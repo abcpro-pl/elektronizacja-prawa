@@ -1,0 +1,2080 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.w3.org/2002/07/owl"
+     xmlns:atu="http://publications.europa.eu/resource/authority/atu/"
+     xmlns:eli="http://data.europa.eu/eli/ontology#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+     xmlns:vann="http://purl.org/vocab/vann/"
+     xmlns:atupl="http://eli.gov.pl/resource/authority/atu/"
+     xmlns:elipl="http://eli.gov.pl/resource/ontology/elipl#"
+     xmlns:euvoc="http://publications.europa.eu/ontology/euvoc#"
+     xmlns:terms="http://purl.org/dc/terms/"
+     xmlns:schema="http://schema.org/">
+    <Ontology rdf:about="http://eli.gov.pl/resource/ontology/elipl/Legal-institutions-Central">
+        <imports rdf:resource="file:/E:/Dokumenty/ELI/ELI%20DL/DL_PL/Ontologia_ELIPL.rdf"/>
+    </Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution">
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/ARCH"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DIS"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_ADMPUBL"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_ARCHIBUD"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_BUDGPM"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_BUDLPZPM"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_BUDPZPM"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_BUDZET"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_CZLRPUE"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_ENERGIA"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_FINPUBL"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_GOSPMOR"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_GOSPOD"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_GOSPPM"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_GOSPWOD"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_GOSPZLKOP"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_INFORM"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_INSTFIN"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_INTEUR"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_KULTFIZ"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_KULTFIZSP"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_KULTFIZTUR"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_KULTODN"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_KULTURA"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_LACZN"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_MIESZKRM"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_NAUKA"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_OBRNAR"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_OSWWYCH"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_PRACA"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_RODZINA"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_ROLNICT"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_ROZWREG"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_ROZWWSI"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_RYBOLOW"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_RYNROL"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_SKARBP"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_SPRAWIEDL"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_SPRRODZ"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_SPRWEWN"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_SPRZAGR"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_SRODOW"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_SZKWNAUKA"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_SZKWYZ"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_TURYST"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_WREGMNE"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_WYZNREG"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_ZABSPOL"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_ZDROWIE"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_ZEGLSROD"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/INNY"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/KRRIT"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/KRS"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/KWRIST"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_AIC"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_AKTP"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_ARCH"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_CYFR"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_EN"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_ENERG"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_FIN"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_FININWIR"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_FIPR"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_GMIZS"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_GOSP"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_INFR"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_INFRIB"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_INFRIR"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_INWIR"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_KIDN"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_KLIM"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_NISW"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_ON"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_PIT"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_PiPS"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_RIF"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_RIRW"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_ROZW"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_ROZWR"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_RPIPS"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_SIT"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_SKARP"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_SPRAW"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_SROD"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_SW"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_SWIA"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_SZ"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_TBIGM"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MIN_ZDR"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MSEJMU"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/MSENATU"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/PG"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/PGUM"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/PGUS"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/PKRRIT"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/PKRUS"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/PKW"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/PNBP"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/PNFZ"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/PNIK"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/PNSA"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/PPAA"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/PPKN"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/PPSN"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/PREZYDENT"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/PRM"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/PUKE"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/PUODO"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/PUP"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/PZBGK"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/PZUS"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/RM"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/RPP"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/SEJM"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/SENAT"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/SN"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/SUDSKIOR"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/TK"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/ZGRNAR"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/ZNBP"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/ZOSNSA"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/ZOSSN"/>
+        <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/ZOSTK"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-12-02T00:00:00Z</terms:created>
+        <terms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-12-02T00:00:00Z</terms:modified>
+        <terms:title xml:lang="pl">Instytucje i działy administracji</terms:title>
+        <rdfs:label xml:lang="pl">Instytucje i działy administracji</rdfs:label>
+        <versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">20191202</versionInfo>
+        <skos:prefLabel xml:lang="pl">Instytucje i działy administracji</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/ARCH -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/ARCH">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1989-09-12T00:00:00Z</euvoc:endDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ARCH</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Inny, sprzed września 1989 r.</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DIS -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DIS">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DIS</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dyrektor izby skarbowej</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_ADMPUBL -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_ADMPUBL">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-04-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_ADMPUBL</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział administracja publiczna</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_ARCHIBUD -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_ARCHIBUD">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2002-01-01T00:00:00Z</euvoc:endDate>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-09-10T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_ARCHIBUD</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Dział architektura i budownictwo</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_BUDGPM -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_BUDGPM">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-01T00:00:00Z</euvoc:endDate>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2002-01-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_BUDGPM</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Dział budownictwo, gospodarka przestrzenna i mieszkaniowa</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_BUDLPZPM -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_BUDLPZPM">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2015-11-27T00:00:00Z</euvoc:endDate>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_BUDLPZPM</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Dział budownictwo, lokalne planowanie i zagospodarowanie przestrzenne oraz mieszkalnictwo</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_BUDPZPM -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_BUDPZPM">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2015-11-27T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_BUDPZPM</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział budownictwo, planowanie i zagospodarowanie przestrzenne oraz mieszkalnictwo</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_BUDZET -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_BUDZET">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-04-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_BUDZET</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział budżet</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_CZLRPUE -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_CZLRPUE">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2010-01-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_CZLRPUE</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział członkostwo Rzeczypospolitej Polskiej w Unii Europejskiej</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_ENERGIA -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_ENERGIA">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2015-11-27T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_ENERGIA</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział energia</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_FINPUBL -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_FINPUBL">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-04-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_FINPUBL</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział finanse publiczne</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_GOSPMOR -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_GOSPMOR">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-04-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_GOSPMOR</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział gospodarka morska</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_GOSPOD -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_GOSPOD">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-04-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_GOSPOD</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział gospodarka</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_GOSPPM -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_GOSPPM">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2002-01-01T00:00:00Z</euvoc:endDate>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-10-09T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_GOSPPM</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Dział gospodarka przestrzenna i mieszkaniowa</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_GOSPWOD -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_GOSPWOD">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-04-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_GOSPWOD</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział gospodarka wodna</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_GOSPZLKOP -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_GOSPZLKOP">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2015-11-27T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_GOSPZLKOP</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział gospodarka złożami kopalin</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_INFORM -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_INFORM">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2002-07-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_INFORM</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział informatyzacja</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_INSTFIN -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_INSTFIN">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-04-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_INSTFIN</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział instytucje finansowe</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_INTEUR -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_INTEUR">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2010-01-01T00:00:00Z</euvoc:endDate>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-04-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_INTEUR</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Dział integracja europejska</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_KULTFIZ -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_KULTFIZ">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2010-10-16T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_KULTFIZ</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział kultura fizyczna</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_KULTFIZSP -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_KULTFIZSP">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2010-10-16T00:00:00Z</euvoc:endDate>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-09-10T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_KULTFIZSP</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Dział kultura fizyczna i sport</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_KULTFIZTUR -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_KULTFIZTUR">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-09-10T00:00:00Z</euvoc:endDate>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-04-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_KULTFIZTUR</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Dział kultura fizyczna i turystyka</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_KULTODN -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_KULTODN">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-09-10T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_KULTODN</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział kultura i ochrona dziedzictwa narodowego</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_KULTURA -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_KULTURA">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-09-10T00:00:00Z</euvoc:endDate>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-04-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_KULTURA</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Dział kultura</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_LACZN -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_LACZN">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-04-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_LACZN</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział łączność</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_MIESZKRM -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_MIESZKRM">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-09-10T00:00:00Z</euvoc:endDate>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-04-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_MIESZKRM</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Dział mieszkalnictwo i rozwój miast</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_NAUKA -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_NAUKA">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2018-10-01T00:00:00Z</euvoc:endDate>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-04-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_NAUKA</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Dział nauka</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_OBRNAR -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_OBRNAR">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-04-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_OBRNAR</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział obrona narodowa</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_OSWWYCH -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_OSWWYCH">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-04-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_OSWWYCH</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział oświata i wychowanie</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_PRACA -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_PRACA">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-04-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_PRACA</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział praca</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_RODZINA -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_RODZINA">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2010-09-09T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_RODZINA</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział rodzina</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_ROLNICT -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_ROLNICT">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-04-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_ROLNICT</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział rolnictwo</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_ROZWREG -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_ROZWREG">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-09-10T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_ROZWREG</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział rozwój regionalny</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_ROZWWSI -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_ROZWWSI">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-04-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_ROZWWSI</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział rozwój wsi</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_RYBOLOW -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_RYBOLOW">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-02-24T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_RYBOLOW</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział rybołówstwo</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_RYNROL -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_RYNROL">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-09-10T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_RYNROL</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział rynki rolne</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_SKARBP -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_SKARBP">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-01T00:00:00Z</euvoc:endDate>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-04-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_SKARBP</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Dział skarb Państwa</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_SPRAWIEDL -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_SPRAWIEDL">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-04-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_SPRAWIEDL</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział sprawiedliwość</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_SPRRODZ -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_SPRRODZ">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2010-09-09T00:00:00Z</euvoc:endDate>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-02-24T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_SPRRODZ</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Dział sprawy rodziny</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_SPRWEWN -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_SPRWEWN">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-04-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_SPRWEWN</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział sprawy wewnętrzne</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_SPRZAGR -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_SPRZAGR">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-04-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_SPRZAGR</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział sprawy zagraniczne</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_SRODOW -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_SRODOW">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-04-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_SRODOW</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział środowisko</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_SZKWNAUKA -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_SZKWNAUKA">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2018-10-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_SZKWNAUKA</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział szkolnictwo wyższe i nauka</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_SZKWYZ -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_SZKWYZ">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2018-10-01T00:00:00Z</euvoc:endDate>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-04-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_SZKWYZ</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Dział szkolnictwo wyższe</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_TURYST -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_TURYST">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-09-10T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_TURYST</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział turystyka</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_WREGMNE -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_WREGMNE">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2005-11-30T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_WREGMNE</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział wyznania religijne oraz mniejszości narodowe i etniczne</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_WYZNREG -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_WYZNREG">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2005-01-31T00:00:00Z</euvoc:endDate>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-04-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_WYZNREG</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Dział wyznania religijne</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_ZABSPOL -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_ZABSPOL">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-04-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_ZABSPOL</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział zabezpieczenie społeczne</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_ZDROWIE -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_ZDROWIE">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-04-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_ZDROWIE</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział zdrowie</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/DZ_ZEGLSROD -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/DZ_ZEGLSROD">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2015-11-27T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZ_ZEGLSROD</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Dział żegluga śródlądowa</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/INNY -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/INNY">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INNY</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Inny</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/KRRIT -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/KRRIT">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">KRRIT</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Krajowa Rada Radiofonii i Telewizji</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/KRS -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/KRS">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">KRS</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Krajowa Rada Sądownictwa</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/KWRIST -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/KWRIST">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">KWRIST</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Komisja Wspólna Rządu i Samorządu Terytorialnego</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_AIC -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_AIC">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2015-11-16T00:00:00Z</euvoc:endDate>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2011-11-18T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_AIC</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Minister Administracji i Cyfryzacji</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_AKTP -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_AKTP">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-11-19T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-12-02T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_AKTP</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Minister Aktywów Państwowych</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_ARCH -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_ARCH">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_ARCH</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Ministerstwa archiwalne, sprzed września 1989 r.</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_CYFR -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_CYFR">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_CYFR</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Minister Cyfryzacji</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_EN -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_EN">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_EN</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Minister Edukacji Narodowej</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_ENERG -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_ENERG">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-11-19T00:00:00Z</euvoc:endDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_ENERG</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Minister Energii</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_FIN -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_FIN">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_FIN</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Minister Finansów</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_FININWIR -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_FININWIR">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-11-19T00:00:00Z</euvoc:endDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_FININWIR</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Minister Finansów, Inwestycji i Rozwoju</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_FIPR -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_FIPR">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-11-19T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-12-02T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_FIPR</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Minister Funduszy i Polityki Regionalnej</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_GMIZS -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_GMIZS">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_GMIZS</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Minister Gospodarki Morskiej i Żeglugi Śródlądowej</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_GOSP -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_GOSP">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2015-11-16T00:00:00Z</euvoc:endDate>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2005-10-31T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_GOSP</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Minister Gospodarki</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_INFR -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_INFR">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_INFR</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Minister Infrastruktury</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_INFRIB -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_INFRIB">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2018-01-09T00:00:00Z</euvoc:endDate>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2015-11-27T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_INFRIB</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Minister Infrastruktury i Budownictwa</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_INFRIR -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_INFRIR">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2015-11-16T00:00:00Z</euvoc:endDate>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-11-27T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_INFRIR</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Minister Infrastruktury i Rozwoju</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_INWIR -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_INWIR">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-11-19T00:00:00Z</euvoc:endDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_INWIR</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Minister Inwestycji i Rozwoju</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_KIDN -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_KIDN">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_KIDN</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Minister Kultury i Dziedzictwa Narodowego</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_KLIM -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_KLIM">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-11-19T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-12-02T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_KLIM</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Minister Klimatu</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_NISW -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_NISW">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_NISW</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Minister Nauki i Szkolnictwa Wyższego</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_ON -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_ON">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_ON</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Minister Obrony Narodowej</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_PIT -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_PIT">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-11-19T00:00:00Z</euvoc:endDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_PIT</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Minister Przedsiębiorczości i Technologii</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_PiPS -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_PiPS">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2015-11-16T00:00:00Z</euvoc:endDate>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2005-10-31T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_PiPS</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Minister Pracy i Polityki Społecznej</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_RIF -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_RIF">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2018-01-09T00:00:00Z</euvoc:endDate>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-09-28T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_RIF</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Minister Rozwoju i Finansów</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_RIRW -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_RIRW">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_RIRW</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Minister Rolnictwa i Rozwoju Wsi</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_ROZW -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_ROZW">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-09-28T00:00:00Z</euvoc:endDate>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-11-19T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-12-02T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_ROZW</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Minister Rozwoju</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_ROZWR -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_ROZWR">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-11-27T00:00:00Z</euvoc:endDate>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2005-10-31T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_ROZWR</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Minister Rozwoju Regionalnego</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_RPIPS -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_RPIPS">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_RPIPS</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Minister Rodziny, Pracy i Polityki Społecznej</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_SIT -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_SIT">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_SIT</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Minister Sportu i Turystyki</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_SKARP -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_SKARP">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-04-01T00:00:00Z</euvoc:endDate>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1999-04-01T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_SKARP</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Minister Skarbu Państwa</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_SPRAW -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_SPRAW">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_SPRAW</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Minister Sprawiedliwości</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_SROD -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_SROD">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-11-19T00:00:00Z</euvoc:endDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_SROD</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Minister Środowiska</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_SW -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_SW">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2015-11-16T00:00:00Z</euvoc:endDate>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2011-11-18T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_SW</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Minister Spraw Wewnętrznych</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_SWIA -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_SWIA">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_SWIA</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Minister Spraw Wewnętrznych i Administracji</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_SZ -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_SZ">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_SZ</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Minister Spraw Zagranicznych</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_TBIGM -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_TBIGM">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <euvoc:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-11-27T00:00:00Z</euvoc:endDate>
+        <euvoc:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2011-11-18T00:00:00Z</euvoc:startDate>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_TBIGM</terms:identifier>
+        <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+        <skos:prefLabel xml:lang="pl">Minister Transportu, Budownictwa i Gospodarki Morskiej</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MIN_ZDR -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MIN_ZDR">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MIN_ZDR</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Minister Zdrowia</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MSEJMU -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MSEJMU">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MSEJMU</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Marszałek Sejmu</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/MSENATU -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/MSENATU">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MSENATU</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Marszałek Senatu</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/PG -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/PG">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PG</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Prokurator Generalny</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/PGUM -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/PGUM">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PGUM</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Prezes Głównego Urzędu Miar</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/PGUS -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/PGUS">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PGUS</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Prezes Głównego Urzędu Statystycznego</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/PKRRIT -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/PKRRIT">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PKRRIT</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Przewodniczący Krajowej Rady Radiofonii i Telewizji</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/PKRUS -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/PKRUS">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PKRUS</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Prezes Kasy Rolniczego Ubezpieczenia Społecznego</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/PKW -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/PKW">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PKW</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Państwowa Komisja Wyborcza</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/PNBP -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/PNBP">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PNBP</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Prezes Narodowego Banku Polskiego</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/PNFZ -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/PNFZ">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PNFZ</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Prezes Narodowego Funduszu Zdrowia</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/PNIK -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/PNIK">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PNIK</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Prezes Najwyższej Izby Kontroli</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/PNSA -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/PNSA">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PNSA</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Prezes Naczelnego Sądu Administracyjnego</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/PPAA -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/PPAA">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PPAA</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Prezes Państwowej Agencji Atomistyki</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/PPKN -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/PPKN">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PPKN</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Prezes Polskiego Komitetu Normalizacyjnego</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/PPSN -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/PPSN">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PPSN</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Pierwszy Prezes Sądu Najwyższego</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/PREZYDENT -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/PREZYDENT">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PREZYDENT</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Prezydent</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/PRM -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/PRM">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PRM</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Prezes Rady Ministrów</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/PUKE -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/PUKE">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PUKE</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Prezes Urzędu Komunikacji Elektronicznej</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/PUODO -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/PUODO">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PUODO</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Prezes Urzędu Ochrony Danych Osobowych</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/PUP -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/PUP">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PUP</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Prezes Urzędu Patentowego Rzeczypospolitej Polskiej</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/PZBGK -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/PZBGK">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PZBGK</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Prezes Zarządu Banku Gospodarstwa Krajowego</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/PZUS -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/PZUS">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PZUS</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Prezes Zakładu Ubezpieczeń Społecznych</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/RM -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/RM">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RM</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Rada Ministrów</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/RPP -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/RPP">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RPP</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Rada Polityki Pieniężnej</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/SEJM -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/SEJM">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SEJM</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Sejm</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/SENAT -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/SENAT">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SENAT</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Senat</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/SN -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/SN">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SN</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Sąd Najwyższy</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/SUDSKIOR -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/SUDSKIOR">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SUDSKIOR</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Szef Urzędu do Spraw Kombatantów i Osób Represjonowanych</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/TK -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/TK">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TK</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Trybunał Konstytucyjny</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/ZGRNAR -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/ZGRNAR">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ZGRNAR</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Zgromadzenie Narodowe</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/ZNBP -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/ZNBP">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ZNBP</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Zarząd Narodowego Banku Polskiego</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/ZOSNSA -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/ZOSNSA">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ZOSNSA</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Zgromadzenie Ogólne Sędziów Naczelnego Sądu Administracyjnego</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/ZOSSN -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/ZOSSN">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ZOSSN</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Zgromadzenie Ogólne Sędziów Sądu Najwyższego</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/ZOSTK -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/ZOSTK">
+        <rdf:type rdf:resource="http://data.europa.eu/eli/ontology#Organization"/>
+        <euvoc:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ZOSTK</terms:identifier>
+        <skos:prefLabel xml:lang="pl">Zgromadzenie Ogólne Sędziów Trybunału Konstytucyjnego</skos:prefLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://eli.gov.pl/resource/authority/legal-institution/collection/DZIALY -->
+
+    <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/legal-institution/collection/DZIALY">
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Collection"/>
+        <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/legal-institution"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_ADMPUBL"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_ARCHIBUD"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_BUDGPM"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_BUDLPZPM"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_BUDPZPM"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_BUDZET"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_CZLRPUE"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_ENERGIA"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_FINPUBL"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_GOSPMOR"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_GOSPOD"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_GOSPPM"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_GOSPWOD"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_GOSPZLKOP"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_INFORM"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_INSTFIN"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_INTEUR"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_KULTFIZ"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_KULTFIZSP"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_KULTFIZTUR"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_KULTODN"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_KULTURA"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_LACZN"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_MIESZKRM"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_NAUKA"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_OBRNAR"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_OSWWYCH"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_PRACA"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_RODZINA"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_ROLNICT"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_ROZWREG"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_ROZWWSI"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_RYBOLOW"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_RYNROL"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_SKARBP"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_SPRAWIEDL"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_SPRRODZ"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_SPRWEWN"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_SPRZAGR"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_SRODOW"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_SZKWNAUKA"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_SZKWYZ"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_TURYST"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_WREGMNE"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_WYZNREG"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_ZABSPOL"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_ZDROWIE"/>
+        <skos:member rdf:resource="http://eli.gov.pl/resource/authority/legal-institution/DZ_ZEGLSROD"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</terms:created>
+        <terms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DZIALY</terms:identifier>
+        <skos:definition xml:lang="pl">Działy administracji rządowej</skos:definition>
+        <skos:prefLabel xml:lang="pl">Działy administracji rządowej</skos:prefLabel>
+    </NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+

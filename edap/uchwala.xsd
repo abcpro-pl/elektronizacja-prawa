@@ -1,0 +1,1139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns="http://www.crd.gov.pl/xml/schematy/edap/2010/01/02" elementFormDefault="unqualified" targetNamespace="http://www.crd.gov.pl/xml/schematy/edap/2010/01/02" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+  <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="http://www.w3.org/TR/xmldsig-core/xmldsig-core-schema.xsd" />
+  <xs:element name="uchwala" nillable="true" type="uchwala-typ">
+    <xs:annotation>
+      <xs:documentation>Uchwała – akt woli samorządowego ciała kolegialnego. 
+Treścią uchwały może być zajęcie stanowiska w określonej sprawie; charakter szczególny mają uchwały indywidualne (zwłaszcza nominacyjne) oraz uchwały ogólne (normatywne, ustalające wykładnię prawa lub wytyczne obowiązujące dla innych organów). 
+Uchwały normatywne określone w tym schemacie (zawierające normy prawne) są stanowione w RP przez rady gmin, powiatów i sejmiki województw. 
+Są to zawsze uchwały wykonawcze, tzn. wydawane na podstawie i w celu wykonania ustaw.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="uchwala-typ">
+    <xs:annotation>
+      <xs:documentation>Uchwała – akt woli samorządowego ciała kolegialnego. 
+Treścią uchwały może być zajęcie stanowiska w określonej sprawie; charakter szczególny mają uchwały indywidualne (zwłaszcza nominacyjne) oraz uchwały ogólne (normatywne, ustalające wykładnię prawa lub wytyczne obowiązujące dla innych organów). 
+Uchwały normatywne określone w tym schemacie (zawierające normy prawne) są stanowione w RP przez rady gmin, powiatów i sejmiki województw. 
+Są to zawsze uchwały wykonawcze, tzn. wydawane na podstawie i w celu wykonania ustaw.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="akt-prawny-typ" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="akt-prawny-typ" abstract="true">
+    <xs:annotation>
+      <xs:documentation>Element bazowy dla wszystkich aktów prawnych.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="dokument-typ">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="metryka" type="metryka-typ">
+            <xs:annotation>
+              <xs:documentation>Metryka - Tytuł aktu prawnego czyli rodzaj aktu i jego numer, data podjęcia, nazwa organu wydającego oraz przedmiot regulacji.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="akapit" type="akapit-typ">
+            <xs:annotation>
+              <xs:documentation>Akapit - Treść pisana od nowego wiersza oraz zawartość komórek tabeli.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element ref="ds:Signature" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:string" use="required">
+          <xs:annotation>
+            <xs:documentation>Unikalny identyfikator aktu prawnego.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="wersja" type="xs:int" use="optional" default="2">
+          <xs:annotation>
+            <xs:documentation>Wersja schematu XML aktu prawnego.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="status" type="status-aktu-typ" use="required">
+          <xs:annotation>
+            <xs:documentation>Lista możliwych statusów aktu prawnego.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="widoczny" type="wartosc-logiczna-typ">
+          <xs:annotation>
+            <xs:documentation>Widoczność aktu prawnego</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="uchylony" type="wartosc-logiczna-typ">
+          <xs:annotation>
+            <xs:documentation>Oznaczenie aktu prawnego jako uchylony.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="zablokowany" type="wartosc-logiczna-typ">
+          <xs:annotation>
+            <xs:documentation>Oznaczenie aktu prawnego jako zablokowany do dalszej edycji.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="dokument-typ" abstract="true" />
+  <xs:complexType name="metryka-typ">
+    <xs:annotation>
+      <xs:documentation>Metryka - Tytuł aktu prawnego czyli rodzaj aktu i jego numer, data podjęcia, nazwa organu wydającego oraz przedmiot regulacji.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="organ-wydajacy" type="organ-wydajacy-typ">
+        <xs:annotation>
+          <xs:documentation>Nazwa organu wydającego akt prawny w dopełniaczu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="tytul" type="przedmiot-regulacji-typ">
+        <xs:annotation>
+          <xs:documentation>Przedmiot regulacji - występujące w tytule aktu prawnego zwięzłe określenie zakresu przedmiotowego regulacji.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Unikalny identyfikator elementu.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="status-aktu" type="status-aktu-typ" use="required">
+      <xs:annotation>
+        <xs:documentation>Lista możliwych statusów aktu prawnego.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="nazwa" type="rodzaj-aktu-typ">
+      <xs:annotation>
+        <xs:documentation>Rodzaj aktu prawnego.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="numer" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Numer aktu prawnego.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="opis-typu" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Nazwa rodzaju aktu prawnego.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="data" type="xs:dateTime" use="required">
+      <xs:annotation>
+        <xs:documentation>Data aktu prawego. Zawsze wstawiaj datę za pomocą metody DateTime.ToUniversalTime(), ponieważ w XML jest ona zapisywana jako UTC.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="organ-wydajacy" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Nazwa organu wydającego akt prawny w dopełniaczu.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="organ-wydajacy-m" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Nazwa organu wydającego akt prawny w mianowniku.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="widoczny" type="wartosc-logiczna-typ">
+      <xs:annotation>
+        <xs:documentation>Widoczność elementu</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="organ-wydajacy-typ" mixed="true">
+    <xs:annotation>
+      <xs:documentation>Organ wydający - Dane organu podejmującego akt prawny.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element minOccurs="0" maxOccurs="1" name="nl" type="nl-typ">
+          <xs:annotation>
+            <xs:documentation>Oznaczenie nowego wiersza.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="tab" type="tab-typ">
+          <xs:annotation>
+            <xs:documentation>Oznaczenie znaku tabulacji.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="nbsp" type="nbsp-typ">
+          <xs:annotation>
+            <xs:documentation>Oznaczenie spacji nierozdzielającej.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="przypis" type="przypis-typ">
+          <xs:annotation>
+            <xs:documentation>Przywołanie treści przypisu.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Unikalny identyfikator elementu.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="w-mianowniku" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Nazwa organu wydającego w mianowniku.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="glowny" type="wartosc-logiczna-typ" use="required">
+      <xs:annotation>
+        <xs:documentation>Oznaczenie organu wydającego jako głównego w dokumencie.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="nl-typ">
+    <xs:annotation>
+      <xs:documentation>Oznaczenie nowego wiersza.</xs:documentation>
+    </xs:annotation>
+  </xs:complexType>
+  <xs:complexType name="tab-typ">
+    <xs:annotation>
+      <xs:documentation>Oznaczenie znaku tabulacji.</xs:documentation>
+    </xs:annotation>
+  </xs:complexType>
+  <xs:complexType name="nbsp-typ">
+    <xs:annotation>
+      <xs:documentation>Oznaczenie spacji nierozdzielającej.</xs:documentation>
+    </xs:annotation>
+  </xs:complexType>
+  <xs:complexType name="przypis-typ" mixed="true">
+    <xs:annotation>
+      <xs:documentation>Przywołanie treści przypisu.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="id" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Unikalny identyfikator elementu.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="nr" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Numer przypisu.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:simpleType name="wartosc-logiczna-typ">
+    <xs:annotation>
+      <xs:documentation>Wartość logiczna.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="" />
+      <xs:enumeration value="tak" />
+      <xs:enumeration value="nie" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="przedmiot-regulacji-typ" mixed="true">
+    <xs:annotation>
+      <xs:documentation>Przedmiot regulacji - występujące w tytule aktu prawnego zwięzłe określenie zakresu przedmiotowego regulacji.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element minOccurs="0" maxOccurs="1" name="nl" type="nl-typ">
+          <xs:annotation>
+            <xs:documentation>Oznaczenie nowego wiersza.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="tab" type="tab-typ">
+          <xs:annotation>
+            <xs:documentation>Oznaczenie znaku tabulacji.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="nbsp" type="nbsp-typ">
+          <xs:annotation>
+            <xs:documentation>Oznaczenie spacji nierozdzielającej.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="przypis" type="przypis-typ">
+          <xs:annotation>
+            <xs:documentation>Przywołanie treści przypisu.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Unikalny identyfikator elementu.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:simpleType name="status-aktu-typ">
+    <xs:annotation>
+      <xs:documentation>Lista możliwych statusów aktu prawnego.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="projekt" />
+      <xs:enumeration value="uchwalony" />
+      <xs:enumeration value="przyjety" />
+      <xs:enumeration value="ogloszony" />
+      <xs:enumeration value="podpisany" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="rodzaj-aktu-typ">
+    <xs:annotation>
+      <xs:documentation>Rodzaj aktu prawnego.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ustawa" />
+      <xs:enumeration value="rozporzadzenie" />
+      <xs:enumeration value="uchwala" />
+      <xs:enumeration value="zarzadzenie" />
+      <xs:enumeration value="informacja" />
+      <xs:enumeration value="komunikat" />
+      <xs:enumeration value="decyzja" />
+      <xs:enumeration value="oswiadczenie" />
+      <xs:enumeration value="postanowienie" />
+      <xs:enumeration value="wyrok" />
+      <xs:enumeration value="porozumienie" />
+      <xs:enumeration value="ogloszenie" />
+      <xs:enumeration value="obwieszczenie" />
+      <xs:enumeration value="aneks" />
+      <xs:enumeration value="statut" />
+      <xs:enumeration value="sprawozdanie" />
+      <xs:enumeration value="protokol" />
+      <xs:enumeration value="umowa" />
+      <xs:enumeration value="porozumienie-miedzygminne" />
+      <xs:enumeration value="licencja" />
+      <xs:enumeration value="uchwala-budzetowa-2010" />
+      <xs:enumeration value="rozstrzygniecie-nadzorcze" />
+      <xs:enumeration value="zarzadzenie-wewnetrzne" />
+      <xs:enumeration value="porozumienie-komunalne" />
+      <xs:enumeration value="zestawienie" />
+      <xs:enumeration value="instrukcja" />
+      <xs:enumeration value="wytyczne" />
+      <xs:enumeration value="rozkaz" />
+      <xs:enumeration value="regulamin" />
+      <xs:enumeration value="komentarz" />
+      <xs:enumeration value="interpretacja" />
+      <xs:enumeration value="opinia-prawna" />
+      <xs:enumeration value="apel" />
+      <xs:enumeration value="deklaracja" />
+      <xs:enumeration value="dekret" />
+      <xs:enumeration value="dokument" />
+      <xs:enumeration value="zawiadomienie" />
+      <xs:enumeration value="karta" />
+      <xs:enumeration value="konwencja" />
+      <xs:enumeration value="lista" />
+      <xs:enumeration value="okolnik" />
+      <xs:enumeration value="orzeczenie" />
+      <xs:enumeration value="pismo-okolne" />
+      <xs:enumeration value="plan" />
+      <xs:enumeration value="raport" />
+      <xs:enumeration value="rezolucja" />
+      <xs:enumeration value="skarga" />
+      <xs:enumeration value="sprostowanie" />
+      <xs:enumeration value="stanowisko" />
+      <xs:enumeration value="traktat" />
+      <xs:enumeration value="uklad" />
+      <xs:enumeration value="umowa-miedzynarodowa" />
+      <xs:enumeration value="wyjasnienie" />
+      <xs:enumeration value="wykaz" />
+      <xs:enumeration value="zalecenie" />
+      <xs:enumeration value="rozporzadzenie-porzadkowe" />
+      <xs:enumeration value="zarzadzenie-porzadkowe" />
+      <xs:enumeration value="upowaznienie" />
+      <xs:enumeration value="uchwala-budzetowa" />
+      <xs:enumeration value="przewodnik" />
+      <xs:enumeration value="procedura" />
+      <xs:enumeration value="pismo-z-zapytaniem" />
+      <xs:enumeration value="odpowiedz-na-pismo" />
+      <xs:enumeration value="wskazanie-nadzorcze" />
+      <xs:enumeration value="zawiadomienie-o-wszczeciu-postepowania" />
+      <xs:enumeration value="umowa-partnerstwa" />
+      <xs:enumeration value="list-intencyjny" />
+      <xs:enumeration value="pelnomocnictwo" />
+      <xs:enumeration value="pelnomocnictwo-ogolne" />
+      <xs:enumeration value="nieokreślony" />
+      <xs:enumeration value="tekst ujednolicony" />
+      <xs:enumeration value="zarzadzenie-zastepcze" />
+      <xs:enumeration value="polecenie" />
+      <xs:enumeration value="polecenie-sluzbowe" />
+      <xs:enumeration value="wniosek" />
+      <xs:enumeration value="polityka" />
+      <xs:enumeration value="strategia" />
+      <xs:enumeration value="metodologia" />
+      <xs:enumeration value="metodyka" />
+      <xs:enumeration value="zasady" />
+      <xs:enumeration value="toip" />
+      <xs:enumeration value="Tabela-oprocentowania" />
+      <xs:enumeration value="Ogolne-warunki-ubezpieczenia" />
+      <xs:enumeration value="konstytucja" />
+      <xs:enumeration value="powierzenie" />
+      <xs:enumeration value="zastrzezenie-pokontrolne" />
+      <xs:enumeration value="nieustalony" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="akapit-typ" mixed="true">
+    <xs:annotation>
+      <xs:documentation>Akapit - Treść pisana od nowego wiersza oraz zawartość komórek tabeli.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="jednostka-redakcyjna-typ">
+        <xs:sequence>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element minOccurs="0" maxOccurs="1" name="nbsp" type="nbsp-typ">
+              <xs:annotation>
+                <xs:documentation>Oznaczenie spacji nierozdzielającej.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" maxOccurs="1" name="nl" type="nl-typ">
+              <xs:annotation>
+                <xs:documentation>Oznaczenie nowego wiersza.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" maxOccurs="1" name="tab" type="tab-typ">
+              <xs:annotation>
+                <xs:documentation>Oznaczenie znaku tabulacji.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" maxOccurs="1" name="podzial-strony" type="podzial-strony-typ">
+              <xs:annotation>
+                <xs:documentation>Oznaczenie podziału strony lub podziału sekcji.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" maxOccurs="1" name="fragment" type="fragment-typ">
+              <xs:annotation>
+                <xs:documentation>Treść w jednostce redakcyjnej, do której stosujemy formatowanie.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" maxOccurs="1" name="przypis" type="przypis-typ">
+              <xs:annotation>
+                <xs:documentation>Przywołanie treści przypisu.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" maxOccurs="1" name="komentuj" type="komentuj-typ">
+              <xs:annotation>
+                <xs:documentation>Oznaczenie tekstu objętego komentarzem.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" maxOccurs="1" name="link" type="link-typ">
+              <xs:annotation>
+                <xs:documentation>Element reprezentować może odwołanie do zewnętrznego zasobu w sieci Internet, odnośnik do definicji, znacznik nowelizacyjny lub ścieżkę względną do pliku obrazu.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" maxOccurs="1" name="tabela" type="tabela-typ">
+              <xs:annotation>
+                <xs:documentation>Tabela - sposób zapisu i przedstawiania informacji, w którym dane umieszcza się w odpowiednio rozmieszczonych polach. Pola te utworzone są poprzez poziome i pionowe linie (na wydrukach lub monitorach oba te typy linii, albo tylko jeden z nich, nie muszą być widoczne lub mogą być zróżnicowane). Elementy trybu zgodności z EAP XML.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" maxOccurs="1" name="tabela-word" type="tabela-word-typ">
+              <xs:annotation>
+                <xs:documentation>Tabela zawierająca element opisujący szerokość kolumn - sposób zapisu i przedstawiania informacji, w którym dane umieszcza się w odpowiednio rozmieszczonych polach. Pola te utworzone są poprzez poziome i pionowe linie (na wydrukach lub monitorach oba te typy linii, albo tylko jeden z nich, nie muszą być widoczne lub mogą być zróżnicowane).</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" maxOccurs="1" name="indeks-gorny" type="indeks-gorny-typ">
+              <xs:annotation>
+                <xs:documentation>Treść pisana w indeksie górnym.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" maxOccurs="1" name="indeks-dolny" type="indeks-dolny-typ">
+              <xs:annotation>
+                <xs:documentation>Treść pisana w indeksie dolnym.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" maxOccurs="1" name="wytluszczenie" type="wytluszczenie-typ">
+              <xs:annotation>
+                <xs:documentation>Treść pisana w wytłuszczoną czcionką.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" maxOccurs="1" name="kursywa" type="kursywa-typ">
+              <xs:annotation>
+                <xs:documentation>Treść pisana kursywą.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" maxOccurs="1" name="podkreslenie" type="podkreslenie-typ">
+              <xs:annotation>
+                <xs:documentation>Treść pisana z podkresleniem.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" maxOccurs="1" name="skreslenie" type="skreslenie-typ">
+              <xs:annotation>
+                <xs:documentation>Treść pisana ze skreśleniem.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:choice>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="jednostka-redakcyjna-typ" abstract="true">
+    <xs:annotation>
+      <xs:documentation>Element bazowy dla jednostek redakcyjnych.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="id" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Unikalny identyfikator elementu.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="nr" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Numer jednostki redakcyjnej.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="wyrownanie" type="wyrownanie-tekstu-typ">
+      <xs:annotation>
+        <xs:documentation>Wyrównanie tekstu w poziomie.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="par" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>Numer akapitu.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:simpleType name="wyrownanie-tekstu-typ">
+    <xs:annotation>
+      <xs:documentation>Wyrównanie tekstu w poziomie.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="domyslne" />
+      <xs:enumeration value="do-lewej" />
+      <xs:enumeration value="wysrodkowane" />
+      <xs:enumeration value="do-prawej" />
+      <xs:enumeration value="wyjustowane" />
+      <xs:enumeration value="" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="podzial-strony-typ">
+    <xs:annotation>
+      <xs:documentation>Oznaczenie podziału strony lub podziału sekcji.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="orientacja" type="orientacja-strony-typ">
+      <xs:annotation>
+        <xs:documentation>Orientacja strony wystepującej za podziałem.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:simpleType name="orientacja-strony-typ">
+    <xs:annotation>
+      <xs:documentation>Orientacja strony wystepującej za podziałem.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="pionowa" />
+      <xs:enumeration value="pozioma" />
+      <xs:enumeration value="" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="fragment-typ">
+    <xs:annotation>
+      <xs:documentation>Treść w jednostce redakcyjnej, do której stosujemy formatowanie.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="true">
+      <xs:extension base="element-tekstowy-typ">
+        <xs:attribute name="uchylony" type="wartosc-logiczna-typ">
+          <xs:annotation>
+            <xs:documentation>Oznaczenie elementu jako uchylony.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="wytluszczenie" type="wartosc-logiczna-typ">
+          <xs:annotation>
+            <xs:documentation>Wartość logiczna.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="kursywa" type="wartosc-logiczna-typ">
+          <xs:annotation>
+            <xs:documentation>Wartość logiczna.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="podkreslenie" type="wartosc-logiczna-typ">
+          <xs:annotation>
+            <xs:documentation>Wartość logiczna.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="indeks-dolny" type="wartosc-logiczna-typ">
+          <xs:annotation>
+            <xs:documentation>Wartość logiczna.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="indeks-gorny" type="wartosc-logiczna-typ">
+          <xs:annotation>
+            <xs:documentation>Wartość logiczna.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="tekst-dodany" type="wartosc-logiczna-typ">
+          <xs:annotation>
+            <xs:documentation>Wartość logiczna.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="tekst-skreslony" type="wartosc-logiczna-typ">
+          <xs:annotation>
+            <xs:documentation>Wartość logiczna.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="kolor" type="xs:string" />
+        <xs:attribute name="kolor-podkreslenia" type="xs:string" />
+        <xs:attribute name="rozmiar-czcionki" type="xs:int">
+          <xs:annotation>
+            <xs:documentation>Wielkość czcionki.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="element-tekstowy-typ" mixed="true">
+    <xs:annotation>
+      <xs:documentation>Treść w jednostce redakcyjnej, o okreslonym formatowaniu. Elementy trybu zgodności z EAP XML.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element minOccurs="0" maxOccurs="1" name="nbsp" type="nbsp-typ">
+          <xs:annotation>
+            <xs:documentation>Oznaczenie spacji nierozdzielającej.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="nl" type="nl-typ">
+          <xs:annotation>
+            <xs:documentation>Oznaczenie nowego wiersza.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="tab" type="tab-typ">
+          <xs:annotation>
+            <xs:documentation>Oznaczenie znaku tabulacji.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="podzial-strony" type="podzial-strony-typ">
+          <xs:annotation>
+            <xs:documentation>Oznaczenie podziału strony lub podziału sekcji.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="link" type="link-typ">
+          <xs:annotation>
+            <xs:documentation>Element reprezentować może odwołanie do zewnętrznego zasobu w sieci Internet, odnośnik do definicji, znacznik nowelizacyjny lub ścieżkę względną do pliku obrazu.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="przypis" type="przypis-typ">
+          <xs:annotation>
+            <xs:documentation>Przywołanie treści przypisu.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="komentuj" type="komentuj-typ">
+          <xs:annotation>
+            <xs:documentation>Oznaczenie tekstu objętego komentarzem.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="indeks-gorny" type="indeks-gorny-typ">
+          <xs:annotation>
+            <xs:documentation>Treść pisana w indeksie górnym.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="indeks-dolny" type="indeks-dolny-typ">
+          <xs:annotation>
+            <xs:documentation>Treść pisana w indeksie dolnym.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="wytluszczenie" type="wytluszczenie-typ">
+          <xs:annotation>
+            <xs:documentation>Treść pisana w wytłuszczoną czcionką.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="kursywa" type="kursywa-typ">
+          <xs:annotation>
+            <xs:documentation>Treść pisana kursywą.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="podkreslenie" type="podkreslenie-typ">
+          <xs:annotation>
+            <xs:documentation>Treść pisana z podkresleniem.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="skreslenie" type="skreslenie-typ">
+          <xs:annotation>
+            <xs:documentation>Treść pisana ze skreśleniem.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Unikalny identyfikator elementu.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="link-typ">
+    <xs:annotation>
+      <xs:documentation>Element reprezentować może odwołanie do zewnętrznego zasobu w sieci Internet, odnośnik do definicji, znacznik nowelizacyjny lub ścieżkę względną do pliku obrazu.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="id" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Unikalny identyfikator elementu.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="typ" type="link-rodzaj-typ" use="required">
+      <xs:annotation>
+        <xs:documentation>Typ linku zawierający odwołanie do zewnętrznego zasobu w sieci Internet, odnośnik do definicji, znacznik nowelizacyjny lub ścieżkę względną do pliku obrazu.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="mime" type="xs:string" />
+    <xs:attribute name="szerokosc" type="xs:int" />
+    <xs:attribute name="wysokosc" type="xs:int" />
+    <xs:attribute name="cel" type="xs:string" />
+    <xs:attribute name="hash" type="xs:string" />
+  </xs:complexType>
+  <xs:simpleType name="link-rodzaj-typ">
+    <xs:annotation>
+      <xs:documentation>Typ linku zawierający odwołanie do zewnętrznego zasobu w sieci Internet, odnośnik do definicji, znacznik nowelizacyjny lub ścieżkę względną do pliku obrazu.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="hiperlink" />
+      <xs:enumeration value="zalacznik" />
+      <xs:enumeration value="definicja" />
+      <xs:enumeration value="dodaj" />
+      <xs:enumeration value="zmien" />
+      <xs:enumeration value="uchyl" />
+      <xs:enumeration value="nowelizacja" />
+      <xs:enumeration value="przepis" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="komentuj-typ" mixed="true">
+    <xs:annotation>
+      <xs:documentation>Oznaczenie tekstu objętego komentarzem.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element minOccurs="0" maxOccurs="1" name="nl" type="nl-typ">
+          <xs:annotation>
+            <xs:documentation>Oznaczenie nowego wiersza.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="tab" type="tab-typ">
+          <xs:annotation>
+            <xs:documentation>Oznaczenie znaku tabulacji.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="nbsp" type="nbsp-typ">
+          <xs:annotation>
+            <xs:documentation>Oznaczenie spacji nierozdzielającej.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="przypis" type="przypis-typ">
+          <xs:annotation>
+            <xs:documentation>Przywołanie treści przypisu.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Unikalny identyfikator elementu.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="autor" type="xs:string" />
+    <xs:attribute name="inicjaly" type="xs:string" />
+    <xs:attribute name="data" type="xs:dateTime" use="required" />
+    <xs:attribute name="tresc" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="indeks-gorny-typ">
+    <xs:annotation>
+      <xs:documentation>Treść pisana w indeksie górnym.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="element-tekstowy-typ" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="indeks-dolny-typ">
+    <xs:annotation>
+      <xs:documentation>Treść pisana w indeksie dolnym.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="element-tekstowy-typ" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="wytluszczenie-typ">
+    <xs:annotation>
+      <xs:documentation>Treść pisana w wytłuszczoną czcionką.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="element-tekstowy-typ" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="kursywa-typ">
+    <xs:annotation>
+      <xs:documentation>Treść pisana kursywą.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="element-tekstowy-typ" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="podkreslenie-typ">
+    <xs:annotation>
+      <xs:documentation>Treść pisana z podkresleniem.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="element-tekstowy-typ" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="skreslenie-typ">
+    <xs:annotation>
+      <xs:documentation>Treść pisana ze skreśleniem.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="element-tekstowy-typ" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tabela-typ">
+    <xs:annotation>
+      <xs:documentation>Tabela - sposób zapisu i przedstawiania informacji, w którym dane umieszcza się w odpowiednio rozmieszczonych polach. Pola te utworzone są poprzez poziome i pionowe linie (na wydrukach lub monitorach oba te typy linii, albo tylko jeden z nich, nie muszą być widoczne lub mogą być zróżnicowane). Elementy trybu zgodności z EAP XML.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="wiersz" type="wiersz-typ">
+        <xs:annotation>
+          <xs:documentation>Wiersz tabeli. Elementy trybu zgodności z EAP XML.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Unikalny identyfikator elementu.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="szerokosc" type="xs:int" use="required" />
+    <xs:attribute name="szerokosc-krawedzi" type="xs:int" use="required" />
+    <xs:attribute name="odleglosc-akapitu" type="xs:int" use="required" />
+    <xs:attribute name="obramowanie" type="wartosc-logiczna-typ">
+      <xs:annotation>
+        <xs:documentation>Wartość logiczna.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="wiersz-typ">
+    <xs:annotation>
+      <xs:documentation>Wiersz tabeli. Elementy trybu zgodności z EAP XML.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="komorka" type="komorka-typ">
+        <xs:annotation>
+          <xs:documentation>Komórka tabeli. Elementy trybu zgodności z EAP XML.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Unikalny identyfikator elementu.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="komorka-typ" mixed="true">
+    <xs:annotation>
+      <xs:documentation>Komórka tabeli. Elementy trybu zgodności z EAP XML.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element minOccurs="0" maxOccurs="1" name="nbsp" type="nbsp-typ">
+          <xs:annotation>
+            <xs:documentation>Oznaczenie spacji nierozdzielającej.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="nl" type="nl-typ">
+          <xs:annotation>
+            <xs:documentation>Oznaczenie nowego wiersza.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="tab" type="tab-typ">
+          <xs:annotation>
+            <xs:documentation>Oznaczenie znaku tabulacji.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="podzial-strony" type="podzial-strony-typ">
+          <xs:annotation>
+            <xs:documentation>Oznaczenie podziału strony lub podziału sekcji.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="fragment" type="fragment-typ">
+          <xs:annotation>
+            <xs:documentation>Treść w jednostce redakcyjnej, do której stosujemy formatowanie.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="przypis" type="przypis-typ">
+          <xs:annotation>
+            <xs:documentation>Przywołanie treści przypisu.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="komentuj" type="komentuj-typ">
+          <xs:annotation>
+            <xs:documentation>Oznaczenie tekstu objętego komentarzem.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="link" type="link-typ">
+          <xs:annotation>
+            <xs:documentation>Element reprezentować może odwołanie do zewnętrznego zasobu w sieci Internet, odnośnik do definicji, znacznik nowelizacyjny lub ścieżkę względną do pliku obrazu.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="indeks-gorny" type="indeks-gorny-typ">
+          <xs:annotation>
+            <xs:documentation>Treść pisana w indeksie górnym.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="indeks-dolny" type="indeks-dolny-typ">
+          <xs:annotation>
+            <xs:documentation>Treść pisana w indeksie dolnym.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="wytluszczenie" type="wytluszczenie-typ">
+          <xs:annotation>
+            <xs:documentation>Treść pisana w wytłuszczoną czcionką.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="kursywa" type="kursywa-typ">
+          <xs:annotation>
+            <xs:documentation>Treść pisana kursywą.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="podkreslenie" type="podkreslenie-typ">
+          <xs:annotation>
+            <xs:documentation>Treść pisana z podkresleniem.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="skreslenie" type="skreslenie-typ">
+          <xs:annotation>
+            <xs:documentation>Treść pisana ze skreśleniem.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="akapit" type="akapit-typ">
+          <xs:annotation>
+            <xs:documentation>Akapit - Treść pisana od nowego wiersza oraz zawartość komórek tabeli.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Unikalny identyfikator elementu.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="obramowanie-gorne" type="wartosc-logiczna-typ">
+      <xs:annotation>
+        <xs:documentation>Wartość logiczna.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="obramowanie-dolne" type="wartosc-logiczna-typ">
+      <xs:annotation>
+        <xs:documentation>Wartość logiczna.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="obramowanie-lewe" type="wartosc-logiczna-typ">
+      <xs:annotation>
+        <xs:documentation>Wartość logiczna.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="obramowanie-prawe" type="wartosc-logiczna-typ">
+      <xs:annotation>
+        <xs:documentation>Wartość logiczna.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="wyrownanie" type="wyrownanie-tekstu-typ">
+      <xs:annotation>
+        <xs:documentation>Wyrównanie tekstu w poziomie.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="wyrownanie-w-pionie" type="wyrownanie-w-pionie-type">
+      <xs:annotation>
+        <xs:documentation>Wyrównanie tekstu w pionie w komórce tabeli.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="scal-poziomo" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>Liczba komórek scalonych poziomo.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="scal-pionowo" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>Liczba komórek scalonych pionowo.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:simpleType name="wyrownanie-w-pionie-type">
+    <xs:annotation>
+      <xs:documentation>Wyrównanie tekstu w pionie w komórce tabeli.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="" />
+      <xs:enumeration value="do-gory" />
+      <xs:enumeration value="do-dolu" />
+      <xs:enumeration value="wysrodkowane" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="tabela-word-typ">
+    <xs:annotation>
+      <xs:documentation>Tabela zawierająca element opisujący szerokość kolumn - sposób zapisu i przedstawiania informacji, w którym dane umieszcza się w odpowiednio rozmieszczonych polach. Pola te utworzone są poprzez poziome i pionowe linie (na wydrukach lub monitorach oba te typy linii, albo tylko jeden z nich, nie muszą być widoczne lub mogą być zróżnicowane).</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="kolumny-podzial" type="tabela-word-kolumny-podzial-typ">
+        <xs:annotation>
+          <xs:documentation>Lista szerokośći poszczególnych kolumn w tabeli.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="wiersz" type="tabela-word-wiersz-typ">
+        <xs:annotation>
+          <xs:documentation>Wiersz tabeli.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Unikalny identyfikator elementu.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="szerokosc-krawedzi" type="xs:int" use="required" />
+    <xs:attribute name="odleglosc-akapitu" type="xs:int" use="required" />
+    <xs:attribute name="obramowanie" type="wartosc-logiczna-typ">
+      <xs:annotation>
+        <xs:documentation>Wartość logiczna.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="tabela-word-kolumny-podzial-typ">
+    <xs:annotation>
+      <xs:documentation>Lista szerokośći poszczególnych kolumn w tabeli.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="kolumna-szerokosc" type="tabela-word-kolumna-szerokosc-typ">
+        <xs:annotation>
+          <xs:documentation>Szerokość kolumny w tabeli.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="tabela-word-kolumna-szerokosc-typ">
+    <xs:annotation>
+      <xs:documentation>Szerokość kolumny w tabeli.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string" />
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="tabela-word-wiersz-typ">
+    <xs:annotation>
+      <xs:documentation>Wiersz tabeli.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="komorka" type="tabela-word-komorka-typ">
+        <xs:annotation>
+          <xs:documentation>Komórka tabeli.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Unikalny identyfikator elementu.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="wysokosc-typ" type="wysokosc-wiersza-typ">
+      <xs:annotation>
+        <xs:documentation>Oznaczenie sposobu zachowania wysokości wiersza tabeli.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="wysokosc" type="xs:double" />
+  </xs:complexType>
+  <xs:complexType name="tabela-word-komorka-typ" mixed="true">
+    <xs:annotation>
+      <xs:documentation>Komórka tabeli.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element minOccurs="0" maxOccurs="1" name="nbsp" type="nbsp-typ">
+          <xs:annotation>
+            <xs:documentation>Oznaczenie spacji nierozdzielającej.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="nl" type="nl-typ">
+          <xs:annotation>
+            <xs:documentation>Oznaczenie nowego wiersza.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="tab" type="tab-typ">
+          <xs:annotation>
+            <xs:documentation>Oznaczenie znaku tabulacji.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="podzial-strony" type="podzial-strony-typ">
+          <xs:annotation>
+            <xs:documentation>Oznaczenie podziału strony lub podziału sekcji.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="fragment" type="fragment-typ">
+          <xs:annotation>
+            <xs:documentation>Treść w jednostce redakcyjnej, do której stosujemy formatowanie.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="przypis" type="przypis-typ">
+          <xs:annotation>
+            <xs:documentation>Przywołanie treści przypisu.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="link" type="link-typ">
+          <xs:annotation>
+            <xs:documentation>Element reprezentować może odwołanie do zewnętrznego zasobu w sieci Internet, odnośnik do definicji, znacznik nowelizacyjny lub ścieżkę względną do pliku obrazu.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="komentuj" type="komentuj-typ">
+          <xs:annotation>
+            <xs:documentation>Oznaczenie tekstu objętego komentarzem.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="akapit" type="akapit-typ">
+          <xs:annotation>
+            <xs:documentation>Akapit - Treść pisana od nowego wiersza oraz zawartość komórek tabeli.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Unikalny identyfikator elementu.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="rozmiar-czcionki" type="xs:int" />
+    <xs:attribute name="wyrownanie" type="wyrownanie-tekstu-typ">
+      <xs:annotation>
+        <xs:documentation>Wyrównanie tekstu w poziomie.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="wyrownanie-w-pionie" type="wyrownanie-w-pionie-type">
+      <xs:annotation>
+        <xs:documentation>Wyrównanie tekstu w pionie w komórce tabeli.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="obramowanie-gorne" type="wartosc-logiczna-typ">
+      <xs:annotation>
+        <xs:documentation>Wartość logiczna.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="obramowanie-dolne" type="wartosc-logiczna-typ">
+      <xs:annotation>
+        <xs:documentation>Wartość logiczna.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="obramowanie-lewe" type="wartosc-logiczna-typ">
+      <xs:annotation>
+        <xs:documentation>Wartość logiczna.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="obramowanie-prawe" type="wartosc-logiczna-typ">
+      <xs:annotation>
+        <xs:documentation>Wartość logiczna.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="scal-poziomo" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>Liczba komórek scalonych poziomo.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="scal-pionowo-start" type="wartosc-logiczna-typ">
+      <xs:annotation>
+        <xs:documentation>Komórka rozpoczyna scalanie pionowe.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="scalona-pionowo" type="wartosc-logiczna-typ">
+      <xs:annotation>
+        <xs:documentation>Komórka jest scalona pionowo.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:simpleType name="wysokosc-wiersza-typ">
+    <xs:annotation>
+      <xs:documentation>Oznaczenie sposobu zachowania wysokości wiersza tabeli.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="" />
+      <xs:enumeration value="auto" />
+      <xs:enumeration value="dokladnie" />
+      <xs:enumeration value="co-najmniej" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

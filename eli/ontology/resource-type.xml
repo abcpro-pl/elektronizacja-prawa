@@ -1,0 +1,1117 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.w3.org/2002/07/owl"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:ev="http://publications.europa.eu/ontology/euvoc#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+     xmlns:dcterms="http://purl.org/dc/terms/">
+  <Ontology/>
+
+
+
+  <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+
+
+  <!-- http://publications.europa.eu/ontology/euvoc#endDate -->
+
+  <AnnotationProperty rdf:about="http://publications.europa.eu/ontology/euvoc#endDate"/>
+
+
+
+  <!-- http://publications.europa.eu/ontology/euvoc#startDate -->
+
+  <AnnotationProperty rdf:about="http://publications.europa.eu/ontology/euvoc#startDate"/>
+
+
+
+  <!-- http://publications.europa.eu/ontology/euvoc#status -->
+
+  <AnnotationProperty rdf:about="http://publications.europa.eu/ontology/euvoc#status"/>
+
+
+
+  <!-- http://purl.org/dc/elements/1.1/identifier -->
+
+  <AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/identifier"/>
+
+
+
+  <!-- http://purl.org/dc/terms/created -->
+
+  <AnnotationProperty rdf:about="http://purl.org/dc/terms/created"/>
+
+
+
+  <!-- http://purl.org/dc/terms/description -->
+
+  <AnnotationProperty rdf:about="http://purl.org/dc/terms/description"/>
+
+
+
+  <!-- http://purl.org/dc/terms/isRequiredBy -->
+
+  <AnnotationProperty rdf:about="http://purl.org/dc/terms/isRequiredBy"/>
+
+
+
+  <!-- http://purl.org/dc/terms/modified -->
+
+  <AnnotationProperty rdf:about="http://purl.org/dc/terms/modified"/>
+
+
+
+  <!-- http://purl.org/dc/terms/title -->
+
+  <AnnotationProperty rdf:about="http://purl.org/dc/terms/title"/>
+
+
+
+  <!-- http://purl.org/dc/terms/type -->
+
+  <AnnotationProperty rdf:about="http://purl.org/dc/terms/type"/>
+
+
+
+  <!-- http://www.w3.org/2000/01/rdf-schema#label -->
+
+  <AnnotationProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#label"/>
+
+
+
+  <!-- http://www.w3.org/2002/07/owl#deprecated -->
+
+  <AnnotationProperty rdf:about="http://www.w3.org/2002/07/owl#deprecated"/>
+
+
+
+  <!-- http://www.w3.org/2002/07/owl#versionInfo -->
+
+  <AnnotationProperty rdf:about="http://www.w3.org/2002/07/owl#versionInfo"/>
+
+
+
+  <!-- http://www.w3.org/2004/02/skos/core#definition -->
+
+  <AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#definition"/>
+
+
+
+  <!-- http://www.w3.org/2004/02/skos/core#editorialNote -->
+
+  <AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#editorialNote"/>
+
+
+
+  <!-- http://www.w3.org/2004/02/skos/core#hasTopConcept -->
+
+  <AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#hasTopConcept"/>
+
+
+
+  <!-- http://www.w3.org/2004/02/skos/core#historyNote -->
+
+  <AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#historyNote"/>
+
+
+
+  <!-- http://www.w3.org/2004/02/skos/core#inScheme -->
+
+  <AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#inScheme"/>
+
+
+
+  <!-- http://www.w3.org/2004/02/skos/core#member -->
+
+  <AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#member"/>
+
+
+
+  <!-- http://www.w3.org/2004/02/skos/core#prefLabel -->
+
+  <AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#prefLabel"/>
+
+
+
+  <!-- http://www.w3.org/2004/02/skos/core#scopeNote -->
+
+  <AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#scopeNote"/>
+
+
+
+  <!-- http://www.w3.org/2004/02/skos/core#topConceptOf -->
+
+  <AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#topConceptOf"/>
+
+
+
+  <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+
+
+  <!-- http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral -->
+
+  <rdfs:Datatype rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral"/>
+
+
+
+  <!-- http://www.w3.org/2001/XMLSchema#dateTime -->
+
+  <rdfs:Datatype rdf:about="http://www.w3.org/2001/XMLSchema#dateTime"/>
+
+
+
+  <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+
+
+  <!-- http://www.w3.org/2004/02/skos/core#Collection -->
+
+  <Class rdf:about="http://www.w3.org/2004/02/skos/core#Collection"/>
+
+
+
+  <!-- http://www.w3.org/2004/02/skos/core#Concept -->
+
+  <Class rdf:about="http://www.w3.org/2004/02/skos/core#Concept"/>
+
+
+
+  <!-- http://www.w3.org/2004/02/skos/core#ConceptScheme -->
+
+  <Class rdf:about="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+
+
+
+  <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/ -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <dcterms:isRequiredBy rdf:resource="http://eli.gov.pl/resource/ontology/elipl#"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2020-06-08T00:00:00Z</dcterms:modified>
+    <dcterms:title xml:lang="pl">Typy polskich aktów prawnych</dcterms:title>
+    <dcterms:type xml:lang="en">Controlled vocabulary</dcterms:type>
+    <dcterms:type xml:lang="pl">Zarządzany słownik</dcterms:type>
+    <rdfs:label xml:lang="en">Resource type PL</rdfs:label>
+    <rdfs:label xml:lang="pl">Typy polskich aktów prawnych</rdfs:label>
+    <versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">20200608</versionInfo>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/ANEKS"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/ARCH"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/DECYZJA"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/INFOR"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/INNY"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/KOMUN"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/KONSTYTUCJA"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/LISTA"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/OBW"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/OBW_SPROST"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/OBW_TJ"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/OGLOSZ"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/OSWIADCZ"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/OSW_RZ"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/POROZ"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/POROZ_MGM"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/POST"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/PROT"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/ROZP"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/ROZS_NAD"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/SPRAW"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/UCHW"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/UCH_BUDZ"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/UMOWA"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/UM_PARTN"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/USTAWA"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/USTAWA_BUDZ"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/WSK_NAD"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/WYROK"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/ZARZ"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/ZARZ_PORZ"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/ZARZ_ZAST"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/POROZ_KOM"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/DEKRET"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/DEKRETACJA"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/APEL"/>
+    
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_ART"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_CZESC"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_CZWSP"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_DZIAL"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_INNA"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_KSIEGA"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_LIT"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_ODDZIAL"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_PARKOD"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_PARROZP"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_PKT"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_ROZDZIAL"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_TIR"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_TYTUL"/>
+    <skos:hasTopConcept rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_USTEP"/>
+    
+    <skos:prefLabel xml:lang="en">Resource type PL</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">Typy polskich aktów prawnych</skos:prefLabel>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/ANEKS -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/ANEKS">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ANEKS</dc:identifier>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="pl">aneks</skos:prefLabel>
+    <skos:prefLabel xml:lang="en">annex</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/ARCH -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/ARCH">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2012-01-01T00:00:00Z</ev:endDate>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ARCH</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="pl">akt archiwalny (sprzed 2012 r)</skos:prefLabel>
+    <skos:prefLabel xml:lang="en">archival (before 2012)</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/DECYZJA -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/DECYZJA">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DECYZJA</dc:identifier>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">decision</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">decyzja</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/INFOR -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/INFOR">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INFOR</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="pl">informacja</skos:prefLabel>
+    <skos:prefLabel xml:lang="en">information</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/INNY -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/INNY">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INNY</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="pl">inny akt</skos:prefLabel>
+    <skos:prefLabel xml:lang="en">other act</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/KOMUN -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/KOMUN">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">KOMUN</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">comunique</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">komunikat</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/KONSTYTUCJA -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/KONSTYTUCJA">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">KONSTYTUCJA</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">constitution</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">konstytucja</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/LISTA -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/LISTA">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LISTA</dc:identifier>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">list</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">lista</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/OBW -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/OBW">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">OBW</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">notice</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">obwieszczenie</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/OBW_SPROST -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/OBW_SPROST">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">OBW_SPROST</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">corrigendum</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">obwieszczenie - sprostowanie</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/OBW_TJ -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/OBW_TJ">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">OBW_TJ</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">consolidated text</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">obwieszczenie - tekst jednolity</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/OGLOSZ -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/OGLOSZ">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">OGLOSZ</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">announcement</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">ogłoszenie</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/OSWIADCZ -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/OSWIADCZ">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">OSWIADCZ</dc:identifier>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="pl">oświadczenie</skos:prefLabel>
+    <skos:prefLabel xml:lang="en">proclamation</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/OSW_RZ -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/OSW_RZ">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">OSW_RZ</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">governmental proclamation</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">oświadczenie rządowe</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/POROZ -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/POROZ">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">POROZ</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">agreement</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">porozumienie</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/POROZ_MGM -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/POROZ_MGM">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">POROZ_MGM</dc:identifier>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">inter-community agreement</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">porozumienie międzygminne</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/POROZ_KOM -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/POROZ_KOM">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">POROZ_KOM</dc:identifier>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">municipal agreement</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">porozumienie komunalne</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/POST -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/POST">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">POST</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="pl">postanowienie</skos:prefLabel>
+    <skos:prefLabel xml:lang="en">regulation</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/PROT -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/PROT">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PROT</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">protocol, minutes</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">protokół</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/ROZP -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/ROZP">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ROZP</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">government regulation</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">rozporządzenie</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/ROZS_NAD -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/ROZS_NAD">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ROZS_NAD</dc:identifier>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="pl">rozstrzygnięcie nadzorcze</skos:prefLabel>
+    <skos:prefLabel xml:lang="en">supervisory settlement</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/SPRAW -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/SPRAW">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SPRAW</dc:identifier>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">report</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">sprawozdanie</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/UCHW -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/UCHW">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UCHW</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">resolution</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">uchwała</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/UCH_BUDZ -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/UCH_BUDZ">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UCH_BUDZ</dc:identifier>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">budgetary resolution</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">uchwała budżetowa</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/UMOWA -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/UMOWA">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UMOWA</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">agreement, contract</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">umowa</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/UM_PARTN -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/UM_PARTN">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UM_PARTN</dc:identifier>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">partnership agreement</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">umowa partnerska</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/USTAWA -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/USTAWA">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">USTAWA</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">statute</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">ustawa</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/USTAWA_BUDZ -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/USTAWA_BUDZ">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">USTAWA_BUDZ</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">budget</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">ustawa budżetowa</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/WSK_NAD -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/WSK_NAD">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">WSK_NAD</dc:identifier>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">suoervisory indication</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">wskazanie nadzorcze</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/WYROK -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/WYROK">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">WYROK</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">sentence, judgment</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">wyrok</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/ZARZ -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/ZARZ">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ZARZ</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">disposition</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">zarządzenie</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/ZARZ_PORZ -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/ZARZ_PORZ">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ZARZ_PORZ</dc:identifier>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">order disposition</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">zarządzenie porządkowe</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/ZARZ_ZAST -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/ZARZ_ZAST">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ZARZ_ZAST</dc:identifier>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">alternate disposition</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">zarządzenie zastępcze</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/APEL -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/APEL">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">APEL</dc:identifier>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">appeal</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">apel</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/DEKLARACJA -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/DEKLARACJA">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DEKLARACJA</dc:identifier>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">declaration</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">deklaracja</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/DEKRET -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/DEKRET">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/DEPRECATED"/>    
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</deprecated>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DEKRET</dc:identifier>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">decree</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">dekret</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>  
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/collection/JRED -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/collection/JRED">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Collection"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">JRED</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-30T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:definition xml:lang="pl">Jednostki redakcyjne</skos:definition>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:member rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_ART"/>
+    <skos:member rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_CZESC"/>
+    <skos:member rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_CZWSP"/>
+    <skos:member rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_DZIAL"/>
+    <skos:member rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_INNA"/>
+    <skos:member rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_KSIEGA"/>
+    <skos:member rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_LIT"/>
+    <skos:member rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_ODDZIAL"/>
+    <skos:member rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_PARKOD"/>
+    <skos:member rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_PARROZP"/>
+    <skos:member rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_PKT"/>
+    <skos:member rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_ROZDZIAL"/>
+    <skos:member rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_TIR"/>
+    <skos:member rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_PODWTIR"/>
+    <skos:member rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_TYTUL"/>
+    <skos:member rdf:resource="http://eli.gov.pl/resource/authority/resource-type/JR_USTEP"/>
+    <skos:prefLabel xml:lang="en">Editorial units</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">Jednostki redakcyjne</skos:prefLabel>
+  </NamedIndividual>
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/JR_ART -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/JR_ART">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">JR_ART</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">article</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">artykuł</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/JR_CZESC -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/JR_CZESC">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">JR_CZESC</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="pl">część</skos:prefLabel>
+    <skos:prefLabel xml:lang="en">part</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/JR_CZWSP -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/JR_CZWSP">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">JR_CZWSP</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="pl">część wspólna</skos:prefLabel>
+    <skos:prefLabel xml:lang="en">joint conclusion, common part of enumeration</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/JR_DZIAL -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/JR_DZIAL">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">JR_DZIAL</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">division</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">dział</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/JR_INNA -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/JR_INNA">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">JR_INNA</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="pl">inna jednostka</skos:prefLabel>
+    <skos:prefLabel xml:lang="en">other unit</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/JR_KSIEGA -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/JR_KSIEGA">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">JR_KSIEGA</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">book</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">księga</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/JR_LIT -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/JR_LIT">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">JR_LIT</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">letter</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">litera</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/JR_ODDZIAL -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/JR_ODDZIAL">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">JR_ODDZIAL</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="pl">oddział</skos:prefLabel>
+    <skos:prefLabel xml:lang="en">subchapter</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/JR_PARKOD -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/JR_PARKOD">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">JR_PARKOD</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">clause in code</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">paragraf kodeksu</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/JR_PARROZP -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/JR_PARROZP">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">JR_PARROZP</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="pl">paragraf aktu wykonawczego</skos:prefLabel>
+    <skos:prefLabel xml:lang="en">paragraph</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/JR_PKT -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/JR_PKT">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">JR_PKT</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">point</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">punkt</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/JR_ROZDZIAL -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/JR_ROZDZIAL">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">JR_ROZDZIAL</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">chapter</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">rozdział</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/JR_TIR -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/JR_TIR">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">JR_TIR</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">dash</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">tiret</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+  
+  <!-- http://eli.gov.pl/resource/authority/resource-type/JR_PODWTIR -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/JR_PODWTIR">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">JR_PODWTIR</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">double dash</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">podwójne tiret</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>  
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/JR_TYTUL -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/JR_TYTUL">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">JR_TYTUL</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">title</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">tytuł</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+
+
+  <!-- http://eli.gov.pl/resource/authority/resource-type/JR_USTEP -->
+
+  <NamedIndividual rdf:about="http://eli.gov.pl/resource/authority/resource-type/JR_USTEP">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <ev:status rdf:resource="http://publications.europa.eu/resource/authority/concept-status/CURRENT"/>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">JR_USTEP</dc:identifier>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-26T00:00:00Z</dcterms:created>
+    <deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</deprecated>
+    <skos:inScheme rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+    <skos:prefLabel xml:lang="en">clause</skos:prefLabel>
+    <skos:prefLabel xml:lang="pl">ustęp</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="http://eli.gov.pl/resource/authority/resource-type/"/>
+  </NamedIndividual>
+
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
