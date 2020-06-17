@@ -1,0 +1,2245 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xsd:schema xmlns="http://www.crd.gov.pl/xml/schematy/edap/2010/01/02" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.crd.gov.pl/xml/schematy/edap/2010/01/02">
+	<!--  D o k u m e n t y  -->
+	<xsd:element name="ustawa">
+		<xsd:annotation>
+			<xsd:documentation>Element glowny dokumentu XML-owego reprezentuacego ustawe.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="metryka" minOccurs="0"/>
+				<xsd:element ref="trybunal" minOccurs="0"/>
+				<xsd:group ref="elem-komentarza" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="preambula" minOccurs="0"/>
+				<!--				<xsd:choice>-->
+				<xsd:element ref="czesc" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="ksiega" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="tyt" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="dzial" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="rozdzial" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="artykul" minOccurs="0" maxOccurs="unbounded"/>
+				<!--				</xsd:choice>-->
+				<xsd:element ref="podpisy" minOccurs="0"/>
+				<xsd:element ref="zatwierdzil" minOccurs="0"/>
+				<xsd:element ref="zalaczniki" minOccurs="0"/>
+				<xsd:element ref="tresc-przypisow" minOccurs="0"/>
+				<xsd:element ref="zalacznik_bin" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="atr-wspolne"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="rozporzadzenie">
+		<xsd:annotation>
+			<xsd:documentation>Element glowny dokumentu XML-owego reprezentujacego rozporzadzenie.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="metryka" minOccurs="0"/>
+				<xsd:group ref="elem-komentarza" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="podstawa-prawna" minOccurs="0"/>
+				<!--				<xsd:choice>-->
+				<xsd:element ref="tyt" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="dzial" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="rozdzial" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="paragraf" minOccurs="0" maxOccurs="unbounded"/>
+				<!--				</xsd:choice>-->
+				<xsd:element ref="podpisy" minOccurs="0"/>
+				<xsd:element ref="zatwierdzil" minOccurs="0"/>
+				<xsd:element ref="zalaczniki" minOccurs="0"/>
+				<xsd:element ref="tresc-przypisow" minOccurs="0"/>
+				<xsd:element ref="zalacznik_bin" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="uchwala">
+		<xsd:annotation>
+			<xsd:documentation>Element glowny dokumentu XML-owego reprezentujacego uchwale.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="metryka" minOccurs="0"/>
+				<xsd:group ref="elem-komentarza" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="podstawa-prawna" minOccurs="0"/>
+				<!--				<xsd:choice>-->
+				<xsd:element ref="tyt" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="dzial" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="rozdzial" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="artykul" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="paragraf" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="akapit" minOccurs="0" maxOccurs="unbounded"/>
+				<!--				</xsd:choice>-->
+				<xsd:element ref="podpisy" minOccurs="0"/>
+				<xsd:element ref="zatwierdzil" minOccurs="0"/>
+				<xsd:element ref="zalaczniki" minOccurs="0"/>
+				<xsd:element ref="tresc-przypisow" minOccurs="0"/>
+				<xsd:element ref="zalacznik_bin" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="zarzadzenie">
+		<xsd:annotation>
+			<xsd:documentation>Element glowny dokumentu XML-owego reprezentujacego zarzadzenie.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="metryka" minOccurs="0"/>
+				<xsd:group ref="elem-komentarza" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="podstawa-prawna" minOccurs="0"/>
+				<xsd:element ref="paragraf" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="podpisy" minOccurs="0"/>
+				<xsd:element ref="zatwierdzil" minOccurs="0"/>
+				<xsd:element ref="zalaczniki" minOccurs="0"/>
+				<xsd:element ref="tresc-przypisow" minOccurs="0"/>
+				<xsd:element ref="zalacznik_bin" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="informacja">
+		<xsd:annotation>
+			<xsd:documentation>Element glowny dokumentu XML-owego reprezentuacego informacje.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="metryka" minOccurs="0"/>
+				<xsd:group ref="elem-komentarza" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="podstawa-prawna" minOccurs="0"/>
+				<!--				<xsd:choice>-->
+				<xsd:element ref="paragraf" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="punkt" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="litera" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="tiret" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="akapit" minOccurs="0" maxOccurs="unbounded"/>
+				<!--				</xsd:choice>-->
+				<xsd:element ref="podpisy" minOccurs="0"/>
+				<xsd:element ref="zatwierdzil" minOccurs="0"/>
+				<xsd:element ref="zalaczniki" minOccurs="0"/>
+				<xsd:element ref="tresc-przypisow" minOccurs="0"/>
+				<xsd:element ref="zalacznik_bin" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="komunikat">
+		<xsd:annotation>
+			<xsd:documentation>Element glowny dokumentu XML-owego reprezentujacego komunikat.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="metryka" minOccurs="0"/>
+				<xsd:group ref="elem-komentarza" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="podstawa-prawna" minOccurs="0"/>
+				<!--				<xsd:choice>-->
+				<xsd:element ref="paragraf" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="punkt" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="litera" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="tiret" minOccurs="0" maxOccurs="unbounded"/>
+				<!--				</xsd:choice>-->
+				<xsd:element ref="podpisy" minOccurs="0"/>
+				<xsd:element ref="zatwierdzil" minOccurs="0"/>
+				<xsd:element ref="zalaczniki" minOccurs="0"/>
+				<xsd:element ref="tresc-przypisow" minOccurs="0"/>
+				<xsd:element ref="zalacznik_bin" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="decyzja">
+		<xsd:annotation>
+			<xsd:documentation>Element glowny dokumentu XML-owego reprezentujacego decyzje.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="metryka" minOccurs="0"/>
+				<xsd:group ref="elem-komentarza" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="podstawa-prawna" minOccurs="0"/>
+				<!--				<xsd:choice>-->
+				<xsd:element ref="paragraf" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="punkt" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="litera" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="tiret" minOccurs="0" maxOccurs="unbounded"/>
+				<!--				</xsd:choice>-->
+				<xsd:element ref="podpisy" minOccurs="0"/>
+				<xsd:element ref="zatwierdzil" minOccurs="0"/>
+				<xsd:element ref="zalacznik" minOccurs="0"/>
+				<xsd:element ref="tresc-przypisow" minOccurs="0"/>
+				<xsd:element ref="zalacznik_bin" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="oswiadczenie">
+		<xsd:annotation>
+			<xsd:documentation>Element glowny dokumentu XML-owego reprezentujacego oswiadczenie.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="metryka" minOccurs="0"/>
+				<xsd:group ref="elem-komentarza" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="podstawa-prawna" minOccurs="0"/>
+				<!--				<xsd:choice>-->
+				<xsd:element ref="paragraf" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="punkt" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="litera" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="tiret" minOccurs="0" maxOccurs="unbounded"/>
+				<!--				</xsd:choice>-->
+				<xsd:element ref="podpisy" minOccurs="0"/>
+				<xsd:element ref="zatwierdzil" minOccurs="0"/>
+				<xsd:element ref="zalaczniki" minOccurs="0"/>
+				<xsd:element ref="tresc-przypisow" minOccurs="0"/>
+				<xsd:element ref="zalacznik_bin" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="wyrok_TK">
+		<xsd:annotation>
+			<xsd:documentation>Element glowny dokumentu XML-owego reprezentujacego wyrok Trybunalu Konstytucyjnego.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="metryka" minOccurs="0"/>
+				<xsd:group ref="elem-komentarza" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="podstawa-prawna" minOccurs="0"/>
+				<!--				<xsd:choice maxOccurs="unbounded">-->
+				<xsd:element ref="sklad" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="zaskarzenie" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="sentencja" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="akapit" minOccurs="0" maxOccurs="unbounded"/>
+				<!--				</xsd:choice>-->
+				<xsd:element ref="uzasadnienie" minOccurs="0"/>
+				<xsd:element ref="podpisy" minOccurs="0"/>
+				<xsd:element ref="zatwierdzil" minOccurs="0"/>
+				<xsd:element ref="tresc-przypisow" minOccurs="0"/>
+				<xsd:element ref="zalacznik_bin" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="sygn-akt" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="postanowienie">
+		<xsd:annotation>
+			<xsd:documentation>Element glowny dokumentu XML-owego reprezentujacego postanowienie</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="metryka" minOccurs="0"/>
+				<xsd:group ref="elem-komentarza" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="podstawa-prawna" minOccurs="0"/>
+				<xsd:element ref="sklad" minOccurs="0"/>
+				<!--				<xsd:choice maxOccurs="unbounded">-->
+				<xsd:element ref="sentencja" minOccurs="0" maxOccurs="unbounded"/>
+				<!--				</xsd:choice>-->
+				<xsd:element ref="uzasadnienie" minOccurs="0"/>
+				<xsd:element ref="podpisy" minOccurs="0"/>
+				<xsd:element ref="zatwierdzil" minOccurs="0"/>
+				<xsd:element ref="tresc-przypisow" minOccurs="0"/>
+				<xsd:element ref="zalacznik_bin" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="sygn-akt"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="wyrok">
+		<xsd:annotation>
+			<xsd:documentation>Element glowny dokumentu XML-owego reprezentujacego wyrok.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="metryka" minOccurs="0"/>
+				<xsd:group ref="elem-komentarza" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="podstawa-prawna" minOccurs="0"/>
+				<!--				<xsd:choice>-->
+				<xsd:element ref="rozdzial" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="paragraf" minOccurs="0" maxOccurs="unbounded"/>
+				<!--				</xsd:choice>-->
+				<xsd:element ref="podpisy" minOccurs="0"/>
+				<xsd:element ref="zatwierdzil" minOccurs="0"/>
+				<xsd:element ref="zalaczniki" minOccurs="0"/>
+				<xsd:element ref="tresc-przypisow" minOccurs="0"/>
+				<xsd:element ref="zalacznik_bin" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="sygn-akt"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="porozumienie">
+		<xsd:annotation>
+			<xsd:documentation>Element glowny dokumentu XML-owego reprezentujacego porozumienie.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="metryka" minOccurs="0"/>
+				<xsd:group ref="elem-komentarza" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="podstawa-prawna" minOccurs="0"/>
+				<!--				<xsd:choice>-->
+				<xsd:element ref="paragraf" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="punkt" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="tiret" minOccurs="0" maxOccurs="unbounded"/>
+				<!--				</xsd:choice>-->
+				<xsd:element ref="podpisy" minOccurs="0"/>
+				<xsd:element ref="zatwierdzil" minOccurs="0"/>
+				<xsd:element ref="zalaczniki" minOccurs="0"/>
+				<xsd:element ref="tresc-przypisow" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ogloszenie">
+		<xsd:annotation>
+			<xsd:documentation>Element glowny dokumentu XML-owego reprezentujacego ogloszenie.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="metryka" minOccurs="0"/>
+				<xsd:group ref="elem-komentarza" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="podstawa-prawna" minOccurs="0"/>
+				<!--				<xsd:choice>-->
+				<xsd:element ref="rozdzial" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="paragraf" minOccurs="0" maxOccurs="unbounded"/>
+				<!--				</xsd:choice>-->
+				<xsd:element ref="podpisy" minOccurs="0"/>
+				<xsd:element ref="zatwierdzil" minOccurs="0"/>
+				<xsd:element ref="zalaczniki" minOccurs="0"/>
+				<xsd:element ref="tresc-przypisow" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="obwieszczenie">
+		<xsd:annotation>
+			<xsd:documentation>Element glowny dokumentu XML-owego reprezentuacego obwieszczenie.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="metryka" minOccurs="0"/>
+				<xsd:group ref="elem-komentarza" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="podstawa-prawna" minOccurs="0"/>
+				<!--				<xsd:choice>-->
+				<xsd:element ref="rozdzial" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="paragraf" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="ustep" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="akapit" minOccurs="0" maxOccurs="unbounded"/>
+				<!--				</xsd:choice>-->
+				<xsd:element ref="podpisy" minOccurs="0"/>
+				<xsd:element ref="zatwierdzil" minOccurs="0"/>
+				<xsd:element ref="zalaczniki" minOccurs="0"/>
+				<xsd:element ref="tresc-przypisow" minOccurs="0"/>
+				<xsd:element ref="zalacznik_bin" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--  G r u p y   a t r y b u t o w  -->
+	<xsd:attributeGroup name="atr-czasowe">
+		<xsd:annotation>
+			<xsd:documentation>Atrybuty okreslajace poczatkowa i koncowa date obowiazywania elementu.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="obowiazuje-od" type="data">
+			<xsd:annotation>
+				<xsd:documentation>Data poczatku obowiazywania elementu.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="obowiazuje-do" type="data">
+			<xsd:annotation>
+				<xsd:documentation>Data konca obowiazywania elementu.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:attributeGroup>
+	<xsd:attributeGroup name="atr-wizualizacyjne">
+		<xsd:annotation>
+			<xsd:documentation>Atrybuty sterujace wyswietlaniem elementu.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="widoczny" default="tak">
+			<xsd:annotation>
+				<xsd:documentation>Informacja, czy element ma byc wizualizowany.</xsd:documentation>
+			</xsd:annotation>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="tak"/>
+					<xsd:enumeration value="nie"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:attributeGroup>
+	<xsd:attributeGroup name="atr-sterujace">
+		<xsd:annotation>
+			<xsd:documentation>Atrybuty ogolnego przeznaczenia.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="status">
+			<xsd:annotation>
+				<xsd:documentation>Stan elementu - atrybut ogolnego przeznaczenia.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="komentarz">
+			<xsd:annotation>
+				<xsd:documentation>Komentarz do elementu - atrybut ogolnego przeznaczenia.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:attributeGroup>
+	<xsd:attributeGroup name="atr-wspolne">
+		<xsd:annotation>
+			<xsd:documentation>Podstawowy zestaw atrybutow.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="uchylony" default="nie">
+			<xsd:annotation>
+				<xsd:documentation>Informacja, czy element zostal uchylony.</xsd:documentation>
+			</xsd:annotation>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="tak"/>
+					<xsd:enumeration value="nie"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attributeGroup ref="atr-sterujace"/>
+		<xsd:attributeGroup ref="atr-wizualizacyjne"/>
+		<xsd:attributeGroup ref="atr-czasowe"/>
+	</xsd:attributeGroup>
+	<xsd:attributeGroup name="atr-wspolne-nr">
+		<xsd:annotation>
+			<xsd:documentation>Atrybuty dla elementow numerowanych.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="nr">
+			<xsd:annotation>
+				<xsd:documentation>Numer elementu struktury.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attributeGroup ref="atr-wspolne"/>
+	</xsd:attributeGroup>
+	<xsd:attributeGroup name="atr-identyfikacyjne">
+		<xsd:annotation>
+			<xsd:documentation>Atrybuty identyfikujace zakres nowelizacji tekstowej.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="wystapienie" default="ostatnie">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="pierwsze"/>
+					<xsd:enumeration value="drugie"/>
+					<xsd:enumeration value="ostatnie"/>
+					<xsd:enumeration value="wszystkie"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:attributeGroup>
+	<xsd:attributeGroup name="atr-nowelizacyjne">
+		<xsd:annotation>
+			<xsd:documentation>Atrybuty dla znacznikow nowelizacyjnych.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attributeGroup ref="atr-wizualizacyjne"/>
+	</xsd:attributeGroup>
+	<xsd:attributeGroup name="atr-wyrownanie-poz">
+		<xsd:annotation>
+			<xsd:documentation>Atrybuty sterujace wyrownaniem w poziomie.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="wyrownanie">
+			<xsd:annotation>
+				<xsd:documentation>Wyrownanie: do lewej, do prawej, wysrodkowane, wyjustowane.</xsd:documentation>
+			</xsd:annotation>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:token">
+					<xsd:enumeration value="do-lewej"/>
+					<xsd:enumeration value="do-prawej"/>
+					<xsd:enumeration value="wysrodkowane"/>
+					<xsd:enumeration value="wyjustowane"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:attributeGroup>
+	<xsd:attributeGroup name="atr-wyrownanie-pion">
+		<xsd:annotation>
+			<xsd:documentation>Atrybuty sterujace wyrownaniem w pionie.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="wyrownanie-w-pionie">
+			<xsd:annotation>
+				<xsd:documentation>Wyrownanie: do gory, do dolu, wysrodkowane.</xsd:documentation>
+			</xsd:annotation>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:token">
+					<xsd:enumeration value="do-gory"/>
+					<xsd:enumeration value="wysrodkowane"/>
+					<xsd:enumeration value="do-dolu"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:attributeGroup>
+	<!--  T y p y   p r o s t e  -->
+	<xsd:simpleType name="data">
+		<xsd:annotation>
+			<xsd:documentation>Wzorzec dat (RRRR-MM-DD).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="(19|20)[0-9]{2}\-(01|02|03|04|05|06|07|08|09|10|11|12)\-([0-2]{1}[0-9]{1}|30|31)"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="zakres_lat">
+		<xsd:annotation>
+			<xsd:documentation>Wzorzec zakresu lat (RRRR-RRR).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="(19|20)[0-9]{2}\-(19|20)[0-9]{2}"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="liczba">
+		<xsd:annotation>
+			<xsd:documentation>Wzorzec dla liczb naturalnych.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:nonNegativeInteger">
+			<xsd:pattern value="[0-9]+"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!--  F r a g m e n t y   d e f i n i c j i  -->
+	<xsd:complexType name="elem-struktury">
+		<xsd:annotation>
+			<xsd:documentation>Element struktury.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice minOccurs="0">
+			<xsd:element ref="podstawa-prawna"/>
+			<xsd:element ref="ksiega" maxOccurs="unbounded"/>
+			<xsd:element ref="czesc" maxOccurs="unbounded"/>
+			<xsd:element ref="tyt" maxOccurs="unbounded"/>
+			<xsd:element ref="dzial" maxOccurs="unbounded"/>
+			<xsd:element ref="rozdzial" maxOccurs="unbounded"/>
+			<xsd:element ref="oddzial" maxOccurs="unbounded"/>
+			<xsd:element ref="artykul" maxOccurs="unbounded"/>
+			<xsd:element ref="paragraf" maxOccurs="unbounded"/>
+			<xsd:element ref="ustep" maxOccurs="unbounded"/>
+			<xsd:element ref="punkt" maxOccurs="unbounded"/>
+			<xsd:element ref="litera" maxOccurs="unbounded"/>
+			<xsd:element ref="tiret" maxOccurs="unbounded"/>
+			<xsd:element ref="akapit" maxOccurs="unbounded"/>
+			<xsd:element ref="ustep-przypisu" maxOccurs="unbounded"/>
+			<xsd:element ref="punkt-przypisu" maxOccurs="unbounded"/>
+			<xsd:element ref="litera-przypisu" maxOccurs="unbounded"/>
+			<xsd:element ref="tiret-przypisu" maxOccurs="unbounded"/>
+			<xsd:element ref="tabela" maxOccurs="unbounded"/>
+			<xsd:element ref="wiersz" maxOccurs="unbounded"/>
+			<xsd:element ref="zalacznik" maxOccurs="unbounded"/>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:group name="elem-nowelizacyjne">
+		<xsd:annotation>
+			<xsd:documentation>Elementy nowelizacyjne.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice>
+			<xsd:element ref="dodaj"/>
+			<xsd:element ref="uchyl"/>
+			<xsd:element ref="zastap"/>
+		</xsd:choice>
+	</xsd:group>
+	<xsd:group name="elem-komentarza">
+		<xsd:annotation>
+			<xsd:documentation>Elementy komentarza.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice>
+			<xsd:element ref="uwaga" minOccurs="0"/>
+			<xsd:element ref="wyspa" minOccurs="0"/>
+		</xsd:choice>
+	</xsd:group>
+	<xsd:group name="elem-formatowania">
+		<xsd:annotation>
+			<xsd:documentation>Elementy formatowania.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice>
+			<xsd:element ref="wytluszczenie"/>
+			<xsd:element ref="kursywa"/>
+			<xsd:element ref="podkreslenie"/>
+		</xsd:choice>
+	</xsd:group>
+	<xsd:group name="elem-grupujace">
+		<xsd:annotation>
+			<xsd:documentation>Elementy grupujace.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice>
+			<xsd:element ref="fragment"/>
+			<xsd:element ref="blok"/>
+		</xsd:choice>
+	</xsd:group>
+	<xsd:group name="elem-tekstowe">
+		<xsd:annotation>
+			<xsd:documentation>Elementy dozwolone w "zwyklym" tekscie (formatowanie i indeksy).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:group ref="elem-formatowania"/>
+			<xsd:element ref="indeks-dolny" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="indeks-gorny" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="elem-grupowe">
+		<xsd:annotation>
+			<xsd:documentation>Rozszerzenie zwyklego tekstu o elementy grupujace.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice>
+			<xsd:group ref="elem-tekstowe"/>
+			<xsd:group ref="elem-grupujace"/>
+		</xsd:choice>
+	</xsd:group>
+	<xsd:group name="elem-wewnetrzne">
+		<xsd:annotation>
+			<xsd:documentation>Rozszerzenie elementow grupowych o reprezentacje powiazan.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:group ref="elem-grupowe" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="przypis" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="definicja" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="link" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="przywolanie" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="rozsz-elem-wewnetrzne">
+		<xsd:annotation>
+			<xsd:documentation>Rozszerzenie elementow wewnetrznych o znaczniki nowelizacyjne, cytowanie i tabele.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice>
+			<xsd:group ref="elem-wewnetrzne"/>
+			<xsd:group ref="elem-nowelizacyjne"/>
+			<xsd:element ref="cytuj">
+				<xsd:annotation>
+					<xsd:documentation>Element umozliwiajacy cytowanie bezpo�rednie przepisow.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--
+				<xsd:element ref="cytowanie">
+					<xsd:annotation>
+						<xsd:documentation>Element umozliwiajacy cytowanie referencyjne przepisow.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				-->
+			<xsd:element ref="cytowanie"/>
+			<xsd:element ref="tabela"/>
+		</xsd:choice>
+	</xsd:group>
+	<!--  M e t r y c z k a  -->
+	<xsd:element name="metryka">
+		<xsd:annotation>
+			<xsd:documentation>Metryczka aktu, uzywana jako naglowek badz informacja w przywolaniu.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="organ-wydajacy"/>
+				<xsd:element ref="tytul" minOccurs="0"/>
+				<xsd:element ref="adres-publikacji" minOccurs="0"/>
+			</xsd:sequence>
+			<xsd:attribute name="status-aktu" use="required">
+				<xsd:annotation>
+					<xsd:documentation>Informacja o stanie prac nad aktem prawnym.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="projekt"/>
+						<xsd:enumeration value="uchwalony"/>
+						<xsd:enumeration value="przyjety"/>
+						<xsd:enumeration value="ogloszony"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="nazwa" use="optional">
+				<xsd:annotation>
+					<xsd:documentation>Nazwa aktu ("ustawa", "konstytucja", "regulamin" itp.)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="numer">
+				<xsd:annotation>
+					<xsd:documentation>Numer aktu prawnego.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="organ-wydajacy" use="optional">
+				<xsd:annotation>
+					<xsd:documentation>Element reprezentujacy organ wydajacy akt (w dopelniaczu) - uzupelnienie nazwy.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="data" type="data" use="optional">
+				<xsd:annotation>
+					<xsd:documentation>Data uchwalenia/wydania aktu.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="opis-typu">
+				<xsd:annotation>
+					<xsd:documentation>Opis aktu prawnego (rozszerzenie numeru aktu).</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="kadencja" type="zakres_lat">
+				<xsd:annotation>
+					<xsd:documentation>Okreslenie kadencji organu wydajacego.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="organ-wydajacy">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy organ wydajacy akt (w dopelniaczu) - uzupelnienie nazwy.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:sequence>
+				<xsd:element ref="przypis" minOccurs="0"/>
+			</xsd:sequence>
+<!--			<xsd:attribute name="data" type="data" use="required">-->
+<!--				<xsd:annotation>-->
+<!--					<xsd:documentation>Data uchwalenia/wydania aktu.</xsd:documentation>-->
+<!--				</xsd:annotation>-->
+<!--			</xsd:attribute>-->
+		</xsd:complexType>
+	</xsd:element>
+	<!--  E l e m e n t y   s t r u k t u r y  -->
+	<xsd:element name="tytul">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy tytul aktu.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0">
+				<xsd:element ref="przypis"/>
+				<xsd:element ref="fragment"/>
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="srodtytul">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy srodtytul.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:sequence>
+				<xsd:element ref="przypis"/>
+				<xsd:element ref="fragment"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="element_redakcyjny">
+		<xsd:annotation>
+			<xsd:documentation>Element redakcyjny posiadajacy pelna funkcjonalnosc.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:sequence>
+				<xsd:group ref="rozsz-elem-wewnetrzne"/>
+				<xsd:element ref="punkt" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="litera" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="tiret" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="akapit" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="atr-wspolne"/>
+			<!--			<xsd:choice minOccurs="0" maxOccurs="unbounded">-->
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="preambula">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy preambule.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:sequence>
+				<xsd:group ref="rozsz-elem-wewnetrzne"/>
+				<!-- dodane na wniosek TK -->
+				<xsd:element ref="akapit" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="punkt" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="litera" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="tiret" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="atr-wspolne"/>
+			<!--			<xsd:choice minOccurs="0" maxOccurs="unbounded">-->
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="podstawa-prawna">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy podstawe prawna.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:sequence>
+				<xsd:group ref="rozsz-elem-wewnetrzne"/>
+				<!-- dodane na wniosek TK -->
+				<xsd:element ref="akapit" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="punkt" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="litera" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="tiret" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="atr-wspolne"/>
+			<!--			<xsd:choice minOccurs="0" maxOccurs="unbounded">-->
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="czesc">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy czesc.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="tytul" minOccurs="0"/>
+				<!--				<xsd:choice maxOccurs="unbounded">-->
+				<!--					<xsd:sequence>-->
+				<xsd:element ref="ksiega" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="tyt" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="rozdzial" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="artykul" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:group ref="elem-komentarza"/>
+				<!--					</xsd:sequence>-->
+				<!--				</xsd:choice>-->
+			</xsd:sequence>
+			<xsd:attributeGroup ref="atr-wspolne-nr"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ksiega">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy ksiege.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="tytul" minOccurs="0"/>
+				<!--				<xsd:choice maxOccurs="unbounded">-->
+				<!--					<xsd:sequence>-->
+				<xsd:element ref="tyt" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="artykul" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:group ref="elem-komentarza"/>
+				<!--					</xsd:sequence>-->
+				<!--				</xsd:choice>-->
+			</xsd:sequence>
+			<xsd:attributeGroup ref="atr-wspolne-nr"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="tyt">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy tytul (jako czesc struktury).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="tytul" minOccurs="0"/>
+				<!--				<xsd:choice maxOccurs="unbounded">-->
+				<!--					<xsd:sequence>-->
+				<xsd:element ref="dzial" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="artykul" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="paragraf" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:group ref="elem-komentarza"/>
+				<!--					</xsd:sequence>-->
+				<!--				</xsd:choice>-->
+			</xsd:sequence>
+			<xsd:attributeGroup ref="atr-wspolne-nr"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="dzial">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy dzial.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="tytul" minOccurs="0"/>
+				<!--				<xsd:choice maxOccurs="unbounded">-->
+				<!--					<xsd:sequence>-->
+				<xsd:element ref="rozdzial" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="artykul" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="paragraf" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:group ref="elem-komentarza"/>
+				<!--					</xsd:sequence>-->
+				<!--				</xsd:choice>-->
+			</xsd:sequence>
+			<xsd:attributeGroup ref="atr-wspolne-nr"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="rozdzial">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy rozdzial.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="tytul" minOccurs="0"/>
+				<!--				<xsd:choice maxOccurs="unbounded">-->
+				<!--					<xsd:sequence>-->
+				<xsd:element ref="oddzial" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="srodtytul" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="artykul" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="paragraf" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:group ref="elem-komentarza"/>
+				<!--					</xsd:sequence>-->
+				<!--				</xsd:choice>-->
+			</xsd:sequence>
+			<xsd:attributeGroup ref="atr-wspolne-nr"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="oddzial">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy oddzial.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="tytul" minOccurs="0"/>
+				<!--				<xsd:sequence>-->
+				<xsd:element ref="artykul" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="paragraf" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:group ref="elem-komentarza"/>
+				<!--				</xsd:sequence>-->
+			</xsd:sequence>
+			<xsd:attributeGroup ref="atr-wspolne-nr"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="artykul">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy artykul.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:sequence>
+				<xsd:group ref="rozsz-elem-wewnetrzne"/>
+				<xsd:element ref="akapit" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="paragraf" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="ustep" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="punkt" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="podwyliczenie" minOccurs="0"/>
+				<xsd:element ref="litera" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="tiret" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="trybunal" minOccurs="0"/>
+				<xsd:element ref="przepisy-wykonawcze" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="dyrektywa" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="wejscie-w-zycie" minOccurs="0"/>
+				<xsd:element ref="stosowanie" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:group ref="elem-komentarza"/>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="atr-wspolne-nr"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="paragraf">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy paragraf.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:sequence>
+				<xsd:group ref="rozsz-elem-wewnetrzne"/>
+				<xsd:element ref="akapit" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="ustep" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="punkt" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="podwyliczenie" minOccurs="0"/>
+				<xsd:element ref="litera" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="tiret" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="trybunal" minOccurs="0"/>
+				<xsd:element ref="przepisy-wykonawcze" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="dyrektywa" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:group ref="elem-komentarza"/>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="atr-wspolne-nr"/>
+			<xsd:attribute name="symbol-wysrodkowany" default="nie">
+				<xsd:annotation>
+					<xsd:documentation>Wyb�r po�o�enia symbolu paragrafu w wydruku.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="tak"/>
+						<xsd:enumeration value="nie"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="sentencja">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy sentencji.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:sequence>
+				<xsd:element ref="tytul" minOccurs="0"/>
+				<xsd:group ref="rozsz-elem-wewnetrzne"/>
+				<xsd:element ref="akapit" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="ustep" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="paragraf" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="punkt" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="litera" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="tiret" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="trybunal" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="przepisy-wykonawcze" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="dyrektywa" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="wejscie-w-zycie" minOccurs="0"/>
+				<xsd:element ref="stosowanie" minOccurs="0"/>
+				<xsd:group ref="elem-komentarza"/>
+				<xsd:element ref="element_redakcyjny" minOccurs="0"/>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="atr-wspolne-nr"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ustep">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy ustep.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:sequence>
+				<xsd:group ref="rozsz-elem-wewnetrzne"/>
+				<xsd:element ref="akapit" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="punkt" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="podwyliczenie" minOccurs="0"/>
+				<xsd:element ref="litera" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="tiret" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="trybunal" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="przepisy-wykonawcze" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="dyrektywa" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:group ref="elem-komentarza"/>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="atr-wspolne-nr"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="zaskarzenie">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy ustep.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:sequence>
+				<xsd:group ref="rozsz-elem-wewnetrzne"/>
+				<!-- dodane na wniosek TK -->
+				<xsd:element ref="akapit" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="tytul" minOccurs="0"/>
+				<xsd:element ref="ustep" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="paragraf" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="punkt" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="litera" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="tiret" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="trybunal" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="przepisy-wykonawcze" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="dyrektywa" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:group ref="elem-komentarza"/>
+				<xsd:element ref="element_redakcyjny" minOccurs="0"/>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="atr-wspolne-nr"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="punkt">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy punkt.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:sequence>
+				<xsd:group ref="rozsz-elem-wewnetrzne"/>
+				<xsd:element ref="akapit" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="litera" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="podwyliczenie" minOccurs="0"/>
+				<xsd:element ref="tiret" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="trybunal" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="przepisy-wykonawcze" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="dyrektywa" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:group ref="elem-komentarza"/>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="atr-wspolne-nr"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="litera">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy litere.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:sequence>
+				<xsd:group ref="rozsz-elem-wewnetrzne"/>
+				<xsd:element ref="akapit" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="tiret" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="podwyliczenie" minOccurs="0"/>
+				<xsd:element ref="trybunal" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="przepisy-wykonawcze" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="dyrektywa" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:group ref="elem-komentarza"/>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="atr-wspolne-nr"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="tiret">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy tiret, uzywany takze do wyliczen.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:sequence>
+				<xsd:group ref="rozsz-elem-wewnetrzne"/>
+				<!--				<xsd:element ref="tiret"/>-->
+				<xsd:element ref="akapit" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="trybunal" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="przepisy-wykonawcze" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="dyrektywa" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:group ref="elem-komentarza"/>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="atr-wspolne"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="akapit">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy akapit.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:group ref="rozsz-elem-wewnetrzne"/>
+				<xsd:group ref="elem-komentarza"/>
+				<!-- dodane na wniosek TK -->
+				<xsd:element ref="element_redakcyjny" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:attributeGroup ref="atr-wspolne"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="podwyliczenie">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy czesc wspólną podsumowującą wyliczenie i odnoszaca sie do wszystkich jego elementow.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:group ref="rozsz-elem-wewnetrzne"/>
+				<xsd:group ref="elem-komentarza"/>
+				<!-- dodane na wniosek TK -->
+			</xsd:choice>
+			<xsd:attributeGroup ref="atr-wspolne"/>
+		</xsd:complexType>
+	</xsd:element>
+	<!--  E l e m e n t y   p o m o c n i c z e  -->
+	<xsd:element name="indeks-gorny">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy tekst w indeksie gornym.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true"/>
+	</xsd:element>
+	<xsd:element name="indeks-dolny">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy tekst w indeksie dolnym.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true"/>
+	</xsd:element>
+	<!--  U w a g a  -->
+	<xsd:element name="uwaga">
+		<xsd:annotation>
+			<xsd:documentation>Element przechowujacy uwage tekstowa.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:attribute name="typ" default="zwykla">
+				<xsd:annotation>
+					<xsd:documentation>Typ uwagi: zwykla, marginesowa, reprezentujaca poprawke.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="zwykla"/>
+						<xsd:enumeration value="marginalia"/>
+						<xsd:enumeration value="poprawka"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attributeGroup ref="atr-wyrownanie-poz"/>
+		</xsd:complexType>
+	</xsd:element>
+	<!--  A d r e s   p u b l i k a c j i  -->
+	<xsd:element name="adres-publikacji">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy adres publikacji aktu.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="adres-dzu" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="adres-dzu">
+		<xsd:annotation>
+			<xsd:documentation>Element identyfikujacy dziennik urzedowy, w ktorym opublikowano akt.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="typ">
+				<xsd:annotation>
+					<xsd:documentation>Nazwa dziennika.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="Dziennik Ustaw"/>
+						<xsd:enumeration value="Monitor Polski"/>
+						<xsd:enumeration value="Dziennik Urzedowy Glownego Urzedu Miar"/>
+						<xsd:enumeration value="Dziennik Urzedowy Glownego Urzedu Statystycznego"/>
+						<xsd:enumeration value="Dziennik Urzedowy Komendy G�ownej Policji"/>
+						<xsd:enumeration value="Dziennik Urzedowy Komendy G�ownej Panstwowej Strazy Pozarnej"/>
+						<xsd:enumeration value="Dziennik Urzedowy Komendy G�ownej Strazy Granicznej"/>
+						<xsd:enumeration value="Dziennik Urzedowy Komisji Papierow Wartosciowych i Gield"/>
+						<xsd:enumeration value="Dziennik Urzedowy Komisji Nadzoru Ubezpieczen i Funduszy Emerytalnych"/>
+						<xsd:enumeration value="Dziennik Urzedowy Komitetu Integracji Europejskiej"/>
+						<xsd:enumeration value="Dziennik Urzedowy Ministra Edukacji Narodowej"/>
+						<xsd:enumeration value="Dziennik Urzedowy Ministra Finansow"/>
+						<xsd:enumeration value="Dziennik Urzedowy Ministra Gospodarki"/>
+						<xsd:enumeration value="Dziennik Urzedowy Ministra Infrastruktury"/>
+						<xsd:enumeration value="Dziennik Urzedowy Ministra Kultury i Dziedzictwa Narodowego"/>
+						<xsd:enumeration value="Dziennik Urzedowy Ministra Nauki i Szkolnictwa Wyzszego"/>
+						<xsd:enumeration value="Dziennik Urzedowy Ministra Obrony Narodowej"/>
+						<xsd:enumeration value="Dziennik Urzedowy Ministra Pracy i Polityki Spo�ecznej"/>
+						<xsd:enumeration value="Dziennik Urzedowy Ministra Rolnictwa i Rozwoju Wsi"/>
+						<xsd:enumeration value="Dziennik Urzedowy Ministra Rozwoju Regionalnego"/>
+						<xsd:enumeration value="Dziennik Urzedowy Ministra Skarbu Panstwa"/>
+						<xsd:enumeration value="Dziennik Urzedowy Ministra Sportu i Turystyki"/>
+						<xsd:enumeration value="Dziennik Urzedowy Ministra Sprawiedliwosci"/>
+						<xsd:enumeration value="Dziennik Urzedowy Ministra Spraw Wewnetrznych i Administracji"/>
+						<xsd:enumeration value="Dziennik Urzedowy Ministra Spraw Zagranicznych"/>
+						<xsd:enumeration value="Dziennik Urzedowy Ministra Srodowiska"/>
+						<xsd:enumeration value="Dziennik Urzedowy Ministra Zdrowia"/>
+						<xsd:enumeration value="Dziennik Urzedowy Narodowego Banku Polskiego"/>
+						<xsd:enumeration value="Dziennik Urzedowy Urzedu Komunikacji Elektronicznej"/>
+						<xsd:enumeration value="Dziennik Urzedowy Urz�du Lotnictwa Cywilnego"/>
+						<xsd:enumeration value="Dziennik Urzedowy Urzedu Mieszkalnictwa i Rozwoju Miast"/>
+						<xsd:enumeration value="Dziennik Urzedowy Urzedu Ochrony Konkurencji i Konsumentow"/>
+						<xsd:enumeration value="Dziennik Urzedowy Urzedu Patentowego Rzeczypospolitej Polskiej"/>
+						<xsd:enumeration value="Dziennik Urzedowy Urzedu Regulacji Telekomunikacji i Poczty"/>
+						<xsd:enumeration value="Dziennik Urzedowy Wyzszegu Urzedu Gorniczego"/>
+						<xsd:enumeration value="Dziennik Urzedowy Zakladu Ubezpieczen Spolecznych"/>
+						<xsd:enumeration value="Dziennik Urzedowy Woj. Dolnoslaskiego"/>
+						<xsd:enumeration value="Dziennik Urzedowy Woj. Kujawsko-Pomorskiego"/>
+						<xsd:enumeration value="Dziennik Urzedowy Woj. Lubelskiego"/>
+						<xsd:enumeration value="Dziennik Urzedowy Woj. Lubuskiego"/>
+						<xsd:enumeration value="Dziennik Urzedowy Woj. Lodzkiego"/>
+						<xsd:enumeration value="Dziennik Urzedowy Woj. Malopolskiego"/>
+						<xsd:enumeration value="Dziennik Urzedowy Woj. Mazowieckiego"/>
+						<xsd:enumeration value="Dziennik Urzedowy Woj. Opolskiego"/>
+						<xsd:enumeration value="Dziennik Urzedowy Woj. Podkarpackiego"/>
+						<xsd:enumeration value="Dziennik Urzedowy Woj. Podlaskiego"/>
+						<xsd:enumeration value="Dziennik Urzedowy Woj. Pomorskiego"/>
+						<xsd:enumeration value="Dziennik Urzedowy Woj. Slaskiego"/>
+						<xsd:enumeration value="Dziennik Urzedowy Woj. Swi�tokrzyskiego"/>
+						<xsd:enumeration value="Dziennik Urzedowy Woj. Warminsko-Mazurskiego"/>
+						<xsd:enumeration value="Dziennik Urzedowy Woj. Wielkopolskiego"/>
+						<xsd:enumeration value="Dziennik Urzedowy Woj. Zachodniopomorskiego"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="rok">
+				<xsd:annotation>
+					<xsd:documentation>Rok wydania.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:pattern value="(19|20)[0-9]{2}"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="numer" type="xsd:positiveInteger">
+				<xsd:annotation>
+					<xsd:documentation>Numer wydania.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="pozycja" type="xsd:positiveInteger">
+				<xsd:annotation>
+					<xsd:documentation>Pozycja aktu w wydaniu.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="tj" default="nie">
+				<xsd:annotation>
+					<xsd:documentation>Informacja, czy akt zamieszczony pod wskazana pozycja jest tekstem jednolitym.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="tak"/>
+						<xsd:enumeration value="nie"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<!--  Z a l a c z n i k i  -->
+	<xsd:element name="zalaczniki">
+		<xsd:annotation>
+			<xsd:documentation>Lista zalacznikow.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="zalacznik" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="do-aktu" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Podtytu� wskazuj�cy akt do kt�rego nale�y za��cznik</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="zalacznik">
+		<xsd:annotation>
+			<xsd:documentation>Pojedynczy zalacznik.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="tytul" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="podstawa-prawna" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="ksiega" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="czesc" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="tyt" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="dzial" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="rozdzial" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="artykul" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="paragraf" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="ustep" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="punkt" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="litera" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="tiret" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="akapit" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="link" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="tabela" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:group ref="elem-komentarza"/>
+			</xsd:sequence>
+			<xsd:attribute name="do-aktu" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Podtytu� wskazuj�cy akt do kt�rego nale�y za��cznik</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attributeGroup ref="atr-wspolne-nr"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="uzasadnienie">
+		<xsd:annotation>
+			<xsd:documentation>Uzasadnienie.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="tytul" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="podstawa-prawna" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="ksiega" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="czesc" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="dzial" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="rozdzial" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="artykul" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="paragraf" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="ustep" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="punkt" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="litera" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="tiret" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="akapit" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="link" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="tabela" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:group ref="elem-komentarza"/>
+			</xsd:sequence>
+			<xsd:attribute name="do-aktu" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Podtytu� wskazuj�cy akt do kt�rego nale�y za��cznik</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attributeGroup ref="atr-wspolne-nr"/>
+		</xsd:complexType>
+	</xsd:element>
+	<!--  P o d p i s y  -->
+	<xsd:element name="podpisy">
+		<xsd:annotation>
+			<xsd:documentation>Lista podpisow (nieelektronicznych) pod aktem prawnym.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="podpis" maxOccurs="unbounded"/>
+				<xsd:element ref="kontrasygnata" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="w-porozumieniu" minOccurs="0" maxOccurs="unbounded"/>
+				<!--				<xsd:choice>-->
+				<xsd:element ref="organ-poswiadczajacy" minOccurs="0"/>
+				<xsd:element ref="zgodnosc-z-oryginalem" minOccurs="0" maxOccurs="unbounded"/>
+				<!--				</xsd:choice>-->
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="podpis">
+		<xsd:annotation>
+			<xsd:documentation>Pojedynczy podpis.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="funkcja">
+				<xsd:annotation>
+					<xsd:documentation>Funkcja/stanowisko osoby podpisujacej.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="tytul">
+				<xsd:annotation>
+					<xsd:documentation>Tytul naukowy/zawodowy osoby podpisujacej.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="imie">
+				<xsd:annotation>
+					<xsd:documentation>Imie/imiona osoby podpisujacej.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="nazwisko">
+				<xsd:annotation>
+					<xsd:documentation>Nazwisko osoby podpisujacej.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attributeGroup ref="atr-wizualizacyjne"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="kontrasygnata">
+		<xsd:annotation>
+			<xsd:documentation>Kontrasygnata</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="funkcja">
+				<xsd:annotation>
+					<xsd:documentation>Funkcja/stanowisko osoby podpisujacej.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="tytul">
+				<xsd:annotation>
+					<xsd:documentation>Tytul naukowy/zawodowy osoby podpisujacej.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="imie">
+				<xsd:annotation>
+					<xsd:documentation>Imie/imiona osoby podpisujacej.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="nazwisko">
+				<xsd:annotation>
+					<xsd:documentation>Nazwisko osoby podpisujacej.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attributeGroup ref="atr-wizualizacyjne"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="w-porozumieniu">
+		<xsd:annotation>
+			<xsd:documentation>Podpisy osob w porozumieniu z ktorymi wydano akt.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="funkcja">
+				<xsd:annotation>
+					<xsd:documentation>Funkcja/stanowisko osoby podpisujacej.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="tytul">
+				<xsd:annotation>
+					<xsd:documentation>Tytul naukowy/zawodowy osoby podpisujacej.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="imie">
+				<xsd:annotation>
+					<xsd:documentation>Imie/imiona osoby podpisujacej.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="nazwisko">
+				<xsd:annotation>
+					<xsd:documentation>Nazwisko osoby podpisujacej.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attributeGroup ref="atr-wizualizacyjne"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="organ-poswiadczajacy">
+		<xsd:annotation>
+			<xsd:documentation>Organ ktorego czlonkowie poswiadczaja zgodnosc elektronicznego aktu z oryginalem.</xsd:documentation>
+		</xsd:annotation>
+		<!--		<xsd:complexType mixed="true">-->
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="podpis" minOccurs="0"/>
+			</xsd:sequence>
+			<xsd:attribute name="data" type="data" use="required">
+				<xsd:annotation>
+					<xsd:documentation>Data uchwalenia/wydania aktu.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="organ">
+				<xsd:annotation>
+					<xsd:documentation>Nazwa organu wydaj�cego akt</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="zgodnosc-z-oryginalem">
+		<xsd:annotation>
+			<xsd:documentation>Podpis osoby poowiadczajacej zgodnosc wwersji elektroinicznej aktu z oryginalem paierowym.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="funkcja">
+				<xsd:annotation>
+					<xsd:documentation>Funkcja/stanowisko osoby podpisujacej.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="tytul">
+				<xsd:annotation>
+					<xsd:documentation>Tytul naukowy/zawodowy osoby podpisujacej.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="imie">
+				<xsd:annotation>
+					<xsd:documentation>Imie/imiona osoby podpisujacej.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="nazwisko">
+				<xsd:annotation>
+					<xsd:documentation>Nazwisko osoby podpisujacej.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attributeGroup ref="atr-wizualizacyjne"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="zatwierdzil">
+		<xsd:annotation>
+			<xsd:documentation>Tekstowa informacja o osobie odpowiedzialnej za zatwierdzenie aktu.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true"/>
+	</xsd:element>
+	<xsd:element name="osoba">
+		<xsd:annotation>
+			<xsd:documentation>Osoba.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence minOccurs="0">
+				<xsd:group ref="elem-komentarza"/>
+			</xsd:sequence>
+			<xsd:attribute name="tytul_nauk" use="optional">
+				<xsd:annotation>
+					<xsd:documentation>Tytul (naukowy)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="nazwisko" use="required">
+				<xsd:annotation>
+					<xsd:documentation>Nazwisko</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="imie" use="required">
+				<xsd:annotation>
+					<xsd:documentation>Imie</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="funkcja">
+				<xsd:annotation>
+					<xsd:documentation>funkcja w zespole</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="sklad">
+		<xsd:annotation>
+			<xsd:documentation>Lista sedziow orzekajacych.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence maxOccurs="unbounded">
+				<xsd:element ref="osoba"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--  P r z y p i s y  -->
+	<xsd:element name="przypis">
+		<xsd:annotation>
+			<xsd:documentation>Odnosnik do przypisu.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="nr">
+				<xsd:annotation>
+					<xsd:documentation>Numer (oznaczenie) przypisu.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="tresc-przypisow">
+		<xsd:annotation>
+			<xsd:documentation>Element grupujacy tresci przypisow.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="tresc-przypisu" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="tresc-przypisu">
+		<xsd:annotation>
+			<xsd:documentation>Tresc pojedynczego przypisu.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:group ref="elem-tekstowe"/>
+				<xsd:element ref="ustep-przypisu"/>
+				<xsd:element ref="punkt-przypisu"/>
+				<xsd:element ref="litera-przypisu"/>
+				<xsd:element ref="tiret-przypisu"/>
+				<xsd:element ref="adres-publikacji"/>
+				<xsd:element ref="dyrektywa"/>
+			</xsd:choice>
+			<xsd:attribute name="nr">
+				<xsd:annotation>
+					<xsd:documentation>Numer (oznaczenie) przypisu, ktorego tresc reprezentuje dany element.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ustep-przypisu">
+		<xsd:annotation>
+			<xsd:documentation>Ustep w podstrukturze przypisu.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:group ref="elem-tekstowe"/>
+				<xsd:element ref="punkt-przypisu"/>
+				<xsd:element ref="litera-przypisu"/>
+				<xsd:element ref="tiret-przypisu"/>
+				<xsd:element ref="dyrektywa"/>
+			</xsd:choice>
+			<xsd:attributeGroup ref="atr-wspolne-nr"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="punkt-przypisu">
+		<xsd:annotation>
+			<xsd:documentation>Punkt w postrukturze przypisu.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:group ref="elem-tekstowe"/>
+				<xsd:element ref="litera-przypisu"/>
+				<xsd:element ref="tiret-przypisu"/>
+				<xsd:element ref="dyrektywa"/>
+			</xsd:choice>
+			<xsd:attributeGroup ref="atr-wspolne-nr"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="litera-przypisu">
+		<xsd:annotation>
+			<xsd:documentation>Litera w podstrukturze przypisu.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:group ref="elem-tekstowe"/>
+				<xsd:element ref="tiret-przypisu"/>
+				<xsd:element ref="dyrektywa"/>
+			</xsd:choice>
+			<xsd:attributeGroup ref="atr-wspolne-nr"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="tiret-przypisu">
+		<xsd:annotation>
+			<xsd:documentation>Tiret w podstrukturze przypisu.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:group ref="elem-tekstowe"/>
+				<xsd:element ref="dyrektywa"/>
+			</xsd:choice>
+			<xsd:attributeGroup ref="atr-wspolne"/>
+		</xsd:complexType>
+	</xsd:element>
+	<!--  P r z y w o l a n i e  -->
+	<xsd:element name="przywolanie">
+		<xsd:annotation>
+			<xsd:documentation>Specjalny rodzaj linku do przywolywanego aktu.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:sequence>
+				<xsd:element ref="metryka" minOccurs="0"/>
+				<xsd:element ref="przypis" minOccurs="0"/>
+			</xsd:sequence>
+			<xsd:attribute name="akt-id" use="required">
+				<xsd:annotation>
+					<xsd:documentation>Identyfikator aktu.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="typ" default="nowelizacyjne">
+				<xsd:annotation>
+					<xsd:documentation>Rodzaj przywolania (nowelizacyjne, informacyjne, cytujace, odsylajace).</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="nowelizacyjne"/>
+						<xsd:enumeration value="informacyjne"/>
+						<xsd:enumeration value="cytujace"/>
+						<xsd:enumeration value="odsylajace"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="zamrozone" default="nie">
+				<xsd:annotation>
+					<xsd:documentation>Informacja o rezygnacji z aktualizacji przywolan (dla tekstow zarchiwizowanych).</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="tak"/>
+						<xsd:enumeration value="nie"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<!--  E l e m e n t y   f o r m a t o w a n i a  -->
+	<xsd:element name="wytluszczenie">
+		<xsd:annotation>
+			<xsd:documentation>Oznaczenie tekstu wytluszczonego.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:group ref="elem-wewnetrzne"/>
+			</xsd:choice>
+			<xsd:attributeGroup ref="atr-wspolne"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="kursywa">
+		<xsd:annotation>
+			<xsd:documentation>Oznaczenie tekstu zapisanego kursywa.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:group ref="elem-wewnetrzne"/>
+			</xsd:choice>
+			<xsd:attributeGroup ref="atr-wspolne"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="podkreslenie">
+		<xsd:annotation>
+			<xsd:documentation>Oznaczenie tekstu podkreslonego.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:group ref="elem-wewnetrzne"/>
+			</xsd:choice>
+			<xsd:attributeGroup ref="atr-wspolne"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="wyspa">
+		<xsd:annotation>
+			<xsd:documentation>Element umozliwiajacy zapis dowolnego fragmentu tekstu wykraczajacego struktura badz formatowaniem poza niniejszy schemat.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:attribute name="opis" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Tekstowy opis zawartosci wyspy.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="typ">
+				<xsd:annotation>
+					<xsd:documentation>Format zapisu tekstu wewnatrz wyspy.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="odf"/>
+						<xsd:enumeration value="ooxml"/>
+						<xsd:enumeration value="xhtml"/>
+						<xsd:enumeration value="latex"/>
+						<xsd:enumeration value="rtf"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="zalacznik_bin">
+		<xsd:annotation>
+			<xsd:documentation>Element umozliwiajacy zapis dowolnego pliku, jako czesc aktu.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:attribute name="nazwa" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Nazwa pliku.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="hash" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Skr�t kryptograficzny pliku.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="typ">
+				<xsd:annotation>
+					<xsd:documentation>Funkcja skr�tu.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="MD5"/>
+						<xsd:enumeration value="SHA-1"/>
+						<xsd:enumeration value="SHA-2"/>
+						<xsd:enumeration value="RIPEMD-160"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<!-- C y t o w a n i e   b e z p o s r e d n i e  -->
+	<xsd:element name="cytuj">
+		<xsd:annotation>
+			<xsd:documentation>Element umozliwiajacy bezposrednie cytowanie przepisow.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<!-- dodane na wniosek TK -->
+				<xsd:group ref="elem-wewnetrzne"/>
+				<xsd:group ref="elem-komentarza"/>
+				<xsd:element ref="tabela"/>
+			</xsd:choice>
+			<xsd:attributeGroup ref="atr-wspolne"/>
+		</xsd:complexType>
+	</xsd:element>
+	<!--  Z n a c z n i k i   n o w e l i z a c y j n e   i   c y t o w a n i e  -->
+	<xsd:element name="dodaj">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy dodanie przepisow.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:choice>
+				<xsd:sequence>
+					<xsd:element ref="po-elemencie" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element ref="element"/>
+				</xsd:sequence>
+				<xsd:sequence>
+					<xsd:element ref="w-elemencie" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element ref="po-tekscie"/>
+					<xsd:element ref="akcja" minOccurs="0"/>
+					<xsd:sequence>
+						<xsd:element ref="tekst" minOccurs="0"/>
+						<xsd:element ref="element" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:sequence>
+			</xsd:choice>
+			<xsd:attributeGroup ref="atr-nowelizacyjne"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="uchyl">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy uchylenie przepisow.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:choice minOccurs="0">
+					<xsd:choice maxOccurs="unbounded">
+						<xsd:element ref="element"/>
+						<xsd:element ref="elementy"/>
+					</xsd:choice>
+					<xsd:sequence>
+						<xsd:element ref="w-elemencie" minOccurs="0" maxOccurs="unbounded"/>
+						<xsd:element ref="tekst"/>
+					</xsd:sequence>
+					<xsd:element ref="oprocz" maxOccurs="unbounded"/>
+				</xsd:choice>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="atr-nowelizacyjne"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="zastap">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy zmiane brzmienia przepisow.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:choice>
+				<xsd:sequence>
+					<xsd:choice maxOccurs="unbounded">
+						<xsd:element ref="element"/>
+						<xsd:element ref="elementy"/>
+					</xsd:choice>
+					<xsd:element ref="elementem" minOccurs="0"/>
+				</xsd:sequence>
+				<xsd:sequence>
+					<xsd:element ref="w-elemencie" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element ref="tekst"/>
+					<xsd:element ref="akcja" minOccurs="0"/>
+					<xsd:element ref="tekstem"/>
+				</xsd:sequence>
+			</xsd:choice>
+			<xsd:attributeGroup ref="atr-nowelizacyjne"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="cytowanie">
+		<xsd:annotation>
+			<xsd:documentation>Element umozliwiajacy cytowanie przepisow.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:choice>
+				<xsd:element ref="element"/>
+				<xsd:element ref="cytowanie"/>
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="po-elemencie">
+		<xsd:annotation>
+			<xsd:documentation>Element wskazujacy sciezke do elementu struktury, po ktorym maja zostac dodane nowe przepisy.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="id" use="required">
+				<xsd:annotation>
+					<xsd:documentation>Sciezka w postaci wyrazenia XPath identyfikujaca element.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="w-elemencie">
+		<xsd:annotation>
+			<xsd:documentation>Element wskazujacy sciezke do elementu struktury, w ktorym maja zostac zmienione przepisy.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="id" use="required">
+				<xsd:annotation>
+					<xsd:documentation>Sciezka w postaci wyrazenia XPath identyfikujaca element.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="w-zdaniu">
+				<xsd:annotation>
+					<xsd:documentation>Numer zdania, w ktorym ma nastapic zamiana tekstu.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="element">
+		<xsd:annotation>
+			<xsd:documentation>Element wskazujacy sciezke do elementu struktury, w ktorym ma zostac znowelizowana tresc lub zawierajacy nowe brzmienie dodawanych przepisow.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="elem-struktury">
+					<xsd:attribute name="id">
+						<xsd:annotation>
+							<xsd:documentation>Sciezka w postaci wyrazenia XPath identyfikujaca element.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="elementy">
+		<xsd:annotation>
+			<xsd:documentation>Element wskazujacy sciezke do ciagu elementow nowelizowanej struktury.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="od" use="required">
+				<xsd:annotation>
+					<xsd:documentation>Sciezka w postaci wyrazenia XPath identyfikujaca element poczatkowy.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="do" use="required">
+				<xsd:annotation>
+					<xsd:documentation>Sciezka w postaci wyrazenia XPath identyfikujaca element koncowy.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="elementem">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy nowe brzmienie nowelizowanej czesci aktu.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="elem-struktury">
+					<xsd:attribute name="poziom">
+						<xsd:annotation>
+							<xsd:documentation>Nazwa elementu obudowujacego nowa czesc struktury: paragraf lub ustep.</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="paragraf"/>
+								<xsd:enumeration value="ustep"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="po-tekscie">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy fragment tekstu, po ktorym ma zostac dodana nowa tresc przepisu.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:group ref="elem-tekstowe"/>
+			</xsd:choice>
+			<xsd:attributeGroup ref="atr-identyfikacyjne"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="tekst">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy fragment tekstu, ktory ma zostac znowelizowany.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:group ref="elem-tekstowe"/>
+			</xsd:choice>
+			<xsd:attributeGroup ref="atr-identyfikacyjne"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="akcja">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentuacy fragment tekstu pomiedzy starym i nowym brzmieniem zmienianego tekstu.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:group ref="elem-tekstowe"/>
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="tekstem">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy nowe wyrazy przepisu zmieniajacego brzmienie.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:group ref="elem-tekstowe"/>
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="oprocz">
+		<xsd:annotation>
+			<xsd:documentation>Element reprezentujacy strukture pozostawiana w akcie po uchyleniu go w calosci.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element ref="element"/>
+					<xsd:element ref="elementy"/>
+				</xsd:choice>
+			</xsd:sequence>
+			<xsd:attribute name="do" type="data" use="required">
+				<xsd:annotation>
+					<xsd:documentation>Data konca obowiazywania pozostawionych przepisow.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<!--  Z n a c z n i k i   i n t e r p r e t a c y j n e  -->
+	<xsd:element name="trybunal">
+		<xsd:annotation>
+			<xsd:documentation>Element umozliwiajacy oznaczenie w tekscie ustawy wyrokow Trybunalu Konstytucyjnego.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="adres-dzu" minOccurs="0"/>
+				<xsd:element ref="zakwestionowany" minOccurs="0"/>
+				<xsd:element ref="komentarz" minOccurs="0"/>
+			</xsd:sequence>
+			<xsd:attribute name="stan" use="required">
+				<xsd:annotation>
+					<xsd:documentation>Stan procesu rozpatrywania zgodnosci przepisow z Konstytucja: "zaskarzony" lub "po wyroku".</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="zaskarzony"/>
+						<xsd:enumeration value="po-wyroku"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="zakwestionowany">
+		<xsd:annotation>
+			<xsd:documentation>Element obudowujacy zaskarzone przepisy.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:sequence>
+				<xsd:group ref="rozsz-elem-wewnetrzne"/>
+				<xsd:element ref="ustep" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="paragraf" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="punkt" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="litera" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="tiret" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:group ref="elem-komentarza"/>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="atr-wspolne"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="komentarz">
+		<xsd:annotation>
+			<xsd:documentation>Tekstowy komentarz do obowiazujacego stanu prawnego.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true"/>
+	</xsd:element>
+	<xsd:element name="wejscie-w-zycie">
+		<xsd:annotation>
+			<xsd:documentation>Informacja o dacie wejscia przepisow w zycie.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+				<xsd:element ref="od">
+					<xsd:annotation>
+						<xsd:documentation>Reprezentacja grupy przepisow o wspolnej dacie wejscia w zycie.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="stosowanie">
+		<xsd:annotation>
+			<xsd:documentation>Informacja o dacie stosowania przepisow.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+				<xsd:element ref="od">
+					<xsd:annotation>
+						<xsd:documentation>Reprezentacja grupy przepisow o wspolnej dacie poczatku stosowania.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="od">
+		<xsd:annotation>
+			<xsd:documentation>Reprezentacja grupy przepisow o wspolnej dacie wejscia w zycie/poczatku stosowania.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:element ref="element"/>
+				<xsd:element ref="elementy"/>
+			</xsd:choice>
+			<xsd:attribute name="data">
+				<xsd:annotation>
+					<xsd:documentation>Data poczatku stosowania/wejscia w zycie przepisow.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="przepisy-wykonawcze">
+		<xsd:annotation>
+			<xsd:documentation>Element wskazujacy miejsce umieszczenia przepisow wykonawczych.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true"/>
+	</xsd:element>
+	<xsd:element name="dyrektywa">
+		<xsd:annotation>
+			<xsd:documentation>Przywolanie dyrektywy UE.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="tytul"/>
+				<xsd:element ref="adres-publikacji-ue" minOccurs="0"/>
+			</xsd:sequence>
+			<xsd:attribute name="nr" type="xsd:positiveInteger">
+				<xsd:annotation>
+					<xsd:documentation>Numer dyrektywy.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="data" type="data">
+				<xsd:annotation>
+					<xsd:documentation>Data wydania dyrektywy.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="adres-publikacji-ue">
+		<xsd:annotation>
+			<xsd:documentation>Adres publikacji aktu w Dzienniku Urzedowym UE.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="adres-dzu-ue" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="adres-dzu-ue">
+		<xsd:annotation>
+			<xsd:documentation>Adres Dziennika Urzedowego UE.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="seria">
+				<xsd:annotation>
+					<xsd:documentation>Seria Dziennika Urzedowego UE.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="L"/>
+						<xsd:enumeration value="C"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="nr" type="xsd:positiveInteger">
+				<xsd:annotation>
+					<xsd:documentation>Numer Dziennika.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="data" type="data">
+				<xsd:annotation>
+					<xsd:documentation>Data wydania Dziennika.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<!--  L i n k i  -->
+	<xsd:element name="link">
+		<xsd:annotation>
+			<xsd:documentation>Link ogolnego przeznaczenia.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:attribute name="cel" use="required">
+				<xsd:annotation>
+					<xsd:documentation>Sciezka/wskazanie elementu docelowego linku.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="typ" default="hiperlink">
+				<xsd:annotation>
+					<xsd:documentation>Typ linku (hiperlink, link do zalacznika, link do definicji).</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="hiperlink"/>
+						<xsd:enumeration value="zalacznik"/>
+						<xsd:enumeration value="definicja"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="mime">
+				<xsd:annotation>
+					<xsd:documentation>Typ MIME wlaczanej zawartosci.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="definicja">
+		<xsd:annotation>
+			<xsd:documentation>Oznaczenie miejsca wystapienia definicji.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:attribute name="pojecie" use="required">
+				<xsd:annotation>
+					<xsd:documentation>Definiowane pojecie.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<!--  E l e m e n t y   g r u p u j a c e  -->
+	<xsd:element name="fragment">
+		<xsd:annotation>
+			<xsd:documentation>Znakowy fragment tekstu.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:group ref="elem-wewnetrzne"/>
+			</xsd:choice>
+			<xsd:attributeGroup ref="atr-wspolne"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="blok">
+		<xsd:annotation>
+			<xsd:documentation>Akapitowy fragment tekstu.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:group ref="elem-wewnetrzne"/>
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+	<!--  T a b e l e  -->
+	<xsd:element name="tabela">
+		<xsd:annotation>
+			<xsd:documentation>Tabela.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="naglowek-tabeli" minOccurs="0"/>
+				<xsd:element ref="wiersz" maxOccurs="unbounded"/>
+				<xsd:element ref="stopka-tabeli" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="naglowek-tabeli">
+		<xsd:annotation>
+			<xsd:documentation>Naglowek tabeli.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="wiersz" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="stopka-tabeli">
+		<xsd:annotation>
+			<xsd:documentation>Stopka tabeli.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="wiersz" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="wiersz">
+		<xsd:annotation>
+			<xsd:documentation>Wiersz tabeli.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:element ref="komorka"/>
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="komorka">
+		<xsd:annotation>
+			<xsd:documentation>Pojedyncza komorka.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:group ref="elem-tekstowe"/>
+			</xsd:choice>
+			<xsd:attribute name="scal-poziomo" type="liczba" default="1">
+				<xsd:annotation>
+					<xsd:documentation>Liczba kolumn, na ktore rozciaga sie komorka.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="scal-pionowo" type="liczba" default="1">
+				<xsd:annotation>
+					<xsd:documentation>Liczba wierszy, na ktore rozciaga sie komorka.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attributeGroup ref="atr-wyrownanie-poz"/>
+			<xsd:attributeGroup ref="atr-wyrownanie-pion"/>
+			<xsd:attribute name="szerokosc">
+				<xsd:annotation>
+					<xsd:documentation>Procentowa szerokosc komorki (kolumny).</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:pattern value="\d+%"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>
