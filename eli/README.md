@@ -1,4 +1,4 @@
-![Image](images/eli_brand.svg)
+![Image](images/eli_brand_invert.svg) 
 # Europejski Identyfikator Prawodawstwa
 
 W tym folderze przechowywane są :
