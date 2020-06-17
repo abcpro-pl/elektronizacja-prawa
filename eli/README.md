@@ -3,8 +3,10 @@
 
 W tym folderze przechowywane są :
 1. Słowniki (ontology) utworzone przez Jarosława Demineta z Rządowego Centrum Legislacji.
-2. Schematy XML aktów prawnych programu Legislator 3.x wykorzystujące przestrzenie nazw ELI dla dokumentów. W przeciwieństwie do EDAP, schematy dokumentów dostosowane są faktycznie występującej zawartości, są więc bardziej restrykcyjne. 
-3. Kody źródłowe klienta ELI do pobierania danych z Wojewódzkich Dzienników Urzędowych oraz niektórych Dzienników Ministerstw i Urzedów Centralnych. Od 2020 aplikacja Elektroniczne Dzienniki Urzedowe posiada podwitrynę ELI podobnie jak Dziennik Ustaw i Monitor Polski https://eli.gov.pl/
+2. Schematy XML aktów prawnych programu Legislator 3.x wykorzystujące przestrzenie nazw ELI dla dokumentów. W przeciwieństwie do EDAP, schematy dokumentów dostosowane są do faktycznie występującej zawartości, są więc bardziej restrykcyjne. 
+3. Kod źródłowy C# klienta ELI  do pobierania danych z Wojewódzkich Dzienników Urzędowych oraz niektórych Dzienników Ministerstw i Urzedów Centralnych. W celu wygenerowania klienta dla innego języka programowania, skorzystaj ze [Swagger CodeGen](https://swagger.io/tools/swagger-codegen/) w generatorze wskaż url do dokumentacji np. http://dziennik.lodzkie.eu/api/eli/openapi/ui/v1/elijson 
+
+    Od 2020 aplikacja Elektroniczne Dzienniki Urzedowe posiada podwitrynę ELI http://{adres-dziennika}/eli podobnie jak Dziennik Ustaw i Monitor Polski https://eli.gov.pl/eli
 
 Koncepcja identyfikatora została opisana w dokumencie Konkluzje Rady zalecające wprowadzenie europejskiego identyfikatora prawodawstwa (European Legislation Identifier – ELI) (2012/C 325/02) oraz dokumencie Konkluzje Rady w sprawie europejskiego identyfikatora prawodawstwa (2017/C 441/05). Koncepcja zakłada stworzenie wspólnego systemu identyfikowania prawodawstwa i jego metadanych, który uzupełni systemy informacji prawnej państw członkowskich. Wprowadzany przez koncepcję nowy standard dostępu do informacji prawnej zakłada, że sposób przygotowywania dzienników urzędowych i biuletynów prawnych w dalszym ciągu pozostawiony będzie w gestii państw wdrażających ELI.
 
