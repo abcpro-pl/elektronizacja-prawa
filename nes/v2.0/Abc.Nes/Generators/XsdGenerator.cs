@@ -18,7 +18,7 @@ using System.Linq;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
-namespace Abc.Nes.Utils {
+namespace Abc.Nes.Generators {
     public class XsdGenerator : IDisposable {
         public XElement GetSchema(Type type = null, string rootTypeName = null) {
             if (type.IsNull()) { type = typeof(Document); }
@@ -53,8 +53,8 @@ namespace Abc.Nes.Utils {
             return xsdText;
         }
         private XElement ChangeXsd(XElement xsd, string rootTypeName) {
-            using (var controller = new XsdAnnotationController()) {
-                xsd = controller.AddAnnotations(xsd, true);
+            using (var controller = new XsdCustomAttributesGenerator()) {
+                xsd = controller.AddCustomAttributes(xsd, true);
             }
 
             xsd.AddFirst(new XElement(XName.Get("import", xsd.Name.NamespaceName),

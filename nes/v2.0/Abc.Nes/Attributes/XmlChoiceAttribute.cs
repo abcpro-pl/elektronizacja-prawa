@@ -12,15 +12,7 @@
 
   ===================================================================================*/
 
-using Abc.Nes.Enumerations;
-using System;
-using System.Xml.Serialization;
-
-namespace Abc.Nes.Elements {
-    [XmlType(TypeName = "osoba-identyfikator-typ")]
-    [XmlAnnotation("Identyfikator osoby.")]
-    public class PersonIdElement {
-        [XmlText] public string Value { get; set; } = String.Empty;
-        [XmlAttribute("typId")] [XmlRequired] public PersonIdType Type { get; set; }
-    }
+namespace System.Xml.Serialization {
+    [AttributeUsage(AttributeTargets.Class)]
+    public class XmlChoiceAttribute : Attribute { }
 }

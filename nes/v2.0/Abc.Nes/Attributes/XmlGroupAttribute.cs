@@ -12,19 +12,11 @@
 
   ===================================================================================*/
 
-using System.Collections.Generic;
-
 namespace System.Xml.Serialization {
     [AttributeUsage(AttributeTargets.Property)]
-    public class XmlSimpleTypeAttribute : Attribute {
+    public class XmlGroupAttribute : Attribute {
         public string Prefix { get; set; } = "ndap";
-        public string TypeName { get; set; }
-        public string BaseTypeName { get; set; } = "xs:string";
-        public int MinLength { get; set; }
-        public string Pattern { get; set; }
-        public string[] EnumerationRestriction { get; set; }
+        public string Name { get; set; }
         public string Annotation { get; set; }
-        public string UnionMemberTypes { get; set; }
-        public XmlSimpleTypeAttribute() { }
     }
 }

@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Abc.Nes.Generators;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
 using System.IO;
 using System.Xml.Linq;
-using Abc.Nes.Utils;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Abc.Nes.UnitTests {
     [TestClass]

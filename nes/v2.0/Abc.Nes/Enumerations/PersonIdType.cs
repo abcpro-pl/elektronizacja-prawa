@@ -12,15 +12,15 @@
 
   ===================================================================================*/
 
-using Abc.Nes.Enumerations;
-using System;
 using System.Xml.Serialization;
 
-namespace Abc.Nes.Elements {
-    [XmlType(TypeName = "osoba-identyfikator-typ")]
-    [XmlAnnotation("Identyfikator osoby.")]
-    public class PersonIdElement {
-        [XmlText] public string Value { get; set; } = String.Empty;
-        [XmlAttribute("typId")] [XmlRequired] public PersonIdType Type { get; set; }
+namespace Abc.Nes.Enumerations {
+    [XmlType(TypeName = "osoba-id-typ")]
+    [XmlAnnotation("Type identyfikatora osoby.")]
+    public enum PersonIdType {
+        [XmlEnum("PESEL")]
+        Id,
+        [XmlEnum("NIP")]
+        TaxId
     }
 }

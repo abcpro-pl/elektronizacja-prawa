@@ -15,7 +15,7 @@
 using System;
 using System.IO;
 
-namespace Abc.Nes.Utils {
+namespace Abc.Nes.Converters {
     public class JsonConverter : IDisposable {
         public string GetJson(Document doc) {
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(doc);

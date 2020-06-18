@@ -16,10 +16,9 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace Abc.Nes.Elements {
-    [XmlType(TypeName = "instytucja-typ")]
-    [XmlAnnotation("Element zawierający dane instytucji. Podmiot inny niż osoba fizyczna np. urząd, organizacja, przedsiębiorstwo. ")]
-    public class InstitutionElement  {
-        [XmlElement("id")] public List<InstitutionIdElement> Identifiers { get; set; }
+    [XmlType(TypeName = "instytucja-komorka-typ")]
+    [XmlAnnotation("Element zawierający dane komórki lub jednostki organizacyjnej instytucji.")]
+    public class InstitutionUnitElement  {
         [XmlElement("nazwa")] [XmlRequired] [XmlAnnotation("Nazwa instytucji")] public string Name { get; set; }
         [XmlElement("adres")] public List<AddressElement> Addresses { get; set; }
         [XmlElement("kontakt")] public List<ContactElement> Contacts { get; set; }

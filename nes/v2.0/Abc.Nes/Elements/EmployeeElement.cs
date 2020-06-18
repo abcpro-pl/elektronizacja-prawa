@@ -12,19 +12,16 @@
 
   ===================================================================================*/
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Xml.Serialization;
 
 namespace Abc.Nes.Elements {
-    [XmlType(TypeName = "osoba-typ")]
-    [XmlAnnotation("Element zawierający dane osoby fizycznej.")]
-    public class PersonElement  {
-        [XmlElement("id")] public List<PersonIdElement> Identifiers { get; set; }
+    [XmlType(TypeName = "instytucja-pracownik-typ")]
+    [XmlAnnotation("Element zawierający dane pracownika instytucji. Pozwala opisać dane identyfikujące pracownika instytucji odpowiedzialnego za czynności przy tworzeniu i obiegu dokumentów.")]
+    public class EmployeeElement  {
         [XmlElement("nazwisko")] [XmlRequired] [XmlAnnotation("Nazwisko")] public string Surname { get; set; }
         [XmlElement("imie")] [XmlAnnotation("Imiona")] public List<string> FirstNames { get; set; }
-        [XmlElement("adres")] [XmlAnnotation("Adresy")] public List<AddressElement> Addresses { get; set; }
         [XmlElement("kontakt")] [XmlAnnotation("Kontakty")] public List<ContactElement> Contacts { get; set; }
+        [XmlElement("stanowisko")] [XmlAnnotation("Stanowisko zajmowane przez pracownika")] public string Position { get; set; }
     }
 }

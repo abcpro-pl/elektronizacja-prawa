@@ -17,10 +17,10 @@ using System;
 using System.Xml.Serialization;
 
 namespace Abc.Nes.Elements {
-    [XmlType(TypeName = "osoba-identyfikator-typ")]
-    [XmlAnnotation("Identyfikator osoby.")]
-    public class PersonIdElement {
+    [XmlType(TypeName = "instytucja-identyfikator-typ")]
+    [XmlAnnotation("Identyfikator instytucji.")]
+    public class InstitutionIdElement  {
         [XmlText] public string Value { get; set; } = String.Empty;
-        [XmlAttribute("typId")] [XmlRequired] public PersonIdType Type { get; set; }
+        [XmlAttribute("typId")] [XmlRequired] public InstitutionIdType Type { get; set; }
     }
 }

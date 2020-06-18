@@ -12,18 +12,15 @@
 
   ===================================================================================*/
 
-using System;
 using System.Xml.Serialization;
 
-namespace Abc.Nes.Elements {
-    [XmlType(TypeName = "element-bazowy-typ")]
-    [XmlAnnotation("Element bazowy.")]
-    public abstract class ElementBase : IComparable, IDisposable {
-        public int CompareTo(object obj) {
-            if (obj.IsNull()) { return 1; }
-            return this.GetHashCode().CompareTo(obj.GetHashCode());
-        }
-
-        public void Dispose() { }
+namespace Abc.Nes.Enumerations {
+    [XmlType(TypeName = "data-zakres-typ")]
+    [XmlAnnotation("Słownik zakresów dat.")]
+    public enum DateRangeType {
+        [XmlEnum("")]
+        None,
+        [XmlEnum("daty skrajne")]
+        DateFromTo
     }
 }

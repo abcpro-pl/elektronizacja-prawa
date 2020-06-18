@@ -17,10 +17,10 @@ using System;
 using System.Xml.Serialization;
 
 namespace Abc.Nes.Elements {
-    [XmlType(TypeName = "osoba-identyfikator-typ")]
-    [XmlAnnotation("Identyfikator osoby.")]
-    public class PersonIdElement {
+    [XmlType(TypeName = "tytul-z-jezykiem-typ")]
+    [XmlAnnotation("Element zawierający tytuł dokumentu z podanie kodu języka, w którym go sporządzono.")]
+    public class TitleWithLanguageCodeElement  {
         [XmlText] public string Value { get; set; } = String.Empty;
-        [XmlAttribute("typId")] [XmlRequired] public PersonIdType Type { get; set; }
+        [XmlAttribute("kodJezyka")] [XmlRequired(false)] public LanguageCode Type { get; set; }
     }
 }

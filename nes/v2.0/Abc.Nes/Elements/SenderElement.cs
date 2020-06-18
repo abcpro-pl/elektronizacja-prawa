@@ -12,15 +12,13 @@
 
   ===================================================================================*/
 
-using Abc.Nes.Enumerations;
-using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace Abc.Nes.Elements {
-    [XmlType(TypeName = "osoba-identyfikator-typ")]
-    [XmlAnnotation("Identyfikator osoby.")]
-    public class PersonIdElement {
-        [XmlText] public string Value { get; set; } = String.Empty;
-        [XmlAttribute("typId")] [XmlRequired] public PersonIdType Type { get; set; }
+    [XmlType(TypeName = "nadawca-typ")]
+    [XmlAnnotation(@"Podmiot (instytucja lub osoba) który został odnotowany jako nadawca dokumentu zarejestrowanego w dokumentacji organu lub jednostki.")]
+    public class SenderElement {
+        [XmlElement("podmiot")] [XmlRequired] public SubjectElement Subject { get; set; }
     }
 }

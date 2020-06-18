@@ -1,0 +1,30 @@
+﻿/*=====================================================================================
+
+	ABC NES 
+	(C)2002 - 2020 ABC PRO sp. z o.o.
+	http://abcpro.pl
+	
+	Author: (C)2009 - 2020 ITORG Krzysztof Radzimski
+	http://itorg.pl
+
+    License: GPL-3.0-or-later
+    https://licenses.nuget.org/GPL-3.0-or-later
+
+  ===================================================================================*/
+
+using System;
+using System.Xml.Serialization;
+
+namespace Abc.Nes.Elements {
+    [XmlType(TypeName = "kontakt-typ")]
+    [XmlAnnotation("Element zawierający dane kontaktowe.")]
+    public class ContactElement  {
+        [XmlText] public string Value { get; set; } = String.Empty;
+
+        [XmlAttribute("typKontaktu")]
+        [XmlAnnotation("Wskazanie rodzaju kontaktu np. email, telefon, adres strony internetowej.")]
+        [XmlRequired]
+        [XmlSimpleType(Annotation = "Typy kontaktu", EnumerationRestriction = new string[] { "telefon", "faks", "email", "url", "skype", "facebook", "youtube", "instagram", "tiktok", "teams", "snapchat", "wuze", "messanger", "zoom" }, BaseTypeName = "xs:string", TypeName = "kontakt-rodzaj-typ", UnionMemberTypes = "xs:string")]
+        public string Type { get; set; }
+    }
+}

@@ -12,15 +12,13 @@
 
   ===================================================================================*/
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Xml.Serialization;
 
 namespace Abc.Nes.Elements {
     [XmlType(TypeName = "podmiot-typ")]
-    [XmlAnnotation("Element zawierający dane podmiotu.")]
-    public class SubjectElement : ElementBase {
+    [XmlAnnotation(@"Element zawierający dane podmiotu. 
+Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czynności związanej z dokumentem (tworzenie, odbieranie, akceptacja, podpisywanie, łączenie w grupy). ")]
+    public class SubjectElement {
         [XmlRequired]
         [XmlChoiceIdentifier("SubjectType")]
         [XmlElement("osoba", typeof(PersonElement))]
@@ -28,6 +26,8 @@ namespace Abc.Nes.Elements {
         public object Subject { get; set; }
 
         [XmlIgnore] public SubjectType SubjectType;
+        [XmlIgnore] public PersonElement Person { get { return Subject as PersonElement; } set { Subject = value; } }
+        [XmlIgnore] public InstitutionElement Institution { get { return Subject as InstitutionElement; } set { Subject = value; } }
     }
 
     [XmlType(IncludeInSchema = false)]

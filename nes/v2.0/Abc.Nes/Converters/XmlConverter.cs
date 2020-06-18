@@ -12,13 +12,14 @@
 
   ===================================================================================*/
 
+using Abc.Nes.Utils;
 using System;
 using System.IO;
 using System.Text;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
-namespace Abc.Nes.Utils {
+namespace Abc.Nes.Converters {
     public class XmlConverter : IDisposable {
         public XElement GetXml(Document doc) {
             var xmlserializer = new XmlSerializer(this.GetType());
