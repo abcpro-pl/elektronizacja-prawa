@@ -12,13 +12,22 @@
 
   ===================================================================================*/
 
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace System {
     static class SystemExtensions {
+        public static string GetXmlEnum(this Enum value) {
+            try {
+                var fi = value.GetType().GetField(value.ToString());
+                XmlEnumAttribute[] attributes = (XmlEnumAttribute[])fi.GetCustomAttributes(typeof(XmlEnumAttribute), false);
+                return (attributes.Length > 0) ? attributes[0].Name : value.ToString();
+            }
+            catch {
+                return string.Empty;
+            }
+        }
         public static byte[] ToByteArray(this string text) {
             return Encoding.UTF8.GetBytes(text);
         }

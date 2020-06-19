@@ -152,10 +152,10 @@ namespace Abc.Nes.Generators {
                                         simpleTypeElement = new XElement(N("simpleType"),
                                                 new XAttribute("name", simpleType.TypeName),
                                                 simpleType.Annotation.IsNotNullOrEmpty() ? new XElement(N("annotation"), new XElement(N("documentation"), simpleType.Annotation)) : null,
-                                                (simpleType.EnumerationRestriction.IsNull() || simpleType.EnumerationRestriction.Count() == 0) && simpleType.MinLength > 0 ? new XElement(N("minLength"), new XAttribute("value", simpleType.MinLength)) : null,
+                                                simpleType.EnumerationRestriction.IsNull() && simpleType.MinLength > 0 ? new XElement(N("minLength"), new XAttribute("value", simpleType.MinLength)) : null,
                                                 simpleType.Pattern.IsNotNullOrEmpty() ? new XElement(N("pattern"), new XAttribute("value", simpleType.Pattern)) : null,
                                                 new XElement(N("union"), new XAttribute("memberTypes", simpleType.UnionMemberTypes),
-                                                    simpleType.EnumerationRestriction.IsNotNull() && simpleType.EnumerationRestriction.Length > 0 ? new XElement(N("simpleType"), GetEnumerationRestrictionXml(simpleType.EnumerationRestriction, simpleType.BaseTypeName)) : null
+                                                    simpleType.EnumerationRestriction.IsNotNull()  ? new XElement(N("simpleType"), GetEnumerationRestrictionXml(simpleType.EnumerationRestriction, simpleType.BaseTypeName)) : null
                                                 ));
                                     }
                                     else {
@@ -165,7 +165,7 @@ namespace Abc.Nes.Generators {
                                             new XElement(N("restriction"), new XAttribute("base", simpleType.BaseTypeName),
                                                 simpleType.MinLength > 0 ? new XElement(N("minLength"), new XAttribute("value", simpleType.MinLength)) : null,
                                                 simpleType.Pattern.IsNotNullOrEmpty() ? new XElement(N("pattern"), new XAttribute("value", simpleType.Pattern)) : null,
-                                                simpleType.EnumerationRestriction.IsNotNull() && simpleType.EnumerationRestriction.Length > 0 ? GetEnumerationRestrictionXml(simpleType.EnumerationRestriction, simpleType.BaseTypeName) : null
+                                                simpleType.EnumerationRestriction.IsNotNull() ? GetEnumerationRestrictionXml(simpleType.EnumerationRestriction, simpleType.BaseTypeName) : null
                                             )
                                         );
                                     }
@@ -232,11 +232,12 @@ namespace Abc.Nes.Generators {
             return xsd;
         }
 
-        private XElement GetEnumerationRestrictionXml(IEnumerable<string> enumeration, string baseType) {
+        private XElement GetEnumerationRestrictionXml(Type enumType, string baseType) {
             var restriction = new XElement(N("restriction"), new XAttribute("base", baseType));
-            if (enumeration.IsNotNull() && enumeration.Count() > 0) {
-                foreach (var item in enumeration) {
-                    restriction.Add(new XElement(N("enumeration"), new XAttribute("value", item)));
+            
+            if (enumType.IsNotNull()) {
+                foreach (Enum item in Enum.GetValues(enumType)) {                    
+                    restriction.Add(new XElement(N("enumeration"), new XAttribute("value", item.GetXmlEnum())));
                 }
             }
 

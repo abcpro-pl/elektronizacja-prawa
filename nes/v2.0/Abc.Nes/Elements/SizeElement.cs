@@ -12,6 +12,7 @@
 
   ===================================================================================*/
 
+using Abc.Nes.Enumerations;
 using System;
 using System.Xml.Serialization;
 
@@ -23,7 +24,11 @@ namespace Abc.Nes.Elements {
 
         [XmlAttribute("miara")]
         [XmlRequired]
-        [XmlSimpleType(Annotation = "Miara wielkości dokumentu.", TypeName = "miara-typ", UnionMemberTypes = "ndap:niepusty-ciag-typ", BaseTypeName = "xs:string", EnumerationRestriction = new string[] { "bajt", "b", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" })]
+        [XmlSimpleType(Annotation = "Miara wielkości dokumentu.", TypeName = "miara-typ", UnionMemberTypes = "ndap:niepusty-ciag-typ", BaseTypeName = "xs:string", EnumerationRestriction = typeof(FileSizeType)/*new string[] { "bajt", "b", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" }*/)]
         public string Measure { get; set; }
+
+        public void SetMeasure(FileSizeType sizeType) {
+            Measure = sizeType.GetXmlEnum();
+        }
     }
 }
