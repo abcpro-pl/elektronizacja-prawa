@@ -32,5 +32,26 @@ namespace Abc.Nes {
         [XmlElement("nadawca")] public List<SenderElement> Senders { get; set; }
         [XmlElement("odbiorca")] public List<RecipientElement> Recipients { get; set; }
         [XmlElement("relacja")] public List<RelationElement> Relations { get; set; }
+        [XmlElement("kwalifikacja")] public List<QualificationElement> Qualifications { get; set; }
+        [XmlElement("jezyk")] [XmlAnnotation("Określenie języka naturalnego zgodnie z normą ISO-639-2, użytego w dokumencie.")] public List<TitleWithLanguageCodeElement> Languages { get; set; }
+
+        [XmlElement("opis")]
+        [XmlAnnotation("Streszczenie, spis treści lub krótki opis treści dokumentu.")]
+        [XmlSimpleType(TypeName = "dokument-opis-typ", Annotation = "Opis dokumentu.", BaseTypeName = "xs:string", UnionMemberTypes = "ndap:niepusty-ciag-typ")]
+        public string Description { get; set; }
+
+        [XmlElement("tematyka")] public List<KeywordElement> Keywords { get; set; }
+
+        [XmlElement("uprawnienia")]
+        [XmlAnnotation("Wskazanie podmiotu uprawnionego do dysponowania treścią dokumentu.")]
+        [XmlSimpleType(TypeName = "uprawnienia-typ", Annotation = "Wskazanie podmiotu uprawnionego do dysponowania treścią dokumentu.", BaseTypeName = "xs:string", UnionMemberTypes = "ndap:niepusty-ciag-typ")]
+        public List<string> Rights { get; set; }
+
+        [XmlElement("lokalizacja")]
+        [XmlAnnotation("Lokalizacja dokumentu.")]
+        [XmlSimpleType(TypeName = "lokalizacja-typ", Annotation = "Lokalizacja dokumentu.", BaseTypeName = "xs:string", UnionMemberTypes = "ndap:niepusty-ciag-typ")]
+        public List<string> Locations { get; set; }
+
+        [XmlElement("status")] [XmlAnnotation("Status dokumentu.")] public List<StatusElement> Statuses { get; set; }
     }
 }

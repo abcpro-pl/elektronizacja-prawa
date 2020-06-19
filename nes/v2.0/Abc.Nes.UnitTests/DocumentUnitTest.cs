@@ -13,7 +13,8 @@ namespace Abc.Nes.UnitTests {
             using (var xsdGenerator = new XsdGenerator()) {
                 schema = xsdGenerator.GetSchema();
             }
-            var filePath = Path.Combine(Path.GetTempPath(), "nes.xsd");
+            //var filePath = Path.Combine(Path.GetTempPath(), "nes.xsd");
+            var filePath = @"..\..\..\nes_20_generated.xsd";
             schema.Save(filePath);
             Debug.Assert(schema != null);
         }
