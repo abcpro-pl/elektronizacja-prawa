@@ -24,7 +24,7 @@ Pozwoli na odróżnienie dokumentów elektronicznych od nieelektronicznych celem
 W przypadku dokumentów elektronicznych powoli także na zarządzanie dokumentacją zapisaną w przestarzałych technologicznie formatach w przypadku gdy system operacyjny nie będzie umiał rozpoznać formatu (informacja o formacie będzie wskazówką naprowadzającą co to jest za zasób). W szczególności będzie można wyszukać i wyodrębnić dokumentację w przestarzałych formatach celem przygotowania jej konwersji do formatów nowszych lub powiązania z oprogramowaniem zapewniającym możliwość wizualizacji treści.")]
     public class FormatElement {
         [XmlElement("typFormatu")]
-        [XmlAnnotation("Typ formatu")]
+        [XmlAnnotation("Określenie typu pliku lub zasobu będącego zbiorem plików lub dokumentu fizycznego")]
         [XmlRequired]
         [XmlSimpleType(TypeName = "niepusty-ciag-typ", BaseTypeName = "xs:string", MinLength = 1, Pattern = @"(\r|\n|.)*\S(\r|\n|.)*", Annotation = "Typ definiujący nie pusty ciąg znaków.")]
         public string Type { get; set; }

@@ -28,7 +28,10 @@ namespace Abc.Nes.Elements {
         public string Measure { get; set; }
 
         public void SetMeasure(FileSizeType sizeType) {
-            Measure = sizeType.GetXmlEnum();
+            Measure = GetSizeType(sizeType);
+        }
+        public static string GetSizeType(FileSizeType sizeType) {
+            return sizeType.GetXmlEnum();
         }
     }
 }

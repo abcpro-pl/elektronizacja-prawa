@@ -26,8 +26,8 @@ Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czy
         public object Subject { get; set; }
 
         [XmlIgnore] public SubjectType SubjectType;
-        [XmlIgnore] public PersonElement Person { get { return Subject as PersonElement; } set { Subject = value; } }
-        [XmlIgnore] public InstitutionElement Institution { get { return Subject as InstitutionElement; } set { Subject = value; } }
+        [XmlIgnore] public PersonElement Person { get { return Subject as PersonElement; } set { SubjectType = SubjectType.osoba; Subject = value; } }
+        [XmlIgnore] public InstitutionElement Institution { get { return Subject as InstitutionElement; } set { SubjectType = SubjectType.instytucja; Subject = value; } }
     }
 
     [XmlType(IncludeInSchema = false)]

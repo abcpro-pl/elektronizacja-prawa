@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:ndap="http://www.mswia.gov.pl/standardy/ndap" elementFormDefault="qualified" targetNamespace="http://www.mswia.gov.pl/standardy/ndap" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<xs:schema xmlns:ndap="http://www.mswia.gov.pl/standardy/ndap" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" targetNamespace="http://www.mswia.gov.pl/standardy/ndap" elementFormDefault="qualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="http://www.w3.org/TR/xmldsig-core/xmldsig-core-schema.xsd" />
   <xs:element name="dokument" nillable="true" type="ndap:dokument-typ">
     <xs:annotation>
@@ -1186,7 +1186,7 @@ W przypadku dokumentów elektronicznych powoli także na zarządzanie dokumentac
     <xs:sequence>
       <xs:element maxOccurs="1" name="typFormatu" type="ndap:niepusty-ciag-typ">
         <xs:annotation>
-          <xs:documentation>Typ formatu</xs:documentation>
+          <xs:documentation>Określenie typu pliku lub zasobu będącego zbiorem plików lub dokumentu fizycznego</xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element minOccurs="0" maxOccurs="1" name="specyfikacja" type="xs:string">

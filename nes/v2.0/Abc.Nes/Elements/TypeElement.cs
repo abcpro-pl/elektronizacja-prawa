@@ -42,5 +42,12 @@ Umożliwia podanie informacji o rodzaju dokumentu na wykazach dokumentów znajdu
         public void SetClass(DocumentClassType docClass) {            
             Class = docClass.GetXmlEnum();
         }
+
+        public static string GetDocumentKindType(DocumentKindType kind) {
+            return kind.GetXmlEnum();
+        }
+        public static string GetDocumentClassType(DocumentClassType docClass) {
+            return docClass.GetXmlEnum();
+        }
     }
 }
