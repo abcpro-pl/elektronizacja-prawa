@@ -22,10 +22,19 @@
 <a href="http://edziennik.lublin.uw.gov.pl/eli/"><img alt="WWW" src="https://img.shields.io/badge/ELI-POL_WOJ_LB-darkred"></a>
 <a href="http://dzienniki.luw.pl/eli/"><img alt="WWW" src="https://img.shields.io/badge/ELI-POL_WOJ_LS-darkred"></a>
 <a href="http://dziennik.lodzkie.eu/eli/"><img alt="WWW" src="https://img.shields.io/badge/ELI-POL_WOJ_LD-darkred"></a>
+
 <a href="http://edziennik.malopolska.uw.gov.pl/eli/"><img alt="WWW" src="https://img.shields.io/badge/ELI-POL_WOJ_MP-darkred"></a>
 <a href="http://edziennik.mazowieckie.pl/eli/"><img alt="WWW" src="https://img.shields.io/badge/ELI-POL_WOJ_MZ-darkred"></a>
 <a href="https://duwo.opole.uw.gov.pl/eli/"><img alt="WWW" src="https://img.shields.io/badge/ELI-POL_WOJ_OP-darkred"></a>
 <a href="http://edziennik.rzeszow.uw.gov.pl/eli/"><img alt="WWW" src="https://img.shields.io/badge/ELI-POL_WOJ_PK-darkred"></a>
+<a href="http://edziennik.bialystok.uw.gov.pl/eli/"><img alt="WWW" src="https://img.shields.io/badge/ELI-POL_WOJ_PL-darkred"></a>
+
+<a href="http://edziennik.gdansk.uw.gov.pl/eli/"><img alt="WWW" src="https://img.shields.io/badge/ELI-POL_WOJ_PM-darkred"></a>
+<a href="http://dzienniki.slask.eu/eli"><img alt="WWW" src="https://img.shields.io/badge/ELI-POL_WOJ_SL-darkred"></a>
+<a href="http://edziennik.kielce.uw.gov.pl/eli/"><img alt="WWW" src="https://img.shields.io/badge/ELI-POL_WOJ_SK-darkred"></a>
+<a href="http://edzienniki.olsztyn.uw.gov.pl/eli/"><img alt="WWW" src="https://img.shields.io/badge/ELI-POL_WOJ_WM-darkred"></a>
+<a href="http://edziennik.poznan.uw.gov.pl/eli/"><img alt="WWW" src="https://img.shields.io/badge/ELI-POL_WOJ_WP-darkred"></a>
+<a href="http://e-dziennik.szczecin.uw.gov.pl/eli/"><img alt="WWW" src="https://img.shields.io/badge/ELI-POL_WOJ_ZP-darkred"></a>
 
 W tym folderze przechowywane są :
 1. Słowniki (ontology) utworzone przez Dyrektora Jarosława Demineta z Rządowego Centrum Legislacji.
