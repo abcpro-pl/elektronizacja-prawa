@@ -9,7 +9,7 @@ Necessary elements of electronic documents structure).</Description>
     <Copyright>ABC PRO Sp. z o.o.</Copyright>
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
     <PackageIcon>nes_logo.jpg</PackageIcon>
-    <RepositoryUrl>https://github.com/abcpro-pl/elektronizacja-prawa/</RepositoryUrl>
+    <RepositoryUrl>https://github.com/abcpro-pl/elektronizacja-prawa.git</RepositoryUrl>
     <RepositoryType>GIT</RepositoryType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReleaseNotes>You can create, edit and save document metadata for Polish State Archives (NES - 
@@ -20,7 +20,7 @@ Necessary elements of electronic documents structure).</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0</PackageProjectUrl>
     <AssemblyVersion>1.0.0.2</AssemblyVersion>
     <FileVersion>1.0.0.2</FileVersion>
-    <Version>1.0.2</Version>
+    <Version>1.0.2</Version>    
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

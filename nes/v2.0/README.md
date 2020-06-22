@@ -1,6 +1,6 @@
 ![Image](images/nes_logo.jpg) 
 
-# Niezbedne Elementy Struktury 2.0
+# Niezbędne Elementy Struktury 2.0
 
 W tym katalogu znajduje się oryginalny schemat XSD [nes_20.xsd](nes_20.xsd) oraz [biblioteka do tworzenia, edycji i zapisu pliku XML zgodnego ze schematem](Abc.Nes). Biblioteka pozwala na utworzenie pliku XSD na podstawie modelu. W przeciwieństwie do oryginalnego [pliku XSD](nes_20.xsd), - który można pobrać również z [profilu Ministerstwa Cyfryzacji](https://github.com/Ministerstwo-Cyfryzacji/ezd-analizy-it), ten [wygenerowany z modelu](nes_20_generated.xsd) nie zawiera żadnych błędów walidacji i referecji do zewnętrznych słowników, wszystkie elementy są opatrzone komentarzem, ponadto dodano możliwość umieszczania elementów ds:Signature czyli owzorowania podpisów elektronicznych. W katalogu doc znajduje się [dokumentacja wygenerowana na podstawie schematu](doc).
 
