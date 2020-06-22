@@ -1,8 +1,45 @@
 ![Image](images/eli_brand_invert.svg) 
 # Europejski Identyfikator Prawodawstwa
 
+<a href="http://eli.gov.pl"><img alt="WWW" src="https://img.shields.io/badge/ELI-Dziennik Ustaw i Monitor Polski-black"></a>
+
+<a href="http://e-dziennik.msw.gov.pl/eli"><img alt="WWW" src="https://img.shields.io/badge/ELI-DUM_MSW-darkblue"></a>
+<a href="http://edziennik.mswia.gov.pl/eli"><img alt="WWW" src="https://img.shields.io/badge/ELI-DUM_MSWiA-darkblue"></a>
+<a href="http://e-dziennik.mac.gov.pl/eli"><img alt="WWW" src="https://img.shields.io/badge/ELI-DUM_MAC-darkblue"></a>
+<a href="http://e-dziennik.msport.gov.pl/eli"><img alt="WWW" src="https://img.shields.io/badge/ELI-DUM_MSiT-darkblue"></a>
+
+
+<a href="https://edu.cba.gov.pl/eli"><img alt="WWW" src="https://img.shields.io/badge/ELI-DU_CBA-darkblue"></a>
+<a href="https://dzu.nbp.pl/eli"><img alt="WWW" src="https://img.shields.io/badge/ELI-DU_NBP -darkgreen"></a>
+<a href="http://edziennik.uke.gov.pl/eli"><img alt="WWW" src="https://img.shields.io/badge/ELI-DU_UKE-darkblue"></a>
+<a href="http://dziennik.urpl.gov.pl/eli"><img alt="WWW" src="https://img.shields.io/badge/ELI-DU_RPL-darkblue"></a>
+<a href="http://edziennik.kgpsp.gov.pl/eli"><img alt="WWW" src="https://img.shields.io/badge/ELI-DU_PSP -darkblue"></a>
+<a href="http://edziennik.sop.gov.pl/eli/"><img alt="WWW" src="https://img.shields.io/badge/ELI-DU_SOP -darkblue"></a>
+
+
+<a href="https://edzienniki.duw.pl/eli/"><img alt="WWW" src="https://img.shields.io/badge/ELI-POL_WOJ_DS-darkred"></a>
+<a href="http://www.edzienniki.bydgoszcz.uw.gov.pl/eli/"><img alt="WWW" src="https://img.shields.io/badge/ELI-POL_WOJ_KP-darkred"></a>
+<a href="http://edziennik.lublin.uw.gov.pl/eli/"><img alt="WWW" src="https://img.shields.io/badge/ELI-POL_WOJ_LB-darkred"></a>
+<a href="http://dzienniki.luw.pl/eli/"><img alt="WWW" src="https://img.shields.io/badge/ELI-POL_WOJ_LS-darkred"></a>
+<a href="http://dziennik.lodzkie.eu/eli/"><img alt="WWW" src="https://img.shields.io/badge/ELI-POL_WOJ_LD-darkred"></a>
+<a href="http://edziennik.malopolska.uw.gov.pl/eli/"><img alt="WWW" src="https://img.shields.io/badge/ELI-POL_WOJ_MP-darkred"></a>
+<a href="http://edziennik.mazowieckie.pl/eli/"><img alt="WWW" src="https://img.shields.io/badge/ELI-POL_WOJ_MZ-darkred"></a>
+<a href="https://duwo.opole.uw.gov.pl/eli/"><img alt="WWW" src="https://img.shields.io/badge/ELI-POL_WOJ_OP-darkred"></a>
+<a href="http://edziennik.rzeszow.uw.gov.pl/eli/"><img alt="WWW" src="https://img.shields.io/badge/ELI-POL_WOJ_PK-darkred"></a>
+
 W tym folderze przechowywane są :
-1. Słowniki (ontology) utworzone przez Jarosława Demineta z Rządowego Centrum Legislacji.
+1. Słowniki (ontology) utworzone przez Dyrektora Jarosława Demineta z Rządowego Centrum Legislacji.
+
+    * Resource-types – rodzaje aktów
+    * ATU_PL – jednostki podziału administracyjnego (województwa, powiaty, miasta na prawach powiatu, gminy)
+    * Legal-institutions_Central – organy centralne
+    * Legal-institutions_WOJ – organy administracji zespolonej i inne wojewódzkie
+    * Legal-institutions_POW – organy powiatowe
+    * Legal-institutions_MPP – organy miast na prawach powiatu
+    * Legal-institutions_GM – organy gminne
+    * Legal-institutions_Inne – inne organy terenowe (komisarze wyborczy, prezesi sądów, dyrektorzy urzędów, organy związków międzygminnych i metropolitalnych)
+
+
 2. Schematy XML aktów prawnych programu Legislator 3.x wykorzystujące przestrzenie nazw ELI dla dokumentów. W przeciwieństwie do EDAP, schematy dokumentów dostosowane są do faktycznie występującej zawartości, są więc bardziej restrykcyjne. 
 3. Kod źródłowy C# klienta ELI  do pobierania danych z Wojewódzkich Dzienników Urzędowych oraz niektórych Dzienników Ministerstw i Urzedów Centralnych. W celu wygenerowania klienta dla innego języka programowania, skorzystaj ze [Swagger CodeGen](https://swagger.io/tools/swagger-codegen/) w generatorze wskaż url do dokumentacji np. http://dziennik.lodzkie.eu/api/eli/openapi/ui/v1/elijson 
 
