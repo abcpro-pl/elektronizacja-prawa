@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns="http://eli.gov.pl/resource/authority/resource-type/ROZS_NAD" elementFormDefault="unqualified" targetNamespace="http://eli.gov.pl/resource/authority/resource-type/ROZS_NAD" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<xs:schema xmlns="http://eli.gov.pl/resource/authority/resource-type/ROZS_NAD" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" targetNamespace="http://eli.gov.pl/resource/authority/resource-type/ROZS_NAD" elementFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="http://www.w3.org/TR/xmldsig-core/xmldsig-core-schema.xsd" />
   <xs:element name="rozstrzygniecie-nadzorcze" nillable="true" type="rozstrzygniecie-nadzorcze-typ">
     <xs:annotation>
@@ -21,7 +21,7 @@ Rozstrzygnięcie może być zaskarżone przez jednostkę samorządu terytorialne
     <xs:complexContent mixed="false">
       <xs:extension base="akt-deklaratoryjny-typ">
         <xs:sequence>
-          <xs:element maxOccurs="1" name="podstawa-prawna" type="podstawa-prawna-typ">
+          <xs:element minOccurs="0" maxOccurs="1" name="podstawa-prawna" type="podstawa-prawna-typ">
             <xs:annotation>
               <xs:documentation>Lista przywołań jednostek redakcyjnych ustaw wraz z ich numerami publikacyjnymi, stanowiące delegację ustawową do wydania aktu lub uzasadniające wydanie przepisów wykonawczych na danym terenie; pozostające w związku z przedmiotem regulacji.</xs:documentation>
             </xs:annotation>
@@ -66,7 +66,7 @@ Element bazowy dla rozstrzygnięć, decyzji i wyroków.</xs:documentation>
     <xs:complexContent mixed="false">
       <xs:extension base="akt-prawny-typ">
         <xs:sequence>
-          <xs:element maxOccurs="1" name="metryka" type="metryka-decyzje-typ">
+          <xs:element minOccurs="0" maxOccurs="1" name="metryka" type="metryka-decyzje-typ">
             <xs:annotation>
               <xs:documentation>Metryka - Tytuł aktu prawnego czyli rodzaj aktu i jego numer, data podjęcia, nazwa organu wydającego oraz przedmiot regulacji. 
 Dodatkowo w metryce dla decyzji, wyroku czy rozstrzygnięcia, umieszcza się nazwę miejscowości, nazwę i adres jednostki, urzedu, organu, przedsiębiorstwa lub osoby, w której sprawie wydano rozstrzygnięcie. </xs:documentation>
@@ -81,18 +81,18 @@ Dodatkowo w metryce dla decyzji, wyroku czy rozstrzygnięcia, umieszcza się naz
       <xs:documentation>Element bazowy dla wszystkich aktów prawnych.</xs:documentation>
     </xs:annotation>
     <xs:complexContent mixed="false">
-      <xs:extension base="dokument-typ">
+      <xs:extension base="abstrakt-dokument-typ">
         <xs:attribute name="id" type="xs:string" use="required">
           <xs:annotation>
             <xs:documentation>Unikalny identyfikator aktu prawnego.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
-        <xs:attribute name="wersja" type="xs:int" use="optional" default="3">
+        <xs:attribute name="wersja" type="xs:int" default="3">
           <xs:annotation>
             <xs:documentation>Wersja schematu XML aktu prawnego.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
-        <xs:attribute name="status" type="status-aktu-typ" use="required">
+        <xs:attribute name="status" type="status-aktu-typ" use="optional">
           <xs:annotation>
             <xs:documentation>Lista możliwych statusów aktu prawnego.</xs:documentation>
           </xs:annotation>
@@ -115,7 +115,19 @@ Dodatkowo w metryce dla decyzji, wyroku czy rozstrzygnięcia, umieszcza się naz
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="dokument-typ" abstract="true" />
+  <xs:complexType name="abstrakt-dokument-typ" abstract="true">
+    <xs:annotation>
+      <xs:documentation>Typ abstrakcyjny</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="abstrakt-generator-typ" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="abstrakt-generator-typ" abstract="true">
+    <xs:annotation>
+      <xs:documentation>Typ abstrakcyjny</xs:documentation>
+    </xs:annotation>
+  </xs:complexType>
   <xs:simpleType name="status-aktu-typ">
     <xs:annotation>
       <xs:documentation>Lista możliwych statusów aktu prawnego.</xs:documentation>

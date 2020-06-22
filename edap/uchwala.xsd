@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns="http://www.crd.gov.pl/xml/schematy/edap/2010/01/02" elementFormDefault="unqualified" targetNamespace="http://www.crd.gov.pl/xml/schematy/edap/2010/01/02" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<xs:schema xmlns="http://www.crd.gov.pl/xml/schematy/edap/2010/01/02" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" targetNamespace="http://www.crd.gov.pl/xml/schematy/edap/2010/01/02" elementFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="http://www.w3.org/TR/xmldsig-core/xmldsig-core-schema.xsd" />
   <xs:element name="uchwala" nillable="true" type="uchwala-typ">
     <xs:annotation>
@@ -25,7 +25,7 @@ Są to zawsze uchwały wykonawcze, tzn. wydawane na podstawie i w celu wykonania
       <xs:documentation>Element bazowy dla wszystkich aktów prawnych.</xs:documentation>
     </xs:annotation>
     <xs:complexContent mixed="false">
-      <xs:extension base="dokument-typ">
+      <xs:extension base="abstrakt-dokument-typ">
         <xs:sequence>
           <xs:element minOccurs="0" maxOccurs="1" name="metryka" type="metryka-typ">
             <xs:annotation>
@@ -44,12 +44,12 @@ Są to zawsze uchwały wykonawcze, tzn. wydawane na podstawie i w celu wykonania
             <xs:documentation>Unikalny identyfikator aktu prawnego.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
-        <xs:attribute name="wersja" type="xs:int" use="optional" default="2">
+        <xs:attribute name="wersja" type="xs:int" default="2">
           <xs:annotation>
             <xs:documentation>Wersja schematu XML aktu prawnego.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
-        <xs:attribute name="status" type="status-aktu-typ" use="required">
+        <xs:attribute name="status" type="status-aktu-typ" use="optional">
           <xs:annotation>
             <xs:documentation>Lista możliwych statusów aktu prawnego.</xs:documentation>
           </xs:annotation>
@@ -72,7 +72,19 @@ Są to zawsze uchwały wykonawcze, tzn. wydawane na podstawie i w celu wykonania
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="dokument-typ" abstract="true" />
+  <xs:complexType name="abstrakt-dokument-typ" abstract="true">
+    <xs:annotation>
+      <xs:documentation>Typ abstrakcyjny</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="abstrakt-generator-typ" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="abstrakt-generator-typ" abstract="true">
+    <xs:annotation>
+      <xs:documentation>Typ abstrakcyjny</xs:documentation>
+    </xs:annotation>
+  </xs:complexType>
   <xs:complexType name="metryka-typ">
     <xs:annotation>
       <xs:documentation>Metryka - Tytuł aktu prawnego czyli rodzaj aktu i jego numer, data podjęcia, nazwa organu wydającego oraz przedmiot regulacji.</xs:documentation>
@@ -80,7 +92,7 @@ Są to zawsze uchwały wykonawcze, tzn. wydawane na podstawie i w celu wykonania
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="organ-wydajacy" type="organ-wydajacy-typ">
         <xs:annotation>
-          <xs:documentation>Nazwa organu wydającego akt prawny w dopełniaczu.</xs:documentation>
+          <xs:documentation>Organ wydający - Dane organu podejmującego akt prawny.</xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element minOccurs="0" maxOccurs="1" name="tytul" type="przedmiot-regulacji-typ">
@@ -119,16 +131,8 @@ Są to zawsze uchwały wykonawcze, tzn. wydawane na podstawie i w celu wykonania
         <xs:documentation>Data aktu prawego. Zawsze wstawiaj datę za pomocą metody DateTime.ToUniversalTime(), ponieważ w XML jest ona zapisywana jako UTC.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name="organ-wydajacy" type="xs:string">
-      <xs:annotation>
-        <xs:documentation>Nazwa organu wydającego akt prawny w dopełniaczu.</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name="organ-wydajacy-m" type="xs:string">
-      <xs:annotation>
-        <xs:documentation>Nazwa organu wydającego akt prawny w mianowniku.</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
+    <xs:attribute name="organ-wydajacy" type="xs:string" />
+    <xs:attribute name="organ-wydajacy-m" type="xs:string" />
     <xs:attribute name="widoczny" type="wartosc-logiczna-typ">
       <xs:annotation>
         <xs:documentation>Widoczność elementu</xs:documentation>
@@ -409,7 +413,7 @@ Są to zawsze uchwały wykonawcze, tzn. wydawane na podstawie i w celu wykonania
             </xs:element>
             <xs:element minOccurs="0" maxOccurs="1" name="tabela" type="tabela-typ">
               <xs:annotation>
-                <xs:documentation>Tabela - sposób zapisu i przedstawiania informacji, w którym dane umieszcza się w odpowiednio rozmieszczonych polach. Pola te utworzone są poprzez poziome i pionowe linie (na wydrukach lub monitorach oba te typy linii, albo tylko jeden z nich, nie muszą być widoczne lub mogą być zróżnicowane). Elementy trybu zgodności z EAP XML.</xs:documentation>
+                <xs:documentation>Tabela - sposób zapisu i przedstawiania informacji, w którym dane umieszcza się w odpowiednio rozmieszczonych polach. Pola te utworzone są poprzez poziome i pionowe linie (na wydrukach lub monitorach oba te typy linii, albo tylko jeden z nich, nie muszą być widoczne lub mogą być zróżnicowane).</xs:documentation>
               </xs:annotation>
             </xs:element>
             <xs:element minOccurs="0" maxOccurs="1" name="tabela-word" type="tabela-word-typ">
@@ -568,7 +572,7 @@ Są to zawsze uchwały wykonawcze, tzn. wydawane na podstawie i w celu wykonania
   </xs:complexType>
   <xs:complexType name="element-tekstowy-typ" mixed="true">
     <xs:annotation>
-      <xs:documentation>Treść w jednostce redakcyjnej, o okreslonym formatowaniu. Elementy trybu zgodności z EAP XML.</xs:documentation>
+      <xs:documentation>Element bazowy dla odnośników.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
@@ -649,11 +653,7 @@ Są to zawsze uchwały wykonawcze, tzn. wydawane na podstawie i w celu wykonania
     <xs:annotation>
       <xs:documentation>Element reprezentować może odwołanie do zewnętrznego zasobu w sieci Internet, odnośnik do definicji, znacznik nowelizacyjny lub ścieżkę względną do pliku obrazu.</xs:documentation>
     </xs:annotation>
-    <xs:attribute name="id" type="xs:string">
-      <xs:annotation>
-        <xs:documentation>Unikalny identyfikator elementu.</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
+    <xs:attribute name="id" type="xs:string" />
     <xs:attribute name="typ" type="link-rodzaj-typ" use="required">
       <xs:annotation>
         <xs:documentation>Typ linku zawierający odwołanie do zewnętrznego zasobu w sieci Internet, odnośnik do definicji, znacznik nowelizacyjny lub ścieżkę względną do pliku obrazu.</xs:documentation>
@@ -768,7 +768,7 @@ Są to zawsze uchwały wykonawcze, tzn. wydawane na podstawie i w celu wykonania
   </xs:complexType>
   <xs:complexType name="tabela-typ">
     <xs:annotation>
-      <xs:documentation>Tabela - sposób zapisu i przedstawiania informacji, w którym dane umieszcza się w odpowiednio rozmieszczonych polach. Pola te utworzone są poprzez poziome i pionowe linie (na wydrukach lub monitorach oba te typy linii, albo tylko jeden z nich, nie muszą być widoczne lub mogą być zróżnicowane). Elementy trybu zgodności z EAP XML.</xs:documentation>
+      <xs:documentation>Tabela - sposób zapisu i przedstawiania informacji, w którym dane umieszcza się w odpowiednio rozmieszczonych polach. Pola te utworzone są poprzez poziome i pionowe linie (na wydrukach lub monitorach oba te typy linii, albo tylko jeden z nich, nie muszą być widoczne lub mogą być zróżnicowane).</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="wiersz" type="wiersz-typ">
@@ -777,11 +777,7 @@ Są to zawsze uchwały wykonawcze, tzn. wydawane na podstawie i w celu wykonania
         </xs:annotation>
       </xs:element>
     </xs:sequence>
-    <xs:attribute name="id" type="xs:string">
-      <xs:annotation>
-        <xs:documentation>Unikalny identyfikator elementu.</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
+    <xs:attribute name="id" type="xs:string" />
     <xs:attribute name="szerokosc" type="xs:int" use="required" />
     <xs:attribute name="szerokosc-krawedzi" type="xs:int" use="required" />
     <xs:attribute name="odleglosc-akapitu" type="xs:int" use="required" />

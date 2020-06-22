@@ -22,7 +22,6 @@ namespace System.Xml.Serialization {
         public string BaseTypeName { get; set; } = "xs:string";
         public int MinLength { get; set; }
         public string Pattern { get; set; }
-        //public string[] EnumerationRestriction { get; set; }
         public Type EnumerationRestriction { get; set; }
         public string Annotation { get; set; }
         public string UnionMemberTypes { get; set; }

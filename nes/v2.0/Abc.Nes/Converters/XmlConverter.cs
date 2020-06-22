@@ -22,7 +22,7 @@ using System.Xml.Serialization;
 namespace Abc.Nes.Converters {
     public class XmlConverter : IDisposable {
         public XElement GetXml(Document doc) {
-            var xmlserializer = new XmlSerializer(this.GetType());
+            var xmlserializer = new XmlSerializer(typeof(Document));
             var stringWriter = new Utf8StringWriter();
             using (var writer = System.Xml.XmlWriter.Create(stringWriter, new System.Xml.XmlWriterSettings() {
                 Encoding = Encoding.UTF8

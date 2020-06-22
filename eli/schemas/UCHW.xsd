@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns="http://eli.gov.pl/resource/authority/resource-type/UCHW" elementFormDefault="unqualified" targetNamespace="http://eli.gov.pl/resource/authority/resource-type/UCHW" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<xs:schema xmlns="http://eli.gov.pl/resource/authority/resource-type/UCHW" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" targetNamespace="http://eli.gov.pl/resource/authority/resource-type/UCHW" elementFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="http://www.w3.org/TR/xmldsig-core/xmldsig-core-schema.xsd" />
   <xs:element name="uchwala" nillable="true" type="uchwala-typ">
     <xs:annotation>
@@ -108,18 +108,18 @@ Element bazowy dla aktów prawnych stanowionych m.in. przez Jednostki Samorządu
       <xs:documentation>Element bazowy dla wszystkich aktów prawnych.</xs:documentation>
     </xs:annotation>
     <xs:complexContent mixed="false">
-      <xs:extension base="dokument-typ">
+      <xs:extension base="abstrakt-dokument-typ">
         <xs:attribute name="id" type="xs:string" use="required">
           <xs:annotation>
             <xs:documentation>Unikalny identyfikator aktu prawnego.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
-        <xs:attribute name="wersja" type="xs:int" use="optional" default="3">
+        <xs:attribute name="wersja" type="xs:int" default="3">
           <xs:annotation>
             <xs:documentation>Wersja schematu XML aktu prawnego.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
-        <xs:attribute name="status" type="status-aktu-typ" use="required">
+        <xs:attribute name="status" type="status-aktu-typ" use="optional">
           <xs:annotation>
             <xs:documentation>Lista możliwych statusów aktu prawnego.</xs:documentation>
           </xs:annotation>
@@ -142,7 +142,19 @@ Element bazowy dla aktów prawnych stanowionych m.in. przez Jednostki Samorządu
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="dokument-typ" abstract="true" />
+  <xs:complexType name="abstrakt-dokument-typ" abstract="true">
+    <xs:annotation>
+      <xs:documentation>Typ abstrakcyjny</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="abstrakt-generator-typ" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="abstrakt-generator-typ" abstract="true">
+    <xs:annotation>
+      <xs:documentation>Typ abstrakcyjny</xs:documentation>
+    </xs:annotation>
+  </xs:complexType>
   <xs:simpleType name="status-aktu-typ">
     <xs:annotation>
       <xs:documentation>Lista możliwych statusów aktu prawnego.</xs:documentation>
