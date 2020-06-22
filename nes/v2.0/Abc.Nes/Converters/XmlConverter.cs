@@ -12,11 +12,14 @@
 
   ===================================================================================*/
 
+using Abc.Nes.Generators;
 using Abc.Nes.Utils;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml.Linq;
+using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace Abc.Nes.Converters {
@@ -64,6 +67,27 @@ namespace Abc.Nes.Converters {
             return result;
         }
 
+        public static List<string> ValidationErrors { get; private set; }
+        public bool Validate(string filePath) {
+            if (String.IsNullOrEmpty(filePath)) { throw new ArgumentException(); }
+            if (!File.Exists(filePath)) { throw new FileNotFoundException(); }
+
+            ValidationErrors = new List<string>();
+
+            var schemas = new System.Xml.Schema.XmlSchemaSet();
+            TextReader reader = new StringReader(new XsdGenerator().GetSchema().ToString());
+            var schema = System.Xml.Schema.XmlSchema.Read(reader, ValidationCallback);
+            schemas.Add(schema);
+
+            var document = XDocument.Load(filePath);
+            document.Validate(schemas, ValidationCallback);
+
+            return ValidationErrors.Count == 0;
+        }
+
+        static void ValidationCallback(object sender, System.Xml.Schema.ValidationEventArgs args) {          
+            ValidationErrors.Add(args.Message);
+        }
 
         public void Dispose() { }
     }
