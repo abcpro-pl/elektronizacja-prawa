@@ -2,12 +2,24 @@
 
 # Niezbędne Elementy Struktury 2.0
 
+ ## NuGet
+
 <a href="https://www.nuget.org/packages/ABCPRO.NES/"><img alt="Nuget" src="https://img.shields.io/nuget/v/ABCPRO.NES?label=abcpro.nes%20nuget"></a> <img alt="Nuget" src="https://img.shields.io/nuget/dt/ABCPRO.NES">
 
 <a href="https://www.nuget.org/packages/ABCPRO.NES.ArchivalPackage/"><img alt="Nuget" src="https://img.shields.io/nuget/v/ABCPRO.NES.ArchivalPackage?label=abcpro.nes.archivalpackage%20nuget"></a> <img alt="Nuget" src="https://img.shields.io/nuget/dt/ABCPRO.NES.ArchivalPackage">
 
-W tym katalogu znajduje się oryginalny schemat XSD [nes_20.xsd](nes_20.xsd), [biblioteka do tworzenia, edycji i zapisu pliku XML zgodnego ze schematem](Abc.Nes) oraz [biblioteka do tworzenia paczki archiwalnej](Abc.Nes.ArchivalPackage). Biblioteka pozwala na utworzenie pliku XSD na podstawie modelu. W przeciwieństwie do oryginalnego [pliku XSD](nes_20.xsd), - który można pobrać również z [profilu Ministerstwa Cyfryzacji](https://github.com/Ministerstwo-Cyfryzacji/ezd-analizy-it), ten [wygenerowany z modelu](nes_20_generated.xsd) nie zawiera żadnych błędów walidacji i referecji do zewnętrznych słowników, wszystkie elementy są opatrzone komentarzem, ponadto dodano możliwość umieszczania elementów ds:Signature czyli owzorowania podpisów elektronicznych. W katalogu doc znajduje się [dokumentacja wygenerowana na podstawie schematu](doc).
+## Zawartość
 
-Historia niezbędnych elementów dokumentów elektronicznych rozpoczęła się 30 października 2006 roku wraz z wydaniem rozporządzenia Ministra Spraw Wewnętrznych i Administracji [(Dz.U. Nr 206, poz. 1517)](https://eli.gov.pl/eli/DU/2006/1517/ogl). NES łaczą się bezpośrednio z Ustawą o narodowym zasobie archiwalnym i archiwach  [(Dz.U. z 2019 r. poz. 553)](https://eli.gov.pl/eli/DU/1983/173/ogl), Rozporządzeniem Ministra Spraw Wewnętrznych i Administracji w sprawie wymagań technicznych formatów zapisu i informatycznych nośników danych, na których utrwalono materiały archiwalne przekazywane do archiwów państwowych  [(Dz.U. Nr 206, poz. 1519)](https://eli.gov.pl/eli/DU/2006/1519/ogl) i Rozporządzeniem Prezydenta Rzeczypospolitej Polskiej w sprawie szczegółowego sposobu oraz szczegółowych warunków przekazywania skargi wraz z aktami sprawy i odpowiedzią na skargę do sądu administracyjnego  [(Dz.U. z 2019 r. poz. 1003)](https://eli.gov.pl/eli/DU/2019/1003/ogl)
+W tym katalogu znajduje się:
+
+* oryginalny schemat XSD [nes_20.xsd](nes_20.xsd), 
+* kod źródłowy biblioteki do tworzenia, edycji i zapisu pliku XML zgodnego ze schematem [ABCPRO.NES](Abc.Nes). Biblioteka pozwala na utworzenie pliku XSD na podstawie modelu. W przeciwieństwie do oryginalnego [pliku XSD](nes_20.xsd), - który można pobrać również z [profilu Ministerstwa Cyfryzacji](https://github.com/Ministerstwo-Cyfryzacji/ezd-analizy-it), ten [wygenerowany z modelu](nes_20_generated.xsd) nie zawiera żadnych błędów walidacji i referecji do zewnętrznych słowników, wszystkie elementy są opatrzone komentarzem, ponadto dodano możliwość umieszczania elementów ds:Signature czyli owzorowania podpisów elektronicznych. W katalogu doc znajduje się [dokumentacja wygenerowana na podstawie schematu](doc),
+* kod źródłowy biblioteki do tworzenia paczki archiwalnej [ABCPRO.NES.ArchivalPackage](Abc.Nes.ArchivalPackage). Za pomocą biblioteki można tworzyć, edytować i zapisywać dokumenty i metadane w paczce archiwalnej zgodnie z wymogami rozporządzeń.
+
+## Historia
+
+Historia niezbędnych elementów dokumentów elektronicznych rozpoczęła się 30 października 2006 roku wraz z wydaniem rozporządzenia Ministra Spraw Wewnętrznych i Administracji w sprawie niezbędnych elementów struktury dokumentów elektronicznych [(Dz.U. Nr 206, poz. 1517)](https://eli.gov.pl/eli/DU/2006/1517/ogl). 
+
+NES łaczą się bezpośrednio z Ustawą o narodowym zasobie archiwalnym i archiwach  [(Dz.U. z 2019 r. poz. 553)](https://eli.gov.pl/eli/DU/1983/173/ogl), Rozporządzeniem Ministra Spraw Wewnętrznych i Administracji w sprawie wymagań technicznych formatów zapisu i informatycznych nośników danych, na których utrwalono materiały archiwalne przekazywane do archiwów państwowych  [(Dz.U. Nr 206, poz. 1519)](https://eli.gov.pl/eli/DU/2006/1519/ogl) i Rozporządzeniem Prezydenta Rzeczypospolitej Polskiej w sprawie szczegółowego sposobu oraz szczegółowych warunków przekazywania skargi wraz z aktami sprawy i odpowiedzią na skargę do sądu administracyjnego  [(Dz.U. z 2019 r. poz. 1003)](https://eli.gov.pl/eli/DU/2019/1003/ogl)
 
 <a href="https://www.abcpro.pl"><img alt="www" src="https://img.shields.io/badge/www-abcpro.pl-orange?style=for-the-badge"></a> 
