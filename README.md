@@ -1,9 +1,18 @@
-<img src="images/abcpro.svg" width="200px"/>
+<div style="text-align: center;">
+    <img src="images/abcpro.svg" width="200px" /><br/>
+    <a href="http://www.abcpro.pl">
+    <img alt="WWW" src="https://img.shields.io/badge/www-abcpro.pl-red"></a> 
+</div>
 
 # Elektronizacja prawa
 Udostępniane publicznie standardy, schematy i opisy oraz kod źródłowy oprogramowania przeznaczony do celów komercyjnych i niekomercyjnych. 
 
- <a href="https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0"><img alt="git" src="https://img.shields.io/badge/git-abcpro.nes-darkgreen"></a> <a href="http://www.abcpro.pl"><img alt="WWW" src="https://img.shields.io/badge/www-abcpro.pl-red"></a> 
+ <a href="https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0"><img alt="git" src="https://img.shields.io/badge/git-abcpro.nes-darkgreen"></a> 
+
+ <a href="https://www.nuget.org/packages/ABCPRO.NES/"><img alt="Nuget" src="https://img.shields.io/nuget/v/ABCPRO.NES?label=abcpro.nes%20nuget"></a> <img alt="Nuget" src="https://img.shields.io/nuget/dt/ABCPRO.NES">
+
+<a href="https://www.nuget.org/packages/ABCPRO.NES.ArchivalPackage/"><img alt="Nuget" src="https://img.shields.io/nuget/v/ABCPRO.NES.ArchivalPackage?label=abcpro.nes%20nuget"></a> <img alt="Nuget" src="https://img.shields.io/nuget/dt/ABCPRO.NES.ArchivalPackage">
+ 
 
 Misją firmy ABC PRO Sp. z o.o. i jest tworzenie i dostarczanie wyspecjalizowanych aplikacji wspierających szeroko rozumianą „elektronizację prawa”. Nasze rozwiązania obejmują kluczowe zagadnienia związane z tworzeniem i publikacją prawa w Polsce, zarówno na szczeblu samorządowym jak i centralnym.
 
