@@ -1,8 +1,4 @@
-<div style="text-align: center;">
-    <img src="images/abcpro.svg" width="200px" /><br/>
-    <a href="http://www.abcpro.pl">
-    <img alt="WWW" src="https://img.shields.io/badge/www-abcpro.pl-red"></a> 
-</div>
+<img src="images/abcpro.svg" width="200px" /><br/>
 
 # Elektronizacja prawa
 Udostępniane publicznie standardy, schematy i opisy oraz kod źródłowy oprogramowania przeznaczony do celów komercyjnych i niekomercyjnych. 
