@@ -18,6 +18,7 @@ using Abc.Nes.Converters;
 using Ionic.Zip;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 
@@ -130,11 +131,8 @@ namespace Abc.Nes.ArchivalPackage {
             if (!ZipFile.IsZipFile(filePath)) { throw new ZipException("Specified file is not a zip file!"); }
 
             var zipFile = ZipFile.Read(filePath);
-            var zipFileHasMandatoryDirectories =
-                zipFile.EntryFileNames.Where(x => x.Replace("/", "") == MainDirectoriesName.Files.GetXmlEnum() ||
-                                                  x.Replace("/", "") == MainDirectoriesName.Metadata.GetXmlEnum() ||
-                                                  x.Replace("/", "") == MainDirectoriesName.Objects.GetXmlEnum()).Count() == 3;
-            if (!zipFileHasMandatoryDirectories) { throw new PackageInvalidException(); }
+
+            IsPackageValid(zipFile);
 
             InitializePackage();
 
@@ -166,7 +164,9 @@ namespace Abc.Nes.ArchivalPackage {
                     if (dirs[0] == MainDirectoriesName.Objects.GetXmlEnum()) { folder = Package.Objects; }
                     foreach (var dir in dirs) {
                         if (dirs[0] == dir) { continue; }
-                        folder = folder.GetFolder(dir);
+                        var _folder = folder.GetFolder(dir);
+                        if (_folder.IsNull()) { _folder = folder.CreateSubFolder(dir); }
+                        folder = _folder;
                     }
                     ItemBase item = null;
                     var stream = new MemoryStream();
@@ -185,6 +185,23 @@ namespace Abc.Nes.ArchivalPackage {
                     folder.AddItem(item);
                 }
             }
+        }
+
+        public int GetDocumentsCount() {
+            if (Package.IsNull()) { throw new WarningException("Please, load some archival package first!"); }
+            return GetDocumentsCount(Package.Documents);
+        }
+        private int GetDocumentsCount(DocumentFolder folder) {
+            var count = 0;
+            if (folder.IsNotNull()) {
+                if (folder.Items.IsNotNull()) { count += folder.Items.Count; }
+                if (folder.Folders.IsNotNull()) {
+                    foreach (var subFolder in folder.Folders) {
+                        count += GetDocumentsCount(subFolder);
+                    }
+                }
+            }
+            return count;
         }
 
         private void AddMetadata(MetdataFolder folder, ZipFile zipFile, string folderPath = null) {
@@ -250,6 +267,16 @@ namespace Abc.Nes.ArchivalPackage {
             result = result.RemoveIllegalCharacters();
             result = result.RemovePolishChars();
             return result;
+        }
+
+        private bool IsPackageValid(ZipFile zipFile) {
+            var zipFileHasMandatoryDirectories =
+               zipFile.EntryFileNames.Where(x => x.StartsWith(MainDirectoriesName.Files.GetXmlEnum())).Count() > 0 &&
+               zipFile.EntryFileNames.Where(x => x.StartsWith(MainDirectoriesName.Metadata.GetXmlEnum())).Count() > 0 &&
+               zipFile.EntryFileNames.Where(x => x.StartsWith(MainDirectoriesName.Objects.GetXmlEnum())).Count() > 0;
+
+            if (!zipFileHasMandatoryDirectories) { throw new PackageInvalidException(); }
+            return default;
         }
     }
 }
