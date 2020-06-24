@@ -15,8 +15,13 @@
 
 namespace Abc.Nes.ArchivalPackage.Model {
     public class Package {
-        public DocumentSubFolder Documents { get; set; }
-        public MetdataSubFolder Metdata { get; set; }
-        public MetdataSubFolder Objects { get; set; }
+        public DocumentFolder Documents { get; set; }
+        public MetdataFolder Metadata { get; set; }
+        public MetdataFolder Objects { get; set; }
+        public bool IsEmpty {
+            get {
+                return (Documents.IsNull() || Documents.IsEmpty) || (Metadata.IsNull() || Metadata.IsEmpty) || (Objects.IsNull() || Objects.IsEmpty);
+            }
+        }
     }
 }

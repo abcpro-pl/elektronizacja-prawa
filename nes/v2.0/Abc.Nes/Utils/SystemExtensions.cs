@@ -18,6 +18,17 @@ using System.Xml.Serialization;
 
 namespace System {
     static class SystemExtensions {
+        public static string GenerateId(this string text, int length = 0, bool toLower = false) {
+            if (text is null) { throw new ArgumentNullException(nameof(text)); }
+
+            text = Guid.NewGuid().ToString().Replace("{", String.Empty).Replace("}", String.Empty).ToUpper().Trim();
+            if (length < 1 || length > text.Replace("-", String.Empty).Length) {
+                return toLower ? text.ToLower() : text;
+            }
+
+            var s = text.Replace("-", String.Empty).Substring(0, length);
+            return toLower ? s.ToLower() : s;
+        }
         public static string GetXmlEnum(this Enum value) {
             try {
                 var fi = value.GetType().GetField(value.ToString());

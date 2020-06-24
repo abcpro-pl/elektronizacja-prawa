@@ -1,6 +1,6 @@
 ﻿/*=====================================================================================
 
-	ABC NES 
+	ABC NES.ArchivalPackage 
 	(C)2002 - 2020 ABC PRO sp. z o.o.
 	http://abcpro.pl
 	
@@ -12,16 +12,11 @@
 
   ===================================================================================*/
 
-using System.Xml.Serialization;
-
-namespace Abc.Nes.Enumerations {
-    public enum DocumentClassType {
-        [XmlEnum("tekst")] Text,
-        [XmlEnum("dźwięk")] Sound,
-        [XmlEnum("obraz")] Picture,
-        [XmlEnum("obraz ruchomy")] Gif,
-        [XmlEnum("wideo")] Video,
-        [XmlEnum("kolekcja")] Collection,
-        [XmlEnum("zbiór danych")] DataSet
+namespace Abc.Nes.ArchivalPackage.Model {
+    public abstract class FolderBase {
+        public string FolderName { get; set; }
+        public abstract FolderBase CreateSubFolder(string folderName);
+        public abstract FolderBase GetFolder(string folderName);
+        public abstract ItemBase AddItem(ItemBase item);
     }
 }

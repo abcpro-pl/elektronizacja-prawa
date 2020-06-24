@@ -40,5 +40,7 @@ namespace Abc.Nes.Enumerations {
         Modified,
         [XmlEnum("data rejestracji")]
         Registred,
+        [XmlEnum("dostępny po")]
+        AvailableAfter
     }
 }

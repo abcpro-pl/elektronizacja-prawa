@@ -12,6 +12,7 @@
 
   ===================================================================================*/
 
+using System.ComponentModel;
 using System.Xml.Serialization;
 
 namespace Abc.Nes.Enumerations {
@@ -338,6 +339,7 @@ namespace Abc.Nes.Enumerations {
         phi,
         phn,
         pon,
+        [Description("polski")]
         pol,
         por,
         pra,

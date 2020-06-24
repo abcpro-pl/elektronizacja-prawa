@@ -16,7 +16,7 @@ using System.Xml.Serialization;
 
 namespace Abc.Nes.Enumerations {
     [XmlType(TypeName = "instytucja-id-typ")]
-    [XmlAnnotation("Typ identyfikator instytucji.")]
+    [XmlAnnotation("Typ identyfikatora instytucji.")]
     public enum InstitutionIdType {
         [XmlEnum("NIP")]
         TaxId,

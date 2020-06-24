@@ -24,7 +24,7 @@ namespace Abc.Nes.Elements {
         [XmlElement("funkcja")]
         [XmlRequired]
         [XmlAnnotation("Określenie roli podmiotu w tworzeniu treści dokumentu.")]
-        [XmlSimpleType(TypeName = "tworca-funkcja-typ", Annotation = "Zgodnie z referencyjnym słownikiem  funkcji użytkowanych w podmiocie, słownik musi zawierać co najmniej następujące elementy: utworzył, modyfikował, zatwierdził, podpisał.", BaseTypeName = "xs:string", UnionMemberTypes = "ndap:niepusty-ciag-typ", EnumerationRestriction = typeof(AuthorFunctionType) /*new string[] { "podpisał", "utworzył", "modyfikował", "zatwierdził", "opublikowany" }*/)]
+        [XmlSimpleType(TypeName = "tworca-funkcja-typ", Annotation = "Zgodnie z referencyjnym słownikiem  funkcji użytkowanych w podmiocie, słownik musi zawierać co najmniej następujące elementy: utworzył, modyfikował, zatwierdził, podpisał.", BaseTypeName = "xs:string", UnionMemberTypes = "ndap:niepusty-ciag-typ", EnumerationRestriction = typeof(AuthorFunctionType))]
         public List<string> Functions { get; set; }
 
         public void SetKind(AuthorFunctionType functionType) {

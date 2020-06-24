@@ -23,7 +23,9 @@ namespace Abc.Nes.Enumerations {
         [XmlEnum("niepubliczny")]
         NonPublic,
         [XmlEnum("wyłączny")]
-        Exclusive
+        Exclusive,
+        [XmlEnum("wszystko")]
+        All
     }
 
     [XmlType(TypeName = "dostepnosc-data-typ")]

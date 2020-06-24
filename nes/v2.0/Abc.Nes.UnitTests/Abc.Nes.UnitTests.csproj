@@ -53,11 +53,16 @@
   <ItemGroup>
     <Compile Include="DocumentUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PackageUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Abc.Nes.ArchivalPackage\Abc.Nes.ArchivalPackage.csproj">
+      <Project>{F85ABB84-DA49-4F43-B6E2-3843F98C990C}</Project>
+      <Name>Abc.Nes.ArchivalPackage</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Abc.Nes\Abc.Nes.csproj">
       <Project>{fe8ca84e-a197-4b82-a3b7-61294397239c}</Project>
       <Name>Abc.Nes</Name>

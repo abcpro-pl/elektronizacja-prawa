@@ -1,6 +1,6 @@
 ﻿/*=====================================================================================
 
-	ABC NES 
+	ABC NES.ArchivalPackage 
 	(C)2002 - 2020 ABC PRO sp. z o.o.
 	http://abcpro.pl
 	
@@ -12,16 +12,10 @@
 
   ===================================================================================*/
 
-using System.Xml.Serialization;
+using System;
 
-namespace Abc.Nes.Enumerations {
-    public enum DocumentClassType {
-        [XmlEnum("tekst")] Text,
-        [XmlEnum("dźwięk")] Sound,
-        [XmlEnum("obraz")] Picture,
-        [XmlEnum("obraz ruchomy")] Gif,
-        [XmlEnum("wideo")] Video,
-        [XmlEnum("kolekcja")] Collection,
-        [XmlEnum("zbiór danych")] DataSet
+namespace Abc.Nes.ArchivalPackage.Exceptions {
+    public class PackageInvalidException : Exception {
+        public PackageInvalidException() : base("Specified Zip file is not a archival package!") { }
     }
 }

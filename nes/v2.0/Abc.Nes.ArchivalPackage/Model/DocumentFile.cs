@@ -12,17 +12,30 @@
 
   ===================================================================================*/
 
+using System;
 using System.Collections.Generic;
 
 namespace Abc.Nes.ArchivalPackage.Model {
-    public class DocumentFile {
-        public string FileName { get; set; }
+    public class DocumentFile : ItemBase {
         public byte[] FileData { get; set; }
+        public override void Init(byte[] fileData) {
+            FileData = fileData;
+        }
     }
 
-    public class DocumentSubFolder {
-        public string FolderName { get; set; }
-        public List<DocumentFile> Files { get; set; }
-        public List<DocumentSubFolder> SubFolders { get; set; }
+    public class DocumentFolder : Folder<DocumentFolder, DocumentFile> {
+        public override List<DocumentFile> Items { get; set; }
+        public override List<DocumentFolder> Folders { get; set; }
+        public override FolderBase CreateSubFolder(string folderName) {
+            if (folderName.IsNullOrEmpty()) { throw new ArgumentNullException(); }
+            var folder = new DocumentFolder() {
+                FolderName = folderName,
+                Folders = new List<DocumentFolder>(),
+                Items = new List<DocumentFile>()
+            };
+            if (Folders.IsNull()) { Folders = new List<DocumentFolder>(); }
+            Folders.Add(folder);
+            return folder;
+        }
     }
 }

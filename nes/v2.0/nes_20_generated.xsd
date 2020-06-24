@@ -202,23 +202,14 @@ Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czy
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:string">
-        <xs:attribute name="typId" type="ndap:osoba-id-typ" use="required">
+        <xs:attribute name="typId" type="ndap:osoba-identyfikator-rodzajtyp" use="required">
           <xs:annotation>
-            <xs:documentation>Type identyfikatora osoby.</xs:documentation>
+            <xs:documentation>Typ identyfikatora osoby.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:simpleType name="osoba-id-typ">
-    <xs:annotation>
-      <xs:documentation>Type identyfikatora osoby.</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="PESEL" />
-      <xs:enumeration value="NIP" />
-    </xs:restriction>
-  </xs:simpleType>
   <xs:complexType name="adres-typ">
     <xs:annotation>
       <xs:documentation>Element zawierający dane adresowe.</xs:documentation>
@@ -578,24 +569,14 @@ Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czy
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:string">
-        <xs:attribute name="typId" type="ndap:instytucja-id-typ" use="required">
+        <xs:attribute name="typId" type="ndap:instytucja-identyfikator-rodzajtyp" use="required">
           <xs:annotation>
-            <xs:documentation>Typ identyfikator instytucji.</xs:documentation>
+            <xs:documentation>Typ identyfikatora instytucji.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:simpleType name="instytucja-id-typ">
-    <xs:annotation>
-      <xs:documentation>Typ identyfikator instytucji.</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="NIP" />
-      <xs:enumeration value="KRS" />
-      <xs:enumeration value="REGON" />
-    </xs:restriction>
-  </xs:simpleType>
   <xs:complexType name="instytucja-komorka-typ">
     <xs:annotation>
       <xs:documentation>Element zawierający dane komórki lub jednostki organizacyjnej instytucji.</xs:documentation>
@@ -1165,6 +1146,7 @@ Umożliwia wyszukiwanie i sortowanie dokumentów lub ich grupy według czasu zda
       <xs:enumeration value="podpisany" />
       <xs:enumeration value="zmodyfikowany" />
       <xs:enumeration value="data rejestracji" />
+      <xs:enumeration value="dostępny po" />
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="data-zakres-typ">
@@ -1258,6 +1240,7 @@ Informacja o dostępności nie może naruszać przepisów regulujących dostęp 
       <xs:enumeration value="publiczny" />
       <xs:enumeration value="niepubliczny" />
       <xs:enumeration value="wyłączny" />
+      <xs:enumeration value="wszystko" />
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name="dostep-data-typ">
@@ -1514,6 +1497,19 @@ Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czy
     </xs:annotation>
     <xs:union memberTypes="ndap:niepusty-ciag-typ" />
   </xs:simpleType>
+  <xs:simpleType name="osoba-identyfikator-rodzajtyp">
+    <xs:annotation>
+      <xs:documentation>Typ identyfikatora osoby.</xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes="ndap:niepusty-ciag-typ">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="PESEL" />
+          <xs:enumeration value="NIP" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
   <xs:simpleType name="niepusty-ciag-typ">
     <xs:annotation>
       <xs:documentation>Typ definiujący nie pusty ciąg znaków.</xs:documentation>
@@ -1544,6 +1540,20 @@ Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czy
           <xs:enumeration value="wuze" />
           <xs:enumeration value="messanger" />
           <xs:enumeration value="zoom" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="instytucja-identyfikator-rodzajtyp">
+    <xs:annotation>
+      <xs:documentation>Typ identyfikatora instytucji.</xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes="ndap:niepusty-ciag-typ">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="NIP" />
+          <xs:enumeration value="KRS" />
+          <xs:enumeration value="REGON" />
         </xs:restriction>
       </xs:simpleType>
     </xs:union>
@@ -1587,6 +1597,8 @@ Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czy
           <xs:enumeration value="obraz" />
           <xs:enumeration value="obraz ruchomy" />
           <xs:enumeration value="wideo" />
+          <xs:enumeration value="kolekcja" />
+          <xs:enumeration value="zbiór danych" />
         </xs:restriction>
       </xs:simpleType>
     </xs:union>

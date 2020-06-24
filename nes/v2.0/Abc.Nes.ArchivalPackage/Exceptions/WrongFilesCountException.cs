@@ -12,17 +12,10 @@
 
   ===================================================================================*/
 
-using System.Collections.Generic;
+using System;
 
-namespace Abc.Nes.ArchivalPackage.Model {
-    public class Metadata {
-        public string FileName { get; set; }
-        public Document Document { get; set; }
-    }
-
-    public class MetdataSubFolder {
-        public string FolderName { get; set; }
-        public List<Metadata> Metadata { get; set; }
-        public List<MetdataSubFolder> SubFolders { get; set; }
+namespace Abc.Nes.ArchivalPackage.Exceptions {
+    public class WrongFilesCountException : Exception {
+        public WrongFilesCountException() : base("Wrong files count! If you want to add one file use the AddFile method.") { }
     }
 }

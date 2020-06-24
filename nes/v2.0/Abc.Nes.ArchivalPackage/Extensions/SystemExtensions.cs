@@ -15,10 +15,35 @@
 using System;
 using System.IO;
 using System.Text;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace Abc.Nes.ArchivalPackage {
     static class SystemExtensions {
+        public static string FromByteArray(this byte[] bytes) {
+            if (bytes.IsNotNull()) {
+                return Encoding.UTF8.GetString(bytes);
+            }
+            return default;
+        }
+        public static byte[] ToByteArray(this XElement e) {
+            if (e.IsNotNull()) {
+                return Encoding.UTF8.GetBytes(e.ToString());
+            }
+            return default;
+        }
+        public static string GenerateId(this string text, int length = 0, bool toLower = false) {
+            if (text is null) { throw new ArgumentNullException(nameof(text)); }
+
+            text = Guid.NewGuid().ToString().Replace("{", String.Empty).Replace("}", String.Empty).ToUpper().Trim();
+            if (length < 1 || length > text.Replace("-", String.Empty).Length) {
+                return toLower ? text.ToLower() : text;
+            }
+
+            var s = text.Replace("-", String.Empty).Substring(0, length);
+            return toLower ? s.ToLower() : s;
+        }
+
         public static string GetXmlEnum(this Enum value) {
             try {
                 var fi = value.GetType().GetField(value.ToString());
@@ -38,6 +63,7 @@ namespace Abc.Nes.ArchivalPackage {
         public static bool IsNull(this object o) { return o == null; }
         public static bool IsNotNull(this object o) { return o != null; }
         public static bool IsNotNullOrEmpty(this string text) { return !String.IsNullOrEmpty(text); }
+        public static bool IsNullOrEmpty(this string text) { return String.IsNullOrEmpty(text); }
         public static bool ContainsInTable(this string text, bool ignoreCase, bool equals, params string[] strings) {
             if (!String.IsNullOrEmpty(text)) {
                 if (strings != null) {

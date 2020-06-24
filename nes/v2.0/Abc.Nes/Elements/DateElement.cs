@@ -57,5 +57,9 @@ Umożliwia wyszukiwanie i sortowanie dokumentów lub ich grupy według czasu zda
         [XmlSimpleType(TypeName = "czas-typ", UnionMemberTypes = "xs:gYear xs:gYearMonth xs:date xs:dateTime", Annotation = "Czas zapisany jako rok lub rok i miesiąc lub jako pełna data.")]
         public string DateTo { get; set; }
         public bool ShouldSerializeDateTo() { return DateTo.IsNotNullOrEmpty(); }
+
+        public DateTime GetDate() { try { return Convert.ToDateTime(Date); } catch { } return default; }
+        public DateTime GetDateFrom() { try { return Convert.ToDateTime(DateFrom); } catch { } return default; }
+        public DateTime GetDateTo() { try { return Convert.ToDateTime(DateTo); } catch { } return default; }
     }
 }

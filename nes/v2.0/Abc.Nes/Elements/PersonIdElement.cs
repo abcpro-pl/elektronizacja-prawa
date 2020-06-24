@@ -21,6 +21,11 @@ namespace Abc.Nes.Elements {
     [XmlAnnotation("Identyfikator osoby.")]
     public class PersonIdElement {
         [XmlText] public string Value { get; set; } = String.Empty;
-        [XmlAttribute("typId")] [XmlRequired] public PersonIdType Type { get; set; }
+
+        [XmlAttribute("typId")] 
+        [XmlRequired]
+        [XmlAnnotation("Typ identyfikatora osoby.")]
+        [XmlSimpleType(TypeName = "osoba-identyfikator-rodzajtyp", Annotation = "Typ identyfikatora osoby.", BaseTypeName = "xs:string", UnionMemberTypes = "ndap:niepusty-ciag-typ", EnumerationRestriction = typeof(PersonIdType))]
+        public string Type { get; set; }
     }
 }

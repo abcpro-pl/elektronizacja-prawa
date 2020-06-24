@@ -26,7 +26,7 @@ namespace Abc.Nes.Elements {
         [XmlElement("typRelacji")]
         [XmlRequired]
         [XmlAnnotation("Określenie rodzaju powiązania.")]
-        [XmlSimpleType(TypeName = "typrelacji-typ", Annotation = "Standardowe typy relacji powinny być ujęte w słownik zawierający co najmniej typy relacji określone w repozytorium interoparacyjności.", BaseTypeName = "xs:string", UnionMemberTypes = "ndap:niepusty-ciag-typ", EnumerationRestriction = typeof(RelationType)/*new string[] { "ma odniesienie", "odnosi się do", "jest dekretacją", "ma dekretację", "ma podpis", "jest podpisem", "ma wersję", "jest wersją", "ma część", "jest częścią", "ma format", "jest formatem" }*/)]
+        [XmlSimpleType(TypeName = "typrelacji-typ", Annotation = "Standardowe typy relacji powinny być ujęte w słownik zawierający co najmniej typy relacji określone w repozytorium interoparacyjności.", BaseTypeName = "xs:string", UnionMemberTypes = "ndap:niepusty-ciag-typ", EnumerationRestriction = typeof(RelationType))]
         public string Type { get; set; }
 
         public void SetType(RelationType type) {

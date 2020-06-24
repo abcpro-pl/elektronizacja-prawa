@@ -19,8 +19,13 @@ using System.Xml.Serialization;
 namespace Abc.Nes.Elements {
     [XmlType(TypeName = "instytucja-identyfikator-typ")]
     [XmlAnnotation("Identyfikator instytucji.")]
-    public class InstitutionIdElement  {
+    public class InstitutionIdElement {
         [XmlText] public string Value { get; set; } = String.Empty;
-        [XmlAttribute("typId")] [XmlRequired] public InstitutionIdType Type { get; set; }
+
+        [XmlAttribute("typId")]
+        [XmlRequired]
+        [XmlAnnotation("Typ identyfikatora instytucji.")]
+        [XmlSimpleType(TypeName = "instytucja-identyfikator-rodzajtyp", Annotation = "Typ identyfikatora instytucji.", BaseTypeName = "xs:string", UnionMemberTypes = "ndap:niepusty-ciag-typ", EnumerationRestriction = typeof(InstitutionIdType))]
+        public string Type { get; set; }
     }
 }

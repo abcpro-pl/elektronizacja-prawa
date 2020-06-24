@@ -1,7 +1,6 @@
 ﻿using Abc.Nes.Generators;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Xml.Linq;
 
@@ -17,7 +16,7 @@ namespace Abc.Nes.UnitTests {
             //var filePath = Path.Combine(Path.GetTempPath(), "nes.xsd");
             var filePath = @"..\..\..\nes_20_generated.xsd";
             schema.Save(filePath);
-            Debug.Assert(schema != null);
+            Assert.IsTrue(schema != null);
         }
 
         [TestMethod]
@@ -25,7 +24,7 @@ namespace Abc.Nes.UnitTests {
             Abc.Nes.Document document = GetModel();
             var filePath = Path.Combine(Path.GetTempPath(), "nes.xml");
             new Abc.Nes.Converters.XmlConverter().WriteXml(document, filePath);
-            Debug.Assert(File.Exists(filePath));
+            Assert.IsTrue(File.Exists(filePath));
         }
 
         [TestMethod]
@@ -33,8 +32,19 @@ namespace Abc.Nes.UnitTests {
             var filePath = Path.Combine(Path.GetTempPath(), "nes.xml");
             if (!File.Exists(filePath)) { Document_XmlConverter_WriteXml(); }
             var document = new Abc.Nes.Converters.XmlConverter().LoadXml(filePath);
-            Debug.Assert(document != null && document.Groupings != null && document.Groupings.Count > 0);
+            Assert.IsTrue(document != null && document.Groupings != null && document.Groupings.Count > 0);
         }
+
+
+        [TestMethod]
+        public void Document_XmlConverter_Validate() {
+            var filePath = Path.Combine(Path.GetTempPath(), "nes.xml");
+            if (!File.Exists(filePath)) { Document_XmlConverter_WriteXml(); }
+            var c = new Abc.Nes.Converters.XmlConverter();
+            var valid = c.Validate(filePath);
+            Assert.IsTrue(valid && c.ValidationErrors.Count == 0);
+        }
+
 
         private Abc.Nes.Document GetModel() {
             var document = new Abc.Nes.Document() {
@@ -54,6 +64,12 @@ namespace Abc.Nes.UnitTests {
                         Original = new Abc.Nes.Elements.TitleWithLanguageCodeElement(){
                             Type = Enumerations.LanguageCode.pol,
                             Value = "Tytuł dokumentu"
+                        },
+                        Alternative = new List<Elements.TitleWithLanguageCodeElement> {
+                            new Elements.TitleWithLanguageCodeElement() {
+                                Type = Enumerations.LanguageCode.eng,
+                                Value = "Document title"
+                            }
                         }
                     }
                 },
