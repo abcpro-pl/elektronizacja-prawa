@@ -22,6 +22,7 @@ namespace Abc.Nes.Enumerations {
         [XmlEnum("ustawa")] Law,
         [XmlEnum("notatka")] Note,
         [XmlEnum("rozporządzenie")] Regulation,
-        [XmlEnum("pismo")] Document
+        [XmlEnum("pismo")] Document,
+        [XmlEnum("uchwała")] Resolution,
     }
 }

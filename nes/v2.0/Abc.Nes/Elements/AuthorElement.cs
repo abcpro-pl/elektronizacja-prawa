@@ -32,6 +32,10 @@ namespace Abc.Nes.Elements {
             Functions.Add(functionType.GetXmlEnum());
         }
 
+        public static string GetAuthorFunctionType(AuthorFunctionType functionType) {
+            return functionType.GetXmlEnum();
+        }
+
         [XmlElement("podmiot")] [XmlRequired] public SubjectElement Subject { get; set; }
     }
 }

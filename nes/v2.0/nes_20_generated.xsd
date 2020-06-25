@@ -260,6 +260,21 @@ Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czy
           <xs:documentation>Kod kraju</xs:documentation>
         </xs:annotation>
       </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="gmina" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Nazwa gminy</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="powiat" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Nazwa powiatu</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="wojewodztwo" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Nazwa województwa</xs:documentation>
+        </xs:annotation>
+      </xs:element>
     </xs:sequence>
   </xs:complexType>
   <xs:simpleType name="kraj-typ">
@@ -1186,6 +1201,11 @@ W przypadku dokumentów elektronicznych powoli także na zarządzanie dokumentac
           <xs:documentation>Element definiujący wielkość dokumentu. Posiada atrybut miara określający miarę wielkości.</xs:documentation>
         </xs:annotation>
       </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="opis" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Opis formatu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
     </xs:sequence>
   </xs:complexType>
   <xs:simpleType name="wartosc-logiczna-typ">
@@ -1617,6 +1637,7 @@ Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czy
           <xs:enumeration value="notatka" />
           <xs:enumeration value="rozporządzenie" />
           <xs:enumeration value="pismo" />
+          <xs:enumeration value="uchwała" />
         </xs:restriction>
       </xs:simpleType>
     </xs:union>

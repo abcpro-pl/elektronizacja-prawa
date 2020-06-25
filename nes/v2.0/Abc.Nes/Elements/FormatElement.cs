@@ -36,5 +36,9 @@ W przypadku dokumentów elektronicznych powoli także na zarządzanie dokumentac
         public bool ShouldSerializeUncompleted() { return Uncompleted != BooleanValues.None; }
 
         [XmlElement("wielkosc")] public SizeElement Size { get; set; }
+        public bool ShouldSerializeSize() { return Size.IsNotNull(); }
+
+        [XmlElement("opis")] [XmlAnnotation("Opis formatu.")] public string Description { get; set; }
+        public bool ShouldSerializeDescription() { return Description.IsNotNullOrEmpty(); }
     }
 }

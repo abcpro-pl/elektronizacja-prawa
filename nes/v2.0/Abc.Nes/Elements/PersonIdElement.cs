@@ -27,5 +27,7 @@ namespace Abc.Nes.Elements {
         [XmlAnnotation("Typ identyfikatora osoby.")]
         [XmlSimpleType(TypeName = "osoba-identyfikator-rodzajtyp", Annotation = "Typ identyfikatora osoby.", BaseTypeName = "xs:string", UnionMemberTypes = "ndap:niepusty-ciag-typ", EnumerationRestriction = typeof(PersonIdType))]
         public string Type { get; set; }
+
+        public static string GetPersonIdType(PersonIdType type) { return type.GetXmlEnum(); }
     }
 }

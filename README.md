@@ -3,13 +3,13 @@
 # Elektronizacja prawa
 Udostępniane publicznie standardy, schematy i opisy oraz kod źródłowy oprogramowania przeznaczony do celów komercyjnych i niekomercyjnych. 
 
- <a href="https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0"><img alt="git" src="https://img.shields.io/badge/git-abcpro.nes-darkgreen"></a> 
+ <a href="https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0"><img alt="git" src="https://img.shields.io/badge/git-abcpro.nes i abcpro.nes.archivalpackage-darkgreen"></a>  
 
  ## NuGet
 
- <a href="https://www.nuget.org/packages/ABCPRO.NES/"><img alt="Nuget" src="https://img.shields.io/nuget/v/ABCPRO.NES?label=abcpro.nes%20nuget"></a> <img alt="Nuget" src="https://img.shields.io/nuget/dt/ABCPRO.NES">
+ <a href="https://www.nuget.org/packages/ABCPRO.NES/"><img alt="Nuget" src="https://img.shields.io/nuget/v/ABCPRO.NES?label=abcpro.nes%20nuget"> <img alt="Nuget" src="https://img.shields.io/nuget/dt/ABCPRO.NES"></a>
 
-<a href="https://www.nuget.org/packages/ABCPRO.NES.ArchivalPackage/"><img alt="Nuget" src="https://img.shields.io/nuget/v/ABCPRO.NES.ArchivalPackage?label=abcpro.nes.archivalpackage%20nuget"></a> <img alt="Nuget" src="https://img.shields.io/nuget/dt/ABCPRO.NES.ArchivalPackage">
+<a href="https://www.nuget.org/packages/ABCPRO.NES.ArchivalPackage/"><img alt="Nuget" src="https://img.shields.io/nuget/v/ABCPRO.NES.ArchivalPackage?label=abcpro.nes.archivalpackage%20nuget"> <img alt="Nuget" src="https://img.shields.io/nuget/dt/ABCPRO.NES.ArchivalPackage"> </a>
  
 ## O ABC PRO 
 
