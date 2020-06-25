@@ -7,7 +7,7 @@
 W tym katalogu znajduje się:
 
 * oryginalny schemat XSD [nes_20.xsd](nes_20.xsd), 
-* kod źródłowy biblioteki do tworzenia, edycji i zapisu pliku XML zgodnego ze schematem [ABCPRO.NES](Abc.Nes). Biblioteka pozwala na utworzenie pliku XSD na podstawie modelu. W przeciwieństwie do oryginalnego [pliku XSD](nes_20.xsd), - który można pobrać również z [profilu Ministerstwa Cyfryzacji](https://github.com/Ministerstwo-Cyfryzacji/ezd-analizy-it), ten [wygenerowany z modelu](nes_20_generated.xsd) nie zawiera żadnych błędów walidacji i referecji do zewnętrznych słowników, wszystkie elementy są opatrzone komentarzem, ponadto dodano możliwość umieszczania elementów ds:Signature czyli owzorowania podpisów elektronicznych. W katalogu doc znajduje się [dokumentacja wygenerowana na podstawie schematu](doc),
+* kod źródłowy biblioteki do tworzenia, edycji i zapisu pliku XML zgodnego ze schematem [ABCPRO.NES](Abc.Nes). Biblioteka pozwala na utworzenie pliku XSD na podstawie modelu. W przeciwieństwie do oryginalnego [pliku XSD](nes_20.xsd), - który można pobrać również z [profilu Ministerstwa Cyfryzacji](https://github.com/Ministerstwo-Cyfryzacji/ezd-analizy-it/blob/master/nes_bnf_komentarz.md), ten [wygenerowany z modelu](nes_20_generated.xsd) nie zawiera żadnych błędów walidacji i referecji do zewnętrznych słowników, wszystkie elementy są opatrzone komentarzem, ponadto dodano możliwość umieszczania elementów ds:Signature czyli owzorowania podpisów elektronicznych. W katalogu doc znajduje się [dokumentacja wygenerowana na podstawie schematu](doc),
 * kod źródłowy biblioteki do tworzenia paczki archiwalnej [ABCPRO.NES.ArchivalPackage](Abc.Nes.ArchivalPackage). Za pomocą biblioteki można tworzyć, edytować i zapisywać dokumenty i metadane w paczce archiwalnej zgodnie z wymogami rozporządzeń.
 
  ## NuGet
@@ -19,7 +19,7 @@ W tym katalogu znajduje się:
 Nazwa | Wersja | Opis
 ------|--------|--------
 ABCPRO.NES.ArchivalPackage|1.0.5|Aktualizacja zależności.
-ABCPRO.NES|1.0.5|Zawiera dodatkowe pola w adresie (gmina, powiat, województwo). Dodane metody klasyczne do pobiearania wartości z Enumeratorów dla pól tekstowych np. `RelationElement.GetRelationType`.
+ABCPRO.NES|1.0.5|Zawiera dodatkowe pola w adresie (gmina, powiat, województwo). Dodane metody statyczne do pobierania wartości z enumeratorów dla pól tekstowych np. `RelationElement.GetRelationType()`.
 ABCPRO.NES.ArchivalPackage|1.0.4|Pierwsza stabilna wersja biblioteki. Pozwala na tworzenie paczki archiwalnej z wymaganymi katalogami, dodawanie plików oraz metadanych utworzonych za pomocą ABCPRO.NES, zapis i odczyt wcześniej utworzonych paczek.
 ABCPRO.NES|1.0.3|Pierwsza stabilna wersja biblioteki. Pozwala na dodawanie wszystkich metadanych, walidację i zapis do pliku XML. Za pomocą klasy `XmlConverter` możliwe jest otwieranie plików zarówno z wersji 2.0 jak i tych starszych.
 
