@@ -1,4 +1,4 @@
-![Image](images/nes_logo.jpg) 
+![Image](images/nes_logo.png) 
 
 # Niezbędne Elementy Struktury 2.0
 
