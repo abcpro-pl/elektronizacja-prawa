@@ -3,11 +3,17 @@
 # Elektronizacja prawa
 Udostępniane publicznie standardy, schematy i opisy oraz kod źródłowy oprogramowania przeznaczony do celów komercyjnych i niekomercyjnych. 
 
- <a href="https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0"><img alt="git" src="https://img.shields.io/badge/git-abcpro.nes i abcpro.nes.archivalpackage-darkgreen"></a>  
+## Paczka eADM i Niezbędne Elementy Struktury 2.0
 
- ## NuGet
+W podkatalogu [nes](nes/v2.0) znajdują się biblioteki do tworzenia paczki eADM oraz plików metadanych zgodnych z NES 2.0.
 
- <a href="https://www.nuget.org/packages/ABCPRO.NES/"><img alt="Nuget" src="https://img.shields.io/nuget/v/ABCPRO.NES?label=abcpro.nes%20nuget"> <img alt="Nuget" src="https://img.shields.io/nuget/dt/ABCPRO.NES"></a>
+<a href="https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0"><img alt="git" src="https://img.shields.io/badge/git-abcpro.nes i abcpro.nes.archivalpackage-darkgreen"></a>  
+
+### NuGet
+
+Gotowe biblioteki mozna pobrać z NuGet.org
+
+<a href="https://www.nuget.org/packages/ABCPRO.NES/"><img alt="Nuget" src="https://img.shields.io/nuget/v/ABCPRO.NES?label=abcpro.nes%20nuget"> <img alt="Nuget" src="https://img.shields.io/nuget/dt/ABCPRO.NES"></a>
 
 <a href="https://www.nuget.org/packages/ABCPRO.NES.ArchivalPackage/"><img alt="Nuget" src="https://img.shields.io/nuget/v/ABCPRO.NES.ArchivalPackage?label=abcpro.nes.archivalpackage%20nuget"> <img alt="Nuget" src="https://img.shields.io/nuget/dt/ABCPRO.NES.ArchivalPackage"> </a>
  
