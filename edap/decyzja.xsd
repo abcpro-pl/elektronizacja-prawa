@@ -1,20 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns="http://www.crd.gov.pl/xml/schematy/edap/2010/01/02" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" targetNamespace="http://www.crd.gov.pl/xml/schematy/edap/2010/01/02" elementFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="http://www.w3.org/TR/xmldsig-core/xmldsig-core-schema.xsd" />
-  <xs:element name="uchwala" nillable="true" type="uchwala-typ">
+  <xs:element name="decyzja" nillable="true" type="decyzja-typ">
     <xs:annotation>
-      <xs:documentation>Uchwała – akt woli samorządowego ciała kolegialnego. 
-Treścią uchwały może być zajęcie stanowiska w określonej sprawie; charakter szczególny mają uchwały indywidualne (zwłaszcza nominacyjne) oraz uchwały ogólne (normatywne, ustalające wykładnię prawa lub wytyczne obowiązujące dla innych organów). 
-Uchwały normatywne określone w tym schemacie (zawierające normy prawne) są stanowione w RP przez rady gmin, powiatów i sejmiki województw. 
-Są to zawsze uchwały wykonawcze, tzn. wydawane na podstawie i w celu wykonania ustaw.</xs:documentation>
+      <xs:documentation>Akt prawny typu: Decyzja</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name="uchwala-typ">
+  <xs:complexType name="decyzja-typ">
     <xs:annotation>
-      <xs:documentation>Uchwała – akt woli samorządowego ciała kolegialnego. 
-Treścią uchwały może być zajęcie stanowiska w określonej sprawie; charakter szczególny mają uchwały indywidualne (zwłaszcza nominacyjne) oraz uchwały ogólne (normatywne, ustalające wykładnię prawa lub wytyczne obowiązujące dla innych organów). 
-Uchwały normatywne określone w tym schemacie (zawierające normy prawne) są stanowione w RP przez rady gmin, powiatów i sejmiki województw. 
-Są to zawsze uchwały wykonawcze, tzn. wydawane na podstawie i w celu wykonania ustaw.</xs:documentation>
+      <xs:documentation>Akt prawny typu: Decyzja</xs:documentation>
     </xs:annotation>
     <xs:complexContent mixed="false">
       <xs:extension base="akt-prawny-typ" />
