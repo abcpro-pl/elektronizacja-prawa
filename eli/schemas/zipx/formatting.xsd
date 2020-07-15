@@ -1,0 +1,739 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" elementFormDefault="unqualified">
+  <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="http://www.w3.org/TR/xmldsig-core/xmldsig-core-schema.xsd" />
+  <xs:element name="DocumentOptionsData" nillable="true" type="FormattingOptions">
+    <xs:annotation>
+      <xs:documentation>Element główny zawierający szablon formatowania dokumentu.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="FormattingOptions">
+    <xs:annotation>
+      <xs:documentation>Element główny zawierający szablon formatowania dokumentu.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="DocumentOptionsDataType" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DocumentOptionsDataType">
+    <xs:annotation>
+      <xs:documentation>Element główny zawierający szablon formatowania dokumentu.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="abstrakt-generator-typ">
+        <xs:sequence>
+          <xs:element maxOccurs="1" name="LegalActFormatting" type="LegalActFormattingOptions">
+            <xs:annotation>
+              <xs:documentation>Ustawienia formatowania dla aktu prawnego.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="ProjectNote" type="ProjectNoteOptions">
+            <xs:annotation>
+              <xs:documentation>Ustawienia notki projektu.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="PageSetup" type="PageSetupOptions">
+            <xs:annotation>
+              <xs:documentation>Ustawienia strony dokumentu.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="Footer" type="FooterOptions">
+            <xs:annotation>
+              <xs:documentation>Ustawienia stopki dokumentu.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="LegalActHeader" type="LegalActHeaderOptions">
+            <xs:annotation>
+              <xs:documentation>Ustawienia metryki dokumentu.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="Title" type="TitleOptions">
+            <xs:annotation>
+              <xs:documentation>Ustawienia tytułu aktu.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="Preambula" type="ElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienie formatowania dla preambuły.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="PodstawaPrawna" type="LegalBasisFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienie formatowania dla podstawy prawnej.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="Tiret" type="RedactionElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienie formatowania dla tiretu.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="PodwojneTiret" type="RedactionElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienie formatowania dla podwójnego tiretu.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="PotrojneTiret" type="RedactionElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienie formatowania dla potrójnego tiretu.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="PoczworneTiret" type="RedactionElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienie formatowania dla poczwórnego tiretu.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="PopiatneTiret" type="RedactionElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienie formatowania dla popiątnego tiretu.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="Punkt" type="RedactionElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienie formatowania dla punktu.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="Litera" type="RedactionElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienie formatowania dla litery.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="WielkaLitera" type="RedactionElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienie formatowania dla wielkiej litery.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="CyfraRzymska" type="RedactionElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienie formatowania dla cyfry rzymskiej.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="Srodtytul" type="ElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienie formatowania dla śródtytułu.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="Ustep" type="RedactionElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienie formatowania dla ustępu.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="Paragraf" type="RedactionElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienie formatowania dla paragrafu.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="Artykul" type="RedactionElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienie formatowania dla artykułu.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="Akapit" type="ElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienie formatowania dla akapitu.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="Blok" type="ElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienie formatowania dla bloku.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="Cytowanie" type="CitationElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienie formatowania dla cytowania.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="ZnacznikNowelizacyjny" type="ElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienie formatowania dla elementów w znaczniku nowelizacyjnym.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="Czesc" type="HigherOrderElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienie formatowania dla Części.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="Oddzial" type="HigherOrderElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienie formatowania dla Oddział.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="Rozdzial" type="HigherOrderElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienie formatowania dla Rozdział.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="Dzial" type="HigherOrderElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienie formatowania dla Dział.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="Tyt" type="HigherOrderElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienie formatowania dla Tyt.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="Ksiega" type="HigherOrderElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienie formatowania dla Księga.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="Zalacznik" type="AttachmentElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienia formatowania załącznika.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="ZalacznikBinarny" type="BinaryAttachmentElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienia formatowania załącznika binarnego.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="TabelaZObramowaniem" type="TableElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienie formatowania dla tabeli z obramowaniem.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="TabelaBezObramowaniem" type="TableElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienie formatowania dla tabeli bez obramowania.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="Podpisy" type="SignatureElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienia formatowania podpisów.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="TrescPrzypisow" type="FootNoteElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienie formatowania dla treści przypisów.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="Historyczny" type="HistoricalElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienie formatowania dla elementów w widoku historycznym.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" name="Uzasadnienie" type="JustificationElementFormatting">
+            <xs:annotation>
+              <xs:documentation>Ustawienia formatowania dla uzasadnienia.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element ref="ds:Signature" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="abstrakt-generator-typ" abstract="true">
+    <xs:annotation>
+      <xs:documentation>Typ abstrakcyjny</xs:documentation>
+    </xs:annotation>
+  </xs:complexType>
+  <xs:complexType name="LegalActFormattingOptions">
+    <xs:annotation>
+      <xs:documentation>Ustawienia formatowania dla aktu prawnego.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Alignment" type="wyrownanie-tekstu-typ" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FontFamily" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="FontSize" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="UseWord2007ToCreatePdfFile" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="AutoScaleImages" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="NlAsNewParagraph" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="EmptyDateAndNumberInProjectStatus" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ShowCommentsInPDF" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="wyrownanie-tekstu-typ">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="domyslne" />
+      <xs:enumeration value="do-lewej" />
+      <xs:enumeration value="wysrodkowane" />
+      <xs:enumeration value="do-prawej" />
+      <xs:enumeration value="wyjustowane" />
+      <xs:enumeration value="" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ProjectNoteOptions">
+    <xs:annotation>
+      <xs:documentation>Ustawienia notki projektu.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Visible" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="HeaderVisible" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="HeaderText" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DetailedText" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FontFamily" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="FontSize" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="HeaderIsUnderlined" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="HeaderInItalics" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="HeaderIsBold" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Alignment" type="wyrownanie-tekstu-typ" />
+      <xs:element minOccurs="1" maxOccurs="1" name="LeftIndent" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="RightIndent" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PageSetupOptions">
+    <xs:annotation>
+      <xs:documentation>Ustawienia strony dokumentu.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="PaperSize" type="PaperKindSize" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Orientation" type="orientacja-strony-typ" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Columns" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ColumnSpacing" type="xs:double" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Margins" type="PageMarginOptions">
+        <xs:annotation>
+          <xs:documentation>Ustawienia marginesów dla całego dokumentu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="PaperKindSize">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="A4" />
+      <xs:enumeration value="A3" />
+      <xs:enumeration value="A2" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="orientacja-strony-typ">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="pionowa" />
+      <xs:enumeration value="pozioma" />
+      <xs:enumeration value="" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="PageMarginOptions">
+    <xs:annotation>
+      <xs:documentation>Ustawienia marginesów dla całego dokumentu.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Top" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Left" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Right" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Bottom" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FooterOptions">
+    <xs:annotation>
+      <xs:documentation>Ustawienia stopki dokumentu.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Visible" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IdVisible" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="StatusVisible" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="PageNumberVisible" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FontFamily" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="FontSize" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="PageStartingNumber" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ShowPageTotal" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ShowPageTotalText" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="DifferentOddAndEvenPages" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ShowLine" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="RestartPageNumberingForAttachments" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LegalActHeaderOptions">
+    <xs:annotation>
+      <xs:documentation>Ustawienia metryki dokumentu.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Type" type="LegalActHeaderType" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Alignment" type="wyrownanie-tekstu-typ" />
+      <xs:element minOccurs="0" maxOccurs="1" name="LegalActType" type="LegalActTypeOptions">
+        <xs:annotation>
+          <xs:documentation>Ustawienia typu aktu w nagłówku.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Number" type="NumberOptions">
+        <xs:annotation>
+          <xs:documentation>Ustawienia numeru aktu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="LegislativeBody" type="LegislativeBodyOptions">
+        <xs:annotation>
+          <xs:documentation>Ustawienia organu wydającego.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Date" type="DateOptions">
+        <xs:annotation>
+          <xs:documentation>Ustawienia daty aktu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="NumberEmptySpace" type="EmptySpaceType" />
+      <xs:element minOccurs="0" maxOccurs="1" default="20" name="NumberEmptySpaceCount" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="DateEmptySpace" type="EmptySpaceType" />
+      <xs:element minOccurs="0" maxOccurs="1" default="20" name="DateEmptySpaceCount" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CityName" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Concerned" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ShowEmblem" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Stamp" type="StampSettings">
+        <xs:annotation>
+          <xs:documentation>Ustawienia pieczęci.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="ShowJournalHeader" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="LegalActHeaderType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Standard" />
+      <xs:enumeration value="AsDecision" />
+      <xs:enumeration value="AsJudgment" />
+      <xs:enumeration value="AsLaw" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="LegalActTypeOptions">
+    <xs:annotation>
+      <xs:documentation>Ustawienia typu aktu w nagłówku.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="IsBold" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IsCaps" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FontFamily" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="FontSize" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="NumberOptions">
+    <xs:annotation>
+      <xs:documentation>Ustawienia numeru aktu.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="IsBold" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IsCaps" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ShowAlways" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="NumberPosition" type="LegalActNumberPosition" />
+      <xs:element minOccurs="1" maxOccurs="1" name="DontShowPrefix" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FontFamily" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="FontSize" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="LegalActNumberPosition">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Default" />
+      <xs:enumeration value="Topleft" />
+      <xs:enumeration value="Bottom" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="LegislativeBodyOptions">
+    <xs:annotation>
+      <xs:documentation>Ustawienia organu wydającego.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Visible" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IsBold" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IsCaps" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="AdditionalBreakLine" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FontFamily" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="FontSize" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DateOptions">
+    <xs:annotation>
+      <xs:documentation>Ustawienia daty aktu.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="IsBold" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IsCaps" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ShowAlways" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="SpaceBefore" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="SpaceAfter" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="WithoutYearShortcut" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="WithoutYearWhenDateIsEmpty" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FontFamily" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="FontSize" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="EmptySpaceType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Dotted" />
+      <xs:enumeration value="Spaces" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="StampSettings">
+    <xs:annotation>
+      <xs:documentation>Ustawienia pieczęci.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Visible" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ShowEmblem" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="SpaceBefore" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="SpaceAfter" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="LineSpacing" type="LineSpacingValue" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FontFamily" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="FontSize" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Text" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="LineSpacingValue">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Single" />
+      <xs:enumeration value="OneAndHalf" />
+      <xs:enumeration value="Double" />
+      <xs:enumeration value="Triple" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="TitleOptions">
+    <xs:annotation>
+      <xs:documentation>Ustawienia tytułu aktu.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="IsBold" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IsCaps" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Alignment" type="wyrownanie-tekstu-typ" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IsInNewLine" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="SpaceBefore" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="SpaceAfter" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="LineSpacing" type="LineSpacingValue" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FontFamily" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="FontSize" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ElementFormatting">
+    <xs:annotation>
+      <xs:documentation>Ustawienie formatowania dla preambuły.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Alignment" type="wyrownanie-tekstu-typ" />
+      <xs:element minOccurs="1" maxOccurs="1" name="LeftIndent" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="RightIndent" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="KeepTogether" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="KeepWithNext" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="FirstLineIndent" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="LineSpacing" type="LineSpacingValue" />
+      <xs:element minOccurs="1" maxOccurs="1" name="SpaceBefore" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="SpaceAfter" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IsBold" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IsCaps" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="LeftIndentWithPrior" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ForceAlign" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FootNoteElementFormatting">
+    <xs:annotation>
+      <xs:documentation>Ustawienia formatowania dla treści przypisów.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="ElementFormatting">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="FontFamily" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="FontSize" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="FootNotesOnCurrentPage" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ContinuousNumbering" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="CitationElementFormatting">
+    <xs:annotation>
+      <xs:documentation>Ustawienie formatowania dla cytowania.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="ElementFormatting">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="DisablePostfixLogic" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="RedactionElementFormatting">
+    <xs:annotation>
+      <xs:documentation>Ustawienie formatowania dla tiretu.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="ElementFormatting">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="NrPosition" type="NumberPosition" />
+          <xs:element minOccurs="0" maxOccurs="1" name="NrPrefix" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="NrPostfix" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="NrIsBold" type="xs:boolean" />
+          <xs:element minOccurs="0" maxOccurs="1" name="CustomNumber" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="NumberPosition">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Left" />
+      <xs:enumeration value="Top" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="LegalBasisFormatting">
+    <xs:annotation>
+      <xs:documentation>Ustawienia formatowania podstawy prawnej.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="ElementFormatting">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="FontFamily" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="FontSize" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="HigherOrderElementFormatting">
+    <xs:annotation>
+      <xs:documentation>Ustawienie formatowania dla Części.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element maxOccurs="1" name="NumberOptions" type="HigherOrderNumberOptions">
+        <xs:annotation>
+          <xs:documentation>Ustawienia numeru dla jednostki systematyzacyjnej wyższego rzędu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element maxOccurs="1" name="TitleOptions" type="TitleOptions">
+        <xs:annotation>
+          <xs:documentation>Ustawienia tytułu aktu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="HigherOrderNumberOptions">
+    <xs:annotation>
+      <xs:documentation>Ustawienia numeru dla jednostki systematyzacyjnej wyższego rzędu.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="VisualType" type="NumberVisualType" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IsBold" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IsCaps" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Prefix" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Postfix" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="LineSpacing" type="LineSpacingValue" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="NumberVisualType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Arabic" />
+      <xs:enumeration value="Roman" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="AttachmentElementFormatting">
+    <xs:annotation>
+      <xs:documentation>Ustawienia formatowania załącznika.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Alignment" type="wyrownanie-tekstu-typ" />
+      <xs:element minOccurs="1" maxOccurs="1" name="LeftIndent" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="RightIndent" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="StartFromNewPage" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="SpaceBefore" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="SpaceAfter" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="LineSpacing" type="LineSpacingValue" />
+      <xs:element minOccurs="1" maxOccurs="1" name="MinistryAutoHeader" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="MinistryAutoHeaderFontSize" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="UpperFirstLetterLegalActType" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FontFamily" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="FontSize" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="HeaderFontFamily" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="HeaderFontSize" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="JustificationElementFormatting">
+    <xs:annotation>
+      <xs:documentation>Ustawienia formatowania dla uzasadnienia.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="AttachmentElementFormatting">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="LikeAttachment" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsBold" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsCaps" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="LetterSpacing" type="LetterSpacingType" />
+          <xs:element minOccurs="1" maxOccurs="1" name="GenerateJustificationWithMainDocument" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="LetterSpacingType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Condensed" />
+      <xs:enumeration value="Normal" />
+      <xs:enumeration value="Expanded" />
+      <xs:enumeration value="Expanded2" />
+      <xs:enumeration value="Expanded3" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="BinaryAttachmentElementFormatting">
+    <xs:annotation>
+      <xs:documentation>Ustawienia formatowania załącznika binarnego.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="AttachmentElementFormatting">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="DrawBinaryHeader" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TableElementFormatting">
+    <xs:annotation>
+      <xs:documentation>Ustawienie formatowania dla tabeli z obramowaniem.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="FontFamily" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="FontSize" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="InsertTableWithHtml" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SignatureElementFormatting">
+    <xs:annotation>
+      <xs:documentation>Ustawienia formatowania podpisów.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="UnderTheAuthorityOf" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="InsteadOf" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="VisualType" type="SignatureVisualType" />
+      <xs:element minOccurs="1" maxOccurs="1" name="SignatureFunctionBottom" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="SignatureFunctionBold" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="UnderTheAuthorityOfIsBold" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="LeftIndent" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="RightIndent" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="SpaceBefore" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="SpaceAfter" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="DotCount" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="KeepWithNext" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="FirstnameInitialsOnly" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="LegislativeBodyFunctionIsBold" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="InAgreementText" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="InAgreementIsBold" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="InAgreementIsItalic" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ProofOfApprovalText" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ProofOfApprovalIsBold" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ProofOfApprovalIsItalic" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CounterSignatureText" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="CounterSignatureIsBold" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="CounterSignatureIsItalic" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ShowLegislativeBodyFunctions" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="LegislativeBodyOrientation" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="LegislativeBodyItemIsItalic" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="LegislativeBodyItemIsBold" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="LegislativeBodyItemSpaceBefore" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="LegislativeBodyItemSpaceAfter" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="LegislativeBodyItemCenterAlign" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="FirstAndSurnameIsNotBold" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="FirstAndSurnameIsItalic" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="HideSignatures" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="InsteadOfUnderFunction" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="AddComaSeparatorInSimpleSignature" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="SignatureVisualType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Stamp" />
+      <xs:enumeration value="Initials" />
+      <xs:enumeration value="Simple" />
+      <xs:enumeration value="SimpleSingleLine" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="HistoricalElementFormatting">
+    <xs:annotation>
+      <xs:documentation>Ustawienie formatowania dla elementów w widoku historycznym.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="AddColor" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ChangeColor" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DeleteColor" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IsItalic" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="HistoricalFooterFontFamily" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="HistoricalFooterFontSize" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="DisableColors" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
