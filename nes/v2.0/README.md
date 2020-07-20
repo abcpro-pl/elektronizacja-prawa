@@ -20,6 +20,7 @@ W tym katalogu znajduje się:
 
 Nazwa | Wersja | Opis
 ------|--------|--------
+ABCPRO.NES.ArchivalPackage|1.0.6|Dodanie metody w `PackageManager` umożliwiającej proste uzupełnianie pliku metadanych sprawy.
 ABCPRO.NES.ArchivalPackage|1.0.5|Aktualizacja zależności.
 ABCPRO.NES|1.0.5|Zawiera dodatkowe pola w adresie (gmina, powiat, województwo). Dodane metody statyczne do pobierania wartości z enumeratorów dla pól tekstowych np. `RelationElement.GetRelationType()`.
 ABCPRO.NES.ArchivalPackage|1.0.4|Pierwsza stabilna wersja biblioteki. Pozwala na tworzenie paczki archiwalnej z wymaganymi katalogami, dodawanie plików oraz metadanych utworzonych za pomocą ABCPRO.NES, zapis i odczyt wcześniej utworzonych paczek.

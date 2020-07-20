@@ -106,7 +106,7 @@ namespace Abc.Nes.ArchivalPackage {
         public void AddObject(Document metadata, string fileName) {
             if (metadata.IsNull()) { throw new ArgumentNullException("metadata"); }
             if (fileName.IsNullOrEmpty()) { throw new ArgumentNullException("fileName"); }
-            if (!fileName.ToLower().EndsWith(".xml")) { throw new Exception("Object file must by XML file"); }
+            if (!fileName.ToLower().EndsWith(".xml")) { throw new Exception("The Object file must by an XML file!"); }
 
             if (Package.IsNull()) { InitializePackage(); }
             
