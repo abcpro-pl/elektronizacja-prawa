@@ -55,7 +55,6 @@ namespace Abc.Nes.ArchivalPackage {
                 });
             }
         }
-
         public void AddFiles(IEnumerable<string> files, string folderName, IEnumerable<Document> metadata = null) {
             if (files.IsNull()) { throw new NullReferenceException(); }
             if (folderName.IsNotNullOrEmpty()) { throw new NullReferenceException(); }
@@ -104,7 +103,18 @@ namespace Abc.Nes.ArchivalPackage {
 
             Package.Documents.Folders.Add(folder);
         }
+        public void AddObject(Document metadata, string fileName) {
+            if (metadata.IsNull()) { throw new ArgumentNullException("metadata"); }
+            if (fileName.IsNullOrEmpty()) { throw new ArgumentNullException("fileName"); }
+            if (!fileName.ToLower().EndsWith(".xml")) { throw new Exception("Object file must by XML file"); }
 
+            if (Package.IsNull()) { InitializePackage(); }
+            
+            Package.Objects.AddItem(new MetadataFile() {
+                Document = metadata,
+                FileName = fileName
+            });
+        }
         public void Save(string filePath = null) {
             if (Package.IsNull()) { throw new NullReferenceException("Package is not initialized!"); }
             if (Package.IsEmpty) { throw new PackageIsEmptyException(); }
@@ -124,7 +134,6 @@ namespace Abc.Nes.ArchivalPackage {
                 File.Copy(tmp, FilePath, true);
             }
         }
-
         public void LoadPackage(string filePath) {
             if (filePath.IsNullOrEmpty()) { throw new ArgumentNullException(); }
             if (!File.Exists(filePath)) { throw new FileNotFoundException(filePath); }
@@ -186,11 +195,11 @@ namespace Abc.Nes.ArchivalPackage {
                 }
             }
         }
-
         public int GetDocumentsCount() {
             if (Package.IsNull()) { throw new WarningException("Please, load some archival package first!"); }
             return GetDocumentsCount(Package.Documents);
         }
+
         private int GetDocumentsCount(DocumentFolder folder) {
             var count = 0;
             if (folder.IsNotNull()) {
@@ -203,7 +212,6 @@ namespace Abc.Nes.ArchivalPackage {
             }
             return count;
         }
-
         private void AddMetadata(MetdataFolder folder, ZipFile zipFile, string folderPath = null) {
             if (folder.IsNull()) { return; }
             if (zipFile.IsNull()) { throw new ArgumentNullException("zipFile"); }
@@ -221,7 +229,6 @@ namespace Abc.Nes.ArchivalPackage {
                 }
             }
         }
-
         private void AddDocuments(DocumentFolder folder, ZipFile zipFile, string folderPath = null) {
             if (folder.IsNull()) { return; }
             if (zipFile.IsNull()) { throw new ArgumentNullException("zipFile"); }
@@ -238,7 +245,6 @@ namespace Abc.Nes.ArchivalPackage {
                 }
             }
         }
-
         private void InitializePackage() {
             Package = new Package() {
                 Documents = new DocumentFolder() {
@@ -258,7 +264,6 @@ namespace Abc.Nes.ArchivalPackage {
                 }
             };
         }
-
         private string GetValidFileName(string filePath) {
             if (filePath.IsNull()) { throw new NullReferenceException(); }
             if (!File.Exists(filePath)) { throw new FileNotFoundException(); }
@@ -268,7 +273,6 @@ namespace Abc.Nes.ArchivalPackage {
             result = result.RemovePolishChars();
             return result;
         }
-
         private bool IsPackageValid(ZipFile zipFile) {
             var zipFileHasMandatoryDirectories =
                zipFile.EntryFileNames.Where(x => x.StartsWith(MainDirectoriesName.Files.GetXmlEnum())).Count() > 0 &&
