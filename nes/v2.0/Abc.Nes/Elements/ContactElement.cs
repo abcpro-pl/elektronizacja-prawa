@@ -25,7 +25,7 @@ namespace Abc.Nes.Elements {
         [XmlAttribute("typKontaktu")]
         [XmlAnnotation("Wskazanie rodzaju kontaktu np. email, telefon, adres strony internetowej.")]
         [XmlRequired]
-        [XmlSimpleType(Annotation = "Typy kontaktu", EnumerationRestriction = typeof(ContactType) /*new string[] { "telefon", "faks", "email", "url", "skype", "facebook", "youtube", "instagram", "tiktok", "teams", "snapchat", "wuze", "messanger", "zoom" }*/, BaseTypeName = "xs:string", TypeName = "kontakt-rodzaj-typ", UnionMemberTypes = "xs:string")]
+        [XmlSimpleType(Annotation = "Typy kontaktu", EnumerationRestriction = typeof(ContactType), BaseTypeName = "xs:string", TypeName = "kontakt-rodzaj-typ", UnionMemberTypes = "xs:string")]
         public string Type { get; set; }
 
         public void SetType(ContactType type) {

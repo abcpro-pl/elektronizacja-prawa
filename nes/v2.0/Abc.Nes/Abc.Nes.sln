@@ -7,7 +7,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abc.Nes", "Abc.Nes.csproj",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abc.Nes.UnitTests", "..\Abc.Nes.UnitTests\Abc.Nes.UnitTests.csproj", "{4960CAA9-93DE-4DE1-93D5-C1B702B38336}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abc.Nes.ArchivalPackage", "..\Abc.Nes.ArchivalPackage\Abc.Nes.ArchivalPackage.csproj", "{F85ABB84-DA49-4F43-B6E2-3843F98C990C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abc.Nes.ArchivalPackage", "..\Abc.Nes.ArchivalPackage\Abc.Nes.ArchivalPackage.csproj", "{F85ABB84-DA49-4F43-B6E2-3843F98C990C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abc.Nes.ArchivalPackage.Cryptography", "..\Abc.Nes.ArchivalPackage.Cryptography\Abc.Nes.ArchivalPackage.Cryptography.csproj", "{284F9927-F6D2-4727-8A2B-ADABCA5E7E40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abc.Nes.Xades", "..\Abc.Nes.Xades\Abc.Nes.Xades.csproj", "{57833AD8-F3D0-4E7F-ABF1-1C9904C86348}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C6E7383D-C962-4A58-8541-A64C28638D3E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{470E9BE2-55C0-4302-B89B-5E05C7A03053}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,9 +35,24 @@ Global
 		{F85ABB84-DA49-4F43-B6E2-3843F98C990C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F85ABB84-DA49-4F43-B6E2-3843F98C990C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F85ABB84-DA49-4F43-B6E2-3843F98C990C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{284F9927-F6D2-4727-8A2B-ADABCA5E7E40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{284F9927-F6D2-4727-8A2B-ADABCA5E7E40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{284F9927-F6D2-4727-8A2B-ADABCA5E7E40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{284F9927-F6D2-4727-8A2B-ADABCA5E7E40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57833AD8-F3D0-4E7F-ABF1-1C9904C86348}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57833AD8-F3D0-4E7F-ABF1-1C9904C86348}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57833AD8-F3D0-4E7F-ABF1-1C9904C86348}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57833AD8-F3D0-4E7F-ABF1-1C9904C86348}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FE8CA84E-A197-4B82-A3B7-61294397239C} = {C6E7383D-C962-4A58-8541-A64C28638D3E}
+		{4960CAA9-93DE-4DE1-93D5-C1B702B38336} = {470E9BE2-55C0-4302-B89B-5E05C7A03053}
+		{F85ABB84-DA49-4F43-B6E2-3843F98C990C} = {C6E7383D-C962-4A58-8541-A64C28638D3E}
+		{284F9927-F6D2-4727-8A2B-ADABCA5E7E40} = {C6E7383D-C962-4A58-8541-A64C28638D3E}
+		{57833AD8-F3D0-4E7F-ABF1-1C9904C86348} = {C6E7383D-C962-4A58-8541-A64C28638D3E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8665C04C-0C9B-41E0-B5EA-26FC0DAC93B2}

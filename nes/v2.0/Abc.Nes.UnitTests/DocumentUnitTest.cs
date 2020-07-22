@@ -60,11 +60,11 @@ namespace Abc.Nes.UnitTests {
         }
 
 
-        private Abc.Nes.Document GetModel() {
+        public static Abc.Nes.Document GetModel() {
             var document = new Abc.Nes.Document() {
                 Identifiers = new List<Abc.Nes.Elements.IdentifierElement> {
                     new Abc.Nes.Elements.IdentifierElement() {
-                        Type = "Znak sprawy",
+                        Type = Abc.Nes.Elements.IdentifierElement.GetIdTypes(Enumerations.IdTypes.ObjectMark),
                         Value = "ABC-A.123.77.3.2011.JW.",
                         Subject = new Elements.SubjectElement(){
                             Institution = new Elements.InstitutionElement(){
@@ -127,7 +127,144 @@ namespace Abc.Nes.UnitTests {
                         Description = "tekstowy opis grupy"
                     }
                 },
-                Description = "Opis dokumentu"
+                Authors = new List<Elements.AuthorElement> {
+                    new Elements.AuthorElement() {
+                        Functions = new List<string> { Elements.AuthorElement.GetAuthorFunctionType(Enumerations.AuthorFunctionType.Created) },
+                        Subject = new Elements.SubjectElement() {
+                            Institution = new Elements.InstitutionElement() {
+                                Name = "Urząd Miasta Wołomierz"
+                            }
+                        }
+                    }
+                },
+                Senders = new List<Elements.SenderElement> {
+                    new Elements.SenderElement() {
+                        Subject = new Elements.SubjectElement() {
+                            Institution = new Elements.InstitutionElement() {
+                                Name = "Urząd Miasta Wołomierz"
+                            }
+                        }
+                    }
+                },
+                Recipients = new List<Elements.RecipientElement> {
+                    new Elements.RecipientElement() {
+                        CC = Enumerations.BooleanValues.False,
+                        Subject = new Elements.SubjectElement() {
+                            Institution = new Elements.InstitutionElement() {
+                                Name = "Urząd Miasta Wołomierz"
+                            }
+                        }
+                    },
+                    new Elements.RecipientElement() {
+                        CC = Enumerations.BooleanValues.True,
+                        Subject = new Elements.SubjectElement() {
+                            Institution = new Elements.InstitutionElement() {
+                                Name = "Regionalna Izba Obrachunkowa w Łodzi"
+                            }
+                        }
+                    }
+                },
+                Relations = new List<Elements.RelationElement> {
+                    new Elements.RelationElement {
+                        Identifiers = new List<Elements.IdentifierElement> {
+                            new Elements.IdentifierElement() {
+                                Type = "SystemID",
+                                Value = "P00112233.pdf.xades"
+                            }
+                        },
+                        Type = Elements.RelationElement.GetRelationType(Enumerations.RelationType.HasReference)
+                    },
+                    new Elements.RelationElement {
+                        Identifiers = new List<Elements.IdentifierElement> {
+                            new Elements.IdentifierElement() {
+                                Type = "SystemID",
+                                Value = "dek2010123.txt"
+                            }
+                        },
+                        Type = Elements.RelationElement.GetRelationType(Enumerations.RelationType.HasAttribution)
+                    },
+                    new Elements.RelationElement {
+                        Identifiers = new List<Elements.IdentifierElement> {
+                            new Elements.IdentifierElement() {
+                                Type = "SystemID",
+                                Value = "P00112233.docx"
+                            }
+                        },
+                        Type = Elements.RelationElement.GetRelationType(Enumerations.RelationType.IsVersion)
+                    },
+                    new Elements.RelationElement {
+                        Identifiers = new List<Elements.IdentifierElement> {
+                            new Elements.IdentifierElement() {
+                                Type = "SystemID",
+                                Value = "UPD12345.xml"
+                            }
+                        },
+                        Type = Elements.RelationElement.GetRelationType(Enumerations.RelationType.HasReference)
+                    }
+                },
+                Qualifications = new List<Elements.QualificationElement> {
+                    new Elements.QualificationElement() {
+                        Type = Elements.QualificationElement.GetArchivalCategoryType(Enumerations.ArchivalCategoryType.BE10),
+                        Date = "2005-03-05",
+                        Subject = new Elements.SubjectElement() {
+                            Institution = new Elements.InstitutionElement() {
+                                Name = "Urząd Miasta Wołomierz",
+                                Unit = new Elements.InstitutionUnitElement() {
+                                    Name = "Departament Usług i Rozwoju",
+                                    Unit = new Elements.InstitutionUnitElement() {
+                                        Name = "Wydział Rozwoju Systemów",
+                                        Employee = new Elements.EmployeeElement() {
+                                            FirstNames = new List<string> { "Jan" },
+                                            Surname = "Kowalski",
+                                            Position = "Specjalista",
+                                            Contacts = new List<Elements.ContactElement> {
+                                                new Elements.ContactElement() {
+                                                    Type = Elements.ContactElement.GetContactType(Enumerations.ContactType.Email),
+                                                    Value = "jkowalski@mc.gov.pl"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                Languages = new List<Elements.TitleWithLanguageCodeElement>() {
+                    new Elements.TitleWithLanguageCodeElement() {
+                        Type = Enumerations.LanguageCode.pol,
+                        Value = "polski"
+                    }
+                },
+                Description = "projekt dokumentu \"Requirements for elaboration and implementation of information system of General department of Archives\", przekazny przez Przewodniczącą Departamentu Generalnego Archiwów przy Radzie Ministrów Republiki Bułgarii",
+                Keywords = new List<Elements.KeywordElement> {
+                    new Elements.KeywordElement() {
+                        Matters = new List<string> { "handel" },
+                        Places = new List<string> { "Polska" },
+                        Dates = new List<Elements.DateElement> {
+                            new Elements.DateElement() {
+                                Range = Enumerations.DateRangeType.DateFromTo,
+                                DateFrom = "2008",
+                                DateTo = "2012"
+                            }
+                        },
+                        Others = new List<Elements.KeywordDataElement> {
+                            new Elements.KeywordDataElement() {
+                                Key = "placówki handlowe",
+                                Value = "Anna i Jan"
+                            }
+                        }
+                    }
+                },
+                Rights = new List<string> { "© Unesco 2003 do polskiego tłumaczenia Naczelna Dyrekcja Archiwów Państwowych" },
+                Locations = new List<string> { "Archiwum zakładowe Urzędu Miasta w Wołomierzu" },
+                Statuses = new List<Elements.StatusElement> {
+                    new Elements.StatusElement() {
+                        Kind = "status dokumentu",
+                        Version = "numer wersji",
+                        Description = "opis"
+                    }
+                }
             };
 
             return document;
