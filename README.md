@@ -11,11 +11,13 @@ W podkatalogu [nes](nes/v2.0) znajdują się biblioteki do tworzenia paczki eADM
 
 ### NuGet
 
-Gotowe biblioteki mozna pobrać z NuGet.org
+Gotowe biblioteki można pobrać z NuGet.org
 
 <a href="https://www.nuget.org/packages/ABCPRO.NES/"><img alt="Nuget" src="https://img.shields.io/nuget/v/ABCPRO.NES?label=abcpro.nes%20nuget"> <img alt="Nuget" src="https://img.shields.io/nuget/dt/ABCPRO.NES"></a>
 
-<a href="https://www.nuget.org/packages/ABCPRO.NES.ArchivalPackage/"><img alt="Nuget" src="https://img.shields.io/nuget/v/ABCPRO.NES.ArchivalPackage?label=abcpro.nes.archivalpackage%20nuget"> <img alt="Nuget" src="https://img.shields.io/nuget/dt/ABCPRO.NES.ArchivalPackage"> </a>
+<a href="https://www.nuget.org/packages/ABCPRO.NES.ArchivalPackage/"><img alt="Nuget" src="https://img.shields.io/nuget/v/ABCPRO.NES.ArchivalPackage?label=abcpro.nes.archivalpackage%20nuget"> <img alt="Nuget" src="https://img.shields.io/nuget/dt/ABCPRO.NES.ArchivalPackage"></a>
+
+<a href="https://www.nuget.org/packages/ABCPRO.NES.XAdES/"><img alt="Nuget" src="https://img.shields.io/nuget/v/ABCPRO.NES.XAdES?label=abcpro.nes.xades%20nuget"> <img alt="Nuget" src="https://img.shields.io/nuget/dt/ABCPRO.NES.XAdES"></a>
  
 ## O ABC PRO 
 
