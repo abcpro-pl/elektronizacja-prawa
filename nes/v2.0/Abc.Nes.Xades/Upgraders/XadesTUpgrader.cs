@@ -41,20 +41,22 @@ namespace Abc.Nes.Xades.Upgraders {
 
             try {
                 if (unsignedProperties.UnsignedSignatureProperties.SignatureTimeStampCollection.Count > 0) {
-                    throw new Exception("La firma ya contiene un sello de tiempo");
+                    throw new Exception("The signature already contains a time stamp!");
                 }
 
-                XmlDsigExcC14NTransform excTransform = new XmlDsigExcC14NTransform();
+                var excTransform = new XmlDsigExcC14NTransform();
 
-                signatureValueElementXpaths = new ArrayList();
-                signatureValueElementXpaths.Add("ds:SignatureValue");
+                signatureValueElementXpaths = new ArrayList {
+                    "ds:SignatureValue"
+                };
                 signatureValueHash = DigestUtil.ComputeHashValue(XMLUtil.ComputeValueOfElementList(signatureDocument.XadesSignature, signatureValueElementXpaths, excTransform), parameters.DigestMethod);
 
                 byte[] tsa = parameters.TimeStampClient.GetTimeStamp(signatureValueHash, parameters.DigestMethod, true);
 
-                signatureTimeStamp = new TimeStamp("SignatureTimeStamp");
-                signatureTimeStamp.Id = "SignatureTimeStamp-" + signatureDocument.XadesSignature.Signature.Id;
-                signatureTimeStamp.CanonicalizationMethod = new CanonicalizationMethod();
+                signatureTimeStamp = new TimeStamp("SignatureTimeStamp") {
+                    Id = "SignatureTimeStamp-" + signatureDocument.XadesSignature.Signature.Id,
+                    CanonicalizationMethod = new CanonicalizationMethod()
+                };
                 signatureTimeStamp.CanonicalizationMethod.Algorithm = excTransform.Algorithm;
                 signatureTimeStamp.EncapsulatedTimeStamp.PkiData = tsa;
                 signatureTimeStamp.EncapsulatedTimeStamp.Id = "SignatureTimeStamp-" + Guid.NewGuid().ToString();
@@ -66,7 +68,7 @@ namespace Abc.Nes.Xades.Upgraders {
                 signatureDocument.UpdateDocument();
             }
             catch (Exception ex) {
-                throw new Exception("Ha ocurrido un error al insertar el sellado de tiempo.", ex);
+                throw new Exception("An error occurred while inserting the time stamp.", ex);
             }
         }
 

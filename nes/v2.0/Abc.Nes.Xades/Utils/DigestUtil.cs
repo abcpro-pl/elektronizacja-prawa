@@ -22,6 +22,8 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using Microsoft.Xades;
+using System.IO;
+using System.Xml;
 
 namespace Abc.Nes.Xades.Utils {
     class DigestUtil {
@@ -36,6 +38,21 @@ namespace Abc.Nes.Xades.Utils {
             using (var alg = digestMethod.GetHashAlgorithm()) {
                 return alg.ComputeHash(value);
             }
+        }
+    }
+
+    static class Extensions {
+        public static byte[] ToArray(this Stream input) {
+            using (var ms = new MemoryStream()) {
+                input.CopyTo(ms);
+                return ms.ToArray();
+            }
+        }
+        public static XmlDocument ToXmlDocument(this XmlElement e) {
+            var doc = new XmlDocument();
+            var node = doc.ImportNode(e, true);
+            doc.AppendChild(node);
+            return doc;
         }
     }
 }

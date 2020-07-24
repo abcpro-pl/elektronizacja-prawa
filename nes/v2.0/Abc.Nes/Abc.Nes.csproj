@@ -2,10 +2,9 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.1;netstandard2.0;net48;net461</TargetFrameworks>
-    <Authors>Krzysztof Radzimski</Authors>
+    <Authors>ITORG Krzysztof Radzimski</Authors>
     <Company>ABC PRO Sp. z o.o.</Company>
-    <Description>.NET library for creating documents metadata for Polish State Archives (NES - 
-Necessary elements of electronic documents structure).</Description>
+    <Description>.NET library for creating documents metadata for Polish State Archives (NES - Necessary elements of electronic documents structure).</Description>
     <Copyright>ABC PRO Sp. z o.o.</Copyright>
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
     <PackageIcon>nes_logo.jpg</PackageIcon>

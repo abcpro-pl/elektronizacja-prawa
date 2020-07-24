@@ -24,7 +24,7 @@ W tym katalogu znajduje się:
 
 Nazwa | Wersja | Opis
 ------|--------|--------
-ABCPRO.NES.XAdES|1.0.1|Dodanie biblioteki umożliwiającej podpisywanie dokumentów XML. Biblioteka bazuje na kodzie źródłowym [Microsoft.Xades](https://github.com/Caliper/Xades) utworzonym przez francuski oddział firmy Microsoft oraz na podstawie kodu źródłowego [FirmaXadesNet](https://github.com/ctt-gob-es/FirmaXadesNet45) utworzonym przez Departament Nowych Technologii Rady Urbanizmu Miasta Cartagena. Biblioteka pozwala na opatrywanie pliku metadanych bezpiecznym podpisem elektronicznym.  
+ABCPRO.NES.XAdES|1.0.3|Dodanie biblioteki umożliwiającej podpisywanie dokumentów XML. Biblioteka bazuje na kodzie źródłowym [Microsoft.Xades](https://github.com/Caliper/Xades) utworzonym przez francuski oddział firmy Microsoft oraz na podstawie kodu źródłowego [FirmaXadesNet](https://github.com/ctt-gob-es/FirmaXadesNet45) utworzonym przez Departament Nowych Technologii Rady Urbanizacji Miasta Cartagena. Biblioteka pozwala na opatrywanie pliku metadanych bezpiecznym podpisem elektronicznym.  
 ABCPRO.NES.ArchivalPackage|1.0.6|Dodanie metody w `PackageManager` umożliwiającej proste uzupełnianie pliku metadanych sprawy.
 ABCPRO.NES.ArchivalPackage|1.0.5|Aktualizacja zależności.
 ABCPRO.NES|1.0.5|Zawiera dodatkowe pola w adresie (gmina, powiat, województwo). Dodane metody statyczne do pobierania wartości z enumeratorów dla pól tekstowych np. `RelationElement.GetRelationType()`.
@@ -372,32 +372,50 @@ ABCPRO.NES|1.0.3|Pierwsza stabilna wersja biblioteki. Pozwala na dodawanie wszys
 
 ### ABCPRO.NES.XAdES
 
-#### Podpisywanie pliku metadanych
+#### Podpisywanie pliku metadanych (podpis w treści pliku XML - enveloped)
 
 ```C#
 var document = GetModel(); // utworzenie modelu dokumentu metadanych
 var documentXml = new Abc.Nes.Converters.XmlConverter().GetXml(document); // konwersja modelu do XML
 
-using (IXadesService service = new XadesService()) {
+ using (var manager = new XadesManager()) {
     var xml = new MemoryStream(Encoding.UTF8.GetBytes(documentXml.ToString()));
-    var signatureParams = new SignatureParameters() {
-        SignaturePolicyInfo = new SignaturePolicyInfo(),
-        SignaturePackaging = SignaturePackaging.ENVELOPED, // podpis w treści dokumentu XML
-        DataFormat = new DataFormat() {
-            MimeType = MimeTypeUtil.GetMimeType("nes.xml")
-        },
-        Signer = new Xades.Crypto.Signer(CertUtil.SelectCertificate()),
-        DigestMethod = Xades.Crypto.DigestMethod.SHA256,
-        SignatureMethod = Xades.Crypto.SignatureMethod.RSAwithSHA256
-    };
-
-
-    var result = service.Sign(xml, signatureParams);
+    var result = manager.AppendSignatureToXmlFile(xml, CertUtil.SelectCertificate(),
+    new SignatureProductionPlace() {
+        City = "Warszawa",
+        CountryName = "Polska",
+        PostalCode = "03-825",
+        StateOrProvince = "mazowieckie"
+   },
+   new SignerRole("Wiceprezes Zarządu"));
 
     var filePath = Path.Combine(Path.GetTempPath(), "signature.xml");
     if (File.Exists(filePath)) { File.Delete(filePath); }
     result.Save(filePath);
     // System.Diagnostics.Process.Start(filePath);
+}
+```
+
+#### Podpisywanie pliku PDF (podpis okalający - enveloping)
+
+```C#
+var path = "../../../doc/nes_20_generated.pdf";
+using (var manager = new XadesManager()) {
+    var result = manager.CreateEnvelopingSignature(
+        new MemoryStream(File.ReadAllBytes(path)), 
+        CertUtil.SelectCertificate(),
+        new SignatureProductionPlace() {
+            City = "Warszawa",
+            CountryName = "Polska",
+            PostalCode = "03-825",
+            StateOrProvince = "mazowieckie"
+        },
+        new SignerRole("Wiceprezes Zarządu"));
+
+        var filePath = Path.Combine(Path.GetTempPath(), "signature.xml");
+        if (File.Exists(filePath)) { File.Delete(filePath); }
+        result.Save(filePath);
+
 }
 ```
 

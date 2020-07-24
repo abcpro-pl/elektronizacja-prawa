@@ -5,19 +5,7 @@ Udostępniane publicznie standardy, schematy i opisy oraz kod źródłowy oprogr
 
 ## Paczka eADM i Niezbędne Elementy Struktury 2.0
 
-W podkatalogu [nes](nes/v2.0) znajdują się biblioteki do tworzenia paczki eADM oraz plików metadanych zgodnych z NES 2.0.
-
-<a href="https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0"><img alt="git" src="https://img.shields.io/badge/git-abcpro.nes i abcpro.nes.archivalpackage-darkgreen"></a>  
-
-### NuGet
-
-Gotowe biblioteki można pobrać z NuGet.org
-
-<a href="https://www.nuget.org/packages/ABCPRO.NES/"><img alt="Nuget" src="https://img.shields.io/nuget/v/ABCPRO.NES?label=abcpro.nes%20nuget"> <img alt="Nuget" src="https://img.shields.io/nuget/dt/ABCPRO.NES"></a>
-
-<a href="https://www.nuget.org/packages/ABCPRO.NES.ArchivalPackage/"><img alt="Nuget" src="https://img.shields.io/nuget/v/ABCPRO.NES.ArchivalPackage?label=abcpro.nes.archivalpackage%20nuget"> <img alt="Nuget" src="https://img.shields.io/nuget/dt/ABCPRO.NES.ArchivalPackage"></a>
-
-<a href="https://www.nuget.org/packages/ABCPRO.NES.XAdES/"><img alt="Nuget" src="https://img.shields.io/nuget/v/ABCPRO.NES.XAdES?label=abcpro.nes.xades%20nuget"> <img alt="Nuget" src="https://img.shields.io/nuget/dt/ABCPRO.NES.XAdES"></a>
+W podkatalogu [NES/v2.0](nes/v2.0) znajdują się biblioteki do tworzenia, edycji i podpisywania paczki eADM oraz plików metadanych zgodnych z NES 2.0.
  
 ## O ABC PRO 
 

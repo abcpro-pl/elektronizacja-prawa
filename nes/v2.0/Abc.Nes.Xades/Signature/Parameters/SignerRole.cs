@@ -18,6 +18,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/. 
 //
 // E-Mail: informatica@gemuc.es
+//
+// Modified by ITORG Krzysztof Radzimski
 // 
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -26,37 +28,13 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Abc.Nes.Xades.Signature.Parameters {
     public class SignerRole {
-        #region Private variables
+        public List<X509Certificate> CertifiedRoles { get; private set; }
+        public List<string> ClaimedRoles { get; private set; }
 
-        private List<X509Certificate> _certifiedRoles;
-        private List<string> _claimedRoles;
-
-        #endregion
-
-
-        #region Public properties
-
-        public List<X509Certificate> CertifiedRoles {
-            get {
-                return _certifiedRoles;
-            }
+        public SignerRole(params string[] claimedRole) {
+            CertifiedRoles = new List<X509Certificate>();
+            ClaimedRoles = new List<string>();
+            if (claimedRole != null) { ClaimedRoles.AddRange(claimedRole); }
         }
-
-        public List<string> ClaimedRoles {
-            get {
-                return _claimedRoles;
-            }
-        }
-
-        #endregion
-
-        #region Constructors
-
-        public SignerRole() {
-            _certifiedRoles = new List<X509Certificate>();
-            _claimedRoles = new List<string>();
-        }
-
-        #endregion
     }
 }

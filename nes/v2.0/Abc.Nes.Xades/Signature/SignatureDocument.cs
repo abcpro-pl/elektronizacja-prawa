@@ -19,6 +19,7 @@
 //
 // E-Mail: informatica@gemuc.es
 // 
+// Modified by ITORG Krzysztof Radzimski
 // --------------------------------------------------------------------------------------------------------------------
 
 using Abc.Nes.Xades.Utils;
@@ -31,38 +32,8 @@ using System.Xml;
 
 namespace Abc.Nes.Xades.Signature {
     public class SignatureDocument {
-        #region Private variables        
-
-        private XadesSignedXml _xadesSignedXml;
-        private XmlDocument _document;
-
-        #endregion
-
-        #region Public properties
-
-        public XmlDocument Document {
-            get {
-                return _document;
-            }
-
-            set {
-                _document = value;
-            }
-        }
-
-        public XadesSignedXml XadesSignature {
-            get {
-                return _xadesSignedXml;
-            }
-
-            set {
-                _xadesSignedXml = value;
-            }
-        }
-
-        #endregion
-
-        #region Public methods
+        public XmlDocument Document { get; set; }
+        public XadesSignedXml XadesSignature { get; set; }
 
         public byte[] GetDocumentBytes() {
             CheckSignatureDocument(this);
@@ -81,8 +52,9 @@ namespace Abc.Nes.Xades.Signature {
         public void Save(string fileName) {
             CheckSignatureDocument(this);
 
-            XmlWriterSettings settings = new XmlWriterSettings();
-            settings.Encoding = new UTF8Encoding();
+            var settings = new XmlWriterSettings {
+                Encoding = new UTF8Encoding()
+            };
             using (var writer = XmlWriter.Create(fileName, settings)) {
                 this.Document.Save(writer);
             }
@@ -93,31 +65,29 @@ namespace Abc.Nes.Xades.Signature {
         /// </summary>
         /// <param name="output"></param>
         public void Save(Stream output) {
-            XmlWriterSettings settings = new XmlWriterSettings();
-            settings.Encoding = new UTF8Encoding();
+            var settings = new XmlWriterSettings {
+                Encoding = new UTF8Encoding()
+            };
             using (var writer = XmlWriter.Create(output, settings)) {
                 this.Document.Save(writer);
             }
         }
 
-        #endregion
-
-        #region Private methods
 
         /// <summary>
         /// Actualiza el documento resultante
         /// </summary>
         internal void UpdateDocument() {
-            if (_document == null) {
-                _document = new XmlDocument();
+            if (Document == null) {
+                Document = new XmlDocument();
             }
 
-            if (_document.DocumentElement != null) {
-                XmlNode xmlNode = _document.SelectSingleNode("//*[@Id='" + _xadesSignedXml.Signature.Id + "']");
+            if (Document.DocumentElement != null) {
+                XmlNode xmlNode = Document.SelectSingleNode("//*[@Id='" + XadesSignature.Signature.Id + "']");
 
                 if (xmlNode != null) {
 
-                    XmlNamespaceManager nm = new XmlNamespaceManager(_document.NameTable);
+                    XmlNamespaceManager nm = new XmlNamespaceManager(Document.NameTable);
                     nm.AddNamespace("xades", XadesSignedXml.XadesNamespaceUri);
                     nm.AddNamespace("ds", SignedXml.XmlDsigNamespaceUrl);
 
@@ -126,34 +96,34 @@ namespace Abc.Nes.Xades.Signature {
 
                     if (xmlUnsingedPropertiesNode != null) {
                         XmlNode xmlUnsingedSignaturePropertiesNode = xmlNode.SelectSingleNode("ds:Object/xades:QualifyingProperties/xades:UnsignedProperties/xades:UnsignedSignatureProperties", nm);
-                        XmlElement xmlUnsignedPropertiesNew = _xadesSignedXml.XadesObject.QualifyingProperties.UnsignedProperties.UnsignedSignatureProperties.GetXml();
+                        XmlElement xmlUnsignedPropertiesNew = XadesSignature.XadesObject.QualifyingProperties.UnsignedProperties.UnsignedSignatureProperties.GetXml();
                         foreach (XmlNode childNode in xmlUnsignedPropertiesNew.ChildNodes) {
                             if (childNode.Attributes["Id"] != null &&
                                 xmlUnsingedSignaturePropertiesNode.SelectSingleNode("//*[@Id='" + childNode.Attributes["Id"].Value + "']") == null) {
-                                var newNode = _document.ImportNode(childNode, true);
+                                var newNode = Document.ImportNode(childNode, true);
                                 xmlUnsingedSignaturePropertiesNode.AppendChild(newNode);
                             }
                         }
 
                         // Se comprueban las ContraFirmas
-                        if (_xadesSignedXml.XadesObject.QualifyingProperties.UnsignedProperties.UnsignedSignatureProperties.CounterSignatureCollection.Count > 0) {
-                            foreach (XadesSignedXml counterSign in _xadesSignedXml.XadesObject.QualifyingProperties.UnsignedProperties.UnsignedSignatureProperties.CounterSignatureCollection) {
+                        if (XadesSignature.XadesObject.QualifyingProperties.UnsignedProperties.UnsignedSignatureProperties.CounterSignatureCollection.Count > 0) {
+                            foreach (XadesSignedXml counterSign in XadesSignature.XadesObject.QualifyingProperties.UnsignedProperties.UnsignedSignatureProperties.CounterSignatureCollection) {
                                 if (xmlNode.SelectSingleNode("//*[@Id='" + counterSign.Signature.Id + "']") == null) {
-                                    XmlNode xmlCounterSignatureNode = _document.CreateElement(XadesSignedXml.XmlXadesPrefix, "CounterSignature", XadesSignedXml.XadesNamespaceUri);
+                                    XmlNode xmlCounterSignatureNode = Document.CreateElement(XadesSignedXml.XmlXadesPrefix, "CounterSignature", XadesSignedXml.XadesNamespaceUri);
                                     xmlUnsingedSignaturePropertiesNode.AppendChild(xmlCounterSignatureNode);
-                                    xmlCounterSignatureNode.AppendChild(_document.ImportNode(counterSign.GetXml(), true));
+                                    xmlCounterSignatureNode.AppendChild(Document.ImportNode(counterSign.GetXml(), true));
                                 }
                             }
                         }
                     }
                     else {
-                        xmlUnsingedPropertiesNode = _document.ImportNode(_xadesSignedXml.XadesObject.QualifyingProperties.UnsignedProperties.GetXml(), true);
+                        xmlUnsingedPropertiesNode = Document.ImportNode(XadesSignature.XadesObject.QualifyingProperties.UnsignedProperties.GetXml(), true);
                         xmlQPNode.AppendChild(xmlUnsingedPropertiesNode);
                     }
 
                 }
                 else {
-                    XmlElement xmlSigned = _xadesSignedXml.GetXml();
+                    XmlElement xmlSigned = XadesSignature.GetXml();
 
                     byte[] canonicalizedElement = XMLUtil.ApplyTransform(xmlSigned, new XmlDsigC14NTransform());
 
@@ -161,13 +131,13 @@ namespace Abc.Nes.Xades.Signature {
                     doc.PreserveWhitespace = true;
                     doc.LoadXml(Encoding.UTF8.GetString(canonicalizedElement));
 
-                    XmlNode canonSignature = _document.ImportNode(doc.DocumentElement, true);
+                    XmlNode canonSignature = Document.ImportNode(doc.DocumentElement, true);
 
-                    _xadesSignedXml.GetSignatureElement().AppendChild(canonSignature);
+                    XadesSignature.GetSignatureElement().AppendChild(canonSignature);
                 }
             }
             else {
-                _document.LoadXml(_xadesSignedXml.GetXml().OuterXml);
+                Document.LoadXml(XadesSignature.GetXml().OuterXml);
             }
         }
 
@@ -178,10 +148,8 @@ namespace Abc.Nes.Xades.Signature {
             }
 
             if (sigDocument.Document == null || sigDocument.XadesSignature == null) {
-                throw new Exception("No existe información sobre la firma");
+                throw new Exception("Signatures not found!");
             }
-        }
-
-        #endregion
+        }        
     }
 }

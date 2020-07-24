@@ -21,37 +21,18 @@
 // 
 // --------------------------------------------------------------------------------------------------------------------
 
+// Modified by ITORG Krzysztof Radzimski
+
 using System;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Abc.Nes.Xades.Crypto {
     public class Signer : IDisposable {
-        #region Private variables
-
         private bool _disposeCryptoProvider;
-        private X509Certificate2 _signingCertificate;
-        private AsymmetricAlgorithm _signingKey;
 
-        #endregion
-
-        #region Public properties
-
-        public X509Certificate2 Certificate {
-            get {
-                return _signingCertificate;
-            }
-        }
-
-        public AsymmetricAlgorithm SigningKey {
-            get {
-                return _signingKey;
-            }
-        }
-
-        #endregion
-
-        #region Constructors
+        public X509Certificate2 Certificate { get; private set; }
+        public AsymmetricAlgorithm SigningKey { get; private set; }
 
         public Signer(X509Certificate2 certificate) {
             if (certificate == null) {
@@ -62,31 +43,20 @@ namespace Abc.Nes.Xades.Crypto {
                 throw new Exception("The certificate does not contain any private keys.");
             }
 
-            _signingCertificate = certificate;
-
-            SetSigningKey(_signingCertificate);
+            Certificate = certificate;
+            SetSigningKey(Certificate);
         }
 
-        #endregion
-
-        #region Public methods
-
         public void Dispose() {
-            if (_disposeCryptoProvider && _signingKey != null) {
-                _signingKey.Dispose();
+            if (_disposeCryptoProvider && SigningKey != null) {
+                SigningKey.Dispose();
             }
         }
 
-        #endregion
-
-        #region Private methods
-
         private void SetSigningKey(X509Certificate2 certificate) {
             var key = certificate.GetRSAPrivateKey();
-            _signingKey = key;
+            SigningKey = key;
             _disposeCryptoProvider = false;
         }
-
-        #endregion
     }
 }

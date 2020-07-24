@@ -113,8 +113,9 @@ namespace Abc.Nes.Xades.Utils {
         /// <param name="input"></param>
         /// <returns></returns>
         public static XmlDocument LoadDocument(Stream input) {
-            XmlDocument document = new XmlDocument();
-            document.PreserveWhitespace = true;
+            XmlDocument document = new XmlDocument {
+                PreserveWhitespace = true
+            };
             document.Load(input);
 
             return document;

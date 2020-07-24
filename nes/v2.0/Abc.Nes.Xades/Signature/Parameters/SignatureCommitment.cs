@@ -25,8 +25,7 @@ using System.Collections.Generic;
 using System.Xml;
 
 namespace Abc.Nes.Xades.Signature.Parameters {
-    public class SignatureCommitment
-    {
+    public class SignatureCommitment {
         #region Public properties
 
         public SignatureCommitmentType CommitmentType { get; set; }
@@ -37,18 +36,16 @@ namespace Abc.Nes.Xades.Signature.Parameters {
 
         #region Constructors
 
-        public SignatureCommitment(SignatureCommitmentType commitmentType)
-        {
+        public SignatureCommitment(SignatureCommitmentType commitmentType) {
             this.CommitmentType = commitmentType;
             this.CommitmentTypeQualifiers = new List<XmlElement>();
         }
-        
+
         #endregion
 
         #region Public methods
 
-        public void AddQualifierFromXml(string xml)
-        {
+        public void AddQualifierFromXml(string xml) {
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml);
 

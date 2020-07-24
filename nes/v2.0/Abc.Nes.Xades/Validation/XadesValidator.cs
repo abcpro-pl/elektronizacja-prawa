@@ -34,7 +34,11 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.Xml;
 
 namespace Abc.Nes.Xades.Validation {
-    class XadesValidator {
+    class XadesValidator :IDisposable {
+        public void Dispose() {
+            
+        }
+
         #region Public methods
 
         public ValidationResult Validate(SignatureDocument sigDocument) {
@@ -53,9 +57,9 @@ namespace Abc.Nes.Xades.Validation {
                 // Verifica las huellas de las referencias y la firma
                 sigDocument.XadesSignature.CheckXmldsigSignature();
             }
-            catch (Exception ex) {
+            catch {
                 result.IsValid = false;
-                result.Message = "La verificación de la firma no ha sido satisfactoria";
+                result.Message = "Signature verification was unsuccessful";
 
                 return result;
             }
@@ -78,20 +82,22 @@ namespace Abc.Nes.Xades.Validation {
                     transform = new XmlDsigC14NTransform();
                 }
 
-                ArrayList signatureValueElementXpaths = new ArrayList();
-                signatureValueElementXpaths.Add("ds:SignatureValue");
+                ArrayList signatureValueElementXpaths = new ArrayList {
+                    "ds:SignatureValue"
+                };
+
                 byte[] signatureValueHash = DigestUtil.ComputeHashValue(XMLUtil.ComputeValueOfElementList(sigDocument.XadesSignature, signatureValueElementXpaths, transform), tsDigestMethod);
 
                 if (!Arrays.AreEqual(tsHashValue, signatureValueHash)) {
                     result.IsValid = false;
-                    result.Message = "La huella del sello de tiempo no se corresponde con la calculada";
+                    result.Message = "The trimestamp does not correspond to the calculated one";
 
                     return result;
                 }
             }
 
             result.IsValid = true;
-            result.Message = "Verificación de la firma satisfactoria";
+            result.Message = "Successful signature verification";
 
             return result;
         }

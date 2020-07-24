@@ -35,107 +35,6 @@ using System.Xml.Schema;
 
 namespace Microsoft.Xades {
     /// <summary>
-    /// Types of signature standards that can be contained in XadesSignedXml class instance
-    /// </summary>
-    public enum KnownSignatureStandard {
-        /// <summary>
-        /// XML Digital Signature (XMLDSIG)
-        /// </summary>
-        XmlDsig,
-        /// <summary>
-        /// XML Advanced Electronic Signature (XAdES) 
-        /// </summary>
-        Xades
-    }
-
-    /// <summary>
-    /// Bitmasks to indicate which checks need to be executed on the XAdES signature
-    /// </summary>
-    [FlagsAttribute]
-    public enum XadesCheckSignatureMasks : ulong {
-        /// <summary>
-        /// Check the signature of the underlying XMLDSIG signature
-        /// </summary>
-        CheckXmldsigSignature = 0x01,
-        /// <summary>
-        /// Validate the XML representation of the signature against the XAdES and XMLDSIG schemas
-        /// </summary>
-        ValidateAgainstSchema = 0x02,
-        /// <summary>
-        /// Check to see if first XMLDSIG certificate has same hashvalue as first XAdES SignatureCertificate
-        /// </summary>
-        CheckSameCertificate = 0x04,
-        /// <summary>
-        /// Check if there is a HashDataInfo for each reference if there is a AllDataObjectsTimeStamp
-        /// </summary>
-        CheckAllReferencesExistInAllDataObjectsTimeStamp = 0x08,
-        /// <summary>
-        /// Check if the HashDataInfo of each IndividualDataObjectsTimeStamp points to existing Reference
-        /// </summary>
-        CheckAllHashDataInfosInIndividualDataObjectsTimeStamp = 0x10,
-        /// <summary>
-        /// Perform XAdES checks on contained counter signatures 
-        /// </summary>
-        CheckCounterSignatures = 0x20,
-        /// <summary>
-        /// Counter signatures should all contain a reference to the parent signature SignatureValue element
-        /// </summary>
-        CheckCounterSignaturesReference = 0x40,
-        /// <summary>
-        /// Check if each ObjectReference in CommitmentTypeIndication points to Reference element
-        /// </summary>
-        CheckObjectReferencesInCommitmentTypeIndication = 0x80,
-        /// <summary>
-        /// Check if at least ClaimedRoles or CertifiedRoles present in SignerRole
-        /// </summary>
-        CheckIfClaimedRolesOrCertifiedRolesPresentInSignerRole = 0x0100,
-        /// <summary>
-        /// Check if HashDataInfo of SignatureTimeStamp points to SignatureValue
-        /// </summary>
-        CheckHashDataInfoOfSignatureTimeStampPointsToSignatureValue = 0x0200,
-        /// <summary>
-        /// Check if the QualifyingProperties Target attribute points to the signature element
-        /// </summary>
-        CheckQualifyingPropertiesTarget = 0x0400,
-        /// <summary>
-        /// Check that QualifyingProperties occur in one Object, check that there is only one QualifyingProperties and that signed properties occur in one QualifyingProperties element
-        /// </summary>
-        CheckQualifyingProperties = 0x0800,
-        /// <summary>
-        /// Check if all required HashDataInfos are present on SigAndRefsTimeStamp
-        /// </summary>
-        CheckSigAndRefsTimeStampHashDataInfos = 0x1000,
-        /// <summary>
-        /// Check if all required HashDataInfos are present on RefsOnlyTimeStamp
-        /// </summary>
-        CheckRefsOnlyTimeStampHashDataInfos = 0x2000,
-        /// <summary>
-        /// Check if all required HashDataInfos are present on ArchiveTimeStamp
-        /// </summary>
-        CheckArchiveTimeStampHashDataInfos = 0x4000,
-        /// <summary>
-        /// Check if a XAdES-C signature is also a XAdES-T signature
-        /// </summary>
-        CheckXadesCIsXadesT = 0x8000,
-        /// <summary>
-        /// Check if a XAdES-XL signature is also a XAdES-X signature
-        /// </summary>
-        CheckXadesXLIsXadesX = 0x010000,
-        /// <summary>
-        /// Check if CertificateValues match CertificateRefs
-        /// </summary>
-        CheckCertificateValuesMatchCertificateRefs = 0x020000,
-        /// <summary>
-        /// Check if RevocationValues match RevocationRefs
-        /// </summary>
-        CheckRevocationValuesMatchRevocationRefs = 0x040000,
-        /// <summary>
-        /// Do all known tests on XAdES signature
-        /// </summary>
-        AllChecks = 0xFFFFFF
-    }
-
-    /// <summary>
     /// Facade class for the XAdES signature library.  The class inherits from
     /// the System.Security.Cryptography.Xml.SignedXml class and is backwards
     /// compatible with it, so this class can host xmldsig signatures and XAdES
@@ -437,35 +336,6 @@ namespace Microsoft.Xades {
             xmlNamespaceManager = new XmlNamespaceManager(retVal.OwnerDocument.NameTable);
             xmlNamespaceManager.AddNamespace("ds", SignedXml.XmlDsigNamespaceUrl);
 
-
-            /*if (this.signatureDocument != null)
-            {
-                                
-                XmlNode nodeKeyInfoRetVal = retVal.SelectSingleNode("ds:KeyInfo", xmlNamespaceManager);
-                XmlNodeList nodeKeyInfoOrig = this.signatureDocument.DocumentElement.GetElementsByTagName("KeyInfo", SignedXml.XmlDsigNamespaceUrl);
-
-                if (nodeKeyInfoOrig.Count > 0)
-                {
-                    nodeKeyInfoRetVal.InnerXml = nodeKeyInfoOrig[0].InnerXml;
-                }
-
-                XmlNode nodeSignatureValue = retVal.SelectSingleNode("ds:SignatureValue", xmlNamespaceManager);
-                XmlNodeList nodeSignatureValueOrign = this.signatureDocument.DocumentElement.GetElementsByTagName("SignatureValue", SignedXml.XmlDsigNamespaceUrl);
-
-                if (nodeSignatureValueOrign.Count > 0)
-                {
-                    nodeSignatureValue.InnerXml = nodeSignatureValueOrign[0].InnerXml;
-                }
-
-                XmlNode nodeSignedInfo = retVal.SelectSingleNode("ds:SignedInfo", xmlNamespaceManager);
-                XmlNodeList nodeSignedInfoOrig = this.signatureDocument.DocumentElement.GetElementsByTagName("SignedInfo", SignedXml.XmlDsigNamespaceUrl);
-
-                if (nodeSignedInfoOrig.Count > 0)
-                {
-                    nodeSignedInfo.InnerXml = nodeSignedInfoOrig[0].InnerXml;
-                }
-            }*/
-
             if (this.signatureValueId != null && this.signatureValueId != "") { //Id on Signature value is needed for XAdES-T. We inject it here.
                 xmlNamespaceManager = new XmlNamespaceManager(retVal.OwnerDocument.NameTable);
                 xmlNamespaceManager.AddNamespace("ds", SignedXml.XmlDsigNamespaceUrl);
@@ -519,9 +389,10 @@ namespace Microsoft.Xades {
             XmlElement bufferXmlElement;
 
             if (this.SignatureStandard != KnownSignatureStandard.Xades) {
-                dataObject = new DataObject();
-                dataObject.Id = xadesObject.Id;
-                dataObject.Data = xadesObject.GetXml().ChildNodes;
+                dataObject = new DataObject {
+                    Id = xadesObject.Id,
+                    Data = xadesObject.GetXml().ChildNodes
+                };
                 this.AddObject(dataObject); //Add the XAdES object                            
 
                 reference = new Reference();
@@ -785,16 +656,6 @@ namespace Microsoft.Xades {
         /// </summary>
         /// <returns>If the function returns true the check was OK</returns>
         public virtual bool CheckSameCertificate() {
-            bool retVal = false;
-
-            //KeyInfoX509Data keyInfoX509Data = new KeyInfoX509Data();
-            //keyInfoX509Data.LoadXml(this.KeyInfo.GetXml());
-            //if (keyInfoX509Data.Certificates.Count <= 0)
-            //{
-            //    throw new CryptographicException("Certificate not found in XMLDSIG signature while doing CheckSameCertificate()");
-            //}
-            //string xmldsigCertHash = Convert.ToBase64String(((X509Certificate)keyInfoX509Data.Certificates[0]).GetCertHash());
-
             X509Certificate xmldsigCert = GetSigningCertificate();
             string xmldsigCertHash = Convert.ToBase64String(xmldsigCert.GetCertHash());
 
@@ -808,8 +669,7 @@ namespace Microsoft.Xades {
             if (String.Compare(xmldsigCertHash, xadesCertHash, true, CultureInfo.InvariantCulture) != 0) {
                 throw new CryptographicException("Certificate in XMLDSIG signature doesn't match certificate in SigningCertificate element");
             }
-            retVal = true;
-
+            var retVal = true;
             return retVal;
         }
 
@@ -825,7 +685,6 @@ namespace Microsoft.Xades {
             bool retVal;
 
             allHashDataInfosExist = true;
-            retVal = false;
             allDataObjectsTimeStampCollection = this.XadesObject.QualifyingProperties.SignedProperties.SignedDataObjectProperties.AllDataObjectsTimeStampCollection;
             if (allDataObjectsTimeStampCollection.Count > 0) {
                 for (timeStampCounter = 0; allHashDataInfosExist && (timeStampCounter < allDataObjectsTimeStampCollection.Count); timeStampCounter++) {
@@ -853,7 +712,6 @@ namespace Microsoft.Xades {
             bool retVal;
 
             hashDataInfoExists = true;
-            retVal = false;
             individualDataObjectsTimeStampCollection = this.XadesObject.QualifyingProperties.SignedProperties.SignedDataObjectProperties.IndividualDataObjectsTimeStampCollection;
             if (individualDataObjectsTimeStampCollection.Count > 0) {
                 for (timeStampCounter = 0; hashDataInfoExists && (timeStampCounter < individualDataObjectsTimeStampCollection.Count); timeStampCounter++) {
@@ -1386,6 +1244,7 @@ namespace Microsoft.Xades {
             }
 
             if (contentElement == null) {
+                //if (this.Signature != null) { return this.Signature.GetXml(); }
                 return null;
             }
 

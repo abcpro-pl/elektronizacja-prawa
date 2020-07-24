@@ -81,6 +81,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Abc.Nes.ArchivalPackage.Cryptography\Abc.Nes.ArchivalPackage.Cryptography.csproj">
+      <Project>{284F9927-F6D2-4727-8A2B-ADABCA5E7E40}</Project>
+      <Name>Abc.Nes.ArchivalPackage.Cryptography</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Abc.Nes.ArchivalPackage\Abc.Nes.ArchivalPackage.csproj">
       <Project>{F85ABB84-DA49-4F43-B6E2-3843F98C990C}</Project>
       <Name>Abc.Nes.ArchivalPackage</Name>
