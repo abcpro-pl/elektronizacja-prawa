@@ -1,6 +1,14 @@
 ![Image](images/nes_logo.png) 
 
 # Niezbędne Elementy Struktury 2.0
+- [Zawartość](#Zawartość)
+- [Biblioteki](#NuGet)
+- [Przykłady użycia](#Przykłady)
+    * [ABCPRO.NES](#ABCPRO.NES)
+    * [ABCPRO.NES.ArchivalPackage](#ABCPRO.NES.ArchivalPackage)
+    * [ABCPRO.NES.ArchivalPackage.Cryptography](#ABCPRO.NES.ArchivalPackage.Cryptography)
+    * [ABCPRO.NES.XAdES](#ABCPRO.NES.XADES)
+- [Historia](#Historia)
 
 ## Zawartość
 
@@ -22,6 +30,8 @@ W tym katalogu znajduje się:
 
 <a href="https://www.nuget.org/packages/ABCPRO.NES.XAdES/"><img alt="Nuget" src="https://img.shields.io/nuget/v/ABCPRO.NES.XAdES?label=abcpro.nes.xades%20nuget"> <img alt="Nuget" src="https://img.shields.io/nuget/dt/ABCPRO.NES.XAdES"></a>
 
+<a href="https://www.nuget.org/packages/ABCPRO.NES.ArchivalPackage.Cryptography/"><img alt="Nuget" src="https://img.shields.io/nuget/v/ABCPRO.NES.ArchivalPackage.Cryptography?label=abcpro.nes.archivalpackage.cryptography%20nuget"> <img alt="Nuget" src="https://img.shields.io/nuget/dt/ABCPRO.NES.ArchivalPackage.Cryptography"></a>
+
 Nazwa | Wersja | Opis
 ------|--------|--------
 ABCPRO.NES.ArchivalPackage.Cryptography|1.0.0|Dodanie biblioteki pozwalającej na podpisywanie pliku paczki archiwalnej wraz z plikami w niej umieszczonymi. Pliki XML podpisywane są podpisem wewnętrznym XAdES, pliki PDF podpisem PAdES (podpis realizowany jest z wykorzystaniem komercyjnych bibliotek `Aspose.Pdf`. wymagany jest zakup licencji na oprogramowanie [Aspose.Pdf](https://products.aspose.com/pdf). Sama paczka archiwalna może zostać umieszczona w pliku `.xades` (podpis okalający - Enveloping) lub w oddzielnym pliku; wówczas plik `.xades` zawiera jedynie referencję do właściwego pliku.
@@ -33,7 +43,7 @@ ABCPRO.NES.ArchivalPackage|1.0.4|Pierwsza stabilna wersja biblioteki. Pozwala na
 ABCPRO.NES|1.0.3|Pierwsza stabilna wersja biblioteki. Pozwala na dodawanie wszystkich metadanych, walidację i zapis do pliku XML. Za pomocą klasy `XmlConverter` możliwe jest otwieranie plików zarówno z wersji 2.0 jak i tych starszych.
 
 
-## Przykłady użycia
+## Przykłady
 
 ### ABCPRO.NES
 
