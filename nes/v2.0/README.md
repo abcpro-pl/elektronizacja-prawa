@@ -1,14 +1,14 @@
 ![Image](images/nes_logo.png) 
 
 # Niezbędne Elementy Struktury 2.0
-- [Zawartość](#Zawartość)
-- [Biblioteki](#NuGet)
-- [Przykłady użycia](#Przykłady)
-    * [ABCPRO.NES](##ABCPRO.NES)
-    * [ABCPRO.NES.ArchivalPackage](##ABCPRO.NES.ArchivalPackage)
-    * [ABCPRO.NES.ArchivalPackage.Cryptography](##ABCPRO.NES.ArchivalPackage.Cryptography)
-    * [ABCPRO.NES.XAdES](##ABCPRO.NES.XADES)
-- [Historia](#Historia)
+- [Zawartość](#zawartość)
+- [Biblioteki](#nuget)
+- [Przykłady użycia](#przykłady)
+    * [ABCPRO.NES](#abcprones)
+    * [ABCPRO.NES.ArchivalPackage](#abcpronesarchivalpackage)
+    * [ABCPRO.NES.ArchivalPackage.Cryptography](#abcpronesarchivalpackagecryptography)
+    * [ABCPRO.NES.XAdES](#abcpronesxades)
+- [Historia](#historia)
 
 ## Zawartość
 
