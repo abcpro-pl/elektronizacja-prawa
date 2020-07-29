@@ -30,18 +30,27 @@ using Org.BouncyCastle.Tsp;
 using Org.BouncyCastle.Utilities;
 using System;
 using System.Collections;
+using System.IO;
 using System.Security.Cryptography;
-using System.Security.Cryptography.Xml;
+using System.Xml;
 
 namespace Abc.Nes.Xades.Validation {
-    class XadesValidator :IDisposable {
-        public void Dispose() {
-            
+    class XadesValidator : IDisposable {
+        public void Dispose() { }
+        public ValidationResult Validate(SignatureDocument sigDocument) {
+            return Validate(sigDocument.XadesSignature);
         }
 
-        #region Public methods
+        public ValidationResult Validate(Stream stream) {
+            if (stream == null) { throw new ArgumentNullException("stream"); }
 
-        public ValidationResult Validate(SignatureDocument sigDocument) {
+            var xmlDocument = new XmlDocument();
+            xmlDocument.Load(stream);
+            var signature = new Microsoft.Xades.XadesSignedXml(xmlDocument);
+            return Validate(signature);
+        }
+
+        public ValidationResult Validate(Microsoft.Xades.XadesSignedXml signature) {
             /* Los elementos que se validan son:
              * 
              * 1. Las huellas de las referencias de la firma.
@@ -55,7 +64,7 @@ namespace Abc.Nes.Xades.Validation {
 
             try {
                 // Verifica las huellas de las referencias y la firma
-                sigDocument.XadesSignature.CheckXmldsigSignature();
+                signature.CheckXmldsigSignature();
             }
             catch {
                 result.IsValid = false;
@@ -64,29 +73,29 @@ namespace Abc.Nes.Xades.Validation {
                 return result;
             }
 
-            if (sigDocument.XadesSignature.UnsignedProperties.UnsignedSignatureProperties.SignatureTimeStampCollection.Count > 0) {
+            if (signature.UnsignedProperties.UnsignedSignatureProperties.SignatureTimeStampCollection.Count > 0) {
                 // Se comprueba el sello de tiempo
 
-                TimeStamp timeStamp = sigDocument.XadesSignature.UnsignedProperties.UnsignedSignatureProperties.SignatureTimeStampCollection[0];
+                var timeStamp = signature.UnsignedProperties.UnsignedSignatureProperties.SignatureTimeStampCollection[0];
                 TimeStampToken token = new TimeStampToken(new CmsSignedData(timeStamp.EncapsulatedTimeStamp.PkiData));
 
                 byte[] tsHashValue = token.TimeStampInfo.GetMessageImprintDigest();
                 Crypto.DigestMethod tsDigestMethod = Crypto.DigestMethod.GetByOid(token.TimeStampInfo.HashAlgorithm.ObjectID.Id);
 
-                System.Security.Cryptography.Xml.Transform transform = null;
+                Microsoft.XmlDsig.Transform transform = null;
 
                 if (timeStamp.CanonicalizationMethod != null) {
-                    transform = CryptoConfig.CreateFromName(timeStamp.CanonicalizationMethod.Algorithm) as System.Security.Cryptography.Xml.Transform;
+                    transform = CryptoConfig.CreateFromName(timeStamp.CanonicalizationMethod.Algorithm) as Microsoft.XmlDsig.Transform;
                 }
                 else {
-                    transform = new XmlDsigC14NTransform();
+                    transform = new Microsoft.XmlDsig.XmlDsigC14NTransform();
                 }
 
                 ArrayList signatureValueElementXpaths = new ArrayList {
                     "ds:SignatureValue"
                 };
 
-                byte[] signatureValueHash = DigestUtil.ComputeHashValue(XMLUtil.ComputeValueOfElementList(sigDocument.XadesSignature, signatureValueElementXpaths, transform), tsDigestMethod);
+                byte[] signatureValueHash = DigestUtil.ComputeHashValue(XMLUtil.ComputeValueOfElementList(signature, signatureValueElementXpaths, transform), tsDigestMethod);
 
                 if (!Arrays.AreEqual(tsHashValue, signatureValueHash)) {
                     result.IsValid = false;
@@ -102,6 +111,5 @@ namespace Abc.Nes.Xades.Validation {
             return result;
         }
 
-        #endregion
     }
 }

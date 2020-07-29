@@ -22,7 +22,6 @@
 
 using System;
 using System.Collections;
-using System.Security.Cryptography.Xml;
 using System.Xml;
 
 namespace Microsoft.Xades {
@@ -121,7 +120,7 @@ namespace Microsoft.Xades {
 
             creationXmlDocument = new XmlDocument();
             retVal = creationXmlDocument.CreateElement(XadesSignedXml.XmlXadesPrefix, "OCSPRefs", XadesSignedXml.XadesNamespaceUri);
-            retVal.SetAttribute("xmlns:ds", SignedXml.XmlDsigNamespaceUrl);
+            retVal.SetAttribute("xmlns:ds", XmlDsig.SignedXml.XmlDsigNamespaceUrl);
 
             if (this.ocspRefCollection.Count > 0) {
                 foreach (OCSPRef ocspRef in this.ocspRefCollection) {

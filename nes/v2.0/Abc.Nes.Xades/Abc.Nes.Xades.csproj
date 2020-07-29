@@ -4,7 +4,7 @@
     <TargetFrameworks>netstandard2.1;netstandard2.0;net48;net461</TargetFrameworks>
     <Authors>ITORG Krzysztof Radzimski</Authors>
     <Company>ABC PRO Sp. z o.o.</Company>
-    <Description>.NET library for digital signing an archival package for Polish State Archives, which is based on a modification of the XAdES starter kit developed by Microsoft France and FirmaXadesNet - Library for the generation of XADES signatures.</Description>
+    <Description>.NET library for digital signing an archival package for Polish State Archives, which is based on a modification of the .Net Framework System.Security.Cryptography.Xml (as Microsoft.XmlDsig), the XAdES starter kit developed by Microsoft France (as Microsoft.Xades) and FirmaXadesNet - Library for the generation of XAdES signatures.</Description>
     <Copyright>ABC PRO Sp. z o.o.</Copyright>
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
     <PackageIcon>nes_logo.jpg</PackageIcon>
@@ -16,19 +16,20 @@
     <PackageId>ABCPRO.NES.XAdES</PackageId>
     <Product>ABCPRO.NES.XAdES</Product>
     <PackageProjectUrl>https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0</PackageProjectUrl>
-    <AssemblyVersion>1.0.0.3</AssemblyVersion>
-    <FileVersion>1.0.0.3</FileVersion>
-    <Version>1.0.3</Version>
+    <AssemblyVersion>1.0.0.4</AssemblyVersion>
+    <FileVersion>1.0.0.4</FileVersion>
+    <Version>1.0.4</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <NoWarn>1701;1702;IDE0063;</NoWarn>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="XadesService.cs" />
-  </ItemGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
 
   <ItemGroup>
     <None Include="..\images\nes_logo.jpg" Link="nes_logo.jpg">
@@ -38,7 +39,24 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Security.Permissions" Version="4.7.0" />
+    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="4.7.0" />
     <PackageReference Include="BouncyCastle.NetCore" Version="1.8.5" />
-    <PackageReference Include="System.Security.Cryptography.Xml" Version="4.7.0" />    
+    <PackageReference Include="System.Memory" Version="4.5.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

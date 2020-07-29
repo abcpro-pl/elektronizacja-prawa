@@ -24,9 +24,9 @@
 
 using Abc.Nes.Xades.Utils;
 using Microsoft.Xades;
+using Microsoft.XmlDsig;
 using System;
 using System.IO;
-using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Xml;
 
@@ -127,8 +127,9 @@ namespace Abc.Nes.Xades.Signature {
 
                     byte[] canonicalizedElement = XMLUtil.ApplyTransform(xmlSigned, new XmlDsigC14NTransform());
 
-                    XmlDocument doc = new XmlDocument();
-                    doc.PreserveWhitespace = true;
+                    XmlDocument doc = new XmlDocument {
+                        PreserveWhitespace = true
+                    };
                     doc.LoadXml(Encoding.UTF8.GetString(canonicalizedElement));
 
                     XmlNode canonSignature = Document.ImportNode(doc.DocumentElement, true);

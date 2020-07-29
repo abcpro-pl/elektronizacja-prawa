@@ -22,7 +22,6 @@
 
 using System;
 using System.Collections;
-using System.Security.Cryptography.Xml;
 using System.Xml;
 
 namespace Microsoft.Xades {
@@ -192,7 +191,7 @@ namespace Microsoft.Xades {
 
             creationXmlDocument = new XmlDocument();
             retVal = creationXmlDocument.CreateElement(XadesSignedXml.XmlXadesPrefix, "CertificateValues", XadesSignedXml.XadesNamespaceUri);
-            retVal.SetAttribute("xmlns:ds", SignedXml.XmlDsigNamespaceUrl);
+            retVal.SetAttribute("xmlns:ds", XmlDsig.SignedXml.XmlDsigNamespaceUrl);
 
             if (this.id != null && this.id != "") {
                 retVal.SetAttribute("Id", this.id);

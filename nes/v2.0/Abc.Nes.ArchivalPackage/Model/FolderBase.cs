@@ -12,11 +12,16 @@
 
   ===================================================================================*/
 
+using System.Collections.Generic;
+
 namespace Abc.Nes.ArchivalPackage.Model {
     public abstract class FolderBase {
         public string FolderName { get; set; }
         public abstract FolderBase CreateSubFolder(string folderName);
         public abstract FolderBase GetFolder(string folderName);
         public abstract ItemBase AddItem(ItemBase item);
+
+        public abstract IEnumerable<FolderBase> GetFolders();
+        public abstract IEnumerable<ItemBase> GetItems();
     }
 }

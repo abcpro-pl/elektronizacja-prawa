@@ -5,7 +5,7 @@ Udostępniane publicznie standardy, schematy i opisy oraz kod źródłowy oprogr
 
 ## Paczka eADM i Niezbędne Elementy Struktury 2.0
 
-W podkatalogu [NES/v2.0](nes/v2.0) znajdują się biblioteki do tworzenia, edycji i podpisywania paczki eADM oraz plików metadanych zgodnych z NES 2.0.
+W podkatalogu [NES/v2.0](nes/v2.0/) znajdują się biblioteki do tworzenia, edycji i podpisywania paczki eADM oraz plików metadanych zgodnych z NES 2.0.
  
 ## O ABC PRO 
 

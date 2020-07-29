@@ -1,9 +1,7 @@
-﻿using Abc.Nes.ArchivalPackage.Cryptography;
-using Abc.Nes.Xades;
+﻿using Abc.Nes.Xades;
 using Abc.Nes.Xades.Signature.Parameters;
 using Abc.Nes.Xades.Utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.IO;
 using System.Text;
 
@@ -40,16 +38,41 @@ namespace Abc.Nes.UnitTests {
         public void XadesManager_CreateEnvelopingSignature() {
             var path = "../../../doc/nes_20_generated.pdf";
             using (var manager = new XadesManager()) {
-               var result = manager.CreateEnvelopingSignature(new MemoryStream(File.ReadAllBytes(path)), CertUtil.SelectCertificate(),
-                    new SignatureProductionPlace() {
-                        City = "Warszawa",
-                        CountryName = "Polska",
-                        PostalCode = "03-825",
-                        StateOrProvince = "mazowieckie"
-                    },
-                    new SignerRole("Wiceprezes Zarządu"));
+                var result = manager.CreateEnvelopingSignature(new MemoryStream(File.ReadAllBytes(path)), CertUtil.SelectCertificate(),
+                     new SignatureProductionPlace() {
+                         City = "Warszawa",
+                         CountryName = "Polska",
+                         PostalCode = "03-825",
+                         StateOrProvince = "mazowieckie"
+                     },
+                     new SignerRole("Wiceprezes Zarządu"),
+                     "nes_20_generated.pdf");
 
-                var filePath = Path.Combine(Path.GetTempPath(), "signature.xml");
+                var filePath = Path.Combine(Path.GetTempPath(), "nes_20_generated.pdf.xades");
+                if (File.Exists(filePath)) { File.Delete(filePath); }
+                result.Save(filePath);
+
+                Assert.IsTrue(result != null && result.Document != null && result.Document.OuterXml != null && File.Exists(filePath));
+
+                System.Diagnostics.Process.Start(filePath);
+            }
+        }
+
+        [TestMethod]
+        public void XadesManager_CreateDetachedSignature() {
+            var path = "../../../doc/nes_20_generated.pdf";
+            using (var manager = new XadesManager()) {
+                var result = manager.CreateDetachedSignature(new FileInfo(path).FullName, CertUtil.SelectCertificate(),
+                     new SignatureProductionPlace() {
+                         City = "Warszawa",
+                         CountryName = "Polska",
+                         PostalCode = "03-825",
+                         StateOrProvince = "mazowieckie"
+                     },
+                     new SignerRole("Wiceprezes Zarządu"));
+
+                File.Copy(path, Path.Combine(Path.GetTempPath(), "nes_20_generated.pdf"), true);
+                var filePath = Path.Combine(Path.GetTempPath(), "nes_20_generated.pdf.xades");
                 if (File.Exists(filePath)) { File.Delete(filePath); }
                 result.Save(filePath);
 

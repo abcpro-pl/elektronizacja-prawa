@@ -4,15 +4,22 @@ using Abc.Nes.Xades.Signature.Parameters;
 using Abc.Nes.Xades.Utils;
 using Abc.Nes.Xades.Validation;
 using Microsoft.Xades;
+using Microsoft.XmlDsig;
 using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
-using System.Security.Cryptography.Xml;
 using System.Xml;
 
 namespace Abc.Nes.Xades {
-    public class XadesManager : IDisposable {
+    public interface IXadesManager : IDisposable {
+        SignatureDocument AppendSignatureToXmlFile(Stream input, X509Certificate2 cert, Signature.Parameters.SignatureProductionPlace productionPlace = null, Signature.Parameters.SignerRole signerRole = null);
+        SignatureDocument CreateEnvelopingSignature(Stream input, X509Certificate2 cert, Signature.Parameters.SignatureProductionPlace productionPlace = null, Signature.Parameters.SignerRole signerRole = null, string fileName = null);
+        SignatureDocument CreateDetachedSignature(string filePath, X509Certificate2 cert, Signature.Parameters.SignatureProductionPlace productionPlace = null, Signature.Parameters.SignerRole signerRole = null);
+        ValidationResult ValidateSignature(Stream stream);
+        ValidationResult ValidateSignature(SignatureDocument sigDocument);
+    }
+    public class XadesManager : IXadesManager {
         private Signature.Parameters.SignatureProductionPlace ProductionPlace = null;
         private Signature.Parameters.SignerRole Role = null;
         private X509Certificate2 Certificate = null;
@@ -20,9 +27,7 @@ namespace Abc.Nes.Xades {
         private Reference ContentReference = null;
         private Signer XadesSigner = null;
 
-        public SignatureDocument AppendSignatureToXmlFile(Stream input, X509Certificate2 cert,
-            Signature.Parameters.SignatureProductionPlace productionPlace = null,
-            Signature.Parameters.SignerRole signerRole = null) {
+        public SignatureDocument AppendSignatureToXmlFile(Stream input, X509Certificate2 cert, Signature.Parameters.SignatureProductionPlace productionPlace = null, Signature.Parameters.SignerRole signerRole = null) {
             if (input == null) { throw new ArgumentNullException("input"); }
 
             ProductionPlace = productionPlace;
@@ -42,7 +47,8 @@ namespace Abc.Nes.Xades {
             DataFormat = new DataObjectFormat() {
                 MimeType = "text/xml",
                 Encoding = "UTF-8",
-                Description = @"MIME-Version: 1.0
+                Description = @"
+MIME-Version: 1.0
 Content-Type: text/xml
 Content-Transfer-Encoding: UTF-8"
             };
@@ -74,9 +80,7 @@ Content-Transfer-Encoding: UTF-8"
             return signatureDocument;
         }
 
-        public SignatureDocument CreateEnvelopingSignature(Stream input, X509Certificate2 cert,
-            Signature.Parameters.SignatureProductionPlace productionPlace = null,
-            Signature.Parameters.SignerRole signerRole = null) {
+        public SignatureDocument CreateEnvelopingSignature(Stream input, X509Certificate2 cert, Signature.Parameters.SignatureProductionPlace productionPlace = null, Signature.Parameters.SignerRole signerRole = null, string fileName = null) {
 
             if (input == null) { throw new ArgumentNullException("input"); }
 
@@ -94,10 +98,31 @@ Content-Transfer-Encoding: UTF-8"
                 Type = XadesSignedXml.XmlDsigObjectType
             };
 
-            var objectXml = new XmlDocument {
-                PreserveWhitespace = true
-            };
-            var objectXmlNode = objectXml.CreateElement("ds", "Object", "http://www.w3.org/2000/09/xmldsig#");            
+            if (fileName != null) {
+                DataFormat = new DataObjectFormat() {
+                    MimeType = MimeTypeUtil.GetMimeType(fileName),
+                    Encoding = "UTF-8",
+                    Description = $@"
+MIME-Version: 1.0
+Content-Type: {MimeTypeUtil.GetMimeType(fileName)}
+Content-Transfer-Encoding: binary
+Content-Disposition: filename=""{ fileName }""
+",
+                    ObjectIdentifier = new ObjectIdentifier() {
+                        Identifier = new Identifier() {
+                            IdentifierUri = "http://www.certum.pl/OIDAsURI/signedFile/1.2.616.1.113527.3.1.1.3.1",
+                            Qualifier = KnownQualifier.OIDAsURI
+                        },
+                        Description = "Description of the document format and its full name",
+                        DocumentationReferences = new DocumentationReferences(new DocumentationReference() {
+                            DocumentationReferenceUri = "http://www.certum.pl/OIDAsURI/signedFile.pdf"
+                        })
+                    }
+                };
+            }
+
+            var objectXml = new XmlDocument { PreserveWhitespace = true };
+            var objectXmlNode = objectXml.CreateElement("ds", "Object", "http://www.w3.org/2000/09/xmldsig#");
             var base64Node = objectXml.CreateTextNode(Convert.ToBase64String(input.ToArray()));
             objectXmlNode.AppendChild(base64Node);
             objectXml.AppendChild(objectXmlNode);
@@ -106,21 +131,21 @@ Content-Transfer-Encoding: UTF-8"
                 objectXml.RemoveChild(objectXml.ChildNodes[0]);
             }
 
+            XmlDsigC14NTransform transform = new XmlDsigC14NTransform();
+            ContentReference.AddTransform(transform);
+            signatureDocument.XadesSignature.AddReference(ContentReference);
+
+            SetSignatureId(signatureDocument.XadesSignature);
+            PrepareSignature(signatureDocument, false);
+
             signatureDocument.XadesSignature.AddObject(new DataObject() {
                 Id = objectId,
                 Data = objectXml.ChildNodes[0].ChildNodes,
                 Encoding = "http://www.w3.org/2000/09/xmldsig#base64"
             });
 
-            XmlDsigC14NTransform transform = new XmlDsigC14NTransform();
-            ContentReference.AddTransform(transform);
-            signatureDocument.XadesSignature.AddReference(ContentReference);
-
-            SetSignatureId(signatureDocument.XadesSignature);
-            PrepareSignature(signatureDocument);
-
             signatureDocument.XadesSignature.ComputeSignature();
-                        
+
             var xml = signatureDocument.XadesSignature.GetXml();
             signatureDocument.Document = xml.ToXmlDocument();
 
@@ -129,7 +154,68 @@ Content-Transfer-Encoding: UTF-8"
             return signatureDocument;
         }
 
-        public ValidationResult Validate(SignatureDocument sigDocument) {
+        public SignatureDocument CreateDetachedSignature(string filePath, X509Certificate2 cert, Signature.Parameters.SignatureProductionPlace productionPlace = null, Signature.Parameters.SignerRole signerRole = null) {
+            if (filePath == null) { throw new ArgumentNullException("filePath"); }
+            if (!File.Exists(filePath)) { throw new FileNotFoundException("Specified file not found!"); }
+            ProductionPlace = productionPlace;
+            Role = signerRole;
+            Certificate = cert ?? throw new ArgumentNullException("cert");
+
+            var signatureDocument = new SignatureDocument() {
+                XadesSignature = new XadesSignedXml()
+            };
+
+            var fileName = Path.GetFileName(filePath);
+
+            ContentReference = new Reference(filePath) {
+                Id = $"FileReference-{Guid.NewGuid()}"
+            };
+
+            DataFormat = new DataObjectFormat() {
+                MimeType = MimeTypeUtil.GetMimeType(fileName),
+                Encoding = "UTF-8",
+                Description = $@"
+MIME-Version: 1.0
+Content-Type: {MimeTypeUtil.GetMimeType(fileName)}
+Content-Transfer-Encoding: binary
+Content-Disposition: filename=""{ fileName }""
+",
+                ObjectIdentifier = new ObjectIdentifier() {
+                    Identifier = new Identifier() {
+                        IdentifierUri = "http://www.certum.pl/OIDAsURI/signedFile/1.2.616.1.113527.3.1.1.3.1",
+                        Qualifier = KnownQualifier.OIDAsURI
+                    },
+                    Description = "Description of the document format and its full name",
+                    DocumentationReferences = new DocumentationReferences(new DocumentationReference() {
+                        DocumentationReferenceUri = "http://www.certum.pl/OIDAsURI/signedFile.pdf"
+                    })
+                }
+            };
+
+            //XmlDsigC14NTransform transform = new XmlDsigC14NTransform();
+            //ContentReference.AddTransform(transform);
+            signatureDocument.XadesSignature.AddReference(ContentReference);
+
+            SetSignatureId(signatureDocument.XadesSignature);
+            PrepareSignature(signatureDocument, false);
+
+            signatureDocument.XadesSignature.ComputeSignature();
+
+            var xml = signatureDocument.XadesSignature.GetXml();
+            signatureDocument.Document = xml.ToXmlDocument();
+
+            UpdateXadesSignature(signatureDocument);
+
+            return signatureDocument;
+        }
+
+        public ValidationResult ValidateSignature(Stream stream) {
+            using (XadesValidator validator = new XadesValidator()) {
+                return validator.Validate(stream);
+            }
+        }
+
+        public ValidationResult ValidateSignature(SignatureDocument sigDocument) {
             SignatureDocument.CheckSignatureDocument(sigDocument);
 
             using (XadesValidator validator = new XadesValidator()) {
@@ -143,13 +229,13 @@ Content-Transfer-Encoding: UTF-8"
             xadesSignedXml.SignatureValueId = "SignatureValue-" + id;
         }
 
-        private void PrepareSignature(SignatureDocument signatureDocument) {
+        private void PrepareSignature(SignatureDocument signatureDocument, bool addKeyInfoReference = true) {
             signatureDocument.XadesSignature.SignedInfo.SignatureMethod = SignatureMethod.RSAwithSHA256.URI;
-            AddCertificateInfo(signatureDocument);
+            AddCertificateInfo(signatureDocument, addKeyInfoReference);
             AddXadesInfo(signatureDocument);
         }
 
-        private void AddCertificateInfo(SignatureDocument signatureDocument) {
+        private void AddCertificateInfo(SignatureDocument signatureDocument, bool addKeyInfoReference = true) {
             XadesSigner = new Signer(Certificate);
             signatureDocument.XadesSignature.SigningKey = XadesSigner.SigningKey;
 
@@ -161,12 +247,14 @@ Content-Transfer-Encoding: UTF-8"
 
             signatureDocument.XadesSignature.KeyInfo = keyInfo;
 
-            var reference = new Reference {
-                Id = "ReferenceKeyInfo",
-                Uri = "#KeyInfoId-" + signatureDocument.XadesSignature.Signature.Id
-            };
+            if (addKeyInfoReference) {
+                var reference = new Reference {
+                    Id = "ReferenceKeyInfo",
+                    Uri = "#KeyInfoId-" + signatureDocument.XadesSignature.Signature.Id
+                };
 
-            signatureDocument.XadesSignature.AddReference(reference);
+                signatureDocument.XadesSignature.AddReference(reference);
+            }
         }
 
         private void AddXadesInfo(SignatureDocument signatureDocument) {
@@ -198,30 +286,10 @@ Content-Transfer-Encoding: UTF-8"
             DigestUtil.SetCertDigest(XadesSigner.Certificate.GetRawCertData(), Crypto.DigestMethod.SHA256, cert.CertDigest);
             signedSignatureProperties.SigningCertificate.CertCollection.Add(cert);
 
-            //if (parameters.SignaturePolicyInfo != null) {
-            //    if (!string.IsNullOrEmpty(parameters.SignaturePolicyInfo.PolicyIdentifier)) {
-            //        signedSignatureProperties.SignaturePolicyIdentifier.SignaturePolicyImplied = false;
-            //        signedSignatureProperties.SignaturePolicyIdentifier.SignaturePolicyId.SigPolicyId.Identifier.IdentifierUri = parameters.SignaturePolicyInfo.PolicyIdentifier;
-            //    }
-
-            //    if (!string.IsNullOrEmpty(parameters.SignaturePolicyInfo.PolicyUri)) {
-            //        SigPolicyQualifier spq = new SigPolicyQualifier();
-            //        spq.AnyXmlElement = sigDocument.Document.CreateElement(XadesSignedXml.XmlXadesPrefix, "SPURI", XadesSignedXml.XadesNamespaceUri);
-            //        spq.AnyXmlElement.InnerText = parameters.SignaturePolicyInfo.PolicyUri;
-
-            //        signedSignatureProperties.SignaturePolicyIdentifier.SignaturePolicyId.SigPolicyQualifiers.SigPolicyQualifierCollection.Add(spq);
-            //    }
-
-            //    if (!string.IsNullOrEmpty(parameters.SignaturePolicyInfo.PolicyHash)) {
-            //        signedSignatureProperties.SignaturePolicyIdentifier.SignaturePolicyId.SigPolicyHash.DigestMethod.Algorithm = parameters.SignaturePolicyInfo.PolicyDigestAlgorithm.URI;
-            //        signedSignatureProperties.SignaturePolicyIdentifier.SignaturePolicyId.SigPolicyHash.DigestValue = Convert.FromBase64String(parameters.SignaturePolicyInfo.PolicyHash);
-            //    }
-            //}
-
             signedSignatureProperties.SigningTime = DateTime.Now;
 
             if (DataFormat != null) {
-                DataObjectFormat newDataObjectFormat = new DataObjectFormat {
+                var newDataObjectFormat = new DataObjectFormat {
                     MimeType = DataFormat.MimeType,
                     Encoding = DataFormat.Encoding,
                     Description = DataFormat.Description,
@@ -247,39 +315,10 @@ Content-Transfer-Encoding: UTF-8"
                 }
             }
 
-            //if (parameters.SignerRole != null &&
-            //    (parameters.SignerRole.CertifiedRoles.Count > 0 || parameters.SignerRole.ClaimedRoles.Count > 0)) {
-            //    signedSignatureProperties.SignerRole = new Microsoft.Xades.SignerRole();
-
-            //    foreach (X509Certificate certifiedRole in parameters.SignerRole.CertifiedRoles) {
-            //        signedSignatureProperties.SignerRole.CertifiedRoles.CertifiedRoleCollection.Add(new CertifiedRole() { PkiData = certifiedRole.GetRawCertData() });
-            //    }
-
-            //    foreach (string claimedRole in parameters.SignerRole.ClaimedRoles) {
-            //        signedSignatureProperties.SignerRole.ClaimedRoles.ClaimedRoleCollection.Add(new ClaimedRole() { InnerText = claimedRole });
-            //    }
-            //}
-
             CommitmentTypeIndication cti = new CommitmentTypeIndication();
             cti.CommitmentTypeId.Identifier.IdentifierUri = SignatureCommitmentType.ProofOfApproval.URI;
             cti.AllSignedDataObjects = true;
             signedDataObjectProperties.CommitmentTypeIndicationCollection.Add(cti);
-
-            //foreach (SignatureCommitment signatureCommitment in parameters.SignatureCommitments) {
-            //    CommitmentTypeIndication cti = new CommitmentTypeIndication();
-            //    cti.CommitmentTypeId.Identifier.IdentifierUri = signatureCommitment.CommitmentType.URI;
-            //    cti.AllSignedDataObjects = true;
-
-            //    foreach (XmlElement signatureCommitmentQualifier in signatureCommitment.CommitmentTypeQualifiers) {
-            //        var ctq = new CommitmentTypeQualifier {
-            //            AnyXmlElement = signatureCommitmentQualifier
-            //        };
-
-            //        cti.CommitmentTypeQualifiers.CommitmentTypeQualifierCollection.Add(ctq);
-            //    }
-
-            //    signedDataObjectProperties.CommitmentTypeIndicationCollection.Add(cti);
-            //}
 
             if (ProductionPlace != null) {
                 signedSignatureProperties.SignatureProductionPlace.City = ProductionPlace.City;
@@ -287,7 +326,6 @@ Content-Transfer-Encoding: UTF-8"
                 signedSignatureProperties.SignatureProductionPlace.PostalCode = ProductionPlace.PostalCode;
                 signedSignatureProperties.SignatureProductionPlace.CountryName = ProductionPlace.CountryName;
             }
-
         }
 
         private void UpdateXadesSignature(SignatureDocument signatureDocument) {

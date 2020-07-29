@@ -24,7 +24,8 @@ W tym katalogu znajduje się:
 
 Nazwa | Wersja | Opis
 ------|--------|--------
-ABCPRO.NES.XAdES|1.0.3|Dodanie biblioteki umożliwiającej podpisywanie dokumentów XML. Biblioteka bazuje na kodzie źródłowym [Microsoft.Xades](https://github.com/Caliper/Xades) utworzonym przez francuski oddział firmy Microsoft oraz na podstawie kodu źródłowego [FirmaXadesNet](https://github.com/ctt-gob-es/FirmaXadesNet45) utworzonym przez Departament Nowych Technologii Rady Urbanizacji Miasta Cartagena. Biblioteka pozwala na opatrywanie pliku metadanych bezpiecznym podpisem elektronicznym.  
+ABCPRO.NES.ArchivalPackage.Cryptography|1.0.0|Dodanie biblioteki pozwalającej na podpisywanie pliku paczki archiwalnej wraz z plikami w niej umieszczonymi. Pliki XML podpisywane są podpisem wewnętrznym XAdES, pliki PDF podpisem PAdES (podpis realizowany jest z wykorzystaniem komercyjnych bibliotek `Aspose.Pdf`. wymagany jest zakup licencji na oprogramowanie [Aspose.Pdf](https://products.aspose.com/pdf). Sama paczka archiwalna może zostać umieszczona w pliku `.xades` (podpis okalający - Enveloping) lub w oddzielnym pliku; wówczas plik `.xades` zawiera jedynie referencję do właściwego pliku.
+ABCPRO.NES.XAdES|1.0.4|Dodanie biblioteki umożliwiającej podpisywanie dokumentów XML. Biblioteka bazuje na kodzie źródłowym [Microsoft .NET Framework](https://github.com/dotnet/runtime/tree/master/src/libraries/System.Security.Cryptography.Xml/src) w przestrzeni nazw `Microsoft.XmlDsig`, projektu [`Microsoft.Xades`](https://github.com/Caliper/Xades) utworzonym przez francuski oddział firmy Microsoft oraz na podstawie kodu źródłowego [FirmaXadesNet](https://github.com/ctt-gob-es/FirmaXadesNet45) utworzonym przez Departament Nowych Technologii Rady Urbanizacji Miasta Cartagena. Biblioteka pozwala na opatrywanie pliku metadanych bezpiecznym podpisem elektronicznym.  
 ABCPRO.NES.ArchivalPackage|1.0.6|Dodanie metody w `PackageManager` umożliwiającej proste uzupełnianie pliku metadanych sprawy.
 ABCPRO.NES.ArchivalPackage|1.0.5|Aktualizacja zależności.
 ABCPRO.NES|1.0.5|Zawiera dodatkowe pola w adresie (gmina, powiat, województwo). Dodane metody statyczne do pobierania wartości z enumeratorów dla pól tekstowych np. `RelationElement.GetRelationType()`.
@@ -293,6 +294,15 @@ ABCPRO.NES|1.0.3|Pierwsza stabilna wersja biblioteki. Pozwala na dodawanie wszys
             var count = mgr.GetDocumentsCount();
 ```
 
+#### Pobieranie listy plików w paczce archiwalnej 
+
+``` C#
+            var path = @"../../../sample/ValidatedPackage.zip";
+            var mgr = new PackageManager();
+            mgr.LoadPackage(path);
+            var items = mgr.GetAllFiles();
+```
+
 #### Ładowanie, dodanie pliku z metadanymi i zapisanie paczki archiwalnej 
 
 ``` C#
@@ -416,6 +426,55 @@ using (var manager = new XadesManager()) {
         if (File.Exists(filePath)) { File.Delete(filePath); }
         result.Save(filePath);
 
+}
+```
+
+#### Podpisywanie pliku PDF (podpis zewnętrzny - detached)
+
+```C#
+var path = "../../../doc/nes_20_generated.pdf";
+using (var manager = new XadesManager()) {
+    var result = manager.CreateDetachedSignature(new FileInfo(path).FullName, CertUtil.SelectCertificate(),
+    new SignatureProductionPlace() {
+        City = "Warszawa",
+        CountryName = "Polska",
+        PostalCode = "03-825",
+        StateOrProvince = "mazowieckie"
+    },
+    new SignerRole("Wiceprezes Zarządu"));
+
+    File.Copy(path, Path.Combine(Path.GetTempPath(), "nes_20_generated.pdf"), true);
+    var filePath = Path.Combine(Path.GetTempPath(), "nes_20_generated.pdf.xades");
+    if (File.Exists(filePath)) { File.Delete(filePath); }
+    result.Save(filePath);
+```
+
+### ABCPRO.NES.ArchivalPackage.Cryptography
+
+#### Podpisywanie paczki archiwalnej
+
+```C#
+// wskazanie licencji na ASPOSE.PDF
+var licPath = @"../../../../../../../Aspose.Total.lic";
+new Aspose.Pdf.License().SetLicense(licPath);
+
+var path = @"../../../sample/ValidatedPackage.zip";
+var outputPath = @"../../../sample/SignedPackage.xades";
+using (var mgr = new PackageSignerManager()) {
+    mgr.Sign(new FileInfo(path).FullName, 
+    CertUtil.SelectCertificate(),
+    new FileInfo(outputPath).FullName,
+    new SignatureProductionPlace() {
+        City = "Warszawa",
+        CountryName = "Polska",
+        PostalCode = "03-825",
+        StateOrProvince = "mazowieckie"
+    },
+    new SignerRole("Wiceprezes Zarządu"),
+    true, // Podpisz pliki w paczce archiwalnej
+    true, // Podpisz paczkę archiwalną
+    false // w pliku .xades umieść jedynie referencję do pliku paczki (podpis zewnętrzny - detached)
+    );
 }
 ```
 

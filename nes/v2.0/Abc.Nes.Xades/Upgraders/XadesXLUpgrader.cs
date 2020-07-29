@@ -40,7 +40,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
-using System.Security.Cryptography.Xml;
 using System.Xml;
 
 namespace Abc.Nes.Xades.Upgraders {
@@ -362,7 +361,7 @@ namespace Abc.Nes.Xades.Upgraders {
 
             XmlNamespaceManager nm = new XmlNamespaceManager(signatureDocument.Document.NameTable);
             nm.AddNamespace("xades", XadesSignedXml.XadesNamespaceUri);
-            nm.AddNamespace("ds", SignedXml.XmlDsigNamespaceUrl);
+            nm.AddNamespace("ds", Microsoft.XmlDsig.SignedXml.XmlDsigNamespaceUrl);
 
             XmlNode xmlCompleteCertRefs = nodoFirma.SelectSingleNode("ds:Object/xades:QualifyingProperties/xades:UnsignedProperties/xades:UnsignedSignatureProperties/xades:CompleteCertificateRefs", nm);
 

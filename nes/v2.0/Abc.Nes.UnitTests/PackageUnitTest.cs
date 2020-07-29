@@ -14,11 +14,15 @@
 
 
 using Abc.Nes.ArchivalPackage;
+using Abc.Nes.ArchivalPackage.Cryptography;
 using Abc.Nes.ArchivalPackage.Model;
 using Abc.Nes.Enumerations;
+using Abc.Nes.Xades.Signature.Parameters;
+using Abc.Nes.Xades.Utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Abc.Nes.UnitTests {
     [TestClass]
@@ -125,6 +129,42 @@ namespace Abc.Nes.UnitTests {
             });
 
             mgr.Save(@"../../../sample/ValidatedPackage.zip");
+        }
+
+        [TestMethod]
+        public void Package_GetAllFiles() {
+            var path = @"../../../sample/ValidatedPackage.zip";
+            var mgr = new PackageManager();
+            mgr.LoadPackage(path);
+            var items = mgr.GetAllFiles();
+            var isNotEmpty = mgr != null && mgr.Package != null && !mgr.Package.IsEmpty;
+            Assert.IsTrue(isNotEmpty && items.Count() == 8);
+        }
+
+        [TestMethod]
+        public void PackageSignerManager_Sign() {
+            var licPath = @"../../../../../../../Aspose.Total.lic";
+            new Aspose.Pdf.License().SetLicense(licPath);
+
+            var path = @"../../../sample/ValidatedPackage.zip";
+            var outputPath = @"../../../sample/SignedPackage.xades";
+            using (var mgr = new PackageSignerManager()) {
+                mgr.Sign(new FileInfo(path).FullName, 
+                    CertUtil.SelectCertificate(),
+                    new FileInfo(outputPath).FullName,
+                    new SignatureProductionPlace() {
+                        City = "Warszawa",
+                        CountryName = "Polska",
+                        PostalCode = "03-825",
+                        StateOrProvince = "mazowieckie"
+                    },
+                    new SignerRole("Wiceprezes Zarządu"),
+                    true, // Podpisz pliki w paczce archiwalnej
+                    true, // Podpisz paczkę archiwalną
+                    false // w pliku .xades umieść jedynie referencję do pliku paczki (podpis zewnętrzny - detached)
+                    );
+
+            }
         }
     }
 }

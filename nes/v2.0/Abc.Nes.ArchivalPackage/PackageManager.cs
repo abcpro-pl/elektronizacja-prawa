@@ -23,7 +23,7 @@ using System.IO;
 using System.Linq;
 
 namespace Abc.Nes.ArchivalPackage {
-    public class PackageManager {
+    public class PackageManager : IPackageManager {
         public Package Package { get; private set; }
         public string FilePath { get; private set; }
         public void AddFile(DocumentFile document, Document metadata = null) {
@@ -109,7 +109,7 @@ namespace Abc.Nes.ArchivalPackage {
             if (!fileName.ToLower().EndsWith(".xml")) { throw new Exception("The Object file must by an XML file!"); }
 
             if (Package.IsNull()) { InitializePackage(); }
-            
+
             Package.Objects.AddItem(new MetadataFile() {
                 Document = metadata,
                 FileName = fileName
@@ -177,16 +177,17 @@ namespace Abc.Nes.ArchivalPackage {
                         if (_folder.IsNull()) { _folder = folder.CreateSubFolder(dir); }
                         folder = _folder;
                     }
-                    ItemBase item = null;
+
                     var stream = new MemoryStream();
                     entry.Extract(stream);
                     var fileData = stream.ToArray();
 
+                    ItemBase item;
                     if (dirs[0] == MainDirectoriesName.Files.GetXmlEnum()) {
-                        item = new DocumentFile() { FileName = fileName };
+                        item = new DocumentFile() { FileName = fileName, FilePath = entry.FileName };
                     }
                     else {
-                        item = new MetadataFile() { FileName = fileName };
+                        item = new MetadataFile() { FileName = fileName, FilePath = entry.FileName };
                     }
 
                     item.Init(fileData);
@@ -198,6 +199,31 @@ namespace Abc.Nes.ArchivalPackage {
         public int GetDocumentsCount() {
             if (Package.IsNull()) { throw new WarningException("Please, load some archival package first!"); }
             return GetDocumentsCount(Package.Documents);
+        }
+        public IEnumerable<ItemBase> GetAllFiles() {
+            var items = new List<ItemBase>();
+            if (Package.IsNotNull()) {
+                items.AddRange(GetAllFiles(Package.Documents));
+                items.AddRange(GetAllFiles(Package.Metadata));
+                items.AddRange(GetAllFiles(Package.Objects));
+            }
+            return items;
+        }
+        public IEnumerable<ItemBase> GetAllFiles(FolderBase folder) {
+            var items = new List<ItemBase>();
+            if (folder.IsNotNull()) {
+                var folderItems = folder.GetItems();
+                if (folderItems.IsNotNull()&& folderItems.Count()>0) items.AddRange(folderItems);
+
+                var subfolders = folder.GetFolders();
+                if (subfolders.IsNotNull() && folderItems.Count() > 0) {
+                    foreach (var subfolder in subfolders) {
+                        var subfolderItems = GetAllFiles(subfolder);
+                        if (subfolderItems.IsNotNull() && subfolderItems.Count() > 0) items.AddRange(subfolderItems);
+                    }
+                }
+            }
+            return items;
         }
 
         private int GetDocumentsCount(DocumentFolder folder) {

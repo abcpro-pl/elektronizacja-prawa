@@ -22,7 +22,6 @@
 
 using System;
 using System.Collections;
-using System.Security.Cryptography.Xml;
 using System.Xml;
 
 namespace Microsoft.Xades {
@@ -88,7 +87,7 @@ namespace Microsoft.Xades {
             }
 
             xmlNamespaceManager = new XmlNamespaceManager(xmlElement.OwnerDocument.NameTable);
-            xmlNamespaceManager.AddNamespace("ds", SignedXml.XmlDsigNamespaceUrl);
+            xmlNamespaceManager.AddNamespace("ds", XmlDsig.SignedXml.XmlDsigNamespaceUrl);
 
             this.transformCollection.Clear();
             xmlNodeList = xmlElement.SelectNodes("ds:Transform", xmlNamespaceManager);

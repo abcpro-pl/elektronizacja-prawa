@@ -15,9 +15,9 @@
 using System.Collections.Generic;
 
 namespace Abc.Nes.ArchivalPackage.Model {
-    public abstract class Folder<F, T> : FolderBase 
+    public abstract class Folder<F, T> : FolderBase
         where F : FolderBase
-        where T : ItemBase{
+        where T : ItemBase {
         public abstract List<T> Items { get; set; }
         public abstract List<F> Folders { get; set; }
         public override FolderBase GetFolder(string folderName) {
@@ -43,5 +43,8 @@ namespace Abc.Nes.ArchivalPackage.Model {
                 return itemsIsEmpty && foldersIsEmpty;
             }
         }
+
+        public override IEnumerable<FolderBase> GetFolders() => Folders;
+        public override IEnumerable<ItemBase> GetItems() => Items;
     }
 }

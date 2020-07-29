@@ -21,7 +21,6 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/. 
 
 using System;
-using System.Security.Cryptography.Xml;
 using System.Xml;
 
 namespace Microsoft.Xades {
@@ -92,7 +91,7 @@ namespace Microsoft.Xades {
 
             creationXmlDocument = new XmlDocument();
             //retVal = creationXmlDocument.CreateElement("DigestMethod", XadesSignedXml.XadesNamespaceUri);
-            retVal = creationXmlDocument.CreateElement(XadesSignedXml.XmlDSigPrefix, "DigestMethod", SignedXml.XmlDsigNamespaceUrl);
+            retVal = creationXmlDocument.CreateElement(XadesSignedXml.XmlDSigPrefix, "DigestMethod", XmlDsig.SignedXml.XmlDsigNamespaceUrl);
 
 
             retVal.SetAttribute("Algorithm", this.algorithm);

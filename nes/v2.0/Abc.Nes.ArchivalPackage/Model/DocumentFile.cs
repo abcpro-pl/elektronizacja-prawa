@@ -17,7 +17,7 @@ using System.Collections.Generic;
 
 namespace Abc.Nes.ArchivalPackage.Model {
     public class DocumentFile : ItemBase {
-        public byte[] FileData { get; set; }
+        public byte[] FileData { get; set; }        
         public override void Init(byte[] fileData) {
             FileData = fileData;
         }

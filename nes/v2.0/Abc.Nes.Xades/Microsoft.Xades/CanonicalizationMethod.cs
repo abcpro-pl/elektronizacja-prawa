@@ -21,7 +21,6 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/. 
 
 using System;
-using System.Security.Cryptography.Xml;
 using System.Xml;
 
 namespace Microsoft.Xades {
@@ -96,7 +95,7 @@ namespace Microsoft.Xades {
             XmlElement retVal;
 
             creationXmlDocument = new XmlDocument();
-            retVal = creationXmlDocument.CreateElement("ds", "CanonicalizationMethod", SignedXml.XmlDsigNamespaceUrl);
+            retVal = creationXmlDocument.CreateElement("ds", "CanonicalizationMethod", XmlDsig.SignedXml.XmlDsigNamespaceUrl);
 
             if (this.algorithm != null) {
                 retVal.SetAttribute("Algorithm", this.algorithm);

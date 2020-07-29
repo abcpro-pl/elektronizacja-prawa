@@ -51,8 +51,11 @@ namespace Microsoft.Xades {
         /// <summary>
         /// Default constructor
         /// </summary>
-        public DocumentationReferences() {
+        public DocumentationReferences(params DocumentationReference[] documentationReferences) {
             this.documentationReferenceCollection = new DocumentationReferenceCollection();
+            if (documentationReferences != null) {
+                documentationReferenceCollection.AddRange(documentationReferences);
+            }
         }
         #endregion
 

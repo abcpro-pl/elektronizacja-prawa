@@ -22,7 +22,6 @@
 
 using System;
 using System.Security.Cryptography;
-using System.Security.Cryptography.Xml;
 using System.Xml;
 
 namespace Microsoft.Xades {
@@ -102,7 +101,7 @@ namespace Microsoft.Xades {
             }
 
             xmlNamespaceManager = new XmlNamespaceManager(xmlElement.OwnerDocument.NameTable);
-            xmlNamespaceManager.AddNamespace("ds", SignedXml.XmlDsigNamespaceUrl);
+            xmlNamespaceManager.AddNamespace("ds", XmlDsig.SignedXml.XmlDsigNamespaceUrl);
 
             xmlNodeList = xmlElement.SelectNodes("ds:X509IssuerName", xmlNamespaceManager);
             if (xmlNodeList.Count == 0) {
@@ -128,14 +127,14 @@ namespace Microsoft.Xades {
 
             creationXmlDocument = new XmlDocument();
             retVal = creationXmlDocument.CreateElement(XadesSignedXml.XmlXadesPrefix, "IssuerSerial", XadesSignedXml.XadesNamespaceUri);
-            retVal.SetAttribute("xmlns:ds", SignedXml.XmlDsigNamespaceUrl);
+            retVal.SetAttribute("xmlns:ds", XmlDsig.SignedXml.XmlDsigNamespaceUrl);
 
-            bufferXmlElement = creationXmlDocument.CreateElement(XadesSignedXml.XmlDSigPrefix, "X509IssuerName", SignedXml.XmlDsigNamespaceUrl);
+            bufferXmlElement = creationXmlDocument.CreateElement(XadesSignedXml.XmlDSigPrefix, "X509IssuerName", XmlDsig.SignedXml.XmlDsigNamespaceUrl);
             bufferXmlElement.SetAttribute("xmlns:xades", XadesSignedXml.XadesNamespaceUri);
             bufferXmlElement.InnerText = this.x509IssuerName;
             retVal.AppendChild(bufferXmlElement);
 
-            bufferXmlElement = creationXmlDocument.CreateElement(XadesSignedXml.XmlDSigPrefix, "X509SerialNumber", SignedXml.XmlDsigNamespaceUrl);
+            bufferXmlElement = creationXmlDocument.CreateElement(XadesSignedXml.XmlDSigPrefix, "X509SerialNumber", XmlDsig.SignedXml.XmlDsigNamespaceUrl);
             bufferXmlElement.SetAttribute("xmlns:xades", XadesSignedXml.XadesNamespaceUri);
             bufferXmlElement.InnerText = this.x509SerialNumber;
 

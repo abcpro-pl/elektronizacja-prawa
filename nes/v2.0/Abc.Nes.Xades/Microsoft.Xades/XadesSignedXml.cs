@@ -20,16 +20,15 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/. 
 
+using Microsoft.XmlDsig;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
-using System.Security.Cryptography.Xml;
 using System.Xml;
 using System.Xml.Schema;
 
@@ -41,7 +40,7 @@ namespace Microsoft.Xades {
     /// signatures.  The property SignatureStandard will indicate the type of the
     /// signature: XMLDSIG or XAdES.
     /// </summary>
-    public class XadesSignedXml : System.Security.Cryptography.Xml.SignedXml {
+    public class XadesSignedXml : Microsoft.XmlDsig.SignedXml {
         #region Constants
         /// <summary>
         /// The XAdES XML namespace URI
@@ -140,7 +139,7 @@ namespace Microsoft.Xades {
         public UnsignedProperties UnsignedProperties {
             get {
                 XmlElement dataObjectXmlElement;
-                System.Security.Cryptography.Xml.DataObject xadesDataObject;
+                DataObject xadesDataObject;
                 XmlNamespaceManager xmlNamespaceManager;
                 XmlNodeList xmlNodeList;
                 UnsignedProperties retVal;
@@ -166,7 +165,7 @@ namespace Microsoft.Xades {
 
             set {
                 XmlElement dataObjectXmlElement = null;
-                System.Security.Cryptography.Xml.DataObject xadesDataObject, newXadesDataObject;
+                DataObject xadesDataObject, newXadesDataObject;
                 XmlNamespaceManager xmlNamespaceManager;
                 XmlNodeList qualifyingPropertiesXmlNodeList;
                 XmlNodeList unsignedPropertiesXmlNodeList;
@@ -550,8 +549,8 @@ namespace Microsoft.Xades {
                 }
             }
 
-            foreach (Reference reference in SignedInfo.References) {
-                foreach (System.Security.Cryptography.Xml.Transform transform in reference.TransformChain) {
+            foreach (Microsoft.XmlDsig.Reference reference in SignedInfo.References) {
+                foreach (Microsoft.XmlDsig.Transform transform in reference.TransformChain) {
                     if (transform.GetType() == typeof(XmlDsigXPathTransform)) {
                         Type transform_Type = typeof(XmlDsigXPathTransform);
                         FieldInfo nsm_FieldInfo = transform_Type.GetField("_nsm", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -1227,7 +1226,7 @@ namespace Microsoft.Xades {
                 contentRef.Uri.StartsWith("#")) {
                 contentElement = GetIdElement(this.signatureDocument, contentRef.Uri.Substring(1));
             }
-            else {
+            else if (this.signatureDocument != null) {
                 contentElement = this.signatureDocument.DocumentElement;
             }
         }
@@ -1290,70 +1289,101 @@ namespace Microsoft.Xades {
         /// Copy of System.Security.Cryptography.Xml.SignedXml.BuildDigestedReferences() which will add a "ds" 
         /// namespace prefix to all XmlDsig nodes
         /// </summary>
-        private void BuildDigestedReferences() {
+        protected override void BuildDigestedReferences() {
             ArrayList references = this.SignedInfo.References;
 
-            Type SignedXml_Type = typeof(SignedXml);
-            FieldInfo SignedXml_m_refProcessed = SignedXml_Type.GetField("_refProcessed", BindingFlags.NonPublic | BindingFlags.Instance);
-            if (SignedXml_m_refProcessed == null) {
-                SignedXml_m_refProcessed = SignedXml_Type.GetField("m_refProcessed", BindingFlags.NonPublic | BindingFlags.Instance);
+            // Reset the cache
+            _refProcessed = new bool[references.Count];
+            _refLevelCache = new int[references.Count];
+
+            var sortOrder = new ReferenceLevelSortOrder {
+                References = references
+            };
+            // Don't alter the order of the references array list
+            ArrayList sortedReferences = new ArrayList();
+            foreach (Reference reference in references) {
+                sortedReferences.Add(reference);
             }
-            SignedXml_m_refProcessed.SetValue(this, new bool[references.Count]);
+            sortedReferences.Sort(sortOrder);
 
-
-            FieldInfo SignedXml_m_refLevelCache = SignedXml_Type.GetField("_refLevelCache", BindingFlags.NonPublic | BindingFlags.Instance);
-            if (SignedXml_m_refLevelCache == null) {
-                SignedXml_m_refLevelCache = SignedXml_Type.GetField("m_refLevelCache", BindingFlags.NonPublic | BindingFlags.Instance);
+            CanonicalXmlNodeList nodeList = new CanonicalXmlNodeList();
+            foreach (DataObject obj in m_signature.ObjectList) {
+                nodeList.Add(obj.GetXml());
             }
-            SignedXml_m_refLevelCache.SetValue(this, new int[references.Count]);
+            foreach (Reference reference in sortedReferences) {
+                // If no DigestMethod has yet been set, default it to sha1
+                if (reference.DigestMethod == null)
+                    reference.DigestMethod = Reference.DefaultDigestMethod;
 
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            Assembly System_Security_Assembly = assemblies.Where(x => x.FullName.Contains("System.Security,")).FirstOrDefault();
-            if (System_Security_Assembly == null) {
-                System_Security_Assembly = Assembly.Load("System.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a");
+                SignedXmlDebugLog.LogSigningReference(this, reference);
+
+                // reference.UpdateHashValue(_containingDocument, nodeList);
+                // If this reference has an Id attribute, add it
+                //if (reference.Id != null)
+                //    nodeList.Add(reference.GetXml());
             }
 
-            Assembly cripXmlAssembly = assemblies.Where(x => x.FullName.Contains("System.Security.Cryptography.Xml")).FirstOrDefault();
-            if (cripXmlAssembly == null) {
-                cripXmlAssembly = Assembly.Load("System.Security.Cryptography.Xml");
-            }
+            //Type SignedXml_Type = typeof(SignedXml);
+            //FieldInfo SignedXml_m_refProcessed = SignedXml_Type.GetField("_refProcessed", BindingFlags.NonPublic | BindingFlags.Instance);
+            //if (SignedXml_m_refProcessed == null) {
+            //    SignedXml_m_refProcessed = SignedXml_Type.GetField("m_refProcessed", BindingFlags.NonPublic | BindingFlags.Instance);
+            //}
+            //SignedXml_m_refProcessed.SetValue(this, new bool[references.Count]);
 
-            Type ReferenceLevelSortOrder_Type = System_Security_Assembly.GetType("System.Security.Cryptography.Xml.SignedXml+ReferenceLevelSortOrder");
-            ConstructorInfo ReferenceLevelSortOrder_Constructor = ReferenceLevelSortOrder_Type.GetConstructor(new Type[] { });
-            Object comparer = ReferenceLevelSortOrder_Constructor.Invoke(null);
 
-            PropertyInfo ReferenceLevelSortOrder_References = ReferenceLevelSortOrder_Type.GetProperty("References", BindingFlags.Public | BindingFlags.Instance);
-            ReferenceLevelSortOrder_References.SetValue(comparer, references, null);
+            //FieldInfo SignedXml_m_refLevelCache = SignedXml_Type.GetField("_refLevelCache", BindingFlags.NonPublic | BindingFlags.Instance);
+            //if (SignedXml_m_refLevelCache == null) {
+            //    SignedXml_m_refLevelCache = SignedXml_Type.GetField("m_refLevelCache", BindingFlags.NonPublic | BindingFlags.Instance);
+            //}
+            //SignedXml_m_refLevelCache.SetValue(this, new int[references.Count]);
+
+            //var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            //Assembly System_Security_Assembly = assemblies.Where(x => x.FullName.Contains("System.Security,")).FirstOrDefault();
+            //if (System_Security_Assembly == null) {
+            //    System_Security_Assembly = Assembly.Load("System.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a");
+            //}
+
+            //Assembly cripXmlAssembly = assemblies.Where(x => x.FullName.Contains("System.Security.Cryptography.Xml")).FirstOrDefault();
+            //if (cripXmlAssembly == null) {
+            //    cripXmlAssembly = Assembly.Load("System.Security.Cryptography.Xml");
+            //}
+
+            //Type ReferenceLevelSortOrder_Type = System_Security_Assembly.GetType("System.Security.Cryptography.Xml.SignedXml+ReferenceLevelSortOrder");
+            //ConstructorInfo ReferenceLevelSortOrder_Constructor = ReferenceLevelSortOrder_Type.GetConstructor(new Type[] { });
+            //Object comparer = ReferenceLevelSortOrder_Constructor.Invoke(null);
+
+            //PropertyInfo ReferenceLevelSortOrder_References = ReferenceLevelSortOrder_Type.GetProperty("References", BindingFlags.Public | BindingFlags.Instance);
+            //ReferenceLevelSortOrder_References.SetValue(comparer, references, null);
 
             ArrayList list2 = new ArrayList();
             foreach (Reference reference in references) {
                 list2.Add(reference);
             }
+            list2.Sort(sortOrder);
+            //list2.Sort((IComparer)comparer);
 
-            list2.Sort((IComparer)comparer);
+            //Type CanonicalXmlNodeList_Type = cripXmlAssembly.GetType("System.Security.Cryptography.Xml.CanonicalXmlNodeList");
+            //if (CanonicalXmlNodeList_Type == null) {
+            //    CanonicalXmlNodeList_Type = System_Security_Assembly.GetType("System.Security.Cryptography.Xml.CanonicalXmlNodeList");
+            //}
 
-            Type CanonicalXmlNodeList_Type = cripXmlAssembly.GetType("System.Security.Cryptography.Xml.CanonicalXmlNodeList");
-            if (CanonicalXmlNodeList_Type == null) {
-                CanonicalXmlNodeList_Type = System_Security_Assembly.GetType("System.Security.Cryptography.Xml.CanonicalXmlNodeList");
-            }
+            //ConstructorInfo CanonicalXmlNodeList_Constructor = CanonicalXmlNodeList_Type.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, new Type[] { }, null);
 
-            ConstructorInfo CanonicalXmlNodeList_Constructor = CanonicalXmlNodeList_Type.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, new Type[] { }, null);
+            //// refList is a list of elements that might be targets of references
+            //Object refList = CanonicalXmlNodeList_Constructor.Invoke(null);
 
-            // refList is a list of elements that might be targets of references
-            Object refList = CanonicalXmlNodeList_Constructor.Invoke(null);
+            //MethodInfo CanonicalXmlNodeList_Add = CanonicalXmlNodeList_Type.GetMethod("Add", BindingFlags.Public | BindingFlags.Instance);
 
-            MethodInfo CanonicalXmlNodeList_Add = CanonicalXmlNodeList_Type.GetMethod("Add", BindingFlags.Public | BindingFlags.Instance);
+            ////
+            //FieldInfo SignedXml_m_containingDocument = SignedXml_Type.GetField("_containingDocument", BindingFlags.NonPublic | BindingFlags.Instance);
+            //if (SignedXml_m_containingDocument == null) {
+            //    SignedXml_m_containingDocument = SignedXml_Type.GetField("m_containingDocument", BindingFlags.NonPublic | BindingFlags.Instance);
+            //}
+            //Type Reference_Type = typeof(Reference);
+            //MethodInfo Reference_UpdateHashValue = Reference_Type.GetMethod("UpdateHashValue", BindingFlags.NonPublic | BindingFlags.Instance);
+            ////
 
-            //
-            FieldInfo SignedXml_m_containingDocument = SignedXml_Type.GetField("_containingDocument", BindingFlags.NonPublic | BindingFlags.Instance);
-            if (SignedXml_m_containingDocument == null) {
-                SignedXml_m_containingDocument = SignedXml_Type.GetField("m_containingDocument", BindingFlags.NonPublic | BindingFlags.Instance);
-            }
-            Type Reference_Type = typeof(Reference);
-            MethodInfo Reference_UpdateHashValue = Reference_Type.GetMethod("UpdateHashValue", BindingFlags.NonPublic | BindingFlags.Instance);
-            //
-
-            object m_containingDocument = SignedXml_m_containingDocument.GetValue(this);
+            //object m_containingDocument = SignedXml_m_containingDocument.GetValue(this);
 
             if (contentElement == null) {
                 FindContentElement();
@@ -1420,7 +1450,7 @@ namespace Microsoft.Xades {
                     }
                 }
                 else {
-                    xmlDoc = (XmlDocument)m_containingDocument;
+                    xmlDoc = _containingDocument;
                 }
 
 
@@ -1434,10 +1464,12 @@ namespace Microsoft.Xades {
                 }
 
                 if (xmlDoc != null) {
-                    CanonicalXmlNodeList_Add.Invoke(refList, new object[] { xmlDoc.DocumentElement });
+                    //CanonicalXmlNodeList_Add.Invoke(refList, new object[] { xmlDoc.DocumentElement });
+                    nodeList.Add(xmlDoc.DocumentElement);
                 }
 
-                Reference_UpdateHashValue.Invoke(reference2, new object[] { xmlDoc, refList });
+                //Reference_UpdateHashValue.Invoke(reference2, new object[] { xmlDoc, refList });
+                reference2.UpdateHashValue(xmlDoc, nodeList);
 
                 if (reference2.Id != null) {
                     XmlElement xml = reference2.GetXml();
@@ -1448,52 +1480,52 @@ namespace Microsoft.Xades {
         }
 
 
-        private AsymmetricAlgorithm GetPublicKey() {
-            Type SignedXml_Type = typeof(SignedXml);
+        //private AsymmetricAlgorithm GetPublicKey() {
+        //    Type SignedXml_Type = typeof(SignedXml);
 
-            MethodInfo SignedXml_Type_GetPublicKey = SignedXml_Type.GetMethod("GetPublicKey", BindingFlags.NonPublic | BindingFlags.Instance);
+        //    MethodInfo SignedXml_Type_GetPublicKey = SignedXml_Type.GetMethod("GetPublicKey", BindingFlags.NonPublic | BindingFlags.Instance);
 
-            return SignedXml_Type_GetPublicKey.Invoke(this, null) as AsymmetricAlgorithm;
-        }
+        //    return SignedXml_Type_GetPublicKey.Invoke(this, null) as AsymmetricAlgorithm;
+        //}
 
 
-        private bool CheckDigestedReferences() {
-            ArrayList references = m_signature.SignedInfo.References;
+        //private bool CheckDigestedReferences() {
+        //    ArrayList references = m_signature.SignedInfo.References;
 
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            Assembly System_Security_Assembly = assemblies.Where(x => x.FullName.Contains("System.Security,")).FirstOrDefault();
-            if (System_Security_Assembly == null) {
-                System_Security_Assembly = Assembly.Load("System.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a");
-            }
+        //    var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+        //    Assembly System_Security_Assembly = assemblies.Where(x => x.FullName.Contains("System.Security,")).FirstOrDefault();
+        //    if (System_Security_Assembly == null) {
+        //        System_Security_Assembly = Assembly.Load("System.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a");
+        //    }
 
-            Type CanonicalXmlNodeList_Type = System_Security_Assembly.GetType("System.Security.Cryptography.Xml.CanonicalXmlNodeList");
-            ConstructorInfo CanonicalXmlNodeList_Constructor = CanonicalXmlNodeList_Type.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, new Type[] { }, null);
+        //    Type CanonicalXmlNodeList_Type = System_Security_Assembly.GetType("System.Security.Cryptography.Xml.CanonicalXmlNodeList");
+        //    ConstructorInfo CanonicalXmlNodeList_Constructor = CanonicalXmlNodeList_Type.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, new Type[] { }, null);
 
-            MethodInfo CanonicalXmlNodeList_Add = CanonicalXmlNodeList_Type.GetMethod("Add", BindingFlags.Public | BindingFlags.Instance);
-            Object refList = CanonicalXmlNodeList_Constructor.Invoke(null);
+        //    MethodInfo CanonicalXmlNodeList_Add = CanonicalXmlNodeList_Type.GetMethod("Add", BindingFlags.Public | BindingFlags.Instance);
+        //    Object refList = CanonicalXmlNodeList_Constructor.Invoke(null);
 
-            CanonicalXmlNodeList_Add.Invoke(refList, new object[] { this.signatureDocument });
+        //    CanonicalXmlNodeList_Add.Invoke(refList, new object[] { this.signatureDocument });
 
-            Type Reference_Type = typeof(Reference);
-            MethodInfo Reference_CalculateHashValue = Reference_Type.GetMethod("CalculateHashValue", BindingFlags.NonPublic | BindingFlags.Instance);
+        //    Type Reference_Type = typeof(Reference);
+        //    MethodInfo Reference_CalculateHashValue = Reference_Type.GetMethod("CalculateHashValue", BindingFlags.NonPublic | BindingFlags.Instance);
 
-            for (int i = 0; i < references.Count; ++i) {
-                Reference digestedReference = (Reference)references[i];
+        //    for (int i = 0; i < references.Count; ++i) {
+        //        Reference digestedReference = (Reference)references[i];
 
-                byte[] calculatedHash = (byte[])Reference_CalculateHashValue.Invoke(digestedReference, new object[] { this.signatureDocument, refList });
+        //        byte[] calculatedHash = (byte[])Reference_CalculateHashValue.Invoke(digestedReference, new object[] { this.signatureDocument, refList });
 
-                if (calculatedHash.Length != digestedReference.DigestValue.Length)
-                    return false;
+        //        if (calculatedHash.Length != digestedReference.DigestValue.Length)
+        //            return false;
 
-                byte[] rgb1 = calculatedHash;
-                byte[] rgb2 = digestedReference.DigestValue;
-                for (int j = 0; j < rgb1.Length; ++j) {
-                    if (rgb1[j] != rgb2[j]) return false;
-                }
-            }
+        //        byte[] rgb1 = calculatedHash;
+        //        byte[] rgb2 = digestedReference.DigestValue;
+        //        for (int j = 0; j < rgb1.Length; ++j) {
+        //            if (rgb1[j] != rgb2[j]) return false;
+        //        }
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
 
 
         private bool CheckSignedInfo(AsymmetricAlgorithm key) {
@@ -1539,9 +1571,9 @@ namespace Microsoft.Xades {
 
             Type SignedXml_Type = typeof(SignedXml);
             FieldInfo SignedXml_bCacheValid = SignedXml_Type.GetField("_bCacheValid", BindingFlags.NonPublic | BindingFlags.Instance);
-            if (SignedXml_bCacheValid == null) {
-                SignedXml_bCacheValid = SignedXml_Type.GetField("bCacheValid", BindingFlags.NonPublic | BindingFlags.Instance);
-            }
+            //if (SignedXml_bCacheValid == null) {
+            //    SignedXml_bCacheValid = SignedXml_Type.GetField("bCacheValid", BindingFlags.NonPublic | BindingFlags.Instance);
+            //}
             bool bCacheValid = (bool)SignedXml_bCacheValid.GetValue(this);
             Type SignedInfo_Type = typeof(SignedInfo);
             PropertyInfo SignedInfo_CacheValid = SignedInfo_Type.GetProperty("CacheValid", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -1550,42 +1582,43 @@ namespace Microsoft.Xades {
             FieldInfo SignedXml__digestedSignedInfo = SignedXml_Type.GetField("_digestedSignedInfo", BindingFlags.NonPublic | BindingFlags.Instance);
 
             if (!bCacheValid || !CacheValid) {
-                FieldInfo SignedXml_m_containingDocument = SignedXml_Type.GetField("_containingDocument", BindingFlags.NonPublic | BindingFlags.Instance);
-                if (SignedXml_m_containingDocument == null) {
-                    SignedXml_m_containingDocument = SignedXml_Type.GetField("m_containingDocument", BindingFlags.NonPublic | BindingFlags.Instance);
-                }
-                XmlDocument m_containingDocument = (XmlDocument)SignedXml_m_containingDocument.GetValue(this);
-                string securityUrl = (m_containingDocument == null) ? null : m_containingDocument.BaseURI;
+                //FieldInfo SignedXml_m_containingDocument = SignedXml_Type.GetField("_containingDocument", BindingFlags.NonPublic | BindingFlags.Instance);
+                //if (SignedXml_m_containingDocument == null) {
+                //    SignedXml_m_containingDocument = SignedXml_Type.GetField("m_containingDocument", BindingFlags.NonPublic | BindingFlags.Instance);
+                //}
+                //XmlDocument m_containingDocument = (XmlDocument)SignedXml_m_containingDocument.GetValue(this);
+                string securityUrl = (_containingDocument == null) ? null : _containingDocument.BaseURI;
 
                 FieldInfo SignedXml_m_bResolverSet = SignedXml_Type.GetField("_bResolverSet", BindingFlags.NonPublic | BindingFlags.Instance);
-                if (SignedXml_m_bResolverSet == null) {
-                    SignedXml_m_bResolverSet = SignedXml_Type.GetField("m_bResolverSet", BindingFlags.NonPublic | BindingFlags.Instance);
-                }
+                //if (SignedXml_m_bResolverSet == null) {
+                //    SignedXml_m_bResolverSet = SignedXml_Type.GetField("m_bResolverSet", BindingFlags.NonPublic | BindingFlags.Instance);
+                //}
                 bool m_bResolverSet = (bool)SignedXml_m_bResolverSet.GetValue(this);
 
                 FieldInfo SignedXml_m_xmlResolver = SignedXml_Type.GetField("_xmlResolver", BindingFlags.NonPublic | BindingFlags.Instance);
-                if (SignedXml_m_xmlResolver == null) {
-                    SignedXml_m_xmlResolver = SignedXml_Type.GetField("m_xmlResolver", BindingFlags.NonPublic | BindingFlags.Instance);
-                }
+                //if (SignedXml_m_xmlResolver == null) {
+                //    SignedXml_m_xmlResolver = SignedXml_Type.GetField("m_xmlResolver", BindingFlags.NonPublic | BindingFlags.Instance);
+                //}
                 XmlResolver m_xmlResolver = (XmlResolver)SignedXml_m_xmlResolver.GetValue(this);
                 XmlResolver xmlResolver = m_bResolverSet ? m_xmlResolver : new XmlSecureResolver(new XmlUrlResolver(), securityUrl);
 
-                var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-                Assembly cripXmlAssembly = assemblies.Where(x => x.FullName.Contains("System.Security.Cryptography.Xml")).FirstOrDefault();
-                Assembly System_Security_Assembly = assemblies.Where(x => x.FullName.Contains("System.Security,")).FirstOrDefault();
-                if (cripXmlAssembly == null) {
-                    cripXmlAssembly = Assembly.Load("System.Security.Cryptography.Xml");
-                }
-                Type Utils_Type = cripXmlAssembly.GetType("System.Security.Cryptography.Xml.Utils");
-                if (Utils_Type == null) {
-                    Utils_Type = System_Security_Assembly.GetType("System.Security.Cryptography.Xml.Utils");
-                }
-                MethodInfo Utils_PreProcessElementInput = Utils_Type.GetMethod("PreProcessElementInput", BindingFlags.NonPublic | BindingFlags.Static);
+                //var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+                //Assembly cripXmlAssembly = assemblies.Where(x => x.FullName.Contains("System.Security.Cryptography.Xml")).FirstOrDefault();
+                //Assembly System_Security_Assembly = assemblies.Where(x => x.FullName.Contains("System.Security,")).FirstOrDefault();
+                //if (cripXmlAssembly == null) {
+                //    cripXmlAssembly = Assembly.Load("System.Security.Cryptography.Xml");
+                //}
+                //Type Utils_Type = cripXmlAssembly.GetType("System.Security.Cryptography.Xml.Utils");
+                //if (Utils_Type == null) {
+                //    Utils_Type = System_Security_Assembly.GetType("System.Security.Cryptography.Xml.Utils");
+                //}
+                //MethodInfo Utils_PreProcessElementInput = Utils_Type.GetMethod("PreProcessElementInput", BindingFlags.NonPublic | BindingFlags.Static);
 
                 XmlElement xml = this.SignedInfo.GetXml();
                 SetPrefix(prefix, xml); // <---
 
-                XmlDocument document = (XmlDocument)Utils_PreProcessElementInput.Invoke(null, new object[] { xml, xmlResolver, securityUrl });
+                //XmlDocument document = (XmlDocument)Utils_PreProcessElementInput.Invoke(null, new object[] { xml, xmlResolver, securityUrl });
+                XmlDocument document = Utils.PreProcessElementInput(xml, xmlResolver, securityUrl);
 
                 var docNamespaces = GetAllNamespaces(GetSignatureElement());
 
@@ -1605,36 +1638,38 @@ namespace Microsoft.Xades {
                 }
 
                 //CanonicalXmlNodeList namespaces = (this.m_context == null) ? null : Utils.GetPropagatedAttributes(this.m_context);
-                FieldInfo SignedXml_m_context = SignedXml_Type.GetField("_context", BindingFlags.NonPublic | BindingFlags.Instance);
-                if (SignedXml_m_context == null) {
-                    SignedXml_m_context = SignedXml_Type.GetField("m_context", BindingFlags.NonPublic | BindingFlags.Instance);
-                }
-                MethodInfo Utils_GetPropagatedAttributes = Utils_Type.GetMethod("GetPropagatedAttributes", BindingFlags.NonPublic | BindingFlags.Static);
-                object m_context = SignedXml_m_context.GetValue(this);
-                object namespaces = (m_context == null) ? null : Utils_GetPropagatedAttributes.Invoke(null, new object[] { m_context });
+                //FieldInfo SignedXml_m_context = SignedXml_Type.GetField("_context", BindingFlags.NonPublic | BindingFlags.Instance);
+                //if (SignedXml_m_context == null) {
+                //    SignedXml_m_context = SignedXml_Type.GetField("m_context", BindingFlags.NonPublic | BindingFlags.Instance);
+                //}
+                //MethodInfo Utils_GetPropagatedAttributes = Utils_Type.GetMethod("GetPropagatedAttributes", BindingFlags.NonPublic | BindingFlags.Static);
+                //object m_context = SignedXml_m_context.GetValue(this);
+                //object namespaces = (m_context == null) ? null : Utils_GetPropagatedAttributes.Invoke(null, new object[] { m_context });
+                var namespaces = _context != null ? Utils.GetPropagatedAttributes(_context) : null;
 
 
                 //
 
                 // Utils.AddNamespaces(document.DocumentElement, namespaces);
-                Type CanonicalXmlNodeList_Type = cripXmlAssembly.GetType("System.Security.Cryptography.Xml.CanonicalXmlNodeList");
-                if (CanonicalXmlNodeList_Type == null) {
-                    CanonicalXmlNodeList_Type = System_Security_Assembly.GetType("System.Security.Cryptography.Xml.CanonicalXmlNodeList");
-                }
-                MethodInfo Utils_AddNamespaces = Utils_Type.GetMethod("AddNamespaces", BindingFlags.NonPublic | BindingFlags.Static, null, new Type[] { typeof(XmlElement), CanonicalXmlNodeList_Type }, null);
-                Utils_AddNamespaces.Invoke(null, new object[] { document.DocumentElement, namespaces });
-                //
+                //Type CanonicalXmlNodeList_Type = cripXmlAssembly.GetType("System.Security.Cryptography.Xml.CanonicalXmlNodeList");
+                //if (CanonicalXmlNodeList_Type == null) {
+                //    CanonicalXmlNodeList_Type = System_Security_Assembly.GetType("System.Security.Cryptography.Xml.CanonicalXmlNodeList");
+                //}
+                //MethodInfo Utils_AddNamespaces = Utils_Type.GetMethod("AddNamespaces", BindingFlags.NonPublic | BindingFlags.Static, null, new Type[] { typeof(XmlElement), CanonicalXmlNodeList_Type }, null);
+                //Utils_AddNamespaces.Invoke(null, new object[] { document.DocumentElement, namespaces });
+                Utils.AddNamespaces(document.DocumentElement, namespaces);
 
                 //Transform canonicalizationMethodObject = this.SignedInfo.CanonicalizationMethodObject;
-                System.Security.Cryptography.Xml.Transform canonicalizationMethodObject = this.SignedInfo.CanonicalizationMethodObject;
+                var canonicalizationMethodObject = this.SignedInfo.CanonicalizationMethodObject;
                 //
 
                 canonicalizationMethodObject.Resolver = xmlResolver;
+                canonicalizationMethodObject.BaseURI = securityUrl;
 
                 //canonicalizationMethodObject.BaseURI = securityUrl;
-                Type Transform_Type = typeof(System.Security.Cryptography.Xml.Transform);
-                PropertyInfo Transform_BaseURI = Transform_Type.GetProperty("BaseURI", BindingFlags.NonPublic | BindingFlags.Instance);
-                Transform_BaseURI.SetValue(canonicalizationMethodObject, securityUrl, null);
+                //Type Transform_Type = typeof(System.Security.Cryptography.Xml.Transform);
+                //PropertyInfo Transform_BaseURI = Transform_Type.GetProperty("BaseURI", BindingFlags.NonPublic | BindingFlags.Instance);
+                //Transform_BaseURI.SetValue(canonicalizationMethodObject, securityUrl, null);
                 //
 
                 canonicalizationMethodObject.LoadInput(document);
@@ -1685,18 +1720,17 @@ namespace Microsoft.Xades {
             }
         }
 
-        private System.Security.Cryptography.Xml.DataObject GetXadesDataObject() {
-            System.Security.Cryptography.Xml.DataObject retVal = null;
+        private DataObject GetXadesDataObject() {
+            DataObject retVal = null;
 
             for (int dataObjectCounter = 0; dataObjectCounter < (this.Signature.ObjectList.Count); dataObjectCounter++) {
-                System.Security.Cryptography.Xml.DataObject dataObject = (System.Security.Cryptography.Xml.DataObject)this.Signature.ObjectList[dataObjectCounter];
+                DataObject dataObject = (DataObject)this.Signature.ObjectList[dataObjectCounter];
                 XmlElement dataObjectXmlElement = dataObject.GetXml();
                 XmlNamespaceManager xmlNamespaceManager = new XmlNamespaceManager(dataObjectXmlElement.OwnerDocument.NameTable);
                 xmlNamespaceManager.AddNamespace("xades", XadesSignedXml.XadesNamespaceUri);
                 XmlNodeList xmlNodeList = dataObjectXmlElement.SelectNodes("xades:QualifyingProperties", xmlNamespaceManager);
                 if (xmlNodeList.Count != 0) {
                     retVal = dataObject;
-
                     break;
                 }
             }

@@ -22,7 +22,6 @@
 
 using System;
 using System.Security.Cryptography;
-using System.Security.Cryptography.Xml;
 using System.Xml;
 
 namespace Microsoft.Xades {
@@ -125,7 +124,7 @@ namespace Microsoft.Xades {
             }
 
             xmlNamespaceManager = new XmlNamespaceManager(xmlElement.OwnerDocument.NameTable);
-            xmlNamespaceManager.AddNamespace("ds", SignedXml.XmlDsigNamespaceUrl);
+            xmlNamespaceManager.AddNamespace("ds", XmlDsig.SignedXml.XmlDsigNamespaceUrl);
 
 
             xmlNodeList = xmlElement.SelectNodes("ds:DigestMethod", xmlNamespaceManager);
@@ -153,7 +152,7 @@ namespace Microsoft.Xades {
 
             creationXmlDocument = new XmlDocument();
             retVal = creationXmlDocument.CreateElement(XadesSignedXml.XmlXadesPrefix, this.tagName, XadesSignedXml.XadesNamespaceUri);
-            retVal.SetAttribute("xmlns:ds", SignedXml.XmlDsigNamespaceUrl);
+            retVal.SetAttribute("xmlns:ds", XmlDsig.SignedXml.XmlDsigNamespaceUrl);
 
             if (this.digestMethod != null && this.digestMethod.HasChanged()) {
                 retVal.AppendChild(creationXmlDocument.ImportNode(this.digestMethod.GetXml(), true));
@@ -164,7 +163,7 @@ namespace Microsoft.Xades {
 
             if (this.digestValue != null && this.digestValue.Length > 0) {
                 //bufferXmlElement = creationXmlDocument.CreateElement("DigestValue", XadesSignedXml.XadesNamespaceUri);
-                bufferXmlElement = creationXmlDocument.CreateElement(XadesSignedXml.XmlDSigPrefix, "DigestValue", SignedXml.XmlDsigNamespaceUrl);
+                bufferXmlElement = creationXmlDocument.CreateElement(XadesSignedXml.XmlDSigPrefix, "DigestValue", XmlDsig.SignedXml.XmlDsigNamespaceUrl);
                 bufferXmlElement.SetAttribute("xmlns:xades", XadesSignedXml.XadesNamespaceUri);
 
                 bufferXmlElement.InnerText = Convert.ToBase64String(this.digestValue);

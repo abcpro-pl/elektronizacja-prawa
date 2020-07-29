@@ -27,7 +27,6 @@ using Abc.Nes.Xades.Utils;
 using Microsoft.Xades;
 using System;
 using System.Collections;
-using System.Security.Cryptography.Xml;
 
 namespace Abc.Nes.Xades.Upgraders {
     class XadesTUpgrader : IXadesUpgrader {
@@ -44,7 +43,7 @@ namespace Abc.Nes.Xades.Upgraders {
                     throw new Exception("The signature already contains a time stamp!");
                 }
 
-                var excTransform = new XmlDsigExcC14NTransform();
+                var excTransform = new Microsoft.XmlDsig.XmlDsigExcC14NTransform();
 
                 signatureValueElementXpaths = new ArrayList {
                     "ds:SignatureValue"

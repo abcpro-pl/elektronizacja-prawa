@@ -21,7 +21,6 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/. 
 
 using System;
-using System.Security.Cryptography.Xml;
 using System.Xml;
 
 namespace Microsoft.Xades {
@@ -123,7 +122,7 @@ namespace Microsoft.Xades {
             XmlElement bufferXmlElement;
 
             creationXmlDocument = new XmlDocument();
-            retVal = creationXmlDocument.CreateElement("ds", "Transform", SignedXml.XmlDsigNamespaceUrl);
+            retVal = creationXmlDocument.CreateElement("ds", "Transform", XmlDsig.SignedXml.XmlDsigNamespaceUrl);
 
             if (this.algorithm != null) {
                 retVal.SetAttribute("Algorithm", this.algorithm);
@@ -133,7 +132,7 @@ namespace Microsoft.Xades {
             }
 
             if (this.xpath != null && this.xpath != "") {
-                bufferXmlElement = creationXmlDocument.CreateElement("ds", "XPath", SignedXml.XmlDsigNamespaceUrl);
+                bufferXmlElement = creationXmlDocument.CreateElement("ds", "XPath", XmlDsig.SignedXml.XmlDsigNamespaceUrl);
                 bufferXmlElement.InnerText = this.xpath;
                 retVal.AppendChild(bufferXmlElement);
             }

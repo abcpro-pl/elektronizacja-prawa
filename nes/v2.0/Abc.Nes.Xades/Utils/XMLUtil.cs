@@ -21,11 +21,10 @@
 // 
 // --------------------------------------------------------------------------------------------------------------------
 
-using Microsoft.Xades;
+using Microsoft.XmlDsig;
 using System.Collections;
 using System.IO;
 using System.Security.Cryptography;
-using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Xml;
 
@@ -39,7 +38,7 @@ namespace Abc.Nes.Xades.Utils {
         /// <param name="element"></param>
         /// <param name="transform"></param>
         /// <returns></returns>
-        public static byte[] ApplyTransform(XmlElement element, System.Security.Cryptography.Xml.Transform transform) {
+        public static byte[] ApplyTransform(XmlElement element, Transform transform) {
             byte[] buffer = Encoding.UTF8.GetBytes(element.OuterXml);
 
             using (MemoryStream ms = new MemoryStream(buffer)) {
@@ -56,7 +55,7 @@ namespace Abc.Nes.Xades.Utils {
         /// <param name="xadesSignedXml"></param>
         /// <param name="elementXpaths"></param>
         /// <returns></returns>
-        public static byte[] ComputeValueOfElementList(XadesSignedXml xadesSignedXml, ArrayList elementXpaths) {
+        public static byte[] ComputeValueOfElementList(Microsoft.Xades.XadesSignedXml xadesSignedXml, ArrayList elementXpaths) {
             return ComputeValueOfElementList(xadesSignedXml, elementXpaths, new XmlDsigC14NTransform());
         }
 
@@ -66,8 +65,8 @@ namespace Abc.Nes.Xades.Utils {
         /// <param name="xadesSignedXml"></param>
         /// <param name="elementXpaths"></param>
         /// <returns></returns>
-        public static byte[] ComputeValueOfElementList(XadesSignedXml xadesSignedXml, ArrayList elementXpaths,
-            System.Security.Cryptography.Xml.Transform transform) {
+        public static byte[] ComputeValueOfElementList(Microsoft.Xades.XadesSignedXml xadesSignedXml, ArrayList elementXpaths,
+            Transform transform) {
             XmlDocument xmlDocument;
             XmlNamespaceManager xmlNamespaceManager;
             XmlNodeList searchXmlNodeList;
@@ -78,7 +77,7 @@ namespace Abc.Nes.Xades.Utils {
             xmlDocument = signatureXmlElement.OwnerDocument;
             xmlNamespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             xmlNamespaceManager.AddNamespace("ds", SignedXml.XmlDsigNamespaceUrl);
-            xmlNamespaceManager.AddNamespace("xades", XadesSignedXml.XadesNamespaceUri);
+            xmlNamespaceManager.AddNamespace("xades", Microsoft.Xades.XadesSignedXml.XadesNamespaceUri);
 
             using (MemoryStream msResult = new MemoryStream()) {
                 foreach (string elementXpath in elementXpaths) {
@@ -91,7 +90,7 @@ namespace Abc.Nes.Xades.Utils {
                     foreach (XmlNode xmlNode in searchXmlNodeList) {
                         XmlElement clonedElement = (XmlElement)xmlNode.Clone();
 
-                        clonedElement.SetAttribute("xmlns:" + XadesSignedXml.XmlDSigPrefix, XadesSignedXml.XmlDsigNamespaceUrl);
+                        clonedElement.SetAttribute("xmlns:" + Microsoft.Xades.XadesSignedXml.XmlDSigPrefix, Microsoft.Xades.XadesSignedXml.XmlDsigNamespaceUrl);
 
                         foreach (var attr in namespaces) {
                             clonedElement.SetAttribute(attr.Name, attr.Value);

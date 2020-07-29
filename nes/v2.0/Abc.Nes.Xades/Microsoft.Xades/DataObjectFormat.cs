@@ -201,7 +201,7 @@ namespace Microsoft.Xades {
             XmlElement retVal;
             XmlElement bufferXmlElement;
 
-            creationXmlDocument = new XmlDocument();
+            creationXmlDocument = new XmlDocument() { PreserveWhitespace = true };
             retVal = creationXmlDocument.CreateElement(XadesSignedXml.XmlXadesPrefix, "DataObjectFormat", XadesSignedXml.XadesNamespaceUri);
 
             if ((this.objectReferenceAttribute != null) && ((this.objectReferenceAttribute != ""))) {

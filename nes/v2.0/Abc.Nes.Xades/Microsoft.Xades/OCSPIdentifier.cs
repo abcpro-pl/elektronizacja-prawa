@@ -21,7 +21,6 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/. 
 
 using System;
-using System.Security.Cryptography.Xml;
 using System.Xml;
 
 namespace Microsoft.Xades {
@@ -164,7 +163,7 @@ namespace Microsoft.Xades {
 
             creationXmlDocument = new XmlDocument();
             retVal = creationXmlDocument.CreateElement(XadesSignedXml.XmlXadesPrefix, "OCSPIdentifier", XadesSignedXml.XadesNamespaceUri);
-            retVal.SetAttribute("xmlns:ds", SignedXml.XmlDsigNamespaceUrl);
+            retVal.SetAttribute("xmlns:ds", XmlDsig.SignedXml.XmlDsigNamespaceUrl);
 
             if (!string.IsNullOrEmpty(uriAttribute)) {
                 retVal.SetAttribute("URI", this.uriAttribute);
@@ -172,7 +171,7 @@ namespace Microsoft.Xades {
 
             if (!String.IsNullOrEmpty(this.responderID)) {
                 bufferXmlElement = creationXmlDocument.CreateElement(XadesSignedXml.XmlXadesPrefix, "ResponderID", XadesSignedXml.XadesNamespaceUri);
-                bufferXmlElement.SetAttribute("xmlns:ds", SignedXml.XmlDsigNamespaceUrl);
+                bufferXmlElement.SetAttribute("xmlns:ds", XmlDsig.SignedXml.XmlDsigNamespaceUrl);
 
                 XmlElement bufferXmlElement2 = null;
 
@@ -183,7 +182,7 @@ namespace Microsoft.Xades {
                     bufferXmlElement2 = creationXmlDocument.CreateElement(XadesSignedXml.XmlXadesPrefix, "ByKey", XadesSignedXml.XadesNamespaceUri);
                 }
 
-                bufferXmlElement2.SetAttribute("xmlns:ds", SignedXml.XmlDsigNamespaceUrl);
+                bufferXmlElement2.SetAttribute("xmlns:ds", XmlDsig.SignedXml.XmlDsigNamespaceUrl);
                 bufferXmlElement2.InnerText = this.ResponderID;
 
                 bufferXmlElement.AppendChild(bufferXmlElement2);
@@ -198,7 +197,7 @@ namespace Microsoft.Xades {
 
                 bufferXmlElement.InnerText = XmlConvert.ToString(truncatedDateTime, XmlDateTimeSerializationMode.Local);
 
-                bufferXmlElement.SetAttribute("xmlns:ds", SignedXml.XmlDsigNamespaceUrl);
+                bufferXmlElement.SetAttribute("xmlns:ds", XmlDsig.SignedXml.XmlDsigNamespaceUrl);
                 retVal.AppendChild(bufferXmlElement);
             }
 

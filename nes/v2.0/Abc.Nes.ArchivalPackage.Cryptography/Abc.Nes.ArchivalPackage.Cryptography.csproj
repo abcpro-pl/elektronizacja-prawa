@@ -34,10 +34,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ABCPRO.NES.ArchivalPackage" Version="1.0.6" />
-    <PackageReference Include="Aspose.PDF" Version="20.7.0" />
-    <PackageReference Include="DotNetZip" Version="1.13.8" />
-    <PackageReference Include="ABCPRO.NES.XAdES" Version="1.0.2" />
+    <PackageReference Include="ABCPRO.NES.ArchivalPackage" Version="1.0.7" />
+    <PackageReference Include="ABCPRO.NES.XAdES" Version="1.0.4" />
+    <PackageReference Include="Aspose.PDF" Version="20.7.0" />        
   </ItemGroup>
 
 </Project>
