@@ -4,10 +4,10 @@
 - [Zawartość](#Zawartość)
 - [Biblioteki](#NuGet)
 - [Przykłady użycia](#Przykłady)
-    * [ABCPRO.NES](#ABCPRO.NES)
-    * [ABCPRO.NES.ArchivalPackage](#ABCPRO.NES.ArchivalPackage)
-    * [ABCPRO.NES.ArchivalPackage.Cryptography](#ABCPRO.NES.ArchivalPackage.Cryptography)
-    * [ABCPRO.NES.XAdES](#ABCPRO.NES.XADES)
+    * [ABCPRO.NES](##ABCPRO.NES)
+    * [ABCPRO.NES.ArchivalPackage](##ABCPRO.NES.ArchivalPackage)
+    * [ABCPRO.NES.ArchivalPackage.Cryptography](##ABCPRO.NES.ArchivalPackage.Cryptography)
+    * [ABCPRO.NES.XAdES](##ABCPRO.NES.XADES)
 - [Historia](#Historia)
 
 ## Zawartość
