@@ -43,7 +43,7 @@ ABCPRO.NES.ArchivalPackage|1.0.5|Aktualizacja zależności.
 ABCPRO.NES|1.0.5|Zawiera dodatkowe pola w adresie (gmina, powiat, województwo). Dodane metody statyczne do pobierania wartości z enumeratorów dla pól tekstowych np. `RelationElement.GetRelationType()`.
 ABCPRO.NES.ArchivalPackage|1.0.4|Pierwsza stabilna wersja biblioteki. Pozwala na tworzenie paczki archiwalnej z wymaganymi katalogami, dodawanie plików oraz metadanych utworzonych za pomocą ABCPRO.NES, zapis i odczyt wcześniej utworzonych paczek.
 ABCPRO.NES|1.0.3|Pierwsza stabilna wersja biblioteki. Pozwala na dodawanie wszystkich metadanych, walidację i zapis do pliku XML. Za pomocą klasy `XmlConverter` możliwe jest otwieranie plików zarówno z wersji 2.0 jak i tych starszych.
-
+[&#8682; Do góry](#paczka-eadm-i-niezbędne-elementy-struktury-dokumentu-elektronicznego-20)
 
 ## Przykłady
 
@@ -286,6 +286,8 @@ var document = new Abc.Nes.Document() {
     }
 };
 ```
+[&#8682; Do góry](#paczka-eadm-i-niezbędne-elementy-struktury-dokumentu-elektronicznego-20)
+
 ### ABCPRO.NES.ArchivalPackage
 
 #### Ładowanie paczki archiwalnej
@@ -417,6 +419,7 @@ mgr.AddFile(new DocumentFile() {
 
 mgr.Save(@"../../../sample/ValidatedPackage.zip");
 ```
+[&#8682; Do góry](#paczka-eadm-i-niezbędne-elementy-struktury-dokumentu-elektronicznego-20)
 
 ### ABCPRO.NES.XAdES
 
@@ -515,6 +518,7 @@ using (var mgr = new PackageSignerManager()) {
     );
 }
 ```
+[&#8682; Do góry](#paczka-eadm-i-niezbędne-elementy-struktury-dokumentu-elektronicznego-20)
 
 ## Historia
 
@@ -527,5 +531,7 @@ W Dz.U. z 2019 r. pod poz. 1003 opublikowano rozporządzenia Prezydenta Rzeczypo
 Z rozporządzenia wynika, że po pierwsze, skargę oraz odpowiedź na skargę organ przekazuje w formie lub postaci, w jakiej zostały sporządzone. Natomiast skargę lub odpowiedź na skargę sporządzoną w formie dokumentu elektronicznego organ przekazuje do elektronicznej skrzynki podawczej sądu.
 
 Z §7 rozporządzenia wynika, że akta sprawy prowadzone w postaci elektronicznej przekazuje się jako wyodrębniony z systemu elektronicznego zarządzania dokumentacją, w rozumieniu przepisów o narodowym zasobie archiwalnym i archiwach, zbiór dokumentów obejmujących akta sprawy (paczka eADM). Opisane powyżej biblioteki służą do jej sporządzenia i podpisania bezpiecznym podpisem elektronicznym. Więcej informacji o eADM można znaleźć na stronie [gov.legalis.pl](https://gov.legalis.pl/przekazywanie-skargi-do-sadu-administracyjnego/).
+
+[&#8682; Do góry](#paczka-eadm-i-niezbędne-elementy-struktury-dokumentu-elektronicznego-20)
 
 <a href="https://www.abcpro.pl"><img alt="www" src="https://img.shields.io/badge/www-abcpro.pl-orange?style=for-the-badge"></a> 
