@@ -43,6 +43,7 @@ ABCPRO.NES.ArchivalPackage|1.0.5|Aktualizacja zależności.
 ABCPRO.NES|1.0.5|Zawiera dodatkowe pola w adresie (gmina, powiat, województwo). Dodane metody statyczne do pobierania wartości z enumeratorów dla pól tekstowych np. `RelationElement.GetRelationType()`.
 ABCPRO.NES.ArchivalPackage|1.0.4|Pierwsza stabilna wersja biblioteki. Pozwala na tworzenie paczki archiwalnej z wymaganymi katalogami, dodawanie plików oraz metadanych utworzonych za pomocą ABCPRO.NES, zapis i odczyt wcześniej utworzonych paczek.
 ABCPRO.NES|1.0.3|Pierwsza stabilna wersja biblioteki. Pozwala na dodawanie wszystkich metadanych, walidację i zapis do pliku XML. Za pomocą klasy `XmlConverter` możliwe jest otwieranie plików zarówno z wersji 2.0 jak i tych starszych.
+
 [&#8682; Do góry](#paczka-eadm-i-niezbędne-elementy-struktury-dokumentu-elektronicznego-20)
 
 ## Przykłady
@@ -489,6 +490,7 @@ using (var manager = new XadesManager()) {
     if (File.Exists(filePath)) { File.Delete(filePath); }
     result.Save(filePath);
 ```
+[&#8682; Do góry](#paczka-eadm-i-niezbędne-elementy-struktury-dokumentu-elektronicznego-20)
 
 ### ABCPRO.NES.ArchivalPackage.Cryptography
 
