@@ -530,7 +530,13 @@ NES od początku miały opisywać dokumenty przekazywane do Archiwów Paśtwowyc
 
 W Dz.U. z 2019 r. pod poz. 1003 opublikowano rozporządzenia Prezydenta Rzeczypospolitej Polskiej z 27 maja 2019 r. w sprawie szczegółowego sposobu oraz szczegółowych warunków przekazywania skargi wraz z aktami sprawy i odpowiedzią na skargę do sądu administracyjnego [(Dz.U. z 2019 r. poz. 1003)](https://eli.gov.pl/eli/DU/2019/1003/ogl).
 
-Z rozporządzenia wynika, że po pierwsze, skargę oraz odpowiedź na skargę organ przekazuje w formie lub postaci, w jakiej zostały sporządzone. Natomiast skargę lub odpowiedź na skargę sporządzoną w formie dokumentu elektronicznego organ przekazuje do elektronicznej skrzynki podawczej sądu.
+Z rozporządzenia wynika, że skargę oraz odpowiedź na skargę organ przekazuje w formie lub postaci, w jakiej zostały sporządzone. Natomiast skargę lub odpowiedź na skargę *sporządzoną w formie dokumentu elektronicznego* organ przekazuje do elektronicznej skrzynki podawczej sądu.
+
+Jeżeli forma lub postać skargi i odpowiedzi na skargę różnią się, organ, przekazując dokument elektroniczny **załącza uwierzytelnioną kopię kwalifikowaną pieczęcią elektroniczną, kwalifikowanym podpisem elektronicznym lub podpisem (profilem) zaufanym**.
+
+Akta sprawy organ przekazuje do sądu w takiej postaci, w jakiej są prowadzone. Akta można prowadzić w formie papierowej i elektronicznej. W przypadku gdy akta sprawy są prowadzone w postaci elektronicznej, organ przekazuje akta sprawy w sposób, o którym mowa w § 7 ust. 1 rozporządzenia, *wraz ze skargą lub odpowiedzią na skargę sporządzoną w formie dokumentu elektronicznego*, do elektronicznej skrzynki podawczej sądu. Jeżeli w aktach sprawy prowadzonych w postaci elektronicznej znajdują się dokumenty, których treść nie jest dostępna w całości w postaci elektronicznej, organ przekazuje do sądu:
+* akta sprawy, podając informację o sposobie i dacie przekazania dokumentów, których treść nie jest dostępna w całości w postaci elektronicznej;
+* dokumenty, których treść nie jest dostępna w całości w postaci elektronicznej, wskazując na akta sprawy oraz datę ich przekazania do sądu.
 
 Z §7 rozporządzenia wynika, że akta sprawy prowadzone w postaci elektronicznej przekazuje się jako wyodrębniony z systemu elektronicznego zarządzania dokumentacją, w rozumieniu przepisów o narodowym zasobie archiwalnym i archiwach, zbiór dokumentów obejmujących akta sprawy (paczka eADM). Opisane powyżej biblioteki służą do jej sporządzenia i podpisania bezpiecznym podpisem elektronicznym. Więcej informacji o eADM można znaleźć na stronie [gov.legalis.pl](https://gov.legalis.pl/przekazywanie-skargi-do-sadu-administracyjnego/).
 
