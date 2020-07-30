@@ -1,14 +1,14 @@
 ![Image](images/nes_logo.png) 
 
-# Niezbędne Elementy Struktury 2.0
-- [Zawartość](#zawartość)
-- [Biblioteki](#nuget)
-- [Przykłady użycia](#przykłady)
-    * [ABCPRO.NES](#abcprones)
-    * [ABCPRO.NES.ArchivalPackage](#abcpronesarchivalpackage)
-    * [ABCPRO.NES.ArchivalPackage.Cryptography](#abcpronesarchivalpackagecryptography)
-    * [ABCPRO.NES.XAdES](#abcpronesxades)
-- [Historia](#historia)
+# Paczka eADM i Niezbędne Elementy Struktury (dokumentu elektronicznego) 2.0
+- [Krótki opis zawartości](#zawartość)
+- [Biblioteki .NET](#nuget)
+- [Przykłady użycia bibliotek .NET](#przykłady)
+    * [Biblioteka ABCPRO.NES](#abcprones)
+    * [Biblioteka ABCPRO.NES.ArchivalPackage](#abcpronesarchivalpackage)
+    * [Biblioteka ABCPRO.NES.ArchivalPackage.Cryptography](#abcpronesarchivalpackagecryptography)
+    * [Biblioteka ABCPRO.NES.XAdES](#abcpronesxades)
+- [Opis merytoryczny](#historia)
 
 ## Zawartość
 
@@ -34,6 +34,8 @@ W tym katalogu znajduje się:
 
 Nazwa | Wersja | Opis
 ------|--------|--------
+ABCPRO.NES.ArchivalPackage.Cryptography|1.0.1|Dodanie mozliwości podpisywania plików w paczce archiwalnej podpisem zewnętrznym oraz podpisywanie samego archiwum podpisem zewnetrznym.
+ABCPRO.NES.ArchivalPackage|1.0.9|Dodanie metod: do pobierania obiektu folderu dla wskazanego obiektu pliku, do pobierania pliku metadanych dla wskazanego pliku z katalogu dokumenty, do pobierania obiektu pliku na podstawie ścieżki wewnątrz archiwum.
 ABCPRO.NES.ArchivalPackage.Cryptography|1.0.0|Dodanie biblioteki pozwalającej na podpisywanie pliku paczki archiwalnej wraz z plikami w niej umieszczonymi. Pliki XML podpisywane są podpisem wewnętrznym XAdES, pliki PDF podpisem PAdES (podpis realizowany jest z wykorzystaniem komercyjnych bibliotek `Aspose.Pdf`. wymagany jest zakup licencji na oprogramowanie [Aspose.Pdf](https://products.aspose.com/pdf). Sama paczka archiwalna może zostać umieszczona w pliku `.xades` (podpis okalający - Enveloping) lub w oddzielnym pliku; wówczas plik `.xades` zawiera jedynie referencję do właściwego pliku.
 ABCPRO.NES.XAdES|1.0.4|Dodanie biblioteki umożliwiającej podpisywanie dokumentów XML. Biblioteka bazuje na kodzie źródłowym [Microsoft .NET Framework](https://github.com/dotnet/runtime/tree/master/src/libraries/System.Security.Cryptography.Xml/src) w przestrzeni nazw `Microsoft.XmlDsig`, projektu [`Microsoft.Xades`](https://github.com/Caliper/Xades) utworzonym przez francuski oddział firmy Microsoft oraz na podstawie kodu źródłowego [FirmaXadesNet](https://github.com/ctt-gob-es/FirmaXadesNet45) utworzonym przez Departament Nowych Technologii Rady Urbanizacji Miasta Cartagena. Biblioteka pozwala na opatrywanie pliku metadanych bezpiecznym podpisem elektronicznym.  
 ABCPRO.NES.ArchivalPackage|1.0.6|Dodanie metody w `PackageManager` umożliwiającej proste uzupełnianie pliku metadanych sprawy.
@@ -50,344 +52,370 @@ ABCPRO.NES|1.0.3|Pierwsza stabilna wersja biblioteki. Pozwala na dodawanie wszys
 #### Generowanie schematu XSD
 
 ``` C#
-            XElement schema;
-            using (var xsdGenerator = new XsdGenerator()) {
-                schema = xsdGenerator.GetSchema();
-            }
-            var filePath = @"..\..\..\nes_20_generated.xsd";
-            schema.Save(filePath);
+XElement schema;
+using (var xsdGenerator = new XsdGenerator()) {
+    schema = xsdGenerator.GetSchema();
+}
+var filePath = @"..\..\..\nes_20_generated.xsd";
+schema.Save(filePath);
 ```
 
 #### Tworzenie dokumentu XML
 
 ```C#
-            Abc.Nes.Document document = GetModel(); 
-            var filePath = Path.Combine(Path.GetTempPath(), "nes.xml");
-            new Abc.Nes.Converters.XmlConverter().WriteXml(document, filePath);
+Abc.Nes.Document document = GetModel(); 
+var filePath = Path.Combine(Path.GetTempPath(), "nes.xml");
+new Abc.Nes.Converters.XmlConverter().WriteXml(document, filePath);
 ```
 
 #### Ładowanie dokumentu XML
 
 ```C#
-            var filePath = Path.Combine(Path.GetTempPath(), "nes.xml");
-            if (!File.Exists(filePath)) { throw new FileNotFoundException(); }
-            var document = new Abc.Nes.Converters.XmlConverter().LoadXml(filePath);
+var filePath = Path.Combine(Path.GetTempPath(), "nes.xml");
+if (!File.Exists(filePath)) { throw new FileNotFoundException(); }
+var document = new Abc.Nes.Converters.XmlConverter().LoadXml(filePath);
 ```
 
 #### Walidacja dokumentu XML
 
 ```C#
-            var filePath = Path.Combine(Path.GetTempPath(), "nes.xml");
-            if (!File.Exists(filePath)) { throw new FileNotFoundException(); }
-            var converter = new Abc.Nes.Converters.XmlConverter();
-            var valid = converter.Validate(filePath);
-            // converter.ValidationErrors - errors
+var filePath = Path.Combine(Path.GetTempPath(), "nes.xml");
+if (!File.Exists(filePath)) { throw new FileNotFoundException(); }
+ar converter = new Abc.Nes.Converters.XmlConverter();
+var valid = converter.Validate(filePath);
+// converter.ValidationErrors - errors
 ```
 
 #### Korzystanie z modelu
 
 ```C#
-            var document = new Abc.Nes.Document() {
-                Identifiers = new List<Abc.Nes.Elements.IdentifierElement> {
-                    new Abc.Nes.Elements.IdentifierElement() {
-                        Type = Abc.Nes.Elements.IdentifierElement.GetIdTypes(Enumerations.IdTypes.ObjectMark),
-                        Value = "ABC-A.123.77.3.2011.JW.",
-                        Subject = new Elements.SubjectElement() {
-                            Institution = new Elements.InstitutionElement() {
-                                Name = "Urząd Miasta Wołomierz"
-                            }
+var document = new Abc.Nes.Document() {
+    Identifiers = new List<Abc.Nes.Elements.IdentifierElement> {
+        new Abc.Nes.Elements.IdentifierElement() {
+            Type = Abc.Nes.Elements.IdentifierElement.GetIdTypes(Enumerations.IdTypes.ObjectMark),
+            Value = "ABC-A.123.77.3.2011.JW.",
+            Subject = new Elements.SubjectElement() {
+                Institution = new Elements.InstitutionElement() {
+                    Name = "Urząd Miasta Wołomierz"
+                }
+            }
+        }
+    },
+    Titles = new List<Abc.Nes.Elements.TitleElement> {
+        new Abc.Nes.Elements.TitleElement(){
+            Original = new Abc.Nes.Elements.TitleWithLanguageCodeElement(){
+                Type = Enumerations.LanguageCode.pol,
+                    Value = "Tytuł dokumentu"
+            },
+            Alternative = new List<Elements.TitleWithLanguageCodeElement> {
+                new Elements.TitleWithLanguageCodeElement() {
+                    Type = Enumerations.LanguageCode.eng,
+                    Value = "Document title"
+                }
+            }
+        }
+    },
+    Dates = new List<Elements.DateElement> {
+        new Elements.DateElement() {
+            Type = Enumerations.EventDateType.Created,
+            Date = "2020-06-22"
+        }
+    },
+    Formats = new List<Elements.FormatElement> {
+        new Elements.FormatElement() {
+            Type = ".pdf",
+            Specification = "1.7",
+            Uncompleted = Enumerations.BooleanValues.False,
+            Size = new Elements.SizeElement() {
+                Measure = Elements.SizeElement.GetSizeType(Enumerations.FileSizeType.kB),
+                    Value = "4712"
+                }
+            }
+    },
+    Access = new List<Elements.AccessElement> {
+        new Elements.AccessElement() {
+            Access = Enumerations.AccessType.Public,
+            Description = "Uwagi dotyczące dostępności",
+            Date = new Elements.AccessDateElement() {
+                Type = Enumerations.AccessDateType.After,
+                Date = "2020-06-23"
+            }
+        }
+    },
+    Types = new List<Elements.TypeElement>() {
+        new Elements.TypeElement() {
+            Class = Elements.TypeElement.GetDocumentClassType(Enumerations.DocumentClassType.Text),
+            Kinds = new List<string> { Elements.TypeElement.GetDocumentKindType(Enumerations.DocumentKindType.Document) }
+        }
+    },
+    Groupings = new List<Elements.GroupingElement> {
+        new Elements.GroupingElement() {
+            Type = "Rejestr korespondencji przychodzącej",
+            Code = "RKP01",
+            Description = "tekstowy opis grupy"
+        }
+    },
+    Authors = new List<Elements.AuthorElement> {
+        new Elements.AuthorElement() {
+            Functions = new List<string> { Elements.AuthorElement.GetAuthorFunctionType(Enumerations.AuthorFunctionType.Created) },
+            Subject = new Elements.SubjectElement() {
+                Institution = new Elements.InstitutionElement() {
+                    Name = "Urząd Miasta Wołomierz"
+                }
+            }
+        }
+    },
+    Senders = new List<Elements.SenderElement> {
+        new Elements.SenderElement() {
+            Subject = new Elements.SubjectElement() {
+                Institution = new Elements.InstitutionElement() {
+                    Name = "Urząd Miasta Wołomierz"
+                }
+            }
+        }
+    },
+    Recipients = new List<Elements.RecipientElement> {
+        new Elements.RecipientElement() {
+            CC = Enumerations.BooleanValues.False,
+            Subject = new Elements.SubjectElement() {
+                Institution = new Elements.InstitutionElement() {
+                    Name = "Urząd Miasta Wołomierz"
+                }
+            }
+        },
+        new Elements.RecipientElement() {
+            CC = Enumerations.BooleanValues.True,
+            Subject = new Elements.SubjectElement() {
+                Institution = new Elements.InstitutionElement() {
+                    Name = "Regionalna Izba Obrachunkowa w Łodzi"
+                }
+            }
+        }
+    },
+    Relations = new List<Elements.RelationElement> {
+        new Elements.RelationElement {
+            Identifiers = new List<Elements.IdentifierElement> {
+                new Elements.IdentifierElement() {
+                    Type = "SystemID",
+                    Value = "P00112233.pdf.xades"
+                }
+            },
+            Type = Elements.RelationElement.GetRelationType(Enumerations.RelationType.HasReference)
+        },
+        new Elements.RelationElement {
+            Identifiers = new List<Elements.IdentifierElement> {
+                new Elements.IdentifierElement() {
+                    Type = "SystemID",
+                    Value = "dek2010123.txt"
+                }
+            },
+            Type = Elements.RelationElement.GetRelationType(Enumerations.RelationType.HasAttribution)
+        },
+        new Elements.RelationElement {
+            Identifiers = new List<Elements.IdentifierElement> {
+                new Elements.IdentifierElement() {
+                    Type = "SystemID",
+                    Value = "P00112233.docx"
+                }
+            },
+            Type = Elements.RelationElement.GetRelationType(Enumerations.RelationType.IsVersion)
+        },
+        new Elements.RelationElement {
+            Identifiers = new List<Elements.IdentifierElement> {
+                new Elements.IdentifierElement() {
+                    Type = "SystemID",
+                    Value = "UPD12345.xml"
+                }
+            },
+            Type = Elements.RelationElement.GetRelationType(Enumerations.RelationType.HasReference)
+        }
+    },
+    Qualifications = new List<Elements.QualificationElement> {
+        new Elements.QualificationElement() {
+            Type = Elements.QualificationElement.GetArchivalCategoryType(Enumerations.ArchivalCategoryType.BE10),
+            Date = "2005-03-05",
+            Subject = new Elements.SubjectElement() {
+            Institution = new Elements.InstitutionElement() {
+                Name = "Urząd Miasta Wołomierz",
+                    Unit = new Elements.InstitutionUnitElement() {
+                        Name = "Wydział Organizacyjny",
+                        Employee = new Elements.EmployeeElement() {
+                            FirstNames = new List<string> { "Jan" },
+                            Surname = "Kowalski",
+                            Position = "Specjalista"
                         }
-                    }
-                },
-                Titles = new List<Abc.Nes.Elements.TitleElement> {
-                    new Abc.Nes.Elements.TitleElement(){
-                        Original = new Abc.Nes.Elements.TitleWithLanguageCodeElement(){
-                            Type = Enumerations.LanguageCode.pol,
-                            Value = "Tytuł dokumentu"
-                        },
-                        Alternative = new List<Elements.TitleWithLanguageCodeElement> {
-                            new Elements.TitleWithLanguageCodeElement() {
-                                Type = Enumerations.LanguageCode.eng,
-                                Value = "Document title"
-                            }
-                        }
-                    }
-                },
-                Dates = new List<Elements.DateElement> {
-                    new Elements.DateElement() {
-                        Type = Enumerations.EventDateType.Created,
-                        Date = "2020-06-22"
-                    }
-                },
-                Formats = new List<Elements.FormatElement> {
-                    new Elements.FormatElement() {
-                        Type = ".pdf",
-                        Specification = "1.7",
-                        Uncompleted = Enumerations.BooleanValues.False,
-                        Size = new Elements.SizeElement() {
-                            Measure = Elements.SizeElement.GetSizeType(Enumerations.FileSizeType.kB),
-                            Value = "4712"
-                        }
-                    }
-                },
-                Access = new List<Elements.AccessElement> {
-                    new Elements.AccessElement() {
-                        Access = Enumerations.AccessType.Public,
-                        Description = "Uwagi dotyczące dostępności",
-                        Date = new Elements.AccessDateElement() {
-                            Type = Enumerations.AccessDateType.After,
-                            Date = "2020-06-23"
-                        }
-                    }
-                },
-                Types = new List<Elements.TypeElement>() {
-                    new Elements.TypeElement() {
-                        Class = Elements.TypeElement.GetDocumentClassType(Enumerations.DocumentClassType.Text),
-                        Kinds = new List<string> { Elements.TypeElement.GetDocumentKindType(Enumerations.DocumentKindType.Document) }
-                    }
-                },
-                Groupings = new List<Elements.GroupingElement> {
-                    new Elements.GroupingElement() {
-                        Type = "Rejestr korespondencji przychodzącej",
-                        Code = "RKP01",
-                        Description = "tekstowy opis grupy"
-                    }
-                },
-                Authors = new List<Elements.AuthorElement> {
-                    new Elements.AuthorElement() {
-                        Functions = new List<string> { Elements.AuthorElement.GetAuthorFunctionType(Enumerations.AuthorFunctionType.Created) },
-                        Subject = new Elements.SubjectElement() {
-                            Institution = new Elements.InstitutionElement() {
-                                Name = "Urząd Miasta Wołomierz"
-                            }
-                        }
-                    }
-                },
-                Senders = new List<Elements.SenderElement> {
-                    new Elements.SenderElement() {
-                        Subject = new Elements.SubjectElement() {
-                            Institution = new Elements.InstitutionElement() {
-                                Name = "Urząd Miasta Wołomierz"
-                            }
-                        }
-                    }
-                },
-                Recipients = new List<Elements.RecipientElement> {
-                    new Elements.RecipientElement() {
-                        CC = Enumerations.BooleanValues.False,
-                        Subject = new Elements.SubjectElement() {
-                            Institution = new Elements.InstitutionElement() {
-                                Name = "Urząd Miasta Wołomierz"
-                            }
-                        }
-                    },
-                    new Elements.RecipientElement() {
-                        CC = Enumerations.BooleanValues.True,
-                        Subject = new Elements.SubjectElement() {
-                            Institution = new Elements.InstitutionElement() {
-                                Name = "Regionalna Izba Obrachunkowa w Łodzi"
-                            }
-                        }
-                    }
-                },
-                Relations = new List<Elements.RelationElement> {
-                    new Elements.RelationElement {
-                        Identifiers = new List<Elements.IdentifierElement> {
-                            new Elements.IdentifierElement() {
-                                Type = "SystemID",
-                                Value = "P00112233.pdf.xades"
-                            }
-                        },
-                        Type = Elements.RelationElement.GetRelationType(Enumerations.RelationType.HasReference)
-                    },
-                    new Elements.RelationElement {
-                        Identifiers = new List<Elements.IdentifierElement> {
-                            new Elements.IdentifierElement() {
-                                Type = "SystemID",
-                                Value = "dek2010123.txt"
-                            }
-                        },
-                        Type = Elements.RelationElement.GetRelationType(Enumerations.RelationType.HasAttribution)
-                    },
-                    new Elements.RelationElement {
-                        Identifiers = new List<Elements.IdentifierElement> {
-                            new Elements.IdentifierElement() {
-                                Type = "SystemID",
-                                Value = "P00112233.docx"
-                            }
-                        },
-                        Type = Elements.RelationElement.GetRelationType(Enumerations.RelationType.IsVersion)
-                    },
-                    new Elements.RelationElement {
-                        Identifiers = new List<Elements.IdentifierElement> {
-                            new Elements.IdentifierElement() {
-                                Type = "SystemID",
-                                Value = "UPD12345.xml"
-                            }
-                        },
-                        Type = Elements.RelationElement.GetRelationType(Enumerations.RelationType.HasReference)
-                    }
-                },
-                Qualifications = new List<Elements.QualificationElement> {
-                    new Elements.QualificationElement() {
-                        Type = Elements.QualificationElement.GetArchivalCategoryType(Enumerations.ArchivalCategoryType.BE10),
-                        Date = "2005-03-05",
-                        Subject = new Elements.SubjectElement() {
-                            Institution = new Elements.InstitutionElement() {
-                                Name = "Urząd Miasta Wołomierz",
-                                Unit = new Elements.InstitutionUnitElement() {
-                                    Name = "Wydział Organizacyjny",
-                                    Employee = new Elements.EmployeeElement() {
-                                        FirstNames = new List<string> { "Jan" },
-                                        Surname = "Kowalski",
-                                        Position = "Specjalista"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                Languages = new List<Elements.TitleWithLanguageCodeElement>() {
-                    new Elements.TitleWithLanguageCodeElement() {
-                        Type = Enumerations.LanguageCode.pol,
-                        Value = "polski"
-                    }
-                },
-                Description = "projekt dokumentu \"Requirements for elaboration and implementation of information system of General department of Archives\", przekazny przez Przewodniczącą Departamentu Generalnego Archiwów przy Radzie Ministrów Republiki Bułgarii",
-                Keywords = new List<Elements.KeywordElement> {
-                    new Elements.KeywordElement() {
-                        Matters = new List<string> { "handel" },
-                        Places = new List<string> { "Polska" },
-                        Dates = new List<Elements.DateElement> {
-                            new Elements.DateElement() {
-                                Range = Enumerations.DateRangeType.DateFromTo,
-                                DateFrom = "2008",
-                                DateTo = "2012"
-                            }
-                        },
-                        Others = new List<Elements.KeywordDataElement> {
-                            new Elements.KeywordDataElement() {
-                                Key = "placówki handlowe",
-                                Value = "Anna i Jan"
-                            }
-                        } 
-                    }
-                },
-                Rights = new List<string> { "© Unesco 2003 do polskiego tłumaczenia Naczelna Dyrekcja Archiwów Państwowych" },
-                Locations = new List<string> { "Archiwum zakładowe Urzędu Miasta w Wołomierzu" },
-                Statuses = new List<Elements.StatusElement> { 
-                    new Elements.StatusElement() { 
-                        Kind = "status dokumentu",
-                        Version = "numer wersji",
-                        Description = "opis"
                     }
                 }
-            };
+            }
+        }
+    },
+    Languages = new List<Elements.TitleWithLanguageCodeElement>() {
+        new Elements.TitleWithLanguageCodeElement() {
+            Type = Enumerations.LanguageCode.pol,
+            Value = "polski"
+        }
+    },
+    Description = "projekt dokumentu \"Requirements for elaboration and implementation of information system of General department of Archives\", przekazny przez Przewodniczącą Departamentu Generalnego Archiwów przy Radzie Ministrów Republiki Bułgarii",
+    Keywords = new List<Elements.KeywordElement> {
+        new Elements.KeywordElement() {
+            Matters = new List<string> { "handel" },
+            Places = new List<string> { "Polska" },
+            Dates = new List<Elements.DateElement> {
+                new Elements.DateElement() {
+                    Range = Enumerations.DateRangeType.DateFromTo,
+                    DateFrom = "2008",
+                    DateTo = "2012"
+                }
+            },
+            Others = new List<Elements.KeywordDataElement> {
+                new Elements.KeywordDataElement() {
+                    Key = "placówki handlowe",
+                    Value = "Anna i Jan"
+                }
+            } 
+        }
+    },
+    Rights = new List<string> { "© Unesco 2003 do polskiego tłumaczenia Naczelna Dyrekcja Archiwów Państwowych" },
+    Locations = new List<string> { "Archiwum zakładowe Urzędu Miasta w Wołomierzu" },
+    Statuses = new List<Elements.StatusElement> { 
+        new Elements.StatusElement() { 
+            Kind = "status dokumentu",
+            Version = "numer wersji",
+            Description = "opis"
+        }
+    }
+};
 ```
 ### ABCPRO.NES.ArchivalPackage
 
 #### Ładowanie paczki archiwalnej
 
 ``` C#
-            var path = @"../../../sample/ValidatedPackage.zip";
-            var mgr = new PackageManager();
-            mgr.LoadPackage(path);
-            var isNotEmpty = mgr != null && mgr.Package != null && !mgr.Package.IsEmpty;
+var path = @"../../../sample/ValidatedPackage.zip";
+var mgr = new PackageManager();
+mgr.LoadPackage(path);
+
+var isNotEmpty = mgr != null && mgr.Package != null && !mgr.Package.IsEmpty;
 ```            
 
 #### Pobieranie informacji o ilości dokumentów w paczce archiwalnej 
 
 ```C#
-            var path = @"../../../sample/ValidatedPackage.zip";
-            var mgr = new PackageManager();
-            mgr.LoadPackage(path);
-            var count = mgr.GetDocumentsCount();
+var path = @"../../../sample/ValidatedPackage.zip";
+var mgr = new PackageManager();
+mgr.LoadPackage(path);
+
+var count = mgr.GetDocumentsCount();
 ```
 
 #### Pobieranie listy plików w paczce archiwalnej 
 
 ``` C#
-            var path = @"../../../sample/ValidatedPackage.zip";
-            var mgr = new PackageManager();
-            mgr.LoadPackage(path);
-            var items = mgr.GetAllFiles();
+var path = @"../../../sample/ValidatedPackage.zip";
+var mgr = new PackageManager();
+mgr.LoadPackage(path);
+
+var items = mgr.GetAllFiles();
+```
+
+#### Pobranie pliku metadanych dla wskazanej ścieżki pliku dokumentu
+
+```C#
+var path = @"../../../sample/ValidatedPackage.zip";
+var mgr = new PackageManager();
+mgr.LoadPackage(path);
+
+var item = mgr.GetItemByFilePath("Dokumenty/Wniosek/Wniosek.xml");
+if (item != null) {
+    var metadataFile = mgr.GetMetadataFile(item);                
+}
+```
+
+#### Pobranie obiektu folderu dla wskazanej ścieżki pliku dokumentu
+
+```C#
+var path = @"../../../sample/ValidatedPackage.zip";
+var mgr = new PackageManager();
+mgr.LoadPackage(path);
+
+var folder = mgr.GetParentFolder("dokumenty/Wniosek/Wniosek.xml");
 ```
 
 #### Ładowanie, dodanie pliku z metadanymi i zapisanie paczki archiwalnej 
 
 ``` C#
-            var path = @"../../../sample/ValidatedPackage.zip";
-            var mgr = new PackageManager();
-            mgr.LoadPackage(path);
+var path = @"../../../sample/ValidatedPackage.zip";
+var mgr = new PackageManager();
+mgr.LoadPackage(path);
 
-            mgr.AddFile(new DocumentFile() {
-                FileData = File.ReadAllBytes(@"../../../sample/sample_file.pdf"),
-                FileName = "TabelaWydatkow.pdf"
-            }, new Document() {
-                Identifiers = new List<Elements.IdentifierElement>() {
-                    new Elements.IdentifierElement() {
-                        Type = "Numer tabeli",
-                        Value = "3",
-                        Subject = new Elements.SubjectElement() {
-                            Person = new Elements.PersonElement() {
-                                FirstNames = new List<string> { "Jan" },
-                                Surname = "Kowalski",
-                                Contacts = new List<Elements.ContactElement> {
-                                    new Elements.ContactElement() {
-                                        Type = Elements.ContactElement.GetContactType(ContactType.Email),
-                                        Value = "jan.kowalski@miastowolomierz.pl"
-                                    }
-                                }
+mgr.AddFile(new DocumentFile() {
+    FileData = File.ReadAllBytes(@"../../../sample/sample_file.pdf"),
+    FileName = "TabelaWydatkow.pdf"
+}, new Document() {
+    Identifiers = new List<Elements.IdentifierElement>() {
+        new Elements.IdentifierElement() {
+            Type = "Numer tabeli",
+            Value = "3",
+            Subject = new Elements.SubjectElement() {
+                Person = new Elements.PersonElement() {
+                    FirstNames = new List<string> { "Jan" },
+                    Surname = "Kowalski",
+                    Contacts = new List<Elements.ContactElement> {
+                        new Elements.ContactElement() {
+                            Type = Elements.ContactElement.GetContactType(ContactType.Email),
+                                Value = "jan.kowalski@miastowolomierz.pl"
                             }
                         }
                     }
-                 },
-                Titles = new List<Elements.TitleElement> {
-                    new Elements.TitleElement() {
-                        Original = new Elements.TitleWithLanguageCodeElement(){
-                            Type = LanguageCode.pol,
-                            Value = "Tabela wydatków"
-                        }
-                    }
-                 },
-                Dates = new List<Elements.DateElement> {
-                    new Elements.DateElement() {
-                        Type = EventDateType.Created,
-                        Date = "2020-04-01 12:32:00"
-                    }
-                 },
-                Formats = new List<Elements.FormatElement> {
-                    new Elements.FormatElement() {
-                        Type = "PDF",
-                        Specification = "1.7",
-                        Uncompleted = BooleanValues.False,
-                        Size = new Elements.SizeElement() {
-                            Measure = Elements.SizeElement.GetSizeType(FileSizeType.bajt),
-                            Value = new FileInfo(@"../../../sample/sample_file.pdf").Length.ToString()
-                        }
-                    }
-                 },
-                Access = new List<Elements.AccessElement> {
-                    new Elements.AccessElement() {
-                        Access = AccessType.Public
-                    }
-                 },
-                Types = new List<Elements.TypeElement> {
-                    new Elements.TypeElement() {
-                        Class = Elements.TypeElement.GetDocumentClassType(DocumentClassType.Text),
-                        Kinds = new List<string> { Elements.TypeElement.GetDocumentKindType(DocumentKindType.Regulation) }
-                    }
-                 },
-                Groupings = new List<Elements.GroupingElement> {
-                    new Elements.GroupingElement() {
-                        Type = "Rejestr wydatków",
-                        Code = "KS_RW",
-                        Description = "Księgowość: rejestr wydatków"
-                    }
-                 }
-            });
+                }
+            }
+        },
+        Titles = new List<Elements.TitleElement> {
+            new Elements.TitleElement() {
+                Original = new Elements.TitleWithLanguageCodeElement(){
+                    Type = LanguageCode.pol,
+                    Value = "Tabela wydatków"
+                }
+            }
+        },
+        Dates = new List<Elements.DateElement> {
+            new Elements.DateElement() {
+                Type = EventDateType.Created,
+                Date = "2020-04-01 12:32:00"
+            }
+        },
+        Formats = new List<Elements.FormatElement> {
+            new Elements.FormatElement() {
+                Type = "PDF",
+                Specification = "1.7",
+                Uncompleted = BooleanValues.False,
+                Size = new Elements.SizeElement() {
+                    Measure = Elements.SizeElement.GetSizeType(FileSizeType.bajt),
+                    Value = new FileInfo(@"../../../sample/sample_file.pdf").Length.ToString()
+                }
+            }
+        },
+        Access = new List<Elements.AccessElement> {
+            new Elements.AccessElement() {
+                Access = AccessType.Public
+            }
+        },
+        Types = new List<Elements.TypeElement> {
+            new Elements.TypeElement() {
+                Class = Elements.TypeElement.GetDocumentClassType(DocumentClassType.Text),
+                Kinds = new List<string> { Elements.TypeElement.GetDocumentKindType(DocumentKindType.Regulation) }
+            }
+        },
+        Groupings = new List<Elements.GroupingElement> {
+        new Elements.GroupingElement() {
+            Type = "Rejestr wydatków",
+            Code = "KS_RW",
+            Description = "Księgowość: rejestr wydatków"
+        }
+    }
+});
 
-            mgr.Save(@"../../../sample/ValidatedPackage.zip");
+mgr.Save(@"../../../sample/ValidatedPackage.zip");
 ```
 
 ### ABCPRO.NES.XAdES
@@ -490,8 +518,14 @@ using (var mgr = new PackageSignerManager()) {
 
 ## Historia
 
-Historia niezbędnych elementów dokumentów elektronicznych rozpoczęła się 30 października 2006 roku wraz z wydaniem rozporządzenia Ministra Spraw Wewnętrznych i Administracji w sprawie niezbędnych elementów struktury dokumentów elektronicznych [(Dz.U. Nr 206, poz. 1517)](https://eli.gov.pl/eli/DU/2006/1517/ogl). 
+Historia niezbędnych elementów dokumentów elektronicznych rozpoczęła się 30 października 2006 roku wraz z wydaniem rozporządzenia Ministra Spraw Wewnętrznych i Administracji w sprawie niezbędnych elementów struktury dokumentów elektronicznych [(Dz.U. z 2006 r. Nr 206, poz. 1517)](https://eli.gov.pl/eli/DU/2006/1517/ogl). 
 
-NES łaczą się bezpośrednio z Ustawą o narodowym zasobie archiwalnym i archiwach  [(Dz.U. z 2019 r. poz. 553)](https://eli.gov.pl/eli/DU/1983/173/ogl), Rozporządzeniem Ministra Spraw Wewnętrznych i Administracji w sprawie wymagań technicznych formatów zapisu i informatycznych nośników danych, na których utrwalono materiały archiwalne przekazywane do archiwów państwowych  [(Dz.U. Nr 206, poz. 1519)](https://eli.gov.pl/eli/DU/2006/1519/ogl) i Rozporządzeniem Prezydenta Rzeczypospolitej Polskiej w sprawie szczegółowego sposobu oraz szczegółowych warunków przekazywania skargi wraz z aktami sprawy i odpowiedzią na skargę do sądu administracyjnego  [(Dz.U. z 2019 r. poz. 1003)](https://eli.gov.pl/eli/DU/2019/1003/ogl)
+NES od początku miały opisywać dokumenty przekazywane do Archiwów Paśtwowych, a rozporządzenie wynika z delegacji zamieszczonej w ustawie o narodowym zasobie archiwalnym i archiwach  [(Dz.U. z 2019 r. poz. 553)](https://eli.gov.pl/eli/DU/1983/173/ogl), a wydał je Minister Spraw Wewnętrznych i Administracji w rozporządzeniu w sprawie wymagań technicznych formatów zapisu i informatycznych nośników danych, na których utrwalono materiały archiwalne przekazywane do archiwów państwowych  [(Dz.U. Nr 206, poz. 1519)](https://eli.gov.pl/eli/DU/2006/1519/ogl).
+
+W Dz.U. z 2019 r. pod poz. 1003 opublikowano rozporządzenia Prezydenta Rzeczypospolitej Polskiej z 27 maja 2019 r. w sprawie szczegółowego sposobu oraz szczegółowych warunków przekazywania skargi wraz z aktami sprawy i odpowiedzią na skargę do sądu administracyjnego [(Dz.U. z 2019 r. poz. 1003)](https://eli.gov.pl/eli/DU/2019/1003/ogl).
+
+Z rozporządzenia wynika, że po pierwsze, skargę oraz odpowiedź na skargę organ przekazuje w formie lub postaci, w jakiej zostały sporządzone. Natomiast skargę lub odpowiedź na skargę sporządzoną w formie dokumentu elektronicznego organ przekazuje do elektronicznej skrzynki podawczej sądu.
+
+Z §7 rozporządzenia wynika, że akta sprawy prowadzone w postaci elektronicznej przekazuje się jako wyodrębniony z systemu elektronicznego zarządzania dokumentacją, w rozumieniu przepisów o narodowym zasobie archiwalnym i archiwach, zbiór dokumentów obejmujących akta sprawy (paczka eADM). Opisane powyżej biblioteki służą do jej sporządzenia i podpisania bezpiecznym podpisem elektronicznym. Więcej informacji o eADM można znaleźć na stronie [gov.legalis.pl](https://gov.legalis.pl/przekazywanie-skargi-do-sadu-administracyjnego/).
 
 <a href="https://www.abcpro.pl"><img alt="www" src="https://img.shields.io/badge/www-abcpro.pl-orange?style=for-the-badge"></a> 

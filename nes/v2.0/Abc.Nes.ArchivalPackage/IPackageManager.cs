@@ -28,5 +28,10 @@ namespace Abc.Nes.ArchivalPackage {
 		int GetDocumentsCount();
 		IEnumerable<ItemBase> GetAllFiles();
 		IEnumerable<ItemBase> GetAllFiles(FolderBase folder);
+
+		FolderBase GetParentFolder(ItemBase item);
+		FolderBase GetParentFolder(string filePath);
+		ItemBase GetItemByFilePath(string filePath);
+		MetadataFile GetMetadataFile(ItemBase documentFile);
 	}
 }

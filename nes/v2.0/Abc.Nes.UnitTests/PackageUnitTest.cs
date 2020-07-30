@@ -132,6 +132,35 @@ namespace Abc.Nes.UnitTests {
         }
 
         [TestMethod]
+        public void Package_GetMetadataFile() {
+            var result = false;
+            var path = @"../../../sample/ValidatedPackage.zip";
+            var mgr = new PackageManager();
+            mgr.LoadPackage(path);
+            var item = mgr.GetItemByFilePath("dokumenty/Wniosek/Wniosek.xml");
+            if (item != null) {
+                var metadataFile = mgr.GetMetadataFile(item);
+                result = metadataFile != null;
+            }
+
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void Package_GetParentFolder() {
+            var result = false;
+            var path = @"../../../sample/ValidatedPackage.zip";
+            var mgr = new PackageManager();
+            mgr.LoadPackage(path);
+            var item = mgr.GetParentFolder("dokumenty/Wniosek/Wniosek.xml");
+            if (item != null) {
+                result = item != null && item.GetItems().Any();
+            }
+
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
         public void Package_GetAllFiles() {
             var path = @"../../../sample/ValidatedPackage.zip";
             var mgr = new PackageManager();
@@ -149,7 +178,7 @@ namespace Abc.Nes.UnitTests {
             var path = @"../../../sample/ValidatedPackage.zip";
             var outputPath = @"../../../sample/SignedPackage.xades";
             using (var mgr = new PackageSignerManager()) {
-                mgr.Sign(new FileInfo(path).FullName, 
+                mgr.Sign(new FileInfo(path).FullName,
                     CertUtil.SelectCertificate(),
                     new FileInfo(outputPath).FullName,
                     new SignatureProductionPlace() {
@@ -165,6 +194,37 @@ namespace Abc.Nes.UnitTests {
                     );
 
             }
+            Assert.IsTrue(File.Exists(outputPath));
+        }
+
+        [TestMethod]
+        public void PackageSignerManager_SignDetached() {
+            var licPath = @"../../../../../../../Aspose.Total.lic";
+            new Aspose.Pdf.License().SetLicense(licPath);
+
+            var path = @"../../../sample/ValidatedPackage.zip";
+            var outputPath = @"../../../sample/SignedPackage.zip";
+            using (var mgr = new PackageSignerManager()) {
+                mgr.Sign(new FileInfo(path).FullName,
+                    CertUtil.SelectCertificate(),
+                    new FileInfo(outputPath).FullName,
+                    new SignatureProductionPlace() {
+                        City = "Warszawa",
+                        CountryName = "Polska",
+                        PostalCode = "03-825",
+                        StateOrProvince = "mazowieckie"
+                    },
+                    new SignerRole("Wiceprezes Zarządu"),
+                    true, // Podpisz pliki w paczce archiwalnej
+                    true, // Podpisz paczkę archiwalną
+                    true, // w pliku .xades umieść jedynie referencję do pliku paczki (podpis zewnętrzny - detached)
+                    true  // Podpisz pliki w paczce archiwalnej inne niż XML i PDF podpisem zewnętrznym
+                    );
+
+            }
+
+            var outputXadesFilePath = @"../../../sample/SignedPackage.zip.xades";
+            Assert.IsTrue(File.Exists(outputXadesFilePath));
         }
     }
 }

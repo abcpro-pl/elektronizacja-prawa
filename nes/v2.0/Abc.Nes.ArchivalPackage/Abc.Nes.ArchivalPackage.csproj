@@ -4,22 +4,22 @@
     <TargetFrameworks>netstandard2.1;netstandard2.0;net48;net461</TargetFrameworks>
     <Authors>ITORG Krzysztof Radzimski</Authors>
     <Company>ABC PRO Sp. z o.o.</Company>
-    <Description>.NET library for creating archival package for Polish State Archives (NES - Necessary elements of electronic documents structure).</Description>
+    <Description>.NET library for creating archival package (eADM) for Polish State Archives (NES - Necessary elements of electronic documents structure).</Description>
     <Copyright>ABC PRO Sp. z o.o.</Copyright>
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
     <PackageIcon>nes_logo.jpg</PackageIcon>
     <RepositoryUrl>https://github.com/abcpro-pl/elektronizacja-prawa.git</RepositoryUrl>
     <RepositoryType>GIT</RepositoryType>
 
-    <PackageReleaseNotes>You can create, edit and save archival package for Polish State Archives (NES - Necessary elements of electronic documents structure).
+    <PackageReleaseNotes>You can create, edit and save archival package (eADM) for Polish State Archives (NES - Necessary elements of electronic documents structure).
 </PackageReleaseNotes>
     <SignAssembly>false</SignAssembly>
     <PackageId>ABCPRO.NES.ArchivalPackage</PackageId>
     <Product>ABCPRO.NES.ArchivalPackage</Product>
     <PackageProjectUrl>https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0</PackageProjectUrl>
-    <AssemblyVersion>1.0.0.7</AssemblyVersion>
-    <FileVersion>1.0.0.7</FileVersion>
-    <Version>1.0.7</Version>
+    <AssemblyVersion>1.0.0.9</AssemblyVersion>
+    <FileVersion>1.0.0.9</FileVersion>
+    <Version>1.0.9</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
@@ -36,8 +36,7 @@
 
   <ItemGroup>
     <PackageReference Include="ABCPRO.NES" Version="1.0.5" />
-    <PackageReference Include="DotNetZip" Version="1.13.8" />
-    
+    <PackageReference Include="DotNetZip" Version="1.13.8" />    
   </ItemGroup>
 
 </Project>

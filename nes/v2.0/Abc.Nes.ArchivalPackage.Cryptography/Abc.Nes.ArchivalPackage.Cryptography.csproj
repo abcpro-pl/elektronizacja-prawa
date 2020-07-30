@@ -4,21 +4,21 @@
     <TargetFrameworks>netstandard2.1;netstandard2.0;net48;net461</TargetFrameworks>
     <Authors>ITORG Krzysztof Radzimski</Authors>
     <Company>ABC PRO Sp. z o.o.</Company>
-    <Description>.NET library for digital signing archival package for Polish State Archives (NES - Necessary elements of electronic documents structure).</Description>
+    <Description>.NET library for digital signing archival package (eADM) for Polish State Archives (NES - Necessary elements of electronic documents structure).</Description>
     <Copyright>ABC PRO Sp. z o.o.</Copyright>
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
     <PackageIcon>nes_logo.jpg</PackageIcon>
     <RepositoryUrl>https://github.com/abcpro-pl/elektronizacja-prawa.git</RepositoryUrl>
     <RepositoryType>GIT</RepositoryType>
 
-    <PackageReleaseNotes>You can sign and verify digital signature of archival package for Polish State Archives (NES - Necessary elements of electronic documents structure).</PackageReleaseNotes>
+    <PackageReleaseNotes>You can sign and verify digital signature of archival package (eADM) for Polish State Archives (NES - Necessary elements of electronic documents structure).</PackageReleaseNotes>
     <SignAssembly>false</SignAssembly>
     <PackageId>ABCPRO.NES.ArchivalPackage.Cryptography</PackageId>
     <Product>ABCPRO.NES.ArchivalPackage.Cryptography</Product>
     <PackageProjectUrl>https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0</PackageProjectUrl>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
-    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <FileVersion>1.0.0.1</FileVersion>
+    <Version>1.0.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
@@ -34,7 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ABCPRO.NES.ArchivalPackage" Version="1.0.7" />
+    <PackageReference Include="ABCPRO.NES.ArchivalPackage" Version="1.0.9" />
     <PackageReference Include="ABCPRO.NES.XAdES" Version="1.0.4" />
     <PackageReference Include="Aspose.PDF" Version="20.7.0" />        
   </ItemGroup>
