@@ -28,7 +28,7 @@ namespace Microsoft.Xades {
     /// required functionality to add instances of typed classes and obtain typed
     /// elements through a custom indexer.
     /// </summary>
-    public class CounterSignatureCollection : ArrayList {
+    internal class CounterSignatureCollection : ArrayList {
         /// <summary>
         /// New typed indexer for the collection
         /// </summary>

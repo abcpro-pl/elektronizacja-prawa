@@ -28,7 +28,7 @@ namespace Microsoft.Xades {
     /// The UnsignedProperties element contains a number of properties that are
     /// not signed by the XMLDSIG signature
     /// </summary>
-    public class UnsignedProperties {
+    internal class UnsignedProperties {
         #region Private variables
         private string id;
         private UnsignedSignatureProperties unsignedSignatureProperties;

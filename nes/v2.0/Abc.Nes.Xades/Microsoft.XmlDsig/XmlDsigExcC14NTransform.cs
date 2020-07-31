@@ -8,7 +8,7 @@ using System.Xml;
 using SR = Abc.Nes.Xades.Properties.Resources;
 
 namespace Microsoft.XmlDsig {
-    public class XmlDsigExcC14NTransform : Transform {
+    internal class XmlDsigExcC14NTransform : Transform {
         private readonly Type[] _inputTypes = { typeof(Stream), typeof(XmlDocument), typeof(XmlNodeList) };
         private readonly Type[] _outputTypes = { typeof(Stream) };
         private readonly bool _includeComments;

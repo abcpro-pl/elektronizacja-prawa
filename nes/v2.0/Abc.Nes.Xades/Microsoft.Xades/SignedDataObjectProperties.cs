@@ -29,7 +29,7 @@ namespace Microsoft.Xades {
     /// The SignedDataObjectProperties element contains properties that qualify
     /// some of the signed data objects
     /// </summary>
-    public class SignedDataObjectProperties {
+    internal class SignedDataObjectProperties {
         #region Private variables
         private DataObjectFormatCollection dataObjectFormatCollection;
         private CommitmentTypeIndicationCollection commitmentTypeIndicationCollection;

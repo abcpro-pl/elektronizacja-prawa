@@ -10,7 +10,7 @@ using SR = Abc.Nes.Xades.Properties.Resources;
 
 namespace Microsoft.XmlDsig {
     // A class representing conversion from Base64 using CryptoStream
-    public class XmlDsigBase64Transform : Transform {
+    internal class XmlDsigBase64Transform : Transform {
         private readonly Type[] _inputTypes = { typeof(Stream), typeof(XmlNodeList), typeof(XmlDocument) };
         private readonly Type[] _outputTypes = { typeof(Stream) };
         private CryptoStream _cs;

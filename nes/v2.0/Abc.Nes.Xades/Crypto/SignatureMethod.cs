@@ -22,7 +22,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace Abc.Nes.Xades.Crypto {
-    public class SignatureMethod {
+    internal class SignatureMethod {
         #region Private variables
 
         private string _name;

@@ -28,7 +28,7 @@ namespace Microsoft.Xades {
     /// <summary>
     /// This class contains a collection of SigPolicyQualifiers
     /// </summary>
-    public class SigPolicyQualifiers {
+    internal class SigPolicyQualifiers {
         #region Private variables
         private SigPolicyQualifierCollection sigPolicyQualifierCollection;
         #endregion

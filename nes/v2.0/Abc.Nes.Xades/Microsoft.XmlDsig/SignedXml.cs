@@ -12,7 +12,7 @@ using System.Xml;
 using SR = Abc.Nes.Xades.Properties.Resources;
 
 namespace Microsoft.XmlDsig {
-    public class SignedXml {
+    internal class SignedXml {
         protected Signature m_signature;
         protected string m_strSigningKeyName;
 

@@ -37,7 +37,7 @@ namespace Microsoft.Xades {
     /// is not that important but being sure that the signer is empowered by his
     /// company to be the Sales Director is fundamental.
     /// </summary>
-    public class SignerRole {
+    internal class SignerRole {
         #region Private variables
         private ClaimedRoles claimedRoles;
         private CertifiedRoles certifiedRoles;

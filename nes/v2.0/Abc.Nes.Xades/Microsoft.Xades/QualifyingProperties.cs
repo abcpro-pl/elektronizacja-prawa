@@ -31,7 +31,7 @@ namespace Microsoft.Xades {
     /// all the qualifying information that should be added to an XML
     /// signature
     /// </summary>
-    public class QualifyingProperties {
+    internal class QualifyingProperties {
         #region Private variables
         private string id;
         private string target;

@@ -31,7 +31,7 @@ namespace Microsoft.Xades {
     /// certificate. It contains references to certificates and digest values
     /// computed on them
     /// </summary>
-    public class SigningCertificate {
+    internal class SigningCertificate {
         #region Private variables
         private CertCollection certCollection;
         #endregion

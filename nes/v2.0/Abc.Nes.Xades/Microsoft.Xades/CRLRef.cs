@@ -28,7 +28,7 @@ namespace Microsoft.Xades {
     /// <summary>
     /// This class contains information about a Certificate Revocation List (CRL)
     /// </summary>
-    public class CRLRef {
+    internal class CRLRef {
         #region Private variables
         private DigestAlgAndValueType digestAlgAndValue;
         private CRLIdentifier crlIdentifier;

@@ -28,7 +28,7 @@ namespace Microsoft.Xades {
     /// <summary>
     /// This class contains a collection of DocumentationReferences
     /// </summary>
-    public class DocumentationReferences {
+    internal class DocumentationReferences {
         #region Private variables
         private DocumentationReferenceCollection documentationReferenceCollection;
         #endregion

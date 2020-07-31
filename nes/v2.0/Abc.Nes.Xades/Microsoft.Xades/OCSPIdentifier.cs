@@ -31,7 +31,7 @@ namespace Microsoft.Xades {
     /// The optional URI attribute could serve to indicate where the OCSP
     /// response identified is archived.
     /// </summary>
-    public class OCSPIdentifier {
+    internal class OCSPIdentifier {
         #region Private variables
         private string uriAttribute;
         private string responderID;

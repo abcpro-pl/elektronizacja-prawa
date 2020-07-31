@@ -33,7 +33,7 @@ namespace Microsoft.Xades {
     /// An XML electronic signature aligned with the XAdES standard may
     /// contain at most one CompleteCertificateRefs element.
     /// </summary>
-    public class CompleteCertificateRefs {
+    internal class CompleteCertificateRefs {
         #region Private variables
         private string id;
         private CertRefs certRefs;

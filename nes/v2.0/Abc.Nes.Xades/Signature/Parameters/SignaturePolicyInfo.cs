@@ -24,7 +24,7 @@
 using Abc.Nes.Xades.Crypto;
 
 namespace Abc.Nes.Xades.Signature.Parameters {
-    public class SignaturePolicyInfo {
+    internal class SignaturePolicyInfo {
         #region Private variables
 
         private DigestMethod _defaultPolicyDigestAlgorithm = DigestMethod.SHA1;

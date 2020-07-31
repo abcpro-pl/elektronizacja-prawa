@@ -5,29 +5,23 @@ using System;
 using System.Collections;
 using SR = Abc.Nes.Xades.Properties.Resources;
 
-namespace Microsoft.XmlDsig
-{
-    public sealed class ReferenceList : IList
-    {
+namespace Microsoft.XmlDsig {
+    internal sealed class ReferenceList : IList {
         private readonly ArrayList _references;
 
-        public ReferenceList()
-        {
+        public ReferenceList() {
             _references = new ArrayList();
         }
 
-        public IEnumerator GetEnumerator()
-        {
+        public IEnumerator GetEnumerator() {
             return _references.GetEnumerator();
         }
 
-        public int Count
-        {
+        public int Count {
             get { return _references.Count; }
         }
 
-        public int Add(object value)
-        {
+        public int Add(object value) {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
 
@@ -37,23 +31,19 @@ namespace Microsoft.XmlDsig
             return _references.Add(value);
         }
 
-        public void Clear()
-        {
+        public void Clear() {
             _references.Clear();
         }
 
-        public bool Contains(object value)
-        {
+        public bool Contains(object value) {
             return _references.Contains(value);
         }
 
-        public int IndexOf(object value)
-        {
+        public int IndexOf(object value) {
             return _references.IndexOf(value);
         }
 
-        public void Insert(int index, object value)
-        {
+        public void Insert(int index, object value) {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
 
@@ -63,40 +53,32 @@ namespace Microsoft.XmlDsig
             _references.Insert(index, value);
         }
 
-        public void Remove(object value)
-        {
+        public void Remove(object value) {
             _references.Remove(value);
         }
 
-        public void RemoveAt(int index)
-        {
+        public void RemoveAt(int index) {
             _references.RemoveAt(index);
         }
 
-        public EncryptedReference Item(int index)
-        {
+        public EncryptedReference Item(int index) {
             return (EncryptedReference)_references[index];
         }
 
         [System.Runtime.CompilerServices.IndexerName("ItemOf")]
-        public EncryptedReference this[int index]
-        {
-            get
-            {
+        public EncryptedReference this[int index] {
+            get {
                 return Item(index);
             }
-            set
-            {
+            set {
                 ((IList)this)[index] = value;
             }
         }
 
         /// <internalonly/>
-        object IList.this[int index]
-        {
+        object IList.this[int index] {
             get { return _references[index]; }
-            set
-            {
+            set {
                 if (value == null)
                     throw new ArgumentNullException(nameof(value));
 
@@ -107,28 +89,23 @@ namespace Microsoft.XmlDsig
             }
         }
 
-        public void CopyTo(Array array, int index)
-        {
+        public void CopyTo(Array array, int index) {
             _references.CopyTo(array, index);
         }
 
-        bool IList.IsFixedSize
-        {
+        bool IList.IsFixedSize {
             get { return _references.IsFixedSize; }
         }
 
-        bool IList.IsReadOnly
-        {
+        bool IList.IsReadOnly {
             get { return _references.IsReadOnly; }
         }
 
-        public object SyncRoot
-        {
+        public object SyncRoot {
             get { return _references.SyncRoot; }
         }
 
-        public bool IsSynchronized
-        {
+        public bool IsSynchronized {
             get { return _references.IsSynchronized; }
         }
     }

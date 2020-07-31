@@ -34,7 +34,7 @@ namespace Microsoft.Xades {
     /// object. In consequence, a XAdES signature may contain more than one
     /// DataObjectFormat elements, each one qualifying one signed data object.
     /// </summary>
-    public class DataObjectFormat {
+    internal class DataObjectFormat {
         #region Private variables
         private string objectReferenceAttribute;
         private string description;

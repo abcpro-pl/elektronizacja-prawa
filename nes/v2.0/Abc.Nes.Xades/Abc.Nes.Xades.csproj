@@ -11,14 +11,14 @@
     <RepositoryUrl>https://github.com/abcpro-pl/elektronizacja-prawa.git</RepositoryUrl>
     <RepositoryType>GIT</RepositoryType>
 
-    <PackageReleaseNotes>You can sign and verify XAdES digital signatures.</PackageReleaseNotes>
+    <PackageReleaseNotes>You can sign and verify XAdES digital signatures. Microsoft.XAdES and Microsoft.XmlDsig namespace are encapsulated. Using Portable.BouncyCastle.</PackageReleaseNotes>
     <SignAssembly>false</SignAssembly>
     <PackageId>ABCPRO.NES.XAdES</PackageId>
     <Product>ABCPRO.NES.XAdES</Product>
     <PackageProjectUrl>https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0</PackageProjectUrl>
-    <AssemblyVersion>1.0.0.4</AssemblyVersion>
-    <FileVersion>1.0.0.4</FileVersion>
-    <Version>1.0.4</Version>
+    <AssemblyVersion>1.0.0.6</AssemblyVersion>
+    <FileVersion>1.0.0.6</FileVersion>
+    <Version>1.0.6</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
@@ -41,7 +41,8 @@
   <ItemGroup>
     <PackageReference Include="System.Security.Permissions" Version="4.7.0" />
     <PackageReference Include="System.Security.Cryptography.Pkcs" Version="4.7.0" />
-    <PackageReference Include="BouncyCastle.NetCore" Version="1.8.5" />
+    <!--<PackageReference Include="BouncyCastle.NetCore" Version="1.8.5" />-->
+    <PackageReference Include="Portable.BouncyCastle" Version="1.8.6.7" />
     <PackageReference Include="System.Memory" Version="4.5.4" />
   </ItemGroup>
 

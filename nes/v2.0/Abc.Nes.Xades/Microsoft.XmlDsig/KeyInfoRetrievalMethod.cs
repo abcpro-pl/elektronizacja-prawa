@@ -5,7 +5,7 @@ using System;
 using System.Xml;
 
 namespace Microsoft.XmlDsig {
-    public class KeyInfoRetrievalMethod : KeyInfoClause {
+    internal class KeyInfoRetrievalMethod : KeyInfoClause {
         private string _uri;
         private string _type;
 

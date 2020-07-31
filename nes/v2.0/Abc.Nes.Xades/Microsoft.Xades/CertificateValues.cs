@@ -37,7 +37,7 @@ namespace Microsoft.Xades {
     /// the ds:KeyInfo element of the signature or in the CertificateValues
     /// property element.
     /// </summary>
-    public class CertificateValues {
+    internal class CertificateValues {
         #region Private variables
         private string id;
         private EncapsulatedX509CertificateCollection encapsulatedX509CertificateCollection;

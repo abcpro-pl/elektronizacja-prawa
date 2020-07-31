@@ -33,7 +33,7 @@ namespace Microsoft.Xades {
     /// the hash computation process whose result will be included in the
     /// timestamp request to be sent to the TSA.
     /// </summary>
-    public class HashDataInfo {
+    internal class HashDataInfo {
         #region Private variables
         private string uriAttribute;
         private Transforms transforms;

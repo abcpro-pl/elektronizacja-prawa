@@ -8,7 +8,7 @@ using System.Xml;
 using SR = Abc.Nes.Xades.Properties.Resources;
 
 namespace Microsoft.XmlDsig {
-    public class KeyInfo : IEnumerable {
+    internal class KeyInfo : IEnumerable {
         private string _id;
         private readonly ArrayList _keyInfoClauses;
 

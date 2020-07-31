@@ -12,7 +12,7 @@ using System.Xml;
 using SR = Abc.Nes.Xades.Properties.Resources;
 
 namespace Microsoft.XmlDsig {
-    public class EncryptedXml {
+    internal class EncryptedXml {
         //
         // public constant Url identifiers used within the XML Encryption classes
         //

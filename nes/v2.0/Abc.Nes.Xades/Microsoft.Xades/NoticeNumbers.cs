@@ -30,7 +30,7 @@ namespace Microsoft.Xades {
     /// so that the XAdES based application can get the explicit notices from a
     /// notices file
     /// </summary>
-    public class NoticeNumbers {
+    internal class NoticeNumbers {
         #region Private variables
         private NoticeNumberCollection noticeNumberCollection;
         #endregion

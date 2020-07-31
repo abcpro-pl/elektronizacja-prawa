@@ -172,8 +172,8 @@ namespace Abc.Nes.UnitTests {
 
         [TestMethod]
         public void PackageSignerManager_Sign() {
-            var licPath = @"../../../../../../../Aspose.Total.lic";
-            new Aspose.Pdf.License().SetLicense(licPath);
+            //var licPath = @"../../../../../../../Aspose.Total.lic";
+            //new Aspose.Pdf.License().SetLicense(licPath);
 
             var path = @"../../../sample/ValidatedPackage.zip";
             var outputPath = @"../../../sample/SignedPackage.xades";
@@ -199,8 +199,8 @@ namespace Abc.Nes.UnitTests {
 
         [TestMethod]
         public void PackageSignerManager_SignDetached() {
-            var licPath = @"../../../../../../../Aspose.Total.lic";
-            new Aspose.Pdf.License().SetLicense(licPath);
+            //var licPath = @"../../../../../../../Aspose.Total.lic";
+            //new Aspose.Pdf.License().SetLicense(licPath);
 
             var path = @"../../../sample/ValidatedPackage.zip";
             var outputPath = @"../../../sample/SignedPackage.zip";

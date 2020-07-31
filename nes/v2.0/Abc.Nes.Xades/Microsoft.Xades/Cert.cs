@@ -28,7 +28,7 @@ namespace Microsoft.Xades {
     /// <summary>
     /// This class contains certificate identification information
     /// </summary>
-    public class Cert {
+    internal class Cert {
         #region Private variables
         private DigestAlgAndValueType certDigest;
         private IssuerSerial issuerSerial;

@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 namespace Microsoft.XmlDsig {
-    public sealed class DataReference : EncryptedReference {
+    internal sealed class DataReference : EncryptedReference {
         public DataReference() : base() {
             ReferenceType = "DataReference";
         }

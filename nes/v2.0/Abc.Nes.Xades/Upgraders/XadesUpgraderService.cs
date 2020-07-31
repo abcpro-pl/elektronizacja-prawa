@@ -30,7 +30,7 @@ namespace Abc.Nes.Xades.Upgraders {
         XAdES_XL
     }
 
-    public class XadesUpgraderService {
+    internal class XadesUpgraderService {
         #region Public methods
 
         public void Upgrade(SignatureDocument sigDocument, SignatureFormat toFormat, UpgradeParameters parameters) {

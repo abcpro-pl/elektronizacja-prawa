@@ -7,7 +7,7 @@ using System.Xml;
 using SR = Abc.Nes.Xades.Properties.Resources;
 
 namespace Microsoft.XmlDsig {
-    public sealed class EncryptedKey : EncryptedType {
+    internal sealed class EncryptedKey : EncryptedType {
         private string _recipient;
         private string _carriedKeyName;
         private ReferenceList _referenceList;

@@ -23,7 +23,7 @@ using SR = Abc.Nes.Xades.Properties.Resources;
 namespace Microsoft.XmlDsig {
     // This class represents an ordered chain of transforms
 
-    public class TransformChain {
+    internal class TransformChain {
         private readonly ArrayList _transforms;
 
         public TransformChain() {

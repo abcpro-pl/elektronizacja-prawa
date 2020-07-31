@@ -22,7 +22,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace Abc.Nes.Xades.Signature.Parameters {
-    public class SignatureCommitmentType {
+    internal class SignatureCommitmentType {
         #region Private variables
 
         private string _uri;

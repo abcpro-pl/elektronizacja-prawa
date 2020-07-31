@@ -28,7 +28,7 @@ namespace Microsoft.Xades {
     /// <summary>
     /// This class contains a collection of OCSPValues
     /// </summary>
-    public class OCSPValues {
+    internal class OCSPValues {
         #region Private variables
         private OCSPValueCollection ocspValueCollection;
         #endregion

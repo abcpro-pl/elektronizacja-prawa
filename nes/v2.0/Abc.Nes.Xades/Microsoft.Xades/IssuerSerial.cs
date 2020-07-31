@@ -29,7 +29,7 @@ namespace Microsoft.Xades {
     /// The element IssuerSerial contains the identifier of one of the
     /// certificates referenced in the sequence
     /// </summary>
-    public class IssuerSerial {
+    internal class IssuerSerial {
         #region Private variables
         private string x509IssuerName;
         private string x509SerialNumber;

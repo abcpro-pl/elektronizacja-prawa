@@ -11,7 +11,7 @@ using System.Xml;
 using SR = Abc.Nes.Xades.Properties.Resources;
 
 namespace Microsoft.XmlDsig {
-    public class KeyInfoX509Data : KeyInfoClause {
+    internal class KeyInfoX509Data : KeyInfoClause {
         // An array of certificates representing the certificate chain
         private ArrayList _certificates;
         // An array of issuer serial structs

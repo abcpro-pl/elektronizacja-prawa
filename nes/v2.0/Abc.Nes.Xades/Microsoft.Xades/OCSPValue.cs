@@ -26,7 +26,7 @@ namespace Microsoft.Xades {
     /// EncapsulatedOCSPValue element contains the base64 encoding of a
     /// DER-encoded OCSP Response
     /// </summary>
-    public class OCSPValue : EncapsulatedPKIData {
+    internal class OCSPValue : EncapsulatedPKIData {
         #region Constructors
         /// <summary>
         /// Default constructor

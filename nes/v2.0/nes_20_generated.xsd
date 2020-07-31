@@ -126,7 +126,7 @@ Pozwala na szybkie odnalezienie tego samego dokumentu na podstawie jego identyfi
 Stwarza podstawy do tworzenia jednoznacznych powiązań (relacji) między dokumentami w określonym zbiorze np. przyporządkowując załączniki, notatki, potwierdzenia wysłania, potwierdzenia doręczenia, podpisy elektronicznie, opinie itd.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element maxOccurs="1" name="typidentyfikatora" type="xs:string">
+      <xs:element maxOccurs="1" name="typidentyfikatora" type="ndap:identyfikator-rodzaj-typ">
         <xs:annotation>
           <xs:documentation>Typ identyfikatora np. Znak sprawy.</xs:documentation>
         </xs:annotation>
@@ -1516,6 +1516,25 @@ Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czy
       <xs:documentation>Lokalizacja dokumentu.</xs:documentation>
     </xs:annotation>
     <xs:union memberTypes="ndap:niepusty-ciag-typ" />
+  </xs:simpleType>
+  <xs:simpleType name="identyfikator-rodzaj-typ">
+    <xs:annotation>
+      <xs:documentation>Typy identyfikatorów</xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes="xs:string">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="SystemID" />
+          <xs:enumeration value="znak sprawy" />
+          <xs:enumeration value="sygnatura akt" />
+          <xs:enumeration value="znak pisma" />
+          <xs:enumeration value="numer" />
+          <xs:enumeration value="id.ezd.puw" />
+          <xs:enumeration value="id.ezd.eDOK" />
+          <xs:enumeration value="ePUAP CID" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
   </xs:simpleType>
   <xs:simpleType name="osoba-identyfikator-rodzajtyp">
     <xs:annotation>

@@ -26,7 +26,7 @@ namespace Microsoft.Xades {
     /// <summary>
     /// This class contains a timestamp encoded as XML
     /// </summary>
-    public class XMLTimeStamp {
+    internal class XMLTimeStamp {
         #region Private variables
         private XmlElement anyXmlElement;
         #endregion

@@ -8,7 +8,7 @@ using System.Xml;
 using SR = Abc.Nes.Xades.Properties.Resources;
 
 namespace Microsoft.XmlDsig {
-    public class Signature {
+    internal class Signature {
         private string _id;
         private SignedInfo _signedInfo;
         private byte[] _signatureValue;

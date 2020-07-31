@@ -29,7 +29,7 @@ namespace Microsoft.Xades {
     /// The properties that qualify the signature itself or the signer are
     /// included as content of the SignedSignatureProperties element
     /// </summary>
-    public class SignedSignatureProperties {
+    internal class SignedSignatureProperties {
         #region Private variables
         private DateTime signingTime;
         private SigningCertificate signingCertificate;

@@ -32,7 +32,7 @@ namespace Microsoft.Xades {
     /// The XML electronic signature aligned with the present document
     /// MAY contain at most one CompleteRevocationRefs element.
     /// </summary>
-    public class CompleteRevocationRefs {
+    internal class CompleteRevocationRefs {
         #region Private variables
         private string id;
         private CRLRefs crlRefs;

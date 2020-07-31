@@ -32,7 +32,7 @@ namespace Microsoft.Xades {
     /// other information. Its URI attribute could serve to	indicate where the
     /// identified CRL is archived.
     /// </summary>
-    public class CRLIdentifier {
+    internal class CRLIdentifier {
         #region Private variables
         private string uriAttribute;
         private string issuer;

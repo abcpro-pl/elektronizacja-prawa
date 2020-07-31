@@ -6,7 +6,7 @@ using System.Collections;
 using SR = Abc.Nes.Xades.Properties.Resources;
 
 namespace Microsoft.XmlDsig {
-    public sealed class EncryptionPropertyCollection : IList {
+    internal sealed class EncryptionPropertyCollection : IList {
         private readonly ArrayList _props;
 
         public EncryptionPropertyCollection() {

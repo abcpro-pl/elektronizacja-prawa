@@ -6,7 +6,7 @@ using System.Xml;
 namespace Microsoft.XmlDsig
 {
     // This is for generic, unknown nodes
-    public class KeyInfoNode : KeyInfoClause
+    internal class KeyInfoNode : KeyInfoClause
     {
         private XmlElement _node;
 

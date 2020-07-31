@@ -24,8 +24,7 @@
 using Abc.Nes.Xades.Crypto;
 
 namespace Abc.Nes.Xades.Clients {
-    public interface ITimeStampClient
-    {
+    internal interface ITimeStampClient {
         byte[] GetTimeStamp(byte[] hash, DigestMethod digestMethod, bool certReq);
     }
 }

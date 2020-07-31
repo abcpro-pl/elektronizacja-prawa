@@ -48,7 +48,7 @@ namespace Microsoft.Xades {
     /// that is used to identify objects in ASN.1 and the mechanism that is
     /// usually used to identify objects in an XML environment.
     /// </summary>
-    public class Identifier {
+    internal class Identifier {
         #region Private variables
         private KnownQualifier qualifier;
         private string identifierUri;

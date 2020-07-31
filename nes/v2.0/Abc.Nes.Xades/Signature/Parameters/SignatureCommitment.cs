@@ -25,7 +25,7 @@ using System.Collections.Generic;
 using System.Xml;
 
 namespace Abc.Nes.Xades.Signature.Parameters {
-    public class SignatureCommitment {
+    internal class SignatureCommitment {
         #region Public properties
 
         public SignatureCommitmentType CommitmentType { get; set; }

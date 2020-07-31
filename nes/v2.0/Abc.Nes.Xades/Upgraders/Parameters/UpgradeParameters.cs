@@ -28,7 +28,7 @@ using System.Collections.Generic;
 using System.IO;
 
 namespace Abc.Nes.Xades.Upgraders.Parameters {
-    public class UpgradeParameters {
+    internal class UpgradeParameters {
         #region Private variables
 
         private List<OcspServer> _ocspServers;

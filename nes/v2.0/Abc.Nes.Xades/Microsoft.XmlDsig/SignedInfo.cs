@@ -8,7 +8,7 @@ using System.Xml;
 using SR = Abc.Nes.Xades.Properties.Resources;
 
 namespace Microsoft.XmlDsig {
-    public class SignedInfo : ICollection {
+    internal class SignedInfo : ICollection {
         private string _id;
         private string _canonicalizationMethod;
         private string _signatureMethod;

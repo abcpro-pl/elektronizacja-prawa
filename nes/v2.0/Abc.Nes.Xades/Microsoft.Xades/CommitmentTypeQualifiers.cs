@@ -29,7 +29,7 @@ namespace Microsoft.Xades {
     /// The CommitmentTypeQualifier element provides means to include
     /// additional qualifying information on the commitment made by the signer
     /// </summary>
-    public class CommitmentTypeQualifiers {
+    internal class CommitmentTypeQualifiers {
         #region Private variables
         private CommitmentTypeQualifierCollection commitmentTypeQualifierCollection;
         #endregion

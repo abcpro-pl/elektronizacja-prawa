@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Xml;
 
 namespace Microsoft.XmlDsig {
-    public class RSAKeyValue : KeyInfoClause {
+    internal class RSAKeyValue : KeyInfoClause {
         private RSA _key;
 
         //

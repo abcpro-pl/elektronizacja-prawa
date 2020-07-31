@@ -28,7 +28,7 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Abc.Nes.Xades.Crypto {
-    public class Signer : IDisposable {
+    internal class Signer : IDisposable {
         private bool _disposeCryptoProvider;
 
         public X509Certificate2 Certificate { get; private set; }

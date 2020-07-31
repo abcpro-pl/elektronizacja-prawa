@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 
 namespace Abc.Nes.Xades.Utils {
-    public class MimeTypeUtil {
+    internal class MimeTypeUtil {
         private static readonly IDictionary<string, string> _mimeTypes = new Dictionary<string, string>
  {
             {"ai", "application/postscript"},

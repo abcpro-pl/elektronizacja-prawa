@@ -33,7 +33,7 @@ using System.Xml;
 namespace Abc.Nes.Xades.Signature {
     public class SignatureDocument {
         public XmlDocument Document { get; set; }
-        public XadesSignedXml XadesSignature { get; set; }
+        internal XadesSignedXml XadesSignature { get; set; }
 
         public byte[] GetDocumentBytes() {
             CheckSignatureDocument(this);

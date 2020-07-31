@@ -8,7 +8,7 @@ using System.Xml;
 using SR = Abc.Nes.Xades.Properties.Resources;
 
 namespace Microsoft.XmlDsig {
-    public class XmlLicenseTransform : Transform {
+    internal class XmlLicenseTransform : Transform {
         private readonly Type[] _inputTypes = { typeof(XmlDocument) };
         private readonly Type[] _outputTypes = { typeof(XmlDocument) };
         private XmlNamespaceManager _namespaceManager;

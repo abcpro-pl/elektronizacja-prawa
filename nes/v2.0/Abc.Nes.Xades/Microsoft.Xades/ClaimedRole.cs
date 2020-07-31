@@ -27,7 +27,7 @@ namespace Microsoft.Xades {
     /// This class contains a roles claimed by the signer but not it is not a
     /// certified role
     /// </summary>
-    public class ClaimedRole {
+    internal class ClaimedRole {
         #region Private variables
         private XmlElement anyXmlElement;
         private string innerText;

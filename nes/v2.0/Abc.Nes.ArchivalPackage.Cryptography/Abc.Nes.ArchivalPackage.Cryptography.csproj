@@ -11,14 +11,14 @@
     <RepositoryUrl>https://github.com/abcpro-pl/elektronizacja-prawa.git</RepositoryUrl>
     <RepositoryType>GIT</RepositoryType>
 
-    <PackageReleaseNotes>You can sign and verify digital signature of archival package (eADM) for Polish State Archives (NES - Necessary elements of electronic documents structure).</PackageReleaseNotes>
+    <PackageReleaseNotes>You can sign and verify digital signature of archival package (eADM) for Polish State Archives. Replece Aspose.Pdf with iTextSharp.</PackageReleaseNotes>
     <SignAssembly>false</SignAssembly>
     <PackageId>ABCPRO.NES.ArchivalPackage.Cryptography</PackageId>
     <Product>ABCPRO.NES.ArchivalPackage.Cryptography</Product>
     <PackageProjectUrl>https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0</PackageProjectUrl>
-    <AssemblyVersion>1.0.0.1</AssemblyVersion>
-    <FileVersion>1.0.0.1</FileVersion>
-    <Version>1.0.1</Version>
+    <AssemblyVersion>1.0.0.2</AssemblyVersion>
+    <FileVersion>1.0.0.2</FileVersion>
+    <Version>1.0.2</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
@@ -35,8 +35,9 @@
 
   <ItemGroup>
     <PackageReference Include="ABCPRO.NES.ArchivalPackage" Version="1.0.9" />
-    <PackageReference Include="ABCPRO.NES.XAdES" Version="1.0.4" />
-    <PackageReference Include="Aspose.PDF" Version="20.7.0" />        
+    <PackageReference Include="ABCPRO.NES.XAdES" Version="1.0.6" />
+    <!--<PackageReference Include="Aspose.PDF" Version="20.7.0" />-->
+    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.6.7" />
   </ItemGroup>
 
 </Project>

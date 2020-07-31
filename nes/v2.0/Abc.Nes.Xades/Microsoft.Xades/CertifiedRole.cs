@@ -25,7 +25,7 @@ namespace Microsoft.Xades {
     /// The CertifiedRoles element contains one or more wrapped attribute
     /// certificates for the signer
     /// </summary>
-    public class CertifiedRole : EncapsulatedPKIData {
+    internal class CertifiedRole : EncapsulatedPKIData {
         #region Constructors
         /// <summary>
         /// Default constructor

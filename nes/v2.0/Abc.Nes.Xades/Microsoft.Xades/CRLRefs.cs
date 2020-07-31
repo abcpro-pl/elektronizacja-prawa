@@ -28,7 +28,7 @@ namespace Microsoft.Xades {
     /// <summary>
     /// Class that contains a collection of CRL references
     /// </summary>
-    public class CRLRefs {
+    internal class CRLRefs {
         #region Private variables
         private CRLRefCollection crlRefCollection;
         #endregion

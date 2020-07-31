@@ -29,7 +29,7 @@ namespace Microsoft.Xades {
     /// The CertifiedRoles element contains one or more wrapped attribute
     /// certificates for the signer
     /// </summary>
-    public class CertifiedRoles {
+    internal class CertifiedRoles {
         #region Private variables
         private CertifiedRoleCollection certifiedRoleCollection;
         #endregion

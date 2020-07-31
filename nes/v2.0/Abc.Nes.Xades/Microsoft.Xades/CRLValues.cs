@@ -28,7 +28,7 @@ namespace Microsoft.Xades {
     /// <summary>
     /// This class contains a collection of CRL values
     /// </summary>
-    public class CRLValues {
+    internal class CRLValues {
         #region Private variables
         private CRLValueCollection crlValueCollection;
         #endregion

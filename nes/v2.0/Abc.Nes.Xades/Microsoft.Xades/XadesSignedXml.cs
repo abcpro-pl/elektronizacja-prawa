@@ -40,7 +40,7 @@ namespace Microsoft.Xades {
     /// signatures.  The property SignatureStandard will indicate the type of the
     /// signature: XMLDSIG or XAdES.
     /// </summary>
-    public class XadesSignedXml : Microsoft.XmlDsig.SignedXml {
+    internal class XadesSignedXml : Microsoft.XmlDsig.SignedXml {
         #region Constants
         /// <summary>
         /// The XAdES XML namespace URI
@@ -136,7 +136,7 @@ namespace Microsoft.Xades {
         /// SignatureTimeStamp element is such a property, it can only be
         /// created when the XMLDSIG signature has been computed.
         /// </summary>
-        public UnsignedProperties UnsignedProperties {
+        internal UnsignedProperties UnsignedProperties {
             get {
                 XmlElement dataObjectXmlElement;
                 DataObject xadesDataObject;

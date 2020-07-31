@@ -3,10 +3,8 @@
 
 using System.IO;
 
-namespace Microsoft.XmlDsig
-{
-    public interface IRelDecryptor
-    {
+namespace Microsoft.XmlDsig {
+    internal interface IRelDecryptor {
         Stream Decrypt(EncryptionMethod encryptionMethod, KeyInfo keyInfo, Stream toDecrypt);
     }
 }

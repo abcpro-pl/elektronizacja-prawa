@@ -34,7 +34,7 @@ namespace Microsoft.Xades {
     /// An XML electronic signature aligned with the present document MAY contain
     /// at most one SignatureProductionPlace element.
     /// </summary>
-    public class SignatureProductionPlace {
+    internal class SignatureProductionPlace {
         #region Private variables
         private string city;
         private string stateOrProvince;

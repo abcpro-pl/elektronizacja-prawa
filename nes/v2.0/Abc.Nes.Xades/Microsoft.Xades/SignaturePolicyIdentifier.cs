@@ -28,7 +28,7 @@ namespace Microsoft.Xades {
     /// <summary>
     /// This class contains an identifier of a signature policy
     /// </summary>
-    public class SignaturePolicyIdentifier {
+    internal class SignaturePolicyIdentifier {
         #region Private variables
         private SignaturePolicyId signaturePolicyId;
         private bool signaturePolicyImplied;

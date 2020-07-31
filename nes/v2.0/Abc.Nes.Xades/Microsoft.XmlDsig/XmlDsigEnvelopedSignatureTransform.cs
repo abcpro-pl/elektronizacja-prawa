@@ -8,7 +8,7 @@ using System.Xml;
 using SR = Abc.Nes.Xades.Properties.Resources;
 
 namespace Microsoft.XmlDsig {
-    public class XmlDsigEnvelopedSignatureTransform : Transform {
+    internal class XmlDsigEnvelopedSignatureTransform : Transform {
         private readonly Type[] _inputTypes = { typeof(Stream), typeof(XmlNodeList), typeof(XmlDocument) };
         private readonly Type[] _outputTypes = { typeof(XmlNodeList), typeof(XmlDocument) };
         private XmlNodeList _inputNodeList;

@@ -9,7 +9,7 @@ using System.Xml;
 using SR = Abc.Nes.Xades.Properties.Resources;
 
 namespace Microsoft.XmlDsig {
-    public class Reference {
+    internal class Reference {
         internal const string DefaultDigestMethod = SignedXml.XmlDsigSHA256Url;
 
         private string _id;

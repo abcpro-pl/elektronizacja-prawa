@@ -26,7 +26,7 @@ namespace Microsoft.Xades {
     /// <summary>
     /// This class provides a placeholder for other revocation information
     /// </summary>
-    public class OtherValue {
+    internal class OtherValue {
         #region Private variables
         private XmlElement anyXmlElement;
         #endregion

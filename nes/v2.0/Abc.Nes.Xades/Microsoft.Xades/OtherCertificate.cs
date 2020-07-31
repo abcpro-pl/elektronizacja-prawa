@@ -28,7 +28,7 @@ namespace Microsoft.Xades {
     /// The OtherCertificate element is a placeholder for potential future
     /// new formats of certificates
     /// </summary>
-    public class OtherCertificate : ArrayList {
+    internal class OtherCertificate : ArrayList {
         #region Private variables
         private XmlElement anyXmlElement;
         #endregion

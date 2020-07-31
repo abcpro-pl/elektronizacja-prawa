@@ -28,7 +28,7 @@ namespace Microsoft.Xades {
     /// <summary>
     /// The Transforms element contains a collection of transformations
     /// </summary>
-    public class Transforms {
+    internal class Transforms {
         #region Private variables
         private TransformCollection transformCollection;
         #endregion

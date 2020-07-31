@@ -5,7 +5,7 @@ using System;
 using System.Xml;
 
 namespace Microsoft.XmlDsig {
-    public abstract class EncryptedType {
+    internal abstract class EncryptedType {
         private string _id;
         private string _type;
         private string _mimeType;

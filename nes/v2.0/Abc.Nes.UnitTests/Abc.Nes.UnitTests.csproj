@@ -39,9 +39,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Aspose.PDF, Version=20.7.0.0, Culture=neutral, PublicKeyToken=f0262d67fe233d63, processorArchitecture=MSIL">
-      <HintPath>..\Abc.Nes\packages\Aspose.PDF.20.7.0\lib\net4.0\Aspose.PDF.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\Abc.Nes\packages\MSTest.TestFramework.2.1.1\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
     </Reference>

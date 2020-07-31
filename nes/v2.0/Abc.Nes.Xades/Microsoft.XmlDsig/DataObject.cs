@@ -5,7 +5,7 @@ using System;
 using System.Xml;
 
 namespace Microsoft.XmlDsig {
-    public class DataObject {
+    internal class DataObject {
         private string _id;
         private string _mimeType;
         private string _encoding;

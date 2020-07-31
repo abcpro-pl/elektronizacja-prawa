@@ -28,7 +28,7 @@ namespace Microsoft.Xades {
     /// <summary>
     /// This class contains a collection of OCSPRefs
     /// </summary>
-    public class OCSPRefs {
+    internal class OCSPRefs {
         #region Private variables
         private OCSPRefCollection ocspRefCollection;
         #endregion

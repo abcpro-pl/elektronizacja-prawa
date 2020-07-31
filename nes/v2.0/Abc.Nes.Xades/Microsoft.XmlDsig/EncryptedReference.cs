@@ -7,7 +7,7 @@ using System.Xml;
 using SR = Abc.Nes.Xades.Properties.Resources;
 
 namespace Microsoft.XmlDsig {
-    public abstract class EncryptedReference {
+    internal abstract class EncryptedReference {
         private string _uri;
         private string _referenceType;
         private TransformChain _transformChain;

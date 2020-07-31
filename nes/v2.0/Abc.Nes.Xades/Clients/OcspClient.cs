@@ -38,7 +38,7 @@ using System.Security.Cryptography;
 namespace Abc.Nes.Xades.Clients {
     public enum CertificateStatus { Good = 0, Revoked = 1, Unknown = 2 };
 
-    public class OcspClient {
+    internal class OcspClient {
         #region Private variables
 
         private Asn1OctetString _nonceAsn1OctetString;

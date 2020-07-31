@@ -29,7 +29,7 @@ namespace Microsoft.Xades {
     /// The SignedProperties element contains a number of properties that are
     /// collectively signed by the XMLDSIG signature
     /// </summary>
-    public class SignedProperties {
+    internal class SignedProperties {
         #region Constants
         /// <summary>
         /// Default value for the SignedProperties Id attribute

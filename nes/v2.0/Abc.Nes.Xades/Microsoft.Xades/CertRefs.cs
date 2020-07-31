@@ -28,7 +28,7 @@ namespace Microsoft.Xades {
     /// <summary>
     /// The CertRefs element contains a collection of Cert elements
     /// </summary>
-    public class CertRefs {
+    internal class CertRefs {
         #region Private variables
         private CertCollection certCollection;
         #endregion

@@ -34,7 +34,7 @@ namespace Abc.Nes.Xades.Signature.Parameters {
         ENVELOPING
     }
 
-    public class SignatureParameters {
+    internal class SignatureParameters {
         private SignatureMethod _defaultSignatureMethod = SignatureMethod.RSAwithSHA256;
         private DigestMethod _defaultDigestMethod = DigestMethod.SHA256;
 

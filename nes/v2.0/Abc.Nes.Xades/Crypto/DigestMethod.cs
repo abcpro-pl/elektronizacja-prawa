@@ -26,7 +26,7 @@ using System;
 using System.Security.Cryptography;
 
 namespace Abc.Nes.Xades.Crypto {
-    public class DigestMethod {
+    internal class DigestMethod {
         #region Private variables
 
         private string _name;

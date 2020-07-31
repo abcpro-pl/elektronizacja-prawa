@@ -34,7 +34,7 @@ namespace Microsoft.Xades {
     /// electronic signature by the signer as part of the signature
     /// calculation.
     /// </summary>
-    public class SignaturePolicyId {
+    internal class SignaturePolicyId {
         #region Private variables
         private ObjectIdentifier sigPolicyId;
         private Transforms transforms;

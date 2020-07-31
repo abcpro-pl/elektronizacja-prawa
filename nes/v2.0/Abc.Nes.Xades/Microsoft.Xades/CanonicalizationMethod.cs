@@ -27,7 +27,7 @@ namespace Microsoft.Xades {
     /// <summary>
     /// The Transform element contains a single transformation
     /// </summary>
-    public class CanonicalizationMethod {
+    internal class CanonicalizationMethod {
         #region Private variables
         private string algorithm;
         #endregion

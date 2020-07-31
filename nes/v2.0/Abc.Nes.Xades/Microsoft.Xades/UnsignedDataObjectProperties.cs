@@ -29,7 +29,7 @@ namespace Microsoft.Xades {
     /// The UnsignedDataObjectProperties element may contain properties that
     /// qualify some of the signed data objects.
     /// </summary>
-    public class UnsignedDataObjectProperties {
+    internal class UnsignedDataObjectProperties {
         #region Private variables
         private UnsignedDataObjectPropertyCollection unsignedDataObjectPropertyCollection;
         #endregion

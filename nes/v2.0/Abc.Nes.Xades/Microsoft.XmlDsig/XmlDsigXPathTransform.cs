@@ -11,7 +11,7 @@ using SR = Abc.Nes.Xades.Properties.Resources;
 namespace Microsoft.XmlDsig {
     // A class representing DSIG XPath Transforms
 
-    public class XmlDsigXPathTransform : Transform {
+    internal class XmlDsigXPathTransform : Transform {
         private readonly Type[] _inputTypes = { typeof(Stream), typeof(XmlNodeList), typeof(XmlDocument) };
         private readonly Type[] _outputTypes = { typeof(XmlNodeList) };
         private string _xpathexpr;

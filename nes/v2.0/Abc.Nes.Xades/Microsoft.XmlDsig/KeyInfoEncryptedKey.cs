@@ -6,7 +6,7 @@ using System.Xml;
 using SR = Abc.Nes.Xades.Properties.Resources;
 
 namespace Microsoft.XmlDsig {
-    public class KeyInfoEncryptedKey : KeyInfoClause {
+    internal class KeyInfoEncryptedKey : KeyInfoClause {
         private EncryptedKey _encryptedKey;
 
         public KeyInfoEncryptedKey() { }

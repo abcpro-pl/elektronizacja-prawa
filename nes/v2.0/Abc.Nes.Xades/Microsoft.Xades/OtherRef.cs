@@ -26,7 +26,7 @@ namespace Microsoft.Xades {
     /// <summary>
     /// Alternative forms of validation data can be included in this class
     /// </summary>
-    public class OtherRef {
+    internal class OtherRef {
         #region Private variables
         private XmlElement anyXmlElement;
         #endregion

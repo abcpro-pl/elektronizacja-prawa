@@ -27,7 +27,7 @@ namespace Microsoft.Xades {
     /// This class can contain additional information qualifying the signature
     /// policy identifier
     /// </summary>
-    public class SigPolicyQualifier {
+    internal class SigPolicyQualifier {
         #region Private variables
         private XmlElement anyXmlElement;
         #endregion

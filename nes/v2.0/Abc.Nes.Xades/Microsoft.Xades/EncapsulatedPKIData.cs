@@ -31,7 +31,7 @@ namespace Microsoft.Xades {
     /// the time include X509 certificates and revocation lists, OCSP responses,
     /// attribute certificates and time-stamps.
     /// </summary>
-    public class EncapsulatedPKIData {
+    internal class EncapsulatedPKIData {
         #region Private variables
         private string tagName;
         private string id;

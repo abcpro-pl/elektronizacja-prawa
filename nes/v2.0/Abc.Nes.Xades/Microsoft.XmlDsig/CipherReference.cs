@@ -7,7 +7,7 @@ using System.Xml;
 using SR = Abc.Nes.Xades.Properties.Resources;
 
 namespace Microsoft.XmlDsig {
-    public sealed class CipherReference : EncryptedReference {
+    internal sealed class CipherReference : EncryptedReference {
         private byte[] _cipherValue;
 
         public CipherReference() : base() {

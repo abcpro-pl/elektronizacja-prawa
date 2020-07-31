@@ -12,7 +12,7 @@ namespace Microsoft.XmlDsig {
     // XML Decryption Transform is used to specify the order of XML Digital Signature
     // and XML Encryption when performed on the same document.
 
-    public class XmlDecryptionTransform : Transform {
+    internal class XmlDecryptionTransform : Transform {
         private readonly Type[] _inputTypes = { typeof(Stream), typeof(XmlDocument) };
         private readonly Type[] _outputTypes = { typeof(XmlDocument) };
         private XmlNodeList _encryptedDataList;

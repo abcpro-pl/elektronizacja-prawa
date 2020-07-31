@@ -10,7 +10,7 @@ using System.Xml.Xsl;
 using SR = Abc.Nes.Xades.Properties.Resources;
 
 namespace Microsoft.XmlDsig {
-    public class XmlDsigXsltTransform : Transform {
+    internal class XmlDsigXsltTransform : Transform {
         private readonly Type[] _inputTypes = { typeof(Stream), typeof(XmlDocument), typeof(XmlNodeList) };
         private readonly Type[] _outputTypes = { typeof(Stream) };
         private XmlNodeList _xslNodes;

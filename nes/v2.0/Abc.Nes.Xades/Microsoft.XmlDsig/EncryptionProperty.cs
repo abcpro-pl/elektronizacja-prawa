@@ -7,7 +7,7 @@ using System.Xml;
 using SR = Abc.Nes.Xades.Properties.Resources;
 
 namespace Microsoft.XmlDsig {
-    public sealed class EncryptionProperty {
+    internal sealed class EncryptionProperty {
         private string _target;
         private string _id;
         private XmlElement _elemProp;

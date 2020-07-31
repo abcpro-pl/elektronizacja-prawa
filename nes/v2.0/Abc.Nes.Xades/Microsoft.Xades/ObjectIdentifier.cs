@@ -30,7 +30,7 @@ namespace Microsoft.Xades {
     /// object of an object and some additional information about the nature of
     /// the	data object
     /// </summary>
-    public class ObjectIdentifier {
+    internal class ObjectIdentifier {
         #region Private variables
         private string tagName;
         private Identifier identifier;

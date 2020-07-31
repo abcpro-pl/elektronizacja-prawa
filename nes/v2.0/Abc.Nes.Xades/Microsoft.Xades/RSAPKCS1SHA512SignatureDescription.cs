@@ -25,7 +25,7 @@ using System.Security.Cryptography;
 
 namespace Microsoft.Xades {
 
-    public sealed class RSAPKCS1SHA512SignatureDescription : SignatureDescription {
+    internal sealed class RSAPKCS1SHA512SignatureDescription : SignatureDescription {
         public RSAPKCS1SHA512SignatureDescription() {
             KeyAlgorithm = typeof(RSACryptoServiceProvider).FullName;
             DigestAlgorithm = typeof(SHA512Managed).FullName;

@@ -27,7 +27,7 @@ namespace Microsoft.Xades {
     /// <summary>
     /// The Transform element contains a single transformation
     /// </summary>
-    public class Transform {
+    internal class Transform {
         #region Private variables
         private string algorithm;
         private string xpath;

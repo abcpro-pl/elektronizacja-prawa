@@ -7,7 +7,7 @@ namespace Microsoft.XmlDsig
     //     <ec:InclusiveNamespaces PrefixList="dsig soap #default" xmlns:ec="http://www.w3.org/2001/10/xml-exc-c14n#"/>
     // </ds:Transform>
 
-    public class XmlDsigExcC14NWithCommentsTransform : XmlDsigExcC14NTransform
+    internal class XmlDsigExcC14NWithCommentsTransform : XmlDsigExcC14NTransform
     {
         public XmlDsigExcC14NWithCommentsTransform() : base(true)
         {

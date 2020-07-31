@@ -30,7 +30,7 @@ namespace Microsoft.Xades {
     /// numbers a group of textual statements prepared by that organization,
     /// so that the application could get the explicit notices from a notices file.
     /// </summary>
-    public class NoticeRef {
+    internal class NoticeRef {
         #region Private variables
         private string organization;
         private NoticeNumbers noticeNumbers;

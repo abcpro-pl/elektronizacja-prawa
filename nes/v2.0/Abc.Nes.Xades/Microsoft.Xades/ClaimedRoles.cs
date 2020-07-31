@@ -32,7 +32,7 @@ namespace Microsoft.Xades {
     /// The namespaces given to the corresponding XML schemas will allow
     /// their unambiguous identification in the case these roles use XML.
     /// </summary>
-    public class ClaimedRoles {
+    internal class ClaimedRoles {
         #region Private variables
         private ClaimedRoleCollection claimedRoleCollection;
         #endregion

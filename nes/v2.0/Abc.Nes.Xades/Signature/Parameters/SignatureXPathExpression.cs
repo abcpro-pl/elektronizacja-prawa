@@ -24,7 +24,7 @@
 using System.Collections.Generic;
 
 namespace Abc.Nes.Xades.Signature.Parameters {
-    public class SignatureXPathExpression {
+    internal class SignatureXPathExpression {
         #region Private variables
 
         private Dictionary<string, string> _namespaces;

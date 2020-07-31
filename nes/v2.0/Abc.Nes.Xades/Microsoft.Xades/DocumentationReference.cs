@@ -28,7 +28,7 @@ namespace Microsoft.Xades {
     /// DocumentationReference points to further explanatory documentation
     /// of the object identifier
     /// </summary>
-    public class DocumentationReference {
+    internal class DocumentationReference {
         #region Private variables
         private string documentationReferenceUri;
         #endregion

@@ -29,7 +29,7 @@ namespace Microsoft.Xades {
     /// SPUri represents the URL where the copy of the Signature Policy may be
     /// obtained.  The class derives from SigPolicyQualifier.
     /// </summary>
-    public class SPUri : SigPolicyQualifier {
+    internal class SPUri : SigPolicyQualifier {
         #region Private variables
         private string uri;
         #endregion

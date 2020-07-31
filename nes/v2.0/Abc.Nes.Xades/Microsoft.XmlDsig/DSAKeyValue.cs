@@ -8,7 +8,7 @@ using System.Xml;
 #pragma warning disable CA5384 // Do Not Use Digital Signature Algorithm (DSA)
 
 namespace Microsoft.XmlDsig {
-    public class DSAKeyValue : KeyInfoClause {
+    internal class DSAKeyValue : KeyInfoClause {
         private DSA _key;
 
         //

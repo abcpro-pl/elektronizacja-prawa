@@ -29,7 +29,7 @@ namespace Microsoft.Xades {
     /// <summary>
     /// This class contains timestamp information
     /// </summary>
-    public class TimeStamp {
+    internal class TimeStamp {
         #region Private variables
         private string id;
         private string tagName;

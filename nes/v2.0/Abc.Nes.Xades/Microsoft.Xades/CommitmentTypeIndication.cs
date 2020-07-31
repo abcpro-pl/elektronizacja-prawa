@@ -38,7 +38,7 @@ namespace Microsoft.Xades {
     /// specified either as part of the signature policy or may be registered
     /// for	generic use across multiple policies.
     /// </summary>
-    public class CommitmentTypeIndication {
+    internal class CommitmentTypeIndication {
         #region Private variables
         private ObjectIdentifier commitmentTypeId;
         private ObjectReferenceCollection objectReferenceCollection;

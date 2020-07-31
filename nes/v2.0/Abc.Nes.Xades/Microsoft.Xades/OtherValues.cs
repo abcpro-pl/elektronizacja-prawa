@@ -28,7 +28,7 @@ namespace Microsoft.Xades {
     /// <summary>
     /// This class contains a collection of OtherValues
     /// </summary>
-    public class OtherValues {
+    internal class OtherValues {
         #region Private variables
         private OtherValueCollection otherValueCollection;
         #endregion

@@ -30,7 +30,7 @@ using System.Net;
 using System.Text;
 
 namespace Abc.Nes.Xades.Clients {
-    public class TimeStampClient : ITimeStampClient {
+    internal class TimeStampClient : ITimeStampClient {
         #region Private variables
         private string _url;
         private string _user;

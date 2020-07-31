@@ -6,7 +6,7 @@ using System.Xml;
 using SR = Abc.Nes.Xades.Properties.Resources;
 
 namespace Microsoft.XmlDsig {
-    public class EncryptionMethod {
+    internal class EncryptionMethod {
         private XmlElement _cachedXml;
         private int _keySize;
         private string _algorithm;

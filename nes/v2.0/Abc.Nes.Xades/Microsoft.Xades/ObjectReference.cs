@@ -32,7 +32,7 @@ namespace Microsoft.Xades {
     /// However, if all the signed data objects share the same commitment,
     /// the AllSignedDataObjects empty element must be present.
     /// </summary>
-    public class ObjectReference {
+    internal class ObjectReference {
         #region Private variables
         private string objectReferenceUri;
         #endregion

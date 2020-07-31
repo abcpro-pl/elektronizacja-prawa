@@ -7,7 +7,7 @@ using System.Xml;
 using SR = Abc.Nes.Xades.Properties.Resources;
 
 namespace Microsoft.XmlDsig {
-    public sealed class EncryptedData : EncryptedType {
+    internal sealed class EncryptedData : EncryptedType {
         public override void LoadXml(XmlElement value) {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));

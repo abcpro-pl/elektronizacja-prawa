@@ -30,7 +30,7 @@ namespace Microsoft.Xades {
     /// UnsignedSignatureProperties may contain properties that qualify XML
     /// signature itself or the signer
     /// </summary>
-    public class UnsignedSignatureProperties {
+    internal class UnsignedSignatureProperties {
         #region Private variables
         private CounterSignatureCollection counterSignatureCollection;
         private SignatureTimeStampCollection signatureTimeStampCollection;

@@ -30,7 +30,7 @@ namespace Microsoft.Xades {
     /// This information is added for the shake of completeness and to cope with
     /// potential future needs for inclusion of such kind of properties.
     /// </summary>
-    public class UnsignedDataObjectProperty {
+    internal class UnsignedDataObjectProperty {
         #region Private variables
         private XmlElement anyXmlElement;
         #endregion

@@ -29,7 +29,7 @@ namespace Microsoft.Xades {
     /// This class represents the unique object of a XAdES signature that
     /// contains all XAdES information
     /// </summary>
-    public class XadesObject {
+    internal class XadesObject {
         #region Private variable
         private string id;
         private QualifyingProperties qualifyingProperties;

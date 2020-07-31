@@ -28,7 +28,7 @@ namespace Microsoft.Xades {
     /// <summary>
     /// This class contains a collection of OtherRefs
     /// </summary>
-    public class OtherRefs {
+    internal class OtherRefs {
         #region Private variables
         private OtherRefCollection otherRefCollection;
         #endregion

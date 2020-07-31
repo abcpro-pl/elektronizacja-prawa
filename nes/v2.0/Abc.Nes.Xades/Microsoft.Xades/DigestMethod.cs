@@ -27,7 +27,7 @@ namespace Microsoft.Xades {
     /// <summary>
     /// DigestMethod indicates the digest algorithm
     /// </summary>
-    public class DigestMethod {
+    internal class DigestMethod {
         #region Private variables
         private string algorithm;
         #endregion

@@ -29,7 +29,7 @@ namespace Microsoft.Xades {
     /// SPUserNotice element is intended for being displayed whenever the
     /// signature is validated.  The class derives from SigPolicyQualifier.
     /// </summary>
-    public class SPUserNotice : SigPolicyQualifier {
+    internal class SPUserNotice : SigPolicyQualifier {
         #region Private variables
         private NoticeRef noticeRef;
         private string explicitText;

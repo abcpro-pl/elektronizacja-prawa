@@ -32,7 +32,7 @@ namespace Microsoft.Xades {
     /// qualifies the signature. An XML electronic signature aligned with the
     /// present document MAY contain at most one RevocationValues element.
     /// </summary>
-    public class RevocationValues {
+    internal class RevocationValues {
         #region Private variables
         private string id;
         private CRLValues crlValues;

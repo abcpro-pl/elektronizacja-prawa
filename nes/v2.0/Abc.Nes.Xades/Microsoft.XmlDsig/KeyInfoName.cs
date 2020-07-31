@@ -5,7 +5,7 @@ using System;
 using System.Xml;
 
 namespace Microsoft.XmlDsig {
-    public class KeyInfoName : KeyInfoClause {
+    internal class KeyInfoName : KeyInfoClause {
         private string _keyName;
 
         //

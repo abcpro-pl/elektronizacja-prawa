@@ -29,7 +29,7 @@ namespace Microsoft.Xades {
     /// This class indicates the algortithm used to calculate the digest and
     /// the digest value itself
     /// </summary>
-    public class DigestAlgAndValueType {
+    internal class DigestAlgAndValueType {
         #region Private variables
         private string tagName;
         private DigestMethod digestMethod;

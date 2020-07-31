@@ -25,7 +25,7 @@ using Org.BouncyCastle.Asn1.X509;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Abc.Nes.Xades.Upgraders.Parameters {
-    public class OcspServer
+    internal class OcspServer
     {
         public const int DirectoryName = 4;
         public const int DnsName = 2;

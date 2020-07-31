@@ -28,7 +28,7 @@ namespace Microsoft.Xades {
     /// <summary>
     /// This class identifies one OCSP response
     /// </summary>
-    public class OCSPRef {
+    internal class OCSPRef {
         #region Private variables
         private OCSPIdentifier ocspIdentifier;
         private DigestAlgAndValueType digestAlgAndValue;
