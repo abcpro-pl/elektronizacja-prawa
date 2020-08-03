@@ -13,15 +13,11 @@
   ===================================================================================*/
 
 
-using Abc.Nes.ArchivalPackage.Model;
 using Abc.Nes.Xades;
 using Abc.Nes.Xades.Signature;
-using Abc.Nes.Xades.Signature.Parameters;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
-using System.Xml.Serialization;
 
 namespace Abc.Nes.ArchivalPackage.Cryptography {
     public interface IPackageSignerManager : IDisposable {
@@ -32,9 +28,27 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 bool signPackageFile = true,
                 bool detachedSignaturePackageFile = false,
                 bool detachedSignaturePackageFiles = false);
+        void SignInternalFile(string sourcePackageFilePath, 
+                string internalPath,
+                X509Certificate2 cert,
+                Abc.Nes.Xades.Signature.Parameters.SignatureProductionPlace productionPlace = null,
+                Abc.Nes.Xades.Signature.Parameters.SignerRole signerRole = null,
+                bool detachedSignaturePackageFile = false,
+                string outputPackageFilePath = null);
+
+        void SignInternalFile(
+                string sourcePackageFilePath,
+                Model.ItemBase item,
+                PackageManager mgr,
+                X509Certificate2 cert,
+                Abc.Nes.Xades.Signature.Parameters.SignatureProductionPlace productionPlace = null,
+                Abc.Nes.Xades.Signature.Parameters.SignerRole signerRole = null,
+                bool detachedSignaturePackageFile = false,
+                string outputPackageFilePath = null);
+
+        //TODO: Add validate method
     }
-    public class PackageSignerManager : IPackageSignerManager {
-        private const string SigTextFormat = "Signed by: {0} \r\nSigned on: {1:MM/dd/yyyy HH:mm:ss}";
+    public partial class PackageSignerManager : IPackageSignerManager {
 
         public string Sign(string sourcePackageFilePath, X509Certificate2 cert, string outputPackageFilePath = null,
             Abc.Nes.Xades.Signature.Parameters.SignatureProductionPlace productionPlace = null,
@@ -61,7 +75,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                     if (item.FileName.ToLower().EndsWith(".xml")) {
                         SignXmlItem(item, xadesManager, cert, productionPlace, signerRole);
                     }
-                    else if (item.FileName.ToLower().EndsWith(".pdf")) {                        
+                    else if (item.FileName.ToLower().EndsWith(".pdf")) {
                         SignPdfItem(item, cert);
                     }
                     else {
@@ -103,225 +117,67 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             return default;
         }
 
-        private void SignPdfItem(ItemBase item, X509Certificate2 cert) {
-            var input = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.pdf");
-            var output = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.pdf");
-            var temp = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.pdf");
-            try {
-                File.WriteAllBytes(input, (item as DocumentFile).FileData);
-                var reader = new iTextSharp.text.pdf.PdfReader(input);
-                var outputStream = new FileStream(output, FileMode.Create);
-                var pdfStamper = iTextSharp.text.pdf.PdfStamper.CreateSignature(reader, outputStream, '\0', null, true);
+        public void SignInternalFile(string sourcePackageFilePath, string internalPath,
+            X509Certificate2 cert,
+            Abc.Nes.Xades.Signature.Parameters.SignatureProductionPlace productionPlace = null,
+            Abc.Nes.Xades.Signature.Parameters.SignerRole signerRole = null,
+            bool detachedSignaturePackageFile = false,
+            string outputPackageFilePath = null) {
+            if (cert == null) { throw new ArgumentNullException("cert"); }
+            if (sourcePackageFilePath == null) { throw new ArgumentNullException("filePath"); }
 
-                var cp = new Org.BouncyCastle.X509.X509CertificateParser();
-                var chain = new[] { cp.ReadCertificate(cert.RawData) };
+            if (!File.Exists(sourcePackageFilePath)) { throw new FileNotFoundException("Package file not found!", sourcePackageFilePath); }
 
-                var appearance = pdfStamper.SignatureAppearance;
+            if (String.IsNullOrEmpty(outputPackageFilePath)) { outputPackageFilePath = new FileInfo(sourcePackageFilePath).FullName; }
 
-                SetSigPosition(appearance, reader.AcroFields.GetSignatureNames().Count);
-                SetSigText(appearance, chain);
-                SetSigCryptoFromX509(cert, chain, appearance);
-
-                //pdfStamper.Close();
-                reader.Close();
-                outputStream.Close();
-
-                item.Init(File.ReadAllBytes(output));
+            var mgr = new PackageManager();
+            mgr.LoadPackage(sourcePackageFilePath);
+            var item = mgr.GetItemByFilePath(internalPath);
+            if (item != null) {
+                SignInternalFile(sourcePackageFilePath, item, mgr, cert, productionPlace, signerRole, detachedSignaturePackageFile, outputPackageFilePath);
             }
-            finally {
-                try {
-                    if (File.Exists(input)) { File.Delete(input); }
-                    if (File.Exists(output)) { File.Delete(output); }
-                    if (File.Exists(temp)) { File.Delete(temp); }
+        }
+
+        public void SignInternalFile(
+            string sourcePackageFilePath,
+            Model.ItemBase item,
+            PackageManager mgr,
+            X509Certificate2 cert,
+            Abc.Nes.Xades.Signature.Parameters.SignatureProductionPlace productionPlace = null,
+            Abc.Nes.Xades.Signature.Parameters.SignerRole signerRole = null,
+            bool detachedSignaturePackageFile = false,
+            string outputPackageFilePath = null) {
+            if (cert == null) { throw new ArgumentNullException("cert"); }
+            if (sourcePackageFilePath == null) { throw new ArgumentNullException("filePath"); }
+
+            if (!File.Exists(sourcePackageFilePath)) { throw new FileNotFoundException("Package file not found!", sourcePackageFilePath); }
+
+            if (String.IsNullOrEmpty(outputPackageFilePath)) { outputPackageFilePath = new FileInfo(sourcePackageFilePath).FullName; }
+
+            var xadesManager = new XadesManager();
+            if (mgr.Package.Documents == null || mgr.Package.Documents.IsEmpty) {
+                mgr.LoadPackage(sourcePackageFilePath);
+            }
+
+            if (item.FileName.ToLower().EndsWith(".xml")) {
+                SignXmlItem(item, xadesManager, cert, productionPlace, signerRole);
+            }
+            else if (item.FileName.ToLower().EndsWith(".pdf")) {
+                SignPdfItem(item, cert);
+            }
+            else {
+                if (detachedSignaturePackageFile) {
+                    // place signature in detached .xades file
+                    SignDetachedOtherItem(mgr, item, xadesManager, cert, productionPlace, signerRole);
                 }
-                catch { }
-            }
-        }
-
-        private void SetSigText(iTextSharp.text.pdf.PdfSignatureAppearance sigAppearance, IList<Org.BouncyCastle.X509.X509Certificate> chain) {
-            sigAppearance.SignDate = DateTime.Now;
-            var signedBy = iTextSharp.text.pdf.PdfPkcs7.GetSubjectFields(chain[0]).GetField("CN");
-            var signedOn = sigAppearance.SignDate;
-            sigAppearance.Layer2Text = String.Format(SigTextFormat, signedBy, signedOn);
-        }
-
-        private void SetSigCryptoFromX509(X509Certificate2 cert, Org.BouncyCastle.X509.X509Certificate[] chain, iTextSharp.text.pdf.PdfSignatureAppearance appearance) {
-            appearance.SetCrypto(null, chain, null, iTextSharp.text.pdf.PdfSignatureAppearance.WincerSigned);
-            appearance.CryptoDictionary = new iTextSharp.text.pdf.PdfSignature(iTextSharp.text.pdf.PdfName.AdobePpkms, iTextSharp.text.pdf.PdfName.AdbePkcs7Sha1) {
-                Date = new iTextSharp.text.pdf.PdfDate(appearance.SignDate),
-                Name = iTextSharp.text.pdf.PdfPkcs7.GetSubjectFields(chain[0]).GetField("CN"),
-                Reason = appearance.Reason,
-                Location = appearance.Location
-            };
-
-            const int csize = 4000;
-            var exc = new Dictionary<iTextSharp.text.pdf.PdfName, int> { { iTextSharp.text.pdf.PdfName.Contents, csize * 2 + 2 } };
-            var htable = new System.Collections.Hashtable(exc);
-            appearance.PreClose(htable);
-
-            var sha = new System.Security.Cryptography.SHA1CryptoServiceProvider();
-
-            var s = appearance.RangeStream;
-            int read;
-            var buff = new byte[8192];
-            while ((read = s.Read(buff, 0, 8192)) > 0) {
-                sha.TransformBlock(buff, 0, read, buff, 0);
-            }
-            sha.TransformFinalBlock(buff, 0, 0);
-            var pk = SignMsg(sha.Hash, cert, false);
-
-            var outc = new byte[csize];
-
-            var dic2 = new iTextSharp.text.pdf.PdfDictionary();
-
-            Array.Copy(pk, 0, outc, 0, pk.Length);
-
-            dic2.Put(iTextSharp.text.pdf.PdfName.Contents, new iTextSharp.text.pdf.PdfString(outc).SetHexWriting(true));
-
-            appearance.Close(dic2);
-        }
-
-        private void SetSigPosition(iTextSharp.text.pdf.PdfSignatureAppearance sigAppearance, int oldSigCount) {
-            //Note: original formula from QuangNgV, ll = lower left, ur = upper right, coordinates are calculated relative from the lower left of the pdf page
-            float llx = (100 + 20) * (oldSigCount % 5),
-                    lly = (25 + 20) * (oldSigCount / 5),
-                    urx = llx + 100,
-                    ury = lly + 25;
-            sigAppearance.SetVisibleSignature(new iTextSharp.text.Rectangle(llx, lly, urx, ury), 1, null);
-        }
-        private byte[] SignMsg(Byte[] msg, X509Certificate2 signerCert, bool detached) {
-            //  Place message in a ContentInfo object.
-            //  This is required to build a SignedCms object.
-            var contentInfo = new System.Security.Cryptography.Pkcs.ContentInfo(msg);
-
-            //  Instantiate SignedCms object with the ContentInfo above.
-            //  Has default SubjectIdentifierType IssuerAndSerialNumber.
-            var signedCms = new System.Security.Cryptography.Pkcs.SignedCms(contentInfo, detached);
-
-            //  Formulate a CmsSigner object for the signer.
-            var cmsSigner = new System.Security.Cryptography.Pkcs.CmsSigner(signerCert);
-
-            // Include the following line if the top certificate in the
-            // smartcard is not in the trusted list.
-            cmsSigner.IncludeOption = X509IncludeOption.EndCertOnly;
-
-            //  Sign the CMS/PKCS #7 message. The second argument is
-            //  needed to ask for the pin.
-            signedCms.ComputeSignature(cmsSigner, false);
-
-            //  Encode the CMS/PKCS #7 message.
-            return signedCms.Encode();
-        }
-
-        //private void SignPdfItem(ItemBase item, X509Certificate2 cert) {
-        //    var tempFilePath = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.pdf");
-        //    try {
-        //        File.WriteAllBytes(tempFilePath, (item as DocumentFile).FileData);
-        //        using (var stream = new FileStream(tempFilePath, FileMode.Open)) {
-        //            using (var doc = new Aspose.Pdf.Document(stream)) {
-        //                var field1 = new Aspose.Pdf.Forms.SignatureField(doc.Pages[1], new Aspose.Pdf.Rectangle(10, 10, 300, 50));
-        //                var externalSignature = new Aspose.Pdf.Forms.ExternalSignature(cert);
-        //                field1.PartialName = "sig1";
-        //                doc.Form.Add(field1, 1);
-        //                field1.Sign(externalSignature);
-        //            }
-        //        }
-        //        item.Init(File.ReadAllBytes(tempFilePath));
-        //    }
-        //    finally {
-        //        try {
-        //            if (File.Exists(tempFilePath)) { File.Delete(tempFilePath); }
-        //        }
-        //        catch { }
-        //    }
-
-        //}
-
-        private void SignXmlItem(ItemBase item,
-                             XadesManager xadesManager,
-                             X509Certificate2 cert,
-                             SignatureProductionPlace productionPlace = null,
-                             SignerRole signerRole = null) {
-            var ms = new MemoryStream((item as DocumentFile).FileData);
-            var result = xadesManager.AppendSignatureToXmlFile(ms, cert, productionPlace, signerRole);
-            if (result != null) {
-                using (var msOutput = new MemoryStream()) {
-                    result.Save(msOutput);
-                    item.Init(msOutput.ToArray());
+                else {
+                    SignOtherItem(item, xadesManager, cert, productionPlace, signerRole);
                 }
             }
-        }
 
-        private void SignOtherItem(ItemBase item,
-                     XadesManager xadesManager,
-                     X509Certificate2 cert,
-                     SignatureProductionPlace productionPlace = null,
-                     SignerRole signerRole = null) {
-            var ms = new MemoryStream((item as DocumentFile).FileData);
-            var result = xadesManager.CreateEnvelopingSignature(ms, cert, productionPlace, signerRole);
-            if (result != null) {
-                using (var msOutput = new MemoryStream()) {
-                    result.Save(msOutput);
-                    item.Init(msOutput.ToArray());
-                }
-            }
-        }
-
-        private void SignDetachedOtherItem(PackageManager mgr, ItemBase item,
-                    XadesManager xadesManager,
-                    X509Certificate2 cert,
-                    SignatureProductionPlace productionPlace = null,
-                    SignerRole signerRole = null) {
-            var tempFilePath = Path.Combine(Path.GetTempPath(), (item as DocumentFile).FileName);
-            File.WriteAllBytes(tempFilePath, (item as DocumentFile).FileData);
-            var result = xadesManager.CreateDetachedSignature(tempFilePath, cert, productionPlace, signerRole);
-            if (result != null) {
-                using (var msOutput = new MemoryStream()) {
-                    result.Save(msOutput);
-                    var xadesFile = new DocumentFile() {
-                        FileName = $"{(item as DocumentFile).FileName}.xades",
-                        FileData = msOutput.ToArray()
-                    };
-                    var folder = mgr.GetParentFolder(item);
-                    if (folder != null) {
-                        folder.AddItem(xadesFile);
-
-                        // add metadata
-                        var metadataFile = mgr.GetMetadataFile(item);
-                        if (metadataFile != null) {
-                            using (var converter = new Converters.XmlConverter()) {
-                                var xadesMetadataFileDocumentXml = converter.GetXml(metadataFile.Document);
-                                var xadesMetadataFileDocument = converter.ParseXml(xadesMetadataFileDocumentXml);
-                                xadesMetadataFileDocument.Description = $"Digital signature of file {(item as DocumentFile).FileName}.";
-                                var xadesMetadataFile = new MetadataFile() {
-                                    FileName = $"{xadesFile.FileName}.xml",
-                                    Document = xadesMetadataFileDocument
-                                };
-
-                                var metadataFolder = mgr.GetParentFolder(metadataFile);
-                                if (metadataFolder != null) {
-                                    metadataFolder.AddItem(xadesMetadataFile);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            mgr.Save(outputPackageFilePath);
         }
 
         public void Dispose() { }
-    }
-
-    static class Extensions {
-        public static string GetXmlEnum(this Enum value) {
-            try {
-                var fi = value.GetType().GetField(value.ToString());
-                XmlEnumAttribute[] attributes = (XmlEnumAttribute[])fi.GetCustomAttributes(typeof(XmlEnumAttribute), false);
-                return (attributes.Length > 0) ? attributes[0].Name : value.ToString();
-            }
-            catch {
-                return string.Empty;
-            }
-        }
     }
 }

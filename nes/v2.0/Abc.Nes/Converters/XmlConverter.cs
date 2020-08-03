@@ -138,12 +138,12 @@ namespace Abc.Nes.Converters {
 
                     var propVal = property.GetValue(o);
                     if (propVal.IsNull()) {
-                        ValidationErrors.Add($"Wymagane pole '{property.Name}' w obiekcie typu '{o.GetType().FullName}' nie posiada wartości!");
+                        ValidationErrors.Add($"Required field '{property.Name}' of type '{o.GetType().FullName}' does not have a value!");
                         continue;
                     }
                     if (propVal is ICollection) {
                         if ((propVal as ICollection).Count == 0) {
-                            ValidationErrors.Add($"Wymagane pole listy '{property.Name}' w obiekcie typu '{o.GetType().FullName}' nie posiada żadnych elementów!");
+                            ValidationErrors.Add($"Required list fiels '{property.Name}' of type '{o.GetType().FullName}' has no elements!");
                         }
                         else {
                             var collection = propVal as ICollection;

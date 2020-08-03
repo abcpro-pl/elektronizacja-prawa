@@ -140,6 +140,9 @@ namespace Abc.Nes.ArchivalPackage {
             if (!File.Exists(filePath)) { throw new FileNotFoundException(filePath); }
             if (!ZipFile.IsZipFile(filePath)) { throw new ZipException("Specified file is not a zip file!"); }
 
+            // Package is already loaded
+            if (FilePath == filePath && Package.Documents.IsNotNull() && !Package.Documents.IsEmpty) { return; }
+
             FilePath = filePath;
 
             var zipFile = ZipFile.Read(filePath);
@@ -315,6 +318,35 @@ namespace Abc.Nes.ArchivalPackage {
             }
             return default;
         }
+        public bool Validate(out string message, bool validateMetdataFiles = false) {
+            message = null;
+            if (Package.IsNull()) { message = "Package is not initialized!";  }
+            if (message.IsNull() && Package.Documents.IsNull()) { message = "Package is not initialized!"; }
+            if (message.IsNull() && Package.Documents.IsEmpty) { message = "Documents not found!";  }
+
+            if (message.IsNull()) {
+                var validator = new XmlConverter();
+
+                foreach (var item in GetAllFiles(Package.Documents)) {
+                    var metadata = GetMetadataFile(item);
+                    if (metadata.IsNull()) {
+                        message = $"Metadata not found for file: {item.FilePath}!";
+                        break;
+                    }
+                    else if (validateMetdataFiles) {
+                        if (!validator.Validate(metadata.Document)) {
+                            message = $"Metadata of file: {item.FilePath} are not a valid!";
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (message.IsNull() && Package.Objects.IsEmpty) { message = "Objects not found!"; }
+
+            return message.IsNull();
+        }
+
 
         private int GetDocumentsCount(DocumentFolder folder) {
             var count = 0;

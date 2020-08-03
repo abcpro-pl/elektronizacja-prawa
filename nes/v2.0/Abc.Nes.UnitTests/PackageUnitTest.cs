@@ -226,5 +226,39 @@ namespace Abc.Nes.UnitTests {
             var outputXadesFilePath = @"../../../sample/SignedPackage.zip.xades";
             Assert.IsTrue(File.Exists(outputXadesFilePath));
         }
+
+        [TestMethod]
+        public void Package_Validate() {
+            var path = @"../../../sample/ValidatedPackage.zip";
+            var mgr = new PackageManager();
+            mgr.LoadPackage(path);
+            var result = mgr.Validate(out var message);
+            if (!result) {
+                throw new System.Exception(message);
+            }
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void PackageSignerManager_SignSpecifiedFile() {
+            var path = @"../../../sample/ValidatedPackage.zip";
+            var outputPath = @"../../../sample/SignedPackage.zip";
+            using (var mgr = new PackageSignerManager()) {
+                mgr.SignInternalFile(new FileInfo(path).FullName,
+                    "Dokumenty/TabelaWydatkow.pdf",
+                    CertUtil.SelectCertificate(),
+                    new SignatureProductionPlace() {
+                        City = "Warszawa",
+                        CountryName = "Polska",
+                        PostalCode = "03-825",
+                        StateOrProvince = "mazowieckie"
+                    },
+                    new SignerRole("Wiceprezes Zarządu"),
+                    false,
+                    new FileInfo(outputPath).FullName
+                 );
+            }
+            Assert.IsTrue(File.Exists(outputPath));
+        }
     }
 }

@@ -18,7 +18,7 @@ W tym katalogu znajduje się:
 
 * oryginalny schemat XSD [nes_20.xsd](https://raw.githubusercontent.com/abcpro-pl/elektronizacja-prawa/master/nes/v2.0/nes_20.xsd), 
 * kod źródłowy biblioteki do tworzenia, edycji i zapisu pliku XML zgodnego ze schematem [ABCPRO.NES](Abc.Nes). Biblioteka pozwala na utworzenie pliku XSD na podstawie modelu. W przeciwieństwie do oryginalnego [pliku XSD](https://raw.githubusercontent.com/abcpro-pl/elektronizacja-prawa/master/nes/v2.0/nes_20.xsd), - który można pobrać również z [profilu Ministerstwa Cyfryzacji](https://github.com/Ministerstwo-Cyfryzacji/ezd-analizy-it/blob/master/nes_bnf_komentarz.md), ten [wygenerowany z modelu](https://raw.githubusercontent.com/abcpro-pl/elektronizacja-prawa/master/nes/v2.0/nes_20_generated.xsd) nie zawiera żadnych błędów walidacji i referecji do zewnętrznych słowników, wszystkie elementy są opatrzone komentarzem, ponadto dodano możliwość umieszczania elementów ds:Signature czyli owzorowania podpisów elektronicznych. W katalogu [doc](doc) znajduje się [dokumentacja wygenerowana na podstawie schematu](doc/nes_20_generated.pdf),
-* kod źródłowy biblioteki do tworzenia paczki archiwalnej [ABCPRO.NES.ArchivalPackage](Abc.Nes.ArchivalPackage). Za pomocą biblioteki można tworzyć, edytować i zapisywać dokumenty i metadane w paczce archiwalnej zgodnie z wymogami rozporządzeń.
+* kod źródłowy biblioteki do tworzenia paczki eADM [ABCPRO.NES.ArchivalPackage](Abc.Nes.ArchivalPackage). Za pomocą biblioteki można tworzyć, edytować i zapisywać dokumenty i metadane w paczce eADM zgodnie z wymogami rozporządzeń.
 * kod źródłowy biblioteki do podpisywania plików XML [ABCPRO.NES.XAdES](Abc.Nes.Xades)
 * kod źródłowy biblioteki do podpisywania paczki eADM [ABCPRO.NES.ArchivalPackage.Cryptography](Abc.Nes.ArchivalPackage.Cryptography)
 
@@ -34,17 +34,19 @@ W tym katalogu znajduje się:
 
 Nazwa | Wersja | Opis
 ------|--------|--------
+ABCPRO.NES.ArchivalPackage.Cryptography|1.0.3|Dodanie metod do podpisywania wybranych plików w paczce eADM.
+ABCPRO.NES.ArchivalPackage|1.0.10|Dodanie metody `Validate` do sprawdzania poprawności struktury paczki eADM.
 ABCPRO.NES.ArchivalPackage.Cryptography|1.0.2|Zastąpienie biblioteki komercyjnej `Aspose.Pdf` otwartym kodem `iTextSharp`.
 ABCPRO.NES.XAdES|1.0.6|Wymiana biblioteki `BouncyCastle.NetCore` na `Portable.BouncyCastle` w celu uniknięcia konfliktu z referencją występującą w `ABCPRO.NES.ArchivalPackage.Cryptography`.
 ABCPRO.NES.XAdES|1.0.5|Hermetyzacja kodu
-ABCPRO.NES.ArchivalPackage.Cryptography|1.0.1|Dodanie mozliwości podpisywania plików w paczce archiwalnej podpisem zewnętrznym oraz podpisywanie samego archiwum podpisem zewnętrznym.
+ABCPRO.NES.ArchivalPackage.Cryptography|1.0.1|Dodanie mozliwości podpisywania plików w paczce eADM podpisem zewnętrznym oraz podpisywanie samego archiwum podpisem zewnętrznym.
 ABCPRO.NES.ArchivalPackage|1.0.9|Dodanie metod: do pobierania obiektu folderu dla wskazanego obiektu pliku, do pobierania pliku metadanych dla wskazanego pliku z katalogu dokumenty, do pobierania obiektu pliku na podstawie ścieżki wewnątrz archiwum.
-ABCPRO.NES.ArchivalPackage.Cryptography|1.0.0|Dodanie biblioteki pozwalającej na podpisywanie pliku paczki archiwalnej wraz z plikami w niej umieszczonymi. Pliki XML podpisywane są podpisem wewnętrznym XAdES, pliki PDF podpisem PAdES (podpis realizowany jest z wykorzystaniem biblioteki `Aspose.Pdf`. wymagany jest zakup licencji na oprogramowanie [`Aspose.Pdf`](https://products.aspose.com/pdf). Sama paczka archiwalna może zostać umieszczona w pliku `.xades` (podpis okalający - Enveloping) lub w oddzielnym pliku; wówczas plik `.xades` zawiera jedynie referencję do właściwego pliku.
+ABCPRO.NES.ArchivalPackage.Cryptography|1.0.0|Dodanie biblioteki pozwalającej na podpisywanie pliku paczki eADM wraz z plikami w niej umieszczonymi. Pliki XML podpisywane są podpisem wewnętrznym XAdES, pliki PDF podpisem PAdES (podpis realizowany jest z wykorzystaniem biblioteki `Aspose.Pdf`. wymagany jest zakup licencji na oprogramowanie [`Aspose.Pdf`](https://products.aspose.com/pdf). Sama paczka archiwalna może zostać umieszczona w pliku `.xades` (podpis okalający - Enveloping) lub w oddzielnym pliku; wówczas plik `.xades` zawiera jedynie referencję do właściwego pliku.
 ABCPRO.NES.XAdES|1.0.4|Dodanie biblioteki umożliwiającej podpisywanie dokumentów XML. Biblioteka bazuje na kodzie źródłowym [`Microsoft .NET Framework`](https://github.com/dotnet/runtime/tree/master/src/libraries/System.Security.Cryptography.Xml/src) w przestrzeni nazw `Microsoft.XmlDsig`, projektu [`Microsoft.Xades`](https://github.com/Caliper/Xades) utworzonym przez francuski oddział firmy Microsoft oraz na podstawie kodu źródłowego [`FirmaXadesNet`](https://github.com/ctt-gob-es/FirmaXadesNet45) utworzonym przez Departament Nowych Technologii Rady Urbanizacji Miasta Cartagena. Biblioteka pozwala na opatrywanie pliku metadanych bezpiecznym podpisem elektronicznym.  
 ABCPRO.NES.ArchivalPackage|1.0.6|Dodanie metody w `PackageManager` umożliwiającej proste uzupełnianie pliku metadanych sprawy.
 ABCPRO.NES.ArchivalPackage|1.0.5|Aktualizacja zależności.
 ABCPRO.NES|1.0.5|Zawiera dodatkowe pola w adresie (gmina, powiat, województwo). Dodane metody statyczne do pobierania wartości z enumeratorów dla pól tekstowych np. `RelationElement.GetRelationType()`.
-ABCPRO.NES.ArchivalPackage|1.0.4|Pierwsza stabilna wersja biblioteki. Pozwala na tworzenie paczki archiwalnej z wymaganymi katalogami, dodawanie plików oraz metadanych utworzonych za pomocą ABCPRO.NES, zapis i odczyt wcześniej utworzonych paczek.
+ABCPRO.NES.ArchivalPackage|1.0.4|Pierwsza stabilna wersja biblioteki. Pozwala na tworzenie paczki eADM z wymaganymi katalogami, dodawanie plików oraz metadanych utworzonych za pomocą ABCPRO.NES, zapis i odczyt wcześniej utworzonych paczek.
 ABCPRO.NES|1.0.3|Pierwsza stabilna wersja biblioteki. Pozwala na dodawanie wszystkich metadanych, walidację i zapis do pliku XML. Za pomocą klasy `XmlConverter` możliwe jest otwieranie plików zarówno z wersji 2.0 jak i tych starszych.
 
 [&#8682; Do góry](#paczka-eadm-i-niezbędne-elementy-struktury-dokumentu-elektronicznego-20)
@@ -294,7 +296,7 @@ var document = new Abc.Nes.Document() {
 
 ### ABCPRO.NES.ArchivalPackage
 
-#### Ładowanie paczki archiwalnej
+#### Ładowanie paczki eADM
 
 ``` C#
 var path = @"../../../sample/ValidatedPackage.zip";
@@ -304,7 +306,7 @@ mgr.LoadPackage(path);
 var isNotEmpty = mgr != null && mgr.Package != null && !mgr.Package.IsEmpty;
 ```            
 
-#### Pobieranie informacji o ilości dokumentów w paczce archiwalnej 
+#### Pobieranie informacji o ilości dokumentów w paczce eADM 
 
 ```C#
 var path = @"../../../sample/ValidatedPackage.zip";
@@ -314,7 +316,7 @@ mgr.LoadPackage(path);
 var count = mgr.GetDocumentsCount();
 ```
 
-#### Pobieranie listy plików w paczce archiwalnej 
+#### Pobieranie listy plików w paczce eADM 
 
 ``` C#
 var path = @"../../../sample/ValidatedPackage.zip";
@@ -347,7 +349,7 @@ mgr.LoadPackage(path);
 var folder = mgr.GetParentFolder("dokumenty/Wniosek/Wniosek.xml");
 ```
 
-#### Ładowanie, dodanie pliku z metadanymi i zapisanie paczki archiwalnej 
+#### Ładowanie, dodanie pliku z metadanymi i zapisanie paczki eADM 
 
 ``` C#
 var path = @"../../../sample/ValidatedPackage.zip";
@@ -423,6 +425,19 @@ mgr.AddFile(new DocumentFile() {
 
 mgr.Save(@"../../../sample/ValidatedPackage.zip");
 ```
+
+#### Weryfikacja poprawności strukturalnej paczki ADM
+
+```C#
+var path = @"../../../sample/ValidatedPackage.zip";
+var mgr = new PackageManager();
+mgr.LoadPackage(path);
+var result = mgr.Validate(out var message);
+if (!result) {
+    throw new System.Exception(message);
+}
+```
+
 [&#8682; Do góry](#paczka-eadm-i-niezbędne-elementy-struktury-dokumentu-elektronicznego-20)
 
 ### ABCPRO.NES.XAdES
@@ -497,7 +512,7 @@ using (var manager = new XadesManager()) {
 
 ### ABCPRO.NES.ArchivalPackage.Cryptography
 
-#### Podpisywanie paczki archiwalnej  (podpis okalający - enveloping)
+#### Podpisywanie paczki eADM  (podpis okalający - enveloping)
 
 ```C#
 var path = @"../../../sample/ValidatedPackage.zip";
@@ -513,14 +528,14 @@ using (var mgr = new PackageSignerManager()) {
         StateOrProvince = "mazowieckie"
     },
     new SignerRole("Wiceprezes Zarządu"),
-    true, // Podpisz pliki w paczce archiwalnej
+    true, // Podpisz pliki w paczce eADM
     true, // Podpisz paczkę archiwalną
     false // w pliku .xades umieść jedynie referencję do pliku paczki (podpis zewnętrzny - detached)
     );
 }
 ```
 
-#### Podpisywanie paczki archiwalnej (podpis zewnętrzny - detached)
+#### Podpisywanie paczki eADM (podpis zewnętrzny - detached)
 
 ```C#
 var path = @"../../../sample/ValidatedPackage.zip";
@@ -536,16 +551,38 @@ using (var mgr = new PackageSignerManager()) {
             StateOrProvince = "mazowieckie"
         },
         new SignerRole("Wiceprezes Zarządu"),
-        true, // Podpisz pliki w paczce archiwalnej
+        true, // Podpisz pliki w paczce eADM
         true, // Podpisz paczkę archiwalną
         true, // w pliku .xades umieść jedynie referencję do pliku paczki (podpis zewnętrzny - detached)
-        true  // Podpisz pliki w paczce archiwalnej inne niż XML i PDF podpisem zewnętrznym
+        true  // Podpisz pliki w paczce eADM inne niż XML i PDF podpisem zewnętrznym
         );
 }
 
 var outputXadesFilePath = @"../../../sample/SignedPackage.zip.xades";
 if (File.Exists(outputXadesFilePath)) {
     // ...
+}
+```
+
+#### Podpisywanie wybranych plików w paczce eADM
+
+```C#
+var path = @"../../../sample/ValidatedPackage.zip";
+var outputPath = @"../../../sample/SignedPackage.zip";
+using (var mgr = new PackageSignerManager()) {
+    mgr.SignInternalFile(new FileInfo(path).FullName,
+        "Dokumenty/TabelaWydatkow.pdf",
+        CertUtil.SelectCertificate(),
+        new SignatureProductionPlace() {
+            City = "Warszawa",
+            CountryName = "Polska",
+            PostalCode = "03-825",
+            StateOrProvince = "mazowieckie"
+        },
+        new SignerRole("Wiceprezes Zarządu"),
+        false, // Podpis zewnętrzny w pliku .xades
+        new FileInfo(outputPath).FullName
+    );
 }
 ```
 

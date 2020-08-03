@@ -16,6 +16,6 @@ using System;
 
 namespace Abc.Nes.ArchivalPackage.Exceptions {
     public class PackageInvalidException : Exception {
-        public PackageInvalidException() : base("Specified Zip file is not a archival package!") { }
+        public PackageInvalidException() : base("Specified zip file is not a archival package!") { }
     }
 }
