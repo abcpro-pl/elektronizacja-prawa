@@ -14,7 +14,9 @@
 
 using Abc.Nes.ArchivalPackage.Exceptions;
 using Abc.Nes.ArchivalPackage.Model;
+using Abc.Nes.ArchivalPackage.Validators;
 using Abc.Nes.Converters;
+using Abc.Nes.Validators;
 using Ionic.Zip;
 using System;
 using System.Collections.Generic;
@@ -320,9 +322,9 @@ namespace Abc.Nes.ArchivalPackage {
         }
         public bool Validate(out string message, bool validateMetdataFiles = false) {
             message = null;
-            if (Package.IsNull()) { message = "Package is not initialized!";  }
+            if (Package.IsNull()) { message = "Package is not initialized!"; }
             if (message.IsNull() && Package.Documents.IsNull()) { message = "Package is not initialized!"; }
-            if (message.IsNull() && Package.Documents.IsEmpty) { message = "Documents not found!";  }
+            if (message.IsNull() && Package.Documents.IsEmpty) { message = "Documents not found!"; }
 
             if (message.IsNull()) {
                 var validator = new XmlConverter();
@@ -346,7 +348,112 @@ namespace Abc.Nes.ArchivalPackage {
 
             return message.IsNull();
         }
+        public IValidationResult GetValidationResult(bool validateMetdataFiles = false) {
+            IValidationResult result = new PackageValidationResult();
+            if (Package.IsNull()) {
+                result.Add(new PackageValidationResultItem() {
+                    FullName = "eADM Package",
+                    Name = "Package",
+                    Source = ValidationResultSource.Package,
+                    Type = ValidationResultType.Incorrect,
+                    DefaultMessage = "Package is not initialized!"
+                });
+            }
+            if (result.Count == 0 && Package.Documents.IsNull()) {
+                result.Add(new PackageValidationResultItem() {
+                    FullName = "Package.Documents",
+                    Name = "Package",
+                    Source = ValidationResultSource.Package,
+                    Type = ValidationResultType.Incorrect,
+                    DefaultMessage = "Package has no documents folder!"
+                });
+            }
+            if (result.Count == 0 && Package.Documents.IsEmpty) {
+                result.Add(new PackageValidationResultItem() {
+                    FullName = "Package.Documents",
+                    Name = "Documents",
+                    Source = ValidationResultSource.Package,
+                    Type = ValidationResultType.HasNoElements,
+                    DefaultMessage = "Package has no documents!"
+                });
+            }
+            if (result.Count == 0 && Package.Metadata.IsNull()) {
+                result.Add(new PackageValidationResultItem() {
+                    FullName = "Package.Metadata",
+                    Name = "Package",
+                    Source = ValidationResultSource.Package,
+                    Type = ValidationResultType.Incorrect,
+                    DefaultMessage = "Package has no metadata folder!"
+                });
+            }
+            if (result.Count == 0 && Package.Metadata.IsEmpty) {
+                result.Add(new PackageValidationResultItem() {
+                    FullName = "Package.Metadata",
+                    Name = "Metadata",
+                    Source = ValidationResultSource.Package,
+                    Type = ValidationResultType.HasNoElements,
+                    DefaultMessage = "Package has no metadata!"
+                });
+            }
+            if (result.Count == 0 && Package.Objects.IsNull()) {
+                result.Add(new PackageValidationResultItem() {
+                    FullName = "Package.Objects",
+                    Name = "Package",
+                    Source = ValidationResultSource.Package,
+                    Type = ValidationResultType.Incorrect,
+                    DefaultMessage = "Package has no object folder!"
+                });
+            }
+            if (result.Count == 0 && Package.Objects.IsEmpty) {
+                result.Add(new PackageValidationResultItem() {
+                    FullName = "Package.Objects",
+                    Name = "Metadata",
+                    Source = ValidationResultSource.Package,
+                    Type = ValidationResultType.HasNoElements,
+                    DefaultMessage = "Package has no objects!"
+                });
+            }
 
+            if (result.Count == 0) {
+                var validator = new XmlConverter();
+
+                foreach (var item in GetAllFiles(Package.Documents)) {
+                    var metadata = GetMetadataFile(item);
+                    if (metadata.IsNull()) {
+
+                        result.Add(new PackageValidationResultItem() {
+                            FullName = item.FilePath,
+                            Name = item.FileName,
+                            Source = ValidationResultSource.Metadata,
+                            Type = ValidationResultType.NotFound,
+                            DefaultMessage = $"Metadata not found for file: {item.FilePath}!"
+                        });
+
+                        break;
+                    }
+                    else if (validateMetdataFiles) {
+                        var metadataResult = validator.GetValidationResult(metadata.Document);
+                        if (!metadataResult.IsCorrect) {
+                            result.Add(new PackageValidationResultItem() {
+                                FullName = item.FilePath,
+                                Name = item.FileName,
+                                Source = ValidationResultSource.Metadata,
+                                Type = ValidationResultType.Incorrect,
+                                DefaultMessage = $"Metadata of file: {item.FilePath} are not a valid!"
+                            });
+
+                            foreach (var _item in metadataResult) {
+                                result.Add(_item);
+                            }
+                
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
 
         private int GetDocumentsCount(DocumentFolder folder) {
             var count = 0;

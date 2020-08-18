@@ -11,11 +11,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abc.Nes.ArchivalPackage", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abc.Nes.ArchivalPackage.Cryptography", "..\Abc.Nes.ArchivalPackage.Cryptography\Abc.Nes.ArchivalPackage.Cryptography.csproj", "{284F9927-F6D2-4727-8A2B-ADABCA5E7E40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abc.Nes.Xades", "..\Abc.Nes.Xades\Abc.Nes.Xades.csproj", "{57833AD8-F3D0-4E7F-ABF1-1C9904C86348}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abc.Nes.Xades", "..\Abc.Nes.Xades\Abc.Nes.Xades.csproj", "{57833AD8-F3D0-4E7F-ABF1-1C9904C86348}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C6E7383D-C962-4A58-8541-A64C28638D3E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{470E9BE2-55C0-4302-B89B-5E05C7A03053}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{D6879F3C-395D-420A-AABC-D32063B3FBE8}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

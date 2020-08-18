@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+		targetNamespace="http://www.mswia.gov.pl/standardy/ndap"
+		xmlns:tns="http://www.mswia.gov.pl/standardy/ndap"
+	    elementFormDefault="qualified"
+        attributeFormDefault="unqualified">
+	
+	<element name="SpisZdawczoOdbiorczy">
+		<complexType>
+			<sequence>
+				<element name="Sprawa" 
+						 type="tns:Sprawa"
+						 minOccurs="1" 
+						 maxOccurs="unbounded"/>
+			</sequence>
+		</complexType>
+	</element>
+	
+	<complexType name="Sprawa">
+			<sequence>
+				<element name="LiczbaPorzadkowa" 
+						 type="integer"
+						 minOccurs="1"
+						 maxOccurs="1"/>
+				<element name="ZnakSprawy"
+						 type="string" 
+						 minOccurs="1" 
+						 maxOccurs="1"/>
+				<element name="HasloKlasyfikacyjne"
+						 type="string"
+						 minOccurs="1"
+						 maxOccurs="1"/>
+				<element name="TytulSprawy" 
+						 type="string"
+						 minOccurs="1"
+						 maxOccurs="1"/>
+				<element name="DataWszczecia"
+						 type="tns:Czas"
+						 minOccurs="1"
+						 maxOccurs="1"/>
+				<element name="DataZakonczenia"
+						 type="tns:Czas"
+						 minOccurs="1"
+						 maxOccurs="1"/>
+				<element name="LiczbaDokumentow"
+						 type="integer"
+						 minOccurs="1"
+						 maxOccurs="1"/>
+				<element name="Uwagi"
+						 type="string"
+						 minOccurs="0"
+						 maxOccurs="1"/>
+			</sequence>
+	</complexType>
+	
+	<simpleType name="Czas">
+		<union memberTypes="date dateTime" />
+	</simpleType>
+	
+</schema>

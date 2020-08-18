@@ -80,7 +80,7 @@ namespace Abc.Nes.Xades.Validation {
                 TimeStampToken token = new TimeStampToken(new CmsSignedData(timeStamp.EncapsulatedTimeStamp.PkiData));
 
                 byte[] tsHashValue = token.TimeStampInfo.GetMessageImprintDigest();
-                Crypto.DigestMethod tsDigestMethod = Crypto.DigestMethod.GetByOid(token.TimeStampInfo.HashAlgorithm.ObjectID.Id);
+                Crypto.DigestMethod tsDigestMethod = Crypto.DigestMethod.GetByOid(token.TimeStampInfo.HashAlgorithm.Algorithm.Id);
 
                 Microsoft.XmlDsig.Transform transform = null;
 

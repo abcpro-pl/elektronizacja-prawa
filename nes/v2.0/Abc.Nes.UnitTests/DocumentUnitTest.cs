@@ -14,13 +14,16 @@
 
 using Abc.Nes.Generators;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace Abc.Nes.UnitTests {
     [TestClass]
     public class DocumentUnitTest {
+        
         [TestMethod]
         public void Document_XsdGenerator_GetSchema() {
             XElement schema;
@@ -60,7 +63,17 @@ namespace Abc.Nes.UnitTests {
         }
 
 
-        public static Abc.Nes.Document GetModel() {
+        [TestMethod]
+        public void Document_XmlConverter_GetValidationResult() {
+            var c = new Abc.Nes.Converters.XmlConverter();
+            var result = c.GetValidationResult(GetModel(true));
+            foreach (var item in result) {
+                System.Diagnostics.Debug.WriteLine(item.DefaultMessage);                
+            }
+            Assert.IsTrue(result.Count > 0);
+        }
+
+        public static Abc.Nes.Document GetModel(bool incorrect = false) {
             var document = new Abc.Nes.Document() {
                 Identifiers = new List<Abc.Nes.Elements.IdentifierElement> {
                     new Abc.Nes.Elements.IdentifierElement() {
@@ -266,6 +279,11 @@ namespace Abc.Nes.UnitTests {
                     }
                 }
             };
+
+            if (incorrect) {
+                         document.Identifiers.Clear();
+                document.Groupings.First().Description = null;
+            }
 
             return document;
         }

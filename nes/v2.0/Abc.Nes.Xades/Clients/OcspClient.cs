@@ -94,7 +94,7 @@ namespace Abc.Nes.Xades.Clients {
                     }
                 }
             }
-            catch (Exception e) {
+            catch {
                 return null;
             }
 
@@ -216,8 +216,8 @@ namespace Abc.Nes.Xades.Clients {
                 ocspRequestGenerator.SetRequestorName(requestorName);
             }
 
-            ArrayList oids = new ArrayList();
-            Hashtable values = new Hashtable();
+            var oids = new ArrayList();            
+            var values = new Dictionary<DerObjectIdentifier, X509Extension>();
 
             oids.Add(OcspObjectIdentifiers.PkixOcspNonce);
 

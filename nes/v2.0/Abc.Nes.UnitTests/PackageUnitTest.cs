@@ -82,7 +82,7 @@ namespace Abc.Nes.UnitTests {
                             }
                         }
                     }
-                 },
+                },
                 Titles = new List<Elements.TitleElement> {
                     new Elements.TitleElement() {
                         Original = new Elements.TitleWithLanguageCodeElement(){
@@ -90,13 +90,13 @@ namespace Abc.Nes.UnitTests {
                             Value = "Tabela wydatków"
                         }
                     }
-                 },
+                },
                 Dates = new List<Elements.DateElement> {
                     new Elements.DateElement() {
                         Type = EventDateType.Created,
                         Date = "2020-04-01 12:32:00"
                     }
-                 },
+                },
                 Formats = new List<Elements.FormatElement> {
                     new Elements.FormatElement() {
                         Type = "PDF",
@@ -107,18 +107,18 @@ namespace Abc.Nes.UnitTests {
                             Value = new FileInfo(@"../../../sample/sample_file.pdf").Length.ToString()
                         }
                     }
-                 },
+                },
                 Access = new List<Elements.AccessElement> {
                     new Elements.AccessElement() {
                         Access = AccessType.Public
                     }
-                 },
+                },
                 Types = new List<Elements.TypeElement> {
                     new Elements.TypeElement() {
                         Class = Elements.TypeElement.GetDocumentClassType(DocumentClassType.Text),
                         Kinds = new List<string> { Elements.TypeElement.GetDocumentKindType(DocumentKindType.Regulation) }
                     }
-                 },
+                },
                 Groupings = new List<Elements.GroupingElement> {
                     new Elements.GroupingElement() {
                         Type = "Rejestr wydatków",
@@ -232,11 +232,25 @@ namespace Abc.Nes.UnitTests {
             var path = @"../../../sample/ValidatedPackage.zip";
             var mgr = new PackageManager();
             mgr.LoadPackage(path);
-            var result = mgr.Validate(out var message);
+            var result = mgr.Validate(out var message, true);
             if (!result) {
-                throw new System.Exception(message);
+                System.Diagnostics.Debug.WriteLine(message);
             }
             Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void Package_GetValidationResult() {
+            var path = @"../../../sample/ValidatedPackage.zip";
+            var mgr = new PackageManager();
+            mgr.LoadPackage(path);
+            var result = mgr.GetValidationResult(true);
+            if (!result.IsCorrect) {
+                foreach (var item in result) {
+                    System.Diagnostics.Debug.WriteLine(item.DefaultMessage);
+                }
+            }
+            Assert.IsTrue(!result.IsCorrect);
         }
 
         [TestMethod]

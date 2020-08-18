@@ -14,8 +14,8 @@
 
 using Abc.Nes.Generators;
 using Abc.Nes.Utils;
+using Abc.Nes.Validators;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,7 +25,21 @@ using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace Abc.Nes.Converters {
-    public class XmlConverter : IDisposable {
+    public interface IXmlConverter : IDisposable {
+        XElement GetXml(Document doc);
+        XElement WriteXml(Document doc, string filePath);
+        Document ParseXml(string xmlText);
+        Document ParseXml(XElement e);
+        Document LoadXml(string filePath);
+
+        List<string> ValidationErrors { get; }
+        bool Validate(string filePath);
+        bool Validate(Document document);
+        IValidationResult GetValidationResult(string filePath);
+        IValidationResult GetValidationResult(Document document);
+        bool ValidateWithSchema(string filePath);
+    }
+    public class XmlConverter : IXmlConverter {
         public List<string> ValidationErrors { get; private set; }
 
         public XElement GetXml(Document doc) {
@@ -102,64 +116,29 @@ namespace Abc.Nes.Converters {
         }
 
         public bool Validate(Document document) {
-            if (document.IsNull()) { throw new ArgumentException(); }
             ValidationErrors = new List<string>();
-
-            ValidateObject(document);
-
-            //var properties = document.GetType().GetProperties();
-            //foreach (var property in properties) {
-            //    var rqAttr = property.GetCustomAttributes(typeof(XmlRequiredAttribute), false).FirstOrDefault() as XmlRequiredAttribute;
-            //    if (rqAttr.IsNotNull() && rqAttr.Required) {
-            //        var propVal = property.GetValue(document);
-            //        if (propVal.IsNull()) {
-            //            ValidationErrors.Add($"Wymagane pole '{property.Name}' nie posiada wartości!");
-            //            continue;
-            //        }
-            //        if (propVal is ICollection) {
-            //            if ((propVal as ICollection).Count == 0) {
-            //                ValidationErrors.Add($"Wymagane pole listy '{property.Name}' nie posiada żadnych elementów!");
-            //            }
-            //        }
-            //    }
-            //}
-
+            using (var validator = new DocumentValidator()) {
+                var result = validator.Validate(document);
+                ValidationErrors.AddRange(result.Select(x => x.DefaultMessage));
+            }
 
             return ValidationErrors.Count == 0;
         }
 
-        private void ValidateObject(object o) {
-            if (o.GetType().GetCustomAttributes(typeof(XmlChoiceAttribute), false).FirstOrDefault().IsNotNull()) { return; }
+        public IValidationResult GetValidationResult(string filePath) {
+            if (String.IsNullOrEmpty(filePath)) { throw new ArgumentException(); }
+            if (!File.Exists(filePath)) { throw new FileNotFoundException(); }
 
-            var properties = o.GetType().GetProperties();
-            foreach (var property in properties) {
-                var rqAttr = property.GetCustomAttributes(typeof(XmlRequiredAttribute), false).FirstOrDefault() as XmlRequiredAttribute;
-                if (rqAttr.IsNotNull() && rqAttr.Required) {
-
-                    var propVal = property.GetValue(o);
-                    if (propVal.IsNull()) {
-                        ValidationErrors.Add($"Required field '{property.Name}' of type '{o.GetType().FullName}' does not have a value!");
-                        continue;
-                    }
-                    if (propVal is ICollection) {
-                        if ((propVal as ICollection).Count == 0) {
-                            ValidationErrors.Add($"Required list fiels '{property.Name}' of type '{o.GetType().FullName}' has no elements!");
-                        }
-                        else {
-                            var collection = propVal as ICollection;
-                            foreach (var item in collection) {
-                                ValidateObject(item);
-                            }
-                        }
-                    }
-                    else {
-                        ValidateObject(propVal); // rekurencyjnie
-                    }
-                }
-            }
-
+            return GetValidationResult(LoadXml(filePath));
         }
-
+        public IValidationResult GetValidationResult(Document document) {
+            ValidationErrors = new List<string>();
+            using (var validator = new DocumentValidator()) {
+                var result = validator.Validate(document);
+                ValidationErrors.AddRange(result.Select(x => x.DefaultMessage));
+                return result;
+            }
+        }
 
         public bool ValidateWithSchema(string filePath) {
             if (String.IsNullOrEmpty(filePath)) { throw new ArgumentException(); }

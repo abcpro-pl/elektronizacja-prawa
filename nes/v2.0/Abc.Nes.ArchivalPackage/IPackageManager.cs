@@ -13,6 +13,7 @@
   ===================================================================================*/
 
 using Abc.Nes.ArchivalPackage.Model;
+using Abc.Nes.Validators;
 using System.Collections.Generic;
 
 namespace Abc.Nes.ArchivalPackage {
@@ -28,7 +29,8 @@ namespace Abc.Nes.ArchivalPackage {
 		int GetDocumentsCount();
 		IEnumerable<ItemBase> GetAllFiles();
 		IEnumerable<ItemBase> GetAllFiles(FolderBase folder);
-		bool Validate(out string message);
+		bool Validate(out string message, bool validateMetdataFiles = false);
+		IValidationResult GetValidationResult(bool validateMetdataFiles = false);
 
 		FolderBase GetParentFolder(ItemBase item);
 		FolderBase GetParentFolder(string filePath);
