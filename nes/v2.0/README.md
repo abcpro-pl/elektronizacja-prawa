@@ -94,6 +94,15 @@ ar converter = new Abc.Nes.Converters.XmlConverter();
 var valid = converter.Validate(filePath);
 // converter.ValidationErrors - errors
 ```
+W celu wykonania bardziej szczegółowej walidacji należy użyć metody `GetValidationResult`.
+
+```C#
+var c = new Abc.Nes.Converters.XmlConverter();
+var result = c.GetValidationResult(GetModel(true));
+foreach (var item in result) {
+    Console.WriteLine(item.DefaultMessage);                
+}
+```
 
 #### Korzystanie z modelu
 
@@ -438,6 +447,19 @@ mgr.LoadPackage(path);
 var result = mgr.Validate(out var message);
 if (!result) {
     throw new System.Exception(message);
+}
+```
+W celu wykonania bardziej szczegółowej walidacji należy użyć metody `GetValidationResult`.
+
+```C#
+var path = @"../../../sample/ValidatedPackage.zip";
+var mgr = new PackageManager();
+mgr.LoadPackage(path);
+var result = mgr.GetValidationResult(true);
+if (!result.IsCorrect) {
+    foreach (var item in result) {
+        Console.WriteLine(item.DefaultMessage);
+    }
 }
 ```
 
