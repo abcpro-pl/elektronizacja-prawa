@@ -11,18 +11,18 @@
     <RepositoryUrl>https://github.com/abcpro-pl/elektronizacja-prawa.git</RepositoryUrl>
     <RepositoryType>GIT</RepositoryType>
 
-    <PackageReleaseNotes>You can create, edit, save and validate archival package (eADM) for Polish State Archives. A more accurate validator has been added.</PackageReleaseNotes>
+    <PackageReleaseNotes>You can create, edit, save and validate archival package (eADM) for Polish State Archives. A more accurate validator has been added. Polish validation messages has been added.</PackageReleaseNotes>
     <SignAssembly>false</SignAssembly>
     <PackageId>ABCPRO.NES.ArchivalPackage</PackageId>
     <Product>ABCPRO.NES.ArchivalPackage</Product>
     <PackageProjectUrl>https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0</PackageProjectUrl>
-    <AssemblyVersion>1.0.0.11</AssemblyVersion>
-    <FileVersion>1.0.0.11</FileVersion>
-    <Version>1.0.11</Version>
+    <AssemblyVersion>1.0.0.12</AssemblyVersion>
+    <FileVersion>1.0.0.12</FileVersion>
+    <Version>1.0.12</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  <PropertyGroup>
     <NoWarn>1701;1702;IDE0063;</NoWarn>
   </PropertyGroup>
 
@@ -34,8 +34,32 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ABCPRO.NES" Version="1.0.7" />
+    <PackageReference Include="ABCPRO.NES" Version="1.0.8" />
     <PackageReference Include="DotNetZip" Version="1.13.8" />    
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Default.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Default.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Polish.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Polish.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Default.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Default.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Polish.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Polish.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

@@ -19,21 +19,25 @@ using System.Xml.Serialization;
 
 namespace Abc.Nes.Validators {
     public class DocumentValidator : IDocumentValidator {
-        private ValidationResult Result = null;
-
+        private ValidationResult _result = null;
+        private System.Resources.ResourceManager resx = null;
         public void Dispose() { }
 
         public IValidationResult Validate(Document document) {
-            Result = new ValidationResult();
+            _result = new ValidationResult();
+            resx = Properties.Default.ResourceManager;
+            if (System.Globalization.CultureInfo.CurrentCulture.Name == "pl" || System.Globalization.CultureInfo.CurrentCulture.Name == "pl-PL") {
+                resx = Properties.Polish.ResourceManager;
+            }
 
             if (document.IsNull()) { throw new ArgumentException(); }
             ValidateObject(document);
 
-            return Result;
+            return _result;
         }
 
 
-        private void ValidateObject(object o) {
+        private void ValidateObject(object o, string parentPropertyName = null) {
             if (o.GetType().GetCustomAttributes(typeof(XmlChoiceAttribute), false).FirstOrDefault().IsNotNull()) { return; }
 
             var properties = o.GetType().GetProperties();
@@ -41,36 +45,81 @@ namespace Abc.Nes.Validators {
                 var rqAttr = property.GetCustomAttributes(typeof(XmlRequiredAttribute), false).FirstOrDefault() as XmlRequiredAttribute;
                 if (rqAttr.IsNotNull() && rqAttr.Required) {
 
+                    // ------ Property Name ------------------
+                    var propertyName = property.Name;
+                    {
+                        var xmlElementAttr = property.GetCustomAttributes(typeof(XmlElementAttribute), false).FirstOrDefault() as XmlElementAttribute;
+                        if (xmlElementAttr.IsNotNull()) {
+                            propertyName = xmlElementAttr.ElementName;
+                        }
+                        else {
+                            var xmlRootAttr = property.GetCustomAttributes(typeof(XmlRootAttribute), false).FirstOrDefault() as XmlRootAttribute;
+                            if (xmlRootAttr.IsNotNull()) {
+                                propertyName = xmlRootAttr.ElementName;
+                            }
+                            else {
+                                var xmlAttributeAttr = property.GetCustomAttributes(typeof(XmlAttributeAttribute), false).FirstOrDefault() as XmlAttributeAttribute;
+                                if (xmlAttributeAttr.IsNotNull()) {
+                                    propertyName = xmlAttributeAttr.AttributeName;
+                                }
+                            }
+                        }
+                    }
+                    // ---------------------------------------
+
+                    // -------- Object Name ------------------
+                    var objectType = o.GetType();
+                    var objectFullName = parentPropertyName.IsNotNullOrEmpty() ? parentPropertyName : objectType.FullName;
+                    if (parentPropertyName.IsNullOrEmpty()) {
+                        var xmlElementAttr = objectType.GetCustomAttributes(typeof(XmlElementAttribute), false).FirstOrDefault() as XmlElementAttribute;
+                        if (xmlElementAttr.IsNotNull()) {
+                            objectFullName = xmlElementAttr.ElementName;
+                        }
+                        else {
+                            var xmlRootAttr = objectType.GetCustomAttributes(typeof(XmlRootAttribute), false).FirstOrDefault() as XmlRootAttribute;
+                            if (xmlRootAttr.IsNotNull()) {
+                                objectFullName = xmlRootAttr.ElementName;
+                            }
+                            else {
+                                var xmlAttributeAttr = objectType.GetCustomAttributes(typeof(XmlAttributeAttribute), false).FirstOrDefault() as XmlAttributeAttribute;
+                                if (xmlAttributeAttr.IsNotNull()) {
+                                    objectFullName = xmlAttributeAttr.AttributeName;
+                                }
+                            }
+                        }
+                    }
+                    // ---------------------------------------
+
                     var propVal = property.GetValue(o);
                     if (propVal.IsNull()) {
-                        Result.Add(new ValidationResultItem() {
+                        _result.Add(new ValidationResultItem() {
                             Source = ValidationResultSource.Metadata,
                             Type = ValidationResultType.DoesNotHaveValue,
                             Name = property.Name,
                             FullName = o.GetType().FullName,
-                            DefaultMessage = $"Required field '{property.Name}' of type '{o.GetType().FullName}' does not have a value!"
+                            DefaultMessage = String.Format(resx.GetString("RequiredFieldHasNoValue"), propertyName, objectFullName)
                         });
                         continue;
                     }
                     if (propVal is ICollection) {
                         if ((propVal as ICollection).Count == 0) {
-                            Result.Add(new ValidationResultItem() {
+                            _result.Add(new ValidationResultItem() {
                                 Source = ValidationResultSource.Metadata,
                                 Type = ValidationResultType.HasNoElements,
                                 Name = property.Name,
                                 FullName = o.GetType().FullName,
-                                DefaultMessage = $"Required list of fields '{property.Name}' of type '{o.GetType().FullName}' has no elements!"
+                                DefaultMessage = String.Format(resx.GetString("RequiredFieldHasNoItems"), propertyName, objectFullName)
                             });
                         }
                         else {
                             var collection = propVal as ICollection;
                             foreach (var item in collection) {
-                                ValidateObject(item);
+                                ValidateObject(item, propertyName);
                             }
                         }
                     }
                     else {
-                        ValidateObject(propVal); // rekurencyjnie
+                        ValidateObject(propVal, propertyName);
                     }
                 }
             }

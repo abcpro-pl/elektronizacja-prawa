@@ -232,11 +232,13 @@ namespace Abc.Nes.UnitTests {
             var path = @"../../../sample/ValidatedPackage.zip";
             var mgr = new PackageManager();
             mgr.LoadPackage(path);
-            var result = mgr.Validate(out var message, true);
+            var validateMetdataFiles = true;
+            var breakOnFirstError = false;
+            var result = mgr.Validate(out var message, validateMetdataFiles, breakOnFirstError);
             if (!result) {
                 System.Diagnostics.Debug.WriteLine(message);
             }
-            Assert.IsTrue(result);
+            Assert.IsTrue(!result);
         }
 
         [TestMethod]
@@ -244,7 +246,9 @@ namespace Abc.Nes.UnitTests {
             var path = @"../../../sample/ValidatedPackage.zip";
             var mgr = new PackageManager();
             mgr.LoadPackage(path);
-            var result = mgr.GetValidationResult(true);
+            var validateMetdataFiles = true;
+            var breakOnFirstError = false;
+            var result = mgr.GetValidationResult(validateMetdataFiles, breakOnFirstError);
             if (!result.IsCorrect) {
                 foreach (var item in result) {
                     System.Diagnostics.Debug.WriteLine(item.DefaultMessage);

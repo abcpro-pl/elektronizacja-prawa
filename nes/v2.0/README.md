@@ -12,15 +12,15 @@
 
 ## Zawartość
 
-Biblioteki NES służą do tworzenia paczki [eADM](https://gov.legalis.pl/przekazywanie-skargi-do-sadu-administracyjnego/), która swoją strukturą odpowiada paczce archiwalnej przekazywanej do [Archiwów Państwowych](https://www.archiwa.gov.pl/). Paczka oprócz samych dokumentów, zawiera opisujące je pliki metadanych. Więcej informacji można znaleźć w Rozporządzeniu Prezydenta Rzeczypospolitej Polskiej w sprawie szczegółowego sposobu oraz szczegółowych warunków przekazywania skargi wraz z aktami sprawy i odpowiedzią na skargę do sądu administracyjnego  [(Dz.U. z 2019 r. poz. 1003)](https://eli.gov.pl/eli/DU/2019/1003/ogl).
+Biblioteki NES służą do tworzenia paczki [eADM](https://gov.legalis.pl/przekazywanie-skargi-do-sadu-administracyjnego/), która swoją strukturą odpowiada paczce archiwalnej przekazywanej do [Archiwów Państwowych](https://www.archiwa.gov.pl/). Paczka oprócz samych dokumentów, zawiera opisujące je pliki metadanych. Więcej informacji można znaleźć w&nbsp;Rozporządzeniu Prezydenta Rzeczypospolitej Polskiej w&nbsp;sprawie szczegółowego sposobu oraz szczegółowych warunków przekazywania skargi wraz z&nbsp;aktami sprawy i&nbsp;odpowiedzią na skargę do sądu administracyjnego  [(Dz.U. z&nbsp;2019&nbsp;r. poz. 1003)](https://eli.gov.pl/eli/DU/2019/1003/ogl).
 
 W tym katalogu znajduje się:
 
 * oryginalny schemat XSD [nes_20.xsd](https://raw.githubusercontent.com/abcpro-pl/elektronizacja-prawa/master/nes/v2.0/nes_20.xsd), 
-* kod źródłowy biblioteki do tworzenia, edycji i&nbsp;zapisu pliku XML zgodnego ze schematem [ABCPRO.NES](/Abc.Nes). Biblioteka pozwala na utworzenie pliku XSD na podstawie modelu. W&nbsp;przeciwieństwie do oryginalnego [pliku XSD](https://raw.githubusercontent.com/abcpro-pl/elektronizacja-prawa/master/nes/v2.0/nes_20.xsd), - który można pobrać również z&nbsp;[profilu Ministerstwa Cyfryzacji](https://github.com/Ministerstwo-Cyfryzacji/ezd-analizy-it/blob/master/nes_bnf_komentarz.md), ten [wygenerowany z modelu](https://raw.githubusercontent.com/abcpro-pl/elektronizacja-prawa/master/nes/v2.0/nes_20_generated.xsd) nie zawiera żadnych błędów walidacji i&nbsp;referecji do zewnętrznych słowników, wszystkie elementy są opatrzone komentarzem, ponadto dodano możliwość umieszczania elementów ds:Signature czyli owzorowania podpisów elektronicznych. W&nbsp;katalogu [doc](/doc) znajduje się [dokumentacja wygenerowana na podstawie schematu](doc/nes_20_generated.pdf),
-* kod źródłowy biblioteki do tworzenia paczki eADM [ABCPRO.NES.ArchivalPackage](/Abc.Nes.ArchivalPackage). Za pomocą biblioteki można tworzyć, edytować i&nbsp;zapisywać dokumenty i&nbsp;metadane w&nbsp;paczce eADM zgodnie z&nbsp;wymogami rozporządzeń.
-* kod źródłowy biblioteki do podpisywania plików XML [ABCPRO.NES.XAdES](/Abc.Nes.Xades)
-* kod źródłowy biblioteki do podpisywania paczki eADM [ABCPRO.NES.ArchivalPackage.Cryptography](/Abc.Nes.ArchivalPackage.Cryptography)
+* kod źródłowy biblioteki do tworzenia, edycji i&nbsp;zapisu pliku XML zgodnego ze schematem [ABCPRO.NES](https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0/Abc.Nes). Biblioteka pozwala na utworzenie pliku XSD na podstawie modelu. W&nbsp;przeciwieństwie do oryginalnego [pliku XSD](https://raw.githubusercontent.com/abcpro-pl/elektronizacja-prawa/master/nes/v2.0/nes_20.xsd), - który można pobrać również z&nbsp;[profilu Ministerstwa Cyfryzacji](https://github.com/Ministerstwo-Cyfryzacji/ezd-analizy-it/blob/master/nes_bnf_komentarz.md), ten [wygenerowany z modelu](https://raw.githubusercontent.com/abcpro-pl/elektronizacja-prawa/master/nes/v2.0/nes_20_generated.xsd) nie zawiera żadnych błędów walidacji i&nbsp;referecji do zewnętrznych słowników, wszystkie elementy są opatrzone komentarzem, ponadto dodano możliwość umieszczania elementów ds:Signature czyli owzorowania podpisów elektronicznych. W&nbsp;katalogu [doc](https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0/doc) znajduje się [dokumentacja wygenerowana na podstawie schematu](doc/nes_20_generated.pdf),
+* kod źródłowy biblioteki do tworzenia paczki eADM [ABCPRO.NES.ArchivalPackage](https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0/Abc.Nes.ArchivalPackage). Za pomocą biblioteki można tworzyć, edytować i&nbsp;zapisywać dokumenty i&nbsp;metadane w&nbsp;paczce eADM zgodnie z&nbsp;wymogami rozporządzeń.
+* kod źródłowy biblioteki do podpisywania plików XML [ABCPRO.NES.XAdES](https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0/Abc.Nes.Xades)
+* kod źródłowy biblioteki do podpisywania paczki eADM [ABCPRO.NES.ArchivalPackage.Cryptography](https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0/Abc.Nes.ArchivalPackage.Cryptography)
 
  ## NuGet
 
@@ -34,6 +34,9 @@ W tym katalogu znajduje się:
 
 Nazwa | Wersja | Opis
 ------|--------|--------
+ABCPRO.NES.ArchivalPackage.Cryptography|1.0.5|Aktualizacja zależności.
+ABCPRO.NES.ArchivalPackage|1.0.12|Dodanie polskich opisów błędów przy walidacji paczki. W&nbsp;pliku `AssemblyIno.cs` projektu należy dodać dyrektywę  `[assembly: NeutralResourcesLanguage("pl")]` lub z&nbsp;poziomu kodu ustawić inne `CultureInfo`.
+ABCPRO.NES|1.0.8|Dodanie polskich opisów błędów przy walidacji metadanych. W&nbsp;pliku `AssemblyIno.cs` projektu należy dodać dyrektywę  `[assembly: NeutralResourcesLanguage("pl")]` lub z&nbsp;poziomu kodu ustawić inne `CultureInfo`.
 ABCPRO.NES.ArchivalPackage.Cryptography|1.0.4|Aktualizacja zależności.
 ABCPRO.NES.ArchivalPackage|1.0.11|Dodanie do klasy `PackageManager` metody `GetValidationResult` zwracającą obiekt ze szczegółową lokalizacją błędów walidacji paczki i&nbsp;metadanych.
 ABCPRO.NES|1.0.7|Dodanie przestrzeni nazw `Abc.Nes.Validators` do wyodrębnienia funkcji walidacji metadanych. W&nbsp;klasie`XmlConverter` dodano metodę `GetValidationResult` zwracającą obiekt ze szczegółową lokalizacją błędów.

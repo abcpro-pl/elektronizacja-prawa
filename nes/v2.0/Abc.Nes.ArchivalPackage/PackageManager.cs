@@ -31,7 +31,11 @@ namespace Abc.Nes.ArchivalPackage {
         public string FilePath { get; private set; }
         public void AddFile(DocumentFile document, Document metadata = null) {
             if (document.IsNull()) { throw new ArgumentNullException(); }
-            if (Package.IsNull()) { InitializePackage(); }
+            if (Package.IsNull()) {
+                using (IPackageValidator validator = new PackageValidator()) {
+                    Package = validator.InitializePackage();
+                }
+            }
             Package.Documents.Items.Add(document);
             if (metadata.IsNotNull()) {
                 Package.Metadata.Items.Add(new MetadataFile() {
@@ -44,7 +48,11 @@ namespace Abc.Nes.ArchivalPackage {
             if (filePath.IsNull()) { throw new ArgumentNullException(); }
             if (!File.Exists(filePath)) { throw new FileNotFoundException(); }
 
-            if (Package.IsNull()) { InitializePackage(); }
+            if (Package.IsNull()) {
+                using (IPackageValidator validator = new PackageValidator()) {
+                    Package = validator.InitializePackage();
+                }
+            }
 
             Package.Documents.Items.Add(new DocumentFile() {
                 FileName = GetValidFileName(filePath),
@@ -73,7 +81,11 @@ namespace Abc.Nes.ArchivalPackage {
                 throw new WrongMetadataCountException();
             }
 
-            if (Package.IsNull()) { InitializePackage(); }
+            if (Package.IsNull()) {
+                using (IPackageValidator validator = new PackageValidator()) {
+                    Package = validator.InitializePackage();
+                }
+            }
             var folder = new DocumentFolder() {
                 FolderName = folderName,
                 Items = new List<DocumentFile>()
@@ -111,7 +123,11 @@ namespace Abc.Nes.ArchivalPackage {
             if (fileName.IsNullOrEmpty()) { throw new ArgumentNullException("fileName"); }
             if (!fileName.ToLower().EndsWith(".xml")) { throw new Exception("The Object file must by an XML file!"); }
 
-            if (Package.IsNull()) { InitializePackage(); }
+            if (Package.IsNull()) {
+                using (IPackageValidator validator = new PackageValidator()) {
+                    Package = validator.InitializePackage();
+                }
+            }
 
             Package.Objects.AddItem(new MetadataFile() {
                 Document = metadata,
@@ -125,34 +141,28 @@ namespace Abc.Nes.ArchivalPackage {
             if (filePath.IsNotNullOrEmpty()) { FilePath = filePath; }
 
             var tmp = Path.Combine(Path.GetTempPath(), $"{string.Empty.GenerateId()}.zip");
-            var zipFile = new ZipFile(tmp);
+            using (var zipFile = new ZipFile(tmp)) {
+                AddDocuments(Package.Documents, zipFile);
+                AddMetadata(Package.Metadata, zipFile);
+                AddMetadata(Package.Objects, zipFile);
 
-            AddDocuments(Package.Documents, zipFile);
-            AddMetadata(Package.Metadata, zipFile);
-            AddMetadata(Package.Objects, zipFile);
-
-            zipFile.Save();
+                zipFile.Save();
+            }
 
             if (File.Exists(tmp)) {
                 File.Copy(tmp, FilePath, true);
             }
         }
         public void LoadPackage(string filePath) {
-            if (filePath.IsNullOrEmpty()) { throw new ArgumentNullException(); }
-            if (!File.Exists(filePath)) { throw new FileNotFoundException(filePath); }
-            if (!ZipFile.IsZipFile(filePath)) { throw new ZipException("Specified file is not a zip file!"); }
-
             // Package is already loaded
             if (FilePath == filePath && Package.Documents.IsNotNull() && !Package.Documents.IsEmpty) { return; }
-
-            FilePath = filePath;
-
+         
+            using (IPackageValidator validator = new PackageValidator()) {
+                Package = validator.GetPackage(filePath);
+                if (Package.IsNotNull()) { FilePath = Package.FilePath; }
+            }
+            
             var zipFile = ZipFile.Read(filePath);
-
-            IsPackageValid(zipFile);
-
-            InitializePackage();
-
             foreach (var entry in zipFile.Entries) {
                 if (entry.Attributes == FileAttributes.Directory) {
                     var dirName = entry.FileName;
@@ -209,29 +219,10 @@ namespace Abc.Nes.ArchivalPackage {
             return GetDocumentsCount(Package.Documents);
         }
         public IEnumerable<ItemBase> GetAllFiles() {
-            var items = new List<ItemBase>();
-            if (Package.IsNotNull()) {
-                items.AddRange(GetAllFiles(Package.Documents));
-                items.AddRange(GetAllFiles(Package.Metadata));
-                items.AddRange(GetAllFiles(Package.Objects));
-            }
-            return items;
+            return Package.GetAllFiles();
         }
         public IEnumerable<ItemBase> GetAllFiles(FolderBase folder) {
-            var items = new List<ItemBase>();
-            if (folder.IsNotNull()) {
-                var folderItems = folder.GetItems();
-                if (folderItems.IsNotNull() && folderItems.Count() > 0) items.AddRange(folderItems);
-
-                var subfolders = folder.GetFolders();
-                if (subfolders.IsNotNull() && folderItems.Count() > 0) {
-                    foreach (var subfolder in subfolders) {
-                        var subfolderItems = GetAllFiles(subfolder);
-                        if (subfolderItems.IsNotNull() && subfolderItems.Count() > 0) items.AddRange(subfolderItems);
-                    }
-                }
-            }
-            return items;
+            return Package.GetAllFiles(folder);
         }
         public MetadataFile GetMetadataFile(ItemBase documentFile) {
             if (documentFile.IsNotNull() && documentFile.FilePath.IsNotNullOrEmpty()) {
@@ -320,139 +311,15 @@ namespace Abc.Nes.ArchivalPackage {
             }
             return default;
         }
-        public bool Validate(out string message, bool validateMetdataFiles = false) {
-            message = null;
-            if (Package.IsNull()) { message = "Package is not initialized!"; }
-            if (message.IsNull() && Package.Documents.IsNull()) { message = "Package is not initialized!"; }
-            if (message.IsNull() && Package.Documents.IsEmpty) { message = "Documents not found!"; }
-
-            if (message.IsNull()) {
-                var validator = new XmlConverter();
-
-                foreach (var item in GetAllFiles(Package.Documents)) {
-                    var metadata = GetMetadataFile(item);
-                    if (metadata.IsNull()) {
-                        message = $"Metadata not found for file: {item.FilePath}!";
-                        break;
-                    }
-                    else if (validateMetdataFiles) {
-                        if (!validator.Validate(metadata.Document)) {
-                            message = $"Metadata of file: {item.FilePath} are not a valid!";
-                            break;
-                        }
-                    }
-                }
+        public bool Validate(out string message, bool validateMetdataFiles = false, bool breakOnFirstError = true) {
+            using (IPackageValidator validator = new PackageValidator()) {
+                return validator.Validate(Package, out message, validateMetdataFiles, breakOnFirstError);
             }
-
-            if (message.IsNull() && Package.Objects.IsEmpty) { message = "Objects not found!"; }
-
-            return message.IsNull();
         }
-        public IValidationResult GetValidationResult(bool validateMetdataFiles = false) {
-            IValidationResult result = new PackageValidationResult();
-            if (Package.IsNull()) {
-                result.Add(new PackageValidationResultItem() {
-                    FullName = "eADM Package",
-                    Name = "Package",
-                    Source = ValidationResultSource.Package,
-                    Type = ValidationResultType.Incorrect,
-                    DefaultMessage = "Package is not initialized!"
-                });
+        public IValidationResult GetValidationResult(bool validateMetdataFiles = false, bool breakOnFirstError = true) {
+            using (IPackageValidator validator = new PackageValidator()) {
+                return validator.GetValidationResult(Package, validateMetdataFiles, breakOnFirstError);
             }
-            if (result.Count == 0 && Package.Documents.IsNull()) {
-                result.Add(new PackageValidationResultItem() {
-                    FullName = "Package.Documents",
-                    Name = "Package",
-                    Source = ValidationResultSource.Package,
-                    Type = ValidationResultType.Incorrect,
-                    DefaultMessage = "Package has no documents folder!"
-                });
-            }
-            if (result.Count == 0 && Package.Documents.IsEmpty) {
-                result.Add(new PackageValidationResultItem() {
-                    FullName = "Package.Documents",
-                    Name = "Documents",
-                    Source = ValidationResultSource.Package,
-                    Type = ValidationResultType.HasNoElements,
-                    DefaultMessage = "Package has no documents!"
-                });
-            }
-            if (result.Count == 0 && Package.Metadata.IsNull()) {
-                result.Add(new PackageValidationResultItem() {
-                    FullName = "Package.Metadata",
-                    Name = "Package",
-                    Source = ValidationResultSource.Package,
-                    Type = ValidationResultType.Incorrect,
-                    DefaultMessage = "Package has no metadata folder!"
-                });
-            }
-            if (result.Count == 0 && Package.Metadata.IsEmpty) {
-                result.Add(new PackageValidationResultItem() {
-                    FullName = "Package.Metadata",
-                    Name = "Metadata",
-                    Source = ValidationResultSource.Package,
-                    Type = ValidationResultType.HasNoElements,
-                    DefaultMessage = "Package has no metadata!"
-                });
-            }
-            if (result.Count == 0 && Package.Objects.IsNull()) {
-                result.Add(new PackageValidationResultItem() {
-                    FullName = "Package.Objects",
-                    Name = "Package",
-                    Source = ValidationResultSource.Package,
-                    Type = ValidationResultType.Incorrect,
-                    DefaultMessage = "Package has no object folder!"
-                });
-            }
-            if (result.Count == 0 && Package.Objects.IsEmpty) {
-                result.Add(new PackageValidationResultItem() {
-                    FullName = "Package.Objects",
-                    Name = "Metadata",
-                    Source = ValidationResultSource.Package,
-                    Type = ValidationResultType.HasNoElements,
-                    DefaultMessage = "Package has no objects!"
-                });
-            }
-
-            if (result.Count == 0) {
-                var validator = new XmlConverter();
-
-                foreach (var item in GetAllFiles(Package.Documents)) {
-                    var metadata = GetMetadataFile(item);
-                    if (metadata.IsNull()) {
-
-                        result.Add(new PackageValidationResultItem() {
-                            FullName = item.FilePath,
-                            Name = item.FileName,
-                            Source = ValidationResultSource.Metadata,
-                            Type = ValidationResultType.NotFound,
-                            DefaultMessage = $"Metadata not found for file: {item.FilePath}!"
-                        });
-
-                        break;
-                    }
-                    else if (validateMetdataFiles) {
-                        var metadataResult = validator.GetValidationResult(metadata.Document);
-                        if (!metadataResult.IsCorrect) {
-                            result.Add(new PackageValidationResultItem() {
-                                FullName = item.FilePath,
-                                Name = item.FileName,
-                                Source = ValidationResultSource.Metadata,
-                                Type = ValidationResultType.Incorrect,
-                                DefaultMessage = $"Metadata of file: {item.FilePath} are not a valid!"
-                            });
-
-                            foreach (var _item in metadataResult) {
-                                result.Add(_item);
-                            }
-                
-                            break;
-                        }
-                    }
-                }
-            }
-
-            return result;
         }
 
         private int GetDocumentsCount(DocumentFolder folder) {
@@ -499,26 +366,7 @@ namespace Abc.Nes.ArchivalPackage {
                     AddDocuments(item, zipFile, $"{folderPath}/{item.FolderName}");
                 }
             }
-        }
-        private void InitializePackage() {
-            Package = new Package() {
-                Documents = new DocumentFolder() {
-                    FolderName = MainDirectoriesName.Files.GetXmlEnum(),
-                    Items = new List<DocumentFile>(),
-                    Folders = new List<DocumentFolder>()
-                },
-                Metadata = new MetdataFolder() {
-                    FolderName = MainDirectoriesName.Metadata.GetXmlEnum(),
-                    Items = new List<MetadataFile>(),
-                    Folders = new List<MetdataFolder>()
-                },
-                Objects = new MetdataFolder() {
-                    FolderName = MainDirectoriesName.Objects.GetXmlEnum(),
-                    Items = new List<MetadataFile>(),
-                    Folders = new List<MetdataFolder>()
-                }
-            };
-        }
+        }     
         private string GetValidFileName(string filePath) {
             if (filePath.IsNull()) { throw new NullReferenceException(); }
             if (!File.Exists(filePath)) { throw new FileNotFoundException(); }
@@ -527,15 +375,6 @@ namespace Abc.Nes.ArchivalPackage {
             result = result.RemoveIllegalCharacters();
             result = result.RemovePolishChars();
             return result;
-        }
-        private bool IsPackageValid(ZipFile zipFile) {
-            var zipFileHasMandatoryDirectories =
-               zipFile.EntryFileNames.Where(x => x.StartsWith(MainDirectoriesName.Files.GetXmlEnum())).Count() > 0 &&
-               zipFile.EntryFileNames.Where(x => x.StartsWith(MainDirectoriesName.Metadata.GetXmlEnum())).Count() > 0 &&
-               zipFile.EntryFileNames.Where(x => x.StartsWith(MainDirectoriesName.Objects.GetXmlEnum())).Count() > 0;
-
-            if (!zipFileHasMandatoryDirectories) { throw new PackageInvalidException(); }
-            return default;
         }
     }
 }

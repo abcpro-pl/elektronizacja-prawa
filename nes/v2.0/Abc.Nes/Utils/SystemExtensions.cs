@@ -47,6 +47,7 @@ namespace System {
         }
         public static bool IsNull(this object o) { return o == null; }
         public static bool IsNotNull(this object o) { return o != null; }
+        public static bool IsNullOrEmpty(this string text) { return String.IsNullOrEmpty(text); }
         public static bool IsNotNullOrEmpty(this string text) { return !String.IsNullOrEmpty(text); }
         public static bool ContainsInTable(this string text, bool ignoreCase, bool equals, params string[] strings) {
             if (!String.IsNullOrEmpty(text)) {

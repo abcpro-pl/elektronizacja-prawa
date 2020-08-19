@@ -23,7 +23,7 @@ using System.Xml.Linq;
 namespace Abc.Nes.UnitTests {
     [TestClass]
     public class DocumentUnitTest {
-        
+
         [TestMethod]
         public void Document_XsdGenerator_GetSchema() {
             XElement schema;
@@ -68,7 +68,7 @@ namespace Abc.Nes.UnitTests {
             var c = new Abc.Nes.Converters.XmlConverter();
             var result = c.GetValidationResult(GetModel(true));
             foreach (var item in result) {
-                System.Diagnostics.Debug.WriteLine(item.DefaultMessage);                
+                System.Diagnostics.Debug.WriteLine(item.DefaultMessage);
             }
             Assert.IsTrue(result.Count > 0);
         }
@@ -281,7 +281,7 @@ namespace Abc.Nes.UnitTests {
             };
 
             if (incorrect) {
-                         document.Identifiers.Clear();
+                document.Identifiers.Clear();
                 document.Groupings.First().Description = null;
             }
 

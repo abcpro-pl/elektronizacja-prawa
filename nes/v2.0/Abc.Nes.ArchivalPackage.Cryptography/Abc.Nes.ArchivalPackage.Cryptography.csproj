@@ -16,13 +16,13 @@
     <PackageId>ABCPRO.NES.ArchivalPackage.Cryptography</PackageId>
     <Product>ABCPRO.NES.ArchivalPackage.Cryptography</Product>
     <PackageProjectUrl>https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0</PackageProjectUrl>
-    <AssemblyVersion>1.0.0.4</AssemblyVersion>
-    <FileVersion>1.0.0.4</FileVersion>
-    <Version>1.0.4</Version>
+    <AssemblyVersion>1.0.0.5</AssemblyVersion>
+    <FileVersion>1.0.0.5</FileVersion>
+    <Version>1.0.5</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  <PropertyGroup>
     <NoWarn>1701;1702;IDE0063;</NoWarn>
   </PropertyGroup>
 
@@ -34,7 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ABCPRO.NES.ArchivalPackage" Version="1.0.11" />
+    <PackageReference Include="ABCPRO.NES.ArchivalPackage" Version="1.0.12" />
     <PackageReference Include="ABCPRO.NES.XAdES" Version="1.0.6" />
     <!--<PackageReference Include="Aspose.PDF" Version="20.7.0" />-->
     <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.6.7" />

@@ -29,8 +29,8 @@ namespace Abc.Nes.ArchivalPackage {
 		int GetDocumentsCount();
 		IEnumerable<ItemBase> GetAllFiles();
 		IEnumerable<ItemBase> GetAllFiles(FolderBase folder);
-		bool Validate(out string message, bool validateMetdataFiles = false);
-		IValidationResult GetValidationResult(bool validateMetdataFiles = false);
+		bool Validate(out string message, bool validateMetdataFiles = false, bool breakOnFirstError = true);
+		IValidationResult GetValidationResult(bool validateMetdataFiles = false, bool breakOnFirstError = true);
 
 		FolderBase GetParentFolder(ItemBase item);
 		FolderBase GetParentFolder(string filePath);
