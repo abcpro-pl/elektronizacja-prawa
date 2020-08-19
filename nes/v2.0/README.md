@@ -72,7 +72,7 @@ var filePath = @"..\..\..\nes_20_generated.xsd";
 schema.Save(filePath);
 ```
 
-#### Tworzenie dokumentu XML
+#### Tworzenie dokumentu XML metadanych
 
 ```C#
 Abc.Nes.Document document = GetModel(); 
@@ -80,7 +80,7 @@ var filePath = Path.Combine(Path.GetTempPath(), "nes.xml");
 new Abc.Nes.Converters.XmlConverter().WriteXml(document, filePath);
 ```
 
-#### Ładowanie dokumentu XML
+#### Ładowanie dokumentu XML metadanych
 
 ```C#
 var filePath = Path.Combine(Path.GetTempPath(), "nes.xml");
@@ -88,7 +88,9 @@ if (!File.Exists(filePath)) { throw new FileNotFoundException(); }
 var document = new Abc.Nes.Converters.XmlConverter().LoadXml(filePath);
 ```
 
-#### Walidacja dokumentu XML
+#### Walidacja dokumentu XML metadanych
+
+Domyslnie komunikaty wyświetlane są w&nbsp;języku angielskim. W&nbsp;celu włączenia komunikatów w&nbsp;języku polskim w&nbsp;pliku `AssemblyIno.cs` projektu należy dodać dyrektywę  `[assembly: NeutralResourcesLanguage("pl")]` lub z&nbsp;poziomu kodu ustawić polskie `CultureInfo`.
 
 ```C#
 var filePath = Path.Combine(Path.GetTempPath(), "nes.xml");
@@ -100,14 +102,14 @@ var valid = converter.Validate(filePath);
 W celu wykonania bardziej szczegółowej walidacji należy użyć metody `GetValidationResult`.
 
 ```C#
-var c = new Abc.Nes.Converters.XmlConverter();
-var result = c.GetValidationResult(GetModel(true));
+var c = new  Abc.Nes.Validators.DocumentValidator();
+var result = c.Validate(GetModel(true));
 foreach (var item in result) {
     Console.WriteLine(item.DefaultMessage);                
 }
 ```
 
-#### Korzystanie z modelu
+#### Korzystanie z modelu metadanych
 
 ```C#
 var document = new Abc.Nes.Document() {
@@ -443,11 +445,15 @@ mgr.Save(@"../../../sample/ValidatedPackage.zip");
 
 #### Weryfikacja poprawności strukturalnej paczki ADM
 
+Domyslnie komunikaty wyświetlane są w&nbsp;języku angielskim. W&nbsp;celu włączenia komunikatów w&nbsp;języku polskim w&nbsp;pliku `AssemblyIno.cs` projektu należy dodać dyrektywę  `[assembly: NeutralResourcesLanguage("pl")]` lub z&nbsp;poziomu kodu ustawić polskie `CultureInfo`.
+
 ```C#
 var path = @"../../../sample/ValidatedPackage.zip";
 var mgr = new PackageManager();
 mgr.LoadPackage(path);
-var result = mgr.Validate(out var message);
+var validateMetdataFiles = true;
+var breakOnFirstError = false;
+var result = mgr.Validate(out var message, validateMetdataFiles, breakOnFirstError);
 if (!result) {
     throw new System.Exception(message);
 }
@@ -458,7 +464,9 @@ W celu wykonania bardziej szczegółowej walidacji należy użyć metody `GetVal
 var path = @"../../../sample/ValidatedPackage.zip";
 var mgr = new PackageManager();
 mgr.LoadPackage(path);
-var result = mgr.GetValidationResult(true);
+var validateMetdataFiles = true;
+var breakOnFirstError = false;
+var result = mgr.GetValidationResult(validateMetdataFiles, breakOnFirstError);
 if (!result.IsCorrect) {
     foreach (var item in result) {
         Console.WriteLine(item.DefaultMessage);

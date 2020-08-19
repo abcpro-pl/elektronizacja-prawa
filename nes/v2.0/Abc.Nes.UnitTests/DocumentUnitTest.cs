@@ -14,7 +14,6 @@
 
 using Abc.Nes.Generators;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -65,8 +64,8 @@ namespace Abc.Nes.UnitTests {
 
         [TestMethod]
         public void Document_XmlConverter_GetValidationResult() {
-            var c = new Abc.Nes.Converters.XmlConverter();
-            var result = c.GetValidationResult(GetModel(true));
+            var c = new Abc.Nes.Validators.DocumentValidator();
+            var result = c.Validate(GetModel(true));
             foreach (var item in result) {
                 System.Diagnostics.Debug.WriteLine(item.DefaultMessage);
             }
