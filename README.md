@@ -9,7 +9,7 @@ W podkatalogu [NES/v2.0](nes/v2.0/readme.md) znajdują się biblioteki do tworze
 
 ## Generator losowych zdań po polsku
 
-w podkatalogu [psg](psg/readme.md) znajduje się biblioteka służąca do generowania zdań po polsku, np. w celu testowania zachowań edytorów tekstów.
+w podkatalogu [psg](psg/README.md) znajduje się biblioteka służąca do generowania zdań po polsku, np. w celu testowania zachowań edytorów tekstów.
  
 ## O ABC PRO 
 

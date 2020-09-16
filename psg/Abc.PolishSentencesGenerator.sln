@@ -3,13 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abc.PolishSentences", "src\Abc.PolishSentencesGenerator\Abc.PolishSentences.csproj", "{C129302A-186D-42BB-9A3E-2DE75623D55E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abc.PolishSentences", "src\Abc.PolishSentencesGenerator\Abc.PolishSentences.csproj", "{C129302A-186D-42BB-9A3E-2DE75623D55E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{22DA10B1-32E5-40B0-8618-F170C89A4DE0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D418DB9E-1556-41BC-89B5-48BF0E3E7543}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abc.PolishSencences.Test", "test\Abc.PolishSencences.Test\Abc.PolishSencences.Test.csproj", "{9D5AA4EB-47B6-4F2D-9061-3092DFE00BCA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{2AE7E92B-D3EF-460C-891D-85AF6F54678E}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
