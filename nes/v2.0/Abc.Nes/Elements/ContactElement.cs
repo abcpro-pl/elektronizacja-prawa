@@ -23,6 +23,7 @@ namespace Abc.Nes.Elements {
         [XmlText] public string Value { get; set; } = String.Empty;
 
         [XmlAttribute("typKontaktu")]
+        [XmlSynonyms("typ")]
         [XmlAnnotation("Wskazanie rodzaju kontaktu np. email, telefon, adres strony internetowej.")]
         [XmlRequired]
         [XmlSimpleType(Annotation = "Typy kontaktu", EnumerationRestriction = typeof(ContactType), BaseTypeName = "xs:string", TypeName = "kontakt-rodzaj-typ", UnionMemberTypes = "xs:string")]

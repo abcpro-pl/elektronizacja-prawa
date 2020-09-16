@@ -15,6 +15,7 @@
 using Abc.Nes.Enumerations;
 using System;
 using System.Collections.Generic;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace Abc.Nes.Elements {
@@ -24,6 +25,7 @@ namespace Abc.Nes.Elements {
         [XmlElement("identyfikator")] [XmlRequired] public List<IdentifierElement> Identifiers { get; set; }
 
         [XmlElement("typRelacji")]
+        [XmlSynonyms("typ")]
         [XmlRequired]
         [XmlAnnotation("Określenie rodzaju powiązania.")]
         [XmlSimpleType(TypeName = "typrelacji-typ", Annotation = "Standardowe typy relacji powinny być ujęte w słownik zawierający co najmniej typy relacji określone w repozytorium interoparacyjności.", BaseTypeName = "xs:string", UnionMemberTypes = "ndap:niepusty-ciag-typ", EnumerationRestriction = typeof(RelationType))]

@@ -5,7 +5,11 @@ Udostępniane publicznie standardy, schematy i opisy oraz kod źródłowy oprogr
 
 ## Paczka eADM i Niezbędne Elementy Struktury 2.0
 
-W podkatalogu [NES/v2.0](nes/v2.0/) znajdują się biblioteki do tworzenia, edycji i podpisywania paczki eADM oraz plików metadanych zgodnych z NES 2.0.
+W podkatalogu [NES/v2.0](nes/v2.0/readme.md) znajdują się biblioteki do tworzenia, edycji i podpisywania paczki eADM oraz plików metadanych zgodnych z NES 2.0.
+
+## Generator losowych zdań po polsku
+
+w podkatalogu [psg](psg/readme.md) znajduje się biblioteka służąca do generowania zdań po polsku, np. w celu testowania zachowań edytorów tekstów.
  
 ## O ABC PRO 
 

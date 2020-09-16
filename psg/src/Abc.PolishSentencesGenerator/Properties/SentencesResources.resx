@@ -1,0 +1,3159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="String1013" xml:space="preserve">
+    <value>Z nastaniem wieczora przyprowadzono Mu wielu opętanych.</value>
+  </data>
+  <data name="String1014" xml:space="preserve">
+    <value>Spadł deszcz, wezbrały potoki, zerwały się wichry i rzuciły się na ten dom.</value>
+  </data>
+  <data name="String1015" xml:space="preserve">
+    <value>Każdego zaś, kto tych słów moich słucha, a nie wypełnia ich, można porównać z człowiekiem nierozsądnym, który dom swój zbudował na piasku.</value>
+  </data>
+  <data name="String1016" xml:space="preserve">
+    <value>On jednak nie runął, bo na skale był utwierdzony.</value>
+  </data>
+  <data name="String1017" xml:space="preserve">
+    <value>Spadł deszcz, wezbrały potoki, zerwały się wichry i uderzyły w ten dom.</value>
+  </data>
+  <data name="String1018" xml:space="preserve">
+    <value>Każdego więc, kto tych słów moich słucha i wypełnia je, można porównać z człowiekiem roztropnym, który dom swój zbudował na skale.</value>
+  </data>
+  <data name="String1019" xml:space="preserve">
+    <value>Każde drzewo, które nie wydaje dobrego owocu, będzie wycięte i w ogień wrzucone.</value>
+  </data>
+  <data name="String1020" xml:space="preserve">
+    <value>Strzeżcie się fałszywych proroków, którzy przychodzą do was w owczej skórze, a wewnątrz są drapieżnymi wilkami.</value>
+  </data>
+  <data name="String1021" xml:space="preserve">
+    <value>Wchodźcie przez ciasną bramę!</value>
+  </data>
+  <data name="String1022" xml:space="preserve">
+    <value>Wszystko więc, co byście chcieli, żeby wam ludzie czynili, i wy im czyńcie!</value>
+  </data>
+  <data name="String1023" xml:space="preserve">
+    <value>Chłodno, głodno, do domu daleko.</value>
+  </data>
+  <data name="String1024" xml:space="preserve">
+    <value>Starajcie się naprzód o królestwo i o Jego sprawiedliwość, a to wszystko będzie wam dodane.</value>
+  </data>
+  <data name="String1025" xml:space="preserve">
+    <value>Nie troszczcie się więc zbytnio i nie mówcie: co będziemy jeść?</value>
+  </data>
+  <data name="String1026" xml:space="preserve">
+    <value>Nie troszczcie się zbytnio o swoje życie, o to, co macie jeść i pić, ani o swoje ciało, czym się macie przyodziać.</value>
+  </data>
+  <data name="String1027" xml:space="preserve">
+    <value>Nikt nie może dwom panom służyć.</value>
+  </data>
+  <data name="String1028" xml:space="preserve">
+    <value>Światłem ciała jest oko. Jeśli więc twoje oko jest zdrowe, całe twoje ciało będzie w świetle.</value>
+  </data>
+  <data name="String1029" xml:space="preserve">
+    <value>Nie gromadźcie sobie skarbów na ziemi, gdzie mól i rdza niszczą i gdzie złodzieje włamują się, i kradną.</value>
+  </data>
+  <data name="String1030" xml:space="preserve">
+    <value>Kiedy pościcie, nie bądźcie posępni jak obłudnicy.</value>
+  </data>
+  <data name="String1031" xml:space="preserve">
+    <value>Na modlitwie nie bądźcie gadatliwi jak poganie.</value>
+  </data>
+  <data name="String1032" xml:space="preserve">
+    <value>Gdy się modlicie, nie bądźcie jak obłudnicy.</value>
+  </data>
+  <data name="String1033" xml:space="preserve">
+    <value>Bądźcie więc wy doskonali, jak doskonały jest Ojciec wasz niebieski.</value>
+  </data>
+  <data name="String1034" xml:space="preserve">
+    <value>Chłodno, głodno i do domu daleko.</value>
+  </data>
+  <data name="String1035" xml:space="preserve">
+    <value>Miłujcie waszych nieprzyjaciół i módlcie się za tych, którzy was prześladują.</value>
+  </data>
+  <data name="String1036" xml:space="preserve">
+    <value>Wcale nie przysięgajcie, ani na niebo, bo jest tronem Bożym, ani na ziemię, bo jest podnóżkiem stóp Jego!</value>
+  </data>
+  <data name="String1037" xml:space="preserve">
+    <value>Lepiej bowiem jest dla ciebie, gdy zginie jeden z twoich członków, niż żeby całe twoje ciało miało iść do piekła.</value>
+  </data>
+  <data name="String1038" xml:space="preserve">
+    <value>Wy jesteście światłem świata. Nie może się ukryć miasto położone na górze.</value>
+  </data>
+  <data name="String1039" xml:space="preserve">
+    <value>Wy jesteście solą dla ziemi. Lecz jeśli sól utraci swój smak, czymże ją posolić?</value>
+  </data>
+  <data name="String1040" xml:space="preserve">
+    <value>Ale jest napisane także: Nie będziesz wystawiał na próbę Pana, Boga swego!</value>
+  </data>
+  <data name="String1041" xml:space="preserve">
+    <value>Wtedy Duch wyprowadził Jezusa na pustynię, aby był kuszony przez diabła.</value>
+  </data>
+  <data name="String1042" xml:space="preserve">
+    <value>A głos z nieba mówił: Ten jest mój Syn umiłowany, w którym mam upodobanie.</value>
+  </data>
+  <data name="String1043" xml:space="preserve">
+    <value>Wtedy przyszedł Jezus z Galilei nad Jordan do Jana, żeby przyjąć chrzest od niego.</value>
+  </data>
+  <data name="String1044" xml:space="preserve">
+    <value>Przyjmowano od niego chrzest w rzece Jordan, wyznając przy tym swe grzechy.</value>
+  </data>
+  <data name="String1045" xml:space="preserve">
+    <value>Chlebem i solą ludzie ludzi niewolą.</value>
+  </data>
+  <data name="String1046" xml:space="preserve">
+    <value>Sam zaś Jan nosił odzienie z sierści wielbłądziej i pas skórzany około bioder, a jego pokarmem była szarańcza i miód leśny.</value>
+  </data>
+  <data name="String1047" xml:space="preserve">
+    <value>Wtedy Herod przywołał potajemnie Mędrców i wypytał ich dokładnie o czas ukazania się gwiazdy.</value>
+  </data>
+  <data name="String1048" xml:space="preserve">
+    <value>Lepszy wróbel w garści niż gołąb na dachu.</value>
+  </data>
+  <data name="String1049" xml:space="preserve">
+    <value>Nie ma tego złego, co by na dobre nie wyszło.</value>
+  </data>
+  <data name="String1050" xml:space="preserve">
+    <value>Kto z kim przestaje, takim się staje.</value>
+  </data>
+  <data name="String1051" xml:space="preserve">
+    <value>Wódka grzeje, wódka chłodzi, wódka nigdy nie zaszkodzi!</value>
+  </data>
+  <data name="String1052" xml:space="preserve">
+    <value>Trzymać język za zębami – to jest cnota nad cnotami.</value>
+  </data>
+  <data name="String1053" xml:space="preserve">
+    <value>Strzeż się babskiego przodu, a końskiego zadu.</value>
+  </data>
+  <data name="String1054" xml:space="preserve">
+    <value>Nawet w Paryżu nie zrobią z bobu ryżu.</value>
+  </data>
+  <data name="String1055" xml:space="preserve">
+    <value>Kto ma dobrze w gębie, dostanie do niej albo po niej.</value>
+  </data>
+  <data name="String1056" xml:space="preserve">
+    <value>Chleb, piwo i świéca zdobią szlachcica.</value>
+  </data>
+  <data name="String1057" xml:space="preserve">
+    <value>Jak sie z chłopa stanie pisarz, to se myśli, że je cesarz.</value>
+  </data>
+  <data name="String1058" xml:space="preserve">
+    <value>Gdy ostatni wypije, musi kazać nalać! Każmy więc, kamraci, wypić za zdrowie tego ostatniego!</value>
+  </data>
+  <data name="String1059" xml:space="preserve">
+    <value>Chałupa bez płota, a baba bez chłopa, to jedno.</value>
+  </data>
+  <data name="String1060" xml:space="preserve">
+    <value>Siebie w słońcu stawiamy, a innych w cieniu.</value>
+  </data>
+  <data name="String1061" xml:space="preserve">
+    <value>Dobry koń bez bata jedzie, ale widzieć go musi.</value>
+  </data>
+  <data name="String1062" xml:space="preserve">
+    <value>Dobre słowo otwiera serce.</value>
+  </data>
+  <data name="String1063" xml:space="preserve">
+    <value>Bo się śledź obrazi!</value>
+  </data>
+  <data name="String1064" xml:space="preserve">
+    <value>Żyd żyda, ksiądz księdza o sto mil zwietrzy.</value>
+  </data>
+  <data name="String1065" xml:space="preserve">
+    <value>Żadna praca nie hańbi.</value>
+  </data>
+  <data name="String1066" xml:space="preserve">
+    <value>Zwykle luty ostro kuty, czasem luty same pluty.</value>
+  </data>
+  <data name="String1067" xml:space="preserve">
+    <value>Chleb w drodze nie cięży.</value>
+  </data>
+  <data name="String1068" xml:space="preserve">
+    <value>Złego diabli nie biorą.</value>
+  </data>
+  <data name="String1069" xml:space="preserve">
+    <value>Złe gospodarstwo, gdzie kądziel przewodzi nad mieczem.</value>
+  </data>
+  <data name="String1070" xml:space="preserve">
+    <value>Zimno w Piotra Stolicę, czterdzieści dni takich naliczę.</value>
+  </data>
+  <data name="String1071" xml:space="preserve">
+    <value>Zima, gdy mrozem nie wygodzi, marzec z kwietniem wraz wychłodzi.</value>
+  </data>
+  <data name="String1072" xml:space="preserve">
+    <value>Zielone Boże Narodzenie, a Wielkanoc biała, w polu uciecha mała.</value>
+  </data>
+  <data name="String1073" xml:space="preserve">
+    <value>Zastaw się, a postaw się.</value>
+  </data>
+  <data name="String1074" xml:space="preserve">
+    <value>Zawsze to znać, co kundel, a co wyżeł.</value>
+  </data>
+  <data name="String1075" xml:space="preserve">
+    <value>Zapust smutny, post wesoły, będziesz człeku, cały rok goły.</value>
+  </data>
+  <data name="String1076" xml:space="preserve">
+    <value>Za kwietniem ciepłym idzie maj chłodny.</value>
+  </data>
+  <data name="String1077" xml:space="preserve">
+    <value>Za grosz cię powieszą, a za dukata ujdziesz.</value>
+  </data>
+  <data name="String1078" xml:space="preserve">
+    <value>Chleb świętej Agaty od ognia strzeże chaty.</value>
+  </data>
+  <data name="String1079" xml:space="preserve">
+    <value>Z nikim się chlebem nie przełamie.</value>
+  </data>
+  <data name="String1080" xml:space="preserve">
+    <value>Z kim szczęście na ukos, i kury nań gdaczą.</value>
+  </data>
+  <data name="String1081" xml:space="preserve">
+    <value>Wystroił się jak stróż w Boże Ciało.</value>
+  </data>
+  <data name="String1082" xml:space="preserve">
+    <value>Wtenczas, gościu, bywaj u mnie, kiedy wszystko znajdziesz w gumnie.</value>
+  </data>
+  <data name="String1083" xml:space="preserve">
+    <value>Wstępna środa następuje, pani matka żur gotuje.</value>
+  </data>
+  <data name="String1084" xml:space="preserve">
+    <value>Wróżą pogodną jesień ciepłe deszcze w kwiecień.</value>
+  </data>
+  <data name="String1085" xml:space="preserve">
+    <value>Wody w maju stojące szkodę przynoszą łące.</value>
+  </data>
+  <data name="String1086" xml:space="preserve">
+    <value>Wodę czerpie przetakiem, kto bez ksiąg chce być żakiem.</value>
+  </data>
+  <data name="String1087" xml:space="preserve">
+    <value>Więcej gość za godzinę w cudzym domu ujrzy niż gospodarz za rok.</value>
+  </data>
+  <data name="String1088" xml:space="preserve">
+    <value>Więcej dogryzie psiarnia kundlów, niż jeden brytan.</value>
+  </data>
+  <data name="String1089" xml:space="preserve">
+    <value>Chleb stracił, a bułki nie znalazł.</value>
+  </data>
+  <data name="String1090" xml:space="preserve">
+    <value>Widzisz bociana w wodzie, nie myśl o pogodzie.</value>
+  </data>
+  <data name="String1091" xml:space="preserve">
+    <value>Weronika chustkę zrzuci, wiosna od nas się odwróci.</value>
+  </data>
+  <data name="String1092" xml:space="preserve">
+    <value>Weronika chustę zrzuci, wiosna od nas się odwróci.</value>
+  </data>
+  <data name="String1093" xml:space="preserve">
+    <value>We Wielki Piątek rosadę kapusty siej, a gawiedź jej nie chyci.</value>
+  </data>
+  <data name="String1094" xml:space="preserve">
+    <value>We Wielki Piątek deszcz, nieurodzaju wieszcz.</value>
+  </data>
+  <data name="String1095" xml:space="preserve">
+    <value>We środę po kołaczach, gdy żaba zakuka, już nas zima mrozami pewnie nie oszuka.</value>
+  </data>
+  <data name="String1096" xml:space="preserve">
+    <value>Wczoraj hulki, dzisiaj hulki, jutro będziem bez koszulki.</value>
+  </data>
+  <data name="String1097" xml:space="preserve">
+    <value>Wczesne kaczki z żurawiami, znakiem wiosny z ciepłami.</value>
+  </data>
+  <data name="String1098" xml:space="preserve">
+    <value>Wart Pac pałaca, a pałac Paca.</value>
+  </data>
+  <data name="String1099" xml:space="preserve">
+    <value>W Zygmunta deszcz – nieurodzaju wieszcz.</value>
+  </data>
+  <data name="String1100" xml:space="preserve">
+    <value>Chleb pracą nabyty, bywa smaczny i syty.</value>
+  </data>
+  <data name="String1101" xml:space="preserve">
+    <value>W zimne maja ranki trudno spotkać kocanki.</value>
+  </data>
+  <data name="String1102" xml:space="preserve">
+    <value>W Wielki Piątek mróz, gdzie bądź na wzgórku siana wóz, w Wielki Piątek rosa, na łące nie chyci kosa.</value>
+  </data>
+  <data name="String1103" xml:space="preserve">
+    <value>W Wielki Piątek gdy deszcz hojnie doliny zleje, że dużo mleka będzie, są pewne nadzieje.</value>
+  </data>
+  <data name="String1104" xml:space="preserve">
+    <value>W Wielki Piątek dobry zasiewu początek.</value>
+  </data>
+  <data name="String1105" xml:space="preserve">
+    <value>W Urbana, miły chłopie, siej len i konopie.</value>
+  </data>
+  <data name="String1106" xml:space="preserve">
+    <value>W świętego Konrada, zima nie rada.</value>
+  </data>
+  <data name="String1107" xml:space="preserve">
+    <value>W styczniu łów łatwy na kuropatwy.</value>
+  </data>
+  <data name="String1108" xml:space="preserve">
+    <value>W prima aprilis się omylisz, gdzie postąpisz, gdzie się schylisz.</value>
+  </data>
+  <data name="String1109" xml:space="preserve">
+    <value>W post zaloty, a gość we żniwa – zawsze nie w porę bywa.</value>
+  </data>
+  <data name="String1110" xml:space="preserve">
+    <value>W popielcową środę jak deszcz z góry pada, trzecia kopka chłopu na polu przepada.</value>
+  </data>
+  <data name="String1111" xml:space="preserve">
+    <value>Chleb płacze, gdy go darmo jedzą.</value>
+  </data>
+  <data name="String1112" xml:space="preserve">
+    <value>W pokoju adamaszek, a w stodole pustki.</value>
+  </data>
+  <data name="String1113" xml:space="preserve">
+    <value>W Niedzielę Kwietnia dzień jasny, jest to dla lata znak krasny.</value>
+  </data>
+  <data name="String1114" xml:space="preserve">
+    <value>W marcu słońce grzeje, czasem śnieżek sieje.</value>
+  </data>
+  <data name="String1115" xml:space="preserve">
+    <value>W marcu mgły – powódź za sto dni.</value>
+  </data>
+  <data name="String1116" xml:space="preserve">
+    <value>W marcu kto siać nie zaczyna, swego dobra zapomina, spiesz więc w pole, by po trochu, rzucić w ziemię owsa, grochu.</value>
+  </data>
+  <data name="String1117" xml:space="preserve">
+    <value>W marcu kto siać nie zaczyna, dobra swego zapomina.</value>
+  </data>
+  <data name="String1118" xml:space="preserve">
+    <value>W marcu jak w garncu.</value>
+  </data>
+  <data name="String1119" xml:space="preserve">
+    <value>W marcu gdy są grzmoty, urośnie zboże ponad płoty.</value>
+  </data>
+  <data name="String1120" xml:space="preserve">
+    <value>W marcu gdy grzmot na lody spada, w lecie grad zapowiada.</value>
+  </data>
+  <data name="String1121" xml:space="preserve">
+    <value>W maju zbiera pszczółka, zbierajże tez i ty ziółka.</value>
+  </data>
+  <data name="String1122" xml:space="preserve">
+    <value>Chleb ma rogi, nędza nogi.</value>
+  </data>
+  <data name="String1123" xml:space="preserve">
+    <value>Ani bądź zbyt gościnny, ani zbyt oszczędny.</value>
+  </data>
+  <data name="String1124" xml:space="preserve">
+    <value>W maju jak w raju.</value>
+  </data>
+  <data name="String1125" xml:space="preserve">
+    <value>W maju jak w gaju.</value>
+  </data>
+  <data name="String1126" xml:space="preserve">
+    <value>W lutym, gdy zagrzmi od wschodniego boku, burze i wiatry częste są w tym roku.</value>
+  </data>
+  <data name="String1127" xml:space="preserve">
+    <value>W lutym wiele wody – całe lato bez pogody.</value>
+  </data>
+  <data name="String1128" xml:space="preserve">
+    <value>W lutym śniegi i mróz stały czynią w lecie upały, gdy burze, deszcze panują, dobry plon nam obiecują.</value>
+  </data>
+  <data name="String1129" xml:space="preserve">
+    <value>W lutym mróz i śnieg stały czynią w lecie upał trwały.</value>
+  </data>
+  <data name="String1130" xml:space="preserve">
+    <value>W lutym lepszy wilk przy progu, niż chłop i koń przy pługu.</value>
+  </data>
+  <data name="String1131" xml:space="preserve">
+    <value>W kwietniu posusza, nic się na polach nie rusza.</value>
+  </data>
+  <data name="String1132" xml:space="preserve">
+    <value>W kwietniu posucha, niknie rolnikom otucha.</value>
+  </data>
+  <data name="String1133" xml:space="preserve">
+    <value>W kwietniu po brzegach wody niosą jęczmienia urody.</value>
+  </data>
+  <data name="String1134" xml:space="preserve">
+    <value>Chleb ma rogi.</value>
+  </data>
+  <data name="String1135" xml:space="preserve">
+    <value>W kwietniu łagodne kwiatki, w grudniu śnieżne płatki.</value>
+  </data>
+  <data name="String1136" xml:space="preserve">
+    <value>W Katedrę Piotra ostry czas, dni czterdzieści trwa on wraz.</value>
+  </data>
+  <data name="String1137" xml:space="preserve">
+    <value>W Józefa z zimy się śmiej i na grządce kapustę siej.</value>
+  </data>
+  <data name="String1138" xml:space="preserve">
+    <value>W dzień świętego Kazimierza zima do morza zmierza.</value>
+  </data>
+  <data name="String1139" xml:space="preserve">
+    <value>W dzień świętej Agaty jeśli słonko przez okienko zajrzy do chaty, to wiosenka na świat podgląda zza zimowej kraty.</value>
+  </data>
+  <data name="String1140" xml:space="preserve">
+    <value>W dzień Agaty jeśli słonko przez okienko zajrzy do chaty, to wiosenka na świat spogląda zza zimowej kraty.</value>
+  </data>
+  <data name="String1141" xml:space="preserve">
+    <value>W dzień Agaty to dopiero pół zimy rogatej.</value>
+  </data>
+  <data name="String1142" xml:space="preserve">
+    <value>W dużej kupie się bić, a w małej jeść.</value>
+  </data>
+  <data name="String1143" xml:space="preserve">
+    <value>W dni krzyżowe męka boża, wstrzymaj się od siewu zboża.</value>
+  </data>
+  <data name="String1144" xml:space="preserve">
+    <value>Urodzaje da rola, gdy deszcz leje w Karola.</value>
+  </data>
+  <data name="String1145" xml:space="preserve">
+    <value>Chleb i woda, nie ma głoda.</value>
+  </data>
+  <data name="String1146" xml:space="preserve">
+    <value>Ulitował się kruk nad żabą, jak jej oczy wydziobał</value>
+  </data>
+  <data name="String1147" xml:space="preserve">
+    <value>Ugościł go, aż nie trafił do domu.</value>
+  </data>
+  <data name="String1148" xml:space="preserve">
+    <value>Ugościć kogoś dupą o ławę.</value>
+  </data>
+  <data name="String1149" xml:space="preserve">
+    <value>Ucz swoje dzieci kamienie gryźć.</value>
+  </data>
+  <data name="String1150" xml:space="preserve">
+    <value>Tłusty czwartek pączkami fetuje, a od Popielca ścisły post szykuje.</value>
+  </data>
+  <data name="String1151" xml:space="preserve">
+    <value>To, co marzec sobie marzy, to jest sęk dla gospodarzy.</value>
+  </data>
+  <data name="String1152" xml:space="preserve">
+    <value>Ta urodzajna pszenica bywa, która w kwietniu przepiórkę przykrywa.</value>
+  </data>
+  <data name="String1153" xml:space="preserve">
+    <value>Święty Marcin lody gładzi, gdy ich nie ma, to je sadzi.</value>
+  </data>
+  <data name="String1154" xml:space="preserve">
+    <value>Święty Maciej albo topi lody, albo też je robi z wody.</value>
+  </data>
+  <data name="String1155" xml:space="preserve">
+    <value>Święty Józef pogodny, będzie roczek wodny.</value>
+  </data>
+  <data name="String1156" xml:space="preserve">
+    <value>Chleb cudzym nożem krajany – niesmaczny.</value>
+  </data>
+  <data name="String1157" xml:space="preserve">
+    <value>Święty Józef kiwnie brodą, idzie zima na dół z wodą.</value>
+  </data>
+  <data name="String1158" xml:space="preserve">
+    <value>Święty Izydor wołkami orze, a kto go prosi, to mu pomoże.</value>
+  </data>
+  <data name="String1159" xml:space="preserve">
+    <value>Święty Błażej, gardła zagrzej.</value>
+  </data>
+  <data name="String1160" xml:space="preserve">
+    <value>Święta Zofija kłosy rozwija.</value>
+  </data>
+  <data name="String1161" xml:space="preserve">
+    <value>Święta Honorata figle płata.</value>
+  </data>
+  <data name="String1162" xml:space="preserve">
+    <value>Święta Dorota zapowiada śnieg i błota.</value>
+  </data>
+  <data name="String1163" xml:space="preserve">
+    <value>Święta Dorota wypuszcza skowronka za wrota.</value>
+  </data>
+  <data name="String1164" xml:space="preserve">
+    <value>Święta Agata w zimę bogata.</value>
+  </data>
+  <data name="String1165" xml:space="preserve">
+    <value>Święta Agata chatę wymiata.</value>
+  </data>
+  <data name="String1166" xml:space="preserve">
+    <value>Śnieg marcowy owocom niezdrowy.</value>
+  </data>
+  <data name="String1167" xml:space="preserve">
+    <value>Chciwy dwa razy traci.</value>
+  </data>
+  <data name="String1168" xml:space="preserve">
+    <value>Śnieg w kwietniu goi rolę, hamuje niedolę.</value>
+  </data>
+  <data name="String1169" xml:space="preserve">
+    <value>Ślub majowy – grób gotowy.</value>
+  </data>
+  <data name="String1170" xml:space="preserve">
+    <value>Szyby lecą, szklarz się śmieje.</value>
+  </data>
+  <data name="String1171" xml:space="preserve">
+    <value>Sześć rzeczy powinien mieć szlachcic w domu dla gościa: kapłona tłustego, piwo dobre, chleb chędogi, ocet mocny, świece jasne i gorzałkę przednią.</value>
+  </data>
+  <data name="String1172" xml:space="preserve">
+    <value>Szczęście karetą nie jeździ, ale i w łachmanach nie chodzi.</value>
+  </data>
+  <data name="String1173" xml:space="preserve">
+    <value>Sumienie stoi za tysiąc świadków.</value>
+  </data>
+  <data name="String1174" xml:space="preserve">
+    <value>Suchy marzec, mokry maj, będzie żytko niby gaj.</value>
+  </data>
+  <data name="String1175" xml:space="preserve">
+    <value>Suchemu kwietniowi chłop się nie raduje, bo kwiecień mokry dobry rok zwiastuje.</value>
+  </data>
+  <data name="String1176" xml:space="preserve">
+    <value>Styczeń, styczeń wszystko studzi – ziemię, bydło, ludzi.</value>
+  </data>
+  <data name="String1177" xml:space="preserve">
+    <value>Strzeż się gości, którzy mają ości.</value>
+  </data>
+  <data name="String1178" xml:space="preserve">
+    <value>Chciwy dwa razy płaci.</value>
+  </data>
+  <data name="String1179" xml:space="preserve">
+    <value>Sól świętej Agaty broni od ognia chaty.</value>
+  </data>
+  <data name="String1180" xml:space="preserve">
+    <value>Skoro po Macieju drzewa się ogrzeją, leć do sadu, oczyść go z owadów.</value>
+  </data>
+  <data name="String1181" xml:space="preserve">
+    <value>Skorego konia jeszcze batem pod górę.</value>
+  </data>
+  <data name="String1182" xml:space="preserve">
+    <value>Silne wiatry przy końcu lutego, spodziewaj się zatem lata żyznego.</value>
+  </data>
+  <data name="String1183" xml:space="preserve">
+    <value>Siedem – biesiada, dziewięciu – zwada.</value>
+  </data>
+  <data name="String1184" xml:space="preserve">
+    <value>Sędzia nie ma być głodny.</value>
+  </data>
+  <data name="String1185" xml:space="preserve">
+    <value>Scholastyka – mróz utyka, zanim Walenty nam zaświęci, obaczymy, mróz kark skręci.</value>
+  </data>
+  <data name="String1186" xml:space="preserve">
+    <value>Sam nie jedz, a gościowi daj.</value>
+  </data>
+  <data name="String1187" xml:space="preserve">
+    <value>Ruszaj w marcu w pole, by po trochu rzucić w ziemię owsa, grochu.</value>
+  </data>
+  <data name="String1188" xml:space="preserve">
+    <value>Rozmówił się jak gęś z prosięciem.</value>
+  </data>
+  <data name="String1189" xml:space="preserve">
+    <value>Chceszli przyjaciela stracić, pieniędzy mu pożycz.</value>
+  </data>
+  <data name="String1190" xml:space="preserve">
+    <value>Rok Nowy pogodny, zbiór będzie dorodny.</value>
+  </data>
+  <data name="String1191" xml:space="preserve">
+    <value>Rok wtedy dobry będzie, jak w maju zawiążą się żołędzie.</value>
+  </data>
+  <data name="String1192" xml:space="preserve">
+    <value>Ranny gość niedługo bawi, późny zawsze prawie nocuje.</value>
+  </data>
+  <data name="String1193" xml:space="preserve">
+    <value>Puścił się bez wiosła na morze.</value>
+  </data>
+  <data name="String1194" xml:space="preserve">
+    <value>Punkt widzenia zależy od punktu siedzenia.</value>
+  </data>
+  <data name="String1195" xml:space="preserve">
+    <value>Psa głaskaj, ale kija z ręki nie puszczaj.</value>
+  </data>
+  <data name="String1196" xml:space="preserve">
+    <value>Przyjdzie święty Józef z pomocą, porówna dzień z nocą.</value>
+  </data>
+  <data name="String1197" xml:space="preserve">
+    <value>Przyjdzie święta Weronika, zniesie jajka kaczka dzika.</value>
+  </data>
+  <data name="String1198" xml:space="preserve">
+    <value>Przyganiał kocioł garnkowi, a sam smoli.</value>
+  </data>
+  <data name="String1199" xml:space="preserve">
+    <value>Przed Maciejem jak połamie lody, po Macieju szukaj pod lodem wody.</value>
+  </data>
+  <data name="String1200" xml:space="preserve">
+    <value>Chcesz się dostać do nieba, nie żałuj biednym kęsa chleba.</value>
+  </data>
+  <data name="String1201" xml:space="preserve">
+    <value>Przed kim bramę zamkną, niech do furtki puka.</value>
+  </data>
+  <data name="String1202" xml:space="preserve">
+    <value>Przed gościem żony nie chwal, czeladzi swej nie zalecaj, z koniem się nie popisuj.</value>
+  </data>
+  <data name="String1203" xml:space="preserve">
+    <value>Prawdziwa cnota krytyk się nie boi.</value>
+  </data>
+  <data name="String1204" xml:space="preserve">
+    <value>Praca tuczy, bieda uczy.</value>
+  </data>
+  <data name="String1205" xml:space="preserve">
+    <value>Póki w maju wiatr z północy, ma się u nas zimno w nocy.</value>
+  </data>
+  <data name="String1206" xml:space="preserve">
+    <value>Pokorne cielę dwie matki ssie.</value>
+  </data>
+  <data name="String1207" xml:space="preserve">
+    <value>Pogodny dzień wielkanocny grochowi wielce pomocny.</value>
+  </data>
+  <data name="String1208" xml:space="preserve">
+    <value>Pogoda na Urbana, deszcz na Wita to dobrze na żyta.</value>
+  </data>
+  <data name="String1209" xml:space="preserve">
+    <value>Pogoda na Kwietną Niedzielę, wróży urodzaju wiele.</value>
+  </data>
+  <data name="String1210" xml:space="preserve">
+    <value>Pogoda na świętego Błażeja – dobra wiosny nadzieja.</value>
+  </data>
+  <data name="String1211" xml:space="preserve">
+    <value>Chcesz córuni, podobaj się wprzód mamuni.</value>
+  </data>
+  <data name="String1212" xml:space="preserve">
+    <value>Po świętym Grzegorzu nie paś bydła na zbożu.</value>
+  </data>
+  <data name="String1213" xml:space="preserve">
+    <value>Po świętym Franciszku pasą na owsisku.</value>
+  </data>
+  <data name="String1214" xml:space="preserve">
+    <value>Po świętej Dorocie wyschną chusty na płocie, a jak nie wyschną, to człeka mrozy do chałupy wepchną.</value>
+  </data>
+  <data name="String1215" xml:space="preserve">
+    <value>Po świętej Dorocie wioska cała w błocie.</value>
+  </data>
+  <data name="String1216" xml:space="preserve">
+    <value>Po świętej Agacie wyschnie bielizna na płocie.</value>
+  </data>
+  <data name="String1217" xml:space="preserve">
+    <value>Po styczniu jasnym i białym będą w lato upały.</value>
+  </data>
+  <data name="String1218" xml:space="preserve">
+    <value>Po tłuste cielę i do domu trafią, a chudego i na targu nie kupią.</value>
+  </data>
+  <data name="String1219" xml:space="preserve">
+    <value>Po gościach jak po wojnie.</value>
+  </data>
+  <data name="String1220" xml:space="preserve">
+    <value>Pierwszy kwietnia – bajów pletnia.</value>
+  </data>
+  <data name="String1221" xml:space="preserve">
+    <value>Pierwszego maja deszcz, nieurodzajów wieszcz.</value>
+  </data>
+  <data name="String1222" xml:space="preserve">
+    <value>Chcesz mieć kęs płótna dobrego, siej len na świętego Jerzego.</value>
+  </data>
+  <data name="String1223" xml:space="preserve">
+    <value>Panu Bogu świeczkę i diabłu ogarek.</value>
+  </data>
+  <data name="String1224" xml:space="preserve">
+    <value>Pankracy, Serwacy, Bonifacy, każdy swoim zimnem raczy.</value>
+  </data>
+  <data name="String1225" xml:space="preserve">
+    <value>Pankracy, Serwacy i Bonifacy – źli na ogrody chłopacy.</value>
+  </data>
+  <data name="String1226" xml:space="preserve">
+    <value>Pankracy, Serwacy i Bonifacy gdy z przymrozkiem stają, lato zimne dają.</value>
+  </data>
+  <data name="String1227" xml:space="preserve">
+    <value>Pankracy, Serwacy, Bonifacy chłodem się znaczą i zwykle płaczą.</value>
+  </data>
+  <data name="String1228" xml:space="preserve">
+    <value>Pan Bóg stworzył wieś, a człowiek miasto.</value>
+  </data>
+  <data name="String1229" xml:space="preserve">
+    <value>Pamiętaj, że Gromnica, to już zimy połowica, ale żadna też nowina, gdy dopiero się zaczyna.</value>
+  </data>
+  <data name="String1230" xml:space="preserve">
+    <value>Ostatni wtorek wskazuje, jaka pogoda w poście panuje.</value>
+  </data>
+  <data name="String1231" xml:space="preserve">
+    <value>Ogrodniku, święta Gertruda gdy słońcem błyśnie, zrobi cuda oczywiście.</value>
+  </data>
+  <data name="String1232" xml:space="preserve">
+    <value>Od Tłustego Czwartku do Zmartwychwstania ścisły post się kłania.</value>
+  </data>
+  <data name="String1233" xml:space="preserve">
+    <value>Chcąc poznać przyjaciela, trzeba z nim beczkę soli zjeść.</value>
+  </data>
+  <data name="String1234" xml:space="preserve">
+    <value>Ani Antoni na morzu wiatru nie dogoni.</value>
+  </data>
+  <data name="String1235" xml:space="preserve">
+    <value>Od świętej Anki chłodne wieczory i ranki.</value>
+  </data>
+  <data name="String1236" xml:space="preserve">
+    <value>Od świętego Florka daj chleba do worka.</value>
+  </data>
+  <data name="String1237" xml:space="preserve">
+    <value>Od starych kruków młode uczą się krakać.</value>
+  </data>
+  <data name="String1238" xml:space="preserve">
+    <value>Od Genowefy listopad swój bierze początek.</value>
+  </data>
+  <data name="String1239" xml:space="preserve">
+    <value>Od dnia dwudziestego marca zagrzewa słońce nawet starca.</value>
+  </data>
+  <data name="String1240" xml:space="preserve">
+    <value>Nowy Rok jaki, cały rok taki.</value>
+  </data>
+  <data name="String1241" xml:space="preserve">
+    <value>Nowe koła skrzypią.</value>
+  </data>
+  <data name="String1242" xml:space="preserve">
+    <value>Nikt swego garbu nie widzi.</value>
+  </data>
+  <data name="String1243" xml:space="preserve">
+    <value>Nigdzie gościnność taka, jak u Polaka.</value>
+  </data>
+  <data name="String1244" xml:space="preserve">
+    <value>Nierad gościa przyjmuje, kto się frasuje.</value>
+  </data>
+  <data name="String1245" xml:space="preserve">
+    <value>Chartom często przebaczają to, za co kundla knutują.</value>
+  </data>
+  <data name="String1246" xml:space="preserve">
+    <value>Nieproszonych gości za stół nie sadzają.</value>
+  </data>
+  <data name="String1247" xml:space="preserve">
+    <value>Niedługo trwa deszcz majowy, tyle, co łzy młodej wdowy.</value>
+  </data>
+  <data name="String1248" xml:space="preserve">
+    <value>Niedaleko pada jabłko od jabłoni.</value>
+  </data>
+  <data name="String1249" xml:space="preserve">
+    <value>Niech ten rządzi, co ma mądzi, a kto ma one, niech idzie na stronę.</value>
+  </data>
+  <data name="String1250" xml:space="preserve">
+    <value>Nie taki diabeł straszny (jak go malują).</value>
+  </data>
+  <data name="String1251" xml:space="preserve">
+    <value>Nie skryje diabeł końskiego kopyta.</value>
+  </data>
+  <data name="String1252" xml:space="preserve">
+    <value>Nie siejesz grochu w marcu, nie masz go w garncu.</value>
+  </data>
+  <data name="String1253" xml:space="preserve">
+    <value>Nie pamiętaj, gościu, rano, co się wyrzekło pijano.</value>
+  </data>
+  <data name="String1254" xml:space="preserve">
+    <value>Nie ma w marcu wody, nie ma w kwietniu trawy.</value>
+  </data>
+  <data name="String1255" xml:space="preserve">
+    <value>Nie lubi chmiel za stołem cicho siedzieć.</value>
+  </data>
+  <data name="String1256" xml:space="preserve">
+    <value>Cel uświęca środki.</value>
+  </data>
+  <data name="String1257" xml:space="preserve">
+    <value>Nie boi się wilk psa, tylko szczekania jego.</value>
+  </data>
+  <data name="String1258" xml:space="preserve">
+    <value>Nic z gości korzyści.</value>
+  </data>
+  <data name="String1259" xml:space="preserve">
+    <value>Nauka to potęgi klucz, w tym rzecz, kto więcej umie.</value>
+  </data>
+  <data name="String1260" xml:space="preserve">
+    <value>Nauka nie poszła w las.</value>
+  </data>
+  <data name="String1261" xml:space="preserve">
+    <value>Najgorszy jest diabeł wtenczas, kiedy się modli.</value>
+  </data>
+  <data name="String1262" xml:space="preserve">
+    <value>Najciężej strzemiona dopaść, to się i na koń dostanie.</value>
+  </data>
+  <data name="String1263" xml:space="preserve">
+    <value>Na Zwiastowanie, kiedy mgła w zaranie, chociaż słonko jasno wschodzi, znak niechybny to powodzi.</value>
+  </data>
+  <data name="String1264" xml:space="preserve">
+    <value>Na Zwiastowanie jaskółki się ukazują, ludziom wiosnę zwiastują.</value>
+  </data>
+  <data name="String1265" xml:space="preserve">
+    <value>Na Zielone Świątki robimy porządki.</value>
+  </data>
+  <data name="String1266" xml:space="preserve">
+    <value>Na Zielone Świątki dobre i otrąbki.</value>
+  </data>
+  <data name="String1267" xml:space="preserve">
+    <value>Cała mądrość nie mieści się w jednej głowie</value>
+  </data>
+  <data name="String1268" xml:space="preserve">
+    <value>Na Wniebowstąpienie Pan Bóg w niebo, robak w mięso, kwas w piwo, a diabeł w babę.</value>
+  </data>
+  <data name="String1269" xml:space="preserve">
+    <value>Na Wniebowstąpienie deszcz mały, mało paszy przez rok cały.</value>
+  </data>
+  <data name="String1270" xml:space="preserve">
+    <value>Na wiosnę ceber deszczu – łyżka błota; na jesień łyżka deszczu – ceber błota.</value>
+  </data>
+  <data name="String1271" xml:space="preserve">
+    <value>Na Urbana chwile jakie, mówią, ze i lato takie.</value>
+  </data>
+  <data name="String1272" xml:space="preserve">
+    <value>Na Trzech Króli słońce świeci – wiosna do nas pędem leci.</value>
+  </data>
+  <data name="String1273" xml:space="preserve">
+    <value>Na święty Piotr suchy dzień, suche lato, sucha jesień.</value>
+  </data>
+  <data name="String1274" xml:space="preserve">
+    <value>Na święty Maciej lody wróżą długie chłody, a gdy płynie struga, to zima niedługa.</value>
+  </data>
+  <data name="String1275" xml:space="preserve">
+    <value>Na święty Józek czasem śniegu, a czasem trawy wózek</value>
+  </data>
+  <data name="String1276" xml:space="preserve">
+    <value>Na święty Jacenty łamią się pod lodem pręty.</value>
+  </data>
+  <data name="String1277" xml:space="preserve">
+    <value>Na święty Ambroży poprawią się mrozy.</value>
+  </data>
+  <data name="String1278" xml:space="preserve">
+    <value>Bywaj, gościu, u mnie, póki żytko w gumnie.</value>
+  </data>
+  <data name="String1279" xml:space="preserve">
+    <value>Na świętej Doroty będzie śniegu za płoty.</value>
+  </data>
+  <data name="String1280" xml:space="preserve">
+    <value>Na świętego Wojciecha rośnie rolnikom pociecha.</value>
+  </data>
+  <data name="String1281" xml:space="preserve">
+    <value>Na świętego Walentego bywa mróz już do niczego.</value>
+  </data>
+  <data name="String1282" xml:space="preserve">
+    <value>Na świętego Tymoteusza trzeba ci czapki, nie kapelusza.</value>
+  </data>
+  <data name="String1283" xml:space="preserve">
+    <value>Na Świętego Szymona nie wdziewaj już kaftana.</value>
+  </data>
+  <data name="String1284" xml:space="preserve">
+    <value>Na świętego Stanisława żyto jak ława.</value>
+  </data>
+  <data name="String1285" xml:space="preserve">
+    <value>Na świętego Stanisława w domu pustki, w polu sława.</value>
+  </data>
+  <data name="String1286" xml:space="preserve">
+    <value>Na świętego Stanisława rośnie koniom trawa.</value>
+  </data>
+  <data name="String1287" xml:space="preserve">
+    <value>Na świętego Pawła połowa zimy przepadła.</value>
+  </data>
+  <data name="String1288" xml:space="preserve">
+    <value>Na świętego Marka deszcz – to suchego lata wieszcz.</value>
+  </data>
+  <data name="String1289" xml:space="preserve">
+    <value>Bywa i śnieg w maju.</value>
+  </data>
+  <data name="String1290" xml:space="preserve">
+    <value>Na świętego Macieja pierwsza wiosny nadzieja.</value>
+  </data>
+  <data name="String1291" xml:space="preserve">
+    <value>Na świętego Macieja lody, wrócą długie chłody.</value>
+  </data>
+  <data name="String1292" xml:space="preserve">
+    <value>Na świętego Ludwika koń na grudzie utyka.</value>
+  </data>
+  <data name="String1293" xml:space="preserve">
+    <value>Na świętego Kazimierza wyjdzie skowronek spod pierza</value>
+  </data>
+  <data name="String1294" xml:space="preserve">
+    <value>Na świętego Kazimierza pełno już młodego zwierza.</value>
+  </data>
+  <data name="String1295" xml:space="preserve">
+    <value>Na świętego Karola wyjrzy spod śniegu rola.</value>
+  </data>
+  <data name="String1296" xml:space="preserve">
+    <value>Na Świętego Justyna siew się w polu zaczyna.</value>
+  </data>
+  <data name="String1297" xml:space="preserve">
+    <value>Na świętego Józefa pięknie, zima prędko pęknie.</value>
+  </data>
+  <data name="String1298" xml:space="preserve">
+    <value>Na świętego Izydora dla bociana pora.</value>
+  </data>
+  <data name="String1299" xml:space="preserve">
+    <value>Na świętego Izydora często bywa chłodna pora.</value>
+  </data>
+  <data name="String1300" xml:space="preserve">
+    <value>Byś zupełnie był mądry, wiek ci nie wystarczy.</value>
+  </data>
+  <data name="String1301" xml:space="preserve">
+    <value>Na świętego Grzegorza idzie zima do morza.</value>
+  </data>
+  <data name="String1302" xml:space="preserve">
+    <value>Na świętego Franciszka zielenią się łany i ze swego zimowiska wracają bociany.</value>
+  </data>
+  <data name="String1303" xml:space="preserve">
+    <value>Na świętego Franciszka szuka ziarnek w polu myszka.</value>
+  </data>
+  <data name="String1304" xml:space="preserve">
+    <value>Na świętego Franciszka przylatuje pliszka.</value>
+  </data>
+  <data name="String1305" xml:space="preserve">
+    <value>Na świętego Franciszka nieraz dobrze grzmi i łyska.</value>
+  </data>
+  <data name="String1306" xml:space="preserve">
+    <value>Na świętego Franciszka chłop w polu nic nie zyska.</value>
+  </data>
+  <data name="String1307" xml:space="preserve">
+    <value>Na świętego Filipa jeśli deszcz rzęsisty, będzie plon dobry i czysty.</value>
+  </data>
+  <data name="String1308" xml:space="preserve">
+    <value>Na świętego Filipa drze się dobrze lipa.</value>
+  </data>
+  <data name="String1309" xml:space="preserve">
+    <value>Na świętego Edwarda zimy pogarda.</value>
+  </data>
+  <data name="String1310" xml:space="preserve">
+    <value>Na świętego Ducha w polu otucha.</value>
+  </data>
+  <data name="String1311" xml:space="preserve">
+    <value>Było dwóch braci mądrych, a trzeci żonaty.</value>
+  </data>
+  <data name="String1312" xml:space="preserve">
+    <value>Na świętego Donata idź po pracę do brata.</value>
+  </data>
+  <data name="String1313" xml:space="preserve">
+    <value>Na świętego Augustyna orka dobrze się poczyna.</value>
+  </data>
+  <data name="String1314" xml:space="preserve">
+    <value>Na świętego Andrzeja dziewkom z wróżby nadzieja.</value>
+  </data>
+  <data name="String1315" xml:space="preserve">
+    <value>Na świętego Albina rzadka u ludzi mina, bo post się zaczyna.</value>
+  </data>
+  <data name="String1316" xml:space="preserve">
+    <value>Na świętą Zofiję deszcz po polach bije.</value>
+  </data>
+  <data name="String1317" xml:space="preserve">
+    <value>Na świętą Martynę przybyło dnia na godzinę.</value>
+  </data>
+  <data name="String1318" xml:space="preserve">
+    <value>Na świętą Annę mrowiska, szukaj w zimie ogniska.</value>
+  </data>
+  <data name="String1319" xml:space="preserve">
+    <value>Na szczęście, na zdrowie, na ten Nowy Rok, aby Was nie bolała głowa ani bok.</value>
+  </data>
+  <data name="String1320" xml:space="preserve">
+    <value>Na pierwszego maja szron, obiecuje hojny plon.</value>
+  </data>
+  <data name="String1321" xml:space="preserve">
+    <value>Na Oczyszczenie Marii Panny zbliża się koniec sanny.</value>
+  </data>
+  <data name="String1322" xml:space="preserve">
+    <value>Był w kościele, ale na swoich chrzcinach.</value>
+  </data>
+  <data name="String1323" xml:space="preserve">
+    <value>Na Nowy Rok przybywa dnia na barani skok.</value>
+  </data>
+  <data name="String1324" xml:space="preserve">
+    <value>Na naukę nigdy nie jest za późno.</value>
+  </data>
+  <data name="String1325" xml:space="preserve">
+    <value>Na Marka człek bez koszuli, a w Ogrodników przy piecu się tuli.</value>
+  </data>
+  <data name="String1326" xml:space="preserve">
+    <value>Na Kazimierza dzień się z nocą przymierza.</value>
+  </data>
+  <data name="String1327" xml:space="preserve">
+    <value>Na Jana Nepomucena wiadoma już zboża cena.</value>
+  </data>
+  <data name="String1328" xml:space="preserve">
+    <value>Na Izydora pusta komora.</value>
+  </data>
+  <data name="String1329" xml:space="preserve">
+    <value>Na Gromniczną Pan Bóg daje, czasem mróz, czasem roztaje.</value>
+  </data>
+  <data name="String1330" xml:space="preserve">
+    <value>Na Gromnicę masz zimy połowicę.</value>
+  </data>
+  <data name="String1331" xml:space="preserve">
+    <value>Na Filipa gdy przymrozek spadnie, najgorsza zaraza na zboże przypadnie.</value>
+  </data>
+  <data name="String1332" xml:space="preserve">
+    <value>Na Edwarda jesień twarda.</value>
+  </data>
+  <data name="String1333" xml:space="preserve">
+    <value>Byle do wiosny.</value>
+  </data>
+  <data name="String1334" xml:space="preserve">
+    <value>Na dzień świętej Doroty ma być śniegu nad płoty.</value>
+  </data>
+  <data name="String1335" xml:space="preserve">
+    <value>Na Boże Ciało żytko zakwitało.</value>
+  </data>
+  <data name="String1336" xml:space="preserve">
+    <value>Na Boże Ciało skacz do wody śmiało.</value>
+  </data>
+  <data name="String1337" xml:space="preserve">
+    <value>Na Boże Ciało siej proso śmiało.</value>
+  </data>
+  <data name="String1338" xml:space="preserve">
+    <value>Na Adama pięknie, zima prędko pęknie.</value>
+  </data>
+  <data name="String1339" xml:space="preserve">
+    <value>Na Adama pięknie, jutrzenka jasna, będzie stodoła ciasna.</value>
+  </data>
+  <data name="String1340" xml:space="preserve">
+    <value>Myszy harcują, gdy kota nie czują.</value>
+  </data>
+  <data name="String1341" xml:space="preserve">
+    <value>Mokre Zielone Świątki dają tłuste Boże Narodzenie.</value>
+  </data>
+  <data name="String1342" xml:space="preserve">
+    <value>Mokre Wniebowstąpienie, tłuste Narodzenie.</value>
+  </data>
+  <data name="String1343" xml:space="preserve">
+    <value>Miękko na Andrzeja, oj! niedobra nadzieja.</value>
+  </data>
+  <data name="String1344" xml:space="preserve">
+    <value>Być w Rzymie i nie widzieć papieża.</value>
+  </data>
+  <data name="String1345" xml:space="preserve">
+    <value>Aksamity, atłasy sławy nie czynią.</value>
+  </data>
+  <data name="String1346" xml:space="preserve">
+    <value>Mgła na Zwiastowanie znaczy rzek rozlanie.</value>
+  </data>
+  <data name="String1347" xml:space="preserve">
+    <value>Mężczyzna powinien być tylko trochę ładniejszy od diabła.</value>
+  </data>
+  <data name="String1348" xml:space="preserve">
+    <value>Męczennicy jeśli psocą, będzie dżdżysto Wielką Nocą, a gdy kropla dżdżu nie spadnie, przez sześć niedziel będzie ładnie.</value>
+  </data>
+  <data name="String1349" xml:space="preserve">
+    <value>Męczennicy gdy mróz noszą, czterdzieści dni mrozu głoszą.</value>
+  </data>
+  <data name="String1350" xml:space="preserve">
+    <value>Mądrej głowie dość dwie słowie.</value>
+  </data>
+  <data name="String1351" xml:space="preserve">
+    <value>Marzec, czy słoneczny, czy płaczliwy, listopada obraz żywy.</value>
+  </data>
+  <data name="String1352" xml:space="preserve">
+    <value>Marzec, co z deszczem chadza, mokry czerwiec sprowadza.</value>
+  </data>
+  <data name="String1353" xml:space="preserve">
+    <value>Marzec – figlarzec, przeplata, trochę zimy, trochę lata.</value>
+  </data>
+  <data name="String1354" xml:space="preserve">
+    <value>Marzec zimny i słoneczny, plon zaręcza dostateczny.</value>
+  </data>
+  <data name="String1355" xml:space="preserve">
+    <value>Marzec uparty stroi z pługiem żarty.</value>
+  </data>
+  <data name="String1356" xml:space="preserve">
+    <value>Być jak u Pana Boga za piecem.</value>
+  </data>
+  <data name="String1357" xml:space="preserve">
+    <value>Marca obraz wierny to miesiąc październy.</value>
+  </data>
+  <data name="String1358" xml:space="preserve">
+    <value>Maria pogodna, będzie jesień dorodna.</value>
+  </data>
+  <data name="String1359" xml:space="preserve">
+    <value>Maria Magdalena zwykle rada, gdy deszcz pada.</value>
+  </data>
+  <data name="String1360" xml:space="preserve">
+    <value>Mamert i Pankracy mrozem kwiat poznaczy.</value>
+  </data>
+  <data name="String1361" xml:space="preserve">
+    <value>Małe pieski najwięcej szczekają.</value>
+  </data>
+  <data name="String1362" xml:space="preserve">
+    <value>Majowa Zofija bzy nam porozwija.</value>
+  </data>
+  <data name="String1363" xml:space="preserve">
+    <value>Maj zieleni łąki, drzewa, już i ptaszek w polu śpiewa.</value>
+  </data>
+  <data name="String1364" xml:space="preserve">
+    <value>Maj bogaty sieje kwiaty.</value>
+  </data>
+  <data name="String1365" xml:space="preserve">
+    <value>Luty – miesiąc bardzo zmienny: pół zimowy, pół wiosenny.</value>
+  </data>
+  <data name="String1366" xml:space="preserve">
+    <value>Luty, szykuj buty, bo nadejdą deszcze, pluty.</value>
+  </data>
+  <data name="String1367" xml:space="preserve">
+    <value>By nie dokuczał luty, pal w kominie i miej kożuch suty.</value>
+  </data>
+  <data name="String1368" xml:space="preserve">
+    <value>Luty, gdy wiatrów i mrozów nie daje, sprowadzi rok słotny i nieurodzaje.</value>
+  </data>
+  <data name="String1369" xml:space="preserve">
+    <value>Luty stały, latem upały.</value>
+  </data>
+  <data name="String1370" xml:space="preserve">
+    <value>Luty ciepły obiecuje, wiosny zimnej nie daruje.</value>
+  </data>
+  <data name="String1371" xml:space="preserve">
+    <value>Luty gdy wiatrów i mrozów nie daje, prowadzi rok słotny i nieurodzaje.</value>
+  </data>
+  <data name="String1372" xml:space="preserve">
+    <value>Lepszy funt rozumu niż cetnar dowcipu.</value>
+  </data>
+  <data name="String1373" xml:space="preserve">
+    <value>Lepszy dukat przed procesem, niźli trzy po procesie.</value>
+  </data>
+  <data name="String1374" xml:space="preserve">
+    <value>Lepsza Agata niżeli jej tata.</value>
+  </data>
+  <data name="String1375" xml:space="preserve">
+    <value>Lepiej z mądrym zgubić niż z głupim znaleźć.</value>
+  </data>
+  <data name="String1376" xml:space="preserve">
+    <value>Lepiej z mądrym pieczeń obracać, niż z głupim ją jeść.</value>
+  </data>
+  <data name="String1377" xml:space="preserve">
+    <value>Kwiecień-plecień, bo przeplata, trochę zimy, trochę lata.</value>
+  </data>
+  <data name="String1378" xml:space="preserve">
+    <value>Brylant świeci i w popiele.</value>
+  </data>
+  <data name="String1379" xml:space="preserve">
+    <value>Kwiecień wilgotny obiecuje rok stokrotny.</value>
+  </data>
+  <data name="String1380" xml:space="preserve">
+    <value>Kwiecień kiedy deszczem plecie, to się maj wystroi w kwiecie.</value>
+  </data>
+  <data name="String1381" xml:space="preserve">
+    <value>Kwiecień daje zieleń trawce, gra pastuszek na igrawce.</value>
+  </data>
+  <data name="String1382" xml:space="preserve">
+    <value>Kwiecień czasem kwieciem ściele, albo śniegiem przyjaciele.</value>
+  </data>
+  <data name="String1383" xml:space="preserve">
+    <value>Ktokolwiek jarząbka na Wielkanoc jada, więźniem nie będzie.</value>
+  </data>
+  <data name="String1384" xml:space="preserve">
+    <value>Kto ziemię w adwent pruje, ta mu trzy lata choruje.</value>
+  </data>
+  <data name="String1385" xml:space="preserve">
+    <value>Kto we Wielki Tydzień sieje, będzie miał szyćko wielgie.</value>
+  </data>
+  <data name="String1386" xml:space="preserve">
+    <value>Kto w zapusty nie tańczy, temu len nie rośnie.</value>
+  </data>
+  <data name="String1387" xml:space="preserve">
+    <value>Kto w Wielki Piątek sieje, ten się w żniwa śmieje.</value>
+  </data>
+  <data name="String1388" xml:space="preserve">
+    <value>Kto w Tłusty Czwartek nie zje pączków kopy, temu myszy zniszczą pole i będzie miał pustki w stodole.</value>
+  </data>
+  <data name="String1389" xml:space="preserve">
+    <value>Broda mędrcem nie czyni.</value>
+  </data>
+  <data name="String1390" xml:space="preserve">
+    <value>Kto w cudzej stodole młóci, i w jego odmłócą.</value>
+  </data>
+  <data name="String1391" xml:space="preserve">
+    <value>Kto w błoto wpadnie, ten suchy nie wstanie.</value>
+  </data>
+  <data name="String1392" xml:space="preserve">
+    <value>Kto ślub bierze na Zielone Świątki, to Duch św. zstępuje na ziemię, a diabeł w małżeństwo.</value>
+  </data>
+  <data name="String1393" xml:space="preserve">
+    <value>Kto się w maju urodzi, dobrze mu się powodzi.</value>
+  </data>
+  <data name="String1394" xml:space="preserve">
+    <value>Kto się nie leni, zrobi złoto z kamieni.</value>
+  </data>
+  <data name="String1395" xml:space="preserve">
+    <value>Kto się akurat w maju urodzi, temu zwykle dobrze się powodzi.</value>
+  </data>
+  <data name="String1396" xml:space="preserve">
+    <value>Kto sieje jęczmień na Urbana, będzie pił piwo z dzbana.</value>
+  </data>
+  <data name="String1397" xml:space="preserve">
+    <value>Kto raz z diabłem płynął, musi go zawsze wozić.</value>
+  </data>
+  <data name="String1398" xml:space="preserve">
+    <value>Kto nie widział ołtarza, i piecu się kłania.</value>
+  </data>
+  <data name="String1399" xml:space="preserve">
+    <value>Kto na święty Bartłomiej siał, będzie chleb miał.</value>
+  </data>
+  <data name="String1400" xml:space="preserve">
+    <value>Brał i Napoleon czasem po tabinkach.</value>
+  </data>
+  <data name="String1401" xml:space="preserve">
+    <value>Kto na końcu wygrywa, bierze pieniądze.</value>
+  </data>
+  <data name="String1402" xml:space="preserve">
+    <value>Kto ma wioski, ma troski.</value>
+  </data>
+  <data name="String1403" xml:space="preserve">
+    <value>Kto dworny ten i wielomowny.</value>
+  </data>
+  <data name="String1404" xml:space="preserve">
+    <value>Krowa cielę kocha i zadek mu liże.</value>
+  </data>
+  <data name="String1405" xml:space="preserve">
+    <value>Kot łowny, a chłop powinien być mowny.</value>
+  </data>
+  <data name="String1406" xml:space="preserve">
+    <value>Koniec języka za przewodnika.</value>
+  </data>
+  <data name="String1407" xml:space="preserve">
+    <value>Komu księżyc świeci, temu i gwiazdy błyszczą.</value>
+  </data>
+  <data name="String1408" xml:space="preserve">
+    <value>Kiedy Wincenty posypie pierze, to nie ustanie aż do Gromnicznej w pierwsze pacierze.</value>
+  </data>
+  <data name="String1409" xml:space="preserve">
+    <value>Kiedy w Wielki Post rosa, to nasiej gospodarzu dużo prosa. A jeżeli w Wielki Piątek mróz, to proso na górę włóż.</value>
+  </data>
+  <data name="String1410" xml:space="preserve">
+    <value>Kiedy w Wielki Piątek pada, suche lato deszczyk nam ten przepowiada.</value>
+  </data>
+  <data name="String1411" xml:space="preserve">
+    <value>Bój się w styczniu wiosny, bo marzec zazdrosny.</value>
+  </data>
+  <data name="String1412" xml:space="preserve">
+    <value>Kiedy w styczniu rośnie trawa, marna w lecie jest potrawa.</value>
+  </data>
+  <data name="String1413" xml:space="preserve">
+    <value>Kiedy w styczniu rosną trawy, lipiec dla nas niełaskawy.</value>
+  </data>
+  <data name="String1414" xml:space="preserve">
+    <value>Kiedy w styczniu lato, w lecie zimno za to.</value>
+  </data>
+  <data name="String1415" xml:space="preserve">
+    <value>Kiedy w marcu plucha, to w maju posucha.</value>
+  </data>
+  <data name="String1416" xml:space="preserve">
+    <value>Kiedy w marcu deszczu wiele, nieurodzaj zboża ściele.</value>
+  </data>
+  <data name="String1417" xml:space="preserve">
+    <value>Kiedy w marcu deszcze leją, nie ciesz się, chłopie, nadzieją.</value>
+  </data>
+  <data name="String1418" xml:space="preserve">
+    <value>Kiedy w maju wiatr z północy, ma się u nas zimno w nocy.</value>
+  </data>
+  <data name="String1419" xml:space="preserve">
+    <value>Kiedy w lutym wiatr z zachodu bywa, płonny rok rolnikom obiecywa.</value>
+  </data>
+  <data name="String1420" xml:space="preserve">
+    <value>Kiedy w lutym tajanie, szykuj chłopie sanie.</value>
+  </data>
+  <data name="String1421" xml:space="preserve">
+    <value>Kiedy w lutym rosa pada, nowe mrozy zapowiada.</value>
+  </data>
+  <data name="String1422" xml:space="preserve">
+    <value>Bóg pomaga tym, co sami sobie pomagają.</value>
+  </data>
+  <data name="String1423" xml:space="preserve">
+    <value>Kiedy w kwietniu słonko grzeje, rolnik nie zubożeje.</value>
+  </data>
+  <data name="String1424" xml:space="preserve">
+    <value>Kiedy w kwietniu grzmoty, szron już nie ma roboty.</value>
+  </data>
+  <data name="String1425" xml:space="preserve">
+    <value>Kiedy w Gromniczną gęś chodzi po wodzie, to będzie na Wielkanoc chodzić po lodzie.</value>
+  </data>
+  <data name="String1426" xml:space="preserve">
+    <value>Kiedy w Filipa i Jakuba deszcz pada, suchy rok będzie; kiedy nie pada – mokry będzie.</value>
+  </data>
+  <data name="String1427" xml:space="preserve">
+    <value>Kiedy święty Pieter grzeje, za wiosną jeszcze trzykroć kur zapieje.</value>
+  </data>
+  <data name="String1428" xml:space="preserve">
+    <value>Kiedy styczeń najostrzejszy, tedy roczek najpłodniejszy.</value>
+  </data>
+  <data name="String1429" xml:space="preserve">
+    <value>Kiedy ptaki w styczniu śpiewają, to im w maju dzioby zamarzają.</value>
+  </data>
+  <data name="String1430" xml:space="preserve">
+    <value>Kiedy poleje na świętego Floriana, potrwa czas jakiś pogoda zakichana.</value>
+  </data>
+  <data name="String1431" xml:space="preserve">
+    <value>Kiedy pada w ostatni wtorek, to ze lnem uciekaj na dołek.</value>
+  </data>
+  <data name="String1432" xml:space="preserve">
+    <value>Kiedy na Gromniczną mróz, zładuj sanie, szykuj wóz.</value>
+  </data>
+  <data name="String1433" xml:space="preserve">
+    <value>Bóg nie opuści, kto się nań spuści.</value>
+  </data>
+  <data name="String1434" xml:space="preserve">
+    <value>Kiedy na Cecylię grzmi, rolnik o dobrym roku śni.</value>
+  </data>
+  <data name="String1435" xml:space="preserve">
+    <value>Kiedy maj zimny, a w czerwcu deszcz pada, gospodarz pełne stodoły posiada.</value>
+  </data>
+  <data name="String1436" xml:space="preserve">
+    <value>Kiedy luty schodzi, człek po wodzie brodzi.</value>
+  </data>
+  <data name="String1437" xml:space="preserve">
+    <value>Kiedy luty pofolguje, marzec zimę zreperuje.</value>
+  </data>
+  <data name="String1438" xml:space="preserve">
+    <value>Kiedy kot w lutym na słonku się grzeje, musi w marcu zajść na przypiecek.</value>
+  </data>
+  <data name="String1439" xml:space="preserve">
+    <value>Kiedy Jerzy skryje wronę w życie, będzie zboża obficie.</value>
+  </data>
+  <data name="String1440" xml:space="preserve">
+    <value>Kiedy Jerzy pogodą częstuje, wnet się pogoda zepsuje.</value>
+  </data>
+  <data name="String1441" xml:space="preserve">
+    <value>Kiedy Gromniczna zimę traci, to święty Maciej ją wzbogaci.</value>
+  </data>
+  <data name="String1442" xml:space="preserve">
+    <value>Każdy gospodarz zasiewa pierwszy groch na marca, aby też próżnego nie miał na ognicku garnca.</value>
+  </data>
+  <data name="String1443" xml:space="preserve">
+    <value>Każdy się drapie, gdzie go świerzbi.</value>
+  </data>
+  <data name="String1444" xml:space="preserve">
+    <value>Bóg dał, Bóg wziął.</value>
+  </data>
+  <data name="String1445" xml:space="preserve">
+    <value>Każde grabie do siebie grabią.</value>
+  </data>
+  <data name="String1446" xml:space="preserve">
+    <value>Każde błoto ma swego diabła.</value>
+  </data>
+  <data name="String1447" xml:space="preserve">
+    <value>Każda krowa swoje cielę liże.</value>
+  </data>
+  <data name="String1448" xml:space="preserve">
+    <value>Jeżeli w świętego Piotra w lutym ciepło służy, do Wielkanocy zima czasy swe przedłuży.</value>
+  </data>
+  <data name="String1449" xml:space="preserve">
+    <value>Jeżeli w pierwszy dzień po przesileniu marcowym burza się zdarzy, zima już nie przydarzy.</value>
+  </data>
+  <data name="String1450" xml:space="preserve">
+    <value>Jeżeli w kwietniu posuszy, nic się w polu nie ruszy.</value>
+  </data>
+  <data name="String1451" xml:space="preserve">
+    <value>Jeżeli pszczoła w styczniu z ula wylatuje, rzadko pomyślny rok nam obiecuje.</value>
+  </data>
+  <data name="String1452" xml:space="preserve">
+    <value>Jeżeli na świętego Kazimierza pogoda, to na ziemniaki woda.</value>
+  </data>
+  <data name="String1453" xml:space="preserve">
+    <value>Jeżeli Kwietnia Niedziela sucha, rok cały mokry, jeżeli mokra, rok suchy.</value>
+  </data>
+  <data name="String1454" xml:space="preserve">
+    <value>Jeżeli ciepło w dzień świętego Piotra, to zima do Wielkiej Nocy potrwa.</value>
+  </data>
+  <data name="String1455" xml:space="preserve">
+    <value>Bóg bez pracy nic nie daje.</value>
+  </data>
+  <data name="String1456" xml:space="preserve">
+    <value>Aksamity i atłasy nie dodadzą ci okrasy.</value>
+  </data>
+  <data name="String1457" xml:space="preserve">
+    <value>Jeśli zapusty pogodne bywają, Świąt wielkanocnych tak się spodziewają.</value>
+  </data>
+  <data name="String1458" xml:space="preserve">
+    <value>Jeśli w Wielki Piątek deszcz kropi, radujcie się chłopi.</value>
+  </data>
+  <data name="String1459" xml:space="preserve">
+    <value>Jeśli w Wielkanoc deszcz pada, w całym lecie suchość włada.</value>
+  </data>
+  <data name="String1460" xml:space="preserve">
+    <value>Jeśli w wstępną środę świecą nocą gwiazdy, kury będą niosły, mówi u nas każdy.</value>
+  </data>
+  <data name="String1461" xml:space="preserve">
+    <value>Jeśli w wstępną środę jest piękna pogoda, to w polu nadzwyczaj jest piękna uroda.</value>
+  </data>
+  <data name="String1462" xml:space="preserve">
+    <value>Jeśli w święty Paweł śnieg albo deszcz pada, dobrych się urodzajów spodziewać wypada.</value>
+  </data>
+  <data name="String1463" xml:space="preserve">
+    <value>Jeśli w Świątki deszcz pada, wielką biedę zapowiada.</value>
+  </data>
+  <data name="String1464" xml:space="preserve">
+    <value>Jeśli w styczniu deszcze leją, nie ciesz się wielką nadzieją.</value>
+  </data>
+  <data name="String1465" xml:space="preserve">
+    <value>Jeśli w maju śnieg się zdarzy, to lato dobrze wyparzy.</value>
+  </data>
+  <data name="String1466" xml:space="preserve">
+    <value>Jeśli w maju deszcze na dworze, to jesienią chleb w komorze.</value>
+  </data>
+  <data name="String1467" xml:space="preserve">
+    <value>Boże, daj, Boże, daj, aby wiecznie trwał nam maj!</value>
+  </data>
+  <data name="String1468" xml:space="preserve">
+    <value>Jeśli w maju często grzmot, rośnie wszystko w lot.</value>
+  </data>
+  <data name="String1469" xml:space="preserve">
+    <value>Jeśli w kwietniu pszczoły nie latają, to jeszcze długie chłody się zapowiadają.</value>
+  </data>
+  <data name="String1470" xml:space="preserve">
+    <value>Jeśli w Boże Ciało deszcz pada, to pierwsze żniwa będą deszczowe.</value>
+  </data>
+  <data name="String1471" xml:space="preserve">
+    <value>Jeżeli nie potrafisz, to nie pchaj się na afisz.</value>
+  </data>
+  <data name="String1472" xml:space="preserve">
+    <value>Jeśli na Wielkanoc ciecze, to do Zielonych Świątek, więcej wody niż pogody.</value>
+  </data>
+  <data name="String1473" xml:space="preserve">
+    <value>Jeśli na święty Marek deszcz wzejdzie, to i na kamieniu owies wzejdzie.</value>
+  </data>
+  <data name="String1474" xml:space="preserve">
+    <value>Jeśli luty śnieżny, mroźny, spodziewaj się wczesnej wiosny.</value>
+  </data>
+  <data name="String1475" xml:space="preserve">
+    <value>Jeśli luty ciepło trzyma, będzie jeszcze w marcu zima.</value>
+  </data>
+  <data name="String1476" xml:space="preserve">
+    <value>Jeśli Jerzy zbliża się pogodnie, będzie tak cztery tygodnie.</value>
+  </data>
+  <data name="String1477" xml:space="preserve">
+    <value>Jeśli ci jeszcze nie dokuczył luty, to pal dobrze w kominie i miej kożuch suty.</value>
+  </data>
+  <data name="String1478" xml:space="preserve">
+    <value>Boże Narodzenie po wodzie, Wielkanoc po lodzie.</value>
+  </data>
+  <data name="String1479" xml:space="preserve">
+    <value>Jedna jaskółka wiosny nie czyni.</value>
+  </data>
+  <data name="String1480" xml:space="preserve">
+    <value>Jasny dzień Pankracego przyczynia wina dobrego.</value>
+  </data>
+  <data name="String1481" xml:space="preserve">
+    <value>Jeśli deszcze w maju, wszystko rośnie jak w gaju.</value>
+  </data>
+  <data name="String1482" xml:space="preserve">
+    <value>Jasna Gromnica – zła orędownica.</value>
+  </data>
+  <data name="String1483" xml:space="preserve">
+    <value>Jaskółka i pszczółka lata, znakiem wiosny to dla świata.</value>
+  </data>
+  <data name="String1484" xml:space="preserve">
+    <value>Jakie zapusty, taka Wielkanoc.</value>
+  </data>
+  <data name="String1485" xml:space="preserve">
+    <value>Jakie jest Zwiastowanie, takie będzie i Zmartwychwstanie.</value>
+  </data>
+  <data name="String1486" xml:space="preserve">
+    <value>Jaki pan, taki kram.</value>
+  </data>
+  <data name="String1487" xml:space="preserve">
+    <value>Jaki korzeń, taka nać, taka córka, jaka mać.</value>
+  </data>
+  <data name="String1488" xml:space="preserve">
+    <value>Jaki dzień w Boże Ciało, takich dni potem niemało.</value>
+  </data>
+  <data name="String1489" xml:space="preserve">
+    <value>Boi się, jak diabeł święconej wody.</value>
+  </data>
+  <data name="String1490" xml:space="preserve">
+    <value>Jaką pogodę Nowy Rok oznaczy, taką i w sierpniu Pan Bóg uraczy.</value>
+  </data>
+  <data name="String1491" xml:space="preserve">
+    <value>Jaka w zapustną niedzielę pogoda, taką też Wielkanoc poda.</value>
+  </data>
+  <data name="String1492" xml:space="preserve">
+    <value>Jaka praca, taka płaca.</value>
+  </data>
+  <data name="String1493" xml:space="preserve">
+    <value>Jaka pogoda w nocy świętego Piotra i Macieja takiej czterdzieści dni i nocy nadzieja.</value>
+  </data>
+  <data name="String1494" xml:space="preserve">
+    <value>Jaka marchew, taka nać – taka córka jaka mać, jakie drzewo, taki klin – jaki ojciec, taki syn.</value>
+  </data>
+  <data name="String1495" xml:space="preserve">
+    <value>Jaka Gromniczna, bracie, taki święty Maciej.</value>
+  </data>
+  <data name="String1496" xml:space="preserve">
+    <value>Jak wilk komarowi pomoże, to komar i konia zmoże.</value>
+  </data>
+  <data name="String1497" xml:space="preserve">
+    <value>Jak we Wielki Piątek mróz, to na gołej kępce siana wóz.</value>
+  </data>
+  <data name="String1498" xml:space="preserve">
+    <value>Jak Walenty nie poleje, to na wiosnę masz nadzieję.</value>
+  </data>
+  <data name="String1499" xml:space="preserve">
+    <value>Jak w Wielki Piątek rosa, to dosiewać prosa, a jak mróz, to kamieniem proso przyłóż.</value>
+  </data>
+  <data name="String1500" xml:space="preserve">
+    <value>Bogu świeczka, a diabłu ogarek.</value>
+  </data>
+  <data name="String1501" xml:space="preserve">
+    <value>Jak w maju plucha, to w czerwcu posucha.</value>
+  </data>
+  <data name="String1502" xml:space="preserve">
+    <value>Jak w lutym rosa pada, nocne przymrozki w maju zapowiada.</value>
+  </data>
+  <data name="String1503" xml:space="preserve">
+    <value>Jak w kwietniu rosa, to dosiewaj chłopie mocno prosa.</value>
+  </data>
+  <data name="String1504" xml:space="preserve">
+    <value>Jak w kwietniu mróz, to na pagórku siana wóz.</value>
+  </data>
+  <data name="String1505" xml:space="preserve">
+    <value>Jak w Kazimierza pochmurno, o jarzynę nietrudno.</value>
+  </data>
+  <data name="String1506" xml:space="preserve">
+    <value>Jak święta Agnieszka wypuści śnieg z mieszka, to go nie powstrzyma ani do Franciszka.</value>
+  </data>
+  <data name="String1507" xml:space="preserve">
+    <value>Jak śnieg na świętego Błażeja, pogodna będzie Wielka Niedziela.</value>
+  </data>
+  <data name="String1508" xml:space="preserve">
+    <value>Jak suche i jasne Gromnice, przyjdą jeszcze śnieżyce.</value>
+  </data>
+  <data name="String1509" xml:space="preserve">
+    <value>Jak styczeń zachlapany, to lipiec zapłakany.</value>
+  </data>
+  <data name="String1510" xml:space="preserve">
+    <value>Jak pogoda w Świętego Marcela, będzie pogodna Wielka Niedziela.</value>
+  </data>
+  <data name="String1511" xml:space="preserve">
+    <value>Bogu służ, a diabła nie gniewaj.</value>
+  </data>
+  <data name="String1512" xml:space="preserve">
+    <value>Jak słońce jasno świeci na Gromnicę, to przyjdą wielkie mrozy i śnieżyce.</value>
+  </data>
+  <data name="String1513" xml:space="preserve">
+    <value>Jak słoneczna jest Cecylia, w białej sukni będzie Wilia.</value>
+  </data>
+  <data name="String1514" xml:space="preserve">
+    <value>Jak się Wincenty rozdeszczy, źle chłopu wilga wieszczy.</value>
+  </data>
+  <data name="String1515" xml:space="preserve">
+    <value>Jak się rozsierdzi Serwacy, to wszystko zmrozi i przeinaczy.</value>
+  </data>
+  <data name="String1516" xml:space="preserve">
+    <value>Jak się luty ulituje, to się mróz pofolguje.</value>
+  </data>
+  <data name="String1517" xml:space="preserve">
+    <value>Jak się gościć, to się bawić, portki sprzedać, pas zastawić.</value>
+  </data>
+  <data name="String1518" xml:space="preserve">
+    <value>Jak się człowiek śpieszy, to się diabeł cieszy.</value>
+  </data>
+  <data name="String1519" xml:space="preserve">
+    <value>Jak przylecą żurawie, można bydło paść na trawie.</value>
+  </data>
+  <data name="String1520" xml:space="preserve">
+    <value>Jak pogoda w świętego Błażeja, będzie ze śniegiem Wielka Niedziela.</value>
+  </data>
+  <data name="String1521" xml:space="preserve">
+    <value>Jak po Benedykcie ciepło, to i w lecie będzie piekło.</value>
+  </data>
+  <data name="String1522" xml:space="preserve">
+    <value>Bogu się kłaniaj, a diabła nie gniewaj.</value>
+  </data>
+  <data name="String1523" xml:space="preserve">
+    <value>Jak pada we Wielkanoc, to trzeci kłos na polu ginie, ale jak pada na Zielone Świątki, to naprawi.</value>
+  </data>
+  <data name="String1524" xml:space="preserve">
+    <value>Jak Nowy Rok jasny i chłodny, będzie roczek pogodny i płodny.</value>
+  </data>
+  <data name="String1525" xml:space="preserve">
+    <value>Jak nie ma śniegu w marcu, deszczu w maju, to nie ma urodzaju.</value>
+  </data>
+  <data name="String1526" xml:space="preserve">
+    <value>Jak nie ma panny Marianny, dobra i Maryśka.</value>
+  </data>
+  <data name="String1527" xml:space="preserve">
+    <value>Jak na święty Wojciech rosa, to siej dużo prosa.</value>
+  </data>
+  <data name="String1528" xml:space="preserve">
+    <value>Jak na świętego Józefa chmurki, to sadź ziemniaki gdzie górki, a jak pogoda, to sadź gdzie woda.</value>
+  </data>
+  <data name="String1529" xml:space="preserve">
+    <value>Jak na Matkę Gromniczną, tak na święty Józef.</value>
+  </data>
+  <data name="String1530" xml:space="preserve">
+    <value>Jak Marek przypieka, chłop jeszcze ponarzeka.</value>
+  </data>
+  <data name="String1531" xml:space="preserve">
+    <value>Jak luty nastaje, śnieg jeszcze nie taje.</value>
+  </data>
+  <data name="String1532" xml:space="preserve">
+    <value>Jak Kuba Bogu, tak Bóg Kubie.</value>
+  </data>
+  <data name="String1533" xml:space="preserve">
+    <value>Bogatemu to i diabeł dzieci kołysze.</value>
+  </data>
+  <data name="String1534" xml:space="preserve">
+    <value>Jak gościa przywita, zaraz na stole piwo, aqua vita.</value>
+  </data>
+  <data name="String1535" xml:space="preserve">
+    <value>Jak gospodarz gościnny, to i ściany się rozszerzają.</value>
+  </data>
+  <data name="String1536" xml:space="preserve">
+    <value>Jak gospodarz gościnny, to i ściany się rozgrzewają.</value>
+  </data>
+  <data name="String1537" xml:space="preserve">
+    <value>Jak dym w górę szybuje, zawsze to mróz zwiastuje.</value>
+  </data>
+  <data name="String1538" xml:space="preserve">
+    <value>Jak długo żaby przed Markiem rechoczą, tak długo deszczu po Marku nie zoczą.</value>
+  </data>
+  <data name="String1539" xml:space="preserve">
+    <value>Jak długo żaby przed Markiem krzeczą, tak też długo potem milczeć muszą.</value>
+  </data>
+  <data name="String1540" xml:space="preserve">
+    <value>Jak burze w maju częste, to snopki w żniwach gęste.</value>
+  </data>
+  <data name="String1541" xml:space="preserve">
+    <value>Jak Bóg zagrzmi, to chłop do pacierza.</value>
+  </data>
+  <data name="String1542" xml:space="preserve">
+    <value>Indyk myślał o niedzieli, a w sobotę łeb mu ścięli.</value>
+  </data>
+  <data name="String1543" xml:space="preserve">
+    <value>Im gość rzadszy, tym milszy.</value>
+  </data>
+  <data name="String1544" xml:space="preserve">
+    <value>Bogatemu to i byk się ocieli.</value>
+  </data>
+  <data name="String1545" xml:space="preserve">
+    <value>Im dalej w las, tym więcej drzew.</value>
+  </data>
+  <data name="String1546" xml:space="preserve">
+    <value>Ile razy przed Wojciechem zagrzmi na pola, tyle razy po Wojciechu zabieli się rola.</value>
+  </data>
+  <data name="String1547" xml:space="preserve">
+    <value>Ile razy marzec mgłą uraczy, tyle niepogody w lecie znaczy.</value>
+  </data>
+  <data name="String1548" xml:space="preserve">
+    <value>Ile mgieł w marcu, tyle deszczów w czerwcu.</value>
+  </data>
+  <data name="String1549" xml:space="preserve">
+    <value>Ile dni przed świętym Wojciechem kukułka się odezwie, albo żaba zaskrzeczy, tyle dni po świętym Wojciechu będzie zimno.</value>
+  </data>
+  <data name="String1550" xml:space="preserve">
+    <value>Idzie luty – podkuj buty.</value>
+  </data>
+  <data name="String1551" xml:space="preserve">
+    <value>I w Paryżu nie zrobią z owsa ryżu.</value>
+  </data>
+  <data name="String1552" xml:space="preserve">
+    <value>I prosię, jak młode, to ładne.</value>
+  </data>
+  <data name="String1553" xml:space="preserve">
+    <value>I na równej drodze można się potknąć.</value>
+  </data>
+  <data name="String1554" xml:space="preserve">
+    <value>I mądry, i głupi, gdy go nędza złupi.</value>
+  </data>
+  <data name="String1555" xml:space="preserve">
+    <value>Bogatemu diabeł dzieci kołysze.</value>
+  </data>
+  <data name="String1556" xml:space="preserve">
+    <value>I koń hardo stąpa, gdy w bogatym rzędzie.</value>
+  </data>
+  <data name="String1557" xml:space="preserve">
+    <value>I gość miły, i chleba żal.</value>
+  </data>
+  <data name="String1558" xml:space="preserve">
+    <value>Husarz prosi Boga o wojnę, a lekarz o febrę.</value>
+  </data>
+  <data name="String1559" xml:space="preserve">
+    <value>Hulaj duszo, piekło gore!</value>
+  </data>
+  <data name="String1560" xml:space="preserve">
+    <value>Hilary zapowiada, jaka pogoda w Wielkanoc przypada.</value>
+  </data>
+  <data name="String1561" xml:space="preserve">
+    <value>Gust kobiety, łaska pańska i marcowa pogoda zawsze niestałe.</value>
+  </data>
+  <data name="String1562" xml:space="preserve">
+    <value>Grzmot w świętego Wojciecha, to chłopięca uciecha.</value>
+  </data>
+  <data name="String1563" xml:space="preserve">
+    <value>Grzmot w maju sprzyja urodzaju.</value>
+  </data>
+  <data name="String1564" xml:space="preserve">
+    <value>Grzmot w maju nie szkodzi, sad dobrze obrodzi.</value>
+  </data>
+  <data name="String1565" xml:space="preserve">
+    <value>Grzmot w kwietniu – dobra nowina, już szron roślin nie pościna.</value>
+  </data>
+  <data name="String1566" xml:space="preserve">
+    <value>Boga na języku, a diabła ma w sercu.</value>
+  </data>
+  <data name="String1567" xml:space="preserve">
+    <value>Afekty, chociaż będą święte, rozumem mają być ujęte.</value>
+  </data>
+  <data name="String1568" xml:space="preserve">
+    <value>Grzej się, Ewka, kiedy się palą drewka.</value>
+  </data>
+  <data name="String1569" xml:space="preserve">
+    <value>Grosz oszczędzony przerabia się w miliony.</value>
+  </data>
+  <data name="String1570" xml:space="preserve">
+    <value>Grosz do grosza, kupi się kokosza.</value>
+  </data>
+  <data name="String1571" xml:space="preserve">
+    <value>Grosz do grosza, a będzie się kokosza.</value>
+  </data>
+  <data name="String1572" xml:space="preserve">
+    <value>Gromniczna pogodna – będzie jesień dorodna.</value>
+  </data>
+  <data name="String1573" xml:space="preserve">
+    <value>Gromnice w śniegu, wiosna jest w biegu, lecz gdy pogoda, dla wiosny zawoda.</value>
+  </data>
+  <data name="String1574" xml:space="preserve">
+    <value>Gromnica – zimy połowica.</value>
+  </data>
+  <data name="String1575" xml:space="preserve">
+    <value>Groch święty Grzegorz zasiewa, soczewicę Jakub miewa.</value>
+  </data>
+  <data name="String1576" xml:space="preserve">
+    <value>Góra z górą się nie zejdzie, ale człowiek z człowiekiem zejść się może.</value>
+  </data>
+  <data name="String1577" xml:space="preserve">
+    <value>Góra z górą się nie zejdzie, ale człowiek z człowiekiem zawsze.</value>
+  </data>
+  <data name="String1578" xml:space="preserve">
+    <value>Błędów nie robi ten, co nic nie robi.</value>
+  </data>
+  <data name="String1579" xml:space="preserve">
+    <value>Góra mysz porodziła.</value>
+  </data>
+  <data name="String1580" xml:space="preserve">
+    <value>Gość, który nic nie przyniesie, niech się prześpi w polu, w lesie.</value>
+  </data>
+  <data name="String1581" xml:space="preserve">
+    <value>Gość z brzuchem tylko z zębami godzien siedzieć jest z osłami.</value>
+  </data>
+  <data name="String1582" xml:space="preserve">
+    <value>Gość w dom, Bóg w dom.</value>
+  </data>
+  <data name="String1583" xml:space="preserve">
+    <value>Gość przybyły na chwilę widzi w koło na milę.</value>
+  </data>
+  <data name="String1584" xml:space="preserve">
+    <value>Gość nie w porę gorszy Tatarzyna.</value>
+  </data>
+  <data name="String1585" xml:space="preserve">
+    <value>Gość nie w porę gorszy Tatara.</value>
+  </data>
+  <data name="String1586" xml:space="preserve">
+    <value>Gość na bankiet nie proszony, nie bywa uczczony.</value>
+  </data>
+  <data name="String1587" xml:space="preserve">
+    <value>Gość ma zwykle więcej czasu niż gospodarz.</value>
+  </data>
+  <data name="String1588" xml:space="preserve">
+    <value>Gość jest najpierw jak złoto, potem – jak srebro, w końcu ciąży jak żelazo.</value>
+  </data>
+  <data name="String1589" xml:space="preserve">
+    <value>Bliższa ciału koszula niż suknia.</value>
+  </data>
+  <data name="String1590" xml:space="preserve">
+    <value>Gość i ryba trzeciego dnia cuchnie.</value>
+  </data>
+  <data name="String1591" xml:space="preserve">
+    <value>Gość częsty, barszcz gęsty, sól gruba – gospodarza zguba.</value>
+  </data>
+  <data name="String1592" xml:space="preserve">
+    <value>Gość częsty i długi rychlej się sprzykrzy.</value>
+  </data>
+  <data name="String1593" xml:space="preserve">
+    <value>Gościnność, acz szczera, czasem boki rozpiera.</value>
+  </data>
+  <data name="String1594" xml:space="preserve">
+    <value>Gościnność nawet pana w sługę przemieni.</value>
+  </data>
+  <data name="String1595" xml:space="preserve">
+    <value>Gościa lepiej nie przyjmować, niż go tudzież wyforować.</value>
+  </data>
+  <data name="String1596" xml:space="preserve">
+    <value>Gospodyni powinna wiedzieć o kuchni, o spiżarni, o piwnicy.</value>
+  </data>
+  <data name="String1597" xml:space="preserve">
+    <value>Gospodarzowi często trzeba być głuchym i ślepym.</value>
+  </data>
+  <data name="String1598" xml:space="preserve">
+    <value>Gorzałką za grosz przyjaciela uczcisz, a za dziesięć umorzysz.</value>
+  </data>
+  <data name="String1599" xml:space="preserve">
+    <value>Głupim fortuna sprzyja.</value>
+  </data>
+  <data name="String1600" xml:space="preserve">
+    <value>Bliższa ciału koszula niż sukmana.</value>
+  </data>
+  <data name="String1601" xml:space="preserve">
+    <value>Głupiemu wszędy z woza.</value>
+  </data>
+  <data name="String1602" xml:space="preserve">
+    <value>Głupiego zwieść, to fraszka; mądrego, to mi sztuka.</value>
+  </data>
+  <data name="String1603" xml:space="preserve">
+    <value>Głupiego łacno poznać: sam się wyda.</value>
+  </data>
+  <data name="String1604" xml:space="preserve">
+    <value>Głupiego i bieda nie nauczy rozumu.</value>
+  </data>
+  <data name="String1605" xml:space="preserve">
+    <value>Głupiec głupca, a diabeł diabła chwali.</value>
+  </data>
+  <data name="String1606" xml:space="preserve">
+    <value>Głupiec głową naprzód wszędzie wpada.</value>
+  </data>
+  <data name="String1607" xml:space="preserve">
+    <value>Głupich nie sieją, sami się rodzą.</value>
+  </data>
+  <data name="String1608" xml:space="preserve">
+    <value>Głupi, kiedy milczy, za mądrego ujdzie.</value>
+  </data>
+  <data name="String1609" xml:space="preserve">
+    <value>Głupi, jak chce kogo pochwalić, jeszcze zgani.</value>
+  </data>
+  <data name="String1610" xml:space="preserve">
+    <value>Głupi to kupi, mądry to ukradnie.</value>
+  </data>
+  <data name="String1611" xml:space="preserve">
+    <value>Bliższa ciału koszula niż kaftan.</value>
+  </data>
+  <data name="String1612" xml:space="preserve">
+    <value>Głupi nie jest ten, co się głupim robi, ale ten, co swojej roboty nie umie dobrze przedstawić.</value>
+  </data>
+  <data name="String1613" xml:space="preserve">
+    <value>Głupi narzeka, mądry zaradza.</value>
+  </data>
+  <data name="String1614" xml:space="preserve">
+    <value>Głupi marzy o bogactwie, a mądry o szczęściu.</value>
+  </data>
+  <data name="String1615" xml:space="preserve">
+    <value>Głupi ten jest, kto głupiemu dowierza.</value>
+  </data>
+  <data name="String1616" xml:space="preserve">
+    <value>Głupi daje, mądry bierze.</value>
+  </data>
+  <data name="String1617" xml:space="preserve">
+    <value>Głupi biega, mądry chodzi.</value>
+  </data>
+  <data name="String1618" xml:space="preserve">
+    <value>Głupi a mocny bywa owocny.</value>
+  </data>
+  <data name="String1619" xml:space="preserve">
+    <value>Głupcy zawsze o sobie dobrze rozumieją.</value>
+  </data>
+  <data name="String1620" xml:space="preserve">
+    <value>Głupcy wiążą węzły, a mędrcy je rozwiązują.</value>
+  </data>
+  <data name="String1621" xml:space="preserve">
+    <value>Głód najlepszy kucharz.</value>
+  </data>
+  <data name="String1622" xml:space="preserve">
+    <value>Blisko swej jabłoni jabłko pada.</value>
+  </data>
+  <data name="String1623" xml:space="preserve">
+    <value>Głowy się trzymaj, byś nie stracił głowy.</value>
+  </data>
+  <data name="String1624" xml:space="preserve">
+    <value>Głową muru nie przebijesz.</value>
+  </data>
+  <data name="String1625" xml:space="preserve">
+    <value>Głową ludzie i rządy stoją.</value>
+  </data>
+  <data name="String1626" xml:space="preserve">
+    <value>Głowa wielka, a rozumu mało.</value>
+  </data>
+  <data name="String1627" xml:space="preserve">
+    <value>Głowa warta kapelusza, a kapelusz wart niewiele.</value>
+  </data>
+  <data name="String1628" xml:space="preserve">
+    <value>Głowa stara, lecz myśl jara.</value>
+  </data>
+  <data name="String1629" xml:space="preserve">
+    <value>Głowa pusta jak kapusta.</value>
+  </data>
+  <data name="String1630" xml:space="preserve">
+    <value>Głowa jak u śledzia, nogi jak u niedźwiedzia.</value>
+  </data>
+  <data name="String1631" xml:space="preserve">
+    <value>Głowa głowie nie równa.</value>
+  </data>
+  <data name="String1632" xml:space="preserve">
+    <value>Głos ludzki, głos boży.</value>
+  </data>
+  <data name="String1633" xml:space="preserve">
+    <value>Bitemu psu tylko kij ukazać.</value>
+  </data>
+  <data name="String1634" xml:space="preserve">
+    <value>Głodny kija się nie boi.</value>
+  </data>
+  <data name="String1635" xml:space="preserve">
+    <value>Głodny jak młynarska kura.</value>
+  </data>
+  <data name="String1636" xml:space="preserve">
+    <value>Głodnemu chleb na myśli.</value>
+  </data>
+  <data name="String1637" xml:space="preserve">
+    <value>Gizela święta zimy nie pamięta.</value>
+  </data>
+  <data name="String1638" xml:space="preserve">
+    <value>Gdzieś się upił, tam idź spać.</value>
+  </data>
+  <data name="String1639" xml:space="preserve">
+    <value>Gdzie zgoda, tam i siła.</value>
+  </data>
+  <data name="String1640" xml:space="preserve">
+    <value>Gdzie wielu dowódców, tam bitwa przegrana.</value>
+  </data>
+  <data name="String1641" xml:space="preserve">
+    <value>Gdzie święta Agata, bezpieczna tam chata.</value>
+  </data>
+  <data name="String1642" xml:space="preserve">
+    <value>Gdzie siła głów do rady i siła rąk do wykonania, tam sprawy oporem idą.</value>
+  </data>
+  <data name="String1643" xml:space="preserve">
+    <value>Gdzie są mądrzy, tam muszą być i mędrkowie.</value>
+  </data>
+  <data name="String1644" xml:space="preserve">
+    <value>Biednemu zawsze wiatr w oczy.</value>
+  </data>
+  <data name="String1645" xml:space="preserve">
+    <value>Gdzie Rzym, gdzie Krym, a gdzie karczmy babińskie.</value>
+  </data>
+  <data name="String1646" xml:space="preserve">
+    <value>Gdzie rozumu nie masz, tam i ładu [rządu].</value>
+  </data>
+  <data name="String1647" xml:space="preserve">
+    <value>Gdzie praca, pilność na straży, tam się bieda wejść nie waży.</value>
+  </data>
+  <data name="String1648" xml:space="preserve">
+    <value>Gdzie pies nie chce, tam sługa musi.</value>
+  </data>
+  <data name="String1649" xml:space="preserve">
+    <value>Gdzie Pan Bóg, tam zwycięstwo.</value>
+  </data>
+  <data name="String1650" xml:space="preserve">
+    <value>Gdzie moda w mowie, tam pustka w głowie.</value>
+  </data>
+  <data name="String1651" xml:space="preserve">
+    <value>Gdzie moda panią, rozum sługą.</value>
+  </data>
+  <data name="String1652" xml:space="preserve">
+    <value>Gdzie ogon rządzi, tam głowa błądzi.</value>
+  </data>
+  <data name="String1653" xml:space="preserve">
+    <value>Gdzie kucharek sześć, tam nie ma co jeść.</value>
+  </data>
+  <data name="String1654" xml:space="preserve">
+    <value>Gdzie kogo nie proszą, tam go kijem wynoszą.</value>
+  </data>
+  <data name="String1655" xml:space="preserve">
+    <value>Biednemu to i weselna noc krótka.</value>
+  </data>
+  <data name="String1656" xml:space="preserve">
+    <value>Gdzie jest miód, tam będą i pszczoły; gdzie piękna dziewczyna, tam będą i chłopcy.</value>
+  </data>
+  <data name="String1657" xml:space="preserve">
+    <value>Gdzie jest kucharek sześć, tam nie ma co jeść.</value>
+  </data>
+  <data name="String1658" xml:space="preserve">
+    <value>Gdzie gości gromada, niesmaczna biesiada.</value>
+  </data>
+  <data name="String1659" xml:space="preserve">
+    <value>Gdzie gospodarz sam już pości, tam trudno bywa o gości.</value>
+  </data>
+  <data name="String1660" xml:space="preserve">
+    <value>Gdzie głupia rada, gotowa zwada.</value>
+  </data>
+  <data name="String1661" xml:space="preserve">
+    <value>Gdzie głowy nie masz, rządu nie pytaj.</value>
+  </data>
+  <data name="String1662" xml:space="preserve">
+    <value>Gdzie głowa rządzi, tam człowiek nie błądzi.</value>
+  </data>
+  <data name="String1663" xml:space="preserve">
+    <value>Gdzie głowa chodzi za nogami, a nie nogi za głową – rząd tam płochy być musi.</value>
+  </data>
+  <data name="String1664" xml:space="preserve">
+    <value>Gdzie dwóch się bije, tam trzeci korzysta.</value>
+  </data>
+  <data name="String1665" xml:space="preserve">
+    <value>Gdzie drwa rąbią, tam wióry lecą.</value>
+  </data>
+  <data name="String1666" xml:space="preserve">
+    <value>Biedna żona taka, która ma pijaka.</value>
+  </data>
+  <data name="String1667" xml:space="preserve">
+    <value>Gdzie diabeł nie może, tam babę pośle.</value>
+  </data>
+  <data name="String1668" xml:space="preserve">
+    <value>Gdzie cienko, tam się rwie.</value>
+  </data>
+  <data name="String1669" xml:space="preserve">
+    <value>Gdzie ciało ma leżeć, tam nogi muszą zajść.</value>
+  </data>
+  <data name="String1670" xml:space="preserve">
+    <value>Gdzie chleb, tam się zęby znajdą.</value>
+  </data>
+  <data name="String1671" xml:space="preserve">
+    <value>Gdyby kózka nie skakała, toby nóżki nie złamała.</value>
+  </data>
+  <data name="String1672" xml:space="preserve">
+    <value>Gdy żaba rano wrzeszczy, spodziewaj się deszczy.</value>
+  </data>
+  <data name="String1673" xml:space="preserve">
+    <value>Gdy Wojciech rano rosi, pół lata posuchę nosi.</value>
+  </data>
+  <data name="String1674" xml:space="preserve">
+    <value>Gdy włos siwieje, to rozum dojrzeje.</value>
+  </data>
+  <data name="String1675" xml:space="preserve">
+    <value>Gdy Wielki Piątek ponury, Wielkanoc będzie bez chmury.</value>
+  </data>
+  <data name="String1676" xml:space="preserve">
+    <value>Gdy wiatr w maju z południa wieje, wkrótce deszcz poleje.</value>
+  </data>
+  <data name="String1677" xml:space="preserve">
+    <value>Bieda z dziećmi, bieda i bez dzieci.</value>
+  </data>
+  <data name="String1678" xml:space="preserve">
+    <value>Adwokat niech głowę, a koń niech ma nogi.</value>
+  </data>
+  <data name="String1679" xml:space="preserve">
+    <value>Gdy wiatr ostry w luty wieje, to gbur dobrą ma nadzieję.</value>
+  </data>
+  <data name="String1680" xml:space="preserve">
+    <value>Gdy wiatr ostro w lutym wieje, chłop ma dobrą nadzieję.</value>
+  </data>
+  <data name="String1681" xml:space="preserve">
+    <value>Gdy w Zuzannę burze, jesienią pełne podwórze.</value>
+  </data>
+  <data name="String1682" xml:space="preserve">
+    <value>Gdy w Zofię zboże do pasa, na zimę chleb i okrasa.</value>
+  </data>
+  <data name="String1683" xml:space="preserve">
+    <value>Gdy w zimie nie było śniegu, to go wiele spadnie w kwietniu.</value>
+  </data>
+  <data name="String1684" xml:space="preserve">
+    <value>Gdy w wstępną środę deszcz pada, to rój gąsienic kapustę zjada.</value>
+  </data>
+  <data name="String1685" xml:space="preserve">
+    <value>Gdy w Tłusty Czwartek człek w jedzeniu pofolguje, łaskawy Pan Bóg grzech obżarstwa daruje.</value>
+  </data>
+  <data name="String1686" xml:space="preserve">
+    <value>Gdy w styczniu deszcz leje, złe robi nadzieje.</value>
+  </data>
+  <data name="String1687" xml:space="preserve">
+    <value>Gdy w Ruprechta jasno, ponoć w czerwcu krasno.</value>
+  </data>
+  <data name="String1688" xml:space="preserve">
+    <value>Gdy w Ruperta niebo jasne będzie, w lipcu takiż czas pogody wszędzie.</value>
+  </data>
+  <data name="String1689" xml:space="preserve">
+    <value>Bieda temu dokuczy, kto się za młodu nie uczy.</value>
+  </data>
+  <data name="String1690" xml:space="preserve">
+    <value>Gdy w Popielec pogoda, wiosna będzie sucha, gdy deszcz, będzie mokra, a jeżeli zimno, będzie zimna.</value>
+  </data>
+  <data name="String1691" xml:space="preserve">
+    <value>Gdy w Popielec pogoda służy, suchą wiosnę wróży.</value>
+  </data>
+  <data name="String1692" xml:space="preserve">
+    <value>Gdy w Palmową Niedzielę słońce świeci, pełne będą stodoły, beczki i sieci.</value>
+  </data>
+  <data name="String1693" xml:space="preserve">
+    <value>Gdy w Nowy Rok skwar i upał, baran wilka będzie chrupał.</value>
+  </data>
+  <data name="String1694" xml:space="preserve">
+    <value>Gdy w niedzielę męki pańskiej słotno jest o świcie, wiele żyta tego roku gospodarz nie zmiecie.</value>
+  </data>
+  <data name="String1695" xml:space="preserve">
+    <value>Gdy w marcu topnieje, to na wiosnę mróz bieleje.</value>
+  </data>
+  <data name="String1696" xml:space="preserve">
+    <value>Gdy w marcu niebo od południa ryknie, rok wszego dobra z tego wyniknie.</value>
+  </data>
+  <data name="String1697" xml:space="preserve">
+    <value>Gdy w marcu mgły bywają, w lecie burze przeszkadzają.</value>
+  </data>
+  <data name="String1698" xml:space="preserve">
+    <value>Gdy w marcu grzmoty, to w maju śniegi.</value>
+  </data>
+  <data name="String1699" xml:space="preserve">
+    <value>Gdy w marcu grzmi, w maju śniegiem ćmi.</value>
+  </data>
+  <data name="String1700" xml:space="preserve">
+    <value>Bieda domu nie buduje.</value>
+  </data>
+  <data name="String1701" xml:space="preserve">
+    <value>Gdy w marcu deszcz pada, wtedy rolnik biada, gdy słonko jaśnieje, to rolnik się śmieje.</value>
+  </data>
+  <data name="String1702" xml:space="preserve">
+    <value>Gdy w maju żołądź dobrze okwita, dobry rok zawita.</value>
+  </data>
+  <data name="String1703" xml:space="preserve">
+    <value>Gdy w maju śnieg pada, suszę zapowiada.</value>
+  </data>
+  <data name="String1704" xml:space="preserve">
+    <value>Gdy w maju plucha, w czerwcu posucha.</value>
+  </data>
+  <data name="String1705" xml:space="preserve">
+    <value>Gdy w maju dobry Serwacy, dobry w czerwcu Bonifacy.</value>
+  </data>
+  <data name="String1706" xml:space="preserve">
+    <value>Gdy w lutym topnieje, to na wiosnę mróz bieleje.</value>
+  </data>
+  <data name="String1707" xml:space="preserve">
+    <value>Gdy w lutym do połowy zima się wysili, to na koniec miesiąca już się nie wychyli.</value>
+  </data>
+  <data name="String1708" xml:space="preserve">
+    <value>Gdy w kwietniu słonko na dworze, nie będzie pustek w komorze.</value>
+  </data>
+  <data name="String1709" xml:space="preserve">
+    <value>Gdy w kwietniu ciepłe deszcze padają, pogodną jesień zapowiadają.</value>
+  </data>
+  <data name="String1710" xml:space="preserve">
+    <value>Gdy w Gromniczną jest ładnie, dużo śniegu jeszcze spadnie.</value>
+  </data>
+  <data name="String1711" xml:space="preserve">
+    <value>Będzie z niego ksiądz jak z diabła kościelny.</value>
+  </data>
+  <data name="String1712" xml:space="preserve">
+    <value>Gdy w Gromnicę z dachów ciecze, zima jeszcze się przewlecze.</value>
+  </data>
+  <data name="String1713" xml:space="preserve">
+    <value>Gdy w Gromnicę pięknie wszędzie, tedy dobra wiosna będzie.</value>
+  </data>
+  <data name="String1714" xml:space="preserve">
+    <value>Gdy w Eugeniego lód albo woda, taka i lipcowa pokaże się pogoda.</value>
+  </data>
+  <data name="String1715" xml:space="preserve">
+    <value>Gdy w dzień Adama i Ewy mróz i pięknie – zima wcześnie pęknie.</value>
+  </data>
+  <data name="String1716" xml:space="preserve">
+    <value>Gdy w adwencie szadź na drzewie się pokazuje, to rok urodzajny nam zwiastuje.</value>
+  </data>
+  <data name="String1717" xml:space="preserve">
+    <value>Gdy trzech Króli mrozem trzyma, będzie jeszcze długa zima.</value>
+  </data>
+  <data name="String1718" xml:space="preserve">
+    <value>Gdy święty Maciej zimę poprawia, to Oblubieniec mrozy zostawia.</value>
+  </data>
+  <data name="String1719" xml:space="preserve">
+    <value>Gdy święty Andrzej ze śniegiem przybieży, sto dni śnieg na polu leży.</value>
+  </data>
+  <data name="String1720" xml:space="preserve">
+    <value>Gdy święta Agata po błocie brodzi, człek w Zmartwychwstanie po lodzie chodzi.</value>
+  </data>
+  <data name="String1721" xml:space="preserve">
+    <value>Gdy suchy marzec, nagradza kwiecień, bo deszcze sprowadza.</value>
+  </data>
+  <data name="String1722" xml:space="preserve">
+    <value>Bęben dlatego tak głośny, bo próżny.</value>
+  </data>
+  <data name="String1723" xml:space="preserve">
+    <value>Gdy suchy marzec, a maj mokry bywa, żyznego roku oracz się spodziewa.</value>
+  </data>
+  <data name="String1724" xml:space="preserve">
+    <value>Gdy styczeń z zimnem nie chodzi – marzec, kwiecień wychłodzi.</value>
+  </data>
+  <data name="String1725" xml:space="preserve">
+    <value>Gdy styczeń burzliwy z śniegami, lato burzliwe z deszczami.</value>
+  </data>
+  <data name="String1726" xml:space="preserve">
+    <value>Gdy słońce przygrzewa na Jana Dobrego, spodziewać się można lata pogodnego.</value>
+  </data>
+  <data name="String1727" xml:space="preserve">
+    <value>Gdy słoneczko przed Serwacym ciepło już dogrzewa, po Serwacym szron pokryje i kwiaty i drzewa.</value>
+  </data>
+  <data name="String1728" xml:space="preserve">
+    <value>Gdy się w maju pszczoły roją, takie roje w wielkiej cenie stoją.</value>
+  </data>
+  <data name="String1729" xml:space="preserve">
+    <value>Gdy się trawa zieleni w marcu, to jej nie ma w maju.</value>
+  </data>
+  <data name="String1730" xml:space="preserve">
+    <value>Gdy się swoje psy kąsają, to się i pogodzą.</value>
+  </data>
+  <data name="String1731" xml:space="preserve">
+    <value>Gdy się grzmot w maju odezwie na wschodzie, rok sprzyja sianu i zbożu w urodzie.</value>
+  </data>
+  <data name="String1732" xml:space="preserve">
+    <value>Gdy się człowiek spieszy, to się diabeł cieszy.</value>
+  </data>
+  <data name="String1733" xml:space="preserve">
+    <value>Bezpieczny jak u Pana Boga za drzwiami.</value>
+  </data>
+  <data name="String1734" xml:space="preserve">
+    <value>Gdy rój w maju idzie w górę, kosztuje on siana furę.</value>
+  </data>
+  <data name="String1735" xml:space="preserve">
+    <value>Gdy rodzina żyje w zgodzie, to jej bieda nie dobodzie.</value>
+  </data>
+  <data name="String1736" xml:space="preserve">
+    <value>Gdy przyjdzie święta Agnieszka, przebije lód ogonem pliszka.</value>
+  </data>
+  <data name="String1737" xml:space="preserve">
+    <value>Gdy przyjadą na targ głupcy, cieszą się kupcy.</value>
+  </data>
+  <data name="String1738" xml:space="preserve">
+    <value>Gdy przed Zwiastowaniem ruszy się pszczoła, to mokrą wiosnę nam przywoła.</value>
+  </data>
+  <data name="String1739" xml:space="preserve">
+    <value>Gdy przed Wojciechem grzmi, długo jeszcze zima śni.</value>
+  </data>
+  <data name="String1740" xml:space="preserve">
+    <value>Gdy przed Pankracym przymrozek nocny się zdarzy, zimno wiosnę zwarzy.</value>
+  </data>
+  <data name="String1741" xml:space="preserve">
+    <value>Gdy przed Pankracym nocą przymrozi, lato będzie przepadziste, a jesienią czasy dżdżyste.</value>
+  </data>
+  <data name="String1742" xml:space="preserve">
+    <value>Gdy Nowy Rok mglisty, zjedzą kapustę glisty.</value>
+  </data>
+  <data name="String1743" xml:space="preserve">
+    <value>Gdy nie wymrozi zima, sierpień zbierać co nie ma.</value>
+  </data>
+  <data name="String1744" xml:space="preserve">
+    <value>Bez zachodu nie ma miodu.</value>
+  </data>
+  <data name="String1745" xml:space="preserve">
+    <value>Gdy na Zmartwychwstanie dżdżysto i chłody, do Zielonych Świątek więcej deszczu niż pogody.</value>
+  </data>
+  <data name="String1746" xml:space="preserve">
+    <value>Gdy na Wojciecha rano plucha, do połowy lata będzie ziemia sucha.</value>
+  </data>
+  <data name="String1747" xml:space="preserve">
+    <value>Gdy na Wniebowstąpienie słota, w jesieni będzie dużo błota.</value>
+  </data>
+  <data name="String1748" xml:space="preserve">
+    <value>Gdy na Wincentego i nawrócenie Pawła pogoda świeci, spodziewajcie się dobrego lata, dzieci.</value>
+  </data>
+  <data name="String1749" xml:space="preserve">
+    <value>Gdy na święty Walenty mróz, chowaj sanie, szykuj wóz.</value>
+  </data>
+  <data name="String1750" xml:space="preserve">
+    <value>Gdy na święty Walek deszcze, mrozy wrócą jeszcze.</value>
+  </data>
+  <data name="String1751" xml:space="preserve">
+    <value>Gdy na święty Józef bociek przybędzie, to już śniegu nie będzie.</value>
+  </data>
+  <data name="String1752" xml:space="preserve">
+    <value>Gdy na święty Jerzy jeszcze nie rozkwita, niech się cieszy stary, młody, chłop i kobita.</value>
+  </data>
+  <data name="String1753" xml:space="preserve">
+    <value>Gdy na świętego Wojciecha rano deszcz pada, do połowy lata suszę zapowiada.</value>
+  </data>
+  <data name="String1754" xml:space="preserve">
+    <value>Gdy na Szczepana błoto po kolana, na Zmartwychwstanie wytoczymy sanie.</value>
+  </data>
+  <data name="String1755" xml:space="preserve">
+    <value>Bez pracy trudno dostąpić honoru.</value>
+  </data>
+  <data name="String1756" xml:space="preserve">
+    <value>Gdy na Nowy Rok plucha, ze żniwem też będzie pokuta.</value>
+  </data>
+  <data name="String1757" xml:space="preserve">
+    <value>Gdy na Marka pot ocierasz, tak na Serwacego kożuch wdziewasz.</value>
+  </data>
+  <data name="String1758" xml:space="preserve">
+    <value>Gdy na Małgorzaty mróz, jeszcze długo nie pojedzie wóz.</value>
+  </data>
+  <data name="String1759" xml:space="preserve">
+    <value>Gdy na Magdalenę pogoda, to wygoda, gdy zaś słota, to lichota.</value>
+  </data>
+  <data name="String1760" xml:space="preserve">
+    <value>Gdy na Macieja przejrzy żyto nieba, to się spodziewać można dużo chleba.</value>
+  </data>
+  <data name="String1761" xml:space="preserve">
+    <value>Gdy na Józefa bociek przybędzie, to już śniegu nie będzie.</value>
+  </data>
+  <data name="String1762" xml:space="preserve">
+    <value>Gdy na Gromnicę roztaje, rzadkie będą urodzaje.</value>
+  </data>
+  <data name="String1763" xml:space="preserve">
+    <value>Gdy na Gertrudy zjawią się bociany, to wiosna już rychło nastanie.</value>
+  </data>
+  <data name="String1764" xml:space="preserve">
+    <value>Gdy na dzwony wielkanocne pada, suchość nam przez całe lato włada.</value>
+  </data>
+  <data name="String1765" xml:space="preserve">
+    <value>Gdy muszki w lutym latają, to w marcu w ręce dmuchają.</value>
+  </data>
+  <data name="String1766" xml:space="preserve">
+    <value>Bez pracy nie ma płacy.</value>
+  </data>
+  <data name="String1767" xml:space="preserve">
+    <value>Gdy mróz w marcu dnia dziesiątego, jeszcze czterdzieści dni mrozu takiego.</value>
+  </data>
+  <data name="String1768" xml:space="preserve">
+    <value>Gdy mróz w lutym ostro trzyma, tedy już niedługa zima.</value>
+  </data>
+  <data name="String1769" xml:space="preserve">
+    <value>Gdy mróz w lutym ostro trzyma, tedy jest niedługa zima.</value>
+  </data>
+  <data name="String1770" xml:space="preserve">
+    <value>Gdy mróz w lutym dwudziestym drugim, dzień straszy nas mrozem długim.</value>
+  </data>
+  <data name="String1771" xml:space="preserve">
+    <value>Gdy mróz w lutym długo trzyma, wtedy już niedługa zima, lecz gdy w lutym z dachów ciecze, zima długo się przewlecze.</value>
+  </data>
+  <data name="String1772" xml:space="preserve">
+    <value>Gdy mokro w Wielką Niedzielę, rok się sucho ściele.</value>
+  </data>
+  <data name="String1773" xml:space="preserve">
+    <value>Gdy mokro w Kwietnia Niedzielę, rok się sucho ściele.</value>
+  </data>
+  <data name="String1774" xml:space="preserve">
+    <value>Gdy marzec suchy, kwiecień nagradza, bo deszcze sprowadza.</value>
+  </data>
+  <data name="String1775" xml:space="preserve">
+    <value>Gdy marzec mglisty, w lecie czas dżdżysty.</value>
+  </data>
+  <data name="String1776" xml:space="preserve">
+    <value>Gdy marzec deszczowy, suche lato rodzi i zasiewom szkodzi.</value>
+  </data>
+  <data name="String1777" xml:space="preserve">
+    <value>Bez pracy nie ma macy.</value>
+  </data>
+  <data name="String1778" xml:space="preserve">
+    <value>Gdy Marek z deszczem przychodzi, posuchę w lecie rodzi.</value>
+  </data>
+  <data name="String1779" xml:space="preserve">
+    <value>Gdy Makary pogodny, cały styczeń chłodny.</value>
+  </data>
+  <data name="String1780" xml:space="preserve">
+    <value>Gdy maj jest przy pogodzie, nie bywają siana w szkodzie.</value>
+  </data>
+  <data name="String1781" xml:space="preserve">
+    <value>Gdy luty zimny i suchy, sierpień będzie gorący.</value>
+  </data>
+  <data name="String1782" xml:space="preserve">
+    <value>Gdy luty z wiatrami, rychła wiosna przed nami.</value>
+  </data>
+  <data name="String1783" xml:space="preserve">
+    <value>Gdy luty ciepły i o wodzie, wiosna późna i o chłodzie.</value>
+  </data>
+  <data name="String1784" xml:space="preserve">
+    <value>Gdy luty bez mrozów i nieburzliwy, rok bywa słotny i nieurodziwy.</value>
+  </data>
+  <data name="String1785" xml:space="preserve">
+    <value>Gdy kwiecień chmurny, a maj z wiatrami, rok żyzny przed nami.</value>
+  </data>
+  <data name="String1786" xml:space="preserve">
+    <value>Gdy kota nie ma, myszy harcują.</value>
+  </data>
+  <data name="String1787" xml:space="preserve">
+    <value>Gdy jasne słońce w dzień gromniczny będzie, więcej niż przedtem śniegu spadnie wszędzie.</value>
+  </data>
+  <data name="String1788" xml:space="preserve">
+    <value>Bez pracy nie ma kołaczy.</value>
+  </data>
+  <data name="String1789" xml:space="preserve">
+    <value>Adam cóż by poradził, gdyby Bóg w raju Ewy nie posadził.</value>
+  </data>
+  <data name="String1790" xml:space="preserve">
+    <value>Gdy gęś dzika w marcu przybywa, ciepła wiosna bywa.</value>
+  </data>
+  <data name="String1791" xml:space="preserve">
+    <value>Gdy Franciszka z wichrem po polu hasa, może sypnąć śniegiem powyżej pasa.</value>
+  </data>
+  <data name="String1792" xml:space="preserve">
+    <value>Gdy dziesiątego lutego mróz panuje, jeszcze czterdzieści dni takich zwiastuje.</value>
+  </data>
+  <data name="String1793" xml:space="preserve">
+    <value>Gdy dziecko upada, anioł poduszkę podkłada, gdy stary upada, diabeł kamień podkłada.</value>
+  </data>
+  <data name="String1794" xml:space="preserve">
+    <value>Gdy dwaj robią to samo, to nie jest to samo.</value>
+  </data>
+  <data name="String1795" xml:space="preserve">
+    <value>Gdy deszcz na świętego Urbana – mały profit z winobrania.</value>
+  </data>
+  <data name="String1796" xml:space="preserve">
+    <value>Gdy ciepło w lutym, zimno w marcu bywa, paszy trzeba zachować, by jej potem nie kupować.</value>
+  </data>
+  <data name="String1797" xml:space="preserve">
+    <value>Gdy ciepło w lutym, zimno w marcu bywa, długo potrwa zima, rzecz to niewątpliwa.</value>
+  </data>
+  <data name="String1798" xml:space="preserve">
+    <value>Gdy ci kobyła zdechnie, pomnij zdjąć chomąto.</value>
+  </data>
+  <data name="String1799" xml:space="preserve">
+    <value>Gdy chcesz poznać pogodę w czerwcu roku tego, uważaj jak będzie w Jana Damasceńskiego.</value>
+  </data>
+  <data name="String1800" xml:space="preserve">
+    <value>Bez nauki i łapciów nie uplecie.</value>
+  </data>
+  <data name="String1801" xml:space="preserve">
+    <value>Gdy bez wiatrów luty chodzi, w kwietniu wicher nie zawodzi.</value>
+  </data>
+  <data name="String1802" xml:space="preserve">
+    <value>Gdy Bernard grzmi i deszczy, czerwiec z pogodą, a lipiec z wodą.</value>
+  </data>
+  <data name="String1803" xml:space="preserve">
+    <value>Gabrielu, przyjacielu, nie mroź nas, łysych jest wielu.</value>
+  </data>
+  <data name="String1804" xml:space="preserve">
+    <value>Fortuna kołem się toczy.</value>
+  </data>
+  <data name="String1805" xml:space="preserve">
+    <value>Fabian i Sebastian gdy mróz dadzą, srogą zimę przyprowadzą.</value>
+  </data>
+  <data name="String1806" xml:space="preserve">
+    <value>Dziurki nie zrobi, a krew wyssie.</value>
+  </data>
+  <data name="String1807" xml:space="preserve">
+    <value>Dziś żyje, jutro gnije.</value>
+  </data>
+  <data name="String1808" xml:space="preserve">
+    <value>Dziś wesoły, jutro goły.</value>
+  </data>
+  <data name="String1809" xml:space="preserve">
+    <value>Dziś pod wozem, jutro na wozie.</value>
+  </data>
+  <data name="String1810" xml:space="preserve">
+    <value>Dziś człowiek żyje, a jutro gnije.</value>
+  </data>
+  <data name="String1811" xml:space="preserve">
+    <value>Bez ludzi i raj się znudzi.</value>
+  </data>
+  <data name="String1812" xml:space="preserve">
+    <value>Dzisiaj po Walentym, kto nie kocha ten przeklęty.</value>
+  </data>
+  <data name="String1813" xml:space="preserve">
+    <value>Dzionki mroźne i dni pluty, słowem – zwykły miesiąc luty.</value>
+  </data>
+  <data name="String1814" xml:space="preserve">
+    <value>Dziewięć much a dziesiąty wilk: na śmierć zjedzą konia.</value>
+  </data>
+  <data name="String1815" xml:space="preserve">
+    <value>Dzień świętego Kazimierza resztki zimy uśmierza.</value>
+  </data>
+  <data name="String1816" xml:space="preserve">
+    <value>Dzień świętego Alojzego przyczynia wina dobrego.</value>
+  </data>
+  <data name="String1817" xml:space="preserve">
+    <value>Dzień na święty Makary pewnie przepowiada, czy we wrześniu pogoda, czy też ciągle pada.</value>
+  </data>
+  <data name="String1818" xml:space="preserve">
+    <value>Dzień Bożego ciała pogodny dobry urodzaj znaczy.</value>
+  </data>
+  <data name="String1819" xml:space="preserve">
+    <value>Dzieci i ryby głosu nie mają.</value>
+  </data>
+  <data name="String1820" xml:space="preserve">
+    <value>Dwóch głupich: jeden, co daje, drugi, co nie bierze.</value>
+  </data>
+  <data name="String1821" xml:space="preserve">
+    <value>Dwa razy daje, kto szybko daje.</value>
+  </data>
+  <data name="String1822" xml:space="preserve">
+    <value>Bez kołaczy nie wesele.</value>
+  </data>
+  <data name="String1823" xml:space="preserve">
+    <value>Dużo chrabąszczów w maju, proso będzie jakby w gaju.</value>
+  </data>
+  <data name="String1824" xml:space="preserve">
+    <value>Drugim mądry, sobie głupi.</value>
+  </data>
+  <data name="String1825" xml:space="preserve">
+    <value>Drą się jak dwa koty.</value>
+  </data>
+  <data name="String1826" xml:space="preserve">
+    <value>Dowcip czasem potrzebny, ale rozum zawsze.</value>
+  </data>
+  <data name="String1827" xml:space="preserve">
+    <value>Dotąd dzban wodę nosi, dopóki się ucho nie urwie.</value>
+  </data>
+  <data name="String1828" xml:space="preserve">
+    <value>Dopóty dzban wodę nosi, dopóki mu się ucho nie urwie.</value>
+  </data>
+  <data name="String1829" xml:space="preserve">
+    <value>Domek ciasny, ale własny.</value>
+  </data>
+  <data name="String1830" xml:space="preserve">
+    <value>Doli swojej koniem nie objedziesz.</value>
+  </data>
+  <data name="String1831" xml:space="preserve">
+    <value>Dobrze ten gości traktuje, co wesołość pokazuje.</value>
+  </data>
+  <data name="String1832" xml:space="preserve">
+    <value>Dobrze się tam dzieje, gdzie dwóch orze, a trzeci sieje.</value>
+  </data>
+  <data name="String1833" xml:space="preserve">
+    <value>Bez ciekawości nie ma mądrości.</value>
+  </data>
+  <data name="String1834" xml:space="preserve">
+    <value>Dobrze częstuje, kto nie żałuje.</value>
+  </data>
+  <data name="String1835" xml:space="preserve">
+    <value>Dobrymi chęciami piekło wybrukowane.</value>
+  </data>
+  <data name="String1836" xml:space="preserve">
+    <value>Dobrymi chęciami piekło jest brukowane.</value>
+  </data>
+  <data name="String1837" xml:space="preserve">
+    <value>Dobry żart tynfa wart.</value>
+  </data>
+  <data name="String1838" xml:space="preserve">
+    <value>Dobry żart tymfa wart.</value>
+  </data>
+  <data name="String1839" xml:space="preserve">
+    <value>Dobry sen stoi za dobry obiad.</value>
+  </data>
+  <data name="String1840" xml:space="preserve">
+    <value>Dobry rozum po szkodzie, lepszy przed szkodą.</value>
+  </data>
+  <data name="String1841" xml:space="preserve">
+    <value>Dobry przykład – połowa kazania.</value>
+  </data>
+  <data name="String1842" xml:space="preserve">
+    <value>Dobry młyn wszystko zmiele.</value>
+  </data>
+  <data name="String1843" xml:space="preserve">
+    <value>Dobry furman na miejscu skręca.</value>
+  </data>
+  <data name="String1844" xml:space="preserve">
+    <value>Bez Boga ni do proga.</value>
+  </data>
+  <data name="String1845" xml:space="preserve">
+    <value>Dobrego karczma nie zepsuje, a złego kościół nie naprawi.</value>
+  </data>
+  <data name="String1846" xml:space="preserve">
+    <value>Dobrego i karczma nie zepsuje, a złego i kościół nie naprawi.</value>
+  </data>
+  <data name="String1847" xml:space="preserve">
+    <value>Dobrego bankiet nie zepsuje.</value>
+  </data>
+  <data name="String1848" xml:space="preserve">
+    <value>Dobre przy lepszym tanieje.</value>
+  </data>
+  <data name="String1849" xml:space="preserve">
+    <value>Dobre dziatki, to skarb matki.</value>
+  </data>
+  <data name="String1850" xml:space="preserve">
+    <value>Dobrą kobyłę i w stajni kupcy znajdą.</value>
+  </data>
+  <data name="String1851" xml:space="preserve">
+    <value>Dobrane małżeństwo, to raj na ziemi.</value>
+  </data>
+  <data name="String1852" xml:space="preserve">
+    <value>Dobra żona – męża korona.</value>
+  </data>
+  <data name="String1853" xml:space="preserve">
+    <value>Dobra Tereska, kto z nią nie mieszka.</value>
+  </data>
+  <data name="String1854" xml:space="preserve">
+    <value>Dobra rada nigdy nie jest za późną.</value>
+  </data>
+  <data name="String1855" xml:space="preserve">
+    <value>Bez Boga ani do proga.</value>
+  </data>
+  <data name="String1856" xml:space="preserve">
+    <value>Dobra rada nie zawada.</value>
+  </data>
+  <data name="String1857" xml:space="preserve">
+    <value>Dobra psu mucha, kiedy nie ma chleba.</value>
+  </data>
+  <data name="String1858" xml:space="preserve">
+    <value>Dobra gospodyni ma zawsze pełno w skrzyni.</value>
+  </data>
+  <data name="String1859" xml:space="preserve">
+    <value>Dobra głupiemu rada – mądrego z głupim zwada.</value>
+  </data>
+  <data name="String1860" xml:space="preserve">
+    <value>Dobra Agnieszka, kto z nią nie mieszka.</value>
+  </data>
+  <data name="String1861" xml:space="preserve">
+    <value>Do wesela się zgoi.</value>
+  </data>
+  <data name="String1862" xml:space="preserve">
+    <value>Do ludzi po rozum, do matki po serce.</value>
+  </data>
+  <data name="String1863" xml:space="preserve">
+    <value>Do grosza grosz, to się napełni trzos.</value>
+  </data>
+  <data name="String1864" xml:space="preserve">
+    <value>Długo myśl, a prędko czyń.</value>
+  </data>
+  <data name="String1865" xml:space="preserve">
+    <value>Długi włos, krótki rozum.</value>
+  </data>
+  <data name="String1866" xml:space="preserve">
+    <value>Benedykta Bożą mocą, dzionek już się równa z nocą.</value>
+  </data>
+  <data name="String1867" xml:space="preserve">
+    <value>Długa do mądrości droga przez nauki, krótsza przez przykłady.</value>
+  </data>
+  <data name="String1868" xml:space="preserve">
+    <value>Dlatego dzwon głośny, że w środku próżny.</value>
+  </data>
+  <data name="String1869" xml:space="preserve">
+    <value>Dla głupiego każdy dzień święto.</value>
+  </data>
+  <data name="String1870" xml:space="preserve">
+    <value>Dla dobrego gościa nie żałuj.</value>
+  </data>
+  <data name="String1871" xml:space="preserve">
+    <value>Diabeł tkwi w szczegółach.</value>
+  </data>
+  <data name="String1872" xml:space="preserve">
+    <value>Diabeł nie śpi.</value>
+  </data>
+  <data name="String1873" xml:space="preserve">
+    <value>Diabeł Ewę po włosku zwodził, Ewa Adama po czesku, Bóg ich po niemiecku gromił, anioł zaś po węgiersku z raju wygnał.</value>
+  </data>
+  <data name="String1874" xml:space="preserve">
+    <value>Deszcze w świętego Floriana, skrzynia groszem napchana.</value>
+  </data>
+  <data name="String1875" xml:space="preserve">
+    <value>Deszcze marcowe zbożu niezdrowe.</value>
+  </data>
+  <data name="String1876" xml:space="preserve">
+    <value>Deszcz w Zielone Świątki, będą wielkie sprzątki.</value>
+  </data>
+  <data name="String1877" xml:space="preserve">
+    <value>Benedykt groch w polu sieje, Wojciech do owsa się śmieje.</value>
+  </data>
+  <data name="String1878" xml:space="preserve">
+    <value>Deszcz w święty Marek, to ziemia w lecie jak skwarek.</value>
+  </data>
+  <data name="String1879" xml:space="preserve">
+    <value>Deszcz podczas Zielonych Świątek niedobry czyni początek.</value>
+  </data>
+  <data name="String1880" xml:space="preserve">
+    <value>Deszcz na świętego Błażeja – słaba wiosny nadzieja.</value>
+  </data>
+  <data name="String1881" xml:space="preserve">
+    <value>Deszcz na Nawiedzenie Panny potrwa pewno do Zuzanny.</value>
+  </data>
+  <data name="String1882" xml:space="preserve">
+    <value>Dasz pokój, masz pokój.</value>
+  </data>
+  <data name="String1883" xml:space="preserve">
+    <value>Darowanemu koniowi w zęby się nie zagląda.</value>
+  </data>
+  <data name="String1884" xml:space="preserve">
+    <value>Darowanemu koniowi nie zaglądaj w zęby.</value>
+  </data>
+  <data name="String1885" xml:space="preserve">
+    <value>Daj kurze grzędę, ona – wyżej siędę.</value>
+  </data>
+  <data name="String1886" xml:space="preserve">
+    <value>Daj kurze grzędę, ona powie: wyżej siędę.</value>
+  </data>
+  <data name="String1887" xml:space="preserve">
+    <value>Ćwiczenie czyni mistrza.</value>
+  </data>
+  <data name="String1888" xml:space="preserve">
+    <value>Bartłomiej zwiastuje, jaka jesień następuje.</value>
+  </data>
+  <data name="String1889" xml:space="preserve">
+    <value>Czwarty pas, karty w tas.</value>
+  </data>
+  <data name="String1890" xml:space="preserve">
+    <value>Czym skorupka za młodu nasiąknie, tym na starość trąci.</value>
+  </data>
+  <data name="String1891" xml:space="preserve">
+    <value>Czym chata bogata, tym rada.</value>
+  </data>
+  <data name="String1892" xml:space="preserve">
+    <value>Czyha jak diabeł na dobrą duszę.</value>
+  </data>
+  <data name="String1893" xml:space="preserve">
+    <value>Człowiek strzela, Pan Bóg kule nosi.</value>
+  </data>
+  <data name="String1894" xml:space="preserve">
+    <value>Człowiek raz się rodzi i raz umiera.</value>
+  </data>
+  <data name="String1895" xml:space="preserve">
+    <value>Człowiek myśli, Pan Bóg kreśli.</value>
+  </data>
+  <data name="String1896" xml:space="preserve">
+    <value>Człowiek myśli, a Bóg kreśli.</value>
+  </data>
+  <data name="String1897" xml:space="preserve">
+    <value>Człowiek do śmierci rozumu się nie nauczy.</value>
+  </data>
+  <data name="String1898" xml:space="preserve">
+    <value>Człowiek dla drugich ma rozum, a dla siebie głupi.</value>
+  </data>
+  <data name="String1899" xml:space="preserve">
+    <value>Baran ma rogi, a zając nogi.</value>
+  </data>
+  <data name="String1900" xml:space="preserve">
+    <value>Aby do wiosny.</value>
+  </data>
+  <data name="String1901" xml:space="preserve">
+    <value>Człowiek cały wiek uczy się, a durniem umiera.</value>
+  </data>
+  <data name="String1902" xml:space="preserve">
+    <value>Człowiek człowiekowi wilkiem.</value>
+  </data>
+  <data name="String1903" xml:space="preserve">
+    <value>Człek do pracy stworzon, ptak do lotu.</value>
+  </data>
+  <data name="String1904" xml:space="preserve">
+    <value>Częste deszcze w całym maju chleb i siano nam dawają.</value>
+  </data>
+  <data name="String1905" xml:space="preserve">
+    <value>Czerwiec – przerwiec, bo przerywa gospodarkę aż do żniwa.</value>
+  </data>
+  <data name="String1906" xml:space="preserve">
+    <value>Czerwiec stały – grudzień doskonały.</value>
+  </data>
+  <data name="String1907" xml:space="preserve">
+    <value>Czerwiec się czerwieni? Będzie dość w kieszeni.</value>
+  </data>
+  <data name="String1908" xml:space="preserve">
+    <value>Czerwiec po deszczowym maju często dżdżysty w naszym kraju.</value>
+  </data>
+  <data name="String1909" xml:space="preserve">
+    <value>Czekaj tatka latka, aż kobyłę wilki zjedzą.</value>
+  </data>
+  <data name="String1910" xml:space="preserve">
+    <value>Czekaj tatka latka, aż kobyła zdechnie.</value>
+  </data>
+  <data name="String1911" xml:space="preserve">
+    <value>Barbara święta o górnikach pamięta.</value>
+  </data>
+  <data name="String1912" xml:space="preserve">
+    <value>Czekaj tatka latka, aż ci piwa nawarzy.</value>
+  </data>
+  <data name="String1913" xml:space="preserve">
+    <value>Czekaj tatka latka.</value>
+  </data>
+  <data name="String1914" xml:space="preserve">
+    <value>Czego się za młodu nauczysz, na starość jak znalazł.</value>
+  </data>
+  <data name="String1915" xml:space="preserve">
+    <value>Czego się młody nie uczy, tego stary nie umie.</value>
+  </data>
+  <data name="String1916" xml:space="preserve">
+    <value>Czego sierpień nie uwarzy, wrzesień tego nie upiecze.</value>
+  </data>
+  <data name="String1917" xml:space="preserve">
+    <value>Czego oko nie widzi, tego sercu nie żal.</value>
+  </data>
+  <data name="String1918" xml:space="preserve">
+    <value>Czego oczy nie widzą, tego sercu nie żal.</value>
+  </data>
+  <data name="String1919" xml:space="preserve">
+    <value>Czego nie dokaże marzec, dokaże kwiecień.</value>
+  </data>
+  <data name="String1920" xml:space="preserve">
+    <value>Czego mądry nie zgadnie, czasem głupi przepowie.</value>
+  </data>
+  <data name="String1921" xml:space="preserve">
+    <value>Czego Jaś się nie nauczy, tego Jan nie będzie umiał.</value>
+  </data>
+  <data name="String1922" xml:space="preserve">
+    <value>Barbara po wodzie, Boże Narodzenie po lodzie.</value>
+  </data>
+  <data name="String1923" xml:space="preserve">
+    <value>Czasem tak się luty rozklei, że się wół napije z kolei.</value>
+  </data>
+  <data name="String1924" xml:space="preserve">
+    <value>Czasem luty się zlituje, że człek niby wiosnę czuje, ale często oszukuje.</value>
+  </data>
+  <data name="String1925" xml:space="preserve">
+    <value>Czasem się luty zlituje, że człek niby wiosnę czuje, ale czasem się tak zżyma, że człek prawie nie wytrzyma.</value>
+  </data>
+  <data name="String1926" xml:space="preserve">
+    <value>Czasem luty tak się zlituje, że człek boso w pole wędruje.</value>
+  </data>
+  <data name="String1927" xml:space="preserve">
+    <value>Czasem luty ostro kuty, czasem w luty same pluty.</value>
+  </data>
+  <data name="String1928" xml:space="preserve">
+    <value>Czasem i w marcu, zetnie wodę w garncu.</value>
+  </data>
+  <data name="String1929" xml:space="preserve">
+    <value>Czasem i mądry głupio sobie pocznie.</value>
+  </data>
+  <data name="String1930" xml:space="preserve">
+    <value>Czas to pieniądz.</value>
+  </data>
+  <data name="String1931" xml:space="preserve">
+    <value>Cudza praca nie wzbogaca.</value>
+  </data>
+  <data name="String1932" xml:space="preserve">
+    <value>Co za dużo – to niezdrowo.</value>
+  </data>
+  <data name="String1933" xml:space="preserve">
+    <value>Baju, baju – będziesz w raju.</value>
+  </data>
+  <data name="String1934" xml:space="preserve">
+    <value>Co z oczu, to z serca.</value>
+  </data>
+  <data name="String1935" xml:space="preserve">
+    <value>Co z głowy, to z myśli.</value>
+  </data>
+  <data name="String1936" xml:space="preserve">
+    <value>Co wolno wojewodzie, to nie tobie, smrodzie.</value>
+  </data>
+  <data name="String1937" xml:space="preserve">
+    <value>Co wieś, to nowa powieść.</value>
+  </data>
+  <data name="String1938" xml:space="preserve">
+    <value>Co w sercu, to na języku.</value>
+  </data>
+  <data name="String1939" xml:space="preserve">
+    <value>Co w sercu, to i w ustach miewa.</value>
+  </data>
+  <data name="String1940" xml:space="preserve">
+    <value>Co u mądrych w myśli, to u głupich w ustach.</value>
+  </data>
+  <data name="String1941" xml:space="preserve">
+    <value>Co swój, to nie obcy.</value>
+  </data>
+  <data name="String1942" xml:space="preserve">
+    <value>Co strona, to żona; co parafia, to dziecko.</value>
+  </data>
+  <data name="String1943" xml:space="preserve">
+    <value>Co się stało, to się nie odstanie.</value>
+  </data>
+  <data name="String1944" xml:space="preserve">
+    <value>Baba z wozu – koniom lżej.</value>
+  </data>
+  <data name="String1945" xml:space="preserve">
+    <value>Co się stało, odstać się nie może.</value>
+  </data>
+  <data name="String1946" xml:space="preserve">
+    <value>Co się odwlecze, to nie uciecze.</value>
+  </data>
+  <data name="String1947" xml:space="preserve">
+    <value>Co rozum, to zdanie.</value>
+  </data>
+  <data name="String1948" xml:space="preserve">
+    <value>Co rok, to prorok.</value>
+  </data>
+  <data name="String1949" xml:space="preserve">
+    <value>Co ptakiem z gęby wyleci, wołem nazad nie wciągniesz.</value>
+  </data>
+  <data name="String1950" xml:space="preserve">
+    <value>Co po tytule, gdy pusto w szkatule.</value>
+  </data>
+  <data name="String1951" xml:space="preserve">
+    <value>Co nagle, to po diable.</value>
+  </data>
+  <data name="String1952" xml:space="preserve">
+    <value>Co na swoim śmiecisku, to nie przepadnie.</value>
+  </data>
+  <data name="String1953" xml:space="preserve">
+    <value>Co na Marka się stanie, to na ogrodników odstanie.</value>
+  </data>
+  <data name="String1954" xml:space="preserve">
+    <value>Co mąż, to wąż; co żona to męczeńska korona.</value>
+  </data>
+  <data name="String1955" xml:space="preserve">
+    <value>Baba w progi, cisza w nogi.</value>
+  </data>
+  <data name="String1956" xml:space="preserve">
+    <value>Co marzec wypiecze, to kwiecień wysiecze.</value>
+  </data>
+  <data name="String1957" xml:space="preserve">
+    <value>Co marzec wypiecze, to kwiecień wyciecze.</value>
+  </data>
+  <data name="String1958" xml:space="preserve">
+    <value>Co Marek zagrzeje, Pankracy wywieje.</value>
+  </data>
+  <data name="String1959" xml:space="preserve">
+    <value>Co ma wisieć, nie utonie.</value>
+  </data>
+  <data name="String1960" xml:space="preserve">
+    <value>Co kraj, to obyczaj.</value>
+  </data>
+  <data name="String1961" xml:space="preserve">
+    <value>Co jedna głowa wymyśli, to druga odmyśli.</value>
+  </data>
+  <data name="String1962" xml:space="preserve">
+    <value>Co jeden głupi kupi, to dziesięć mądrych nie sprzeda.</value>
+  </data>
+  <data name="String1963" xml:space="preserve">
+    <value>Co godzina, to nowina.</value>
+  </data>
+  <data name="String1964" xml:space="preserve">
+    <value>Co głupiemu po rozumie, kiedy go użyć nie umie?</value>
+  </data>
+  <data name="String1965" xml:space="preserve">
+    <value>Co głupiemu po koronkach, kiedy powiada, że to same dziury?</value>
+  </data>
+  <data name="String1966" xml:space="preserve">
+    <value>Baba swoje, czart swoje.</value>
+  </data>
+  <data name="String1967" xml:space="preserve">
+    <value>Co głupi straci, tym się mądry wzbogaci.</value>
+  </data>
+  <data name="String1968" xml:space="preserve">
+    <value>Co głowa, to rozum.</value>
+  </data>
+  <data name="String1969" xml:space="preserve">
+    <value>Co Francuz wymyśli, to Polak polubi.</value>
+  </data>
+  <data name="String1970" xml:space="preserve">
+    <value>Co dzień człowiek mędrszy.</value>
+  </data>
+  <data name="String1971" xml:space="preserve">
+    <value>Co dwie głowy, to nie jedna.</value>
+  </data>
+  <data name="String1972" xml:space="preserve">
+    <value>Co ciało lubi, to duszę gubi.</value>
+  </data>
+  <data name="String1973" xml:space="preserve">
+    <value>Co bardziej dokuczy, to rychlej nauczy.</value>
+  </data>
+  <data name="String1974" xml:space="preserve">
+    <value>Co Anglik zmyśli, Francuz skréśli, a Niemiec doma nakrupi, wszystko to głupi Polak kupi.</value>
+  </data>
+  <data name="String1975" xml:space="preserve">
+    <value>Cnota zawżdy na dobre wynidzie.</value>
+  </data>
+  <data name="String1976" xml:space="preserve">
+    <value>Cnota naukę przechodzi.</value>
+  </data>
+  <data name="String1977" xml:space="preserve">
+    <value>Cała gościnność w ceremoniach tonie.</value>
+  </data>
+  <data name="String1978" xml:space="preserve">
+    <value>Ciężko dźwigać, żal porzucić.</value>
+  </data>
+  <data name="String1979" xml:space="preserve">
+    <value>Cierpliwością i pracą ludzie się bogacą.</value>
+  </data>
+  <data name="String1980" xml:space="preserve">
+    <value>Cierp ciało, kiedy ci się chciało!</value>
+  </data>
+  <data name="String1981" xml:space="preserve">
+    <value>Cierp ciało, co ci się chciało.</value>
+  </data>
+  <data name="String1982" xml:space="preserve">
+    <value>Ciepła izba marzeń szczytem i tak jakoś mija styczeń.</value>
+  </data>
+  <data name="String1983" xml:space="preserve">
+    <value>Ciemny jak tabaka w rogu.</value>
+  </data>
+  <data name="String1984" xml:space="preserve">
+    <value>Ciekawość to pierwszy stopień do piekła.</value>
+  </data>
+  <data name="String1985" xml:space="preserve">
+    <value>Cicho, jakby makiem zasiał.</value>
+  </data>
+  <data name="String1986" xml:space="preserve">
+    <value>Cicha woda brzegi rwie.</value>
+  </data>
+  <data name="String1987" xml:space="preserve">
+    <value>Ciągnie swój do swego.</value>
+  </data>
+  <data name="String1988" xml:space="preserve">
+    <value>Atak jest najlepszą obroną.</value>
+  </data>
+  <data name="String1989" xml:space="preserve">
+    <value>Ciasno w głowie, przestronno w gębie.</value>
+  </data>
+  <data name="String1990" xml:space="preserve">
+    <value>Choremu brzuchowi i pierogi zaszkodzą.</value>
+  </data>
+  <data name="String1991" xml:space="preserve">
+    <value>Choćby koza biała, byle posag miała.</value>
+  </data>
+  <data name="String1992" xml:space="preserve">
+    <value>Choćby chleb był rżany, byle leżany.</value>
+  </data>
+  <data name="String1993" xml:space="preserve">
+    <value>Choćby był o jednym oku, byle tego roku.</value>
+  </data>
+  <data name="String1994" xml:space="preserve">
+    <value>Choć człek ukuje ze stali, to i tak mu czas obali.</value>
+  </data>
+  <data name="String1995" xml:space="preserve">
+    <value>Choć cichy gość, a kłopotów dość.</value>
+  </data>
+  <data name="String1996" xml:space="preserve">
+    <value>Chytry dwa razy traci.</value>
+  </data>
+  <data name="String1997" xml:space="preserve">
+    <value>Chodzisz na Marka bez koszuli, w maju kożuchem się otulisz.</value>
+  </data>
+  <data name="String1998" xml:space="preserve">
+    <value>Choć już w kwietniu słonko grzeje, nieraz pole śnieg zawieje.</value>
+  </data>
+  <data name="String1999" xml:space="preserve">
+    <value>Apostoł ludzkości rzadko pości.</value>
+  </data>
+  <data name="String2000" xml:space="preserve">
+    <value>Chociaż św. Wincenty, jednak szczypie mróz w pięty.</value>
+  </data>
+  <data name="String2001" xml:space="preserve">
+    <value>Chmury w lutym ku północy, to są ciepła prorocy.</value>
+  </data>
+  <data name="String2002" xml:space="preserve">
+    <value>Chmielu w piwie, a rozumu w głowie gdy za mało – źle, gdy za wiele – niedobrze.</value>
+  </data>
+  <data name="String2003" xml:space="preserve">
+    <value>Chłopa na korce, a rozumu na lata nie mierzą.</value>
+  </data>
+  <data name="String2004" xml:space="preserve">
+    <value>Chłopa korcem nie mierzą.</value>
+  </data>
+  <data name="String2005" xml:space="preserve">
+    <value>Chłop, co musi, rad uczyni.</value>
+  </data>
+  <data name="String2006" xml:space="preserve">
+    <value>Chłop się nie przeżegna, dopóki piorunu nie usłyszy.</value>
+  </data>
+  <data name="String2007" xml:space="preserve">
+    <value>Chłop mowny a kot łowny z głodu nie zemrą.</value>
+  </data>
+  <data name="String2008" xml:space="preserve">
+    <value>Plemię przewrotne i wiarołomne żąda znaku, ale żaden znak nie będzie mu dany, prócz znaku proroka Jonasza.</value>
+  </data>
+  <data name="String2009" xml:space="preserve">
+    <value>Każdy grzech i bluźnierstwo będą odpuszczone ludziom, ale bluźnierstwo przeciwko Duchowi nie będzie odpuszczone.</value>
+  </data>
+  <data name="String2010" xml:space="preserve">
+    <value>Lecz jeśli Ja mocą Ducha Bożego wyrzucam złe duchy, to istotnie przyszło do was królestwo Boże.</value>
+  </data>
+  <data name="String2011" xml:space="preserve">
+    <value>Chłop do cepów, baba do kądzieli.</value>
+  </data>
+  <data name="String2012" xml:space="preserve">
+    <value>Trzciny zgniecionej nie złamie ani knota tlejącego nie dogasi, aż zwycięsko sąd przeprowadzi.</value>
+  </data>
+  <data name="String2013" xml:space="preserve">
+    <value>O ileż ważniejszy jest człowiek niż owca!</value>
+  </data>
+  <data name="String2014" xml:space="preserve">
+    <value>Nie sądźcie, że przyszedłem pokój przynieść na ziemię.</value>
+  </data>
+  <data name="String2015" xml:space="preserve">
+    <value>Uczeń nie przewyższa nauczyciela ani sługa swego pana.</value>
+  </data>
+  <data name="String2016" xml:space="preserve">
+    <value>Będziecie w nienawiści u wszystkich z powodu mego imienia.</value>
+  </data>
+  <data name="String2017" xml:space="preserve">
+    <value>Kiedy was wydadzą, nie martwcie się o to, jak ani co macie mówić.</value>
+  </data>
+  <data name="String2018" xml:space="preserve">
+    <value>Miejcie się na baczności przed ludźmi!</value>
+  </data>
+  <data name="String2019" xml:space="preserve">
+    <value>Proście Pana żniwa, żeby wyprawił robotników na swoje żniwo.</value>
+  </data>
+  <data name="String2020" xml:space="preserve">
+    <value>On wsiadł do łodzi, przeprawił się z powrotem i przyszedł do swego miasta.</value>
+  </data>
+  <data name="String2021" xml:space="preserve">
+    <value>Panie, pozwól mi najpierw pójść i pogrzebać mojego ojca!</value>
+  </data>
+  <data name="String2022" xml:space="preserve">
+    <value>Chłodny maj – dobry urodzaj.</value>
+  </data>
+  <data name="String2023" xml:space="preserve">
+    <value>Apetyt rośnie w miarę jedzenia.</value>
+  </data>
+  <data name="String2024" xml:space="preserve">
+    <value>A po marcu, co mgłą raczy, tyleż lato się napłacze.</value>
+  </data>
+  <data name="String2025" xml:space="preserve">
+    <value>A co po czyjej wielkości, jak nie ma w głowie mądrości.</value>
+  </data>
+</root>

@@ -25,4 +25,15 @@ namespace Abc.Nes.Elements {
         [XmlElement("komorka")] public InstitutionUnitElement Unit { get; set; }
         [XmlElement("pracownik")] public EmployeeElement Employee { get; set; }
     }
+    [XmlType(TypeName = "instytucja-jednostka-typ")]
+    [XmlAnnotation("Element zawierający dane jednostki organizacyjnej instytucji.")]
+    public class InstitutionOrgUnitElement {
+        // [XmlElement("id")] public List<IdElement> Identifiers { get; set; }
+        [XmlElement("nazwa")] [XmlRequired] [XmlAnnotation("Nazwa instytucji")] public string Name { get; set; }
+        [XmlElement("adres")] public List<AddressElement> Addresses { get; set; }
+        [XmlElement("kontakt")] public List<ContactElement> Contacts { get; set; }
+        [XmlElement("poziom")] public string Level { get; set; }
+        [XmlElement("jednostka")] public InstitutionOrgUnitElement OrgUnit { get; set; }
+        [XmlElement("pracownik")] public EmployeeOrgElement Employee { get; set; }
+    }
 }

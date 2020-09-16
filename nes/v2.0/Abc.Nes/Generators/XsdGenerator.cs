@@ -37,8 +37,10 @@ namespace Abc.Nes.Generators {
                 var xsdText = schemaWriter.ToString();
                 xsdText = ChangeXsdText(xsdText);
 
+                Enumerations.DocumentType documentType = type.GetInterface("IDocument").IsNotNull() ? (Activator.CreateInstance(type) as IDocument).Type : Enumerations.DocumentType.None;
+
                 var xsd = XElement.Parse(xsdText);
-                xsd = ChangeXsd(xsd, rootTypeName);
+                xsd = ChangeXsd(xsd, rootTypeName, documentType);
 
                 return xsd;
             }
@@ -52,9 +54,9 @@ namespace Abc.Nes.Generators {
 
             return xsdText;
         }
-        private XElement ChangeXsd(XElement xsd, string rootTypeName) {
+        private XElement ChangeXsd(XElement xsd, string rootTypeName, Enumerations.DocumentType documentType = Enumerations.DocumentType.None) {
             using (var controller = new XsdCustomAttributesGenerator()) {
-                xsd = controller.AddCustomAttributes(xsd, true);
+                xsd = controller.AddCustomAttributes(xsd, true, documentType);
             }
 
             xsd.AddFirst(new XElement(XName.Get("import", xsd.Name.NamespaceName),
@@ -69,7 +71,7 @@ namespace Abc.Nes.Generators {
 
             if (xsd.Attribute("elementFormDefault").IsNotNull()) {
                 var a = xsd.Attribute("elementFormDefault");
-        
+
                 a.Remove();
                 xsd.Add(a);
             }

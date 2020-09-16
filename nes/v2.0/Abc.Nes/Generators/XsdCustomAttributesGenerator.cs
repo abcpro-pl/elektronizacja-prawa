@@ -42,7 +42,8 @@ namespace Abc.Nes.Generators {
                 }
             }
         }
-        public XElement AddCustomAttributes(XElement xsd, bool addCustomAttributes = true) {
+        public XElement AddCustomAttributes(XElement xsd, bool addCustomAttributes = true, DocumentType documentType = DocumentType.None) {
+            const string removeAttributeName = "remove-this";
             if (xsd.IsNotNull() && xsd.HasElements) {
 
                 // Add annotations for classes
@@ -63,7 +64,7 @@ namespace Abc.Nes.Generators {
                     }
                 }
 
-                // Add annotations for properties
+                // Add properties annotations and more...
                 foreach (var xsdType in xsdTypes) {
                     var typeName = xsdType.Attribute("name").Value;
                     var type = GetClassType(typeName);
@@ -73,6 +74,17 @@ namespace Abc.Nes.Generators {
                         var properties = type.GetProperties();
                         foreach (var property in properties) {
                             var propertyName = GetPropertyXmlName(property);
+
+                            // Remove incompatible xsdTypes
+                            var propertyDocumentType = GetDocumentTypeAttributeValue(property);
+                            if (propertyDocumentType != DocumentType.None && propertyDocumentType != documentType) {
+                                var xsdElementItems = xsdElements.Where(x => x.Attribute("name").Value == propertyName);
+                                foreach (var xsdElement in xsdElementItems) {
+                                    xsdElement.Add(new XAttribute(removeAttributeName, true));
+                                }
+                            }
+
+                            // add annotations
                             var propertyAnnotation = GetPropertyAnnotation(property);
                             if (propertyAnnotation.IsNotNullOrEmpty()) {
                                 var xsdElementItems = xsdElements.Where(x => x.Attribute("name").Value == propertyName);
@@ -155,7 +167,7 @@ namespace Abc.Nes.Generators {
                                                 simpleType.EnumerationRestriction.IsNull() && simpleType.MinLength > 0 ? new XElement(N("minLength"), new XAttribute("value", simpleType.MinLength)) : null,
                                                 simpleType.Pattern.IsNotNullOrEmpty() ? new XElement(N("pattern"), new XAttribute("value", simpleType.Pattern)) : null,
                                                 new XElement(N("union"), new XAttribute("memberTypes", simpleType.UnionMemberTypes),
-                                                    simpleType.EnumerationRestriction.IsNotNull()  ? new XElement(N("simpleType"), GetEnumerationRestrictionXml(simpleType.EnumerationRestriction, simpleType.BaseTypeName)) : null
+                                                    simpleType.EnumerationRestriction.IsNotNull() ? new XElement(N("simpleType"), GetEnumerationRestrictionXml(simpleType.EnumerationRestriction, simpleType.BaseTypeName)) : null
                                                 ));
                                     }
                                     else {
@@ -179,6 +191,17 @@ namespace Abc.Nes.Generators {
                                     }
                                     else {
                                         xsdElement.Add(new XAttribute("type", simpleType.Prefix + ":" + simpleType.TypeName));
+                                    }
+                                }
+                            }
+
+                            // change xml name with XmlSynonym attribute
+                            var synonymName = GetPropertySynonym(property, documentType);
+                            if (synonymName.IsNotNullOrEmpty()) {
+                                var xsdElementItems = xsdElements.Where(x => x.Attribute("name").Value == propertyName);
+                                foreach (var xsdElement in xsdElementItems) {
+                                    if (xsdElement.Attribute("name").IsNotNull()) {
+                                        xsdElement.Attribute("name").Value = synonymName;
                                     }
                                 }
                             }
@@ -229,14 +252,42 @@ namespace Abc.Nes.Generators {
                     }
                 }
             }
+
+            // Remove incompatible xsdTypes
+            xsd.Descendants().Where(x => x.Attribute(removeAttributeName).IsNotNull()).Remove();
+
             return xsd;
+        }
+
+        private DocumentType GetDocumentTypeAttributeValue(PropertyInfo property) {
+            if (property.IsNotNull()) {
+                TargetDocumentTypeAttribute[] attributes = (TargetDocumentTypeAttribute[])property.GetCustomAttributes(typeof(TargetDocumentTypeAttribute), false);
+                if (attributes.IsNotNull() && attributes.Length > 0) {
+                    return attributes[0].DocumentType;
+                }
+            }
+            return default;
+        }
+
+        private string GetPropertySynonym(PropertyInfo property, DocumentType documentType) {
+            if (documentType != DocumentType.None && property.IsNotNull()) {
+                XmlSynonymsAttribute[] attributes = (XmlSynonymsAttribute[])property.GetCustomAttributes(typeof(XmlSynonymsAttribute), false);
+                if (attributes.IsNotNull() && attributes.Length > 0) {
+                    foreach (var attr in attributes) {
+                        if (attr.Synonym.Type == documentType) {
+                            return attr.Synonym.Name;
+                        }
+                    }
+                }
+            }
+            return default;
         }
 
         private XElement GetEnumerationRestrictionXml(Type enumType, string baseType) {
             var restriction = new XElement(N("restriction"), new XAttribute("base", baseType));
-            
+
             if (enumType.IsNotNull()) {
-                foreach (Enum item in Enum.GetValues(enumType)) {                    
+                foreach (Enum item in Enum.GetValues(enumType)) {
                     restriction.Add(new XElement(N("enumeration"), new XAttribute("value", item.GetXmlEnum())));
                 }
             }

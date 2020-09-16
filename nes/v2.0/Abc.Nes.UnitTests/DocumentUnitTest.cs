@@ -28,9 +28,18 @@ namespace Abc.Nes.UnitTests {
             XElement schema;
             using (var xsdGenerator = new XsdGenerator()) {
                 schema = xsdGenerator.GetSchema();
-            }
-            //var filePath = Path.Combine(Path.GetTempPath(), "nes.xsd");
+            }            
             var filePath = @"..\..\..\nes_20_generated.xsd";
+            schema.Save(filePath);
+            Assert.IsTrue(schema != null);
+        }
+        [TestMethod]
+        public void Document_XsdGenerator17_GetSchema() {
+            XElement schema;
+            using (var xsdGenerator = new XsdGenerator()) {
+                schema = xsdGenerator.GetSchema(typeof(Document17));
+            }            
+            var filePath = @"..\..\..\nes_17_generated.xsd";
             schema.Save(filePath);
             Assert.IsTrue(schema != null);
         }

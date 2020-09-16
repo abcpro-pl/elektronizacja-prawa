@@ -19,12 +19,14 @@ namespace Abc.Nes.Elements {
     [XmlAnnotation(@"Wskazanie przynależności do akt sprawy lub innego zbioru dokumentów. Pozwala na łączenie dokumentów w grupy.")]
     public class GroupingElement {
         [XmlElement("typGrupy")]
+        [XmlSynonyms("typ")]
         [XmlRequired]
         [XmlAnnotation("Określenie typu grupy dokumentów np. sprawa, rejestr umów, rejestr skarg i wniosków itd.")]
         [XmlSimpleType(TypeName = "grupowanie-typgrupy-typ", Annotation = "Dla zbioru/grupy będącej sprawą założoną zgodnie z jednolitym rzeczowym wykazem akt typ przyjmuje wartość = „znak sprawy”. Dla pozostałych grup – inny dowolny tekst w sposób jednoznaczny charakteryzujący wyodrębniony zbiór/grupę dokumentów.", BaseTypeName = "xs:string", UnionMemberTypes = "ndap:niepusty-ciag-typ")]
         public string Type { get; set; }
 
         [XmlElement("kodGrupy")]
+        [XmlSynonyms("kod")]
         [XmlRequired]
         [XmlAnnotation("Numer albo ciąg znaków będący identyfikatorem grupy dokumentów. W danym kontekście (miejscu w strukturze obiegu dokumentów) wartość powinna być unikatowa.")]
         [XmlSimpleType(TypeName = "grupowanie-kodgrupy-typ", Annotation = "Dla grupy będącej sprawą założoną zgodnie z jednolitym rzeczowym wykazem akt, kod przyjmuje wartość zgodną z przyjętym w podmiocie sposobem znakowania spraw. Dla pozostałych grup – unikatowy identyfikator wyodrębnionego zbioru/grupy.", BaseTypeName = "xs:string", UnionMemberTypes = "ndap:niepusty-ciag-typ")]

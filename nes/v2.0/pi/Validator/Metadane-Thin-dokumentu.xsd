@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:ndap="http://www.mswia.gov.pl/standardy/ndap"
+	xmlns:un.ece.unedocs.cl.iso3166="http://www.unece.org/etrades/unedocs/repository/codelists/xml/CountryCode.xsd"
+	xmlns:iso639-2="http://lcweb.loc.gov/standards/iso639-2/"
+	targetNamespace="http://www.mswia.gov.pl/standardy/ndap"
+	elementFormDefault="qualified">
+
+	<xsd:import
+		namespace="http://www.unece.org/etrades/unedocs/repository/codelists/xml/CountryCode.xsd"
+		schemaLocation="http://www.unece.org/etrades/unedocs/repository/codelists/xml/CountryCode.xsd" />
+
+	<xsd:import namespace="http://lcweb.loc.gov/standards/iso639-2/"
+		schemaLocation="http://www.ddb.de/standards/xmetadiss/iso639-2.xsd" />
+
+	<xsd:element name="dokument">
+		<xsd:complexType>
+			<xsd:sequence>
+
+				<xsd:element name="data" type="ndap:Data" minOccurs="1"
+					maxOccurs="unbounded" />
+				<xsd:element name="dostep" type="ndap:Dostep"
+					minOccurs="1" maxOccurs="1" />
+				<xsd:element name="format" type="ndap:Format"
+					minOccurs="1" maxOccurs="1" />
+				<xsd:element name="grupowanie" type="ndap:Grupowanie"
+					minOccurs="1" maxOccurs="unbounded" />
+				<xsd:element name="identyfikator"
+					type="ndap:Identyfikator" minOccurs="1" maxOccurs="unbounded" />
+				<xsd:element name="tworca" type="ndap:Tworca"
+					minOccurs="1" maxOccurs="unbounded" />
+				<xsd:element name="typ" type="ndap:Typ" minOccurs="1"
+					maxOccurs="1" />
+				<xsd:element name="tytul" type="ndap:Tytul"
+					minOccurs="1" maxOccurs="1" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="Adres">
+		<xsd:sequence>
+			<xsd:element name="kod" type="xsd:string" minOccurs="0"
+				maxOccurs="1" />
+			<xsd:element name="poczta" type="xsd:string" minOccurs="0"
+				maxOccurs="1" />
+			<xsd:element name="miejscowosc" type="xsd:string"
+				minOccurs="1" maxOccurs="1" />
+			<xsd:element name="ulica" type="xsd:string" minOccurs="0"
+				maxOccurs="1" />
+			<xsd:element name="budynek" type="xsd:string" minOccurs="0"
+				maxOccurs="1" />
+			<xsd:element name="lokal" type="xsd:string" minOccurs="0"
+				maxOccurs="1" />
+			<xsd:element name="skrytkapocztowa" type="xsd:string"
+				minOccurs="0" maxOccurs="1" />
+			<xsd:element name="uwagi" type="xsd:string" minOccurs="0"
+				maxOccurs="1" />
+			<xsd:element name="kraj"
+				type="un.ece.unedocs.cl.iso3166:CountryCoded" minOccurs="1"
+				maxOccurs="1" default="PL" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Odbiorca">
+		<xsd:sequence>
+			<xsd:element name="podmiot" type="ndap:Podmiot"
+				minOccurs="1" maxOccurs="1" />
+			<xsd:element name="rodzaj" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="glowny" />
+						<xsd:enumeration value="do wiadomosci" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Data">
+		<xsd:sequence>
+			<xsd:element name="typ" type="ndap:TypDaty" minOccurs="1"
+				maxOccurs="1" />
+			<xsd:choice>
+				<xsd:element name="czas" type="ndap:Czas" minOccurs="1"
+					maxOccurs="1" />
+				<xsd:group ref="ndap:PrzedzialCzasu" />
+			</xsd:choice>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="TypDaty">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="dostepnyPo" />
+			<xsd:enumeration value="opublikowany" />
+			<xsd:enumeration value="stworzony" />
+			<xsd:enumeration value="uzyskany" />
+			<xsd:enumeration value="otrzymany" />
+			<xsd:enumeration value="wyslany" />
+			<xsd:enumeration value="zaakceptowany" />
+			<xsd:enumeration value="zatwierdzony" />
+			<xsd:enumeration value="zmodyfikowany" />
+			<xsd:enumeration value="daty skrajne" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:group name="PrzedzialCzasu">
+		<xsd:sequence>
+			<xsd:element name="od" type="ndap:Czas" minOccurs="1"
+				maxOccurs="1" />
+			<xsd:element name="do" type="ndap:Czas" minOccurs="1"
+				maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:group>
+
+	<xsd:simpleType name="Czas">
+		<xsd:union
+			memberTypes="xsd:gYear xsd:gYearMonth xsd:date xsd:dateTime" />
+	</xsd:simpleType>
+
+	<xsd:complexType name="Dostep">
+		<xsd:sequence>
+			<xsd:element name="dostepnosc" minOccurs="1"
+				maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="wszystko" />
+						<xsd:enumeration value="metadane" />
+						<xsd:enumeration value="niedostepne" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="uwagi" type="xsd:string" minOccurs="0"
+				maxOccurs="1" />
+			<xsd:element name="data" minOccurs="0" maxOccurs="1">
+				<xsd:complexType>
+					<xsd:complexContent>
+						<xsd:restriction base="ndap:Data">
+							<xsd:sequence>
+								<xsd:element name="typ"
+									type="ndap:TypDaty" fixed="dostepnyPo" minOccurs="1"
+									maxOccurs="1" />
+								<xsd:element name="czas"
+									type="ndap:Czas" minOccurs="1" maxOccurs="1" />
+							</xsd:sequence>
+						</xsd:restriction>
+					</xsd:complexContent>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Format">
+		<xsd:sequence>
+			<xsd:element name="typ" type="xsd:string" minOccurs="1"
+				maxOccurs="1" />
+			<xsd:element name="specyfikacja" type="xsd:string"
+				minOccurs="0" maxOccurs="1" />
+			<xsd:element name="wielkosc" type="ndap:Wielkosc"
+				minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Wielkosc">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="jednostka" use="required">
+					<xsd:simpleType>
+						<xsd:union memberTypes="xsd:string">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:enumeration value="bajt" />
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:union>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="Grupowanie">
+		<xsd:sequence>
+			<xsd:element name="typ" type="xsd:string" minOccurs="1"
+				maxOccurs="1" />
+			<xsd:element name="kod" type="xsd:string" minOccurs="1"
+				maxOccurs="1" />
+			<xsd:element name="opis" type="xsd:string" minOccurs="1"
+				maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Identyfikator">
+		<xsd:sequence>
+			<xsd:element name="typ" type="xsd:string" minOccurs="1"
+				maxOccurs="1" />
+			<xsd:element name="wartosc" type="xsd:string" minOccurs="1"
+				maxOccurs="1" />
+			<xsd:element name="podmiot" type="ndap:Podmiot"
+				minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Instytucja">
+		<xsd:sequence>
+			<xsd:element name="id" type="ndap:Id" minOccurs="0"
+				maxOccurs="1" />
+			<xsd:element name="nazwa" type="xsd:string" minOccurs="1"
+				maxOccurs="1" />
+			<xsd:element name="adres" type="ndap:Adres" minOccurs="0"
+				maxOccurs="1" />
+			<xsd:element name="kontakt" type="ndap:Kontakt"
+				minOccurs="0" maxOccurs="1" />
+			<xsd:element name="jednostka" type="ndap:Jednostka"
+				minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Kontakt">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="typ" use="required">
+					<xsd:simpleType>
+						<xsd:union memberTypes="xsd:string">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:enumeration value="telefon" />
+									<xsd:enumeration value="faks" />
+									<xsd:enumeration value="email" />
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:union>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="Id">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="typ" type="xsd:string"
+					use="required" />
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="Jednostka">
+		<xsd:sequence>
+			<xsd:element name="nazwa" type="xsd:string" minOccurs="0"
+				maxOccurs="1" />
+			<xsd:element name="adres" type="ndap:Adres" minOccurs="0"
+				maxOccurs="1" />
+			<xsd:element name="kontakt" type="ndap:Kontakt"
+				minOccurs="0" maxOccurs="1" />
+			<xsd:element name="poziom" type="xsd:string" minOccurs="0"
+				maxOccurs="1" />
+			<xsd:element name="jednostka" type="ndap:Jednostka"
+				minOccurs="0" maxOccurs="1" />
+			<xsd:element name="pracownik" type="ndap:Pracownik"
+				minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Jezyk">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="kod"
+					type="iso639-2:RegisteredCodeType" use="required" />
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="Lokalizacja">
+		<xsd:sequence>
+			<xsd:element name="typ" type="xsd:string" minOccurs="1"
+				maxOccurs="1" />
+			<xsd:element name="podmiot" type="ndap:Podmiot"
+				minOccurs="0" maxOccurs="1" />
+			<xsd:element name="adres" type="xsd:string" minOccurs="0"
+				maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Osoba">
+		<xsd:sequence>
+			<xsd:element name="id" type="ndap:Id" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xsd:element name="nazwisko" type="xsd:string" minOccurs="1"
+				maxOccurs="1" />
+			<xsd:element name="imie" type="xsd:string" minOccurs="0"
+				maxOccurs="1" />
+			<xsd:element name="adres" type="ndap:Adres" minOccurs="0"
+				maxOccurs="1" />
+			<xsd:element name="kontakt" type="ndap:Kontakt"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Podmiot">
+		<xsd:choice>
+			<xsd:element name="osoba" type="ndap:Osoba" />
+			<xsd:element name="instytucja" type="ndap:Instytucja" />
+		</xsd:choice>
+	</xsd:complexType>
+
+	<xsd:complexType name="Pracownik">
+		<xsd:sequence>
+			<xsd:element name="id" type="ndap:Id" minOccurs="0"
+				maxOccurs="1" />
+			<xsd:element name="nazwisko" type="xsd:string" minOccurs="1"
+				maxOccurs="1" />
+			<xsd:element name="imie" type="xsd:string" minOccurs="0"
+				maxOccurs="1" />
+			<xsd:element name="kontakt" type="ndap:Kontakt"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="funkcja" type="xsd:string" minOccurs="0"
+				maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Kwalifikacja">
+		<xsd:sequence>
+			<xsd:element name="kategoria" type="xsd:string"
+				minOccurs="1" maxOccurs="1" />
+			<xsd:element name="data" type="xsd:date" minOccurs="1"
+				maxOccurs="1" />
+			<xsd:element name="podmiot" type="ndap:Podmiot"
+				minOccurs="1" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Relacja">
+		<xsd:sequence>
+			<xsd:element name="identyfikator" type="ndap:Identyfikator"
+				minOccurs="1" maxOccurs="1" />
+			<xsd:element name="typ" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:union memberTypes="xsd:string">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="maFormat" />
+								<xsd:enumeration value="jestFormatem" />
+								<xsd:enumeration value="maWersje" />
+								<xsd:enumeration value="jestWersja" />
+								<xsd:enumeration value="maCzesc" />
+								<xsd:enumeration value="jestCzescia" />
+								<xsd:enumeration value="maOdniesienie" />
+								<xsd:enumeration value="odnosiSieDo" />
+								<xsd:enumeration value="maZrodlo" />
+								<xsd:enumeration value="wymaga" />
+								<xsd:enumeration value="jestWymagany" />
+								<xsd:enumeration value="maDekretacje" />
+								<xsd:enumeration value="jestDekretacja" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:union>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Status">
+		<xsd:sequence>
+			<xsd:element name="rodzaj" type="xsd:string" minOccurs="1"
+				maxOccurs="1" />
+			<xsd:element name="wersja" type="xsd:string" minOccurs="1"
+				maxOccurs="1" />
+			<xsd:element name="opis" type="xsd:string" minOccurs="0"
+				maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Tematyka">
+		<xsd:sequence>
+			<xsd:element name="przedmiot" type="xsd:string"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="osoby" type="xsd:string" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xsd:element name="miejsce" type="xsd:string" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xsd:element name="czas" type="ndap:PrzedzialCzasuTematyki"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="odbiorcy" type="xsd:string" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xsd:element name="inne" type="ndap:Inne" minOccurs="0"
+				maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Inne">
+		<xsd:sequence>
+			<xsd:element name="klucz" type="xsd:string" minOccurs="1"
+				maxOccurs="1" />
+			<xsd:element name="wartosc" type="xsd:string" minOccurs="1"
+				maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="PrzedzialCzasuTematyki">
+		<xsd:sequence>
+			<xsd:element name="od" type="ndap:Czas" minOccurs="0"
+				maxOccurs="1" />
+			<xsd:element name="do" type="ndap:Czas" minOccurs="0"
+				maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Tworca">
+		<xsd:sequence>
+			<xsd:element name="funkcja" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:union memberTypes="xsd:string">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="stworzyl" />
+								<xsd:enumeration value="modyfikowal" />
+								<xsd:enumeration value="zatwierdzil" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:union>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="podmiot" type="ndap:Podmiot"
+				minOccurs="1" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Typ">
+		<xsd:sequence>
+			<xsd:element name="kategoria" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="Collection" />
+						<xsd:enumeration value="Dataset" />
+						<xsd:enumeration value="Event" />
+						<xsd:enumeration value="Image" />
+						<xsd:enumeration value="InteractiveResource" />
+						<xsd:enumeration value="MovingImage" />
+						<xsd:enumeration value="PhysicalObject" />
+						<xsd:enumeration value="Service" />
+						<xsd:enumeration value="Software" />
+						<xsd:enumeration value="Sound" />
+						<xsd:enumeration value="StillImage" />
+						<xsd:enumeration value="Text" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="rodzaj" type="xsd:string" minOccurs="0"
+				maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Tytul">
+		<xsd:sequence>
+			<xsd:element name="oryginalny" type="ndap:TytulElement"
+				minOccurs="1" maxOccurs="1" nillable="false" />
+			<xsd:element name="alternatywny" type="ndap:TytulElement"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="TytulElementNazwa">     
+            <xsd:restriction base="xsd:string" >            	            	
+     			<xsd:minLength value="1"/>
+            </xsd:restriction>     
+    </xsd:simpleType>
+    
+    <xsd:complexType name="TytulElement">
+        <xsd:simpleContent>
+            <xsd:extension base="ndap:TytulElementNazwa">
+                <xsd:attribute name="jezyk" type="iso639-2:RegisteredCodeType" use="optional"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+</xsd:schema>

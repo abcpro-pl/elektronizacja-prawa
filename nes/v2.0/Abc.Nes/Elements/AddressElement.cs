@@ -18,14 +18,18 @@ using System.Xml.Serialization;
 namespace Abc.Nes.Elements {
     [XmlType(TypeName = "adres-typ")]
     [XmlAnnotation("Element zawierający dane adresowe.")]
-    public class AddressElement  {
-        [XmlElement("kodPocztowy")] [XmlAnnotation("Kod pocztowy")] public string ZipCode { get; set; }
+    public class AddressElement {        
+        [XmlElement("kodPocztowy")]
+        [XmlSynonyms("kod")]
+        [XmlAnnotation("Kod pocztowy")]
+        public string ZipCode { get; set; }
+        
         [XmlElement("poczta")] [XmlAnnotation("Nazwa urzędu pocztowego")] public string PostName { get; set; }
-       
-        [XmlElement("miejscowosc")] 
-        [XmlAnnotation("Nazwa miejscowości")] 
-        [XmlRequired] 
-        [XmlSimpleType(TypeName = "niepusty-ciag-typ", BaseTypeName = "xs:string", MinLength = 1, Pattern = @"(\r|\n|.)*\S(\r|\n|.)*", Annotation = "Typ definiujący nie pusty ciąg znaków.")] 
+                
+        [XmlElement("miejscowosc")]
+        [XmlAnnotation("Nazwa miejscowości")]
+        [XmlRequired]
+        [XmlSimpleType(TypeName = "niepusty-ciag-typ", BaseTypeName = "xs:string", MinLength = 1, Pattern = @"(\r|\n|.)*\S(\r|\n|.)*", Annotation = "Typ definiujący nie pusty ciąg znaków.")]
         public string Location { get; set; }
         [XmlElement("ulica")] [XmlAnnotation("Nazwa ulicy")] public string StreetName { get; set; }
         [XmlElement("budynek")] [XmlAnnotation("Numer budynku")] public string BuildingNo { get; set; }
@@ -38,5 +42,11 @@ namespace Abc.Nes.Elements {
         [XmlElement("powiat")] [XmlAnnotation("Nazwa powiatu")] public string County { get; set; }
         [XmlElement("wojewodztwo")] [XmlAnnotation("Nazwa województwa")] public string Voivodeship { get; set; }
 
+    }
+
+    [XmlType(IncludeInSchema = false)]
+    public enum ZipCodeElemntName {
+        kodPocztowy,
+        kod
     }
 }

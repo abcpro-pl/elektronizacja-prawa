@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<!-- Etykiety-->
+	<entry key="OpenXmlButton">Załaduj plik</entry>
+	<entry key="ValidateButton">Waliduj plik</entry>
+	<entry key="CloseButton">Zamknij</entry>
+	<entry key="ClearButton">Wyczyść konsole</entry>	
+	<entry key="CurrentFile">Załadowany plik:</entry>
+	<!-- komunikaty -->
+	<entry key="UploadFileMessage">Załaduj plik do walidacji.</entry>
+	<entry key="ValidateFileMessage">Załadowano plik, aby walidować plik naciśnij przycisk "Waliduj plik".</entry>
+	<!-- Komuniekaty konsoli-->
+	<entry key="BadNumber1">Liczba plików dokumnetów jest większa niż liczba plików metadanych dokumentów: </entry>
+	<entry key="BadNumber2">Liczba plików dokumnetów:</entry>
+	<entry key="BadNumber3">Liczba plików metadanych dokumentów: </entry>
+	<entry key="DirectoryError">Brak katalogu: </entry>
+	<entry key="FoundedErrors">Ilość błędów: </entry>
+	<entry key="CassesSummary">Liczba błędnych plików z metadanymi sprawy: </entry>
+	<entry key="SingleCase">Błędy w pliku z metadanymi sprawy: </entry>
+	<entry key="DocsSummary">Liczba błędnych plików z metadanymi dokumentów: </entry>
+	<entry key="SingleDoc">Błędy w pliku z metadanymi dokumentów: </entry>
+	<entry key="Validation">Validacja pliku: </entry>
+	<entry key="Error">Błąd w pliku </entry>
+	<entry key="Success">Walidacja pliku zakończona powodzeniem !</entry>
+	<entry key="Line"> Numer linii </entry>	
+	<entry key="Column"> Numer kolumny </entry>	
+	<entry key="Typ">Typ błędu</entry>	
+	<entry key="UploadedSchema">"Załadowano Schema'e z pliku: "</entry>
+	<entry key="ValidatorError">Błąd: </entry>	
+	<!-- Obrazki -->
+	<entry key="h_top_left">pics/header_top_left.jpg</entry>
+	<entry key="h_top_middle">pics/header_top.jpg</entry>
+	<entry key="h_top_right">pics/header_top_right.jpg</entry>
+	<entry key="h_bottom_left">pics/header_menu_left.jpg</entry>
+	<entry key="h_bottom_middle">pics/header_menu.jpg</entry>
+	<entry key="h_bottom_right">pics/header_menu_right.jpg</entry>
+</properties>

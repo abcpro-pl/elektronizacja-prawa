@@ -43,4 +43,31 @@ namespace Abc.Nes.Enumerations {
         [XmlEnum("dostępny po")]
         AvailableAfter
     }
+
+    [XmlType(TypeName = "data-dokumentu-zdarzenie-typ")]
+    [XmlAnnotation("Słownik zdarzeń związanych z datą dokumentu.")]
+    public enum DocumentDateType {
+        [XmlEnum("")]
+        None,
+        [XmlEnum("dostępny po")]
+        AvailableAfter,
+        [XmlEnum("opublikowany")]
+        Published,
+        [XmlEnum("stworzony")]
+        Created,
+        [XmlEnum("uzyskany")]
+        Requested,
+        [XmlEnum("otrzymany")]
+        Recieved,
+        [XmlEnum("wysłany")]
+        Sent,
+        [XmlEnum("zaakceptowany")]
+        Accepted,
+        [XmlEnum("zatwierdzony")]
+        Approved,
+        [XmlEnum("zmodyfikowany")]
+        Modified,
+        [XmlEnum("data skrajne")]
+        Range      
+    }
 }

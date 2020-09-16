@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="FileNotFound">Nie odnaleziono pliku.</entry>	
+	<entry key="IO">Błąd wejścia/wyjścia.</entry>
+	<entry key="SAX">Błąd SAX.</entry>
+	<entry key="StructureError">Błąd struktury danych.</entry>
+	<entry key="SyntaxError">Błąd w składni xml.</entry>
+	<entry key="SchemaNotFound">Nie znaleziono wymaganego do walidacji dokumentu pliku Schema </entry>
+</properties>

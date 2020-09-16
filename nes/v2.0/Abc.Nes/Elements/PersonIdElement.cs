@@ -23,6 +23,7 @@ namespace Abc.Nes.Elements {
         [XmlText] public string Value { get; set; } = String.Empty;
 
         [XmlAttribute("typId")] 
+        [XmlSynonyms("typ")]
         [XmlRequired]
         [XmlAnnotation("Typ identyfikatora osoby.")]
         [XmlSimpleType(TypeName = "osoba-identyfikator-rodzajtyp", Annotation = "Typ identyfikatora osoby.", BaseTypeName = "xs:string", UnionMemberTypes = "ndap:niepusty-ciag-typ", EnumerationRestriction = typeof(PersonIdType))]
