@@ -12,8 +12,10 @@
 
   ===================================================================================*/
 
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace System {
@@ -82,6 +84,25 @@ namespace System {
             }
 
             return false;
+        }
+
+        public static XElement Clone(this XElement e) {
+            return XElement.Parse(e.ToString());
+        }
+        public static IEnumerable<XElement> Clone(this IEnumerable<XElement> items) {
+            var list = new List<XElement>();
+            foreach (var e in items)
+                list.Add(e.Clone());
+            return list;
+        }
+
+        public static void AddOrUpdateAttribute(this XElement e, string name, string value) {
+            if (e.Attribute(name).IsNotNull()) {
+                e.Attribute(name).Value = value;
+            }
+            else {
+                e.Add(new XAttribute(name, value));
+            }
         }
     }
 }

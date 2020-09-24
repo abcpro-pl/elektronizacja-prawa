@@ -14,8 +14,8 @@
 
 
 namespace Abc.Nes.Enumerations {
-    public enum DocumentType {
-        None,
+    public enum DocumentType : int {
+        None = 0,
         Nes20,
         Nes17
     }

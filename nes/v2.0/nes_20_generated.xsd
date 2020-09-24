@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:ndap="http://www.mswia.gov.pl/standardy/ndap" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" targetNamespace="http://www.mswia.gov.pl/standardy/ndap" elementFormDefault="qualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="http://www.w3.org/TR/xmldsig-core/xmldsig-core-schema.xsd" />
-  <xs:element name="dokument" nillable="true" type="ndap:dokument-typ">
+  <xs:element name="dokument" type="ndap:dokument-typ" nillable="true">
     <xs:annotation>
       <xs:documentation>Element główny metadanych opisujący dokument.</xs:documentation>
     </xs:annotation>
@@ -11,7 +11,7 @@
       <xs:documentation>Element główny metadanych opisujący dokument.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element maxOccurs="unbounded" name="identyfikator" type="ndap:identyfikator-typ">
+      <xs:element name="identyfikator" type="ndap:identyfikator-typ" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Element zawierający identyfikator wg. ustalonej typologii oraz opcjonalnie podmiot, który nadał.
 Umożliwia jednoznaczną identyfikację dokumentu w określonym zbiorze. 
@@ -19,20 +19,20 @@ Pozwala na szybkie odnalezienie tego samego dokumentu na podstawie jego identyfi
 Stwarza podstawy do tworzenia jednoznacznych powiązań (relacji) między dokumentami w określonym zbiorze np. przyporządkowując załączniki, notatki, potwierdzenia wysłania, potwierdzenia doręczenia, podpisy elektronicznie, opinie itd.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element maxOccurs="unbounded" name="tytul" type="ndap:tytul-typ">
+      <xs:element name="tytul" type="ndap:tytul-typ" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Tytuł dokumentu. 
 Pozwala na wstępne zorientowanie się czego dotyczy dokument o określonym tytule. Ma to szczególne znaczenie w przypadku prezentacji listy dokumentów należących do określonego zbioru – na przykład dokumentów należących do akt sprawy, dokumentów zarejestrowanych w ewidencji umów lub listy dokumentów będących wynikiem wyszukiwania. Tytuł pozwala zorientować się przeglądającemu listę, czy treść określonego dokumentu jest interesująca dla niego bez potrzeby zapoznawania się z treścią każdego dokumentu. 
 Dodatkowym celem wyodrębnienia tytułu jest możliwość wyszukania dokumentu wg fragmentu lub całości tytułu, co w połączeniu z dodatkowymi warunkami wyszukiwania (np. data i twórca) może pozwolić na szybkie i precyzyjnie odnalezienie dokumentu w większym zbiorze.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element maxOccurs="unbounded" name="data" type="ndap:data-przypisania-typ">
+      <xs:element name="data" type="ndap:data-przypisania-typ" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Element zawierający dane o dacie dokumentu. 
 Umożliwia wyszukiwanie i sortowanie dokumentów lub ich grupy według czasu zdarzeń z nimi związanych, jak również wyszukiwanie / filtrowanie wg rodzajów zdarzeń.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element maxOccurs="unbounded" name="format" type="ndap:format-typ">
+      <xs:element name="format" type="ndap:format-typ" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Element zawierający informacje o formacie dokumentu. 
 Pozwala na wskazanie formatu i rozmiaru dokumentu. Umożliwi w przyszłości wyszukiwanie dokumentów wg ich rozmiaru lub formatu. 
@@ -40,78 +40,78 @@ Pozwoli na odróżnienie dokumentów elektronicznych od nieelektronicznych celem
 W przypadku dokumentów elektronicznych powoli także na zarządzanie dokumentacją zapisaną w przestarzałych technologicznie formatach w przypadku gdy system operacyjny nie będzie umiał rozpoznać formatu (informacja o formacie będzie wskazówką naprowadzającą co to jest za zasób). W szczególności będzie można wyszukać i wyodrębnić dokumentację w przestarzałych formatach celem przygotowania jej konwersji do formatów nowszych lub powiązania z oprogramowaniem zapewniającym możliwość wizualizacji treści.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element maxOccurs="unbounded" name="dostep" type="ndap:dostep-typ">
+      <xs:element name="dostep" type="ndap:dostep-typ" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Element zawierający status dostępności dokumentu. 
 Określenie zasad i warunków regulujących dostęp do dokumentów. 
 Informacja o dostępności nie może naruszać przepisów regulujących dostęp do danych (np. do danych osobowych, informacji niejawnych itd.)</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element maxOccurs="unbounded" name="typ" type="ndap:kategoria-typ">
+      <xs:element name="typ" type="ndap:kategoria-typ" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Określenie kategorii i rodzaju dokumentu. 
 Pozwala na odnajdywanie dokumentów wg określonych klas (np. tylko dokumentów tekstowych, tylko fotografii, tylko nagrań dźwiękowych) oraz rodzajów (np. tylko decyzji, postanowień, urzędowych poświadczeń odbioru).
 Umożliwia podanie informacji o rodzaju dokumentu na wykazach dokumentów znajdujących się w danym zbiorze.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element maxOccurs="unbounded" name="grupowanie" type="ndap:grupowanie-typ">
+      <xs:element name="grupowanie" type="ndap:grupowanie-typ" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Wskazanie przynależności do akt sprawy lub innego zbioru dokumentów. Pozwala na łączenie dokumentów w grupy.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="tworca" type="ndap:tworca-typ">
+      <xs:element name="tworca" type="ndap:tworca-typ" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Podmiot (instytucja lub osoba) pełniący określoną rolę w przygotowaniu dokumentu. Pozwala na identyfikację osoby fizycznej lub prawnej, która przygotowała, modyfikowała, akceptowała/zatwierdziła, podpisała dokument.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="nadawca" type="ndap:nadawca-typ">
+      <xs:element name="nadawca" type="ndap:nadawca-typ" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Podmiot (instytucja lub osoba) który został odnotowany jako nadawca dokumentu zarejestrowanego w dokumentacji organu lub jednostki.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="odbiorca" type="ndap:odbiorca-typ">
+      <xs:element name="odbiorca" type="ndap:odbiorca-typ" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Podmioty, do których dokument jest adresowany.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="relacja" type="ndap:relacja-typ">
+      <xs:element name="relacja" type="ndap:relacja-typ" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Określenie bezpośredniego powiązania z innym dokumentem i rodzaju tego powiązania. Pozwala na odnalezienie dokumentów, które są bezpośrednio powiązane z danym dokumentem. Na przykład kolejnych wersji tego samego dokumentu, dekretacji dokumentu, dokumentów składających się z innych dokumentów, załączników do dokumentów, potwierdzeń doręczenia dokumentu, itd.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="kwalifikacja" type="ndap:kwalifikacja-typ">
+      <xs:element name="kwalifikacja" type="ndap:kwalifikacja-typ" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Kategoria archiwalna dokumentu oraz informacje o tym, kto i kiedy nadał kategorię. 
 Pozwala na określenie, jak długo dany dokument (grupa dokumentów) powinien być przechowywany, oraz czy i kiedy zostanie przekazany do archiwum państwowego. 
 Umożliwi łatwe ustalenie, jakie materiały można ze zbiorów w danym roku wycofać, dla jakich trzeba ustalić ponownie kategorię archiwalną, a jakie podlegają obowiązkowi przekazania do archiwum państwowego.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="jezyk" type="ndap:tytul-z-jezykiem-typ">
+      <xs:element name="jezyk" type="ndap:jezyk-typ" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Określenie języka naturalnego zgodnie z normą ISO-639-2, użytego w dokumencie.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="1" name="opis" type="ndap:dokument-opis-typ">
+      <xs:element name="opis" type="ndap:dokument-opis-typ" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Streszczenie, spis treści lub krótki opis treści dokumentu.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="tematyka" type="ndap:tematyka-typ">
+      <xs:element name="tematyka" type="ndap:tematyka-typ" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Słowa kluczowe dotyczące treści dokumentu.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="uprawnienia" type="ndap:uprawnienia-typ">
+      <xs:element name="uprawnienia" type="ndap:uprawnienia-typ" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Wskazanie podmiotu uprawnionego do dysponowania treścią dokumentu.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="lokalizacja" type="ndap:lokalizacja-typ">
+      <xs:element name="lokalizacja" type="ndap:lokalizacja-typ" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Lokalizacja dokumentu.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="status" type="ndap:status-typ">
+      <xs:element name="status" type="ndap:status-typ" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Status dokumentu.</xs:documentation>
         </xs:annotation>
@@ -126,17 +126,17 @@ Pozwala na szybkie odnalezienie tego samego dokumentu na podstawie jego identyfi
 Stwarza podstawy do tworzenia jednoznacznych powiązań (relacji) między dokumentami w określonym zbiorze np. przyporządkowując załączniki, notatki, potwierdzenia wysłania, potwierdzenia doręczenia, podpisy elektronicznie, opinie itd.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element maxOccurs="1" name="typidentyfikatora" type="ndap:identyfikator-rodzaj-typ">
+      <xs:element name="typidentyfikatora" type="ndap:identyfikator-rodzaj-typ" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Typ identyfikatora np. Znak sprawy.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element maxOccurs="1" name="wartoscId" type="xs:string">
+      <xs:element name="wartoscId" type="xs:string" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Wartość identyfikatora np. ABC-A.123.77.3.2011.JW.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="1" name="podmiot" type="ndap:podmiot-typ">
+      <xs:element name="podmiot" type="ndap:podmiot-typ" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Element zawierający dane podmiotu. 
 Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czynności związanej z dokumentem (tworzenie, odbieranie, akceptacja, podpisywanie, łączenie w grupy). </xs:documentation>
@@ -151,12 +151,12 @@ Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czy
     </xs:annotation>
     <xs:sequence>
       <xs:choice minOccurs="1" maxOccurs="1">
-        <xs:element maxOccurs="1" name="osoba" type="ndap:osoba-typ">
+        <xs:element name="osoba" type="ndap:osoba-typ" maxOccurs="1">
           <xs:annotation>
             <xs:documentation>Element zawierający dane osoby fizycznej.</xs:documentation>
           </xs:annotation>
         </xs:element>
-        <xs:element maxOccurs="1" name="instytucja" type="ndap:instytucja-typ">
+        <xs:element name="instytucja" type="ndap:instytucja-typ" maxOccurs="1">
           <xs:annotation>
             <xs:documentation>Element zawierający dane instytucji. Podmiot inny niż osoba fizyczna np. urząd, organizacja, przedsiębiorstwo. </xs:documentation>
           </xs:annotation>
@@ -169,27 +169,27 @@ Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czy
       <xs:documentation>Element zawierający dane osoby fizycznej.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="id" type="ndap:osoba-identyfikator-typ">
+      <xs:element name="id" type="ndap:osoba-identyfikator-typ" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Identyfikator osoby.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element maxOccurs="1" name="nazwisko" type="xs:string">
+      <xs:element name="nazwisko" type="xs:string" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Nazwisko</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="imie" type="xs:string">
+      <xs:element name="imie" type="xs:string" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Imiona</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="adres" type="ndap:adres-typ">
+      <xs:element name="adres" type="ndap:adres-typ" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Adresy</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="kontakt" type="ndap:kontakt-typ">
+      <xs:element name="kontakt" type="ndap:kontakt-typ" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Kontakty</xs:documentation>
         </xs:annotation>
@@ -215,62 +215,62 @@ Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czy
       <xs:documentation>Element zawierający dane adresowe.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="1" name="kodPocztowy" type="xs:string">
+      <xs:element name="kodPocztowy" type="xs:string" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Kod pocztowy</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="1" name="poczta" type="xs:string">
+      <xs:element name="poczta" type="xs:string" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Nazwa urzędu pocztowego</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element maxOccurs="1" name="miejscowosc" type="ndap:niepusty-ciag-typ">
+      <xs:element name="miejscowosc" type="ndap:niepusty-ciag-typ" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Nazwa miejscowości</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="1" name="ulica" type="xs:string">
+      <xs:element name="ulica" type="xs:string" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Nazwa ulicy</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="1" name="budynek" type="xs:string">
+      <xs:element name="budynek" type="xs:string" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Numer budynku</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="1" name="lokal" type="xs:string">
+      <xs:element name="lokal" type="xs:string" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Numer miszkania</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="1" name="skrytkaPocztowa" type="xs:string">
+      <xs:element name="skrytkaPocztowa" type="xs:string" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Adres skrytki pocztowej</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="1" name="uwagi" type="xs:string">
+      <xs:element name="uwagi" type="xs:string" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Dodatkowe informacje o adresie</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="1" maxOccurs="1" name="kraj" type="ndap:kraj-typ">
+      <xs:element name="kraj" type="ndap:kraj-typ" minOccurs="1" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Kod kraju</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="1" name="gmina" type="xs:string">
+      <xs:element name="gmina" type="xs:string" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Nazwa gminy</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="1" name="powiat" type="xs:string">
+      <xs:element name="powiat" type="xs:string" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Nazwa powiatu</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="1" name="wojewodztwo" type="xs:string">
+      <xs:element name="wojewodztwo" type="xs:string" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Nazwa województwa</xs:documentation>
         </xs:annotation>
@@ -546,47 +546,47 @@ Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czy
       <xs:documentation>Element zawierający dane instytucji. Podmiot inny niż osoba fizyczna np. urząd, organizacja, przedsiębiorstwo. </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="id" type="ndap:instytucja-identyfikator-typ">
+      <xs:element name="id" type="ndap:id-typ" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
-          <xs:documentation>Identyfikator instytucji.</xs:documentation>
+          <xs:documentation>Identyfikator elementu wraz ze zdefiniowanym typem.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element maxOccurs="1" name="nazwa" type="xs:string">
+      <xs:element name="nazwa" type="xs:string" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Nazwa instytucji</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="adres" type="ndap:adres-typ">
+      <xs:element name="adres" type="ndap:adres-typ" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Element zawierający dane adresowe.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="kontakt" type="ndap:kontakt-typ">
+      <xs:element name="kontakt" type="ndap:kontakt-typ" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Element zawierający dane kontaktowe.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="1" name="komorka" type="ndap:instytucja-komorka-typ">
+      <xs:element name="komorka" type="ndap:instytucja-komorka-typ" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Element zawierający dane komórki lub jednostki organizacyjnej instytucji.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="1" name="pracownik" type="ndap:instytucja-pracownik-typ">
+      <xs:element name="pracownik" type="ndap:instytucja-pracownik-typ" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Element zawierający dane pracownika instytucji. Pozwala opisać dane identyfikujące pracownika instytucji odpowiedzialnego za czynności przy tworzeniu i obiegu dokumentów.</xs:documentation>
         </xs:annotation>
       </xs:element>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="instytucja-identyfikator-typ">
+  <xs:complexType name="id-typ">
     <xs:annotation>
-      <xs:documentation>Identyfikator instytucji.</xs:documentation>
+      <xs:documentation>Identyfikator elementu wraz ze zdefiniowanym typem.</xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:string">
-        <xs:attribute name="typId" type="ndap:instytucja-identyfikator-rodzajtyp" use="required">
+        <xs:attribute name="typId" type="ndap:id-rodzaj-typ" use="required">
           <xs:annotation>
-            <xs:documentation>Typ identyfikatora instytucji.</xs:documentation>
+            <xs:documentation>Typ identyfikatora.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
@@ -597,27 +597,27 @@ Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czy
       <xs:documentation>Element zawierający dane komórki lub jednostki organizacyjnej instytucji.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element maxOccurs="1" name="nazwa" type="xs:string">
+      <xs:element name="nazwa" type="xs:string" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Nazwa instytucji</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="adres" type="ndap:adres-typ">
+      <xs:element name="adres" type="ndap:adres-typ" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Element zawierający dane adresowe.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="kontakt" type="ndap:kontakt-typ">
+      <xs:element name="kontakt" type="ndap:kontakt-typ" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Element zawierający dane kontaktowe.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="1" name="komorka" type="ndap:instytucja-komorka-typ">
+      <xs:element name="komorka" type="ndap:instytucja-komorka-typ" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Element zawierający dane komórki lub jednostki organizacyjnej instytucji.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="1" name="pracownik" type="ndap:instytucja-pracownik-typ">
+      <xs:element name="pracownik" type="ndap:instytucja-pracownik-typ" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Element zawierający dane pracownika instytucji. Pozwala opisać dane identyfikujące pracownika instytucji odpowiedzialnego za czynności przy tworzeniu i obiegu dokumentów.</xs:documentation>
         </xs:annotation>
@@ -629,22 +629,87 @@ Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czy
       <xs:documentation>Element zawierający dane pracownika instytucji. Pozwala opisać dane identyfikujące pracownika instytucji odpowiedzialnego za czynności przy tworzeniu i obiegu dokumentów.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element maxOccurs="1" name="nazwisko" type="xs:string">
+      <xs:element name="nazwisko" type="xs:string" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Nazwisko</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="imie" type="xs:string">
+      <xs:element name="imie" type="xs:string" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Imiona</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="kontakt" type="ndap:kontakt-typ">
+      <xs:element name="kontakt" type="ndap:kontakt-typ" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Kontakty</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="1" name="stanowisko" type="xs:string">
+      <xs:element name="stanowisko" type="xs:string" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Stanowisko zajmowane przez pracownika</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="instytucja-jednostka-typ">
+    <xs:annotation>
+      <xs:documentation>Element zawierający dane jednostki organizacyjnej instytucji.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="nazwa" type="xs:string" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Nazwa instytucji</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="adres" type="ndap:adres-typ" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>Element zawierający dane adresowe.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="kontakt" type="ndap:kontakt-typ" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>Element zawierający dane kontaktowe.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="poziom" type="xs:string" minOccurs="0" maxOccurs="1" />
+      <xs:element name="jednostka" type="ndap:instytucja-jednostka-typ" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Element zawierający dane jednostki organizacyjnej instytucji.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="pracownik" type="ndap:instytucja-jednostka-pracownik-typ" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Element zawierający dane pracownika instytucji. Pozwala opisać dane identyfikujące pracownika instytucji odpowiedzialnego za czynności przy tworzeniu i obiegu dokumentów.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="instytucja-jednostka-pracownik-typ">
+    <xs:annotation>
+      <xs:documentation>Element zawierający dane pracownika instytucji. Pozwala opisać dane identyfikujące pracownika instytucji odpowiedzialnego za czynności przy tworzeniu i obiegu dokumentów.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="id" type="ndap:id-typ" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>Identyfikator elementu wraz ze zdefiniowanym typem.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="nazwisko" type="xs:string" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Nazwisko</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="imie" type="xs:string" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Imię</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="kontakt" type="ndap:kontakt-typ" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>Kontakty</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="funkcja" type="xs:string" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Stanowisko zajmowane przez pracownika</xs:documentation>
         </xs:annotation>
@@ -658,12 +723,12 @@ Pozwala na wstępne zorientowanie się czego dotyczy dokument o określonym tytu
 Dodatkowym celem wyodrębnienia tytułu jest możliwość wyszukania dokumentu wg fragmentu lub całości tytułu, co w połączeniu z dodatkowymi warunkami wyszukiwania (np. data i twórca) może pozwolić na szybkie i precyzyjnie odnalezienie dokumentu w większym zbiorze.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element maxOccurs="1" name="oryginalny" type="ndap:tytul-z-jezykiem-typ">
+      <xs:element name="oryginalny" type="ndap:tytul-z-jezykiem-typ" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Element zawierający tytuł dokumentu z podanie kodu języka, w którym go sporządzono.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="alternatywny" type="ndap:tytul-z-jezykiem-typ">
+      <xs:element name="alternatywny" type="ndap:tytul-z-jezykiem-typ" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Element zawierający tytuł dokumentu z podanie kodu języka, w którym go sporządzono.</xs:documentation>
         </xs:annotation>
@@ -1181,27 +1246,27 @@ Pozwoli na odróżnienie dokumentów elektronicznych od nieelektronicznych celem
 W przypadku dokumentów elektronicznych powoli także na zarządzanie dokumentacją zapisaną w przestarzałych technologicznie formatach w przypadku gdy system operacyjny nie będzie umiał rozpoznać formatu (informacja o formacie będzie wskazówką naprowadzającą co to jest za zasób). W szczególności będzie można wyszukać i wyodrębnić dokumentację w przestarzałych formatach celem przygotowania jej konwersji do formatów nowszych lub powiązania z oprogramowaniem zapewniającym możliwość wizualizacji treści.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element maxOccurs="1" name="typFormatu" type="ndap:niepusty-ciag-typ">
+      <xs:element name="typFormatu" type="ndap:niepusty-ciag-typ" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Określenie typu pliku lub zasobu będącego zbiorem plików lub dokumentu fizycznego</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="1" name="specyfikacja" type="xs:string">
+      <xs:element name="specyfikacja" type="xs:string" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Specyficzne dla danego typu formatu sposoby zapisu.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="1" name="niekompletnosc" type="ndap:wartosc-logiczna-typ">
+      <xs:element name="niekompletnosc" type="ndap:wartosc-logiczna-typ" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Wskazanie, że dokument w formacie wskazanym przez format.typFormatu jest niekompletnym odwzorowaniem cyfrowym dokumentu nieelektronicznego.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="1" name="wielkosc" type="ndap:wielkosc-format-typ">
+      <xs:element name="wielkosc" type="ndap:wielkosc-format-typ" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Element definiujący wielkość dokumentu. Posiada atrybut miara określający miarę wielkości.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="1" name="opis" type="xs:string">
+      <xs:element name="opis" type="xs:string" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Opis formatu.</xs:documentation>
         </xs:annotation>
@@ -1235,17 +1300,17 @@ Określenie zasad i warunków regulujących dostęp do dokumentów.
 Informacja o dostępności nie może naruszać przepisów regulujących dostęp do danych (np. do danych osobowych, informacji niejawnych itd.)</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element maxOccurs="1" name="dostepnosc" type="ndap:dostepnosc-typ">
+      <xs:element name="dostepnosc" type="ndap:dostepnosc-typ" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Słownik typów dostępności.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="1" name="uwagi" type="xs:string">
+      <xs:element name="uwagi" type="xs:string" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Dodatkowe informacje o adresie</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="1" name="data" type="ndap:dostep-data-typ">
+      <xs:element name="data" type="ndap:dostep-data-typ" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Data dostępności dokumentu.</xs:documentation>
         </xs:annotation>
@@ -1268,12 +1333,12 @@ Informacja o dostępności nie może naruszać przepisów regulujących dostęp 
       <xs:documentation>Data dostępności dokumentu.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element minOccurs="1" maxOccurs="1" name="typ" type="ndap:dostepnosc-data-typ">
+      <xs:element name="typ" type="ndap:dostepnosc-data-typ" minOccurs="1" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Typ daty dostepności.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element maxOccurs="1" name="czas" type="ndap:czas-typ">
+      <xs:element name="czas" type="ndap:czas-typ" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Data dostępności dokumentu.</xs:documentation>
         </xs:annotation>
@@ -1295,12 +1360,12 @@ Pozwala na odnajdywanie dokumentów wg określonych klas (np. tylko dokumentów 
 Umożliwia podanie informacji o rodzaju dokumentu na wykazach dokumentów znajdujących się w danym zbiorze.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element maxOccurs="1" name="klasa" type="ndap:kategoria-klasa-typ">
+      <xs:element name="klasa" type="ndap:kategoria-klasa-typ" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Określenie typu dokumentu na bardzo ogólnym poziomie (np. tekst, dźwięk, obraz, obraz ruchomy itd).</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element maxOccurs="unbounded" name="rodzaj" type="ndap:kategoria-rodzaj-typ">
+      <xs:element name="rodzaj" type="ndap:kategoria-rodzaj-typ" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Dookreślenie typu dokumentu ze względu na cel jakiemu służy dokument (np. decyzja, prezentacja, faktura, ustawa, notatka, rozporządzenie, pismo itd).</xs:documentation>
         </xs:annotation>
@@ -1312,17 +1377,17 @@ Umożliwia podanie informacji o rodzaju dokumentu na wykazach dokumentów znajdu
       <xs:documentation>Wskazanie przynależności do akt sprawy lub innego zbioru dokumentów. Pozwala na łączenie dokumentów w grupy.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element maxOccurs="1" name="typGrupy" type="ndap:grupowanie-typgrupy-typ">
+      <xs:element name="typGrupy" type="ndap:grupowanie-typgrupy-typ" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Określenie typu grupy dokumentów np. sprawa, rejestr umów, rejestr skarg i wniosków itd.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element maxOccurs="1" name="kodGrupy" type="ndap:grupowanie-kodgrupy-typ">
+      <xs:element name="kodGrupy" type="ndap:grupowanie-kodgrupy-typ" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Numer albo ciąg znaków będący identyfikatorem grupy dokumentów. W danym kontekście (miejscu w strukturze obiegu dokumentów) wartość powinna być unikatowa.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element maxOccurs="1" name="opis" type="ndap:grupowanie-opis-typ">
+      <xs:element name="opis" type="ndap:grupowanie-opis-typ" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Hasło klasyfikacyjne wykazu akt w przypadku sprawy; w przypadku grupy dokumentów innej niż sprawa - tekstowy opis grupy.</xs:documentation>
         </xs:annotation>
@@ -1334,12 +1399,12 @@ Umożliwia podanie informacji o rodzaju dokumentu na wykazach dokumentów znajdu
       <xs:documentation>Podmiot (instytucja lub osoba) pełniący określoną rolę w przygotowaniu dokumentu. Pozwala na identyfikację osoby fizycznej lub prawnej, która przygotowała, modyfikowała, akceptowała/zatwierdziła, podpisała dokument.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element maxOccurs="unbounded" name="funkcja" type="ndap:tworca-funkcja-typ">
+      <xs:element name="funkcja" type="ndap:tworca-funkcja-typ" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Określenie roli podmiotu w tworzeniu treści dokumentu.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element maxOccurs="1" name="podmiot" type="ndap:podmiot-typ">
+      <xs:element name="podmiot" type="ndap:podmiot-typ" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Element zawierający dane podmiotu. 
 Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czynności związanej z dokumentem (tworzenie, odbieranie, akceptacja, podpisywanie, łączenie w grupy). </xs:documentation>
@@ -1352,7 +1417,7 @@ Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czy
       <xs:documentation>Podmiot (instytucja lub osoba) który został odnotowany jako nadawca dokumentu zarejestrowanego w dokumentacji organu lub jednostki.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element maxOccurs="1" name="podmiot" type="ndap:podmiot-typ">
+      <xs:element name="podmiot" type="ndap:podmiot-typ" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Element zawierający dane podmiotu. 
 Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czynności związanej z dokumentem (tworzenie, odbieranie, akceptacja, podpisywanie, łączenie w grupy). </xs:documentation>
@@ -1365,12 +1430,12 @@ Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czy
       <xs:documentation>Podmioty, do których dokument jest adresowany.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="1" name="doWiadomosci" type="ndap:wartosc-logiczna-typ">
+      <xs:element name="doWiadomosci" type="ndap:wartosc-logiczna-typ" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Pozwala na wskazanie, że dany podmiot nie głównym odbiorcą dokumentu (otrzymał do wiadomości).</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element maxOccurs="1" name="podmiot" type="ndap:podmiot-typ">
+      <xs:element name="podmiot" type="ndap:podmiot-typ" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Element zawierający dane podmiotu. 
 Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czynności związanej z dokumentem (tworzenie, odbieranie, akceptacja, podpisywanie, łączenie w grupy). </xs:documentation>
@@ -1383,7 +1448,7 @@ Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czy
       <xs:documentation>Określenie bezpośredniego powiązania z innym dokumentem i rodzaju tego powiązania. Pozwala na odnalezienie dokumentów, które są bezpośrednio powiązane z danym dokumentem. Na przykład kolejnych wersji tego samego dokumentu, dekretacji dokumentu, dokumentów składających się z innych dokumentów, załączników do dokumentów, potwierdzeń doręczenia dokumentu, itd.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element maxOccurs="unbounded" name="identyfikator" type="ndap:identyfikator-typ">
+      <xs:element name="identyfikator" type="ndap:identyfikator-typ" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Element zawierający identyfikator wg. ustalonej typologii oraz opcjonalnie podmiot, który nadał.
 Umożliwia jednoznaczną identyfikację dokumentu w określonym zbiorze. 
@@ -1391,7 +1456,7 @@ Pozwala na szybkie odnalezienie tego samego dokumentu na podstawie jego identyfi
 Stwarza podstawy do tworzenia jednoznacznych powiązań (relacji) między dokumentami w określonym zbiorze np. przyporządkowując załączniki, notatki, potwierdzenia wysłania, potwierdzenia doręczenia, podpisy elektronicznie, opinie itd.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element maxOccurs="1" name="typRelacji" type="ndap:typrelacji-typ">
+      <xs:element name="typRelacji" type="ndap:typrelacji-typ" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Określenie rodzaju powiązania.</xs:documentation>
         </xs:annotation>
@@ -1405,17 +1470,17 @@ Pozwala na określenie, jak długo dany dokument (grupa dokumentów) powinien by
 Umożliwi łatwe ustalenie, jakie materiały można ze zbiorów w danym roku wycofać, dla jakich trzeba ustalić ponownie kategorię archiwalną, a jakie podlegają obowiązkowi przekazania do archiwum państwowego.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element maxOccurs="1" name="kategoria" type="ndap:kategoria-archiwalna-typ">
+      <xs:element name="kategoria" type="ndap:kategoria-archiwalna-typ" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Kategoria archiwalna.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element maxOccurs="1" name="data" type="ndap:czas-typ">
+      <xs:element name="data" type="ndap:czas-typ" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Data nadania kategorii archiwalnej.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element maxOccurs="1" name="podmiot" type="ndap:podmiot-typ">
+      <xs:element name="podmiot" type="ndap:podmiot-typ" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Element zawierający dane podmiotu. 
 Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czynności związanej z dokumentem (tworzenie, odbieranie, akceptacja, podpisywanie, łączenie w grupy). </xs:documentation>
@@ -1423,37 +1488,51 @@ Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czy
       </xs:element>
     </xs:sequence>
   </xs:complexType>
+  <xs:complexType name="jezyk-typ">
+    <xs:annotation>
+      <xs:documentation>Element zawierający nazwę i kod języka, w którym go sporządzono.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="kodJezyka" type="ndap:kod-jezyka-typ" use="required">
+          <xs:annotation>
+            <xs:documentation>Słownik kodów języka, w którym sporządzono dokument.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
   <xs:complexType name="tematyka-typ">
     <xs:annotation>
       <xs:documentation>Słowa kluczowe dotyczące treści dokumentu.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="przedmiot" type="xs:string">
+      <xs:element name="przedmiot" type="xs:string" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Określenie tematyki treści dokumentu na bardzo dużym poziomie ogólności, nie będące nazwą własną (tj. nie nazwą geograficzną, osoby, obiektu, ulicy, instytucji itp.)</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="wspomnianaOsoba" type="xs:string">
+      <xs:element name="wspomnianaOsoba" type="xs:string" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Określenie osoby o której traktuje treść dokumentu.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="miejsce" type="xs:string">
+      <xs:element name="miejsce" type="xs:string" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Określenie obszaru administracyjnego lub obiektów geograficznych o których traktuje treść.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="data" type="ndap:data-przypisania-typ">
+      <xs:element name="data" type="ndap:data-przypisania-typ" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Określenie okresów czasu lub konkretnych dat, których dotyczy treść dokumentu; posiada dwa podelementy: czasOd i czasDo.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="odbiorca" type="xs:string">
+      <xs:element name="odbiorca" type="xs:string" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Kategoria (grupa) osób lub instytucji, dla których dany dokument jest przeznaczony (do których kierowana jest treść).</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="inne" type="ndap:tematyka-slownik-typ">
+      <xs:element name="inne" type="ndap:tematyka-slownik-typ" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Inne wskazówki dotyczące treści, posiada dwa podelementy: klucz i wartość.</xs:documentation>
         </xs:annotation>
@@ -1465,12 +1544,12 @@ Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czy
       <xs:documentation>Inne wskazówki dotyczące treści, posiada dwa podelementy: klucz i wartość.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element maxOccurs="1" name="klucz" type="ndap:klucz-nazwa-typ">
+      <xs:element name="klucz" type="ndap:klucz-nazwa-typ" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Klucz hasła tematycznego.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element maxOccurs="1" name="wartosc" type="xs:string">
+      <xs:element name="wartosc" type="xs:string" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Wartość hasła tematycznego.</xs:documentation>
         </xs:annotation>
@@ -1482,17 +1561,17 @@ Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czy
       <xs:documentation>Status dokumentu.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element maxOccurs="1" name="rodzaj" type="ndap:status-rodzaj-typ">
+      <xs:element name="rodzaj" type="ndap:status-rodzaj-typ" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Rodzaj statusu.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element maxOccurs="1" name="wersja" type="ndap:status-wersja-typ">
+      <xs:element name="wersja" type="ndap:status-wersja-typ" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Wersja statusu.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" maxOccurs="1" name="opis" type="ndap:status-opis-typ">
+      <xs:element name="opis" type="ndap:status-opis-typ" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Opis statusu.</xs:documentation>
         </xs:annotation>
@@ -1583,9 +1662,9 @@ Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czy
       </xs:simpleType>
     </xs:union>
   </xs:simpleType>
-  <xs:simpleType name="instytucja-identyfikator-rodzajtyp">
+  <xs:simpleType name="id-rodzaj-typ">
     <xs:annotation>
-      <xs:documentation>Typ identyfikatora instytucji.</xs:documentation>
+      <xs:documentation>Typ identyfikatora.</xs:documentation>
     </xs:annotation>
     <xs:union memberTypes="ndap:niepusty-ciag-typ">
       <xs:simpleType>
@@ -1773,12 +1852,12 @@ Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czy
       <xs:documentation>Data zdarzenia.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element maxOccurs="1" name="typDaty" type="ndap:data-zdarzenia-typ">
+      <xs:element name="typDaty" type="ndap:data-zdarzenia-typ" xmlns:xs="http://www.w3.org/2001/XMLSchema" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Słownik zdarzeń zwiazanych z datą dokumentu.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element maxOccurs="1" name="czas" type="ndap:czas-typ">
+      <xs:element name="czas" type="ndap:czas-typ" xmlns:xs="http://www.w3.org/2001/XMLSchema" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Data zdarzenia</xs:documentation>
         </xs:annotation>
@@ -1790,17 +1869,17 @@ Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czy
       <xs:documentation>Zakres dat.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element maxOccurs="1" name="zakresDat" type="ndap:data-zakres-typ">
+      <xs:element name="zakresDat" type="ndap:data-zakres-typ" xmlns:xs="http://www.w3.org/2001/XMLSchema" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Słownik zakresów dat.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element maxOccurs="1" name="czasOd" type="ndap:czas-typ">
+      <xs:element name="czasOd" type="ndap:czas-typ" xmlns:xs="http://www.w3.org/2001/XMLSchema" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Data skrajna Od</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element maxOccurs="1" name="czasDo" type="ndap:czas-typ">
+      <xs:element name="czasDo" type="ndap:czas-typ" xmlns:xs="http://www.w3.org/2001/XMLSchema" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Data skrajna Do</xs:documentation>
         </xs:annotation>

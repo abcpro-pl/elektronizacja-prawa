@@ -19,6 +19,6 @@ namespace Abc.Nes {
     /// The root metadata element that describes the document.
     /// </summary>
     public interface IDocument {
-        DocumentType Type { get; }
+        DocumentType DocumentType { get; }
     }
 }

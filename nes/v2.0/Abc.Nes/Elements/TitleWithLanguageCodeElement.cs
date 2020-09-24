@@ -19,8 +19,23 @@ using System.Xml.Serialization;
 namespace Abc.Nes.Elements {
     [XmlType(TypeName = "tytul-z-jezykiem-typ")]
     [XmlAnnotation("Element zawierający tytuł dokumentu z podanie kodu języka, w którym go sporządzono.")]
-    public class TitleWithLanguageCodeElement  {
+    public class TitleWithLanguageCodeElement {
         [XmlText] public string Value { get; set; } = String.Empty;
-        [XmlAttribute("kodJezyka")] [XmlRequired(false)] public LanguageCode Type { get; set; }
+
+        [XmlAttribute("kodJezyka")]
+        [XmlSynonyms("jezyk", DocumentType.Nes17)]
+        [XmlRequired(false)]
+        public LanguageCode Type { get; set; }
+    }
+
+    [XmlType(TypeName = "jezyk-typ")]
+    [XmlAnnotation("Element zawierający nazwę i kod języka, w którym go sporządzono.")]
+    public class LanguageElement {
+        [XmlText] public string Value { get; set; } = String.Empty;
+
+        [XmlAttribute("kodJezyka")]
+        [XmlSynonyms("kod", DocumentType.Nes17)]
+        [XmlRequired]
+        public LanguageCode Type { get; set; }
     }
 }

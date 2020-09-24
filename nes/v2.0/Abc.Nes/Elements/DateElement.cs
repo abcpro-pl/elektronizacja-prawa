@@ -22,6 +22,8 @@ namespace Abc.Nes.Elements {
 Umożliwia wyszukiwanie i sortowanie dokumentów lub ich grupy według czasu zdarzeń z nimi związanych, jak również wyszukiwanie / filtrowanie wg rodzajów zdarzeń.")]
     [XmlChoice]
     public class DateElement {
+        [XmlIgnore] public const DocumentType DOCUMENT_TYPE = DocumentType.Nes20;
+
         [XmlGroup(Name = "data-zdarzenia-grupa", Annotation = "Data zdarzenia.")]
         [XmlElement("typDaty")]
         [XmlRequired]
@@ -63,11 +65,17 @@ Umożliwia wyszukiwanie i sortowanie dokumentów lub ich grupy według czasu zda
         public DateTime GetDateTo() { try { return Convert.ToDateTime(DateTo); } catch { } return default; }
     }
 
+    /// <summary>
+    /// The v.1.7 metadata element that describes date information.
+    /// </summary>
     [XmlType(TypeName = "data-dokumentu-typ")]
     [XmlAnnotation(@"Element zawierający dane o dacie dokumentu. 
 Umożliwia wyszukiwanie i sortowanie dokumentów lub ich grupy według czasu zdarzeń z nimi związanych, jak również wyszukiwanie / filtrowanie wg rodzajów zdarzeń.")]
     [XmlChoice]
     public class DateElement17 {
+        [XmlIgnore] public const DocumentType DOCUMENT_TYPE = DocumentType.Nes17;
+
+
         [XmlElement("typ")]
         [XmlRequired]
         public DocumentDateType Type { get; set; }

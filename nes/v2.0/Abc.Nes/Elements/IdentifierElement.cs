@@ -24,11 +24,18 @@ Pozwala na szybkie odnalezienie tego samego dokumentu na podstawie jego identyfi
 Stwarza podstawy do tworzenia jednoznacznych powiązań (relacji) między dokumentami w określonym zbiorze np. przyporządkowując załączniki, notatki, potwierdzenia wysłania, potwierdzenia doręczenia, podpisy elektronicznie, opinie itd.")]
     public class IdentifierElement {
         [XmlElement("typidentyfikatora")]
+        [XmlSynonyms("typ", DocumentType.Nes17)]
         [XmlAnnotation("Typ identyfikatora np. Znak sprawy.")]
         [XmlRequired]
         [XmlSimpleType(Annotation = "Typy identyfikatorów", EnumerationRestriction = typeof(IdTypes), BaseTypeName = "xs:string", TypeName = "identyfikator-rodzaj-typ", UnionMemberTypes = "xs:string")]
         public string Type { get; set; }
-        [XmlElement("wartoscId")] [XmlAnnotation("Wartość identyfikatora np. ABC-A.123.77.3.2011.JW.")] [XmlRequired] public string Value { get; set; }
+        
+        [XmlElement("wartoscId")]
+        [XmlSynonyms("wartosc", DocumentType.Nes17)]
+        [XmlAnnotation("Wartość identyfikatora np. ABC-A.123.77.3.2011.JW.")]
+        [XmlRequired] 
+        public string Value { get; set; }
+
         [XmlElement("podmiot")] public SubjectElement Subject { get; set; }
 
         public static string GetIdTypes(IdTypes idType) { return idType.GetXmlEnum(); }

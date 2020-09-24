@@ -27,9 +27,12 @@ namespace Abc.Nes.Elements {
 		[XmlElement("podmiot")] [XmlRequired] public SubjectElement Subject { get; set; }
 	}
 
+	/// <summary>
+	/// The v.1.7 metadata element that describes recipient.
+	/// </summary>
 	[XmlType(TypeName = "odbiorca-typ")]
 	[XmlAnnotation(@"Podmioty, do których dokument jest adresowany.")]
-	public class RecipientElement17 {
+	public class RecipientElement17 {		
 		[XmlElement("podmiot")] [XmlRequired] public SubjectElement Subject { get; set; }
 		[XmlElement("rodzaj")] [XmlRequired] public RecipientType Kind { get; set; }
 	}

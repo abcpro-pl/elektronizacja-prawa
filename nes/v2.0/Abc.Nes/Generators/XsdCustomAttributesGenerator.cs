@@ -143,12 +143,7 @@ namespace Abc.Nes.Generators {
                                         }
                                     }
                                     else {
-                                        if (item.Attribute("minOccurs").IsNotNull() && item.Attribute("minOccurs").Value != "0") {
-                                            item.Attribute("minOccurs").Value = "0";
-                                        }
-                                        else {
-                                            item.Add(new XAttribute("minOccurs", "0"));
-                                        }
+                                        item.AddOrUpdateAttribute("minOccurs", "0");
                                     }
                                 }
                             }
@@ -213,6 +208,15 @@ namespace Abc.Nes.Generators {
                 var choiceClasses = GetChoiceClasses();
                 if (choiceClasses.IsNotNull() && choiceClasses.Count() > 0) {
                     foreach (var cClass in choiceClasses) {
+                        // only choices class for this document type
+                        if (documentType != DocumentType.None) {
+                            var docTypeField = cClass.GetField("DOCUMENT_TYPE", BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
+                            if (docTypeField.IsNotNull()) {
+                                var docTypeFieldValue = (DocumentType)docTypeField.GetRawConstantValue();
+                                if (docTypeFieldValue != documentType) { continue; }
+                            }
+                        }
+
                         var typeName = GetXmlTypeName(cClass);
                         var groups = GetGroups(cClass);
                         var xChoice = new XElement(N("choice"));
@@ -231,22 +235,39 @@ namespace Abc.Nes.Generators {
                                 if (groups.IsNotNull() && groups.Count() > 0) {
                                     foreach (var g in groups) {
                                         var pNames = GetGroupProperties(cClass, g.Name);
-                                        var groupXml = new XElement(N("group"), new XAttribute("name", g.Name));
-                                        if (g.Annotation.IsNotNullOrEmpty()) {
-                                            groupXml.Add(new XElement(N("annotation"), new XElement(N("documentation"), new XText(g.Annotation))));
+                                        if (pNames.Count() > 1) {
+                                            var groupXml = new XElement(N("group"), new XAttribute("name", g.Name));
+                                            if (g.Annotation.IsNotNullOrEmpty()) {
+                                                groupXml.Add(new XElement(N("annotation"), new XElement(N("documentation"), new XText(g.Annotation))));
+                                            }
+
+                                            var groupSeq = new XElement(N("sequence"));
+                                            groupXml.Add(groupSeq);
+                                            foreach (var pName in pNames) {
+                                                var itemsInGroup = xsdSequence.Elements().Where(x => x.Attribute("name").IsNotNull() && x.Attribute("name").Value == pName);
+                                                groupSeq.Add(itemsInGroup.Clone());
+                                                itemsInGroup.Remove();
+                                            }
+                                            xsd.Add(groupXml);
                                         }
-                                        var groupSeq = new XElement(N("sequence"));
-                                        groupXml.Add(groupSeq);
-                                        foreach (var pName in pNames) {
-                                            groupSeq.Add(xsdSequence.Elements().Where(x => x.Attribute("name").IsNotNull() && x.Attribute("name").Value == pName));
+                                        else if (pNames.Count() == 1) {
+                                            var itemsInGroup = xsdSequence.Elements().Where(x => x.Attribute("name").IsNotNull() && x.Attribute("name").Value == pNames.First());
+                                            xChoice.Add(itemsInGroup.Clone());
+                                            var gName = $"{g.Prefix}:{g.Name}";
+                                            xChoice.Elements().Where(_g => _g.Attribute("ref").IsNotNull() && _g.Attribute("ref").Value == gName).Remove();
+                                            itemsInGroup.Remove();
                                         }
-                                        xsd.Add(groupXml);
                                     }
                                 }
 
                                 // replace content with choice
-                                xsdSequence.Remove();
-                                xsdElement.Add(xChoice);
+                                if (xsdSequence.HasElements) {
+                                    xsdSequence.Add(xChoice);
+                                }
+                                else {
+                                    xsdSequence.Remove();
+                                    xsdElement.Add(xChoice);
+                                }
                             }
                         }
                     }

@@ -37,7 +37,7 @@ namespace Abc.Nes.Generators {
                 var xsdText = schemaWriter.ToString();
                 xsdText = ChangeXsdText(xsdText);
 
-                Enumerations.DocumentType documentType = type.GetInterface("IDocument").IsNotNull() ? (Activator.CreateInstance(type) as IDocument).Type : Enumerations.DocumentType.None;
+                Enumerations.DocumentType documentType = type.GetInterface("IDocument").IsNotNull() ? (Activator.CreateInstance(type) as IDocument).DocumentType : Enumerations.DocumentType.None;
 
                 var xsd = XElement.Parse(xsdText);
                 xsd = ChangeXsd(xsd, rootTypeName, documentType);
@@ -63,18 +63,25 @@ namespace Abc.Nes.Generators {
                new XAttribute("namespace", "http://www.w3.org/2000/09/xmldsig#"),
                new XAttribute("schemaLocation", "http://www.w3.org/TR/xmldsig-core/xmldsig-core-schema.xsd")));
 
-            if (xsd.Attribute("targetNamespace").IsNotNull()) {
-                var a = xsd.Attribute("targetNamespace");
-                a.Remove();
-                xsd.Add(a);
-            }
+            MoveAttributeToEnd(xsd, "targetNamespace");
+            MoveAttributeToEnd(xsd, "elementFormDefault");
 
-            if (xsd.Attribute("elementFormDefault").IsNotNull()) {
-                var a = xsd.Attribute("elementFormDefault");
+            DescandantMoveAttributeToEnd(xsd, "nillable");
+            DescandantMoveAttributeToEnd(xsd, "minOccurs");
+            DescandantMoveAttributeToEnd(xsd, "maxOccurs");
 
-                a.Remove();
-                xsd.Add(a);
-            }
+            //if (xsd.Attribute("targetNamespace").IsNotNull()) {
+            //    var a = xsd.Attribute("targetNamespace");
+            //    a.Remove();
+            //    xsd.Add(a);
+            //}
+
+            //if (xsd.Attribute("elementFormDefault").IsNotNull()) {
+            //    var a = xsd.Attribute("elementFormDefault");
+
+            //    a.Remove();
+            //    xsd.Add(a);
+            //}
 
             var rootType = xsd.Elements().Where(x => x.Name.LocalName == "complexType" && x.Attribute("name").IsNotNull() && x.Attribute("name").Value == rootTypeName).FirstOrDefault();
             if (rootType.IsNotNull()) {
@@ -88,6 +95,21 @@ namespace Abc.Nes.Generators {
             }
 
             return xsd;
+        }
+
+        private void DescandantMoveAttributeToEnd(XElement root, string attributeName) {
+            var elements = root.Descendants().Where(x => x.Attribute(attributeName).IsNotNull());
+            foreach (var e in elements) {
+                MoveAttributeToEnd(e, attributeName);
+            }
+        }
+        private void MoveAttributeToEnd(XElement e, string name) {
+            if (e.Attribute(name).IsNotNull()) {
+                var a = e.Attribute(name);
+
+                a.Remove();
+                e.Add(a);
+            }
         }
 
         public void WriteSchema(string filePath, Type type = null, string rootTypeName = null) {

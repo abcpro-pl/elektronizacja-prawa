@@ -23,6 +23,7 @@ namespace Abc.Nes.Elements {
         [XmlText] public string Value { get; set; } = String.Empty;
 
         [XmlAttribute("miara")]
+        [XmlSynonyms("jednostka", DocumentType.Nes17)]
         [XmlRequired]
         [XmlSimpleType(Annotation = "Miara wielkości dokumentu.", TypeName = "miara-typ", UnionMemberTypes = "ndap:niepusty-ciag-typ", BaseTypeName = "xs:string", EnumerationRestriction = typeof(FileSizeType)/*new string[] { "bajt", "b", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" }*/)]
         public string Measure { get; set; }

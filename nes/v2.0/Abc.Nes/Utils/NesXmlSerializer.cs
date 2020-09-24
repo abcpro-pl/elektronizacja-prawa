@@ -30,7 +30,7 @@ namespace System.Xml.Serialization {
         }        
 
         public new void Serialize(TextWriter textWriter, object o) {
-            if (o is IDocument) { this.DocumentType = (o as IDocument).Type; }
+            if (o is IDocument) { this.DocumentType = (o as IDocument).DocumentType; }
             base.Serialize(textWriter, o);
         }
 

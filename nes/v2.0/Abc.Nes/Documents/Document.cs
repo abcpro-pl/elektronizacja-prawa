@@ -25,7 +25,7 @@ namespace Abc.Nes {
     [XmlAnnotation("Element główny metadanych opisujący dokument.")]
     [XmlRoot(ElementName = "dokument", Namespace = "http://www.mswia.gov.pl/standardy/ndap")]
     public class Document : IDocument {
-        [XmlIgnore] public DocumentType Type => DocumentType.Nes20;
+        [XmlIgnore] public DocumentType DocumentType => DocumentType.Nes20;
         [XmlElement("identyfikator")] [XmlRequired] public List<IdentifierElement> Identifiers { get; set; }
         [XmlElement("tytul")] [XmlRequired] public List<TitleElement> Titles { get; set; }
         [XmlElement("data")] [XmlRequired] public List<DateElement> Dates { get; set; }
@@ -38,7 +38,7 @@ namespace Abc.Nes {
         [XmlElement("odbiorca")] public List<RecipientElement> Recipients { get; set; }
         [XmlElement("relacja")] public List<RelationElement> Relations { get; set; }
         [XmlElement("kwalifikacja")] public List<QualificationElement> Qualifications { get; set; }
-        [XmlElement("jezyk")] [XmlAnnotation("Określenie języka naturalnego zgodnie z normą ISO-639-2, użytego w dokumencie.")] public List<TitleWithLanguageCodeElement> Languages { get; set; }
+        [XmlElement("jezyk")] [XmlAnnotation("Określenie języka naturalnego zgodnie z normą ISO-639-2, użytego w dokumencie.")] public List<LanguageElement> Languages { get; set; }
 
         [XmlElement("opis")]
         [XmlAnnotation("Streszczenie, spis treści lub krótki opis treści dokumentu.")]

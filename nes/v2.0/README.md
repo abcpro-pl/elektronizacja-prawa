@@ -272,8 +272,8 @@ var document = new Abc.Nes.Document() {
             }
         }
     },
-    Languages = new List<Elements.TitleWithLanguageCodeElement>() {
-        new Elements.TitleWithLanguageCodeElement() {
+    Languages = new List<Elements.LanguageElement>() {
+        new Elements.LanguageElement() {
             Type = Enumerations.LanguageCode.pol,
             Value = "polski"
         }

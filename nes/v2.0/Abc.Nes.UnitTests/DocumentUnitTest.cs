@@ -251,8 +251,8 @@ namespace Abc.Nes.UnitTests {
                         }
                     }
                 },
-                Languages = new List<Elements.TitleWithLanguageCodeElement>() {
-                    new Elements.TitleWithLanguageCodeElement() {
+                Languages = new List<Elements.LanguageElement>() {
+                    new Elements.LanguageElement() {
                         Type = Enumerations.LanguageCode.pol,
                         Value = "polski"
                     }
