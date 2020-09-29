@@ -32,8 +32,13 @@ W tym katalogu znajduje się:
 
 <a href="https://www.nuget.org/packages/ABCPRO.NES.ArchivalPackage.Cryptography/"><img alt="Nuget" src="https://img.shields.io/nuget/v/ABCPRO.NES.ArchivalPackage.Cryptography?label=abcpro.nes.archivalpackage.cryptography%20nuget"> <img alt="Nuget" src="https://img.shields.io/nuget/dt/ABCPRO.NES.ArchivalPackage.Cryptography"></a>
 
+ ## Historia wersji
+
 Nazwa | Wersja | Opis
 ------|--------|--------
+ABCPRO.NES.ArchivalPackage.Cryptography|1.0.7|Dopracowanie opcji zgodności ze schematem `Metadane 1.7`.
+ABCPRO.NES.ArchivalPackage|1.0.14|Dopracowanie opcji zgodności ze schematem `Metadane 1.7`.
+ABCPRO.NES|1.0.10|Dopracowanie opcji zgodności ze schematem `Metadane 1.7`.
 ABCPRO.NES.ArchivalPackage.Cryptography|1.0.6|Aktualizacja zależności.
 ABCPRO.NES.ArchivalPackage|1.0.13|Aktualizacja zależności.
 ABCPRO.NES|1.0.9|Dodanie wsparcia dla schematu metadanych w wersji 1.7 (Klasa `Document17`) czyli używanych przez paczkę archiwalną przekazywaną do AP. Natomiast standardowa klasa `Document` jest zgodna ze schematem 2.0 na potrzeby paczki eADM.
