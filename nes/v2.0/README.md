@@ -36,49 +36,49 @@ W tym katalogu znajduje się:
 
 ### Historia wersji ABCPRO.NES
 
-Nazwa | Wersja | Opis
-------|--------|--------
-ABCPRO.NES|1.0.10|Dopracowanie opcji zgodności ze schematem `Metadane 1.7`.
-ABCPRO.NES|1.0.9|Dodanie wsparcia dla schematu metadanych w wersji 1.7 (Klasa `Document17`) czyli używanych przez paczkę archiwalną przekazywaną do AP. Natomiast standardowa klasa `Document` jest zgodna ze schematem 2.0 na potrzeby paczki eADM.
-ABCPRO.NES|1.0.8|Dodanie polskich opisów błędów przy walidacji metadanych. W&nbsp;pliku `AssemblyIno.cs` projektu należy dodać dyrektywę  `[assembly: NeutralResourcesLanguage("pl")]` lub z&nbsp;poziomu kodu ustawić inne `CultureInfo`.
-ABCPRO.NES|1.0.7|Dodanie przestrzeni nazw `Abc.Nes.Validators` do wyodrębnienia funkcji walidacji metadanych. W&nbsp;klasie`XmlConverter` dodano metodę `GetValidationResult` zwracającą obiekt ze szczegółową lokalizacją błędów.
-ABCPRO.NES|1.0.5|Zawiera dodatkowe pola w&nbsp;adresie (gmina, powiat, województwo). Dodane metody statyczne do pobierania wartości z&nbsp;enumeratorów dla pól tekstowych np. `RelationElement.GetRelationType()`.
-ABCPRO.NES|1.0.3|Pierwsza stabilna wersja biblioteki. Pozwala na dodawanie wszystkich metadanych, walidację i&nbsp;zapis do pliku XML. Za pomocą klasy `XmlConverter` możliwe jest otwieranie plików zarówno z&nbsp;wersji 2.0 jak i&nbsp;tych starszych.
+Wersja  | Opis
+--------|--------
+1.0.10|Dopracowanie opcji zgodności ze schematem `Metadane 1.7`.
+1.0.9|Dodanie wsparcia dla schematu metadanych w wersji 1.7 (Klasa `Document17`) czyli używanych przez paczkę archiwalną przekazywaną do AP. Natomiast standardowa klasa `Document` jest zgodna ze schematem 2.0 na potrzeby paczki eADM.
+1.0.8|Dodanie polskich opisów błędów przy walidacji metadanych. W&nbsp;pliku `AssemblyIno.cs` projektu należy dodać dyrektywę  `[assembly: NeutralResourcesLanguage("pl")]` lub z&nbsp;poziomu kodu ustawić inne `CultureInfo`.
+1.0.7|Dodanie przestrzeni nazw `Abc.Nes.Validators` do wyodrębnienia funkcji walidacji metadanych. W&nbsp;klasie`XmlConverter` dodano metodę `GetValidationResult` zwracającą obiekt ze szczegółową lokalizacją błędów.
+1.0.5|Zawiera dodatkowe pola w&nbsp;adresie (gmina, powiat, województwo). Dodane metody statyczne do pobierania wartości z&nbsp;enumeratorów dla pól tekstowych np. `RelationElement.GetRelationType()`.
+1.0.3|Pierwsza stabilna wersja biblioteki. Pozwala na dodawanie wszystkich metadanych, walidację i&nbsp;zapis do pliku XML. Za pomocą klasy `XmlConverter` możliwe jest otwieranie plików zarówno z&nbsp;wersji 2.0 jak i&nbsp;tych starszych.
 
 ### Historia wersji ABCPRO.NES.ArchivalPackage
 
-Nazwa | Wersja | Opis
-------|--------|--------
-ABCPRO.NES. ArchivalPackage|1.0.14|Dopracowanie opcji zgodności ze schematem `Metadane 1.7`.
-ABCPRO.NES. ArchivalPackage|1.0.13|Aktualizacja zależności.
-ABCPRO.NES. ArchivalPackage|1.0.12|Dodanie polskich opisów błędów przy walidacji paczki. W&nbsp;pliku `AssemblyIno.cs` projektu należy dodać dyrektywę  `[assembly: NeutralResourcesLanguage("pl")]` lub z&nbsp;poziomu kodu ustawić inne `CultureInfo`.
-ABCPRO.NES. ArchivalPackage|1.0.11|Dodanie do klasy `PackageManager` metody `GetValidationResult` zwracającą obiekt ze szczegółową lokalizacją błędów walidacji paczki i&nbsp;metadanych.
-ABCPRO.NES. ArchivalPackage|1.0.10|Dodanie metody `Validate` do sprawdzania poprawności struktury paczki eADM.
-ABCPRO.NES. ArchivalPackage|1.0.9|Dodanie metod: do pobierania obiektu folderu dla wskazanego obiektu pliku, do pobierania pliku metadanych dla wskazanego pliku z&nbsp;katalogu dokumenty, do pobierania obiektu pliku na podstawie ścieżki wewnątrz archiwum.
-ABCPRO.NES. ArchivalPackage|1.0.6|Dodanie metody w&nbsp;`PackageManager` umożliwiającej proste uzupełnianie pliku metadanych sprawy.
-ABCPRO.NES. ArchivalPackage|1.0.5|Aktualizacja zależności.
-ABCPRO.NES. ArchivalPackage|1.0.4|Pierwsza stabilna wersja biblioteki. Pozwala na tworzenie paczki eADM z&nbsp;wymaganymi katalogami, dodawanie plików oraz metadanych utworzonych za pomocą ABCPRO.NES, zapis i&nbsp;odczyt wcześniej utworzonych paczek.
+Wersja  | Opis
+--------|--------
+1.0.14|Dopracowanie opcji zgodności ze schematem `Metadane 1.7`.
+1.0.13|Aktualizacja zależności.
+1.0.12|Dodanie polskich opisów błędów przy walidacji paczki. W&nbsp;pliku `AssemblyIno.cs` projektu należy dodać dyrektywę  `[assembly: NeutralResourcesLanguage("pl")]` lub z&nbsp;poziomu kodu ustawić inne `CultureInfo`.
+1.0.11|Dodanie do klasy `PackageManager` metody `GetValidationResult` zwracającą obiekt ze szczegółową lokalizacją błędów walidacji paczki i&nbsp;metadanych.
+1.0.10|Dodanie metody `Validate` do sprawdzania poprawności struktury paczki eADM.
+1.0.9|Dodanie metod: do pobierania obiektu folderu dla wskazanego obiektu pliku, do pobierania pliku metadanych dla wskazanego pliku z&nbsp;katalogu dokumenty, do pobierania obiektu pliku na podstawie ścieżki wewnątrz archiwum.
+1.0.6|Dodanie metody w&nbsp;`PackageManager` umożliwiającej proste uzupełnianie pliku metadanych sprawy.
+1.0.5|Aktualizacja zależności.
+1.0.4|Pierwsza stabilna wersja biblioteki. Pozwala na tworzenie paczki eADM z&nbsp;wymaganymi katalogami, dodawanie plików oraz metadanych utworzonych za pomocą ABCPRO.NES, zapis i&nbsp;odczyt wcześniej utworzonych paczek.
 
 ### Historia wersji ABCPRO.NES.ArchivalPackage.Cryptography
 
-Nazwa | Wersja | Opis
-------|--------|--------
-ABCPRO.NES. ArchivalPackage.Cryptography|1.0.7|Dopracowanie opcji zgodności ze schematem `Metadane 1.7`.
-ABCPRO.NES. ArchivalPackage.Cryptography|1.0.6|Aktualizacja zależności.
-ABCPRO.NES. ArchivalPackage.Cryptography|1.0.5|Aktualizacja zależności.
-ABCPRO.NES. ArchivalPackage.Cryptography|1.0.4|Aktualizacja zależności.
-ABCPRO.NES. ArchivalPackage.Cryptography|1.0.3|Dodanie metod do podpisywania wybranych plików w&nbsp;paczce eADM.
-ABCPRO.NES. ArchivalPackage.Cryptography|1.0.2|Zastąpienie biblioteki komercyjnej `Aspose.Pdf` otwartym kodem `iTextSharp`.
-ABCPRO.NES. ArchivalPackage.Cryptography|1.0.1|Dodanie mozliwości podpisywania plików w&nbsp;paczce eADM podpisem zewnętrznym oraz podpisywanie samego archiwum podpisem zewnętrznym.
-ABCPRO.NES. ArchivalPackage.Cryptography|1.0.0|Dodanie biblioteki pozwalającej na podpisywanie pliku paczki eADM wraz z&nbsp;plikami w&nbsp;niej umieszczonymi. Pliki XML podpisywane są podpisem wewnętrznym XAdES, pliki PDF podpisem PAdES (podpis realizowany jest z&nbsp;wykorzystaniem biblioteki `Aspose.Pdf`. wymagany jest zakup licencji na oprogramowanie [`Aspose.Pdf`](https://products.aspose.com/pdf). Sama paczka archiwalna może zostać umieszczona w&nbsp;pliku `.xades` (podpis okalający - Enveloping) lub w&nbsp;oddzielnym pliku; wówczas plik `.xades` zawiera jedynie referencję do właściwego pliku.
+Wersja  | Opis
+--------|--------
+1.0.7|Dopracowanie opcji zgodności ze schematem `Metadane 1.7`.
+1.0.6|Aktualizacja zależności.
+1.0.5|Aktualizacja zależności.
+1.0.4|Aktualizacja zależności.
+1.0.3|Dodanie metod do podpisywania wybranych plików w&nbsp;paczce eADM.
+1.0.2|Zastąpienie biblioteki komercyjnej `Aspose.Pdf` otwartym kodem `iTextSharp`.
+1.0.1|Dodanie mozliwości podpisywania plików w&nbsp;paczce eADM podpisem zewnętrznym oraz podpisywanie samego archiwum podpisem zewnętrznym.
+1.0.0|Dodanie biblioteki pozwalającej na podpisywanie pliku paczki eADM wraz z&nbsp;plikami w&nbsp;niej umieszczonymi. Pliki XML podpisywane są podpisem wewnętrznym XAdES, pliki PDF podpisem PAdES (podpis realizowany jest z&nbsp;wykorzystaniem biblioteki `Aspose.Pdf`. wymagany jest zakup licencji na oprogramowanie [`Aspose.Pdf`](https://products.aspose.com/pdf). Sama paczka archiwalna może zostać umieszczona w&nbsp;pliku `.xades` (podpis okalający - Enveloping) lub w&nbsp;oddzielnym pliku; wówczas plik `.xades` zawiera jedynie referencję do właściwego pliku.
 
 ### Historia wersji ABCPRO.NES.XAdES
 
-Nazwa | Wersja | Opis
-------|--------|--------
-ABCPRO.NES.XAdES|1.0.6|Wymiana biblioteki `BouncyCastle.NetCore` na `Portable.BouncyCastle` w&nbsp;celu uniknięcia konfliktu z&nbsp;referencją występującą w&nbsp;`ABCPRO.NES.ArchivalPackage.Cryptography`.
-ABCPRO.NES.XAdES|1.0.5|Hermetyzacja kodu
-ABCPRO.NES.XAdES|1.0.4|Dodanie biblioteki umożliwiającej podpisywanie dokumentów XML. Biblioteka bazuje na kodzie źródłowym [`Microsoft .NET Framework`](https://github.com/dotnet/runtime/tree/master/src/libraries/System.Security.Cryptography.Xml/src) w&nbsp;przestrzeni nazw `Microsoft.XmlDsig`, projektu [`Microsoft.Xades`](https://github.com/Caliper/Xades) utworzonym przez francuski oddział firmy Microsoft oraz na podstawie kodu źródłowego [`FirmaXadesNet`](https://github.com/ctt-gob-es/FirmaXadesNet45) utworzonym przez Departament Nowych Technologii Rady Urbanizacji Miasta Cartagena. Biblioteka pozwala na opatrywanie pliku metadanych bezpiecznym podpisem elektronicznym.  
+Wersja  | Opis
+--------|--------
+1.0.6|Wymiana biblioteki `BouncyCastle.NetCore` na `Portable.BouncyCastle` w&nbsp;celu uniknięcia konfliktu z&nbsp;referencją występującą w&nbsp;`ABCPRO.NES.ArchivalPackage.Cryptography`.
+1.0.5|Hermetyzacja kodu
+1.0.4|Dodanie biblioteki umożliwiającej podpisywanie dokumentów XML. Biblioteka bazuje na kodzie źródłowym [`Microsoft .NET Framework`](https://github.com/dotnet/runtime/tree/master/src/libraries/System.Security.Cryptography.Xml/src) w&nbsp;przestrzeni nazw `Microsoft.XmlDsig`, projektu [`Microsoft.Xades`](https://github.com/Caliper/Xades) utworzonym przez francuski oddział firmy Microsoft oraz na podstawie kodu źródłowego [`FirmaXadesNet`](https://github.com/ctt-gob-es/FirmaXadesNet45) utworzonym przez Departament Nowych Technologii Rady Urbanizacji Miasta Cartagena. Biblioteka pozwala na opatrywanie pliku metadanych bezpiecznym podpisem elektronicznym.  
 
 [&#8682; Do góry](#paczka-eadm-i-niezbędne-elementy-struktury-dokumentu-elektronicznego-20)
 
