@@ -19,7 +19,7 @@ using System.Xml.Linq;
 
 namespace Abc.Nes.ArchivalPackage.Model {
     public class MetadataFile : DocumentFile {
-        public Document Document { get; set; }
+        public IDocument Document { get; set; }
         public override void Init(byte[] fileData) {
             FileData = fileData;
             Document = new Converters.XmlConverter().ParseXml(TrimBom(fileData));

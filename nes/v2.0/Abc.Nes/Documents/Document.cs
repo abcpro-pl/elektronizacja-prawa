@@ -15,11 +15,13 @@
 using Abc.Nes.Elements;
 using Abc.Nes.Enumerations;
 using System.Collections.Generic;
+using System.Linq;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace Abc.Nes {
     /// <summary>
-    /// The root v.2.0 metadata element that describes document.
+    /// The root v.2.0 metadata element that describes document in eADM package.
     /// </summary>
     [XmlType(TypeName = "dokument-typ")]
     [XmlAnnotation("Element główny metadanych opisujący dokument.")]
@@ -58,5 +60,32 @@ namespace Abc.Nes {
         public List<string> Locations { get; set; }
 
         [XmlElement("status")] [XmlAnnotation("Status dokumentu.")] public List<StatusElement> Statuses { get; set; }
+
+        internal static bool InternalValidateXmlFile(string filePath) {
+            try {
+                var xmlText = System.IO.File.ReadAllText(filePath);
+                var xml = XElement.Parse(xmlText);
+                return InternalValidateXml(xml);
+            }
+            catch { }
+
+            return default;
+        }
+        internal static bool InternalValidateXml(string xmlText) {
+            try {
+                var xml = XElement.Parse(xmlText);
+                return InternalValidateXml(xml);
+            } catch { }
+
+            return default;
+        }
+        internal static bool InternalValidateXml(XElement xml) {
+            try {                
+                return xml.HasElements && xml.Elements().First().Name.LocalName == "identyfikator";
+            }
+            catch { }
+
+            return default;
+        }
     }
 }

@@ -29,7 +29,7 @@ namespace Abc.Nes.ArchivalPackage {
     public class PackageManager : IPackageManager {
         public Package Package { get; private set; }
         public string FilePath { get; private set; }
-        public void AddFile(DocumentFile document, Document metadata = null) {
+        public void AddFile(DocumentFile document, IDocument metadata = null) {
             if (document.IsNull()) { throw new ArgumentNullException(); }
             if (Package.IsNull()) {
                 using (IPackageValidator validator = new PackageValidator()) {
@@ -44,7 +44,7 @@ namespace Abc.Nes.ArchivalPackage {
                 });
             }
         }
-        public void AddFile(string filePath, Document metadata = null) {
+        public void AddFile(string filePath, IDocument metadata = null) {
             if (filePath.IsNull()) { throw new ArgumentNullException(); }
             if (!File.Exists(filePath)) { throw new FileNotFoundException(); }
 
@@ -66,7 +66,7 @@ namespace Abc.Nes.ArchivalPackage {
                 });
             }
         }
-        public void AddFiles(IEnumerable<string> files, string folderName, IEnumerable<Document> metadata = null) {
+        public void AddFiles(IEnumerable<string> files, string folderName, IEnumerable<IDocument> metadata = null) {
             if (files.IsNull()) { throw new NullReferenceException(); }
             if (folderName.IsNotNullOrEmpty()) { throw new NullReferenceException(); }
 
@@ -118,7 +118,7 @@ namespace Abc.Nes.ArchivalPackage {
 
             Package.Documents.Folders.Add(folder);
         }
-        public void AddObject(Document metadata, string fileName) {
+        public void AddObject(IDocument metadata, string fileName) {
             if (metadata.IsNull()) { throw new ArgumentNullException("metadata"); }
             if (fileName.IsNullOrEmpty()) { throw new ArgumentNullException("fileName"); }
             if (!fileName.ToLower().EndsWith(".xml")) { throw new Exception("The Object file must by an XML file!"); }

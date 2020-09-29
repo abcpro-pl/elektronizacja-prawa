@@ -26,24 +26,25 @@ using System.Xml.Serialization;
 
 namespace Abc.Nes.Converters {
     public interface IXmlConverter : IDisposable {
-        XElement GetXml(Document doc);
-        XElement WriteXml(Document doc, string filePath);
-        Document ParseXml(string xmlText);
-        Document ParseXml(XElement e);
-        Document LoadXml(string filePath);
+        XElement GetXml(IDocument doc);
+        XElement WriteXml(IDocument doc, string filePath);
+        IDocument ParseXml(string xmlText);
+        IDocument ParseXml(XElement e);
+        IDocument LoadXml(string filePath);
 
         List<string> ValidationErrors { get; }
         bool Validate(string filePath);
-        bool Validate(Document document);
+        bool Validate(IDocument document);
         IValidationResult GetValidationResult(string filePath);
-        IValidationResult GetValidationResult(Document document);
-        bool ValidateWithSchema(string filePath);
+        IValidationResult GetValidationResult(IDocument document);
+        bool ValidateWithSchema(string filePath, Type typeOfDocument = null, string rootTypeName = null);
     }
     public class XmlConverter : IXmlConverter {
         public List<string> ValidationErrors { get; private set; }
 
-        public XElement GetXml(Document doc) {
-            var xmlserializer = new XmlSerializer(typeof(Document));
+        public XElement GetXml(IDocument doc) {
+            var type = doc.GetType();
+            var xmlserializer = new XmlSerializer(type);
             var stringWriter = new Utf8StringWriter();
             using (var writer = System.Xml.XmlWriter.Create(stringWriter, new System.Xml.XmlWriterSettings() {
                 Encoding = Encoding.UTF8
@@ -54,7 +55,7 @@ namespace Abc.Nes.Converters {
             }
         }
 
-        public XElement WriteXml(Document doc, string filePath) {
+        public XElement WriteXml(IDocument doc, string filePath) {
             var xml = GetXml(doc);
             if (xml.IsNotNull()) {
                 xml.Save(filePath);
@@ -62,46 +63,54 @@ namespace Abc.Nes.Converters {
             return xml;
         }
 
-        public Document ParseXml(string xmlText) {
+        public IDocument ParseXml(string xmlText) {
             if (xmlText.IsNotNullOrEmpty()) {
-                xmlText = UpdateToCurrentVersion(xmlText);
-                using (var stream = xmlText.GetMemoryStream()) {
-                    var serializer = new XmlSerializer(typeof(Document));
-                    return serializer.Deserialize(stream) as Document;
+                if (Document.InternalValidateXml(xmlText)) {
+                    xmlText = UpdateToCurrentVersion(xmlText);
+                    using (var stream = xmlText.GetMemoryStream()) {
+                        var serializer = new XmlSerializer(typeof(Document));
+                        return serializer.Deserialize(stream) as Document;
+                    }
+                }
+                else if (Document17.InternalValidateXml(xmlText)) {
+                    using (var stream = xmlText.GetMemoryStream()) {
+                        var serializer = new XmlSerializer(typeof(Document17));
+                        return serializer.Deserialize(stream) as Document17;
+                    }
                 }
             }
             return default;
         }
 
-        public Document ParseXml(XElement e) {
+        public IDocument ParseXml(XElement e) {
             if (e.IsNotNull()) {
-                var xmlText = UpdateToCurrentVersion(e.ToString());
-                using (var stream = xmlText.GetMemoryStream()) {
-                    var serializer = new XmlSerializer(typeof(Document));
-                    return serializer.Deserialize(stream) as Document;
+                if (Document.InternalValidateXml(e)) {
+                    var xmlText = UpdateToCurrentVersion(e.ToString());
+                    using (var stream = xmlText.GetMemoryStream()) {
+                        var serializer = new XmlSerializer(typeof(Document));
+                        return serializer.Deserialize(stream) as Document;
+                    }
+                }
+                else if (Document17.InternalValidateXml(e)) {
+                    var xmlText = e.ToString();
+                    using (var stream = xmlText.GetMemoryStream()) {
+                        var serializer = new XmlSerializer(typeof(Document17));
+                        return serializer.Deserialize(stream) as Document17;
+                    }
                 }
             }
             return default;
         }
 
-        public Document LoadXml(string filePath) {
+        public IDocument LoadXml(string filePath) {
             if (String.IsNullOrEmpty(filePath)) { throw new ArgumentException(); }
             if (!File.Exists(filePath)) { throw new FileNotFoundException(); }
 
             var tmp = Path.Combine(Path.GetTempPath(), $"{string.Empty.GenerateId()}.xml");
             try {
                 File.Copy(filePath, tmp, true);
-
-                var xmlText = UpdateToCurrentVersion(File.ReadAllText(tmp));
-                if (xmlText.IsNotNullOrEmpty()) { File.WriteAllText(tmp, xmlText); }
-
-                Document result;
-                var serializer = new XmlSerializer(typeof(Document));
-                using (var reader = File.OpenText(tmp)) {
-                    result = serializer.Deserialize(reader) as Document;
-                }
-
-                return result;
+                var xmlText = File.ReadAllText(tmp);
+                return ParseXml(xmlText);
             }
             finally {
                 try { File.Delete(tmp); } catch { }
@@ -115,7 +124,7 @@ namespace Abc.Nes.Converters {
             return Validate(LoadXml(filePath));
         }
 
-        public bool Validate(Document document) {
+        public bool Validate(IDocument document) {
             ValidationErrors = new List<string>();
             using (var validator = new DocumentValidator()) {
                 var result = validator.Validate(document);
@@ -131,7 +140,7 @@ namespace Abc.Nes.Converters {
 
             return GetValidationResult(LoadXml(filePath));
         }
-        public IValidationResult GetValidationResult(Document document) {
+        public IValidationResult GetValidationResult(IDocument document) {
             ValidationErrors = new List<string>();
             using (var validator = new DocumentValidator()) {
                 var result = validator.Validate(document);
@@ -140,14 +149,14 @@ namespace Abc.Nes.Converters {
             }
         }
 
-        public bool ValidateWithSchema(string filePath) {
+        public bool ValidateWithSchema(string filePath, Type typeOfDocument = null, string rootTypeName = null) {
             if (String.IsNullOrEmpty(filePath)) { throw new ArgumentException(); }
             if (!File.Exists(filePath)) { throw new FileNotFoundException(); }
 
             ValidationErrors = new List<string>();
 
             var schemas = new XmlSchemaSet();
-            TextReader reader = new StringReader(new XsdGenerator().GetSchema().ToString());
+            TextReader reader = new StringReader(new XsdGenerator().GetSchema(typeOfDocument, rootTypeName).ToString());
             var schema = XmlSchema.Read(reader, ValidationCallback);
             schemas.Add(schema);
 

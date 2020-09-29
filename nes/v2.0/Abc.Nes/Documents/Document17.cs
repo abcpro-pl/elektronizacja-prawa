@@ -15,11 +15,13 @@
 using Abc.Nes.Elements;
 using Abc.Nes.Enumerations;
 using System.Collections.Generic;
+using System.Linq;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace Abc.Nes {
     /// <summary>
-    /// The root v.1.7 metadata element that describes document.
+    /// The root v.1.7 metadata element that describes document in archival package.
     /// </summary>
     [XmlType(TypeName = "dokument-typ")]
     [XmlAnnotation("Element główny metadanych opisujący dokument.")]
@@ -52,5 +54,33 @@ namespace Abc.Nes {
         [XmlElement("tworca")] [XmlRequired] public List<AuthorElement17> Authors { get; set; }
         [XmlElement("typ")] [XmlRequired] public List<TypeElement17> Types { get; set; }
         [XmlElement("tytul")] [XmlRequired] public List<TitleElement> Titles { get; set; }
+
+        internal static bool InternalValidateXmlFile(string filePath) {
+            try {
+                var xmlText = System.IO.File.ReadAllText(filePath);
+                var xml = XElement.Parse(xmlText);
+                return InternalValidateXml(xml);
+            }
+            catch { }
+
+            return default;
+        }
+        internal static bool InternalValidateXml(string xmlText) {
+            try {
+                var xml = XElement.Parse(xmlText);
+                return InternalValidateXml(xml);
+            }
+            catch { }
+
+            return default;
+        }
+        internal static bool InternalValidateXml(XElement xml) {
+            try {                
+                return xml.HasElements && (xml.Elements().First().Name.LocalName == "odbiorca" || xml.Elements().First().Name.LocalName == "data");
+            }
+            catch { }
+
+            return default;
+        }
     }
 }

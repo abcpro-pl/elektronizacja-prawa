@@ -20,10 +20,10 @@ namespace Abc.Nes.ArchivalPackage {
     public interface IPackageManager {
 		Package Package { get; }
 		string FilePath { get; }
-		void AddFile(DocumentFile document, Document metadata = null);
-		void AddFile(string filePath, Document metadata = null);
-		void AddFiles(IEnumerable<string> files, string folderName, IEnumerable<Document> metadata = null);
-		void AddObject(Document metadata, string fileName);
+		void AddFile(DocumentFile document, IDocument metadata = null);
+		void AddFile(string filePath, IDocument metadata = null);
+		void AddFiles(IEnumerable<string> files, string folderName, IEnumerable<IDocument> metadata = null);
+		void AddObject(IDocument metadata, string fileName);
 		void Save(string filePath = null);
 		void LoadPackage(string filePath);
 		int GetDocumentsCount();

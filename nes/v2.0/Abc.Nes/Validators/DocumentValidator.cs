@@ -23,7 +23,7 @@ namespace Abc.Nes.Validators {
         private System.Resources.ResourceManager resx = null;
         public void Dispose() { }
 
-        public IValidationResult Validate(Document document) {
+        public IValidationResult Validate(IDocument document) {
             _result = new ValidationResult();
             resx = Properties.Default.ResourceManager;
             if (System.Globalization.CultureInfo.CurrentCulture.Name == "pl" || System.Globalization.CultureInfo.CurrentCulture.Name == "pl-PL") {
@@ -38,6 +38,7 @@ namespace Abc.Nes.Validators {
 
 
         private void ValidateObject(object o, string parentPropertyName = null) {
+            // the object, due to its complexity, is currently not validated
             if (o.GetType().GetCustomAttributes(typeof(XmlChoiceAttribute), false).FirstOrDefault().IsNotNull()) { return; }
 
             var properties = o.GetType().GetProperties();

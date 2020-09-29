@@ -17,12 +17,12 @@ using System.IO;
 
 namespace Abc.Nes.Converters {
     public class JsonConverter : IDisposable {
-        public string GetJson(Document doc) {
+        public string GetJson(IDocument doc) {
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(doc);
             return json;
         }
-        
-        public string WriteJson(Document doc, string filePath) {
+
+        public string WriteJson(IDocument doc, string filePath) {
             var json = GetJson(doc);
             if (json.IsNotNullOrEmpty()) {
                 File.WriteAllText(filePath, json);
@@ -30,15 +30,16 @@ namespace Abc.Nes.Converters {
             return json;
         }
 
-        public Document LoadJson(string filePath) {
+        public IDocument LoadJson(string filePath) {
             if (String.IsNullOrEmpty(filePath)) { throw new ArgumentException(); }
             if (!File.Exists(filePath)) { throw new FileNotFoundException(); }
-
-            Document result = Newtonsoft.Json.JsonConvert.DeserializeObject<Document>(File.ReadAllText(filePath));
+            //{"DocumentType":1
+            // TODO: add schema compliance Metadata 1.7 
+            var result = Newtonsoft.Json.JsonConvert.DeserializeObject<Document>(File.ReadAllText(filePath));
             return result;
         }
 
-        public Document ParseJson(string json) {
+        public IDocument ParseJson(string json) {
             Document result = Newtonsoft.Json.JsonConvert.DeserializeObject<Document>(json);
             return result;
         }

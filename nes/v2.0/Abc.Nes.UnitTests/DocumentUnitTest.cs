@@ -56,7 +56,7 @@ namespace Abc.Nes.UnitTests {
         public void Document_XmlConverter_LoadXml() {
             var filePath = Path.Combine(Path.GetTempPath(), "nes.xml");
             if (!File.Exists(filePath)) { Document_XmlConverter_WriteXml(); }
-            var document = new Abc.Nes.Converters.XmlConverter().LoadXml(filePath);
+            var document = new Abc.Nes.Converters.XmlConverter().LoadXml(filePath) as Document;
             Assert.IsTrue(document != null && document.Groupings != null && document.Groupings.Count > 0);
         }
 
@@ -79,6 +79,14 @@ namespace Abc.Nes.UnitTests {
                 System.Diagnostics.Debug.WriteLine(item.DefaultMessage);
             }
             Assert.IsTrue(result.Count > 0);
+        }
+
+        [TestMethod]
+        public void Document_XmlConverter_WriteJson() {
+            Abc.Nes.Document document = GetModel();
+            var filePath = Path.Combine(Path.GetTempPath(), "nes.json");
+            new Abc.Nes.Converters.JsonConverter().WriteJson(document, filePath);
+            Assert.IsTrue(File.Exists(filePath));
         }
 
         public static Abc.Nes.Document GetModel(bool incorrect = false) {

@@ -11,14 +11,14 @@
     <RepositoryUrl>https://github.com/abcpro-pl/elektronizacja-prawa.git</RepositoryUrl>
     <RepositoryType>GIT</RepositoryType>
 
-    <PackageReleaseNotes>You can create, edit, save and validate archival package (eADM) for Polish State Archives. A more accurate validator has been added. Polish validation messages has been added.</PackageReleaseNotes>
+    <PackageReleaseNotes>You can create, edit, save and validate archival package (eADM) for Polish State Archives. A more accurate validator has been added. Polish validation messages has been added. Added Metadata 1.7 compatibility mode.</PackageReleaseNotes>
     <SignAssembly>false</SignAssembly>
     <PackageId>ABCPRO.NES.ArchivalPackage</PackageId>
     <Product>ABCPRO.NES.ArchivalPackage</Product>
     <PackageProjectUrl>https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0</PackageProjectUrl>
-    <AssemblyVersion>1.0.0.13</AssemblyVersion>
-    <FileVersion>1.0.0.13</FileVersion>
-    <Version>1.0.13</Version>
+    <AssemblyVersion>1.0.0.14</AssemblyVersion>
+    <FileVersion>1.0.0.14</FileVersion>
+    <Version>1.0.14</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
@@ -34,7 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ABCPRO.NES" Version="1.0.9" />
+    <PackageReference Include="ABCPRO.NES" Version="1.0.10" />
     <PackageReference Include="DotNetZip" Version="1.13.8" />    
   </ItemGroup>
 

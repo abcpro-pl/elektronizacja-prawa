@@ -213,7 +213,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                         if (metadataFile != null) {
                             using (var converter = new Converters.XmlConverter()) {
                                 var xadesMetadataFileDocumentXml = converter.GetXml(metadataFile.Document);
-                                var xadesMetadataFileDocument = converter.ParseXml(xadesMetadataFileDocumentXml);
+                                var xadesMetadataFileDocument = converter.ParseXml(xadesMetadataFileDocumentXml) as Document;
                                 xadesMetadataFileDocument.Description = $"Digital signature of file {(item as DocumentFile).FileName}.";
                                 var xadesMetadataFile = new MetadataFile() {
                                     FileName = $"{xadesFile.FileName}.xml",

@@ -11,25 +11,21 @@
     <RepositoryUrl>https://github.com/abcpro-pl/elektronizacja-prawa.git</RepositoryUrl>
     <RepositoryType>GIT</RepositoryType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>You can create, edit and save document metadata for Polish State Archives (NES - Necessary elements of electronic documents structure). A more accurate validator has been added. Polish validation messages has been added.</PackageReleaseNotes>
+    <PackageReleaseNotes>You can create, edit and save document metadata for Polish State Archives (NES - Necessary elements of electronic documents structure). A more accurate validator has been added. Polish validation messages has been added. Added Metadata 1.7 compatibility mode.</PackageReleaseNotes>
     <SignAssembly>false</SignAssembly>
     <PackageId>ABCPRO.NES</PackageId>
     <Product>ABCPRO.NES</Product>
     <PackageProjectUrl>https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0</PackageProjectUrl>
-    <AssemblyVersion>1.0.0.9</AssemblyVersion>
-    <FileVersion>1.0.0.9</FileVersion>
-    <Version>1.0.9</Version>    
+    <AssemblyVersion>1.0.0.10</AssemblyVersion>
+    <FileVersion>1.0.0.10</FileVersion>
+    <Version>1.0.10</Version>    
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  <PropertyGroup>
     <NoWarn>1701;1702;IDE0063;</NoWarn>
   </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|AnyCPU'">
-    <NoWarn>1701;1702;IDE0063</NoWarn>
-  </PropertyGroup>
-
-  <ItemGroup>
+  
+  <ItemGroup>    
     <Compile Remove="packages\**" />
     <EmbeddedResource Remove="packages\**" />
     <None Remove="packages\**" />
