@@ -134,7 +134,7 @@ namespace Abc.Nes.ArchivalPackage {
                 FileName = fileName
             });
         }
-        public void Save(string filePath = null) {
+        public void Save(string filePath = null, bool appendFileDataOnly = false) {
             if (Package.IsNull()) { throw new NullReferenceException("Package is not initialized!"); }
             if (Package.IsEmpty) { throw new PackageIsEmptyException(); }
             if (filePath.IsNullOrEmpty() && FilePath.IsNullOrEmpty()) { throw new ArgumentNullException(); }
@@ -143,25 +143,25 @@ namespace Abc.Nes.ArchivalPackage {
             var tmp = Path.Combine(Path.GetTempPath(), $"{string.Empty.GenerateId()}.zip");
             using (var zipFile = new ZipFile(tmp)) {
                 AddDocuments(Package.Documents, zipFile);
-                AddMetadata(Package.Metadata, zipFile);
-                AddMetadata(Package.Objects, zipFile);
+                AddMetadata(Package.Metadata, zipFile, appendFileDataOnly: appendFileDataOnly);
+                AddMetadata(Package.Objects, zipFile, appendFileDataOnly: appendFileDataOnly);
 
                 zipFile.Save();
             }
 
-            if (File.Exists(tmp)) {
-                File.Copy(tmp, FilePath, true);
-            }
+            if (File.Exists(tmp)) { File.Copy(tmp, FilePath, true); }
+
+            try { if (File.Exists(tmp)) { File.Delete(tmp); } } catch { }
         }
         public void LoadPackage(string filePath) {
             // Package is already loaded
             if (FilePath == filePath && Package.Documents.IsNotNull() && !Package.Documents.IsEmpty) { return; }
-         
+
             using (IPackageValidator validator = new PackageValidator()) {
                 Package = validator.GetPackage(filePath);
                 if (Package.IsNotNull()) { FilePath = Package.FilePath; }
             }
-            
+
             var zipFile = ZipFile.Read(filePath);
             foreach (var entry in zipFile.Entries) {
                 if (entry.Attributes == FileAttributes.Directory) {
@@ -334,7 +334,7 @@ namespace Abc.Nes.ArchivalPackage {
             }
             return count;
         }
-        private void AddMetadata(MetdataFolder folder, ZipFile zipFile, string folderPath = null) {
+        private void AddMetadata(MetdataFolder folder, ZipFile zipFile, string folderPath = null, bool appendFileDataOnly = false) {
             if (folder.IsNull()) { return; }
             if (zipFile.IsNull()) { throw new ArgumentNullException("zipFile"); }
             if (folderPath.IsNullOrEmpty()) { folderPath = folder.FolderName; }
@@ -342,12 +342,17 @@ namespace Abc.Nes.ArchivalPackage {
 
             var converter = new XmlConverter();
             foreach (var item in folder.Items) {
-                zipFile.AddEntry($"{folderPath}/{item.FileName}", converter.GetXml(item.Document).ToByteArray());
+                if (appendFileDataOnly && item.FileData.IsNotNull()) {
+                    zipFile.AddEntry($"{folderPath}/{item.FileName}", item.FileData);
+                }
+                else {
+                    zipFile.AddEntry($"{folderPath}/{item.FileName}", converter.GetXml(item.Document).ToByteArray());
+                }
             }
 
             if (folder.Folders.IsNotNull() && folder.Folders.Count > 0) {
                 foreach (var item in folder.Folders) {
-                    AddMetadata(item, zipFile, $"{folderPath}/{item.FolderName}");
+                    AddMetadata(item, zipFile, $"{folderPath}/{item.FolderName}", appendFileDataOnly);
                 }
             }
         }
@@ -366,7 +371,7 @@ namespace Abc.Nes.ArchivalPackage {
                     AddDocuments(item, zipFile, $"{folderPath}/{item.FolderName}");
                 }
             }
-        }     
+        }
         private string GetValidFileName(string filePath) {
             if (filePath.IsNull()) { throw new NullReferenceException(); }
             if (!File.Exists(filePath)) { throw new FileNotFoundException(); }

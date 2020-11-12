@@ -70,27 +70,19 @@ namespace Abc.Nes.Generators {
             DescandantMoveAttributeToEnd(xsd, "minOccurs");
             DescandantMoveAttributeToEnd(xsd, "maxOccurs");
 
-            //if (xsd.Attribute("targetNamespace").IsNotNull()) {
-            //    var a = xsd.Attribute("targetNamespace");
-            //    a.Remove();
-            //    xsd.Add(a);
-            //}
-
-            //if (xsd.Attribute("elementFormDefault").IsNotNull()) {
-            //    var a = xsd.Attribute("elementFormDefault");
-
-            //    a.Remove();
-            //    xsd.Add(a);
-            //}
-
             var rootType = xsd.Elements().Where(x => x.Name.LocalName == "complexType" && x.Attribute("name").IsNotNull() && x.Attribute("name").Value == rootTypeName).FirstOrDefault();
             if (rootType.IsNotNull()) {
-                rootType.Descendants().Where(x => x.Name.LocalName == "extension").ToList().ForEach(x => {
-                    (x.FirstNode as XElement).Add(new XElement(XName.Get("element", x.Name.NamespaceName),
+                rootType.Descendants().Where(x => x.Name.LocalName == "sequence").ToList().ForEach(x => {
+                    x.Add(new XElement(XName.Get("element", x.Name.NamespaceName),
                         new XAttribute("ref", "ds:Signature"),
                         new XAttribute("minOccurs", "0"),
-                        new XAttribute("maxOccurs", "unbounded")
-                        ));
+                        new XAttribute("maxOccurs", "unbounded"),
+                        new XElement(XName.Get("annotation", x.Name.NamespaceName),
+                            new XElement(XName.Get("documentation", x.Name.NamespaceName),
+                                new XText("Dane podpisu elektronicznego. Kwalifikowany podpis elektroniczny, podpis zaufany lub pieczęć elektroniczna.")
+                            )
+                        )
+                    ));
                 });
             }
 

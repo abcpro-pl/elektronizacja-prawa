@@ -13,6 +13,7 @@
   ===================================================================================*/
 
 
+using Abc.Nes.ArchivalPackage.Cryptography.Model;
 using Abc.Nes.ArchivalPackage.Model;
 using Abc.Nes.Xades;
 using Abc.Nes.Xades.Signature.Parameters;
@@ -20,7 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
-
+using System.Xml.Linq;
 
 namespace Abc.Nes.ArchivalPackage.Cryptography {
     partial class PackageSignerManager {
@@ -59,14 +60,12 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 catch { }
             }
         }
-
         private void SetSigText(iTextSharp.text.pdf.PdfSignatureAppearance sigAppearance, IList<Org.BouncyCastle.X509.X509Certificate> chain) {
             sigAppearance.SignDate = DateTime.Now;
             var signedBy = iTextSharp.text.pdf.PdfPkcs7.GetSubjectFields(chain[0]).GetField("CN");
             var signedOn = sigAppearance.SignDate;
             sigAppearance.Layer2Text = String.Format(SigTextFormat, signedBy, signedOn);
         }
-
         private void SetSigCryptoFromX509(X509Certificate2 cert, Org.BouncyCastle.X509.X509Certificate[] chain, iTextSharp.text.pdf.PdfSignatureAppearance appearance) {
             appearance.SetCrypto(null, chain, null, iTextSharp.text.pdf.PdfSignatureAppearance.WincerSigned);
             appearance.CryptoDictionary = new iTextSharp.text.pdf.PdfSignature(iTextSharp.text.pdf.PdfName.AdobePpkms, iTextSharp.text.pdf.PdfName.AdbePkcs7Sha1) {
@@ -102,7 +101,6 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
 
             appearance.Close(dic2);
         }
-
         private void SetSigPosition(iTextSharp.text.pdf.PdfSignatureAppearance sigAppearance, int oldSigCount) {
             //Note: original formula from QuangNgV, ll = lower left, ur = upper right, coordinates are calculated relative from the lower left of the pdf page
             float llx = (100 + 20) * (oldSigCount % 5),
@@ -229,6 +227,15 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                     }
                 }
             }
+        }
+
+        private SignatureInfo GetPadesInfo(byte[] fileData) {
+            throw new NotImplementedException();
+        }
+
+        private SignatureInfo GetSignatureInfo(XElement e) {
+            throw new NotImplementedException();
+            //return default;
         }
     }
 }

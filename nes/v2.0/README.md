@@ -49,6 +49,7 @@ Wersja  | Opis
 
 Wersja  | Opis
 --------|--------
+1.0.15|Poprawiony błąd przy zapisie podpisanej paczki.
 1.0.14|Dopracowanie opcji zgodności ze schematem `Metadane 1.7`.
 1.0.13|Aktualizacja zależności.
 1.0.12|Dodanie polskich opisów błędów przy walidacji paczki. W&nbsp;pliku `AssemblyIno.cs` projektu należy dodać dyrektywę  `[assembly: NeutralResourcesLanguage("pl")]` lub z&nbsp;poziomu kodu ustawić inne `CultureInfo`.
@@ -63,6 +64,8 @@ Wersja  | Opis
 
 Wersja  | Opis
 --------|--------
+1.0.9|Dodanie metody do podpisywania kolekcji plików wewnątrz paczki.
+1.0.8|Poprawki błędów
 1.0.7|Dopracowanie opcji zgodności ze schematem `Metadane 1.7`.
 1.0.6|Aktualizacja zależności.
 1.0.5|Aktualizacja zależności.
@@ -644,6 +647,35 @@ using (var mgr = new PackageSignerManager()) {
         false, // Podpis zewnętrzny w pliku .xades
         new FileInfo(outputPath).FullName
     );
+}
+```
+
+#### Podpisywanie paczki oraz wybranych plików w paczce eADM
+
+```C#
+var path = @"../../../sample/ValidatedPackage.zip";
+var outputPath = @"../../../sample/SignedPackage.zip";
+using (var mgr = new PackageSignerManager()) {
+    mgr.Sign(new FileInfo(path).FullName,
+        CertUtil.SelectCertificate(),
+        new FileInfo(outputPath).FullName,
+        new SignatureProductionPlace() {
+            City = "Warszawa",
+            CountryName = "Polska",
+            PostalCode = "03-825",
+            StateOrProvince = "mazowieckie"
+        },
+        new SignerRole("Wiceprezes Zarządu"),
+        new string[] {"Dokumenty/Wniosek/Wniosek.xml", "Dokumenty/Tabela_Wydatkow.pdf"}, // Podpisz wybrane pliki w paczce eADM        
+        true, // Podpisz paczkę archiwalną
+        true, // w pliku .xades umieść jedynie referencję do pliku paczki (podpis zewnętrzny - detached)
+        true  // Podpisz pliki w paczce eADM inne niż XML i PDF podpisem zewnętrznym
+        );
+}
+
+var outputXadesFilePath = @"../../../sample/SignedPackage.zip.xades";
+if (File.Exists(outputXadesFilePath)) {
+    // ...
 }
 ```
 

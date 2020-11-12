@@ -64,7 +64,7 @@ namespace Abc.Nes.UnitTests {
             mgr.AddFile(new DocumentFile() {
                 FileData = File.ReadAllBytes(@"../../../sample/sample_file.pdf"),
                 FileName = "TabelaWydatkow.pdf"
-            }, new Document() {
+            }, new Abc.Nes.Document() {
                 Identifiers = new List<Elements.IdentifierElement>() {
                     new Elements.IdentifierElement() {
                         Type = "Numer tabeli",
@@ -176,7 +176,7 @@ namespace Abc.Nes.UnitTests {
             //new Aspose.Pdf.License().SetLicense(licPath);
 
             var path = @"../../../sample/ValidatedPackage.zip";
-            var outputPath = @"../../../sample/SignedPackage.xades";
+            var outputPath = @"../../../sample/SignedPackage.zip";
             using (var mgr = new PackageSignerManager()) {
                 mgr.Sign(new FileInfo(path).FullName,
                     CertUtil.SelectCertificate(),
