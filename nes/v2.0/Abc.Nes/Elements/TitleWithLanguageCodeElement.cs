@@ -19,7 +19,7 @@ using System.Xml.Serialization;
 namespace Abc.Nes.Elements {
     [XmlType(TypeName = "tytul-z-jezykiem-typ")]
     [XmlAnnotation("Element zawierający tytuł dokumentu z podanie kodu języka, w którym go sporządzono.")]
-    public class TitleWithLanguageCodeElement {
+    public class TitleWithLanguageCodeElement : ElementBase {
         [XmlText] public string Value { get; set; } = String.Empty;
 
         [XmlAttribute("kodJezyka")]
@@ -30,7 +30,7 @@ namespace Abc.Nes.Elements {
 
     [XmlType(TypeName = "jezyk-typ")]
     [XmlAnnotation("Element zawierający nazwę i kod języka, w którym go sporządzono.")]
-    public class LanguageElement {
+    public class LanguageElement : ElementBase {
         [XmlText] public string Value { get; set; } = String.Empty;
 
         [XmlAttribute("kodJezyka")]

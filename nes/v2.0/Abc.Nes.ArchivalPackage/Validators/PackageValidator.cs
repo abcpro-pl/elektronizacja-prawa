@@ -198,9 +198,9 @@ namespace Abc.Nes.ArchivalPackage.Validators {
         public bool IsPackageValid(string filePath) {
             using (var zipFile = ZipFile.Read(filePath)) {
                 var zipFileHasMandatoryDirectories =
-                   zipFile.EntryFileNames.Where(x => x.StartsWith(MainDirectoriesName.Files.GetXmlEnum())).Count() > 0 &&
-                   zipFile.EntryFileNames.Where(x => x.StartsWith(MainDirectoriesName.Metadata.GetXmlEnum())).Count() > 0 &&
-                   zipFile.EntryFileNames.Where(x => x.StartsWith(MainDirectoriesName.Objects.GetXmlEnum())).Count() > 0;
+                   zipFile.EntryFileNames.Where(x => x.ToLower().StartsWith(MainDirectoriesName.Files.GetXmlEnum().ToLower())).Count() > 0 &&
+                   zipFile.EntryFileNames.Where(x => x.ToLower().StartsWith(MainDirectoriesName.Metadata.GetXmlEnum().ToLower())).Count() > 0 &&
+                   zipFile.EntryFileNames.Where(x => x.ToLower().StartsWith(MainDirectoriesName.Objects.GetXmlEnum().ToLower())).Count() > 0;
 
                 if (!zipFileHasMandatoryDirectories) { throw new PackageInvalidException(); }
             }

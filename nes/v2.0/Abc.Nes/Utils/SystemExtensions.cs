@@ -104,5 +104,35 @@ namespace System {
                 e.Add(new XAttribute(name, value));
             }
         }
+
+        public static int ToInt(this string value) {
+            try {
+                if (!string.IsNullOrEmpty(value)) {
+                    return Convert.ToInt32(value);
+                }
+                return 0;
+            }
+            catch {
+                return 0;
+            }
+        }
+        public static double ToDouble(this string value) {
+            try {
+                if (!string.IsNullOrEmpty(value)) {
+                    return Convert.ToDouble(value);
+                }
+                return 0;
+            }
+            catch {
+                return 0;
+            }
+        }
+
+        public static string Value(this XAttribute attr) {
+            if (attr.IsNotNull()) {
+                return attr.Value;
+            }
+            return String.Empty;
+        }
     }
 }

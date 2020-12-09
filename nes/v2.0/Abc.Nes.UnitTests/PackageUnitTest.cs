@@ -28,6 +28,17 @@ namespace Abc.Nes.UnitTests {
     [TestClass]
     public class PackageUnitTest {
         [TestMethod]
+        public void Package_LoadPackageEzdPuw() {
+            var path = @"../../../sample/EZD_PUW.zip";
+            var outpath = @"../../../sample/EZD_PUW_generated.zip";
+            var mgr = new PackageManager();
+            mgr.LoadPackage(path);
+            var isNotEmpty = mgr != null && mgr.Package != null && !mgr.Package.IsEmpty;
+            Assert.IsTrue(isNotEmpty);
+            mgr.Save(outpath);
+        }
+
+        [TestMethod]
         public void Package_LoadPackage() {
             var path = @"../../../sample/InvalidPackage.zip";
             var mgr = new PackageManager();
@@ -172,11 +183,11 @@ namespace Abc.Nes.UnitTests {
 
         [TestMethod]
         public void PackageSignerManager_Sign() {
-            //var licPath = @"../../../../../../../Aspose.Total.lic";
-            //new Aspose.Pdf.License().SetLicense(licPath);
+            var licPath = @"../../../../../../../Aspose.Total.lic";
+            new Aspose.Pdf.License().SetLicense(licPath);
 
-            var path = @"../../../sample/ValidatedPackage.zip";
-            var outputPath = @"../../../sample/SignedPackage.zip";
+            var path = @"../../../sample/eNadzorPackage.zip";
+            var outputPath = @"../../../sample/eNadzorPackage_SignedPackage.zip";
             using (var mgr = new PackageSignerManager()) {
                 mgr.Sign(new FileInfo(path).FullName,
                     CertUtil.SelectCertificate(),
@@ -190,7 +201,9 @@ namespace Abc.Nes.UnitTests {
                     new SignerRole("Wiceprezes Zarządu"),
                     true, // Podpisz pliki w paczce archiwalnej
                     true, // Podpisz paczkę archiwalną
-                    false // w pliku .xades umieść jedynie referencję do pliku paczki (podpis zewnętrzny - detached)
+                    true, // w pliku .xades umieść jedynie referencję do pliku paczki (podpis zewnętrzny - detached)
+                    true, // dla plików w paczce w pliku .xades umieść jedynie referencję do pliku paczki (podpis zewnętrzny - detached)
+                    false // dodaj znacznik czasu
                     );
 
             }

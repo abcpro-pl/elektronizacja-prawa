@@ -19,7 +19,7 @@ using System.Xml.Serialization;
 namespace Abc.Nes.Elements {
     [XmlType(TypeName = "wielkosc-format-typ")]
     [XmlAnnotation("Element definiujący wielkość dokumentu. Posiada atrybut miara określający miarę wielkości.")]
-    public class SizeElement {
+    public class SizeElement : ElementBase {
         [XmlText] public string Value { get; set; } = String.Empty;
 
         [XmlAttribute("miara")]

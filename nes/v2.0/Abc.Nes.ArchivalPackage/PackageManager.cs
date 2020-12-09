@@ -27,6 +27,7 @@ using System.Text.RegularExpressions;
 
 namespace Abc.Nes.ArchivalPackage {
     public class PackageManager : IPackageManager {
+        public Enumerations.DocumentType PackageType { get; private set; } = Enumerations.DocumentType.None;
         public Package Package { get; private set; }
         public string FilePath { get; private set; }
         public void AddFile(DocumentFile document, IDocument metadata = null) {
@@ -169,14 +170,14 @@ namespace Abc.Nes.ArchivalPackage {
                     var dirs = dirName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
                     FolderBase folder = null;
 
-                    if (dirs[0] == MainDirectoriesName.Files.GetXmlEnum()) { folder = Package.Documents; }
-                    if (dirs[0] == MainDirectoriesName.Metadata.GetXmlEnum()) { folder = Package.Metadata; }
-                    if (dirs[0] == MainDirectoriesName.Objects.GetXmlEnum()) { folder = Package.Objects; }
+                    if (dirs[0].ToLower() == MainDirectoriesName.Files.GetXmlEnum().ToLower()) { folder = Package.Documents; }
+                    else if (dirs[0].ToLower() == MainDirectoriesName.Metadata.GetXmlEnum().ToLower()) { folder = Package.Metadata; }
+                    else if (dirs[0].ToLower() == MainDirectoriesName.Objects.GetXmlEnum().ToLower()) { folder = Package.Objects; }
 
                     foreach (var dir in dirs) {
-                        if (dir == MainDirectoriesName.Files.GetXmlEnum() ||
-                            dir == MainDirectoriesName.Metadata.GetXmlEnum() ||
-                            dir == MainDirectoriesName.Objects.GetXmlEnum()) { continue; }
+                        if (dir.ToLower() == MainDirectoriesName.Files.GetXmlEnum().ToLower() ||
+                            dir.ToLower() == MainDirectoriesName.Metadata.GetXmlEnum().ToLower() ||
+                            dir.ToLower() == MainDirectoriesName.Objects.GetXmlEnum().ToLower()) { continue; }
 
                         folder = folder.CreateSubFolder(dir);
                     }
@@ -186,9 +187,9 @@ namespace Abc.Nes.ArchivalPackage {
                     var fileName = Path.GetFileName(entry.FileName);
                     var dirs = dirName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
                     FolderBase folder = null;
-                    if (dirs[0] == MainDirectoriesName.Files.GetXmlEnum()) { folder = Package.Documents; }
-                    if (dirs[0] == MainDirectoriesName.Metadata.GetXmlEnum()) { folder = Package.Metadata; }
-                    if (dirs[0] == MainDirectoriesName.Objects.GetXmlEnum()) { folder = Package.Objects; }
+                    if (dirs[0].ToLower() == MainDirectoriesName.Files.GetXmlEnum().ToLower()) { folder = Package.Documents; }
+                    else if (dirs[0].ToLower() == MainDirectoriesName.Metadata.GetXmlEnum().ToLower()) { folder = Package.Metadata; }
+                    else if (dirs[0].ToLower() == MainDirectoriesName.Objects.GetXmlEnum().ToLower()) { folder = Package.Objects; }
                     foreach (var dir in dirs) {
                         if (dirs[0] == dir) { continue; }
                         var _folder = folder.GetFolder(dir);
@@ -201,7 +202,7 @@ namespace Abc.Nes.ArchivalPackage {
                     var fileData = stream.ToArray();
 
                     ItemBase item;
-                    if (dirs[0] == MainDirectoriesName.Files.GetXmlEnum()) {
+                    if (dirs[0].ToLower() == MainDirectoriesName.Files.GetXmlEnum().ToLower()) {
                         item = new DocumentFile() { FileName = fileName, FilePath = entry.FileName };
                     }
                     else {
@@ -209,6 +210,13 @@ namespace Abc.Nes.ArchivalPackage {
                     }
 
                     item.Init(fileData);
+
+                    if (item is MetadataFile && PackageType == Enumerations.DocumentType.None) {
+                        try {
+                            PackageType = (item as MetadataFile).Document.DocumentType;
+                        }
+                        catch { }
+                    }
 
                     folder.AddItem(item);
                 }
@@ -226,7 +234,7 @@ namespace Abc.Nes.ArchivalPackage {
         }
         public MetadataFile GetMetadataFile(ItemBase documentFile) {
             if (documentFile.IsNotNull() && documentFile.FilePath.IsNotNullOrEmpty()) {
-                var regex = new Regex(Regex.Escape($"{MainDirectoriesName.Files.GetXmlEnum()}"));
+                var regex = new Regex(Regex.Escape($"{MainDirectoriesName.Files.GetXmlEnum()}"), RegexOptions.IgnoreCase);
                 var metadataFilePath = regex.Replace(documentFile.FilePath, MainDirectoriesName.Metadata.GetXmlEnum(), 1);
                 return GetItemByFilePath($"{metadataFilePath}.xml") as MetadataFile;
             }

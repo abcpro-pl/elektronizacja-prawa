@@ -30,7 +30,7 @@ namespace Abc.Nes {
         [XmlIgnore] public DocumentType DocumentType => DocumentType.Nes17;
         [XmlElement("odbiorca")] public List<RecipientElement17> Recipients { get; set; }
         [XmlElement("data")] [XmlRequired] public List<DateElement17> Dates { get; set; }
-        [XmlElement("dostep")] [XmlRequired] public List<AccessElement> Access { get; set; }
+        [XmlElement("dostep")] [XmlRequired] public List<AccessElement17> Access { get; set; }
         [XmlElement("format")] [XmlRequired] public List<FormatElement17> Formats { get; set; }
         [XmlElement("grupowanie")] public List<GroupingElement> Groupings { get; set; }
         [XmlElement("identyfikator")] [XmlRequired] public List<IdentifierElement> Identifiers { get; set; }

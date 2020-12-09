@@ -109,5 +109,9 @@ Umożliwia wyszukiwanie i sortowanie dokumentów lub ich grupy według czasu zda
         public bool ShouldSerializeDateTo() { return DateTo.IsNotNullOrEmpty(); }
 
         // -----------------------------przedzial-czasu-grupa -----------------------------------
+
+        public DateTime GetDate() { try { return Convert.ToDateTime(Date); } catch { } return default; }
+        public DateTime GetDateFrom() { try { return Convert.ToDateTime(DateFrom); } catch { } return default; }
+        public DateTime GetDateTo() { try { return Convert.ToDateTime(DateTo); } catch { } return default; }
     }
 }

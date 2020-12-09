@@ -17,7 +17,7 @@ using System.Xml.Serialization;
 namespace Abc.Nes.Elements {
     [XmlType(TypeName = "grupowanie-typ")]
     [XmlAnnotation(@"Wskazanie przynależności do akt sprawy lub innego zbioru dokumentów. Pozwala na łączenie dokumentów w grupy.")]
-    public class GroupingElement {
+    public class GroupingElement : ElementBase {
         [XmlElement("typGrupy")]
         [XmlSynonyms("typ")]
         [XmlRequired]

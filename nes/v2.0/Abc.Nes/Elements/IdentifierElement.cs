@@ -22,7 +22,7 @@ namespace Abc.Nes.Elements {
 Umożliwia jednoznaczną identyfikację dokumentu w określonym zbiorze. 
 Pozwala na szybkie odnalezienie tego samego dokumentu na podstawie jego identyfikatora w różnym czasie. 
 Stwarza podstawy do tworzenia jednoznacznych powiązań (relacji) między dokumentami w określonym zbiorze np. przyporządkowując załączniki, notatki, potwierdzenia wysłania, potwierdzenia doręczenia, podpisy elektronicznie, opinie itd.")]
-    public class IdentifierElement {
+    public class IdentifierElement : ElementBase {
         [XmlElement("typidentyfikatora")]
         [XmlSynonyms("typ", DocumentType.Nes17)]
         [XmlAnnotation("Typ identyfikatora np. Znak sprawy.")]

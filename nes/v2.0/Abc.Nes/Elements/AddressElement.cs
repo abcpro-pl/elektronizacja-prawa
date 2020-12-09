@@ -18,14 +18,14 @@ using System.Xml.Serialization;
 namespace Abc.Nes.Elements {
     [XmlType(TypeName = "adres-typ")]
     [XmlAnnotation("Element zawierający dane adresowe.")]
-    public class AddressElement {        
+    public class AddressElement : ElementBase {
         [XmlElement("kodPocztowy")]
         [XmlSynonyms("kod")]
         [XmlAnnotation("Kod pocztowy")]
         public string ZipCode { get; set; }
-        
+
         [XmlElement("poczta")] [XmlAnnotation("Nazwa urzędu pocztowego")] public string PostName { get; set; }
-                
+
         [XmlElement("miejscowosc")]
         [XmlAnnotation("Nazwa miejscowości")]
         [XmlRequired]

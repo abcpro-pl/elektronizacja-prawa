@@ -28,6 +28,17 @@ namespace Abc.Nes.Enumerations {
         All
     }
 
+    [XmlType(TypeName = "dostepnosc-typ")]
+    [XmlAnnotation(@"Słownik typów dostępności.")]
+    public enum AccessType17 {
+        [XmlEnum("wszystko")]
+        All,
+        [XmlEnum("metadane")]
+        Metadata,
+        [XmlEnum("niedostepne")]
+        NotAvailable       
+    }
+
     [XmlType(TypeName = "dostepnosc-data-typ")]
     [XmlAnnotation("Typ daty dostepności.")]
     public enum AccessDateType {

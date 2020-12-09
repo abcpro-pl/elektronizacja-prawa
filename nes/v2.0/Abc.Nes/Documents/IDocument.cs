@@ -13,6 +13,7 @@
   ===================================================================================*/
 
 using Abc.Nes.Enumerations;
+using System.Xml.Serialization;
 
 namespace Abc.Nes {
     /// <summary>
@@ -20,5 +21,10 @@ namespace Abc.Nes {
     /// </summary>
     public interface IDocument {
         DocumentType DocumentType { get; }
+    }
+
+    public abstract class ElementBase {
+        [XmlAttribute]
+        public string ElementTypeFullName { get { return this.GetType().FullName; } set { /*ReadOnly*/ } }
     }
 }

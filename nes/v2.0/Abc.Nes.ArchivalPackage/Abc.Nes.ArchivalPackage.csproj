@@ -16,10 +16,10 @@
     <PackageId>ABCPRO.NES.ArchivalPackage</PackageId>
     <Product>ABCPRO.NES.ArchivalPackage</Product>
     <PackageProjectUrl>https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0</PackageProjectUrl>
-    <AssemblyVersion>1.0.0.15</AssemblyVersion>
-    <FileVersion>1.0.0.15</FileVersion>
-    <Version>1.0.15</Version>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <!--<AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
+    <Version>1.1.0</Version>-->
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -34,8 +34,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ABCPRO.NES" Version="1.0.10" />
-    <PackageReference Include="DotNetZip" Version="1.13.8" />    
+    <PackageReference Include="DotNetZip" Version="1.15.0" />    
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Abc.Nes\Abc.Nes.csproj" />
   </ItemGroup>
 
   <ItemGroup>

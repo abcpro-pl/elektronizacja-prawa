@@ -16,10 +16,10 @@
     <PackageId>ABCPRO.NES.XAdES</PackageId>
     <Product>ABCPRO.NES.XAdES</Product>
     <PackageProjectUrl>https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0</PackageProjectUrl>
-    <AssemblyVersion>1.0.0.6</AssemblyVersion>
-    <FileVersion>1.0.0.6</FileVersion>
-    <Version>1.0.6</Version>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <!--<AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
+    <Version>1.1.0</Version>-->
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -41,7 +41,7 @@
   <ItemGroup>
     <PackageReference Include="System.Security.Permissions" Version="4.7.0" />
     <PackageReference Include="System.Security.Cryptography.Pkcs" Version="4.7.0" />    
-    <PackageReference Include="Portable.BouncyCastle" Version="1.8.6.7" />
+    <PackageReference Include="Portable.BouncyCastle" Version="1.8.8" />
     <PackageReference Include="System.Memory" Version="4.5.4" />
   </ItemGroup>
 

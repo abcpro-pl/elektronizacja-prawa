@@ -19,7 +19,7 @@ using System.Xml.Serialization;
 namespace Abc.Nes.Elements {
     [XmlType(TypeName = "id-typ")]
     [XmlAnnotation("Identyfikator elementu wraz ze zdefiniowanym typem.")]
-    public class IdElement {
+    public class IdElement : ElementBase {
         [XmlText] public string Value { get; set; } = String.Empty;
 
         [XmlAttribute("typId")]

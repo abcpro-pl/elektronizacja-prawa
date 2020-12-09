@@ -49,7 +49,7 @@ namespace Abc.Nes.Enumerations {
     public enum DocumentDateType {
         [XmlEnum("")]
         None,
-        [XmlEnum("dostępny po")]
+        [XmlEnum("dostępnyPo")]
         AvailableAfter,
         [XmlEnum("opublikowany")]
         Published,
@@ -67,7 +67,7 @@ namespace Abc.Nes.Enumerations {
         Approved,
         [XmlEnum("zmodyfikowany")]
         Modified,
-        [XmlEnum("data skrajne")]
+        [XmlEnum("daty skrajne")]
         Range      
     }
 }

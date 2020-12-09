@@ -19,7 +19,7 @@ using System.Xml.Serialization;
 namespace Abc.Nes.Elements {
     [XmlType(TypeName = "kontakt-typ")]
     [XmlAnnotation("Element zawierający dane kontaktowe.")]
-    public class ContactElement {
+    public class ContactElement : ElementBase {
         [XmlText] public string Value { get; set; } = String.Empty;
 
         [XmlAttribute("typKontaktu")]

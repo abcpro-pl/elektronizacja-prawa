@@ -29,7 +29,7 @@ namespace Abc.Nes.UnitTests {
             using (var xsdGenerator = new XsdGenerator()) {
                 schema = xsdGenerator.GetSchema();
             }            
-            var filePath = @"..\..\..\nes_20_generated.xsd";
+            var filePath = @"..\..\..\Metadane-2.0.xsd";
             schema.Save(filePath);
             Assert.IsTrue(schema != null);
         }
@@ -39,7 +39,7 @@ namespace Abc.Nes.UnitTests {
             using (var xsdGenerator = new XsdGenerator()) {
                 schema = xsdGenerator.GetSchema(typeof(Document17));
             }            
-            var filePath = @"..\..\..\nes_17_generated.xsd";
+            var filePath = @"..\..\..\Metadane-1.7.xsd";
             schema.Save(filePath);
             Assert.IsTrue(schema != null);
         }

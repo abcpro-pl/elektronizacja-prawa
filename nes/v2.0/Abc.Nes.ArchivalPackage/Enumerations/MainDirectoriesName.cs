@@ -16,11 +16,11 @@ using System.Xml.Serialization;
 
 namespace Abc.Nes.ArchivalPackage {
     public enum MainDirectoriesName {
-        [XmlEnum("Dokumenty")]
+        [XmlEnum("dokumenty")]
         Files,
-        [XmlEnum("Metadane")]
+        [XmlEnum("metadane")]
         Metadata,
-        [XmlEnum("Sprawy")]
+        [XmlEnum("sprawy")]
         Objects
     }
 }

@@ -29,7 +29,9 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 bool signPackageFiles = true,
                 bool signPackageFile = true,
                 bool detachedSignaturePackageFile = false,
-                bool detachedSignaturePackageFiles = false);
+                bool detachedSignaturePackageFiles = false,
+                bool addTimeStamp = false,
+                string timeStampServerUrl = "http://time.certum.pl");
         string Sign(string sourcePackageFilePath,
             X509Certificate2 cert,
             string outputPackageFilePath = null,
@@ -38,14 +40,18 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             string[] internalFiles = null,
             bool signPackageFile = true,
             bool detachedSignaturePackageFile = true,
-            bool detachedSignaturePackageFiles = true);
+            bool detachedSignaturePackageFiles = true,
+            bool addTimeStamp = false,
+            string timeStampServerUrl = "http://time.certum.pl");
         void SignInternalFile(string sourcePackageFilePath,
                 string internalPath,
                 X509Certificate2 cert,
                 Abc.Nes.Xades.Signature.Parameters.SignatureProductionPlace productionPlace = null,
                 Abc.Nes.Xades.Signature.Parameters.SignerRole signerRole = null,
                 bool detachedSignaturePackageFile = false,
-                string outputPackageFilePath = null);
+                string outputPackageFilePath = null,
+                bool addTimeStamp = false,
+                string timeStampServerUrl = "http://time.certum.pl");
 
         void SignInternalFile(
                 string sourcePackageFilePath,
@@ -55,7 +61,9 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 Abc.Nes.Xades.Signature.Parameters.SignatureProductionPlace productionPlace = null,
                 Abc.Nes.Xades.Signature.Parameters.SignerRole signerRole = null,
                 bool detachedSignaturePackageFile = false,
-                string outputPackageFilePath = null);
+                string outputPackageFilePath = null,
+                bool addTimeStamp = false,
+                string timeStampServerUrl = "http://time.certum.pl");
 
         SignatureInfo GetSignatureInfo(string packageFilePath, string internalPath);
         SignatureInfo GetSignatureInfo(string xadesFilePath);
@@ -70,7 +78,9 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             bool signPackageFiles = true,
             bool signPackageFile = true,
             bool detachedSignaturePackageFile = false,
-            bool detachedSignaturePackageFiles = false) {
+            bool detachedSignaturePackageFiles = false,
+            bool addTimeStamp = false,
+            string timeStampServerUrl = "http://time.certum.pl") {
 
             if (cert == null) { throw new ArgumentNullException("cert"); }
             if (sourcePackageFilePath == null) { throw new ArgumentNullException("sourcePackageFilePath"); }
@@ -85,18 +95,18 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             if (items != null && signPackageFiles) {
                 foreach (var item in items) {
                     if (item.FileName.ToLower().EndsWith(".xml")) {
-                        SignXmlItem(item, xadesManager, cert, productionPlace, signerRole);
+                        SignXmlItem(item, xadesManager, cert, productionPlace, signerRole, addTimeStamp ? XadesFormat.XadesT : XadesFormat.XadesBes, timeStampServerUrl);
                     }
                     else if (item.FileName.ToLower().EndsWith(".pdf")) {
-                        SignPdfItem(item, cert);
+                        SignPdfItem(item, cert, addTimeStamp, timeStampServerUrl: timeStampServerUrl);
                     }
                     else {
                         if (detachedSignaturePackageFiles) {
                             // place signature in detached .xades file
-                            SignDetachedOtherItem(mgr, item, xadesManager, cert, productionPlace, signerRole);
+                            SignDetachedOtherItem(mgr, item, xadesManager, cert, productionPlace, signerRole, addTimeStamp, timeStampServerUrl);
                         }
                         else {
-                            SignOtherItem(item, xadesManager, cert, productionPlace, signerRole);
+                            SignOtherItem(item, xadesManager, cert, productionPlace, signerRole, addTimeStamp, timeStampServerUrl);
                         }
                     }
                 }
@@ -105,6 +115,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             mgr.Save(outputPackageFilePath, true);
             if (signPackageFile) {
                 SignatureDocument result;
+                Xades.Upgraders.SignatureFormat? sigFormat = addTimeStamp ? Xades.Upgraders.SignatureFormat.XAdES_T : (Xades.Upgraders.SignatureFormat?)null;
 
                 if (detachedSignaturePackageFile) {
                     // place signature in detached .xades file
@@ -117,7 +128,8 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 }
                 else {
                     using (var stream = new FileStream(outputPackageFilePath, FileMode.Open)) {
-                        result = xadesManager.CreateEnvelopingSignature(stream, cert, productionPlace, signerRole);
+                        result = xadesManager.CreateEnvelopingSignature(stream, cert, productionPlace, signerRole,
+                            null, sigFormat, timeStampServerUrl);
                     }
                     if (result != null) {
                         if (!outputPackageFilePath.ToLower().EndsWith(".xades")) {
@@ -140,7 +152,9 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             string[] internalFiles = null,
             bool signPackageFile = true,
             bool detachedSignaturePackageFile = true,
-            bool detachedSignaturePackageFiles = true) {
+            bool detachedSignaturePackageFiles = true,
+            bool addTimeStamp = false,
+            string timeStampServerUrl = "http://time.certum.pl") {
 
             if (cert == null) { throw new ArgumentNullException("cert"); }
             if (sourcePackageFilePath == null) { throw new ArgumentNullException("sourcePackageFilePath"); }
@@ -156,18 +170,18 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 foreach (var item in items) {
                     if (!internalFiles.Contains(item.FilePath)) { continue; }
                     if (item.FileName.ToLower().EndsWith(".xml")) {
-                        SignXmlItem(item, xadesManager, cert, productionPlace, signerRole);
+                        SignXmlItem(item, xadesManager, cert, productionPlace, signerRole, addTimeStamp ? XadesFormat.XadesT : XadesFormat.XadesBes, timeStampServerUrl);
                     }
                     else if (item.FileName.ToLower().EndsWith(".pdf")) {
-                        SignPdfItem(item, cert);
+                        SignPdfItem(item, cert, addTimeStamp, timeStampServerUrl: timeStampServerUrl);
                     }
                     else {
                         if (detachedSignaturePackageFiles) {
                             // place signature in detached .xades file
-                            SignDetachedOtherItem(mgr, item, xadesManager, cert, productionPlace, signerRole);
+                            SignDetachedOtherItem(mgr, item, xadesManager, cert, productionPlace, signerRole, addTimeStamp, timeStampServerUrl);
                         }
                         else {
-                            SignOtherItem(item, xadesManager, cert, productionPlace, signerRole);
+                            SignOtherItem(item, xadesManager, cert, productionPlace, signerRole, addTimeStamp, timeStampServerUrl);
                         }
                     }
                 }
@@ -176,10 +190,13 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             mgr.Save(outputPackageFilePath, true);
             if (signPackageFile) {
                 SignatureDocument result;
+                Xades.Upgraders.SignatureFormat? sigFormat = addTimeStamp ? Xades.Upgraders.SignatureFormat.XAdES_T : (Xades.Upgraders.SignatureFormat?)null;
 
                 if (detachedSignaturePackageFile) {
                     // place signature in detached .xades file
-                    result = xadesManager.CreateDetachedSignature(outputPackageFilePath, cert, productionPlace, signerRole);
+                    result = xadesManager.CreateDetachedSignature(outputPackageFilePath, cert, productionPlace, signerRole,
+                          sigFormat, timeStampServerUrl);
+
                     if (result != null) {
                         var resultFilePath = $"{outputPackageFilePath}.xades";
                         result.Save(resultFilePath);
@@ -188,7 +205,8 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 }
                 else {
                     using (var stream = new FileStream(outputPackageFilePath, FileMode.Open)) {
-                        result = xadesManager.CreateEnvelopingSignature(stream, cert, productionPlace, signerRole);
+                        result = xadesManager.CreateEnvelopingSignature(stream, cert, productionPlace, signerRole,
+                            null, sigFormat, timeStampServerUrl);
                     }
                     if (result != null) {
                         if (!outputPackageFilePath.ToLower().EndsWith(".xades")) {
@@ -210,7 +228,9 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             Abc.Nes.Xades.Signature.Parameters.SignatureProductionPlace productionPlace = null,
             Abc.Nes.Xades.Signature.Parameters.SignerRole signerRole = null,
             bool detachedSignaturePackageFile = false,
-            string outputPackageFilePath = null) {
+            string outputPackageFilePath = null,
+            bool addTimeStamp = false,
+            string timeStampServerUrl = "http://time.certum.pl") {
 
             if (cert == null) { throw new ArgumentNullException("cert"); }
             if (sourcePackageFilePath == null) { throw new ArgumentNullException("sourcePackageFilePath"); }
@@ -221,7 +241,8 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             mgr.LoadPackage(sourcePackageFilePath);
             var item = mgr.GetItemByFilePath(internalPath);
             if (item != null) {
-                SignInternalFile(sourcePackageFilePath, item, mgr, cert, productionPlace, signerRole, detachedSignaturePackageFile, outputPackageFilePath);
+                SignInternalFile(sourcePackageFilePath, item, mgr, cert, productionPlace, signerRole, detachedSignaturePackageFile,
+                    outputPackageFilePath, addTimeStamp, timeStampServerUrl);
             }
         }
 
@@ -233,7 +254,9 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             Abc.Nes.Xades.Signature.Parameters.SignatureProductionPlace productionPlace = null,
             Abc.Nes.Xades.Signature.Parameters.SignerRole signerRole = null,
             bool detachedSignaturePackageFile = false,
-            string outputPackageFilePath = null) {
+            string outputPackageFilePath = null,
+            bool addTimeStamp = false,
+            string timeStampServerUrl = "http://time.certum.pl") {
 
             if (cert == null) { throw new ArgumentNullException("cert"); }
             if (sourcePackageFilePath == null) { throw new ArgumentNullException("sourcePackageFilePath"); }
@@ -247,19 +270,19 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
 
             if (item.FileName.ToLower().EndsWith(".xml")) {
                 // place signature inside root element
-                SignXmlItem(item, xadesManager, cert, productionPlace, signerRole);
+                SignXmlItem(item, xadesManager, cert, productionPlace, signerRole, addTimeStamp ? XadesFormat.XadesT : XadesFormat.XadesBes, timeStampServerUrl);
             }
             else if (item.FileName.ToLower().EndsWith(".pdf")) {
                 // pades
-                SignPdfItem(item, cert);
+                SignPdfItem(item, cert, addTimeStamp, timeStampServerUrl: timeStampServerUrl);
             }
             else {
                 if (detachedSignaturePackageFile) {
                     // place signature in detached .xades file
-                    SignDetachedOtherItem(mgr, item, xadesManager, cert, productionPlace, signerRole);
+                    SignDetachedOtherItem(mgr, item, xadesManager, cert, productionPlace, signerRole, addTimeStamp, timeStampServerUrl);
                 }
                 else {
-                    SignOtherItem(item, xadesManager, cert, productionPlace, signerRole);
+                    SignOtherItem(item, xadesManager, cert, productionPlace, signerRole, addTimeStamp, timeStampServerUrl);
                 }
             }
 

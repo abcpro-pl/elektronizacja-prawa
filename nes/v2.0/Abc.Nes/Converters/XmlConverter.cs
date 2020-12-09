@@ -44,14 +44,22 @@ namespace Abc.Nes.Converters {
 
         public XElement GetXml(IDocument doc) {
             var type = doc.GetType();
-            var xmlserializer = new XmlSerializer(type);
+            var xmlserializer = new NesXmlSerializer(type);
             var stringWriter = new Utf8StringWriter();
             using (var writer = System.Xml.XmlWriter.Create(stringWriter, new System.Xml.XmlWriterSettings() {
                 Encoding = Encoding.UTF8
             })) {
-                xmlserializer.Serialize(writer, doc);
-                var xmlText = stringWriter.ToString();
-                return XElement.Parse(xmlText);
+                xmlserializer.Serialize(writer, stringWriter, doc);
+                //var xmlText = stringWriter.ToString();
+                //var xml = XElement.Parse(xmlText);
+                XNamespace xsiNs = "http://www.w3.org/2001/XMLSchema-instance";
+                if (doc.DocumentType == Enumerations.DocumentType.Nes17) {
+                    xmlserializer.Xml.Add(new XAttribute(xsiNs + "schemaLocation", "http://www.mswia.gov.pl/standardy/ndap Metadane-1.7.xsd"));
+                }
+                else if (doc.DocumentType == Enumerations.DocumentType.Nes20) {
+                    xmlserializer. Xml.Add(new XAttribute(xsiNs + "schemaLocation", "http://www.mswia.gov.pl/standardy/ndap Metadane-2.0.xsd"));
+                }
+                return xmlserializer.Xml;
             }
         }
 
@@ -68,13 +76,13 @@ namespace Abc.Nes.Converters {
                 if (Document.InternalValidateXml(xmlText)) {
                     xmlText = UpdateToCurrentVersion(xmlText);
                     using (var stream = xmlText.GetMemoryStream()) {
-                        var serializer = new XmlSerializer(typeof(Document));
+                        var serializer = new NesXmlSerializer(typeof(Document));
                         return serializer.Deserialize(stream) as Document;
                     }
                 }
                 else if (Document17.InternalValidateXml(xmlText)) {
                     using (var stream = xmlText.GetMemoryStream()) {
-                        var serializer = new XmlSerializer(typeof(Document17));
+                        var serializer = new NesXmlSerializer(typeof(Document17));
                         return serializer.Deserialize(stream) as Document17;
                     }
                 }

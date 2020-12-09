@@ -21,7 +21,7 @@ using System.Xml.Serialization;
 namespace Abc.Nes.Elements {
     [XmlType(TypeName = "relacja-typ")]
     [XmlAnnotation(@"Określenie bezpośredniego powiązania z innym dokumentem i rodzaju tego powiązania. Pozwala na odnalezienie dokumentów, które są bezpośrednio powiązane z danym dokumentem. Na przykład kolejnych wersji tego samego dokumentu, dekretacji dokumentu, dokumentów składających się z innych dokumentów, załączników do dokumentów, potwierdzeń doręczenia dokumentu, itd.")]
-    public class RelationElement {
+    public class RelationElement : ElementBase {
         [XmlElement("identyfikator")] [XmlRequired] public List<IdentifierElement> Identifiers { get; set; }
 
         [XmlElement("typRelacji")]
