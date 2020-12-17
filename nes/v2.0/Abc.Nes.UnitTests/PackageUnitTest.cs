@@ -220,7 +220,8 @@ namespace Abc.Nes.UnitTests {
                     true, // Podpisz paczkę archiwalną
                     true, // w pliku .xades umieść jedynie referencję do pliku paczki (podpis zewnętrzny - detached)
                     true, // dla plików w paczce w pliku .xades umieść jedynie referencję do pliku paczki (podpis zewnętrzny - detached)
-                    false // dodaj znacznik czasu
+                    true, // dodaj znacznik czasu
+                    "http://time.certum.pl" // adres serwera znacznika czasu
                     );
 
             }

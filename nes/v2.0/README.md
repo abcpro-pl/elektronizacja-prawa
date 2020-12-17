@@ -26,18 +26,15 @@ W tym katalogu znajduje się:
 
 <a href="https://www.nuget.org/packages/ABCPRO.NES/"><img alt="Nuget" src="https://img.shields.io/nuget/v/ABCPRO.NES?label=abcpro.nes%20nuget"> <img alt="Nuget" src="https://img.shields.io/nuget/dt/ABCPRO.NES"></a>
 
-<a href="https://www.nuget.org/packages/ABCPRO.NES.ArchivalPackage/"><img alt="Nuget" src="https://img.shields.io/nuget/v/ABCPRO.NES.ArchivalPackage?label=abcpro.nes.archivalpackage%20nuget"> <img alt="Nuget" src="https://img.shields.io/nuget/dt/ABCPRO.NES.ArchivalPackage"></a>
-
-<a href="https://www.nuget.org/packages/ABCPRO.NES.XAdES/"><img alt="Nuget" src="https://img.shields.io/nuget/v/ABCPRO.NES.XAdES?label=abcpro.nes.xades%20nuget"> <img alt="Nuget" src="https://img.shields.io/nuget/dt/ABCPRO.NES.XAdES"></a>
-
-<a href="https://www.nuget.org/packages/ABCPRO.NES.ArchivalPackage.Cryptography/"><img alt="Nuget" src="https://img.shields.io/nuget/v/ABCPRO.NES.ArchivalPackage.Cryptography?label=abcpro.nes.archivalpackage.cryptography%20nuget"> <img alt="Nuget" src="https://img.shields.io/nuget/dt/ABCPRO.NES.ArchivalPackage.Cryptography"></a>
-
  ## Historia wersji
 
 ### Historia wersji ABCPRO.NES
 
 Wersja  | Opis
 --------|--------
+1.1.2|Dodanie metody do podpisywania plików PDF z dysku, poprawione wyświetlanie informacji o podpisie na PDF.
+1.1.1|Usunięcie błędów z wczytywanie schematu metadanych 1.7, dodanie opcji wskazania serwera znacznika czasu podczas podpisywania.
+1.1.0|Złączenie wszystkich bibliotek w jeden pakiet 
 1.0.10|Dopracowanie opcji zgodności ze schematem `Metadane 1.7`.
 1.0.9|Dodanie wsparcia dla schematu metadanych w wersji 1.7 (Klasa `Document17`) czyli używanych przez paczkę archiwalną przekazywaną do AP. Natomiast standardowa klasa `Document` jest zgodna ze schematem 2.0 na potrzeby paczki eADM.
 1.0.8|Dodanie polskich opisów błędów przy walidacji metadanych. W&nbsp;pliku `AssemblyIno.cs` projektu należy dodać dyrektywę  `[assembly: NeutralResourcesLanguage("pl")]` lub z&nbsp;poziomu kodu ustawić inne `CultureInfo`.
@@ -49,6 +46,7 @@ Wersja  | Opis
 
 Wersja  | Opis
 --------|--------
+ABCPRO.NES| Zawarty w pakiecie głównym
 1.0.15|Poprawiony błąd przy zapisie podpisanej paczki.
 1.0.14|Dopracowanie opcji zgodności ze schematem `Metadane 1.7`.
 1.0.13|Aktualizacja zależności.
@@ -64,6 +62,7 @@ Wersja  | Opis
 
 Wersja  | Opis
 --------|--------
+ABCPRO.NES| Zawarty w pakiecie głównym
 1.0.9|Dodanie metody do podpisywania kolekcji plików wewnątrz paczki.
 1.0.8|Poprawki błędów
 1.0.7|Dopracowanie opcji zgodności ze schematem `Metadane 1.7`.
@@ -79,6 +78,7 @@ Wersja  | Opis
 
 Wersja  | Opis
 --------|--------
+ABCPRO.NES| Zawarty w pakiecie głównym
 1.0.6|Wymiana biblioteki `BouncyCastle.NetCore` na `Portable.BouncyCastle` w&nbsp;celu uniknięcia konfliktu z&nbsp;referencją występującą w&nbsp;`ABCPRO.NES.ArchivalPackage.Cryptography`.
 1.0.5|Hermetyzacja kodu
 1.0.4|Dodanie biblioteki umożliwiającej podpisywanie dokumentów XML. Biblioteka bazuje na kodzie źródłowym [`Microsoft .NET Framework`](https://github.com/dotnet/runtime/tree/master/src/libraries/System.Security.Cryptography.Xml/src) w&nbsp;przestrzeni nazw `Microsoft.XmlDsig`, projektu [`Microsoft.Xades`](https://github.com/Caliper/Xades) utworzonym przez francuski oddział firmy Microsoft oraz na podstawie kodu źródłowego [`FirmaXadesNet`](https://github.com/ctt-gob-es/FirmaXadesNet45) utworzonym przez Departament Nowych Technologii Rady Urbanizacji Miasta Cartagena. Biblioteka pozwala na opatrywanie pliku metadanych bezpiecznym podpisem elektronicznym.  
@@ -339,8 +339,6 @@ var document = new Abc.Nes.Document() {
 ```
 [&#8682; Do góry](#paczka-eadm-i-niezbędne-elementy-struktury-dokumentu-elektronicznego-20)
 
-### ABCPRO.NES.ArchivalPackage
-
 #### Ładowanie paczki eADM
 
 ``` C#
@@ -504,8 +502,6 @@ if (!result.IsCorrect) {
 
 [&#8682; Do góry](#paczka-eadm-i-niezbędne-elementy-struktury-dokumentu-elektronicznego-20)
 
-### ABCPRO.NES.XAdES
-
 #### Podpisywanie pliku metadanych (podpis w treści pliku XML - enveloped)
 
 ```C#
@@ -574,8 +570,6 @@ using (var manager = new XadesManager()) {
 ```
 [&#8682; Do góry](#paczka-eadm-i-niezbędne-elementy-struktury-dokumentu-elektronicznego-20)
 
-### ABCPRO.NES.ArchivalPackage.Cryptography
-
 #### Podpisywanie paczki eADM  (podpis okalający - enveloping)
 
 ```C#
@@ -594,7 +588,9 @@ using (var mgr = new PackageSignerManager()) {
     new SignerRole("Wiceprezes Zarządu"),
     true, // Podpisz pliki w paczce eADM
     true, // Podpisz paczkę archiwalną
-    false // w pliku .xades umieść jedynie referencję do pliku paczki (podpis zewnętrzny - detached)
+    false, // w pliku .xades umieść jedynie referencję do pliku paczki (podpis zewnętrzny - detached)
+    true, // dodaj znacznik czasu
+    "http://time.certum.pl" // adres serwera znacznika czasu
     );
 }
 ```
@@ -677,6 +673,25 @@ var outputXadesFilePath = @"../../../sample/SignedPackage.zip.xades";
 if (File.Exists(outputXadesFilePath)) {
     // ...
 }
+```
+
+#### Podpisywanie pliku PDF znajdującego się na dysku
+
+```C#
+var path = @"../../../sample/sample_file.pdf";
+var imagePath = @"../../../sample/legislator.png";
+var outputpath = @"../../../sample/sample_file.signed.pdf";
+var mgr = new PackageSignerManager();
+mgr.SignPdfFile(
+    new FileInfo(path).FullName,
+    CertUtil.SelectCertificate(),
+    "Podpis za zgodnosc z oryginalem",
+    "Warszawa",
+    true,
+    apperancePngImage :File.ReadAllBytes(new FileInfo(imagePath).FullName), // wielkość obrazka 200x50 pikseli
+    apperancePngImageLocation: PdfSignatureLocation.BottomLeft,
+    outputFilePath: new FileInfo(outputpath).FullName
+);
 ```
 
 [&#8682; Do góry](#paczka-eadm-i-niezbędne-elementy-struktury-dokumentu-elektronicznego-20)
