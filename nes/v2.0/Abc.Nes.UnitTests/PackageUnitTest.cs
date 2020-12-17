@@ -28,6 +28,26 @@ namespace Abc.Nes.UnitTests {
     [TestClass]
     public class PackageUnitTest {
         [TestMethod]
+        public void SignPdf() {
+            var path = @"../../../sample/sample_file.pdf";
+            var imagePath = @"../../../sample/legislator.png";
+            var outputpath = @"../../../sample/sample_file.signed.pdf";
+            var mgr = new PackageSignerManager();
+            mgr.SignPdfFile(
+                new FileInfo(path).FullName,
+                CertUtil.SelectCertificate(),
+                "Podpis za zgodnosc z oryginalem",
+                "Warszawa",
+                true,
+                apperancePngImage :File.ReadAllBytes(new FileInfo(imagePath).FullName),
+                apperancePngImageLocation: PdfSignatureLocation.BottomLeft,
+                outputFilePath: new FileInfo(outputpath).FullName
+           );
+
+            Assert.IsTrue(new FileInfo(outputpath).Exists);
+        }
+
+        [TestMethod]
         public void Package_LoadPackageEzdPuw() {
             var path = @"../../../sample/EZD_PUW.zip";
             var outpath = @"../../../sample/EZD_PUW_generated.zip";
@@ -182,10 +202,7 @@ namespace Abc.Nes.UnitTests {
         }
 
         [TestMethod]
-        public void PackageSignerManager_Sign() {
-            var licPath = @"../../../../../../../Aspose.Total.lic";
-            new Aspose.Pdf.License().SetLicense(licPath);
-
+        public void PackageSignerManager_Sign() {            
             var path = @"../../../sample/eNadzorPackage.zip";
             var outputPath = @"../../../sample/eNadzorPackage_SignedPackage.zip";
             using (var mgr = new PackageSignerManager()) {

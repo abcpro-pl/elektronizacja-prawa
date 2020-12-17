@@ -65,6 +65,19 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 bool addTimeStamp = false,
                 string timeStampServerUrl = "http://time.certum.pl");
 
+        void SignPdfFile(
+                string sourceFilePath,
+                X509Certificate2 cert,
+                string reason = "eADM Signing",
+                string location = null,
+                bool addTimeStamp = false,
+                string timeStampServerUrl = "http://time.certum.pl",
+                byte[] apperancePngImage = null,
+                PdfSignatureLocation apperancePngImageLocation = PdfSignatureLocation.Custom,
+                float apperancePngImageLocationCustomX = 30F,
+                float apperancePngImageLocationCustomY = 650F,
+                string outputFilePath = null);
+
         SignatureInfo GetSignatureInfo(string packageFilePath, string internalPath);
         SignatureInfo GetSignatureInfo(string xadesFilePath);
     }
@@ -287,6 +300,28 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             }
 
             mgr.Save(outputPackageFilePath, true);
+        }
+
+        public void SignPdfFile(
+                string sourceFilePath,
+                X509Certificate2 cert,
+                string reason = "eADM Signing",
+                string location = null,
+                bool addTimeStamp = false,
+                string timeStampServerUrl = "http://time.certum.pl",
+                byte[] apperancePngImage = null,
+                PdfSignatureLocation apperancePngImageLocation = PdfSignatureLocation.Custom,
+                float apperancePngImageLocationCustomX = 30F,
+                float apperancePngImageLocationCustomY = 650F,
+                string outputFilePath = null) {
+            if (cert == null) { throw new ArgumentNullException("cert"); }
+            if (sourceFilePath == null) { throw new ArgumentNullException("filePath"); }
+            if (!File.Exists(sourceFilePath)) { throw new FileNotFoundException("File not found!", sourceFilePath); }
+            if (outputFilePath == null) { outputFilePath = sourceFilePath; }
+
+            signPdfFile(sourceFilePath, cert, reason, location, addTimeStamp, timeStampServerUrl, 
+                apperancePngImage, apperancePngImageLocation, apperancePngImageLocationCustomX, apperancePngImageLocationCustomY, 
+                outputFilePath);
         }
 
         public void Dispose() { }

@@ -28,6 +28,116 @@ using System.Xml.Linq;
 
 namespace Abc.Nes.ArchivalPackage.Cryptography {
     partial class PackageSignerManager {
+        private iText.Kernel.Geom.Rectangle GetApperanceImageRect(
+                PdfSignatureLocation apperancePngImageLocation,
+                float pageWidth,
+                float pageHeight,
+                float apperancePngImageLocationCustomX = 0,
+                float apperancePngImageLocationCustomY = 0) {
+            var w = 200F;
+            var h = 50F;
+            var m = 10F;
+            var result = new iText.Kernel.Geom.Rectangle(apperancePngImageLocationCustomX, apperancePngImageLocationCustomY, w, h);
+            if (apperancePngImageLocation != PdfSignatureLocation.Custom) {
+                switch (apperancePngImageLocation) {
+                    case PdfSignatureLocation.BottomLeft: { result = new iText.Kernel.Geom.Rectangle(m, m, w, h); break; }
+                    case PdfSignatureLocation.BottomRight: { result = new iText.Kernel.Geom.Rectangle(pageWidth - (m + w), m, w, h); break; }
+                    case PdfSignatureLocation.TopLeft: { result = new iText.Kernel.Geom.Rectangle(m, pageHeight - (m + h), w, h); break; }
+                    case PdfSignatureLocation.TopRight: { result = new iText.Kernel.Geom.Rectangle(pageWidth - (m + w), pageHeight - (m + h), w, h); break; }
+                }
+            }
+
+            return result;
+        }
+        private void signPdfFile(
+                string sourceFilePath,
+                X509Certificate2 cert,
+                string reason,
+                string location,
+                bool addTimeStamp,
+                string timeStampServerUrl,
+                byte[] apperancePngImage,
+                PdfSignatureLocation apperancePngImageLocation,
+                float apperancePngImageLocationCustomX,
+                float apperancePngImageLocationCustomY,
+                string outputFilePath) {
+
+            if (apperancePngImage == null) { apperancePngImage = Properties.Resources.nes_stamp; }
+
+            var temp = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.pdf");
+            ITSAClient tsa = null;
+
+            if (!HasSignatures(sourceFilePath)) {
+                float pageWidth = 0;
+                float pageHeight = 0;
+                using (var reader = new PdfReader(sourceFilePath)) {
+                    using (var pdfDoc = new PdfDocument(reader, new StampingProperties())) {
+                        var page = pdfDoc.GetPage(1);
+                        var pageRect = page.GetPageSize();
+                        pageWidth = pageRect.GetWidth();
+                        pageHeight = pageRect.GetHeight();
+                    }
+                }
+
+                using (var reader = new PdfReader(sourceFilePath)) {
+                    using (var fs = new FileStream(temp, FileMode.Create)) {
+                        var signer = new PdfSigner(reader, fs, new StampingProperties());
+                        var rect = GetApperanceImageRect(apperancePngImageLocation, pageWidth, pageHeight, apperancePngImageLocationCustomX, apperancePngImageLocationCustomY);
+                        var appearance = signer.GetSignatureAppearance();
+                        appearance
+                            .SetPageRect(rect)
+                            .SetPageNumber(1)
+                            .SetReason(reason)
+                            .SetReasonCaption("Rodzaj: ")
+                            .SetLocation(location)
+                            .SetLocationCaption("Miejsce: ")
+                            .SetImage(iText.IO.Image.ImageDataFactory.CreatePng(apperancePngImage));
+
+                        appearance.SetRenderingMode(PdfSignatureAppearance.RenderingMode.DESCRIPTION);
+                        signer.SetFieldName($"sig-{Guid.NewGuid()}");
+
+                        if (addTimeStamp) { tsa = new TSAClientBouncyCastle(timeStampServerUrl); }
+                        var signature = new X509Certificate2Signature(cert, HashAlgorithmName.SHA256.Name);
+                        signer.SignDetached(signature, GetChain(cert), null, null, tsa, 0, PdfSigner.CryptoStandard.CADES);
+                    }
+                }
+
+                if (addTimeStamp) {
+                    using (var reader = new PdfReader(temp)) {
+                        var ocsp = new OcspClientBouncyCastle(null);
+                        var crl = new CrlClientOnline();
+
+                        using (var writer = new PdfWriter(outputFilePath)) {
+                            using (var pdfDoc = new PdfDocument(reader, writer, new StampingProperties().UseAppendMode())) {
+                                var v = new LtvVerification(pdfDoc);
+                                var signatureUtil = new SignatureUtil(pdfDoc);
+                                var names = signatureUtil.GetSignatureNames();
+                                var sigName = names[names.Count - 1];
+                                var pkcs7 = signatureUtil.ReadSignatureData(sigName);
+                                if (pkcs7.IsTsp()) {
+                                    v.AddVerification(sigName, ocsp, crl, LtvVerification.CertificateOption.WHOLE_CHAIN,
+                                        LtvVerification.Level.OCSP_CRL, LtvVerification.CertificateInclusion.NO);
+                                }
+                                else {
+                                    foreach (var name in names) {
+                                        v.AddVerification(name, ocsp, crl, LtvVerification.CertificateOption.WHOLE_CHAIN,
+                                             LtvVerification.Level.OCSP_CRL, LtvVerification.CertificateInclusion.NO);
+                                    }
+                                }
+                                v.Merge();
+                                pdfDoc.Close();
+                            }
+                            writer.Close();
+                        }
+                    }
+                }
+
+                try {
+                    if (File.Exists(temp)) { File.Delete(temp); }
+                }
+                catch { }
+            }
+        }
         private void SignPdfItem(ItemBase item, X509Certificate2 cert, bool addTimeStamp, string reason = "eADM Signing", string location = null, string timeStampServerUrl = "http://time.certum.pl") {
             var input = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.pdf");
             var output = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.pdf");
@@ -38,21 +148,34 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             ITSAClient tsa = null;
 
             File.WriteAllBytes(input, (item as DocumentFile).FileData);
-            
+
             if (!HasSignatures(input)) {
+                float pageWidth = 0;
+                float pageHeight = 0;
+                using (var reader = new PdfReader(input)) {
+                    using (var pdfDoc = new PdfDocument(reader, new StampingProperties())) {
+                        var page = pdfDoc.GetPage(1);
+                        var pageRect = page.GetPageSize();
+                        pageWidth = pageRect.GetWidth();
+                        pageHeight = pageRect.GetHeight();
+                    }
+                }
+
                 using (PdfReader reader = new PdfReader(input)) {
                     using (var fs = new FileStream(temp, FileMode.Create)) {
                         PdfSigner signer = new PdfSigner(reader, fs, new StampingProperties());
 
-                        var rect = new iText.Kernel.Geom.Rectangle(36, 648, 200, 100);
+                        var rect = GetApperanceImageRect(PdfSignatureLocation.BottomLeft, pageWidth, pageHeight);
                         PdfSignatureAppearance appearance = signer.GetSignatureAppearance();
                         appearance
-                            .SetReason(reason)
-                            .SetLocation(location)
                             .SetPageRect(rect)
-                            .SetSignatureGraphic(iText.IO.Image.ImageDataFactory.CreatePng(Properties.Resources.nes_stamp))
-                            .SetPageNumber(1);
-                        appearance.SetRenderingMode(PdfSignatureAppearance.RenderingMode.GRAPHIC_AND_DESCRIPTION);
+                            .SetPageNumber(1)
+                            .SetReason(reason)
+                            .SetReasonCaption("Rodzaj: ")
+                            .SetLocation(location)
+                            .SetLocationCaption("Miejsce: ")
+                            .SetImage(iText.IO.Image.ImageDataFactory.CreatePng(Properties.Resources.nes_stamp));
+                        appearance.SetRenderingMode(PdfSignatureAppearance.RenderingMode.DESCRIPTION);
                         signer.SetFieldName($"sig-{Guid.NewGuid()}");
 
                         if (addTimeStamp) { tsa = new TSAClientBouncyCastle(timeStampServerUrl); }
@@ -85,8 +208,8 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                                             LtvVerification.Level.OCSP_CRL, LtvVerification.CertificateInclusion.NO);
                                     }
                                 }
-                                v.Merge();                                
-                                pdfDoc.Close(); 
+                                v.Merge();
+                                pdfDoc.Close();
                             }
                             writer.Close();
                         }
