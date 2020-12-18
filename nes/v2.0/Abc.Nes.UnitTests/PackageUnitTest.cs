@@ -39,12 +39,20 @@ namespace Abc.Nes.UnitTests {
                 "Podpis za zgodnosc z oryginalem",
                 "Warszawa",
                 true,
-                apperancePngImage :File.ReadAllBytes(new FileInfo(imagePath).FullName),
-                apperancePngImageLocation: PdfSignatureLocation.BottomLeft,
+                apperancePngImage: File.ReadAllBytes(new FileInfo(imagePath).FullName),
+                apperancePngImageLocation: PdfSignatureLocation.Custom,
+                apperanceLocationX: 360F,
+                apperanceLocationY: 620F, //700F,
+                apperanceWidth: 220F,
+                apperanceHeight: 50F,
+                margin: 10F,
                 outputFilePath: new FileInfo(outputpath).FullName
            );
 
             Assert.IsTrue(new FileInfo(outputpath).Exists);
+            if (new FileInfo(outputpath).Exists) {
+                System.Diagnostics.Process.Start(new FileInfo(outputpath).FullName);
+            }
         }
 
         [TestMethod]
@@ -202,7 +210,7 @@ namespace Abc.Nes.UnitTests {
         }
 
         [TestMethod]
-        public void PackageSignerManager_Sign() {            
+        public void PackageSignerManager_Sign() {
             var path = @"../../../sample/eNadzorPackage.zip";
             var outputPath = @"../../../sample/eNadzorPackage_SignedPackage.zip";
             using (var mgr = new PackageSignerManager()) {

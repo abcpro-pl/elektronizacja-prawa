@@ -74,8 +74,11 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 string timeStampServerUrl = "http://time.certum.pl",
                 byte[] apperancePngImage = null,
                 PdfSignatureLocation apperancePngImageLocation = PdfSignatureLocation.Custom,
-                float apperancePngImageLocationCustomX = 30F,
-                float apperancePngImageLocationCustomY = 650F,
+                float apperanceLocationX = 30F,
+                float apperanceLocationY = 650F,
+                float apperanceWidth = 200F,
+                float apperanceHeight = 50F,
+                float margin = 10F,
                 string outputFilePath = null);
 
         SignatureInfo GetSignatureInfo(string packageFilePath, string internalPath);
@@ -311,16 +314,20 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 string timeStampServerUrl = "http://time.certum.pl",
                 byte[] apperancePngImage = null,
                 PdfSignatureLocation apperancePngImageLocation = PdfSignatureLocation.Custom,
-                float apperancePngImageLocationCustomX = 30F,
-                float apperancePngImageLocationCustomY = 650F,
+                float apperanceLocationX = 30F,
+                float apperanceLocationY = 650F,
+                float apperanceWidth = 200F,
+                float apperanceHeight = 50F,
+                float margin = 10F,
                 string outputFilePath = null) {
             if (cert == null) { throw new ArgumentNullException("cert"); }
             if (sourceFilePath == null) { throw new ArgumentNullException("filePath"); }
             if (!File.Exists(sourceFilePath)) { throw new FileNotFoundException("File not found!", sourceFilePath); }
             if (outputFilePath == null) { outputFilePath = sourceFilePath; }
 
-            signPdfFile(sourceFilePath, cert, reason, location, addTimeStamp, timeStampServerUrl, 
-                apperancePngImage, apperancePngImageLocation, apperancePngImageLocationCustomX, apperancePngImageLocationCustomY, 
+            signPdfFile(sourceFilePath, cert, reason, location, addTimeStamp, timeStampServerUrl,
+                apperancePngImage, apperancePngImageLocation, apperanceLocationX, apperanceLocationY,
+                apperanceWidth, apperanceHeight, margin,
                 outputFilePath);
         }
 

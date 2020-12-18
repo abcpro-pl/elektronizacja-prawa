@@ -32,18 +32,18 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 PdfSignatureLocation apperancePngImageLocation,
                 float pageWidth,
                 float pageHeight,
-                float apperancePngImageLocationCustomX = 0,
-                float apperancePngImageLocationCustomY = 0) {
-            var w = 200F;
-            var h = 50F;
-            var m = 10F;
-            var result = new iText.Kernel.Geom.Rectangle(apperancePngImageLocationCustomX, apperancePngImageLocationCustomY, w, h);
+                float apperanceLocationX = 0,
+                float apperanceLocationY = 0,
+                float apperanceWidth = 200F,
+                float apperanceHeight = 50F,
+                float margin = 10F) {
+            var result = new iText.Kernel.Geom.Rectangle(apperanceLocationX, apperanceLocationY, apperanceWidth, apperanceHeight);
             if (apperancePngImageLocation != PdfSignatureLocation.Custom) {
                 switch (apperancePngImageLocation) {
-                    case PdfSignatureLocation.BottomLeft: { result = new iText.Kernel.Geom.Rectangle(m, m, w, h); break; }
-                    case PdfSignatureLocation.BottomRight: { result = new iText.Kernel.Geom.Rectangle(pageWidth - (m + w), m, w, h); break; }
-                    case PdfSignatureLocation.TopLeft: { result = new iText.Kernel.Geom.Rectangle(m, pageHeight - (m + h), w, h); break; }
-                    case PdfSignatureLocation.TopRight: { result = new iText.Kernel.Geom.Rectangle(pageWidth - (m + w), pageHeight - (m + h), w, h); break; }
+                    case PdfSignatureLocation.BottomLeft: { result = new iText.Kernel.Geom.Rectangle(margin, margin, apperanceWidth, apperanceHeight); break; }
+                    case PdfSignatureLocation.BottomRight: { result = new iText.Kernel.Geom.Rectangle(pageWidth - (margin + apperanceWidth), margin, apperanceWidth, apperanceHeight); break; }
+                    case PdfSignatureLocation.TopLeft: { result = new iText.Kernel.Geom.Rectangle(margin, pageHeight - (margin + apperanceHeight), apperanceWidth, apperanceHeight); break; }
+                    case PdfSignatureLocation.TopRight: { result = new iText.Kernel.Geom.Rectangle(pageWidth - (margin + apperanceWidth), pageHeight - (margin + apperanceHeight), apperanceWidth, apperanceHeight); break; }
                 }
             }
 
@@ -58,8 +58,11 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 string timeStampServerUrl,
                 byte[] apperancePngImage,
                 PdfSignatureLocation apperancePngImageLocation,
-                float apperancePngImageLocationCustomX,
-                float apperancePngImageLocationCustomY,
+                float apperanceLocationX,
+                float apperanceLocationY,
+                float apperanceWidth,
+                float apperanceHeight,
+                float margin,
                 string outputFilePath) {
 
             if (apperancePngImage == null) { apperancePngImage = Properties.Resources.nes_stamp; }
@@ -82,7 +85,8 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 using (var reader = new PdfReader(sourceFilePath)) {
                     using (var fs = new FileStream(temp, FileMode.Create)) {
                         var signer = new PdfSigner(reader, fs, new StampingProperties());
-                        var rect = GetApperanceImageRect(apperancePngImageLocation, pageWidth, pageHeight, apperancePngImageLocationCustomX, apperancePngImageLocationCustomY);
+                        var rect = GetApperanceImageRect(apperancePngImageLocation, pageWidth, pageHeight,
+                            apperanceLocationX, apperanceLocationY, apperanceWidth, apperanceHeight, margin);
                         var appearance = signer.GetSignatureAppearance();
                         appearance
                             .SetPageRect(rect)
