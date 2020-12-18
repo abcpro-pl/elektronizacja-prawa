@@ -689,8 +689,14 @@ mgr.SignPdfFile(
     "Podpis za zgodnosc z oryginalem",
     "Warszawa",
     true,
-    apperancePngImage :File.ReadAllBytes(new FileInfo(imagePath).FullName), // wielkość obrazka 200x50 pikseli
+    // wielkość obrazka 220x50 pikseli
+    apperancePngImage :File.ReadAllBytes(new FileInfo(imagePath).FullName),
     apperancePngImageLocation: PdfSignatureLocation.BottomLeft,
+    apperanceLocationX: 360F,
+    apperanceLocationY: 620F, //700F,
+    apperanceWidth: 220F,
+    apperanceHeight: 50F,
+    margin: 10F,
     outputFilePath: new FileInfo(outputpath).FullName
 );
 ```
