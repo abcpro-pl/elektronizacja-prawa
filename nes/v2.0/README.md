@@ -32,6 +32,7 @@ W tym katalogu znajduje się:
 
 Wersja  | Opis
 --------|--------
+1.1.4|Dodanie metod do pobierania informacji o podpisach elektronicznych.
 1.1.3|Dodanie nowych parametrów do ustawiania wizualizacji podpisu pliku PDF.
 1.1.2|Dodanie metody do podpisywania plików PDF z dysku, poprawione wyświetlanie informacji o podpisie na PDF.
 1.1.1|Usunięcie błędów z wczytywanie schematu metadanych 1.7, dodanie opcji wskazania serwera znacznika czasu podczas podpisywania.
@@ -144,7 +145,7 @@ foreach (var item in result) {
 var document = new Abc.Nes.Document() {
     Identifiers = new List<Abc.Nes.Elements.IdentifierElement> {
         new Abc.Nes.Elements.IdentifierElement() {
-            Type = Abc.Nes.Elements.IdentifierElement.GetIdTypes(Enumerations.IdTypes.ObjectMark),
+            Type = Enumerations.IdTypes.ObjectMark.GetIdTypes(),
             Value = "ABC-A.123.77.3.2011.JW.",
             Subject = new Elements.SubjectElement() {
                 Institution = new Elements.InstitutionElement() {
@@ -179,7 +180,7 @@ var document = new Abc.Nes.Document() {
             Specification = "1.7",
             Uncompleted = Enumerations.BooleanValues.False,
             Size = new Elements.SizeElement() {
-                Measure = Elements.SizeElement.GetSizeType(Enumerations.FileSizeType.kB),
+                Measure = Enumerations.FileSizeType.kB.GetSizeType(),
                     Value = "4712"
                 }
             }
@@ -196,7 +197,7 @@ var document = new Abc.Nes.Document() {
     },
     Types = new List<Elements.TypeElement>() {
         new Elements.TypeElement() {
-            Class = Elements.TypeElement.GetDocumentClassType(Enumerations.DocumentClassType.Text),
+            Class = Enumerations.DocumentClassType.Text.GetDocumentClassType(),
             Kinds = new List<string> { Elements.TypeElement.GetDocumentKindType(Enumerations.DocumentKindType.Document) }
         }
     },
@@ -209,7 +210,7 @@ var document = new Abc.Nes.Document() {
     },
     Authors = new List<Elements.AuthorElement> {
         new Elements.AuthorElement() {
-            Functions = new List<string> { Elements.AuthorElement.GetAuthorFunctionType(Enumerations.AuthorFunctionType.Created) },
+            Functions = new List<string> { Enumerations.AuthorFunctionType.Created.GetAuthorFunctionType() },
             Subject = new Elements.SubjectElement() {
                 Institution = new Elements.InstitutionElement() {
                     Name = "Urząd Miasta Wołomierz"
@@ -252,7 +253,7 @@ var document = new Abc.Nes.Document() {
                     Value = "P00112233.pdf.xades"
                 }
             },
-            Type = Elements.RelationElement.GetRelationType(Enumerations.RelationType.HasReference)
+            Type = Enumerations.RelationType.HasReference.GetRelationType()
         },
         new Elements.RelationElement {
             Identifiers = new List<Elements.IdentifierElement> {
@@ -261,7 +262,7 @@ var document = new Abc.Nes.Document() {
                     Value = "dek2010123.txt"
                 }
             },
-            Type = Elements.RelationElement.GetRelationType(Enumerations.RelationType.HasAttribution)
+            Type = Enumerations.RelationType.HasAttribution.GetRelationType()
         },
         new Elements.RelationElement {
             Identifiers = new List<Elements.IdentifierElement> {
@@ -270,7 +271,7 @@ var document = new Abc.Nes.Document() {
                     Value = "P00112233.docx"
                 }
             },
-            Type = Elements.RelationElement.GetRelationType(Enumerations.RelationType.IsVersion)
+            Type = Enumerations.RelationType.IsVersion.GetRelationType()
         },
         new Elements.RelationElement {
             Identifiers = new List<Elements.IdentifierElement> {
@@ -279,12 +280,12 @@ var document = new Abc.Nes.Document() {
                     Value = "UPD12345.xml"
                 }
             },
-            Type = Elements.RelationElement.GetRelationType(Enumerations.RelationType.HasReference)
+            Type = Enumerations.RelationType.HasReference.GetRelationType()
         }
     },
     Qualifications = new List<Elements.QualificationElement> {
         new Elements.QualificationElement() {
-            Type = Elements.QualificationElement.GetArchivalCategoryType(Enumerations.ArchivalCategoryType.BE10),
+            Type = Enumerations.ArchivalCategoryType.BE10.GetArchivalCategoryType(),
             Date = "2005-03-05",
             Subject = new Elements.SubjectElement() {
             Institution = new Elements.InstitutionElement() {
@@ -414,7 +415,7 @@ mgr.AddFile(new DocumentFile() {
                     Surname = "Kowalski",
                     Contacts = new List<Elements.ContactElement> {
                         new Elements.ContactElement() {
-                            Type = Elements.ContactElement.GetContactType(ContactType.Email),
+                            Type = ContactType.Email.GetContactType(),
                                 Value = "jan.kowalski@miastowolomierz.pl"
                             }
                         }
@@ -442,7 +443,7 @@ mgr.AddFile(new DocumentFile() {
                 Specification = "1.7",
                 Uncompleted = BooleanValues.False,
                 Size = new Elements.SizeElement() {
-                    Measure = Elements.SizeElement.GetSizeType(FileSizeType.bajt),
+                    Measure = FileSizeType.bajt.GetSizeType(),
                     Value = new FileInfo(@"../../../sample/sample_file.pdf").Length.ToString()
                 }
             }
@@ -454,7 +455,7 @@ mgr.AddFile(new DocumentFile() {
         },
         Types = new List<Elements.TypeElement> {
             new Elements.TypeElement() {
-                Class = Elements.TypeElement.GetDocumentClassType(DocumentClassType.Text),
+                Class = DocumentClassType.Text.GetDocumentClassType(),
                 Kinds = new List<string> { Elements.TypeElement.GetDocumentKindType(DocumentKindType.Regulation) }
             }
         },
@@ -699,6 +700,26 @@ mgr.SignPdfFile(
     margin: 10F,
     outputFilePath: new FileInfo(outputpath).FullName
 );
+```
+
+#### Pobranie informacji o podpisie z pliku .xades
+
+```C#
+ var path = @"../../../sample/SignedPackage.zip.xades";
+ using (var mgr = new PackageSignerManager()) {
+    var result = mgr.GetSignatureInfos(path);
+    Assert.IsTrue(result != null);
+ }
+```
+
+#### Pobranie informacji o podpisie z pliku w paczce eADM
+
+```C#
+ var path = @"../../../sample/SignedPackage.zip";
+ using (var mgr = new PackageSignerManager()) {
+    var result = mgr.GetSignatureInfos(path, "Dokumenty/LegalAct.pdf");
+    Assert.IsTrue(result != null);
+ }
 ```
 
 [&#8682; Do góry](#paczka-eadm-i-niezbędne-elementy-struktury-dokumentu-elektronicznego-20)
