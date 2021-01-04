@@ -17,8 +17,9 @@ using System;
 
 namespace Abc.Nes {
     public static class EnumExtensions {
-        public static string GetAccessType(this AccessDateType type) { return type.GetXmlEnum(); }
+        public static string GetAccessDataType(this AccessDateType type) { return type.GetXmlEnum(); }
         public static string GetAccessType17(this AccessType17 type) { return type.GetXmlEnum(); }
+        public static string GetAccessType(this AccessType type) { return type.GetXmlEnum(); }
         public static string GetContactType(this ContactType type) { return type.GetXmlEnum(); }
         public static string GetEventDateType(this EventDateType type) { return type.GetXmlEnum(); }
         public static string GetDateRangeType(this DateRangeType type) { return type.GetXmlEnum(); }

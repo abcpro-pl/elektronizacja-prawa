@@ -32,6 +32,7 @@ W tym katalogu znajduje się:
 
 Wersja  | Opis
 --------|--------
+1.1.5|Dodanie rozszerzeń dla enumeracji.
 1.1.4|Dodanie metod do pobierania informacji o podpisach elektronicznych.
 1.1.3|Dodanie nowych parametrów do ustawiania wizualizacji podpisu pliku PDF.
 1.1.2|Dodanie metody do podpisywania plików PDF z dysku, poprawione wyświetlanie informacji o podpisie na PDF.
