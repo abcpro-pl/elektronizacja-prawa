@@ -93,7 +93,7 @@ namespace Abc.Nes.UnitTests {
             var document = new Abc.Nes.Document() {
                 Identifiers = new List<Abc.Nes.Elements.IdentifierElement> {
                     new Abc.Nes.Elements.IdentifierElement() {
-                        Type = Abc.Nes.Elements.IdentifierElement.GetIdTypes(Enumerations.IdTypes.ObjectMark),
+                        Type = Enumerations.IdTypes.ObjectMark.GetIdTypes(),
                         Value = "ABC-A.123.77.3.2011.JW.",
                         Subject = new Elements.SubjectElement(){
                             Institution = new Elements.InstitutionElement(){
@@ -128,7 +128,7 @@ namespace Abc.Nes.UnitTests {
                         Specification = "1.7",
                         Uncompleted = Enumerations.BooleanValues.False,
                         Size = new Elements.SizeElement(){
-                            Measure = Elements.SizeElement.GetSizeType(Enumerations.FileSizeType.kB),
+                            Measure = Enumerations.FileSizeType.kB.GetSizeType(),
                             Value = "4712"
                         }
                     }
@@ -145,8 +145,8 @@ namespace Abc.Nes.UnitTests {
                 },
                 Types = new List<Elements.TypeElement>() {
                     new Elements.TypeElement() {
-                        Class = Elements.TypeElement.GetDocumentClassType(Enumerations.DocumentClassType.Text),
-                        Kinds = new List<string> { Elements.TypeElement.GetDocumentKindType(Enumerations.DocumentKindType.Document) }
+                        Class = Enumerations.DocumentClassType.Text.GetDocumentClassType(),
+                        Kinds = new List<string> { Enumerations.DocumentKindType.Document.GetDocumentKindType() }
                     }
                 },
                 Groupings = new List<Elements.GroupingElement> {
@@ -201,7 +201,7 @@ namespace Abc.Nes.UnitTests {
                                 Value = "P00112233.pdf.xades"
                             }
                         },
-                        Type = Elements.RelationElement.GetRelationType(Enumerations.RelationType.HasReference)
+                        Type = Enumerations.RelationType.HasReference.GetRelationType()
                     },
                     new Elements.RelationElement {
                         Identifiers = new List<Elements.IdentifierElement> {
@@ -210,7 +210,7 @@ namespace Abc.Nes.UnitTests {
                                 Value = "dek2010123.txt"
                             }
                         },
-                        Type = Elements.RelationElement.GetRelationType(Enumerations.RelationType.HasAttribution)
+                        Type = Enumerations.RelationType.HasAttribution.GetRelationType()
                     },
                     new Elements.RelationElement {
                         Identifiers = new List<Elements.IdentifierElement> {
@@ -219,7 +219,7 @@ namespace Abc.Nes.UnitTests {
                                 Value = "P00112233.docx"
                             }
                         },
-                        Type = Elements.RelationElement.GetRelationType(Enumerations.RelationType.IsVersion)
+                        Type = Enumerations.RelationType.IsVersion.GetRelationType()
                     },
                     new Elements.RelationElement {
                         Identifiers = new List<Elements.IdentifierElement> {
@@ -228,12 +228,12 @@ namespace Abc.Nes.UnitTests {
                                 Value = "UPD12345.xml"
                             }
                         },
-                        Type = Elements.RelationElement.GetRelationType(Enumerations.RelationType.HasReference)
+                        Type = Enumerations.RelationType.HasReference.GetRelationType()
                     }
                 },
                 Qualifications = new List<Elements.QualificationElement> {
                     new Elements.QualificationElement() {
-                        Type = Elements.QualificationElement.GetArchivalCategoryType(Enumerations.ArchivalCategoryType.BE10),
+                        Type = Enumerations.ArchivalCategoryType.BE10.GetArchivalCategoryType(),
                         Date = "2005-03-05",
                         Subject = new Elements.SubjectElement() {
                             Institution = new Elements.InstitutionElement() {
@@ -248,7 +248,7 @@ namespace Abc.Nes.UnitTests {
                                             Position = "Specjalista",
                                             Contacts = new List<Elements.ContactElement> {
                                                 new Elements.ContactElement() {
-                                                    Type = Elements.ContactElement.GetContactType(Enumerations.ContactType.Email),
+                                                    Type = Enumerations.ContactType.Email.GetContactType(),
                                                     Value = "jkowalski@mc.gov.pl"
                                                 }
                                             }

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>ABCPRO.NES</id>
-    <version>1.1.3</version>
+    <version>1.1.4</version>
     <authors>ITORG Krzysztof Radzimski</authors>
     <owners>ABC PRO Sp. z o.o.</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -12,7 +12,7 @@
     <copyright>ABC PRO Sp. z o.o.</copyright>
     <icon>nes_logo.png</icon>
     <summary>ABCPRO.NES for .NET is a library for creating and signing documents metadata and archival package (eADM) for Polish State Archives.</summary>
-    <releaseNotes>Adding more parameters to method to sign pdf files.</releaseNotes>
+    <releaseNotes>Added methods for retrieving information about digital signatures.</releaseNotes>
     <repository type="GIT" url="https://github.com/abcpro-pl/elektronizacja-prawa.git"/>
     <tags>eADM NES paczka-archiwalna paczka-eADM c# .net csharp digital-signatures signing security accessibility opensource open source</tags>
     <dependencies>

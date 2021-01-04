@@ -31,9 +31,6 @@ namespace Abc.Nes.Elements {
 
         public void SetType(ContactType type) {
             Type = type.GetXmlEnum();
-        }
-        public static string GetContactType(ContactType type) {
-            return type.GetXmlEnum();
-        }
+        }      
     }
 }

@@ -37,18 +37,11 @@ Umożliwia podanie informacji o rodzaju dokumentu na wykazach dokumentów znajdu
 
         public void SetKind(DocumentKindType kind) {
             if (Kinds.IsNull()) { Kinds = new List<string>(); }
-            Kinds.Add(kind.GetXmlEnum());
+            Kinds.Add(kind.GetDocumentKindType());
         }
         public void SetClass(DocumentClassType docClass) {
-            Class = docClass.GetXmlEnum();
-        }
-
-        public static string GetDocumentKindType(DocumentKindType kind) {
-            return kind.GetXmlEnum();
-        }
-        public static string GetDocumentClassType(DocumentClassType docClass) {
-            return docClass.GetXmlEnum();
-        }
+            Class = docClass.GetDocumentClassType();
+        }       
     }
 
     /// <summary>
@@ -72,17 +65,10 @@ Umożliwia podanie informacji o rodzaju dokumentu na wykazach dokumentów znajdu
         public string Kind { get; set; }
 
         public void SetKind(DocumentKindType kind) {
-            Kind = kind.GetXmlEnum();
+            Kind = kind.GetDocumentKindType();
         }
         public void SetClass(DocumentClassType docClass) {
-            Class = docClass.GetXmlEnum();
-        }
-
-        public static string GetDocumentKindType(DocumentKindType kind) {
-            return kind.GetXmlEnum();
-        }
-        public static string GetDocumentClassType(DocumentClassType docClass) {
-            return docClass.GetXmlEnum();
+            Class = docClass.GetDocumentClassType();
         }
     }
 }

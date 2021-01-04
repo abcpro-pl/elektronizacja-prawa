@@ -27,8 +27,6 @@ namespace Abc.Nes.Elements {
         [XmlRequired]
         [XmlAnnotation("Typ identyfikatora.")]
         [XmlSimpleType(TypeName = "id-rodzaj-typ", Annotation = "Typ identyfikatora.", BaseTypeName = "xs:string", UnionMemberTypes = "ndap:niepusty-ciag-typ", EnumerationRestriction = typeof(InstitutionIdType))]
-        public string Type { get; set; }
-
-        public static string GetInstitutionIdType(InstitutionIdType type) { return type.GetXmlEnum(); }
+        public string Type { get; set; }        
     }
 }

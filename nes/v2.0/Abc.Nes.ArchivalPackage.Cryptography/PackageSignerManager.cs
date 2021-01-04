@@ -16,74 +16,13 @@ using Abc.Nes.ArchivalPackage.Cryptography.Model;
 using Abc.Nes.Xades;
 using Abc.Nes.Xades.Signature;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml.Linq;
 
 namespace Abc.Nes.ArchivalPackage.Cryptography {
-    public interface IPackageSignerManager : IDisposable {
-        string Sign(string sourcePackageFilePath, X509Certificate2 cert, string outputPackageFilePath = null,
-                Abc.Nes.Xades.Signature.Parameters.SignatureProductionPlace productionPlace = null,
-                Abc.Nes.Xades.Signature.Parameters.SignerRole signerRole = null,
-                bool signPackageFiles = true,
-                bool signPackageFile = true,
-                bool detachedSignaturePackageFile = false,
-                bool detachedSignaturePackageFiles = false,
-                bool addTimeStamp = false,
-                string timeStampServerUrl = "http://time.certum.pl");
-        string Sign(string sourcePackageFilePath,
-            X509Certificate2 cert,
-            string outputPackageFilePath = null,
-            Abc.Nes.Xades.Signature.Parameters.SignatureProductionPlace productionPlace = null,
-            Abc.Nes.Xades.Signature.Parameters.SignerRole signerRole = null,
-            string[] internalFiles = null,
-            bool signPackageFile = true,
-            bool detachedSignaturePackageFile = true,
-            bool detachedSignaturePackageFiles = true,
-            bool addTimeStamp = false,
-            string timeStampServerUrl = "http://time.certum.pl");
-        void SignInternalFile(string sourcePackageFilePath,
-                string internalPath,
-                X509Certificate2 cert,
-                Abc.Nes.Xades.Signature.Parameters.SignatureProductionPlace productionPlace = null,
-                Abc.Nes.Xades.Signature.Parameters.SignerRole signerRole = null,
-                bool detachedSignaturePackageFile = false,
-                string outputPackageFilePath = null,
-                bool addTimeStamp = false,
-                string timeStampServerUrl = "http://time.certum.pl");
-
-        void SignInternalFile(
-                string sourcePackageFilePath,
-                ArchivalPackage.Model.ItemBase item,
-                PackageManager mgr,
-                X509Certificate2 cert,
-                Abc.Nes.Xades.Signature.Parameters.SignatureProductionPlace productionPlace = null,
-                Abc.Nes.Xades.Signature.Parameters.SignerRole signerRole = null,
-                bool detachedSignaturePackageFile = false,
-                string outputPackageFilePath = null,
-                bool addTimeStamp = false,
-                string timeStampServerUrl = "http://time.certum.pl");
-
-        void SignPdfFile(
-                string sourceFilePath,
-                X509Certificate2 cert,
-                string reason = "eADM Signing",
-                string location = null,
-                bool addTimeStamp = false,
-                string timeStampServerUrl = "http://time.certum.pl",
-                byte[] apperancePngImage = null,
-                PdfSignatureLocation apperancePngImageLocation = PdfSignatureLocation.Custom,
-                float apperanceLocationX = 30F,
-                float apperanceLocationY = 650F,
-                float apperanceWidth = 200F,
-                float apperanceHeight = 50F,
-                float margin = 10F,
-                string outputFilePath = null);
-
-        SignatureInfo GetSignatureInfo(string packageFilePath, string internalPath);
-        SignatureInfo GetSignatureInfo(string xadesFilePath);
-    }
     public partial class PackageSignerManager : IPackageSignerManager {
         public string Sign(
             string sourcePackageFilePath,
@@ -333,43 +272,62 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
 
         public void Dispose() { }
 
-        public SignatureInfo GetSignatureInfo(string packageFilePath, string internalPath) {
+        public SignatureInfo[] GetSignatureInfos(string packageFilePath, string internalPath) {
             if (String.IsNullOrEmpty(packageFilePath)) { throw new ArgumentNullException("packageFilePath"); }
             if (String.IsNullOrEmpty(internalPath)) { throw new ArgumentNullException("internalPath"); }
             if (!File.Exists(packageFilePath)) { throw new FileNotFoundException("Package file not found!", packageFilePath); }
 
+            var list = new List<SignatureInfo>();
             var mgr = new PackageManager();
             mgr.LoadPackage(packageFilePath);
             var item = mgr.GetItemByFilePath(internalPath) as ArchivalPackage.Model.DocumentFile;
             if (item != null) {
 
                 if (internalPath.EndsWith(".xades") || internalPath.EndsWith(".xml")) {
-                    return GetSignatureInfo(item.FileData.ToXElement());
+                    list.AddRange(GetSignatureInfos(item.FileData.ToXElement(), internalPath));
                 }
                 else if (internalPath.EndsWith(".pdf")) {
-                    return GetPadesInfo(item.FileData);
+                    list.AddRange(GetPadesInfos(item.FileData, internalPath));
                 }
                 else {
                     var xadesInternalPath = $"{internalPath}.xades";
                     var xadesItem = mgr.GetItemByFilePath(xadesInternalPath) as ArchivalPackage.Model.DocumentFile;
                     if (xadesItem != null) {
-                        return GetSignatureInfo(xadesItem.FileData.ToXElement());
+                        list.AddRange(GetSignatureInfos(xadesItem.FileData.ToXElement(), xadesInternalPath));
                     }
                 }
             }
 
-            return default;
+            return list.ToArray();
         }
 
-        public SignatureInfo GetSignatureInfo(string xadesFilePath) {
+        public SignatureInfo[] GetSignatureInfos(string xadesFilePath) {
             if (String.IsNullOrEmpty(xadesFilePath)) { throw new ArgumentNullException("xadesFilePath"); }
             if (!File.Exists(xadesFilePath)) { throw new FileNotFoundException("File not found!", xadesFilePath); }
 
             var xml = XElement.Load(xadesFilePath);
             if (xml != null) {
-                return GetSignatureInfo(xml);
+                return GetSignatureInfos(xml, new FileInfo(xadesFilePath).Name);
             }
 
+            return default;
+        }
+
+        public SignatureInfo[] GetSignatureInfos(XElement xades, string fileName = null) {
+            if (xades != null) {
+                var signatures = xades.DescendantsAndSelf().Where(x => x.Name.LocalName == "Signature").ToArray();
+                if (signatures.Length > 0) {
+                    var list = new List<SignatureInfo>();
+                    foreach (var signature in signatures) {
+                        list.Add(GetSignatureInfo(signature));
+                    }
+                    if (fileName != null) {
+                        foreach (var item in list) { item.FileName = fileName; }
+                    }
+
+                    return list.ToArray();
+                }
+            }
             return default;
         }
     }

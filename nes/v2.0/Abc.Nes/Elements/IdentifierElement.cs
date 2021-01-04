@@ -36,8 +36,6 @@ Stwarza podstawy do tworzenia jednoznacznych powiązań (relacji) między dokume
         [XmlRequired] 
         public string Value { get; set; }
 
-        [XmlElement("podmiot")] public SubjectElement Subject { get; set; }
-
-        public static string GetIdTypes(IdTypes idType) { return idType.GetXmlEnum(); }
+        [XmlElement("podmiot")] public SubjectElement Subject { get; set; }        
     }
 }

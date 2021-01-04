@@ -24,7 +24,7 @@ Informacja o dostępności nie może naruszać przepisów regulujących dostęp 
     public class AccessElement {
         [XmlElement("dostepnosc")] [XmlRequired] public AccessType Access { get; set; }
         [XmlElement("uwagi")] [XmlAnnotation("Dodatkowe informacje o adresie")] public string Description { get; set; }
-        [XmlElement("data")] public AccessDateElement Date { get; set; }
+        [XmlElement("data")] public AccessDateElement Date { get; set; }  
     }
 
     [XmlType(TypeName = "dostep-typ")]
@@ -35,7 +35,7 @@ Informacja o dostępności nie może naruszać przepisów regulujących dostęp 
         [XmlIgnore] public const DocumentType DOCUMENT_TYPE = DocumentType.Nes17;
         [XmlElement("dostepnosc")] [XmlRequired] public AccessType17 Access { get; set; }
         [XmlElement("uwagi")] [XmlAnnotation("Dodatkowe informacje o adresie")] public string Description { get; set; }
-        [XmlElement("data")] public AccessDateElement Date { get; set; }
+        [XmlElement("data")] public AccessDateElement Date { get; set; }     
     }
 
     [XmlType(TypeName = "dostep-data-typ")]

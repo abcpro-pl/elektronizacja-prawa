@@ -38,9 +38,6 @@ Umożliwi łatwe ustalenie, jakie materiały można ze zbiorów w danym roku wyc
 
         public void SetType(ArchivalCategoryType type) {
             Type = type.GetXmlEnum();
-        }
-        public static string GetArchivalCategoryType(ArchivalCategoryType type) {
-            return type.GetXmlEnum();
-        }
+        }       
     }
 }

@@ -23,5 +23,6 @@ namespace Abc.Nes.ArchivalPackage.Cryptography.Model {
         public string Publisher { get; internal set; }
         public string SignatureNumber { get; internal set; }
         public X509Certificate2 Certificate { get; internal set; }
+        public string FileName { get; internal set; }
     }
 }

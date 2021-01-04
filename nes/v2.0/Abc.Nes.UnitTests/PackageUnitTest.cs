@@ -42,7 +42,7 @@ namespace Abc.Nes.UnitTests {
                 apperancePngImage: File.ReadAllBytes(new FileInfo(imagePath).FullName),
                 apperancePngImageLocation: PdfSignatureLocation.Custom,
                 apperanceLocationX: 360F,
-                apperanceLocationY: 620F, //700F,
+                apperanceLocationY: 770F, //700F,
                 apperanceWidth: 220F,
                 apperanceHeight: 50F,
                 margin: 10F,
@@ -114,7 +114,7 @@ namespace Abc.Nes.UnitTests {
                                 Surname = "Bąbel",
                                 Contacts = new List<Elements.ContactElement> {
                                     new Elements.ContactElement() {
-                                        Type = Elements.ContactElement.GetContactType(ContactType.Email),
+                                        Type = ContactType.Email.GetContactType(),
                                         Value = "alojzy.babel@akademia-pana-kleksa.pl"
                                     }
                                 }
@@ -142,7 +142,7 @@ namespace Abc.Nes.UnitTests {
                         Specification = "1.7",
                         Uncompleted = BooleanValues.False,
                         Size = new Elements.SizeElement() {
-                            Measure = Elements.SizeElement.GetSizeType(FileSizeType.bajt),
+                            Measure = FileSizeType.bajt.GetSizeType(),
                             Value = new FileInfo(@"../../../sample/sample_file.pdf").Length.ToString()
                         }
                     }
@@ -154,8 +154,8 @@ namespace Abc.Nes.UnitTests {
                 },
                 Types = new List<Elements.TypeElement> {
                     new Elements.TypeElement() {
-                        Class = Elements.TypeElement.GetDocumentClassType(DocumentClassType.Text),
-                        Kinds = new List<string> { Elements.TypeElement.GetDocumentKindType(DocumentKindType.Regulation) }
+                        Class = DocumentClassType.Text.GetDocumentClassType(),
+                        Kinds = new List<string> { DocumentKindType.Regulation.GetDocumentKindType() }
                     }
                 },
                 Groupings = new List<Elements.GroupingElement> {
@@ -316,6 +316,23 @@ namespace Abc.Nes.UnitTests {
                  );
             }
             Assert.IsTrue(File.Exists(outputPath));
+        }
+
+        [TestMethod]
+        public void GetSignatureInfo_Xades() {
+            var path = @"../../../sample/SignedPackage.zip.xades";
+            using (var mgr = new PackageSignerManager()) {
+                var result = mgr.GetSignatureInfos(path);
+                Assert.IsTrue(result != null);
+            }
+        }
+        [TestMethod]
+        public void GetSignatureInfo() {
+            var path = @"../../../sample/SignedPackage.zip";
+            using (var mgr = new PackageSignerManager()) {
+                var result = mgr.GetSignatureInfos(path, "Dokumenty/LegalAct.pdf");
+                Assert.IsTrue(result != null);
+            }
         }
     }
 }

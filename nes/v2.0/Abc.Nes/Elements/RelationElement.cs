@@ -33,10 +33,6 @@ namespace Abc.Nes.Elements {
 
         public void SetType(RelationType type) {
             Type = type.GetXmlEnum();
-        }
-
-        public static string GetRelationType(RelationType type) {
-            return type.GetXmlEnum();
-        }
+        }    
     }
 }

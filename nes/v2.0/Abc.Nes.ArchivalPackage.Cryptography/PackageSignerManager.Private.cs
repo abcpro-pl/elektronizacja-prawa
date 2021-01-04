@@ -22,6 +22,7 @@ using iText.Signatures;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml.Linq;
@@ -570,13 +571,99 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             }
         }
 
-        private SignatureInfo GetPadesInfo(byte[] fileData) {
-            throw new NotImplementedException();
+        private SignatureInfo[] GetPadesInfos(byte[] fileData, string fileName = null) {
+            using (var pdfDoc = new PdfDocument(new PdfReader(new MemoryStream(fileData)))) {
+                var signUtil = new SignatureUtil(pdfDoc);
+                var names = signUtil.GetSignatureNames();
+                if (names != null && names.Count > 0) {
+                    var list = new List<SignatureInfo>();
+                    foreach (var name in names) {
+                        var pkcs7 = signUtil.ReadSignatureData(name);
+                        if (pkcs7 != null) {
+                            var cert = new X509Certificate2(pkcs7.GetSigningCertificate().GetEncoded());
+                            if (cert != null) {
+                                var item = new SignatureInfo() {
+                                    CreateDate = pkcs7.GetSignDate(),
+                                    Certificate = cert,
+                                    Author = new SubjectNameInfo(cert.Subject)["CN"],
+                                    Publisher = new SubjectNameInfo(cert.Issuer)["CN"],
+                                    SignatureType = SignatureType.Pades,
+                                    SignatureNumber = name,
+                                    FileName = fileName
+                                };
+                                if (item.Author != null) { item.Author = item.Author.Replace("\"", String.Empty); }
+                                if (item.Publisher != null) { item.Publisher = item.Publisher.Replace("\"", String.Empty); }
+
+                                list.Add(item);
+                            }
+                        }
+                    }
+                    return list.ToArray();
+                }
+            }
+            return default;
         }
 
         private SignatureInfo GetSignatureInfo(XElement e) {
-            throw new NotImplementedException();
-            //return default;
+            if (e != null) {
+                var result = new SignatureInfo() {
+                    SignatureType = SignatureType.Xades,
+                    SignatureNumber = e.Attribute("Id").Value
+                };
+
+                var keyName = e.Descendants().Where(x => x.Name.LocalName == "KeyName").FirstOrDefault();
+                if (keyName != null) {
+                    result.Author = keyName.Value;
+                }
+                else {
+                    var xSubjectName = e.Descendants().Where(x => x.Name.LocalName == "X509SubjectName").FirstOrDefault();
+                    if (xSubjectName != null) {
+                        var subjectName = new SubjectNameInfo(xSubjectName.Value);
+                        if (subjectName.Count > 0) {
+                            result.Author = subjectName["CN"];
+                        }
+                    }
+                }
+
+                var signingTime = e.Descendants().Where(x => x.Name.LocalName == "SigningTime").FirstOrDefault();
+                if (signingTime != null) {
+                    result.CreateDate = Convert.ToDateTime(signingTime.Value);
+                }
+
+                var xIssuerName = e.Descendants().Where(x => x.Name.LocalName == "X509IssuerName").FirstOrDefault();
+                if (xIssuerName != null) {
+                    var issuerName = new SubjectNameInfo(xIssuerName.Value);
+                    if (issuerName.Count > 0) {
+                        result.Publisher = issuerName["CN"];
+                    }
+                }
+
+                var xmlCert = e.Descendants().Where(x => x.Name.LocalName == "X509Certificate").FirstOrDefault();
+                try {
+                    var data = Convert.FromBase64String(xmlCert.Value);
+                    var cert = new X509Certificate2(data);
+                    result.Certificate = cert;
+                    if (result.Author == null) {
+                        var subjectName = new SubjectNameInfo(cert.Subject);
+                        if (subjectName.Count > 0) {
+                            result.Author = subjectName["CN"];
+                        }
+                    }
+                    if (result.Publisher == null) {
+                        var issuerName = new SubjectNameInfo(cert.Issuer);
+                        if (issuerName.Count > 0) {
+                            result.Publisher = issuerName["CN"];
+                        }
+                    }
+                }
+                catch { }
+
+                if (result.Author != null) { result.Author = result.Author.Replace("\"", String.Empty); }
+                if (result.Publisher != null) { result.Publisher = result.Publisher.Replace("\"", String.Empty); }
+
+                return result;
+            }
+            return default;
         }
     }
 }
