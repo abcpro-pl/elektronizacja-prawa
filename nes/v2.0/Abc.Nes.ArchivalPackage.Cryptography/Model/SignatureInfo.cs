@@ -24,5 +24,15 @@ namespace Abc.Nes.ArchivalPackage.Cryptography.Model {
         public string SignatureNumber { get; internal set; }
         public X509Certificate2 Certificate { get; internal set; }
         public string FileName { get; internal set; }
+
+        public string CommitmentTypeIndication { get; internal set; }
+        public string ClaimedRole { get; internal set; }
+        public string Organization { get; internal set; }
+    }
+
+    public class SignatureVerifyInfo {
+        public string FileName { get; internal set; }
+        public string SignatureName { get; internal set; }
+        public bool IsValid { get; internal set; }
     }
 }

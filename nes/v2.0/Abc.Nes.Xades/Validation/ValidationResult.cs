@@ -25,7 +25,7 @@
 namespace Abc.Nes.Xades.Validation {
     public class ValidationResult {
         public bool IsValid { get; set; }
-
+        public string SignatureName { get; set; }
         public string Message { get; set; }
     }
 }

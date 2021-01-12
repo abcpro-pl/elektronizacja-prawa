@@ -582,14 +582,19 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                         if (pkcs7 != null) {
                             var cert = new X509Certificate2(pkcs7.GetSigningCertificate().GetEncoded());
                             if (cert != null) {
+                                var subject = new SubjectNameInfo(cert.Subject);
+                                var issuer = new SubjectNameInfo(cert.Issuer);
                                 var item = new SignatureInfo() {
                                     CreateDate = pkcs7.GetSignDate(),
                                     Certificate = cert,
-                                    Author = new SubjectNameInfo(cert.Subject)["CN"],
-                                    Publisher = new SubjectNameInfo(cert.Issuer)["CN"],
+                                    Author = subject["CN"],
+                                    Publisher = issuer["CN"],
                                     SignatureType = SignatureType.Pades,
                                     SignatureNumber = name,
-                                    FileName = fileName
+                                    FileName = fileName,
+                                    CommitmentTypeIndication = pkcs7.GetReason(),
+                                    Organization = subject["O"],
+                                    ClaimedRole = ""
                                 };
                                 if (item.Author != null) { item.Author = item.Author.Replace("\"", String.Empty); }
                                 if (item.Publisher != null) { item.Publisher = item.Publisher.Replace("\"", String.Empty); }
@@ -604,30 +609,126 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             return default;
         }
 
+        private SignatureVerifyInfo[] VerifyPadesSignatures(byte[] fileData, string internalPath) {
+            var list = new List<SignatureVerifyInfo>();
+
+            using (var pdfDoc = new PdfDocument(new PdfReader(new MemoryStream(fileData)))) {
+                var signUtil = new SignatureUtil(pdfDoc);
+                var names = signUtil.GetSignatureNames();
+                if (names != null && names.Count > 0) {
+                    foreach (var name in names) {
+                        var pkcs7 = signUtil.ReadSignatureData(name);
+                        if (pkcs7 != null) {
+                            list.Add(new SignatureVerifyInfo() {
+                                FileName = internalPath,
+                                SignatureName = name,
+                                IsValid = pkcs7.VerifySignatureIntegrityAndAuthenticity()
+                            });
+                        }
+                    }
+                }
+            }
+
+            return list.ToArray();
+        }
+
+        private SignatureVerifyInfo[] VerifyXadesSignatures(byte[] fileData, string internalPath) {
+            var list = new List<SignatureVerifyInfo>();
+
+            using (var mgr = new XadesManager()) {
+                var result = mgr.ValidateSignature(new MemoryStream(fileData));
+                list.Add(new SignatureVerifyInfo() {
+                    FileName = internalPath,
+                    IsValid = result.IsValid,
+                    SignatureName = result.SignatureName
+                });
+            }
+
+            return list.ToArray();
+        }
+
+        private SignatureVerifyInfo[] VerifyXadesSignatures(string filePath, string internalPath) {
+            var list = new List<SignatureVerifyInfo>();
+
+            using (var mgr = new XadesManager()) {
+                var result = mgr.ValidateSignature(filePath);
+                list.Add(new SignatureVerifyInfo() {
+                    FileName = internalPath,
+                    IsValid = result.IsValid,
+                    SignatureName = result.SignatureName
+                });
+            }
+
+            return list.ToArray();
+        }
+
+        private string GetCommitmentTypeIndication(XElement e) {
+            const string xmlCTIProofOfReceipt = "http://uri.etsi.org/01903/v1.2.2#ProofOfReceipt";
+            const string xmlCTIProofOfDelivery = "http://uri.etsi.org/01903/v1.2.2#ProofOfDelivery";
+            const string xmlCTIProofOfSender = "http://uri.etsi.org/01903/v1.2.2#ProofOfSender";
+            const string xmlCTIProofOfApproval = "http://uri.etsi.org/01903/v1.2.2#ProofOfApproval";
+            const string xmlCTIProofOfCreation = "http://uri.etsi.org/01903/v1.2.2#ProofOfCreation";
+            const string xmlCTIProofOfOrigin = "http://uri.etsi.org/01903/v1.2.2#ProofOfOrigin";
+            const string EDAP_NAMESPACE = "http://www.crd.gov.pl/xml/schematy/edap/2010/01/02";
+            const string EDAP_NAMESPACE_INITIALS = EDAP_NAMESPACE + "#Initials";
+
+            var s = "Brak";
+            var commitmentTypeIndication = e.Descendants().Where(x => x.Parent != null &&
+                    x.Parent.Name.LocalName == "CommitmentTypeId" &&
+                    x.Name.LocalName == "Identifier").FirstOrDefault();
+            if (commitmentTypeIndication != null) {
+                switch (commitmentTypeIndication.Value) {
+                    case xmlCTIProofOfApproval: { s = "Formalne zatwierdzenie (Proof of approval)"; break; }
+                    case xmlCTIProofOfCreation: { s = "Potwierdzenie utworzenia (Proof of creation)"; break; }
+                    case xmlCTIProofOfDelivery: { s = "Dowód dostawy (Proof of delivery)"; break; }
+                    case xmlCTIProofOfOrigin: { s = "Dowód pochodzenia (Proof of origin)"; break; }
+                    case xmlCTIProofOfReceipt: { s = "Potwierdzenie odbioru (Proof of receipt)"; break; }
+                    case xmlCTIProofOfSender: { s = "Dowód nadawcy (Proof of sender)"; break; }
+                    case EDAP_NAMESPACE_INITIALS: { s = "Parafka"; break; }
+                    default: { s = commitmentTypeIndication.Value; break; }
+                }
+
+            }
+            return s;
+        }
+
         private SignatureInfo GetSignatureInfo(XElement e) {
             if (e != null) {
                 var result = new SignatureInfo() {
                     SignatureType = SignatureType.Xades,
-                    SignatureNumber = e.Attribute("Id").Value
+                    SignatureNumber = e.Attribute("Id").Value,
+                    CommitmentTypeIndication = GetCommitmentTypeIndication(e)
                 };
 
+                var xSubjectName = e.Descendants().Where(x => x.Name.LocalName == "X509SubjectName").FirstOrDefault();
                 var keyName = e.Descendants().Where(x => x.Name.LocalName == "KeyName").FirstOrDefault();
                 if (keyName != null) {
                     result.Author = keyName.Value;
                 }
                 else {
-                    var xSubjectName = e.Descendants().Where(x => x.Name.LocalName == "X509SubjectName").FirstOrDefault();
                     if (xSubjectName != null) {
                         var subjectName = new SubjectNameInfo(xSubjectName.Value);
-                        if (subjectName.Count > 0) {
+                        if (subjectName.Count > 0 && subjectName.Keys.Contains("CN")) {
                             result.Author = subjectName["CN"];
                         }
+                    }
+                }
+
+                if (xSubjectName != null) {
+                    var subjectName = new SubjectNameInfo(xSubjectName.Value);
+                    if (subjectName.Count > 0 && subjectName.Keys.Contains("O")) {
+                        result.Organization = subjectName["O"];
                     }
                 }
 
                 var signingTime = e.Descendants().Where(x => x.Name.LocalName == "SigningTime").FirstOrDefault();
                 if (signingTime != null) {
                     result.CreateDate = Convert.ToDateTime(signingTime.Value);
+                }
+
+                var claimedRole = e.Descendants().Where(x => x.Name.LocalName == "ClaimedRole").FirstOrDefault();
+                if (claimedRole != null) {
+                    result.ClaimedRole = claimedRole.Value;
                 }
 
                 var xIssuerName = e.Descendants().Where(x => x.Name.LocalName == "X509IssuerName").FirstOrDefault();

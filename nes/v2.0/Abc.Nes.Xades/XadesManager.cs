@@ -17,6 +17,7 @@ namespace Abc.Nes.Xades {
         SignatureDocument CreateEnvelopingSignature(Stream input, X509Certificate2 cert, Signature.Parameters.SignatureProductionPlace productionPlace = null, Signature.Parameters.SignerRole signerRole = null, string fileName = null, Upgraders.SignatureFormat? upgradeFormat = null, string timeStampServerUrl = "http://time.certum.pl");
         SignatureDocument CreateDetachedSignature(string filePath, X509Certificate2 cert, Signature.Parameters.SignatureProductionPlace productionPlace = null, Signature.Parameters.SignerRole signerRole = null, Upgraders.SignatureFormat? upgradeFormat = null, string timeStampServerUrl = "http://time.certum.pl");
         ValidationResult ValidateSignature(Stream stream);
+        ValidationResult ValidateSignature(string filePath);
         ValidationResult ValidateSignature(SignatureDocument sigDocument);
     }
     public class XadesManager : IXadesManager {
@@ -236,6 +237,12 @@ Content-Disposition: filename=""{ fileName }""
             }
         }
 
+        public ValidationResult ValidateSignature(string filePath) {
+            using (XadesValidator validator = new XadesValidator()) {
+                return validator.Validate(filePath);
+            }
+        }
+
         public ValidationResult ValidateSignature(SignatureDocument sigDocument) {
             SignatureDocument.CheckSignatureDocument(sigDocument);
 
@@ -299,8 +306,6 @@ Content-Disposition: filename=""{ fileName }""
                     SignedDataObjectProperties signedDataObjectProperties,
                     UnsignedSignatureProperties unsignedSignatureProperties
                     ) {
-
-
             var cert = new Cert();
             cert.IssuerSerial.X509IssuerName = XadesSigner.Certificate.IssuerName.Name;
             cert.IssuerSerial.X509SerialNumber = XadesSigner.Certificate.GetSerialNumberAsDecimalString();

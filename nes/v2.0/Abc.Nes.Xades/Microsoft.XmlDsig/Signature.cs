@@ -125,8 +125,18 @@ namespace Microsoft.XmlDsig {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
 
+            XmlNamespaceManager nsm = new XmlNamespaceManager(value.OwnerDocument.NameTable);
+            nsm.AddNamespace("ds", SignedXml.XmlDsigNamespaceUrl);
+
             // Signature
             XmlElement signatureElement = value;
+            if (!signatureElement.LocalName.Equals("Signature")) {
+                var signatures = signatureElement.SelectNodes("ds:Signature", nsm);
+                if (signatures != null && signatures.Count > 0) {
+                    signatureElement = signatures[0] as XmlElement;
+                }
+            }
+
             if (!signatureElement.LocalName.Equals("Signature"))
                 throw new CryptographicException(SR.Cryptography_Xml_InvalidElement, "Signature");
 
@@ -135,8 +145,8 @@ namespace Microsoft.XmlDsig {
             if (!Utils.VerifyAttributes(signatureElement, "Id"))
                 throw new CryptographicException(SR.Cryptography_Xml_InvalidElement, "Signature");
 
-            XmlNamespaceManager nsm = new XmlNamespaceManager(value.OwnerDocument.NameTable);
-            nsm.AddNamespace("ds", SignedXml.XmlDsigNamespaceUrl);
+            //XmlNamespaceManager nsm = new XmlNamespaceManager(value.OwnerDocument.NameTable);
+            //nsm.AddNamespace("ds", SignedXml.XmlDsigNamespaceUrl);
             int expectedChildNodes = 0;
 
             // SignedInfo

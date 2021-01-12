@@ -224,6 +224,8 @@ namespace Microsoft.Xades {
             }
         }
 
+        public string SignatureIdAttributeValue { get; private set; }
+
         #endregion
 
         #region Constructors
@@ -292,6 +294,7 @@ namespace Microsoft.Xades {
             XmlNode idAttribute = xmlElement.Attributes.GetNamedItem("Id");
             if (idAttribute != null) {
                 this.Signature.Id = idAttribute.Value;
+                this.SignatureIdAttributeValue = idAttribute.Value;
             }
             this.SetSignatureStandard(xmlElement);
 

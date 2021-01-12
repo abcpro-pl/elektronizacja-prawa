@@ -64,7 +64,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
         void SignPdfFile(
                 string sourceFilePath,
                 X509Certificate2 cert,
-                string reason = "eADM Signing",
+                string reason = "Formalne zatwierdzenie (Proof of approval)",
                 string location = null,
                 bool addTimeStamp = false,
                 string timeStampServerUrl = "http://time.certum.pl",
@@ -77,8 +77,14 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 float margin = 10F,
                 string outputFilePath = null);
 
+        SignatureInfo[] GetSignatureInfos(PackageManager mgr, string internalPath);
+        SignatureInfo[] GetSignatureInfos(PackageManager mgr, ArchivalPackage.Model.DocumentFile item);
+        SignatureInfo[] GetSignatureInfos(string packageFilePath);
         SignatureInfo[] GetSignatureInfos(string packageFilePath, string internalPath);
-        SignatureInfo[] GetSignatureInfos(string xadesFilePath);
-        SignatureInfo[] GetSignatureInfos(XElement xades, string fileName = null);
+        SignatureInfo[] GetXadesSignatureInfos(string xadesFilePath);
+        SignatureInfo[] GetXadesSignatureInfos(XElement xades, string fileName = null);
+
+        SignatureVerifyInfo[] VerifySignatures(string packageFilePath);
+        SignatureVerifyInfo[] VerifyXadesSignature(string xadesFilePath);
     }
 }

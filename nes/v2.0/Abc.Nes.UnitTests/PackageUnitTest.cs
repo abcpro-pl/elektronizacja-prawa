@@ -322,7 +322,7 @@ namespace Abc.Nes.UnitTests {
         public void GetSignatureInfo_Xades() {
             var path = @"../../../sample/SignedPackage.zip.xades";
             using (var mgr = new PackageSignerManager()) {
-                var result = mgr.GetSignatureInfos(path);
+                var result = mgr.GetXadesSignatureInfos(path);
                 Assert.IsTrue(result != null);
             }
         }
@@ -333,6 +333,37 @@ namespace Abc.Nes.UnitTests {
                 var result = mgr.GetSignatureInfos(path, "Dokumenty/LegalAct.pdf");
                 Assert.IsTrue(result != null);
             }
+        }
+
+        [TestMethod]
+        public void GetSignatureInfos() {
+            var path = @"../../../sample/Paczka-nowa.zip";
+            var list = new List<ArchivalPackage.Cryptography.Model.SignatureInfo>();
+            using (var mgr = new PackageSignerManager()) {
+                list.AddRange(mgr.GetSignatureInfos(path));               
+            }
+            Assert.IsTrue(list.Count>0);
+        }
+
+        [TestMethod]
+        public void ValidateSignatures() {
+            var path = @"../../../sample/SignedPackage.zip";
+            var list = new List<ArchivalPackage.Cryptography.Model.SignatureVerifyInfo>();
+            using (var mgr = new PackageSignerManager()) {
+                list.AddRange(mgr.VerifySignatures(path));
+            }
+            Assert.IsTrue(list.Count > 0);
+        }
+
+
+        [TestMethod]
+        public void ValidateXadesSignature() {
+            var path = @"../../../sample/SignedPackage.zip.xades";
+            var list = new List<ArchivalPackage.Cryptography.Model.SignatureVerifyInfo>();
+            using (var mgr = new PackageSignerManager()) {
+                list.AddRange(mgr.VerifyXadesSignature(path));
+            }
+            Assert.IsTrue(list.Count > 0);
         }
     }
 }

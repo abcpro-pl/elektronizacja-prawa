@@ -389,5 +389,9 @@ namespace Abc.Nes.ArchivalPackage {
             result = result.RemovePolishChars();
             return result;
         }
+
+        public void Dispose() {
+            
+        }
     }
 }

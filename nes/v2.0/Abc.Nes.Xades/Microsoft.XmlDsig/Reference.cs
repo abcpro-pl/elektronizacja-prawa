@@ -300,6 +300,11 @@ namespace Microsoft.XmlDsig {
 
             // Let's go get the target.
             string baseUri = (document == null ? System.Environment.CurrentDirectory + "\\" : document.BaseURI);
+            string dir = null;
+            if (baseUri != null && baseUri.StartsWith("file:///")) {
+                dir = Path.GetDirectoryName(baseUri.Replace("file:///", String.Empty));
+            }
+
             Stream hashInputStream = null;
             WebResponse response = null;
             Stream inputStream = null;
@@ -408,6 +413,14 @@ namespace Microsoft.XmlDsig {
                             inputStream = new MemoryStream(File.ReadAllBytes(_uri));
                             hashInputStream = inputStream;
                             _uri = Path.GetFileName(_uri);
+                            //resolver = (this.SignedXml.ResolverSet ? this.SignedXml._xmlResolver : new XmlSecureResolver(new XmlUrlResolver(), baseUri));
+                            //hashInputStream = this.TransformChain.TransformToOctetStream(inputStream, resolver, _uri);
+                        }
+                        else if (_uri != null && dir!=null && File.Exists(Path.Combine(dir, _uri))) {
+                            var _uriPath = Path.Combine(dir, _uri);
+                            inputStream = new MemoryStream(File.ReadAllBytes(_uriPath));
+                            hashInputStream = inputStream;
+                            _uri = Path.GetFileName(_uriPath);
                             //resolver = (this.SignedXml.ResolverSet ? this.SignedXml._xmlResolver : new XmlSecureResolver(new XmlUrlResolver(), baseUri));
                             //hashInputStream = this.TransformChain.TransformToOctetStream(inputStream, resolver, _uri);
                         }

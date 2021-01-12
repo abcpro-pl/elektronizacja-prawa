@@ -2,12 +2,9 @@
 
 # Paczka eADM i Niezbędne Elementy Struktury (dokumentu elektronicznego) 2.0
 - [Krótki opis zawartości](#zawartość)
+- [Historia wersji](#historiawersji)
 - [Biblioteki .NET](#nuget)
 - [Przykłady użycia bibliotek .NET](#przykłady)
-    * [Biblioteka ABCPRO.NES](#abcprones)
-    * [Biblioteka ABCPRO.NES.ArchivalPackage](#abcpronesarchivalpackage)
-    * [Biblioteka ABCPRO.NES.ArchivalPackage.Cryptography](#abcpronesarchivalpackagecryptography)
-    * [Biblioteka ABCPRO.NES.XAdES](#abcpronesxades)
 - [Opis merytoryczny](#historia)
 
 ## Zawartość
@@ -32,6 +29,7 @@ W tym katalogu znajduje się:
 
 Wersja  | Opis
 --------|--------
+1.1.6|Dodanie metod do weryfikacji podpisu plików paczki i pliku .xades dla całej paczki eADM. 
 1.1.5|Dodanie rozszerzeń dla enumeracji.
 1.1.4|Dodanie metod do pobierania informacji o podpisach elektronicznych.
 1.1.3|Dodanie nowych parametrów do ustawiania wizualizacji podpisu pliku PDF.
@@ -89,8 +87,6 @@ ABCPRO.NES| Zawarty w pakiecie głównym
 [&#8682; Do góry](#paczka-eadm-i-niezbędne-elementy-struktury-dokumentu-elektronicznego-20)
 
 ## Przykłady
-
-### ABCPRO.NES
 
 #### Generowanie schematu XSD
 
@@ -706,21 +702,43 @@ mgr.SignPdfFile(
 #### Pobranie informacji o podpisie z pliku .xades
 
 ```C#
- var path = @"../../../sample/SignedPackage.zip.xades";
- using (var mgr = new PackageSignerManager()) {
+var path = @"../../../sample/SignedPackage.zip.xades";
+using (var mgr = new PackageSignerManager()) {
     var result = mgr.GetSignatureInfos(path);
     Assert.IsTrue(result != null);
- }
+}
 ```
 
 #### Pobranie informacji o podpisie z pliku w paczce eADM
 
 ```C#
- var path = @"../../../sample/SignedPackage.zip";
- using (var mgr = new PackageSignerManager()) {
+var path = @"../../../sample/SignedPackage.zip";
+using (var mgr = new PackageSignerManager()) {
     var result = mgr.GetSignatureInfos(path, "Dokumenty/LegalAct.pdf");
     Assert.IsTrue(result != null);
- }
+}
+```
+
+#### Weryfikacja podpisów w paczce eADM
+
+```C#
+var path = @"../../../sample/SignedPackage.zip";
+var list = new List<ArchivalPackage.Cryptography.Model.SignatureVerifyInfo>();
+using (var mgr = new PackageSignerManager()) {
+    list.AddRange(mgr.VerifySignatures(path));
+}
+Assert.IsTrue(list.Count > 0);
+```
+
+#### Weryfikacja podpisów w pliku xades paczki eADM
+
+```C#
+var path = @"../../../sample/SignedPackage.zip.xades";
+var list = new List<ArchivalPackage.Cryptography.Model.SignatureVerifyInfo>();
+using (var mgr = new PackageSignerManager()) {
+    list.AddRange(mgr.VerifyXadesSignature(path));
+}
+Assert.IsTrue(list.Count > 0);
 ```
 
 [&#8682; Do góry](#paczka-eadm-i-niezbędne-elementy-struktury-dokumentu-elektronicznego-20)

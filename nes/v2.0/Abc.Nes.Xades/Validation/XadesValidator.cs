@@ -24,7 +24,6 @@
 
 using Abc.Nes.Xades.Signature;
 using Abc.Nes.Xades.Utils;
-using Microsoft.Xades;
 using Org.BouncyCastle.Cms;
 using Org.BouncyCastle.Tsp;
 using Org.BouncyCastle.Utilities;
@@ -37,6 +36,20 @@ using System.Xml;
 namespace Abc.Nes.Xades.Validation {
     class XadesValidator : IDisposable {
         public void Dispose() { }
+
+        public ValidationResult Validate(string filePath) {
+            if (filePath == null) { throw new ArgumentNullException("filePath"); }
+            if (!File.Exists(filePath)) { throw new FileNotFoundException(); }
+
+            var xmlDocument = new XmlDocument();
+            xmlDocument.Load(filePath);
+
+            var signature = new Microsoft.Xades.XadesSignedXml(xmlDocument);
+            signature.LoadXml(xmlDocument.DocumentElement);
+            return Validate(signature);
+        }
+
+
         public ValidationResult Validate(SignatureDocument sigDocument) {
             return Validate(sigDocument.XadesSignature);
         }
@@ -47,6 +60,7 @@ namespace Abc.Nes.Xades.Validation {
             var xmlDocument = new XmlDocument();
             xmlDocument.Load(stream);
             var signature = new Microsoft.Xades.XadesSignedXml(xmlDocument);
+            signature.LoadXml(xmlDocument.DocumentElement);
             return Validate(signature);
         }
 
@@ -68,6 +82,7 @@ namespace Abc.Nes.Xades.Validation {
             }
             catch {
                 result.IsValid = false;
+                result.SignatureName = signature.SignatureIdAttributeValue;
                 result.Message = "Signature verification was unsuccessful";
 
                 return result;
@@ -82,10 +97,12 @@ namespace Abc.Nes.Xades.Validation {
                 byte[] tsHashValue = token.TimeStampInfo.GetMessageImprintDigest();
                 Crypto.DigestMethod tsDigestMethod = Crypto.DigestMethod.GetByOid(token.TimeStampInfo.HashAlgorithm.Algorithm.Id);
 
-                Microsoft.XmlDsig.Transform transform = null;
-
+                Microsoft.XmlDsig.Transform transform;
                 if (timeStamp.CanonicalizationMethod != null) {
                     transform = CryptoConfig.CreateFromName(timeStamp.CanonicalizationMethod.Algorithm) as Microsoft.XmlDsig.Transform;
+                    if (transform == null) {
+                        transform = new Microsoft.XmlDsig.XmlDsigC14NTransform();
+                    }
                 }
                 else {
                     transform = new Microsoft.XmlDsig.XmlDsigC14NTransform();
@@ -99,6 +116,7 @@ namespace Abc.Nes.Xades.Validation {
 
                 if (!Arrays.AreEqual(tsHashValue, signatureValueHash)) {
                     result.IsValid = false;
+                    result.SignatureName = signature.SignatureIdAttributeValue;
                     result.Message = "The trimestamp does not correspond to the calculated one";
 
                     return result;
@@ -106,6 +124,7 @@ namespace Abc.Nes.Xades.Validation {
             }
 
             result.IsValid = true;
+            result.SignatureName = signature.SignatureIdAttributeValue;
             result.Message = "Successful signature verification";
 
             return result;

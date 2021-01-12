@@ -105,9 +105,10 @@ namespace Microsoft.XmlDsig {
         private void Initialize(XmlElement element) {
             _containingDocument = (element == null ? null : element.OwnerDocument);
             _context = element;
-            m_signature = new Signature();
-            m_signature.SignedXml = this;
-            m_signature.SignedInfo = new SignedInfo();
+            m_signature = new Signature {
+                SignedXml = this,
+                SignedInfo = new SignedInfo()
+            };
             _signingKey = null;
 
             _safeCanonicalizationMethods = new Collection<string>(KnownCanonicalizationMethods);
