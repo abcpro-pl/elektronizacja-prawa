@@ -2,8 +2,8 @@
 
 # Paczka eADM i Niezbędne Elementy Struktury (dokumentu elektronicznego) 2.0
 - [Krótki opis zawartości](#zawartość)
-- [Historia wersji](#historiawersji)
 - [Biblioteki .NET](#nuget)
+- [Historia wersji](#historia-wersji)
 - [Przykłady użycia bibliotek .NET](#przykłady)
 - [Opis merytoryczny](#historia)
 
