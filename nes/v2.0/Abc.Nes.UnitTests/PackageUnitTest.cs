@@ -355,6 +355,16 @@ namespace Abc.Nes.UnitTests {
             Assert.IsTrue(list.Count > 0);
         }
 
+        [TestMethod]
+        public void ValidateSignaturesInPackageFile() {
+            var path = @"../../../sample/SignedPackage.zip";
+            var list = new List<ArchivalPackage.Cryptography.Model.SignatureVerifyInfo>();
+            using (var mgr = new PackageSignerManager()) {
+                list.AddRange(mgr.VerifySignatures(path, "Dokumenty/LegalAct.zip.xades"));
+            }
+            Assert.IsTrue(list.Count > 0);
+        }
+
 
         [TestMethod]
         public void ValidateXadesSignature() {

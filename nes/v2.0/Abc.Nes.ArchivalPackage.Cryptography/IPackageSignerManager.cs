@@ -85,6 +85,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
         SignatureInfo[] GetXadesSignatureInfos(XElement xades, string fileName = null);
 
         SignatureVerifyInfo[] VerifySignatures(string packageFilePath);
+        SignatureVerifyInfo[] VerifySignatures(string packageFilePath, string internalPath);
         SignatureVerifyInfo[] VerifyXadesSignature(string xadesFilePath);
     }
 }

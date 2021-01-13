@@ -16,9 +16,9 @@
     <PackageId>ABCPRO.NES.ArchivalPackage</PackageId>
     <Product>ABCPRO.NES.ArchivalPackage</Product>
     <PackageProjectUrl>https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0</PackageProjectUrl>
-    <AssemblyVersion>1.1.5.0</AssemblyVersion>
-    <FileVersion>1.1.5.0</FileVersion>
-    <Version>1.1.5</Version>
+    <AssemblyVersion>1.1.7.0</AssemblyVersion>
+    <FileVersion>1.1.7.0</FileVersion>
+    <Version>1.1.7</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 

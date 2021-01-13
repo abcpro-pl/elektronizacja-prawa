@@ -29,6 +29,7 @@ W tym katalogu znajduje się:
 
 Wersja  | Opis
 --------|--------
+1.1.7|Dodanie metody do weryfikacji wskazanego pliku w paczce eADM
 1.1.6|Dodanie metod do weryfikacji podpisu plików paczki i pliku .xades dla całej paczki eADM. 
 1.1.5|Dodanie rozszerzeń dla enumeracji.
 1.1.4|Dodanie metod do pobierania informacji o podpisach elektronicznych.
@@ -704,8 +705,7 @@ mgr.SignPdfFile(
 ```C#
 var path = @"../../../sample/SignedPackage.zip.xades";
 using (var mgr = new PackageSignerManager()) {
-    var result = mgr.GetSignatureInfos(path);
-    Assert.IsTrue(result != null);
+    var result = mgr.GetSignatureInfos(path);    
 }
 ```
 
@@ -714,8 +714,7 @@ using (var mgr = new PackageSignerManager()) {
 ```C#
 var path = @"../../../sample/SignedPackage.zip";
 using (var mgr = new PackageSignerManager()) {
-    var result = mgr.GetSignatureInfos(path, "Dokumenty/LegalAct.pdf");
-    Assert.IsTrue(result != null);
+    var result = mgr.GetSignatureInfos(path, "Dokumenty/LegalAct.pdf"); 
 }
 ```
 
@@ -727,7 +726,15 @@ var list = new List<ArchivalPackage.Cryptography.Model.SignatureVerifyInfo>();
 using (var mgr = new PackageSignerManager()) {
     list.AddRange(mgr.VerifySignatures(path));
 }
-Assert.IsTrue(list.Count > 0);
+```
+#### Weryfikacja podpisu dla wskazanego pliku w paczce eADM
+
+```C#
+var path = @"../../../sample/SignedPackage.zip";
+var list = new List<ArchivalPackage.Cryptography.Model.SignatureVerifyInfo>();
+using (var mgr = new PackageSignerManager()) {
+    list.AddRange(mgr.VerifySignatures(path, "Dokumenty/LegalAct.zip.xades"));
+}
 ```
 
 #### Weryfikacja podpisów w pliku xades paczki eADM
@@ -738,7 +745,6 @@ var list = new List<ArchivalPackage.Cryptography.Model.SignatureVerifyInfo>();
 using (var mgr = new PackageSignerManager()) {
     list.AddRange(mgr.VerifyXadesSignature(path));
 }
-Assert.IsTrue(list.Count > 0);
 ```
 
 [&#8682; Do góry](#paczka-eadm-i-niezbędne-elementy-struktury-dokumentu-elektronicznego-20)
