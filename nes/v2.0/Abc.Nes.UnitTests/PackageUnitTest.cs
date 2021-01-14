@@ -347,7 +347,7 @@ namespace Abc.Nes.UnitTests {
 
         [TestMethod]
         public void ValidateSignatures() {
-            var path = @"../../../sample/SignedPackage.zip";
+            var path = @"../../../sample/EZD_PUW.zip";
             var list = new List<ArchivalPackage.Cryptography.Model.SignatureVerifyInfo>();
             using (var mgr = new PackageSignerManager()) {
                 list.AddRange(mgr.VerifySignatures(path));
@@ -368,7 +368,7 @@ namespace Abc.Nes.UnitTests {
 
         [TestMethod]
         public void ValidateXadesSignature() {
-            var path = @"../../../sample/SignedPackage.zip.xades";
+            var path = @"../../../sample/Sprawa_NPII.4131.1.815.2020_20201202_161026+.zip.xades";
             var list = new List<ArchivalPackage.Cryptography.Model.SignatureVerifyInfo>();
             using (var mgr = new PackageSignerManager()) {
                 list.AddRange(mgr.VerifyXadesSignature(path));

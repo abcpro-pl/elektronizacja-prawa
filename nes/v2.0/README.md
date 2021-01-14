@@ -13,8 +13,8 @@ Biblioteki NES służą do tworzenia paczki [eADM](https://gov.legalis.pl/przeka
 
 W tym katalogu znajduje się:
 
-* oryginalny schemat XSD [nes_20.xsd](https://raw.githubusercontent.com/abcpro-pl/elektronizacja-prawa/master/nes/v2.0/nes_20.xsd), 
-* kod źródłowy biblioteki do tworzenia, edycji i&nbsp;zapisu pliku XML zgodnego ze schematem [ABCPRO.NES](https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0/Abc.Nes). Biblioteka pozwala na utworzenie pliku XSD na podstawie modelu. W&nbsp;przeciwieństwie do oryginalnego [pliku XSD](https://raw.githubusercontent.com/abcpro-pl/elektronizacja-prawa/master/nes/v2.0/nes_20.xsd), - który można pobrać również z&nbsp;[profilu Ministerstwa Cyfryzacji](https://github.com/Ministerstwo-Cyfryzacji/ezd-analizy-it/blob/master/nes_bnf_komentarz.md), ten [wygenerowany z modelu](https://raw.githubusercontent.com/abcpro-pl/elektronizacja-prawa/master/nes/v2.0/nes_20_generated.xsd) nie zawiera żadnych błędów walidacji i&nbsp;referecji do zewnętrznych słowników, wszystkie elementy są opatrzone komentarzem, ponadto dodano możliwość umieszczania elementów ds:Signature czyli owzorowania podpisów elektronicznych. W&nbsp;katalogu [doc](https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0/doc) znajduje się [dokumentacja wygenerowana na podstawie schematu](doc/nes_20_generated.pdf),
+* oryginalny schemat XSD [nes_20.xsd](https://raw.githubusercontent.com/abcpro-pl/elektronizacja-prawa/master/nes/v2.0/nes_20.xsd) dla metadanych paczki eADM i schemat XSD [Metadane-1.7.xsd](https://raw.githubusercontent.com/abcpro-pl/elektronizacja-prawa/master/nes/v2.0/Metadane-1.7.xsd) dla metadanych paczki archiwalnej, 
+* kod źródłowy biblioteki do tworzenia, edycji i&nbsp;zapisu plików XML metadanych zgodnych ze schematami [ABCPRO.NES](https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0/Abc.Nes). Biblioteka pozwala na utworzenie pliku XSD na podstawie modelu. W&nbsp;przeciwieństwie do oryginalnego [pliku XSD](https://raw.githubusercontent.com/abcpro-pl/elektronizacja-prawa/master/nes/v2.0/nes_20.xsd), - który można pobrać również z&nbsp;[profilu Ministerstwa Cyfryzacji](https://github.com/Ministerstwo-Cyfryzacji/ezd-analizy-it/blob/master/nes_bnf_komentarz.md), ten [wygenerowany z&nbsp;modelu](https://raw.githubusercontent.com/abcpro-pl/elektronizacja-prawa/master/nes/v2.0/nes_20_generated.xsd) nie zawiera żadnych błędów walidacji i&nbsp;referecji do zewnętrznych słowników, wszystkie elementy są opatrzone komentarzem, ponadto dodano możliwość umieszczania elementów ds:Signature czyli owzorowania podpisów elektronicznych. W&nbsp;katalogu [doc](https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0/doc) znajduje się [dokumentacja wygenerowana na podstawie schematu](doc/nes_20_generated.pdf),
 * kod źródłowy biblioteki do tworzenia paczki eADM [ABCPRO.NES.ArchivalPackage](https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0/Abc.Nes.ArchivalPackage). Za pomocą biblioteki można tworzyć, edytować i&nbsp;zapisywać dokumenty i&nbsp;metadane w&nbsp;paczce eADM zgodnie z&nbsp;wymogami rozporządzeń.
 * kod źródłowy biblioteki do podpisywania plików XML [ABCPRO.NES.XAdES](https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0/Abc.Nes.Xades)
 * kod źródłowy biblioteki do podpisywania paczki eADM [ABCPRO.NES.ArchivalPackage.Cryptography](https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0/Abc.Nes.ArchivalPackage.Cryptography)
@@ -29,14 +29,14 @@ W tym katalogu znajduje się:
 
 Wersja  | Opis
 --------|--------
-1.1.7|Dodanie metody do weryfikacji wskazanego pliku w paczce eADM
-1.1.6|Dodanie metod do weryfikacji podpisu plików paczki i pliku .xades dla całej paczki eADM. 
+1.1.7|Dodanie metody do weryfikacji wskazanego pliku w&nbsp;paczce eADM.
+1.1.6|Dodanie metod do weryfikacji podpisu plików paczki i&nbsp;pliku .xades dla całej paczki eADM. 
 1.1.5|Dodanie rozszerzeń dla enumeracji.
-1.1.4|Dodanie metod do pobierania informacji o podpisach elektronicznych.
+1.1.4|Dodanie metod do pobierania informacji o&nbsp;podpisach elektronicznych.
 1.1.3|Dodanie nowych parametrów do ustawiania wizualizacji podpisu pliku PDF.
-1.1.2|Dodanie metody do podpisywania plików PDF z dysku, poprawione wyświetlanie informacji o podpisie na PDF.
-1.1.1|Usunięcie błędów z wczytywanie schematu metadanych 1.7, dodanie opcji wskazania serwera znacznika czasu podczas podpisywania.
-1.1.0|Złączenie wszystkich bibliotek w jeden pakiet 
+1.1.2|Dodanie metody do podpisywania plików PDF z&nbsp;dysku, poprawione wyświetlanie informacji o&nbsp;podpisie na PDF.
+1.1.1|Usunięcie błędów z&nbsp;wczytywanie schematu metadanych 1.7, dodanie opcji wskazania serwera znacznika czasu podczas podpisywania.
+1.1.0|Złączenie wszystkich bibliotek w&nbsp;jeden pakiet 
 1.0.10|Dopracowanie opcji zgodności ze schematem `Metadane 1.7`.
 1.0.9|Dodanie wsparcia dla schematu metadanych w wersji 1.7 (Klasa `Document17`) czyli używanych przez paczkę archiwalną przekazywaną do AP. Natomiast standardowa klasa `Document` jest zgodna ze schematem 2.0 na potrzeby paczki eADM.
 1.0.8|Dodanie polskich opisów błędów przy walidacji metadanych. W&nbsp;pliku `AssemblyIno.cs` projektu należy dodać dyrektywę  `[assembly: NeutralResourcesLanguage("pl")]` lub z&nbsp;poziomu kodu ustawić inne `CultureInfo`.
@@ -48,7 +48,7 @@ Wersja  | Opis
 
 Wersja  | Opis
 --------|--------
-ABCPRO.NES| Zawarty w pakiecie głównym
+ABCPRO.NES| Zawarty w pakiecie głównym.
 1.0.15|Poprawiony błąd przy zapisie podpisanej paczki.
 1.0.14|Dopracowanie opcji zgodności ze schematem `Metadane 1.7`.
 1.0.13|Aktualizacja zależności.
@@ -64,7 +64,7 @@ ABCPRO.NES| Zawarty w pakiecie głównym
 
 Wersja  | Opis
 --------|--------
-ABCPRO.NES| Zawarty w pakiecie głównym
+ABCPRO.NES| Zawarty w pakiecie głównym.
 1.0.9|Dodanie metody do podpisywania kolekcji plików wewnątrz paczki.
 1.0.8|Poprawki błędów
 1.0.7|Dopracowanie opcji zgodności ze schematem `Metadane 1.7`.
@@ -80,7 +80,7 @@ ABCPRO.NES| Zawarty w pakiecie głównym
 
 Wersja  | Opis
 --------|--------
-ABCPRO.NES| Zawarty w pakiecie głównym
+ABCPRO.NES| Zawarty w pakiecie głównym.
 1.0.6|Wymiana biblioteki `BouncyCastle.NetCore` na `Portable.BouncyCastle` w&nbsp;celu uniknięcia konfliktu z&nbsp;referencją występującą w&nbsp;`ABCPRO.NES.ArchivalPackage.Cryptography`.
 1.0.5|Hermetyzacja kodu
 1.0.4|Dodanie biblioteki umożliwiającej podpisywanie dokumentów XML. Biblioteka bazuje na kodzie źródłowym [`Microsoft .NET Framework`](https://github.com/dotnet/runtime/tree/master/src/libraries/System.Security.Cryptography.Xml/src) w&nbsp;przestrzeni nazw `Microsoft.XmlDsig`, projektu [`Microsoft.Xades`](https://github.com/Caliper/Xades) utworzonym przez francuski oddział firmy Microsoft oraz na podstawie kodu źródłowego [`FirmaXadesNet`](https://github.com/ctt-gob-es/FirmaXadesNet45) utworzonym przez Departament Nowych Technologii Rady Urbanizacji Miasta Cartagena. Biblioteka pozwala na opatrywanie pliku metadanych bezpiecznym podpisem elektronicznym.  
