@@ -29,6 +29,7 @@ W tym katalogu znajduje się:
 
 Wersja  | Opis
 --------|--------
+1.1.8|ZMiana modyfikatora dostepu na public klas RSAPKCS1SHA256SignatureDescription i&nbsp;RSAPKCS1SHA512SignatureDescription w Abc.Nes.Xades.
 1.1.7|Dodanie metody do weryfikacji wskazanego pliku w&nbsp;paczce eADM.
 1.1.6|Dodanie metod do weryfikacji podpisu plików paczki i&nbsp;pliku .xades dla całej paczki eADM. 
 1.1.5|Dodanie rozszerzeń dla enumeracji.
