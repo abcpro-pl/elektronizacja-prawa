@@ -88,7 +88,7 @@ namespace Microsoft.Xades {
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "RSAPKCS", Justification = "This casing is to match the existing RSAPKCS1SHA1SignatureDescription type")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "SHA", Justification = "This casing is to match the use of SHA throughout the framework")]
-    internal sealed class RSAPKCS1SHA256SignatureDescription : SignatureDescription {
+    public sealed class RSAPKCS1SHA256SignatureDescription : SignatureDescription {
         /// <summary>
         ///     Construct an RSAPKCS1SHA256SignatureDescription object. The default settings for this object
         ///     are:
