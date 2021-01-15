@@ -632,20 +632,20 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             return list.ToArray();
         }
 
-        private SignatureVerifyInfo[] VerifyXadesSignatures(byte[] fileData, string internalPath) {
-            var list = new List<SignatureVerifyInfo>();
+        //private SignatureVerifyInfo[] VerifyXadesSignatures(byte[] fileData, string internalPath) {
+        //    var list = new List<SignatureVerifyInfo>();
 
-            using (var mgr = new XadesManager()) {
-                var result = mgr.ValidateSignature(new MemoryStream(fileData));
-                list.Add(new SignatureVerifyInfo() {
-                    FileName = internalPath,
-                    IsValid = result.IsValid,
-                    SignatureName = result.SignatureName
-                });
-            }
+        //    using (var mgr = new XadesManager()) {
+        //        var result = mgr.ValidateSignature(new MemoryStream(fileData));
+        //        list.Add(new SignatureVerifyInfo() {
+        //            FileName = internalPath,
+        //            IsValid = result.IsValid,
+        //            SignatureName = result.SignatureName
+        //        });
+        //    }
 
-            return list.ToArray();
-        }
+        //    return list.ToArray();
+        //}
 
         private SignatureVerifyInfo[] VerifyXadesSignatures(string filePath, string internalPath) {
             var list = new List<SignatureVerifyInfo>();

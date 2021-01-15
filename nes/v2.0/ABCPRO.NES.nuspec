@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>ABCPRO.NES</id>
-    <version>1.1.8</version>
+    <version>1.1.9</version>
     <authors>ITORG Krzysztof Radzimski</authors>
     <owners>ABC PRO Sp. z o.o.</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -12,7 +12,7 @@
     <copyright>ABC PRO Sp. z o.o.</copyright>
     <icon>nes_logo.png</icon>
     <summary>ABCPRO.NES for .NET is a library for creating and signing documents metadata and archival package (eADM) for Polish State Archives.</summary>
-    <releaseNotes>Make public RSAPKCS1SHA256SignatureDescription and RSAPKCS1SHA512SignatureDescription classes in Abc.Nes.Xades assembly.</releaseNotes>
+    <releaseNotes>Bug fix when verifying the signature in .NetCore.</releaseNotes>
     <repository type="GIT" url="https://github.com/abcpro-pl/elektronizacja-prawa.git"/>
     <tags>eADM NES paczka-archiwalna paczka-eADM c# .net csharp digital-signatures signing security accessibility opensource open source</tags>
     <dependencies>
@@ -38,7 +38,7 @@
         <dependency id="Common.Logging" version="3.4.1" exclude="Build,Analyzers" />
         <dependency id="Portable.BouncyCastle" version="1.8.8" exclude="Build,Analyzers" />
         <dependency id="DotNetZip" version="1.15.0" exclude="Build,Analyzers" />
-        <dependency id="Newtonsoft.Json" version="12.0.3" exclude="Build,Analyzers" />        
+        <dependency id="Newtonsoft.Json" version="12.0.3" exclude="Build,Analyzers" />
       </group>
     </dependencies>
   </metadata>

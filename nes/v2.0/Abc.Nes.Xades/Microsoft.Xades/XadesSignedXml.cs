@@ -20,6 +20,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/. 
 
+using Abc.Nes.Xades.Utils;
 using Microsoft.XmlDsig;
 using System;
 using System.Collections;
@@ -1540,9 +1541,9 @@ namespace Microsoft.Xades {
                 throw new CryptographicException("signature description can't be created");
 
             // Let's see if the key corresponds with the SignatureMethod
-            Type ta = Type.GetType(signatureDescription.KeyAlgorithm);
+            Type ta = signatureDescription.KeyAlgorithm.FindTypeInAllAssemblies(); //Type.GetType(signatureDescription.KeyAlgorithm);
             Type tb = key.GetType();
-            if ((ta != tb) && !ta.IsSubclassOf(tb) && !tb.IsSubclassOf(ta))
+            if ((ta != tb) && !ta.IsSubclassOf(tb) && !tb.IsSubclassOf(ta) && ta.BaseType != tb.BaseType)
                 // Signature method key mismatch
                 return false;
 

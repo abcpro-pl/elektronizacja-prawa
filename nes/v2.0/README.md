@@ -29,6 +29,7 @@ W tym katalogu znajduje się:
 
 Wersja  | Opis
 --------|--------
+1.1.9|Naprawa błędu występującego podczas weryfikacji podpisu w&nbsp;aplikacjach .NetCore 3.x.
 1.1.8|Zmiana modyfikatora dostepu na public klas RSAPKCS1SHA256SignatureDescription i&nbsp;RSAPKCS1SHA512SignatureDescription w&nbsp;Abc.Nes.Xades.
 1.1.7|Dodanie metody do weryfikacji wskazanego pliku w&nbsp;paczce eADM.
 1.1.6|Dodanie metod do weryfikacji podpisu plików paczki i&nbsp;pliku .xades dla całej paczki eADM. 
