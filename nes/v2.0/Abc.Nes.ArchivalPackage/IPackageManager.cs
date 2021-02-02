@@ -23,7 +23,8 @@ namespace Abc.Nes.ArchivalPackage {
         string FilePath { get; }
         void AddFile(DocumentFile document, IDocument metadata = null);
         void AddFile(string filePath, IDocument metadata = null);
-        void AddFiles(IEnumerable<string> files, string folderName, IEnumerable<IDocument> metadata = null);
+        void AddFiles(IEnumerable<DocumentFile> documents, string folderName = null, IEnumerable<IDocument> metadata = null);
+        void AddFiles(IEnumerable<string> files, string folderName = null, IEnumerable<IDocument> metadata = null);
         void AddObject(IDocument metadata, string fileName);
         void Save(string filePath = null, bool appendFileDataOnly = false);
         void LoadPackage(string filePath);

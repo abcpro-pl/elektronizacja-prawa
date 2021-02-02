@@ -67,11 +67,50 @@ namespace Abc.Nes.ArchivalPackage {
                 });
             }
         }
-        public void AddFiles(IEnumerable<string> files, string folderName, IEnumerable<IDocument> metadata = null) {
-            if (files.IsNull()) { throw new NullReferenceException(); }
-            if (folderName.IsNotNullOrEmpty()) { throw new NullReferenceException(); }
+        public void AddFiles(IEnumerable<DocumentFile> documents, string folderName = null, IEnumerable<IDocument> metadata = null) {
+            if (documents.IsNull()) { throw new ArgumentNullException("documents"); }
+            if (metadata.IsNotNull() && metadata.Count() != documents.Count()) {
+                throw new WrongMetadataCountException();
+            }
+            if (Package.IsNull()) {
+                using (IPackageValidator validator = new PackageValidator()) {
+                    Package = validator.InitializePackage();
+                }
+            }
 
-            if (files.Count() < 2) { throw new WrongFilesCountException(); }
+            var folder = Package.Documents;
+            if (folderName.IsNotNullOrEmpty()) {
+                folder = new DocumentFolder() {
+                    FolderName = folderName,
+                    Items = new List<DocumentFile>()
+                };
+                Package.Documents.Folders.Add(folder);
+            }
+
+            MetdataFolder metadataFolder = Package.Metadata;
+            if (metadata.IsNotNull() && metadata.Count() > 0 && folderName.IsNotNullOrEmpty()) {
+                metadataFolder = new MetdataFolder() {
+                    FolderName = folderName,
+                    Items = new List<MetadataFile>()
+                };
+                Package.Metadata.Folders.Add(metadataFolder);
+            }
+
+            for (int i = 0; i < documents.Count(); i++) {
+                var document = documents.ToArray()[i];
+                document.FileName = document.FileName.RemoveIllegalCharacters().RemovePolishChars();
+                folder.Items.Add(document);
+                if (metadata.IsNotNull()) {
+                    var fileMetadata = metadata.ToArray()[i];
+                    metadataFolder.Items.Add(new MetadataFile() {
+                        Document = fileMetadata,
+                        FileName = $"{document.FileName}.xml"
+                    });
+                }
+            }
+        }
+        public void AddFiles(IEnumerable<string> files, string folderName = null, IEnumerable<IDocument> metadata = null) {
+            if (files.IsNull()) { throw new ArgumentNullException("files"); }
 
             foreach (var filePath in files) {
                 if (filePath.IsNull()) { throw new NullReferenceException(); }
@@ -87,15 +126,20 @@ namespace Abc.Nes.ArchivalPackage {
                     Package = validator.InitializePackage();
                 }
             }
-            var folder = new DocumentFolder() {
-                FolderName = folderName,
-                Items = new List<DocumentFile>()
-            };
 
-            MetdataFolder metadataFolder = null;
-            if (metadata.IsNotNull()) {
+            var folder = Package.Documents;
+            if (folderName.IsNotNullOrEmpty()) {
+                folder = new DocumentFolder() {
+                    FolderName = folderName,
+                    Items = new List<DocumentFile>()
+                };
+                Package.Documents.Folders.Add(folder);
+            }
+
+            MetdataFolder metadataFolder = Package.Metadata;
+            if (metadata.IsNotNull() && folderName.IsNotNullOrEmpty()) {
                 metadataFolder = new MetdataFolder() {
-                    FolderName = $"{folderName}.xml",
+                    FolderName = folderName,
                     Items = new List<MetadataFile>()
                 };
                 Package.Metadata.Folders.Add(metadataFolder);
@@ -116,8 +160,6 @@ namespace Abc.Nes.ArchivalPackage {
                     });
                 }
             }
-
-            Package.Documents.Folders.Add(folder);
         }
         public void AddObject(IDocument metadata, string fileName) {
             if (metadata.IsNull()) { throw new ArgumentNullException("metadata"); }
@@ -390,8 +432,6 @@ namespace Abc.Nes.ArchivalPackage {
             return result;
         }
 
-        public void Dispose() {
-            
-        }
+        public void Dispose() { }
     }
 }

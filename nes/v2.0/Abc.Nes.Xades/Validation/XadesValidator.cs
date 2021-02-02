@@ -45,7 +45,12 @@ namespace Abc.Nes.Xades.Validation {
             xmlDocument.Load(filePath);
 
             var signature = new Microsoft.Xades.XadesSignedXml(xmlDocument);
-            signature.LoadXml(xmlDocument.DocumentElement);
+            try {
+                signature.LoadXml(xmlDocument.DocumentElement);
+            }
+            catch {
+                return default;
+            }
             return Validate(signature);
         }
 
@@ -65,31 +70,34 @@ namespace Abc.Nes.Xades.Validation {
         }
 
         public ValidationResult Validate(Microsoft.Xades.XadesSignedXml signature) {
-            /* Los elementos que se validan son:
-             * 
-             * 1. Las huellas de las referencias de la firma.
-             * 2. Se comprueba la huella del elemento SignedInfo y se verifica la firma con la clave pública del certificado.
-             * 3. Si la firma contiene un sello de tiempo se comprueba que la huella de la firma coincide con la del sello de tiempo.
-             * 
-             * La validación de perfiles -C, -X, -XL y -A esta fuera del ámbito de este proyecto.
-             */
+            //Elementy, które są sprawdzane to:
+            // 1.Ślady referencji firmy.
+            // 2.Sprawdzany jest odcisk palca elementu SignedInfo, a podpis weryfikowany kluczem publicznym certyfikatu.
+            // 3.Jeśli podpis zawiera znacznik czasu, sprawdza się, czy wydruk podpisu jest zgodny z wydrukiem znacznika czasu.
+            //Walidacja profili -C, -X, -XL i - A wykracza poza zakres tego projektu.
 
             ValidationResult result = new ValidationResult();
 
             try {
-                // Verifica las huellas de las referencias y la firma
+                var cert = signature.GetSigningCertificate();
+                result.CertificateIsValid = ValidateCert(cert);
+            }
+            catch { }
+
+            try {
+                // Sprawdź odcisk palca referencji i podpis 
                 signature.CheckXmldsigSignature();
             }
             catch {
                 result.IsValid = false;
-                result.SignatureName = signature.SignatureIdAttributeValue;
+                result.SignatureName = signature.Signature != null ? signature.Signature.Id : null;
                 result.Message = "Signature verification was unsuccessful";
 
                 return result;
             }
 
             if (signature.UnsignedProperties.UnsignedSignatureProperties.SignatureTimeStampCollection.Count > 0) {
-                // Se comprueba el sello de tiempo
+                // Sprawdzanie znacznika czasu
 
                 var timeStamp = signature.UnsignedProperties.UnsignedSignatureProperties.SignatureTimeStampCollection[0];
                 TimeStampToken token = new TimeStampToken(new CmsSignedData(timeStamp.EncapsulatedTimeStamp.PkiData));
@@ -116,19 +124,26 @@ namespace Abc.Nes.Xades.Validation {
 
                 if (!Arrays.AreEqual(tsHashValue, signatureValueHash)) {
                     result.IsValid = false;
-                    result.SignatureName = signature.SignatureIdAttributeValue;
-                    result.Message = "The trimestamp does not correspond to the calculated one";
+                    result.SignatureName = signature.Signature != null ? signature.Signature.Id : null;
+                    result.Message = "The timestamp does not correspond to the calculated one";
 
                     return result;
                 }
             }
 
             result.IsValid = true;
-            result.SignatureName = signature.SignatureIdAttributeValue;
+            result.SignatureName = signature.Signature != null ? signature.Signature.Id : null;
             result.Message = "Successful signature verification";
 
             return result;
         }
-
+        private bool ValidateCert(System.Security.Cryptography.X509Certificates.X509Certificate2 e) {
+            if (e != null) {
+                var ch = new System.Security.Cryptography.X509Certificates.X509Chain();
+                ch.ChainPolicy.RevocationMode = System.Security.Cryptography.X509Certificates.X509RevocationMode.NoCheck;
+                if (ch.Build(e)) { return true; }
+            }
+            return default;
+        }
     }
 }

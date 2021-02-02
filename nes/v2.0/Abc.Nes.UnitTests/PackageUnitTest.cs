@@ -337,7 +337,7 @@ namespace Abc.Nes.UnitTests {
 
         [TestMethod]
         public void GetSignatureInfos() {
-            var path = @"../../../sample/Paczka-nowa.zip";
+            var path = @"../../../sample/LegalAct.zip";
             var list = new List<ArchivalPackage.Cryptography.Model.SignatureInfo>();
             using (var mgr = new PackageSignerManager()) {
                 list.AddRange(mgr.GetSignatureInfos(path));               
@@ -347,7 +347,7 @@ namespace Abc.Nes.UnitTests {
 
         [TestMethod]
         public void ValidateSignatures() {
-            var path = @"../../../sample/EZD_PUW.zip";
+            var path = @"../../../sample/LegalAct.zip";
             var list = new List<ArchivalPackage.Cryptography.Model.SignatureVerifyInfo>();
             using (var mgr = new PackageSignerManager()) {
                 list.AddRange(mgr.VerifySignatures(path));
@@ -374,6 +374,18 @@ namespace Abc.Nes.UnitTests {
                 list.AddRange(mgr.VerifyXadesSignature(path));
             }
             Assert.IsTrue(list.Count > 0);
+        }
+
+        [TestMethod]
+        public void TestDotNetZip() {
+            var path = @"C:\Users\krzysztof.radzimski\Downloads\uchwala-xxvi-491-21 e-radni.zipx";
+            var mark = @"C:\Users\krzysztof.radzimski\Downloads\uchwala-xxvi-491-21 e-radni\Properties\mark.xml";
+            using (var zipFile = new Ionic.Zip.ZipFile(path)) {
+                for (int i = 0; i < 100; i++) {
+                    //zipFile.RemoveEntry("Properties\\mark.xml");
+                    zipFile.AddEntry($"Properties\\mark{i}.xml", File.ReadAllBytes(mark));
+                }
+            }
         }
     }
 }

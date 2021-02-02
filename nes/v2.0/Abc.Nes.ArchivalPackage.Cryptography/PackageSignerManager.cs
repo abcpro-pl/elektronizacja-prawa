@@ -315,6 +315,10 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 var result = GetPadesInfos(item.FileData, internalPath);
                 if (result != null && result.Length > 0) { list.AddRange(result); }
             }
+            else if (internalPath.EndsWith(".zip")) {
+                var result = GetZipxInfos(item.FileData, internalPath);
+                if (result != null && result.Length > 0) { list.AddRange(result); }
+            }
             else {
                 var xadesInternalPath = $"{internalPath}.xades";
                 var xadesItem = mgr.GetItemByFilePath(xadesInternalPath) as ArchivalPackage.Model.DocumentFile;
@@ -430,6 +434,10 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 }
                 else if (internalPath.EndsWith(".pdf")) {
                     var result = VerifyPadesSignatures(item.FileData, internalPath);
+                    if (result != null && result.Length > 0) { list.AddRange(result); }
+                }
+                else if (internalPath.EndsWith(".zip")) {
+                    var result = VerifyZipxSignatures(item.FileData, internalPath);
                     if (result != null && result.Length > 0) { list.AddRange(result); }
                 }
                 else if (internalPath.EndsWith(".xades")) {

@@ -423,9 +423,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             //  Encode the CMS/PKCS #7 message.
             return signedCms.Encode();
         }
-        */
-
-        /*
+        
         private void SignPdfItem(ItemBase item, X509Certificate2 cert, bool addTimeStamp) {
             var tempFilePath = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.pdf");
             try {
@@ -571,6 +569,29 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             }
         }
 
+        private SignatureInfo[] GetZipxInfos(byte[] fileData, string internalPath = null) {
+            const string XML = "akt.xml";
+            using (var zip = Ionic.Zip.ZipFile.Read(new MemoryStream(fileData))) {
+                if (zip.ContainsEntry(XML)) {
+                    // musimy rozpakować archiwum w celu weryfikacji 
+                    // pliku akt.xml
+                    var temp = Path.Combine(Path.GetTempPath(), $"ABCPRO.NES\\{Path.GetFileName(internalPath)}");
+                    if (!Directory.Exists(temp)) { Directory.CreateDirectory(temp); }
+                    zip.ExtractAll(temp);
+                    try {
+                        var xml = XElement.Load(Path.Combine(temp, XML));
+                        return GetXadesSignatureInfos(xml, internalPath);
+                    }
+                    catch { }
+                    finally {
+                        Directory.Delete(temp, true);
+                    }
+
+                }
+            }
+            return default;
+        }
+
         private SignatureInfo[] GetPadesInfos(byte[] fileData, string fileName = null) {
             using (var pdfDoc = new PdfDocument(new PdfReader(new MemoryStream(fileData)))) {
                 var signUtil = new SignatureUtil(pdfDoc);
@@ -587,17 +608,18 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                                 var item = new SignatureInfo() {
                                     CreateDate = pkcs7.GetSignDate(),
                                     Certificate = cert,
-                                    Author = subject["CN"],
-                                    Publisher = issuer["CN"],
+                                    Author = subject.ContainsKey("CN") ? subject["CN"] : String.Empty,
+                                    Publisher = issuer.ContainsKey("CN") ? issuer["CN"] : String.Empty,
                                     SignatureType = SignatureType.Pades,
                                     SignatureNumber = name,
                                     FileName = fileName,
                                     CommitmentTypeIndication = pkcs7.GetReason(),
-                                    Organization = subject["O"],
+                                    Organization = subject.ContainsKey("O") ? subject["O"] : String.Empty,
                                     ClaimedRole = ""
                                 };
                                 if (item.Author != null) { item.Author = item.Author.Replace("\"", String.Empty); }
                                 if (item.Publisher != null) { item.Publisher = item.Publisher.Replace("\"", String.Empty); }
+                                if (item.CommitmentTypeIndication == null) { item.CommitmentTypeIndication = "Formalne zatwierdzenie (Proof of approval)"; }
 
                                 list.Add(item);
                             }
@@ -608,7 +630,6 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             }
             return default;
         }
-
         private SignatureVerifyInfo[] VerifyPadesSignatures(byte[] fileData, string internalPath) {
             var list = new List<SignatureVerifyInfo>();
 
@@ -619,10 +640,12 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                     foreach (var name in names) {
                         var pkcs7 = signUtil.ReadSignatureData(name);
                         if (pkcs7 != null) {
+                            var certIsValid = ValidateCert(pkcs7.GetSigningCertificate());
                             list.Add(new SignatureVerifyInfo() {
                                 FileName = internalPath,
                                 SignatureName = name,
-                                IsValid = pkcs7.VerifySignatureIntegrityAndAuthenticity()
+                                IsValid = pkcs7.VerifySignatureIntegrityAndAuthenticity(),
+                                CertificateIsValid = certIsValid
                             });
                         }
                     }
@@ -631,37 +654,46 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
 
             return list.ToArray();
         }
+        private SignatureVerifyInfo[] VerifyZipxSignatures(byte[] fileData, string internalPath) {
+            var list = new List<SignatureVerifyInfo>();
+            const string XML = "akt.xml";
+            using (var zip = Ionic.Zip.ZipFile.Read(new MemoryStream(fileData))) {
+                if (zip.ContainsEntry(XML)) {
+                    // musimy rozpakować archiwum w celu weryfikacji 
+                    // pliku akt.xml
+                    var temp = Path.Combine(Path.GetTempPath(), $"ABCPRO.NES\\{Path.GetFileName(internalPath)}");
+                    if (!Directory.Exists(temp)) { Directory.CreateDirectory(temp); }
+                    zip.ExtractAll(temp);
+                    try {
+                        var result = VerifyXadesSignatures(Path.Combine(temp, XML), internalPath);
+                        if (result != null) { list.AddRange(result); }
+                    }
+                    catch { }
+                    finally {
+                        Directory.Delete(temp, true);
+                    }
 
-        //private SignatureVerifyInfo[] VerifyXadesSignatures(byte[] fileData, string internalPath) {
-        //    var list = new List<SignatureVerifyInfo>();
-
-        //    using (var mgr = new XadesManager()) {
-        //        var result = mgr.ValidateSignature(new MemoryStream(fileData));
-        //        list.Add(new SignatureVerifyInfo() {
-        //            FileName = internalPath,
-        //            IsValid = result.IsValid,
-        //            SignatureName = result.SignatureName
-        //        });
-        //    }
-
-        //    return list.ToArray();
-        //}
-
+                }
+            }
+            return list.ToArray();
+        }
         private SignatureVerifyInfo[] VerifyXadesSignatures(string filePath, string internalPath) {
             var list = new List<SignatureVerifyInfo>();
 
             using (var mgr = new XadesManager()) {
                 var result = mgr.ValidateSignature(filePath);
-                list.Add(new SignatureVerifyInfo() {
-                    FileName = internalPath,
-                    IsValid = result.IsValid,
-                    SignatureName = result.SignatureName
-                });
+                if (result != null) {
+                    list.Add(new SignatureVerifyInfo() {
+                        FileName = internalPath,
+                        IsValid = result.IsValid,
+                        SignatureName = result.SignatureName,
+                        CertificateIsValid = result.CertificateIsValid
+                    });
+                }
             }
 
             return list.ToArray();
         }
-
         private string GetCommitmentTypeIndication(XElement e) {
             const string xmlCTIProofOfReceipt = "http://uri.etsi.org/01903/v1.2.2#ProofOfReceipt";
             const string xmlCTIProofOfDelivery = "http://uri.etsi.org/01903/v1.2.2#ProofOfDelivery";
@@ -691,13 +723,16 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             }
             return s;
         }
-
         private SignatureInfo GetSignatureInfo(XElement e) {
             if (e != null) {
                 var result = new SignatureInfo() {
                     SignatureType = SignatureType.Xades,
-                    SignatureNumber = e.Attribute("Id").Value,
-                    CommitmentTypeIndication = GetCommitmentTypeIndication(e)
+                    SignatureNumber = e.Attribute("Id").Value(),
+                    CommitmentTypeIndication = GetCommitmentTypeIndication(e),
+                    Author = String.Empty,
+                    ClaimedRole = String.Empty,
+                    Organization = String.Empty,
+                    Publisher = String.Empty,
                 };
 
                 var xSubjectName = e.Descendants().Where(x => x.Name.LocalName == "X509SubjectName").FirstOrDefault();
@@ -708,7 +743,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 else {
                     if (xSubjectName != null) {
                         var subjectName = new SubjectNameInfo(xSubjectName.Value);
-                        if (subjectName.Count > 0 && subjectName.Keys.Contains("CN")) {
+                        if (subjectName.Count > 0 && subjectName.ContainsKey("CN")) {
                             result.Author = subjectName["CN"];
                         }
                     }
@@ -716,7 +751,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
 
                 if (xSubjectName != null) {
                     var subjectName = new SubjectNameInfo(xSubjectName.Value);
-                    if (subjectName.Count > 0 && subjectName.Keys.Contains("O")) {
+                    if (subjectName.Count > 0 && subjectName.ContainsKey("O")) {
                         result.Organization = subjectName["O"];
                     }
                 }
@@ -734,7 +769,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 var xIssuerName = e.Descendants().Where(x => x.Name.LocalName == "X509IssuerName").FirstOrDefault();
                 if (xIssuerName != null) {
                     var issuerName = new SubjectNameInfo(xIssuerName.Value);
-                    if (issuerName.Count > 0) {
+                    if (issuerName.Count > 0 && issuerName.ContainsKey("CN")) {
                         result.Publisher = issuerName["CN"];
                     }
                 }
@@ -746,13 +781,13 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                     result.Certificate = cert;
                     if (result.Author == null) {
                         var subjectName = new SubjectNameInfo(cert.Subject);
-                        if (subjectName.Count > 0) {
+                        if (subjectName.Count > 0 && subjectName.ContainsKey("CN")) {
                             result.Author = subjectName["CN"];
                         }
                     }
                     if (result.Publisher == null) {
                         var issuerName = new SubjectNameInfo(cert.Issuer);
-                        if (issuerName.Count > 0) {
+                        if (issuerName.Count > 0 && issuerName.ContainsKey("CN")) {
                             result.Publisher = issuerName["CN"];
                         }
                     }
@@ -761,8 +796,25 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
 
                 if (result.Author != null) { result.Author = result.Author.Replace("\"", String.Empty); }
                 if (result.Publisher != null) { result.Publisher = result.Publisher.Replace("\"", String.Empty); }
+                if (result.CommitmentTypeIndication == null) { result.CommitmentTypeIndication = "Formalne zatwierdzenie (Proof of approval)"; }
 
                 return result;
+            }
+            return default;
+        }
+
+        private bool ValidateCert(Org.BouncyCastle.X509.X509Certificate e) {
+            if (e != null) {
+                var cert = new X509Certificate2(e.GetEncoded());
+                return ValidateCert(cert);
+            }
+            return default;
+        }
+        private bool ValidateCert(X509Certificate2 e) {
+            if (e != null) {
+                var ch = new X509Chain();
+                ch.ChainPolicy.RevocationMode = X509RevocationMode.NoCheck;
+                if (ch.Build(e)) { return true; }
             }
             return default;
         }

@@ -53,10 +53,57 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
         }
 
         public static string ToText(this byte[] bytes) {
-            if (bytes!=null) {
+            if (bytes != null) {
                 return Encoding.UTF8.GetString(bytes);
             }
             return String.Empty;
+        }
+
+        public static string Value(this XElement e) {
+            if (e == null) {
+                return String.Empty;
+            }
+
+            return e.Value(String.Empty);
+        }
+
+        public static string Value(this XElement e, string defaultValue) {
+            if (e != null) {
+                if (!String.IsNullOrEmpty(e.Value)) {
+                    return e.Value;
+                }
+                else {
+                    return defaultValue;
+                }
+            }
+            if (defaultValue != null) {
+                return defaultValue;
+            }
+
+            return String.Empty;
+        }
+
+        public static string Value(this XAttribute attribute) {
+            if (attribute != null) {
+                return attribute.Value(String.Empty);
+            }
+
+            return String.Empty;
+        }
+        public static string NullOrValue(this XAttribute attribute) {
+            if (attribute != null) {
+                return attribute.Value(String.Empty);
+            }
+            return null;
+        }
+        public static string Value(this XAttribute attribute, string defaultValue) {
+            if (attribute != null) {
+                if (!String.IsNullOrEmpty (attribute.Value)) {
+                    return attribute.Value;
+                }                
+            }
+
+            return defaultValue;
         }
     }
 }

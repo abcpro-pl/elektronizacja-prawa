@@ -34,5 +34,6 @@ namespace Abc.Nes.ArchivalPackage.Cryptography.Model {
         public string FileName { get; internal set; }
         public string SignatureName { get; internal set; }
         public bool IsValid { get; internal set; }
+        public bool CertificateIsValid { get; set; }
     }
 }

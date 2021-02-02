@@ -29,6 +29,8 @@ W tym katalogu znajduje się:
 
 Wersja  | Opis
 --------|--------
+1.1.11|Dodanie opcji weryfikacji plików ZIPX oraz certyfikatów w podpisach.
+1.1.10|Dodanie metody `void AddFiles(IEnumerable<DocumentFile> documents, string folderName = null, IEnumerable<IDocument> metadata = null);`
 1.1.9|Naprawa błędu występującego podczas weryfikacji podpisu w&nbsp;aplikacjach .NetCore 3.x.
 1.1.8|Zmiana modyfikatora dostepu na public klas RSAPKCS1SHA256SignatureDescription i&nbsp;RSAPKCS1SHA512SignatureDescription w&nbsp;Abc.Nes.Xades.
 1.1.7|Dodanie metody do weryfikacji wskazanego pliku w&nbsp;paczce eADM.
