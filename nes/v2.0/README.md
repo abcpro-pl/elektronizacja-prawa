@@ -11,6 +11,8 @@
 
 Biblioteki NES służą do tworzenia paczki [eADM](https://gov.legalis.pl/przekazywanie-skargi-do-sadu-administracyjnego/), która swoją strukturą odpowiada paczce archiwalnej przekazywanej do [Archiwów Państwowych](https://www.archiwa.gov.pl/). Paczka oprócz samych dokumentów, zawiera opisujące je pliki metadanych. Więcej informacji można znaleźć w&nbsp;Rozporządzeniu Prezydenta Rzeczypospolitej Polskiej w&nbsp;sprawie szczegółowego sposobu oraz szczegółowych warunków przekazywania skargi wraz z&nbsp;aktami sprawy i&nbsp;odpowiedzią na skargę do sądu administracyjnego  [(Dz.U. z&nbsp;2019&nbsp;r. poz. 1003)](https://eli.gov.pl/eli/DU/2019/1003/ogl).
 
+> Biblioteki zostały wykorzystane do stworzenia rozwiązania dostępnego pod adresem https://paczka-eadm.abcpro.pl/ pozwalającego na przeglądanie zawartości paczki eADM.
+
 W tym katalogu znajduje się:
 
 * oryginalny schemat XSD [nes_20.xsd](https://raw.githubusercontent.com/abcpro-pl/elektronizacja-prawa/master/nes/v2.0/nes_20.xsd) dla metadanych paczki eADM i schemat XSD [Metadane-1.7.xsd](https://raw.githubusercontent.com/abcpro-pl/elektronizacja-prawa/master/nes/v2.0/Metadane-1.7.xsd) dla metadanych paczki archiwalnej, 
@@ -48,6 +50,8 @@ Wersja  | Opis
 1.0.7|Dodanie przestrzeni nazw `Abc.Nes.Validators` do wyodrębnienia funkcji walidacji metadanych. W&nbsp;klasie`XmlConverter` dodano metodę `GetValidationResult` zwracającą obiekt ze szczegółową lokalizacją błędów.
 1.0.5|Zawiera dodatkowe pola w&nbsp;adresie (gmina, powiat, województwo). Dodane metody statyczne do pobierania wartości z&nbsp;enumeratorów dla pól tekstowych np. `RelationElement.GetRelationType()`.
 1.0.3|Pierwsza stabilna wersja biblioteki. Pozwala na dodawanie wszystkich metadanych, walidację i&nbsp;zapis do pliku XML. Za pomocą klasy `XmlConverter` możliwe jest otwieranie plików zarówno z&nbsp;wersji 2.0 jak i&nbsp;tych starszych.
+
+<!--
 
 ### Historia wersji ABCPRO.NES.ArchivalPackage
 
@@ -88,7 +92,8 @@ Wersja  | Opis
 ABCPRO.NES| Zawarty w pakiecie głównym.
 1.0.6|Wymiana biblioteki `BouncyCastle.NetCore` na `Portable.BouncyCastle` w&nbsp;celu uniknięcia konfliktu z&nbsp;referencją występującą w&nbsp;`ABCPRO.NES.ArchivalPackage.Cryptography`.
 1.0.5|Hermetyzacja kodu
-1.0.4|Dodanie biblioteki umożliwiającej podpisywanie dokumentów XML. Biblioteka bazuje na kodzie źródłowym [`Microsoft .NET Framework`](https://github.com/dotnet/runtime/tree/master/src/libraries/System.Security.Cryptography.Xml/src) w&nbsp;przestrzeni nazw `Microsoft.XmlDsig`, projektu [`Microsoft.Xades`](https://github.com/Caliper/Xades) utworzonym przez francuski oddział firmy Microsoft oraz na podstawie kodu źródłowego [`FirmaXadesNet`](https://github.com/ctt-gob-es/FirmaXadesNet45) utworzonym przez Departament Nowych Technologii Rady Urbanizacji Miasta Cartagena. Biblioteka pozwala na opatrywanie pliku metadanych bezpiecznym podpisem elektronicznym.  
+1.0.4|Dodanie biblioteki umożliwiającej podpisywanie dokumentów XML. Biblioteka bazuje na kodzie źródłowym [`Microsoft .NET Framework`](https://github.com/dotnet/runtime/tree/master/src/libraries/System.Security.Cryptography.Xml/src) w&nbsp;przestrzeni nazw `Microsoft.XmlDsig`, projektu [`Microsoft.Xades`](https://github.com/Caliper/Xades) utworzonym przez francuski oddział firmy Microsoft oraz na podstawie kodu źródłowego [`FirmaXadesNet`](https://github.com/ctt-gob-es/FirmaXadesNet45) utworzonym przez Departament Nowych Technologii Rady Urbanizacji Miasta Cartagena. Biblioteka pozwala na opatrywanie pliku metadanych bezpiecznym podpisem elektronicznym.
+-->  
 
 [&#8682; Do góry](#paczka-eadm-i-niezbędne-elementy-struktury-dokumentu-elektronicznego-20)
 
