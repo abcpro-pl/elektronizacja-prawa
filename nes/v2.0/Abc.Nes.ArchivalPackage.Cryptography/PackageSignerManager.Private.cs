@@ -641,11 +641,13 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                         var pkcs7 = signUtil.ReadSignatureData(name);
                         if (pkcs7 != null) {
                             var certIsValid = ValidateCert(pkcs7.GetSigningCertificate());
+                            var isValid = pkcs7.VerifySignatureIntegrityAndAuthenticity();
                             list.Add(new SignatureVerifyInfo() {
                                 FileName = internalPath,
                                 SignatureName = name,
-                                IsValid = pkcs7.VerifySignatureIntegrityAndAuthenticity(),
-                                CertificateIsValid = certIsValid
+                                IsValid = isValid,
+                                CertificateIsValid = certIsValid,
+                                Message = isValid && certIsValid ? "Weryfikacja sygnatury podpisu i certyfikatu przebiegła pomyślnie" : "Weryfikacja podpisu lub certyfikatu zakończona niepowodzeniem",
                             });
                         }
                     }
@@ -687,7 +689,8 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                         FileName = internalPath,
                         IsValid = result.IsValid,
                         SignatureName = result.SignatureName,
-                        CertificateIsValid = result.CertificateIsValid
+                        CertificateIsValid = result.CertificateIsValid,
+                        Message = result.Message
                     });
                 }
             }

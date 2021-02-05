@@ -29,6 +29,7 @@ W tym katalogu znajduje się:
 
 Wersja  | Opis
 --------|--------
+1.1.12|Poprawiona weryfikacja podpisów wewnętrznych XML.
 1.1.11|Dodanie opcji weryfikacji plików ZIPX oraz certyfikatów w podpisach.
 1.1.10|Dodanie metody `void AddFiles(IEnumerable<DocumentFile> documents, string folderName = null, IEnumerable<IDocument> metadata = null);`
 1.1.9|Naprawa błędu występującego podczas weryfikacji podpisu w&nbsp;aplikacjach .NetCore 3.x.

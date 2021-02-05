@@ -2,6 +2,7 @@
 using Abc.Nes.Xades.Signature.Parameters;
 using Abc.Nes.Xades.Utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.IO;
 using System.Text;
 
@@ -28,8 +29,11 @@ namespace Abc.Nes.UnitTests {
                 if (File.Exists(filePath)) { File.Delete(filePath); }
                 result.Save(filePath);
 
-                Assert.IsTrue(result != null && result.Document != null && result.Document.OuterXml != null && File.Exists(filePath));
-
+                //var mgr = new XmlDsigEnveloped(false, null);
+                //var vr = mgr.VerifyFile(filePath);
+                //Assert.IsTrue(vr);
+                var validationResult = manager.ValidateSignature(filePath);
+                Assert.IsTrue(validationResult.IsValid && result != null && result.Document != null && result.Document.OuterXml != null && File.Exists(filePath));
                 System.Diagnostics.Process.Start(filePath);
             }
         }

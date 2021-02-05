@@ -18,7 +18,7 @@ namespace Abc.Nes.Xades {
         SignatureDocument CreateDetachedSignature(string filePath, X509Certificate2 cert, Signature.Parameters.SignatureProductionPlace productionPlace = null, Signature.Parameters.SignerRole signerRole = null, Upgraders.SignatureFormat? upgradeFormat = null, string timeStampServerUrl = "http://time.certum.pl");
         ValidationResult ValidateSignature(Stream stream);
         ValidationResult ValidateSignature(string filePath);
-        ValidationResult ValidateSignature(SignatureDocument sigDocument);
+        // ValidationResult ValidateSignature(SignatureDocument sigDocument);
     }
     public class XadesManager : IXadesManager {
         private Signature.Parameters.SignatureProductionPlace ProductionPlace = null;
@@ -232,24 +232,109 @@ Content-Disposition: filename=""{ fileName }""
         }
 
         public ValidationResult ValidateSignature(Stream stream) {
-            using (XadesValidator validator = new XadesValidator()) {
-                return validator.Validate(stream);
+            XmlDocument xd = new XmlDocument();
+            xd.PreserveWhitespace = true;
+            xd.Load(stream);
+            var signedXml = new SignedXml(xd);
+
+            XmlNode MessageSignatureNode = xd.GetElementsByTagName("Signature", SignedXml.XmlDsigNamespaceUrl)[0];
+            if (MessageSignatureNode == null) {
+                return null;
+                //return new ValidationResult() {
+                //    CertificateIsValid = false,
+                //    IsValid = false,
+                //    Message = "W dokumencie nie ma żadnych podpisów",
+                //    SignatureName = String.Empty
+                //};
             }
+
+            signedXml.LoadXml((XmlElement)MessageSignatureNode);
+
+            // get the cert from the signature
+            X509Certificate2 certificate = null;
+            foreach (KeyInfoClause clause in signedXml.KeyInfo) {
+                if (clause is KeyInfoX509Data) {
+                    if (((KeyInfoX509Data)clause).Certificates.Count > 0) {
+                        certificate =
+                        (X509Certificate2)((KeyInfoX509Data)clause).Certificates[0];
+                    }
+                }
+            }
+
+            var isValid = false;
+            var certIsValid = false;
+            var message = String.Empty;
+            try {
+                certIsValid = ValidateCert(certificate);
+                isValid = signedXml.CheckSignature(certificate, true);
+                message = isValid && certIsValid ? "Weryfikacja sygnatury podpisu i certyfikatu przebiegła pomyślnie" : "Weryfikacja podpisu lub certyfikatu zakończona niepowodzeniem";
+            }
+            catch (CryptographicException ex) {
+                message = ex.Message;
+            }
+
+            return new ValidationResult() {
+                IsValid = isValid,
+                CertificateIsValid = certIsValid,
+                Message = message,
+                SignatureName = signedXml.Signature?.Id
+            };
+
+            //using (XadesValidator validator = new XadesValidator()) {
+            //    return validator.Validate(stream);
+            //}
         }
 
         public ValidationResult ValidateSignature(string filePath) {
-            using (XadesValidator validator = new XadesValidator()) {
-                return validator.Validate(filePath);
+            byte[] stringData = File.ReadAllBytes(filePath);
+            using (MemoryStream ms = new MemoryStream(stringData)) {
+                System.Environment.CurrentDirectory = Path.GetDirectoryName(filePath);
+                return ValidateSignature(ms);
             }
+
+
+
+            //XmlDocument xmlDocument = new XmlDocument();
+            //xmlDocument.Load(filePath);
+            //var signedXml = new System.Security.Cryptography.Xml.SignedXml(xmlDocument);
+            //var nodeList = xmlDocument.GetElementsByTagName("Signature", System.Security.Cryptography.Xml.SignedXml.XmlDsigNamespaceUrl);
+            //if (nodeList != null && nodeList.Count > 0) {
+            //    var signature = (XmlElement)nodeList[0];
+            //    signedXml.LoadXml(signature);
+            //    AsymmetricAlgorithm key = null;
+            //    var v = signedXml.CheckSignatureReturningKey(out key);
+            //    XmlNode keyXml = signature.GetElementsByTagName("X509Certificate", System.Security.Cryptography.Xml.SignedXml.XmlDsigNamespaceUrl)[0];
+            //    if (keyXml == null) { throw new Exception("Failed to get signing certificate."); }
+            //    var cert = new X509Certificate2(Convert.FromBase64String(keyXml.InnerText));
+            //    if (!v) {
+            //        key = cert.PublicKey.Key;
+            //    }
+            //    var result = signedXml.CheckSignature(cert,true);
+            //    if (result) { }
+            //}
+
+
+            //using (XadesValidator validator = new XadesValidator()) {
+            //    return validator.Validate(filePath);
+            //}
         }
 
-        public ValidationResult ValidateSignature(SignatureDocument sigDocument) {
-            SignatureDocument.CheckSignatureDocument(sigDocument);
-
-            using (XadesValidator validator = new XadesValidator()) {
-                return validator.Validate(sigDocument);
+        private bool ValidateCert(X509Certificate2 e) {
+            if (e != null) {
+                var ch = new X509Chain();
+                ch.ChainPolicy.RevocationMode = X509RevocationMode.NoCheck;
+                if (ch.Build(e)) { return true; }
             }
+            return default;
         }
+
+        //public ValidationResult ValidateSignature(SignatureDocument sigDocument) {
+        //    SignatureDocument.CheckSignatureDocument(sigDocument);
+
+        //    using (XadesValidator validator = new XadesValidator()) {
+        //        return validator.Validate(sigDocument);
+        //    }
+        //}
 
         private void SetSignatureId(XadesSignedXml xadesSignedXml) {
             string id = Guid.NewGuid().ToString();

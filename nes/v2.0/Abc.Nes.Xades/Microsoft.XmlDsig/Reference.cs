@@ -299,7 +299,7 @@ namespace Microsoft.XmlDsig {
                 throw new CryptographicException(SR.Cryptography_Xml_CreateHashAlgorithmFailed);
 
             // Let's go get the target.
-            string baseUri = (document == null ? System.Environment.CurrentDirectory + "\\" : document.BaseURI);
+            string baseUri = document == null || String.IsNullOrEmpty(document.BaseURI) ? System.Environment.CurrentDirectory + "\\" : document.BaseURI;
             string dir = null;
             if (baseUri != null && baseUri.StartsWith("file:///")) {
                 dir = Path.GetDirectoryName(baseUri.Replace("file:///", String.Empty));

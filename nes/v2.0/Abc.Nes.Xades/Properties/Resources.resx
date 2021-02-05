@@ -118,157 +118,157 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ArgumentOutOfRange_Index" xml:space="preserve">
-    <value>Index was out of range. Must be non-negative and less than the size of the collection.</value>
+    <value>Indeks był poza zakresem. Musi być nieujemna i mniejsza niż wielkość kolekcji.</value>
   </data>
   <data name="Arg_EmptyOrNullString" xml:space="preserve">
-    <value>String cannot be empty or null.</value>
+    <value>Ciąg nie może być pusty ani zerowy.</value>
   </data>
   <data name="Cryptography_Partial_Chain" xml:space="preserve">
-    <value>A certificate chain could not be built to a trusted root authority.</value>
+    <value>Nie można zbudować łańcucha certyfikatów w zaufanym urzędzie głównym.</value>
   </data>
   <data name="Cryptography_Xml_BadWrappedKeySize" xml:space="preserve">
-    <value>Bad wrapped key size.</value>
+    <value>Zły rozmiar opakowanego klucza.</value>
   </data>
   <data name="Cryptography_Xml_CipherValueElementRequired" xml:space="preserve">
-    <value>A Cipher Data element should have either a CipherValue or a CipherReference element.</value>
+    <value>Element Cipher Data powinien mieć element CipherValue lub CipherReference.</value>
   </data>
   <data name="Cryptography_Xml_CreateHashAlgorithmFailed" xml:space="preserve">
-    <value>Could not create hash algorithm object.</value>
+    <value>Nie można utworzyć obiektu algorytmu skrótu.</value>
   </data>
   <data name="Cryptography_Xml_CreateTransformFailed" xml:space="preserve">
-    <value>Could not create the XML transformation identified by the URI {0}.</value>
+    <value>Nie można utworzyć transformacji XML identyfikowanej przez identyfikator URI {0}.</value>
   </data>
   <data name="Cryptography_Xml_CreatedKeyFailed" xml:space="preserve">
-    <value>Failed to create signing key.</value>
+    <value>Nie udało się utworzyć klucza podpisu.</value>
   </data>
   <data name="Cryptography_Xml_DigestMethodRequired" xml:space="preserve">
-    <value>A DigestMethod must be specified on a Reference prior to generating XML.</value>
+    <value>Przed wygenerowaniem kodu XML należy określić DigestMethod w referencji.</value>
   </data>
   <data name="Cryptography_Xml_DigestValueRequired" xml:space="preserve">
-    <value>A Reference must contain a DigestValue.</value>
+    <value>Referencja musi zawierać DigestValue.</value>
   </data>
   <data name="Cryptography_Xml_EnvelopedSignatureRequiresContext" xml:space="preserve">
-    <value>An XmlDocument context is required for enveloped transforms.</value>
+    <value>Kontekst XmlDocument jest wymagany dla przekształceń otoczonych.</value>
   </data>
   <data name="Cryptography_Xml_InvalidElement" xml:space="preserve">
-    <value>Malformed element {0}.</value>
+    <value>Zniekształcony element {0}.</value>
   </data>
   <data name="Cryptography_Xml_InvalidEncryptionProperty" xml:space="preserve">
-    <value>Malformed encryption property element.</value>
+    <value>Zniekształcony element właściwości szyfrowania.</value>
   </data>
   <data name="Cryptography_Xml_InvalidKeySize" xml:space="preserve">
-    <value>The key size should be a non negative integer.</value>
+    <value>Rozmiar klucza powinien być nieujemną liczbą całkowitą.</value>
   </data>
   <data name="Cryptography_Xml_InvalidReference" xml:space="preserve">
-    <value>Malformed reference element.</value>
+    <value>Zniekształcony element referencyjny.</value>
   </data>
   <data name="Cryptography_Xml_InvalidSignatureLength" xml:space="preserve">
-    <value>The length of the signature with a MAC should be less than the hash output length.</value>
+    <value>Długość podpisu z adresem MAC powinna być mniejsza niż długość wyjściowa skrótu.</value>
   </data>
   <data name="Cryptography_Xml_InvalidSignatureLength2" xml:space="preserve">
-    <value>The length in bits of the signature with a MAC should be a multiple of 8.</value>
+    <value>Długość w bitach podpisu z adresem MAC powinna być wielokrotnością 8.</value>
   </data>
   <data name="Cryptography_Xml_InvalidX509IssuerSerialNumber" xml:space="preserve">
-    <value>X509 issuer serial number is invalid.</value>
+    <value>Numer seryjny wydawcy X509 jest nieprawidłowy.</value>
   </data>
   <data name="Cryptography_Xml_KeyInfoRequired" xml:space="preserve">
-    <value>A KeyInfo element is required to check the signature.</value>
+    <value>Do sprawdzenia podpisu wymagany jest element KeyInfo.</value>
   </data>
   <data name="Cryptography_Xml_KW_BadKeySize" xml:space="preserve">
-    <value>The length of the encrypted data in Key Wrap is either 32, 40 or 48 bytes.</value>
+    <value>Długość zaszyfrowanych danych w zawijaniu klucza wynosi 32, 40 lub 48 bajtów.</value>
   </data>
   <data name="Cryptography_Xml_LoadKeyFailed" xml:space="preserve">
-    <value>Signing key is not loaded.</value>
+    <value>Klucz podpisu nie został załadowany.</value>
   </data>
   <data name="Cryptography_Xml_MissingAlgorithm" xml:space="preserve">
-    <value>Symmetric algorithm is not specified.</value>
+    <value>Nie określono algorytmu symetrycznego.</value>
   </data>
   <data name="Cryptography_Xml_MissingCipherData" xml:space="preserve">
-    <value>Cipher data is not specified.</value>
+    <value>Nie określono danych szyfrowania.</value>
   </data>
   <data name="Cryptography_Xml_MissingDecryptionKey" xml:space="preserve">
-    <value>Unable to retrieve the decryption key.</value>
+    <value>Nie można pobrać klucza odszyfrowywania.</value>
   </data>
   <data name="Cryptography_Xml_MissingEncryptionKey" xml:space="preserve">
-    <value>Unable to retrieve the encryption key.</value>
+    <value>Nie można pobrać klucza szyfrowania.</value>
   </data>
   <data name="Cryptography_Xml_NotSupportedCryptographicTransform" xml:space="preserve">
-    <value>The specified cryptographic transform is not supported.</value>
+    <value>Określona transformacja kryptograficzna nie jest obsługiwana.</value>
   </data>
   <data name="Cryptography_Xml_ReferenceElementRequired" xml:space="preserve">
-    <value>At least one Reference element is required.</value>
+    <value>Wymagany jest co najmniej jeden element Reference.</value>
   </data>
   <data name="Cryptography_Xml_ReferenceTypeRequired" xml:space="preserve">
-    <value>The Reference type must be set in an EncryptedReference object.</value>
+    <value>Typ odwołania musi być ustawiony w obiekcie EncryptedReference.</value>
   </data>
   <data name="Cryptography_Xml_SelfReferenceRequiresContext" xml:space="preserve">
-    <value>An XmlDocument context is required to resolve the Reference Uri {0}.</value>
+    <value>Aby rozpoznać identyfikator Uri odwołania {0}, wymagany jest kontekst XmlDocument.</value>
   </data>
   <data name="Cryptography_Xml_SignatureDescriptionNotCreated" xml:space="preserve">
-    <value>SignatureDescription could not be created for the signature algorithm supplied.</value>
+    <value>Nie można utworzyć SignatureDescription dla podanego algorytmu podpisu.</value>
   </data>
   <data name="Cryptography_Xml_SignatureMethodKeyMismatch" xml:space="preserve">
-    <value>The key does not fit the SignatureMethod.</value>
+    <value>Klucz nie pasuje do SignatureMethod.</value>
   </data>
   <data name="Cryptography_Xml_SignatureMethodRequired" xml:space="preserve">
-    <value>A signature method is required.</value>
+    <value>Wymagana jest metoda podpisu.</value>
   </data>
   <data name="Cryptography_Xml_SignatureValueRequired" xml:space="preserve">
-    <value>Signature requires a SignatureValue.</value>
+    <value>Podpis wymaga wartości SignatureValue.</value>
   </data>
   <data name="Cryptography_Xml_SignedInfoRequired" xml:space="preserve">
-    <value>Signature requires a SignedInfo.</value>
+    <value>Podpis wymaga SignedInfo.</value>
   </data>
   <data name="Cryptography_Xml_TransformIncorrectInputType" xml:space="preserve">
-    <value>The input type was invalid for this transform.</value>
+    <value>Typ danych wejściowych był nieprawidłowy dla tej transformacji.</value>
   </data>
   <data name="Cryptography_Xml_IncorrectObjectType" xml:space="preserve">
-    <value>Type of input object is invalid.</value>
+    <value>Typ obiektu wejściowego jest nieprawidłowy.</value>
   </data>
   <data name="Cryptography_Xml_UnknownTransform" xml:space="preserve">
-    <value>Unknown transform has been encountered.</value>
+    <value>Napotkano nieznaną transformację.</value>
   </data>
   <data name="Cryptography_Xml_UriNotResolved" xml:space="preserve">
-    <value>Unable to resolve Uri {0}.</value>
+    <value>Nie można rozpoznać ścieżki Uri {0}.</value>
   </data>
   <data name="Cryptography_Xml_UriNotSupported" xml:space="preserve">
-    <value> The specified Uri is not supported.</value>
+    <value>Podany identyfikator Uri nie jest obsługiwany.</value>
   </data>
   <data name="Cryptography_Xml_UriRequired" xml:space="preserve">
-    <value>A Uri attribute is required for a CipherReference element.</value>
+    <value>Dla elementu CipherReference wymagany jest atrybut Uri.</value>
   </data>
   <data name="Cryptography_Xml_XrmlMissingContext" xml:space="preserve">
-    <value>Null Context property encountered.</value>
+    <value>Napotkano null Context.</value>
   </data>
   <data name="Cryptography_Xml_XrmlMissingIRelDecryptor" xml:space="preserve">
-    <value>IRelDecryptor is required.</value>
+    <value>IRelDecryptor jest wymagany.</value>
   </data>
   <data name="Cryptography_Xml_XrmlMissingIssuer" xml:space="preserve">
-    <value>Issuer node is required.</value>
+    <value>Węzeł wystawcy jest wymagany.</value>
   </data>
   <data name="Cryptography_Xml_XrmlMissingLicence" xml:space="preserve">
-    <value>License node is required.</value>
+    <value>Wymagany jest węzeł licencji.</value>
   </data>
   <data name="Cryptography_Xml_XrmlUnableToDecryptGrant" xml:space="preserve">
-    <value>Unable to decrypt grant content.</value>
+    <value>Nie można odszyfrować treści grantu.</value>
   </data>
   <data name="NotSupported_KeyAlgorithm" xml:space="preserve">
-    <value>The certificate key algorithm is not supported.</value>
+    <value>Algorytm klucza certyfikatu nie jest obsługiwany.</value>
   </data>
   <data name="Log_ActualHashValue" xml:space="preserve">
-    <value>Actual hash value: {0}</value>
+    <value>Aktualna wartość skrótu: {0}</value>
   </data>
   <data name="Log_BeginCanonicalization" xml:space="preserve">
-    <value>Beginning canonicalization using "{0}" ({1}).</value>
+    <value>Rozpoczynanie konwersji kanonicznej za pomocą „{0}” ({1}).</value>
   </data>
   <data name="Log_BeginSignatureComputation" xml:space="preserve">
-    <value>Beginning signature computation.</value>
+    <value>Rozpoczęcie obliczania podpisu.</value>
   </data>
   <data name="Log_BeginSignatureVerification" xml:space="preserve">
-    <value>Beginning signature verification.</value>
+    <value>Rozpoczęcie weryfikacji podpisu.</value>
   </data>
   <data name="Log_BuildX509Chain" xml:space="preserve">
-    <value>Building and verifying the X509 chain for certificate {0}.</value>
+    <value>Tworzenie i weryfikowanie łańcucha X509 dla certyfikatu {0}.</value>
   </data>
   <data name="Log_CanonicalizationSettings" xml:space="preserve">
     <value>Canonicalization transform is using resolver {0} and base URI "{1}".</value>
@@ -379,6 +379,6 @@
     <value>Transform method "{0}" is not on the safe list. Safe transform methods are: {1}.</value>
   </data>
   <data name="SystemSecurityCryptographyXml_PlatformNotSupported" xml:space="preserve">
-    <value>System.Security.Cryptography.Xml is not supported on this platform. </value>
+    <value>System.Security.Cryptography.Xml nie jest obsługiwany na tej platformie.</value>
   </data>
 </root>

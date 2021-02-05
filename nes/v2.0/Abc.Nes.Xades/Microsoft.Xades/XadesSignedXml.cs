@@ -542,8 +542,7 @@ namespace Microsoft.Xades {
                 this.KeyInfo = keyInfo;
             }
 
-            SignatureDescription description = CryptoConfig.CreateFromName(this.SignedInfo.SignatureMethod) as SignatureDescription;
-
+            var description = CryptoConfig.CreateFromName(this.SignedInfo.SignatureMethod) as SignatureDescription;
             if (description == null) {
                 if (this.SignedInfo.SignatureMethod == "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256") {
                     CryptoConfig.AddAlgorithm(typeof(Microsoft.Xades.RSAPKCS1SHA256SignatureDescription), "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256");
@@ -568,17 +567,11 @@ namespace Microsoft.Xades {
             }
 
             retVal = this.CheckDigestedReferences();
-
-            if (retVal == false) {
-                throw new CryptographicException("CheckXmldsigSignature() failed");
-            }
+            if (!retVal) { throw new CryptographicException("CheckXmldsigSignature() failed"); }
 
             var key = this.GetPublicKey();
             retVal = this.CheckSignedInfo(key);
-
-            if (retVal == false) {
-                throw new CryptographicException("CheckXmldsigSignature() failed");
-            }
+            if (!retVal) { throw new CryptographicException("CheckXmldsigSignature() failed"); }
 
             return retVal;
         }
@@ -1533,12 +1526,10 @@ namespace Microsoft.Xades {
 
 
         private bool CheckSignedInfo(AsymmetricAlgorithm key) {
-            if (key == null)
-                throw new ArgumentNullException("key");
+            if (key == null) { throw new ArgumentNullException("key"); }
 
-            SignatureDescription signatureDescription = CryptoConfig.CreateFromName(SignatureMethod) as SignatureDescription;
-            if (signatureDescription == null)
-                throw new CryptographicException("signature description can't be created");
+            var signatureDescription = CryptoConfig.CreateFromName(/*key.SignatureAlgorithm*/SignatureMethod) as SignatureDescription;
+            if (signatureDescription == null) { throw new CryptographicException("signature description can't be created"); }
 
             // Let's see if the key corresponds with the SignatureMethod
             Type ta = signatureDescription.KeyAlgorithm.FindTypeInAllAssemblies(); //Type.GetType(signatureDescription.KeyAlgorithm);
@@ -1547,12 +1538,12 @@ namespace Microsoft.Xades {
                 // Signature method key mismatch
                 return false;
 
-            HashAlgorithm hashAlgorithm = signatureDescription.CreateDigest();
-            if (hashAlgorithm == null)
+            HashAlgorithm hash = signatureDescription.CreateDigest();
+            if (hash == null)
                 throw new CryptographicException("signature description can't be created");
 
             /// NECESARIO PARA EL CALCULO CORRECTO
-            byte[] hashval = GetC14NDigest(hashAlgorithm, "ds");
+            byte[] hashval = GetC14NDigest(hash, "ds");
 
             AsymmetricSignatureDeformatter asymmetricSignatureDeformatter = signatureDescription.CreateDeformatter(key);
 

@@ -61,7 +61,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to String cannot be empty or null..
+        ///   Looks up a localized string similar to Ciąg nie może być pusty ani zerowy..
         /// </summary>
         internal static string Arg_EmptyOrNullString {
             get {
@@ -70,7 +70,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Index was out of range. Must be non-negative and less than the size of the collection..
+        ///   Looks up a localized string similar to Indeks był poza zakresem. Musi być nieujemna i mniejsza niż wielkość kolekcji..
         /// </summary>
         internal static string ArgumentOutOfRange_Index {
             get {
@@ -79,7 +79,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A certificate chain could not be built to a trusted root authority..
+        ///   Looks up a localized string similar to Nie można zbudować łańcucha certyfikatów w zaufanym urzędzie głównym..
         /// </summary>
         internal static string Cryptography_Partial_Chain {
             get {
@@ -88,7 +88,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bad wrapped key size..
+        ///   Looks up a localized string similar to Zły rozmiar opakowanego klucza..
         /// </summary>
         internal static string Cryptography_Xml_BadWrappedKeySize {
             get {
@@ -97,7 +97,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A Cipher Data element should have either a CipherValue or a CipherReference element..
+        ///   Looks up a localized string similar to Element Cipher Data powinien mieć element CipherValue lub CipherReference..
         /// </summary>
         internal static string Cryptography_Xml_CipherValueElementRequired {
             get {
@@ -106,7 +106,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to create signing key..
+        ///   Looks up a localized string similar to Nie udało się utworzyć klucza podpisu..
         /// </summary>
         internal static string Cryptography_Xml_CreatedKeyFailed {
             get {
@@ -115,7 +115,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not create hash algorithm object..
+        ///   Looks up a localized string similar to Nie można utworzyć obiektu algorytmu skrótu..
         /// </summary>
         internal static string Cryptography_Xml_CreateHashAlgorithmFailed {
             get {
@@ -124,7 +124,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not create the XML transformation identified by the URI {0}..
+        ///   Looks up a localized string similar to Nie można utworzyć transformacji XML identyfikowanej przez identyfikator URI {0}..
         /// </summary>
         internal static string Cryptography_Xml_CreateTransformFailed {
             get {
@@ -133,7 +133,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A DigestMethod must be specified on a Reference prior to generating XML..
+        ///   Looks up a localized string similar to Przed wygenerowaniem kodu XML należy określić DigestMethod w referencji..
         /// </summary>
         internal static string Cryptography_Xml_DigestMethodRequired {
             get {
@@ -142,7 +142,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A Reference must contain a DigestValue..
+        ///   Looks up a localized string similar to Referencja musi zawierać DigestValue..
         /// </summary>
         internal static string Cryptography_Xml_DigestValueRequired {
             get {
@@ -151,7 +151,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An XmlDocument context is required for enveloped transforms..
+        ///   Looks up a localized string similar to Kontekst XmlDocument jest wymagany dla przekształceń otoczonych..
         /// </summary>
         internal static string Cryptography_Xml_EnvelopedSignatureRequiresContext {
             get {
@@ -160,7 +160,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Type of input object is invalid..
+        ///   Looks up a localized string similar to Typ obiektu wejściowego jest nieprawidłowy..
         /// </summary>
         internal static string Cryptography_Xml_IncorrectObjectType {
             get {
@@ -169,7 +169,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Malformed element {0}..
+        ///   Looks up a localized string similar to Zniekształcony element {0}..
         /// </summary>
         internal static string Cryptography_Xml_InvalidElement {
             get {
@@ -178,7 +178,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Malformed encryption property element..
+        ///   Looks up a localized string similar to Zniekształcony element właściwości szyfrowania..
         /// </summary>
         internal static string Cryptography_Xml_InvalidEncryptionProperty {
             get {
@@ -187,7 +187,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The key size should be a non negative integer..
+        ///   Looks up a localized string similar to Rozmiar klucza powinien być nieujemną liczbą całkowitą..
         /// </summary>
         internal static string Cryptography_Xml_InvalidKeySize {
             get {
@@ -196,7 +196,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Malformed reference element..
+        ///   Looks up a localized string similar to Zniekształcony element referencyjny..
         /// </summary>
         internal static string Cryptography_Xml_InvalidReference {
             get {
@@ -205,7 +205,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The length of the signature with a MAC should be less than the hash output length..
+        ///   Looks up a localized string similar to Długość podpisu z adresem MAC powinna być mniejsza niż długość wyjściowa skrótu..
         /// </summary>
         internal static string Cryptography_Xml_InvalidSignatureLength {
             get {
@@ -214,7 +214,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The length in bits of the signature with a MAC should be a multiple of 8..
+        ///   Looks up a localized string similar to Długość w bitach podpisu z adresem MAC powinna być wielokrotnością 8..
         /// </summary>
         internal static string Cryptography_Xml_InvalidSignatureLength2 {
             get {
@@ -223,7 +223,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to X509 issuer serial number is invalid..
+        ///   Looks up a localized string similar to Numer seryjny wydawcy X509 jest nieprawidłowy..
         /// </summary>
         internal static string Cryptography_Xml_InvalidX509IssuerSerialNumber {
             get {
@@ -232,7 +232,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A KeyInfo element is required to check the signature..
+        ///   Looks up a localized string similar to Do sprawdzenia podpisu wymagany jest element KeyInfo..
         /// </summary>
         internal static string Cryptography_Xml_KeyInfoRequired {
             get {
@@ -241,7 +241,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The length of the encrypted data in Key Wrap is either 32, 40 or 48 bytes..
+        ///   Looks up a localized string similar to Długość zaszyfrowanych danych w zawijaniu klucza wynosi 32, 40 lub 48 bajtów..
         /// </summary>
         internal static string Cryptography_Xml_KW_BadKeySize {
             get {
@@ -250,7 +250,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Signing key is not loaded..
+        ///   Looks up a localized string similar to Klucz podpisu nie został załadowany..
         /// </summary>
         internal static string Cryptography_Xml_LoadKeyFailed {
             get {
@@ -259,7 +259,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Symmetric algorithm is not specified..
+        ///   Looks up a localized string similar to Nie określono algorytmu symetrycznego..
         /// </summary>
         internal static string Cryptography_Xml_MissingAlgorithm {
             get {
@@ -268,7 +268,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cipher data is not specified..
+        ///   Looks up a localized string similar to Nie określono danych szyfrowania..
         /// </summary>
         internal static string Cryptography_Xml_MissingCipherData {
             get {
@@ -277,7 +277,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to retrieve the decryption key..
+        ///   Looks up a localized string similar to Nie można pobrać klucza odszyfrowywania..
         /// </summary>
         internal static string Cryptography_Xml_MissingDecryptionKey {
             get {
@@ -286,7 +286,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to retrieve the encryption key..
+        ///   Looks up a localized string similar to Nie można pobrać klucza szyfrowania..
         /// </summary>
         internal static string Cryptography_Xml_MissingEncryptionKey {
             get {
@@ -295,7 +295,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The specified cryptographic transform is not supported..
+        ///   Looks up a localized string similar to Określona transformacja kryptograficzna nie jest obsługiwana..
         /// </summary>
         internal static string Cryptography_Xml_NotSupportedCryptographicTransform {
             get {
@@ -304,7 +304,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to At least one Reference element is required..
+        ///   Looks up a localized string similar to Wymagany jest co najmniej jeden element Reference..
         /// </summary>
         internal static string Cryptography_Xml_ReferenceElementRequired {
             get {
@@ -313,7 +313,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Reference type must be set in an EncryptedReference object..
+        ///   Looks up a localized string similar to Typ odwołania musi być ustawiony w obiekcie EncryptedReference..
         /// </summary>
         internal static string Cryptography_Xml_ReferenceTypeRequired {
             get {
@@ -322,7 +322,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An XmlDocument context is required to resolve the Reference Uri {0}..
+        ///   Looks up a localized string similar to Aby rozpoznać identyfikator Uri odwołania {0}, wymagany jest kontekst XmlDocument..
         /// </summary>
         internal static string Cryptography_Xml_SelfReferenceRequiresContext {
             get {
@@ -331,7 +331,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SignatureDescription could not be created for the signature algorithm supplied..
+        ///   Looks up a localized string similar to Nie można utworzyć SignatureDescription dla podanego algorytmu podpisu..
         /// </summary>
         internal static string Cryptography_Xml_SignatureDescriptionNotCreated {
             get {
@@ -340,7 +340,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The key does not fit the SignatureMethod..
+        ///   Looks up a localized string similar to Klucz nie pasuje do SignatureMethod..
         /// </summary>
         internal static string Cryptography_Xml_SignatureMethodKeyMismatch {
             get {
@@ -349,7 +349,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A signature method is required..
+        ///   Looks up a localized string similar to Wymagana jest metoda podpisu..
         /// </summary>
         internal static string Cryptography_Xml_SignatureMethodRequired {
             get {
@@ -358,7 +358,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Signature requires a SignatureValue..
+        ///   Looks up a localized string similar to Podpis wymaga wartości SignatureValue..
         /// </summary>
         internal static string Cryptography_Xml_SignatureValueRequired {
             get {
@@ -367,7 +367,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Signature requires a SignedInfo..
+        ///   Looks up a localized string similar to Podpis wymaga SignedInfo..
         /// </summary>
         internal static string Cryptography_Xml_SignedInfoRequired {
             get {
@@ -376,7 +376,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The input type was invalid for this transform..
+        ///   Looks up a localized string similar to Typ danych wejściowych był nieprawidłowy dla tej transformacji..
         /// </summary>
         internal static string Cryptography_Xml_TransformIncorrectInputType {
             get {
@@ -385,7 +385,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unknown transform has been encountered..
+        ///   Looks up a localized string similar to Napotkano nieznaną transformację..
         /// </summary>
         internal static string Cryptography_Xml_UnknownTransform {
             get {
@@ -394,7 +394,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to resolve Uri {0}..
+        ///   Looks up a localized string similar to Nie można rozpoznać ścieżki Uri {0}..
         /// </summary>
         internal static string Cryptography_Xml_UriNotResolved {
             get {
@@ -403,7 +403,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  The specified Uri is not supported..
+        ///   Looks up a localized string similar to Podany identyfikator Uri nie jest obsługiwany..
         /// </summary>
         internal static string Cryptography_Xml_UriNotSupported {
             get {
@@ -412,7 +412,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A Uri attribute is required for a CipherReference element..
+        ///   Looks up a localized string similar to Dla elementu CipherReference wymagany jest atrybut Uri..
         /// </summary>
         internal static string Cryptography_Xml_UriRequired {
             get {
@@ -421,7 +421,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Null Context property encountered..
+        ///   Looks up a localized string similar to Napotkano null Context..
         /// </summary>
         internal static string Cryptography_Xml_XrmlMissingContext {
             get {
@@ -430,7 +430,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to IRelDecryptor is required..
+        ///   Looks up a localized string similar to IRelDecryptor jest wymagany..
         /// </summary>
         internal static string Cryptography_Xml_XrmlMissingIRelDecryptor {
             get {
@@ -439,7 +439,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Issuer node is required..
+        ///   Looks up a localized string similar to Węzeł wystawcy jest wymagany..
         /// </summary>
         internal static string Cryptography_Xml_XrmlMissingIssuer {
             get {
@@ -448,7 +448,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to License node is required..
+        ///   Looks up a localized string similar to Wymagany jest węzeł licencji..
         /// </summary>
         internal static string Cryptography_Xml_XrmlMissingLicence {
             get {
@@ -457,7 +457,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to decrypt grant content..
+        ///   Looks up a localized string similar to Nie można odszyfrować treści grantu..
         /// </summary>
         internal static string Cryptography_Xml_XrmlUnableToDecryptGrant {
             get {
@@ -466,7 +466,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Actual hash value: {0}.
+        ///   Looks up a localized string similar to Aktualna wartość skrótu: {0}.
         /// </summary>
         internal static string Log_ActualHashValue {
             get {
@@ -475,7 +475,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Beginning canonicalization using &quot;{0}&quot; ({1})..
+        ///   Looks up a localized string similar to Rozpoczynanie konwersji kanonicznej za pomocą „{0}” ({1})..
         /// </summary>
         internal static string Log_BeginCanonicalization {
             get {
@@ -484,7 +484,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Beginning signature computation..
+        ///   Looks up a localized string similar to Rozpoczęcie obliczania podpisu..
         /// </summary>
         internal static string Log_BeginSignatureComputation {
             get {
@@ -493,7 +493,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Beginning signature verification..
+        ///   Looks up a localized string similar to Rozpoczęcie weryfikacji podpisu..
         /// </summary>
         internal static string Log_BeginSignatureVerification {
             get {
@@ -502,7 +502,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Building and verifying the X509 chain for certificate {0}..
+        ///   Looks up a localized string similar to Tworzenie i weryfikowanie łańcucha X509 dla certyfikatu {0}..
         /// </summary>
         internal static string Log_BuildX509Chain {
             get {
@@ -835,7 +835,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The certificate key algorithm is not supported..
+        ///   Looks up a localized string similar to Algorytm klucza certyfikatu nie jest obsługiwany..
         /// </summary>
         internal static string NotSupported_KeyAlgorithm {
             get {
@@ -844,7 +844,7 @@ namespace Abc.Nes.Xades.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to System.Security.Cryptography.Xml is not supported on this platform. .
+        ///   Looks up a localized string similar to System.Security.Cryptography.Xml nie jest obsługiwany na tej platformie..
         /// </summary>
         internal static string SystemSecurityCryptographyXml_PlatformNotSupported {
             get {

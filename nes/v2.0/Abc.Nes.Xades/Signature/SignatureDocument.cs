@@ -78,8 +78,10 @@ namespace Abc.Nes.Xades.Signature {
         /// Actualiza el documento resultante
         /// </summary>
         internal void UpdateDocument() {
+            var isXadesFile = false;
             if (Document == null) {
                 Document = new XmlDocument();
+                isXadesFile = true;
             }
 
             if (Document.DocumentElement != null) {
@@ -122,7 +124,7 @@ namespace Abc.Nes.Xades.Signature {
                     }
 
                 }
-                else {
+                else if (isXadesFile) {
                     XmlElement xmlSigned = XadesSignature.GetXml();
 
                     byte[] canonicalizedElement = XMLUtil.ApplyTransform(xmlSigned, new XmlDsigC14NTransform());
@@ -135,6 +137,14 @@ namespace Abc.Nes.Xades.Signature {
                     XmlNode canonSignature = Document.ImportNode(doc.DocumentElement, true);
 
                     XadesSignature.GetSignatureElement().AppendChild(canonSignature);
+                }
+                else {
+                    XmlElement xmlDigitalSignature = XadesSignature.GetXml();
+                    Document.DocumentElement.AppendChild(Document.ImportNode(xmlDigitalSignature, true));
+                    Document.PreserveWhitespace = true;
+                    if (Document.FirstChild is XmlDeclaration) {
+                        Document.RemoveChild(Document.FirstChild);
+                    }
                 }
             }
             else {

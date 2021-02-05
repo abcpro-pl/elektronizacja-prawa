@@ -78,6 +78,7 @@
     <Compile Include="DocumentUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PackageUnitTest.cs" />
+    <Compile Include="SignAndVerifyUnitTest.cs" />
     <Compile Include="XadesServiceUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
