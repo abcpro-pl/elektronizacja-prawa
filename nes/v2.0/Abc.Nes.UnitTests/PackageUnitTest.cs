@@ -340,9 +340,9 @@ namespace Abc.Nes.UnitTests {
             var path = @"../../../sample/LegalAct.zip";
             var list = new List<ArchivalPackage.Cryptography.Model.SignatureInfo>();
             using (var mgr = new PackageSignerManager()) {
-                list.AddRange(mgr.GetSignatureInfos(path));               
+                list.AddRange(mgr.GetSignatureInfos(path));
             }
-            Assert.IsTrue(list.Count>0);
+            Assert.IsTrue(list.Count > 0);
         }
 
         [TestMethod]
@@ -377,14 +377,12 @@ namespace Abc.Nes.UnitTests {
         }
 
         [TestMethod]
-        public void TestDotNetZip() {
-            var path = @"C:\Users\krzysztof.radzimski\Downloads\uchwala-xxvi-491-21 e-radni.zipx";
-            var mark = @"C:\Users\krzysztof.radzimski\Downloads\uchwala-xxvi-491-21 e-radni\Properties\mark.xml";
-            using (var zipFile = new Ionic.Zip.ZipFile(path)) {
-                for (int i = 0; i < 100; i++) {
-                    //zipFile.RemoveEntry("Properties\\mark.xml");
-                    zipFile.AddEntry($"Properties\\mark{i}.xml", File.ReadAllBytes(mark));
-                }
+        public void ValidateZipxSignature() {
+            var pathToPackage = @"../../../sample/cda64f92-4cd5-4809-9938-024cf96fa99c.zip";
+            var pathToFileInPackage = "dokumenty/Zawiadomienie o wszczeciu postepowania nadzorczego.zip";
+            using (var mgr = new PackageSignerManager()) {
+                var signatures = mgr.GetSignatureInfos(pathToPackage, pathToFileInPackage);
+                Assert.IsTrue(signatures.Length > 0);
             }
         }
     }

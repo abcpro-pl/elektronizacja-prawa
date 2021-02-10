@@ -286,7 +286,6 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             }
             return list.ToArray();
         }
-
         public SignatureInfo[] GetSignatureInfos(PackageManager mgr, string internalPath) {
             if (mgr == null) { throw new ArgumentNullException("mgr"); }
             if (String.IsNullOrEmpty(internalPath)) { throw new ArgumentNullException("internalPath"); }
@@ -300,7 +299,6 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
 
             return list.ToArray();
         }
-
         public SignatureInfo[] GetSignatureInfos(PackageManager mgr, ArchivalPackage.Model.DocumentFile item) {
             if (mgr == null) { throw new ArgumentNullException("mgr"); }
             if (item == null) { throw new ArgumentNullException("item"); }
@@ -330,7 +328,6 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
 
             return list.ToArray();
         }
-
         public SignatureInfo[] GetSignatureInfos(string packageFilePath, string internalPath) {
             if (String.IsNullOrEmpty(packageFilePath)) { throw new ArgumentNullException("packageFilePath"); }
             if (String.IsNullOrEmpty(internalPath)) { throw new ArgumentNullException("internalPath"); }
@@ -352,7 +349,6 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
 
             return default;
         }
-
         public SignatureInfo[] GetXadesSignatureInfos(XElement xades, string fileName = null) {
             if (xades != null) {
                 var signatures = xades.DescendantsAndSelf().Where(x => x.Name.LocalName == "Signature").ToArray();
@@ -378,7 +374,6 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             if (result != null && result.Length > 0) { list.AddRange(result); }
             return list.ToArray();
         }
-
         public SignatureVerifyInfo[] VerifySignatures(string packageFilePath, string internalPath) {
             var list = new List<SignatureVerifyInfo>();
             using (var mgr = new PackageManager()) {
@@ -394,7 +389,6 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
 
             return list.ToArray();
         }
-
         public SignatureVerifyInfo[] VerifySignatures(string packageFilePath) {
             var list = new List<SignatureVerifyInfo>();
 
@@ -413,60 +407,55 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             return list.ToArray();
         }
 
-        private void VerifySignatures(List<SignatureVerifyInfo> list, PackageManager mgr, ArchivalPackage.Model.DocumentFile item, string internalPath) {
+        public SignAndVerifyInfo GetSignAndVerifyInfo(string packageFilePath, string internalPath) {
+            if (String.IsNullOrEmpty(packageFilePath)) { throw new ArgumentNullException("packageFilePath"); }
+            if (String.IsNullOrEmpty(internalPath)) { throw new ArgumentNullException("internalPath"); }
+            if (!File.Exists(packageFilePath)) { throw new FileNotFoundException("Package file not found!", packageFilePath); }
+
+            var mgr = new PackageManager();
+            mgr.LoadPackage(packageFilePath);
+
+            return GetSignAndVerifyInfo(mgr, internalPath);
+        }
+        public SignAndVerifyInfo GetSignAndVerifyInfo(PackageManager mgr, string internalPath) {
+            if (mgr == null) { throw new ArgumentNullException("mgr"); }
+            if (String.IsNullOrEmpty(internalPath)) { throw new ArgumentNullException("internalPath"); }
+
+            var item = mgr.GetItemByFilePath(internalPath) as ArchivalPackage.Model.DocumentFile;
+            if (item != null) {
+                return GetSignAndVerifyInfo(mgr, item);
+            }
+            return default;
+        }
+        public SignAndVerifyInfo GetSignAndVerifyInfo(PackageManager mgr, ArchivalPackage.Model.DocumentFile item) {
+            if (mgr == null) { throw new ArgumentNullException("mgr"); }
+            if (item == null) { throw new ArgumentNullException("item"); }
+
+            var internalPath = item.FilePath;
+            var temp = Path.Combine(Path.GetTempPath(), $"ABCPRO.NES\\{Path.GetFileNameWithoutExtension(internalPath)}");
+
             try {
-                var temp = Path.Combine(Path.GetTempPath(), "ABCPRO.NES");
                 if (!Directory.Exists(temp)) { Directory.CreateDirectory(temp); }
+                SignAndVerifyInfo result = null;
 
-                if (internalPath.EndsWith(".xml")) {
-                    try {
-                        File.WriteAllBytes(Path.Combine(temp, item.FileName), item.FileData);
-
-                        var result = VerifyXadesSignatures(Path.Combine(temp, item.FileName), internalPath);
-                        if (result != null && result.Length > 0) { list.AddRange(result); }
-                    }
-                    finally {
-                        var _files = Directory.GetFiles(temp);
-                        foreach (var _file in _files) {
-                            try { File.Delete(_file); } catch { }
-                        }
-                    }
+                if (internalPath.EndsWith(".xades") || internalPath.EndsWith(".xml")) {
+                    result = GetXmlSignAndVerifyInfo(mgr, item, temp, internalPath);
                 }
                 else if (internalPath.EndsWith(".pdf")) {
-                    var result = VerifyPadesSignatures(item.FileData, internalPath);
-                    if (result != null && result.Length > 0) { list.AddRange(result); }
+                    result = GetPadesSignAndVerifyInfo(item.FileData, internalPath);
                 }
                 else if (internalPath.EndsWith(".zip")) {
-                    var result = VerifyZipxSignatures(item.FileData, internalPath);
-                    if (result != null && result.Length > 0) { list.AddRange(result); }
+                    result = GetZipSignAndVerifyInfo(item.FileData, temp, internalPath);
                 }
-                else if (internalPath.EndsWith(".xades")) {
-                    var _internalPath = internalPath.Replace(".xades", "");
-                    var _item = mgr.GetItemByFilePath(_internalPath) as ArchivalPackage.Model.DocumentFile;
-                    if (_item != null) {
-                        try {
-                            File.WriteAllBytes(Path.Combine(temp, item.FileName), item.FileData);
-                            File.WriteAllBytes(Path.Combine(temp, _item.FileName), _item.FileData);
+                else { }
+                return result;
+            }
+            catch { }
+            finally {
+                try { if (Directory.Exists(temp)) { Directory.Delete(temp, true); } } catch { }
+            }
 
-                            var result = VerifyXadesSignatures(Path.Combine(temp, item.FileName), internalPath);
-                            if (result != null && result.Length > 0) { list.AddRange(result); }
-                        }
-                        finally {
-                            var _files = Directory.GetFiles(temp);
-                            foreach (var _file in _files) {
-                                try { File.Delete(_file); } catch { }
-                            }
-                        }
-                    }
-                }
-            }
-            catch {
-                list.Add(new SignatureVerifyInfo() {
-                    FileName = internalPath,
-                    IsValid = false,
-                    SignatureName = String.Empty
-                }); ;
-            }
+            return default;
         }
     }
 }

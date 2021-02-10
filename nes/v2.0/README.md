@@ -31,6 +31,7 @@ W tym katalogu znajduje się:
 
 Wersja  | Opis
 --------|--------
+1.1.13|Dodanie metody `GetSignAndVerifyInfo` do pozyskiwania informacji o podpisach pliku.
 1.1.12|Poprawiona weryfikacja podpisów wewnętrznych XML.
 1.1.11|Dodanie opcji weryfikacji plików ZIPX oraz certyfikatów w podpisach.
 1.1.10|Dodanie metody `void AddFiles(IEnumerable<DocumentFile> documents, string folderName = null, IEnumerable<IDocument> metadata = null);`

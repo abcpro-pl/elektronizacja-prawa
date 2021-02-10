@@ -18,5 +18,25 @@ namespace Abc.Nes.NUnitTests {
             }
             Assert.IsTrue(list.Count > 0);
         }
+
+        [Test]
+        public void ValidateZipxSignature() {
+            var pathToPackage = @"../../../../sample/cda64f92-4cd5-4809-9938-024cf96fa99c.zip";
+            var pathToFileInPackage = "dokumenty/Zawiadomienie o wszczeciu postepowania nadzorczego.zip";
+            using (var mgr = new PackageSignerManager()) {
+                var signatures = mgr.GetSignatureInfos(pathToPackage, pathToFileInPackage);
+                Assert.IsTrue(signatures.Length > 0);
+            }
+        }
+
+        [Test]
+        public void GetSignAndVerifyInfo() {
+            var pathToPackage = @"../../../../sample/cda64f92-4cd5-4809-9938-024cf96fa99c.zip";
+            var pathToFileInPackage = "dokumenty/Zawiadomienie o wszczeciu postepowania nadzorczego.zip";
+            using (var mgr = new PackageSignerManager()) {
+                var signatures = mgr.GetSignAndVerifyInfo(pathToPackage, pathToFileInPackage);
+                Assert.IsTrue(signatures.SignInfo != null && signatures.SignInfo.Length > 0);
+            }
+        }
     }
 }

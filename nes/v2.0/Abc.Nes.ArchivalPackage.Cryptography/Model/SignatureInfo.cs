@@ -37,4 +37,9 @@ namespace Abc.Nes.ArchivalPackage.Cryptography.Model {
         public bool CertificateIsValid { get; internal set; }
         public string Message { get; internal set; }
     }
+
+    public class SignAndVerifyInfo {
+        public SignatureInfo[] SignInfo { get; internal set; }
+        public SignatureVerifyInfo[] VerifyInfo { get; internal set; }
+    }
 }

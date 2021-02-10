@@ -584,14 +584,13 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                     }
                     catch { }
                     finally {
-                        Directory.Delete(temp, true);
+                        try { Directory.Delete(temp, true); } catch { }
                     }
 
                 }
             }
             return default;
         }
-
         private SignatureInfo[] GetPadesInfos(byte[] fileData, string fileName = null) {
             using (var pdfDoc = new PdfDocument(new PdfReader(new MemoryStream(fileData)))) {
                 var signUtil = new SignatureUtil(pdfDoc);
@@ -672,7 +671,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                     }
                     catch { }
                     finally {
-                        Directory.Delete(temp, true);
+                        try { Directory.Delete(temp, true); } catch { }
                     }
 
                 }
@@ -820,6 +819,169 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 if (ch.Build(e)) { return true; }
             }
             return default;
+        }
+
+        private SignAndVerifyInfo GetZipSignAndVerifyInfo(byte[] fileData, string temp, string internalPath) {
+            const string XML = "akt.xml";
+            var result = new SignAndVerifyInfo();
+            using (var zip = Ionic.Zip.ZipFile.Read(new MemoryStream(fileData))) {
+                if (zip.ContainsEntry(XML)) {
+                    // musimy rozpakować archiwum w celu weryfikacji 
+                    // pliku akt.xml
+                    zip.ExtractAll(temp);
+                    try {
+                        var xml = XElement.Load(Path.Combine(temp, XML));
+                        result.SignInfo = GetXadesSignatureInfos(xml, internalPath);
+                        result.VerifyInfo = VerifyXadesSignatures(Path.Combine(temp, XML), internalPath);
+                    }
+                    catch { }
+                    finally {
+                        try { Directory.Delete(temp, true); } catch { }
+                    }
+
+                }
+            }
+            return result;
+        }
+        private SignAndVerifyInfo GetXmlSignAndVerifyInfo(PackageManager mgr, DocumentFile item, string temp, string internalPath) {
+            var result = new SignAndVerifyInfo();
+            var sigInfo = GetXadesSignatureInfos(item.FileData.ToXElement(), internalPath);
+            if (sigInfo != null && sigInfo.Length > 0) {
+                result.SignInfo = sigInfo;
+            }
+
+            if (internalPath.EndsWith(".xml")) {
+                File.WriteAllBytes(Path.Combine(temp, item.FileName), item.FileData);
+                var verifyInfo = VerifyXadesSignatures(Path.Combine(temp, item.FileName), internalPath);
+                if (verifyInfo != null && verifyInfo.Length > 0) {
+                    result.VerifyInfo = verifyInfo;
+                }
+            }
+            else if (internalPath.EndsWith(".xades")) {
+                var _internalPath = internalPath.Replace(".xades", "");
+                var _item = mgr.GetItemByFilePath(_internalPath) as DocumentFile;
+                if (_item != null) {
+                    File.WriteAllBytes(Path.Combine(temp, item.FileName), item.FileData);
+                    File.WriteAllBytes(Path.Combine(temp, _item.FileName), _item.FileData);
+
+                    var verifyInfo = VerifyXadesSignatures(Path.Combine(temp, item.FileName), internalPath);
+                    if (verifyInfo != null && verifyInfo.Length > 0) {
+                        result.VerifyInfo = verifyInfo;
+                    }
+                }
+            }
+            return result;
+        }
+        private SignAndVerifyInfo GetPadesSignAndVerifyInfo(byte[] fileData, string internalPath) {
+            using (var pdfDoc = new PdfDocument(new PdfReader(new MemoryStream(fileData)))) {
+                var signUtil = new SignatureUtil(pdfDoc);
+                var names = signUtil.GetSignatureNames();
+                if (names != null && names.Count > 0) {
+                    var verifyInfo = new List<SignatureVerifyInfo>();
+                    var sigInfo = new List<SignatureInfo>();
+                    foreach (var name in names) {
+                        var pkcs7 = signUtil.ReadSignatureData(name);
+                        if (pkcs7 != null) {
+                            var cert = new X509Certificate2(pkcs7.GetSigningCertificate().GetEncoded());
+                            if (cert != null) {
+                                var subject = new SubjectNameInfo(cert.Subject);
+                                var issuer = new SubjectNameInfo(cert.Issuer);
+                                var item = new SignatureInfo() {
+                                    CreateDate = pkcs7.GetSignDate(),
+                                    Certificate = cert,
+                                    Author = subject.ContainsKey("CN") ? subject["CN"] : String.Empty,
+                                    Publisher = issuer.ContainsKey("CN") ? issuer["CN"] : String.Empty,
+                                    SignatureType = SignatureType.Pades,
+                                    SignatureNumber = name,
+                                    FileName = internalPath,
+                                    CommitmentTypeIndication = pkcs7.GetReason(),
+                                    Organization = subject.ContainsKey("O") ? subject["O"] : String.Empty,
+                                    ClaimedRole = ""
+                                };
+                                if (item.Author != null) { item.Author = item.Author.Replace("\"", String.Empty); }
+                                if (item.Publisher != null) { item.Publisher = item.Publisher.Replace("\"", String.Empty); }
+                                if (item.CommitmentTypeIndication == null) { item.CommitmentTypeIndication = "Formalne zatwierdzenie (Proof of approval)"; }
+
+                                sigInfo.Add(item);
+
+
+                                var certIsValid = ValidateCert(cert);
+                                var isValid = pkcs7.VerifySignatureIntegrityAndAuthenticity();
+                                verifyInfo.Add(new SignatureVerifyInfo() {
+                                    FileName = internalPath,
+                                    SignatureName = name,
+                                    IsValid = isValid,
+                                    CertificateIsValid = certIsValid,
+                                    Message = isValid && certIsValid ? "Weryfikacja sygnatury podpisu i certyfikatu przebiegła pomyślnie" : "Weryfikacja podpisu lub certyfikatu zakończona niepowodzeniem",
+                                });
+                            }
+                        }
+                    }
+
+                    return new SignAndVerifyInfo() {
+                        SignInfo = sigInfo.ToArray(),
+                        VerifyInfo = verifyInfo.ToArray()
+                    };
+                }
+            }
+            return default;
+        }
+
+        private void VerifySignatures(List<SignatureVerifyInfo> list, PackageManager mgr, DocumentFile item, string internalPath) {
+            try {
+                var temp = Path.Combine(Path.GetTempPath(), "ABCPRO.NES");
+                if (!Directory.Exists(temp)) { Directory.CreateDirectory(temp); }
+
+                if (internalPath.EndsWith(".xml")) {
+                    try {
+                        File.WriteAllBytes(Path.Combine(temp, item.FileName), item.FileData);
+
+                        var result = VerifyXadesSignatures(Path.Combine(temp, item.FileName), internalPath);
+                        if (result != null && result.Length > 0) { list.AddRange(result); }
+                    }
+                    finally {
+                        var _files = Directory.GetFiles(temp);
+                        foreach (var _file in _files) {
+                            try { File.Delete(_file); } catch { }
+                        }
+                    }
+                }
+                else if (internalPath.EndsWith(".pdf")) {
+                    var result = VerifyPadesSignatures(item.FileData, internalPath);
+                    if (result != null && result.Length > 0) { list.AddRange(result); }
+                }
+                else if (internalPath.EndsWith(".zip")) {
+                    var result = VerifyZipxSignatures(item.FileData, internalPath);
+                    if (result != null && result.Length > 0) { list.AddRange(result); }
+                }
+                else if (internalPath.EndsWith(".xades")) {
+                    var _internalPath = internalPath.Replace(".xades", "");
+                    var _item = mgr.GetItemByFilePath(_internalPath) as DocumentFile;
+                    if (_item != null) {
+                        try {
+                            File.WriteAllBytes(Path.Combine(temp, item.FileName), item.FileData);
+                            File.WriteAllBytes(Path.Combine(temp, _item.FileName), _item.FileData);
+
+                            var result = VerifyXadesSignatures(Path.Combine(temp, item.FileName), internalPath);
+                            if (result != null && result.Length > 0) { list.AddRange(result); }
+                        }
+                        finally {
+                            try { Directory.Delete(temp, true); } catch { }
+                            //var _files = Directory.GetFiles(temp);
+                            //foreach (var _file in _files) {
+                            //    try { File.Delete(_file); } catch { }
+                            //}
+                        }
+                    }
+                }
+            }
+            catch {
+                list.Add(new SignatureVerifyInfo() {
+                    FileName = internalPath,
+                    IsValid = false,
+                    SignatureName = String.Empty
+                }); ;
+            }
         }
     }
 }

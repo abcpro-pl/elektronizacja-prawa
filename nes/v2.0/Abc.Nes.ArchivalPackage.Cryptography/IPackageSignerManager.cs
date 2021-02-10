@@ -87,5 +87,9 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
         SignatureVerifyInfo[] VerifySignatures(string packageFilePath);
         SignatureVerifyInfo[] VerifySignatures(string packageFilePath, string internalPath);
         SignatureVerifyInfo[] VerifyXadesSignature(string xadesFilePath);
+
+        SignAndVerifyInfo GetSignAndVerifyInfo(string packageFilePath, string internalPath);
+        SignAndVerifyInfo GetSignAndVerifyInfo(PackageManager mgr, string internalPath);
+        SignAndVerifyInfo GetSignAndVerifyInfo(PackageManager mgr, ArchivalPackage.Model.DocumentFile item);
     }
 }
