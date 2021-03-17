@@ -1,4 +1,4 @@
-<img src="images/abcpro-pl.svg" width="200px" style="width: 200px; margin: auto; display:block;"/>
+<img src="images/abcpro-pl-white.svg" width="200px" style="width: 200px; margin: auto; display:block;"/>
 
 # Elektronizacja prawa
 Udostępniane publicznie standardy, schematy i&nbsp;opisy oraz kod źródłowy oprogramowania przeznaczony do celów komercyjnych i&nbsp;niekomercyjnych. 
