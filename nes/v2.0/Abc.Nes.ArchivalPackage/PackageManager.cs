@@ -274,6 +274,9 @@ namespace Abc.Nes.ArchivalPackage {
         public IEnumerable<ItemBase> GetAllFiles(FolderBase folder) {
             return Package.GetAllFiles(folder);
         }
+        public IEnumerable<DocumentFile> GetAllDocuments() {
+            return Package.GetAllFiles(Package.Documents).OfType<DocumentFile>();
+        }
         public MetadataFile GetMetadataFile(ItemBase documentFile) {
             if (documentFile.IsNotNull() && documentFile.FilePath.IsNotNullOrEmpty()) {
                 var regex = new Regex(Regex.Escape($"{MainDirectoriesName.Files.GetXmlEnum()}"), RegexOptions.IgnoreCase);
