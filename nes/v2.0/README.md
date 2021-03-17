@@ -1,4 +1,4 @@
-![Image](images/nes_logo.png) 
+<img src="images/nes_logo.svg" width="200px" style="width: 100px;  display:block;"/>
 
 # Paczka eADM i Niezbędne Elementy Struktury (dokumentu elektronicznego) 2.0
 - [Krótki opis zawartości](#zawartość)
