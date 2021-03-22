@@ -31,6 +31,7 @@ W tym katalogu znajduje się:
 
 Wersja  | Opis
 --------|--------
+1.1.14|Poprawka błędu wystepująca podczas ładowania nieprawidłowej paczki eADM.
 1.1.13|Dodanie metody `GetSignAndVerifyInfo` do pozyskiwania informacji o podpisach pliku.
 1.1.12|Poprawiona weryfikacja podpisów wewnętrznych XML.
 1.1.11|Dodanie opcji weryfikacji plików ZIPX oraz certyfikatów w podpisach.

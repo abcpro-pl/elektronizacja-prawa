@@ -1,3 +1,4 @@
+using Abc.Nes.ArchivalPackage;
 using Abc.Nes.ArchivalPackage.Cryptography;
 using Abc.Nes.ArchivalPackage.Cryptography.Model;
 using NUnit.Framework;
@@ -36,6 +37,16 @@ namespace Abc.Nes.NUnitTests {
             using (var mgr = new PackageSignerManager()) {
                 var signatures = mgr.GetSignAndVerifyInfo(pathToPackage, pathToFileInPackage);
                 Assert.IsTrue(signatures.SignInfo != null && signatures.SignInfo.Length > 0);
+            }
+        }
+
+
+        [Test]
+        public void ValidatePackage() {
+            var pathToPackage = @"../../../../sample/CorruptedPackage.zip";
+            using (var mgr = new PackageManager()) {
+                mgr.LoadPackage(pathToPackage);
+                Assert.IsTrue(mgr.Package != null);
             }
         }
     }
