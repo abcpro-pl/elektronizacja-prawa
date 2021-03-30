@@ -31,6 +31,7 @@ W tym katalogu znajduje się:
 
 Wersja  | Opis
 --------|--------
+1.1.15|Dodano klasę `SignedPackageManager` przeznaczonej do pakowania i rozpakowywania paczki eADM wraz z dołączonym plikiem podpisu `.xades`. Poniżej dołączono przykłąd użycia tej klasy. Poprawiono wydobywanie danych podpisującego z certyfikatu. 
 1.1.14|Poprawka błędu wystepująca podczas ładowania nieprawidłowej paczki eADM.
 1.1.13|Dodanie metody `GetSignAndVerifyInfo` do pozyskiwania informacji o podpisach pliku.
 1.1.12|Poprawiona weryfikacja podpisów wewnętrznych XML.
@@ -757,6 +758,34 @@ var list = new List<ArchivalPackage.Cryptography.Model.SignatureVerifyInfo>();
 using (var mgr = new PackageSignerManager()) {
     list.AddRange(mgr.VerifyXadesSignature(path));
 }
+```
+
+### Archiwum zawierające paczkę eADM i plik podpisu .xades
+#### Rozpakowanie archiwum zawierającego paczke archiwalną i zewnetrzny plik podpisu .xades i ponowne jej podpisanie
+```C#
+var path = @"../../../sample/Paczka.testowa.30.03.21.podpisana.zip";
+
+var signedPackageManager = new SignedPackageManager();
+var info = signedPackageManager.Extract(path);
+
+using (var manager = new XadesManager()) {
+    var result = manager.CreateEnvelopingSignature(
+        new MemoryStream(File.ReadAllBytes(Path.Combine(info.Directory, info.PackageFileName))), 
+        CertUtil.SelectCertificate(),
+        new SignatureProductionPlace() {
+            City = "Warszawa",
+            CountryName = "Polska",
+            PostalCode = "03-825",
+            StateOrProvince = "mazowieckie"
+        },
+        new SignerRole("Wiceprezes Zarządu"));
+
+        var filePath = Path.Combine(info.Directory, info.SignatureFileName);
+        if (File.Exists(filePath)) { File.Delete(filePath); }
+        result.Save(filePath);
+}
+
+signedPackageManager.Compress(info);
 ```
 
 [&#8682; Do góry](#paczka-eadm-i-niezbędne-elementy-struktury-dokumentu-elektronicznego-20)

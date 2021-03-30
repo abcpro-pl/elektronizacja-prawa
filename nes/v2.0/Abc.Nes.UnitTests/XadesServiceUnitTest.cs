@@ -1,4 +1,5 @@
-﻿using Abc.Nes.Xades;
+﻿using Abc.Nes.ArchivalPackage;
+using Abc.Nes.Xades;
 using Abc.Nes.Xades.Signature.Parameters;
 using Abc.Nes.Xades.Utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -9,6 +10,36 @@ using System.Text;
 namespace Abc.Nes.UnitTests {
     [TestClass]
     public class XadesServiceUnitTest {
+
+        [TestMethod]
+        public void ResignPackage() {
+            var path = @"../../../sample/Paczka.testowa.30.03.21.podpisana.zip";
+
+            var signedPackageManager = new SignedPackageManager();
+            var info = signedPackageManager.Extract(path);
+
+            try { File.Delete(Path.Combine(info.Directory, info.SignatureFileName)); } catch { }
+
+            using (var manager = new XadesManager()) {
+                var result = manager.CreateEnvelopingSignature(
+                    new MemoryStream(File.ReadAllBytes(Path.Combine(info.Directory, info.PackageFileName))), 
+                    CertUtil.SelectCertificate(),
+                    new SignatureProductionPlace() {
+                        City = "Warszawa",
+                        CountryName = "Polska",
+                        PostalCode = "03-825",
+                        StateOrProvince = "mazowieckie"
+                    },
+                    new SignerRole("Wiceprezes Zarządu"));
+
+                var filePath = Path.Combine(info.Directory, info.SignatureFileName);
+                if (File.Exists(filePath)) { File.Delete(filePath); }
+                result.Save(filePath);
+            }
+
+            signedPackageManager.Compress(info);
+        }
+
         [TestMethod]
         public void XadesManager_AppendSignatureToXmlFile() {
             var document = DocumentUnitTest.GetModel();
