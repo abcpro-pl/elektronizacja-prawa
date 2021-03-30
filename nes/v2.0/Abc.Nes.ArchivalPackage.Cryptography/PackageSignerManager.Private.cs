@@ -742,12 +742,10 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 if (keyName != null) {
                     result.Author = keyName.Value;
                 }
-                else {
-                    if (xSubjectName != null) {
-                        var subjectName = new SubjectNameInfo(xSubjectName.Value);
-                        if (subjectName.Count > 0 && subjectName.ContainsKey("CN")) {
-                            result.Author = subjectName["CN"];
-                        }
+                else if (xSubjectName != null) {
+                    var subjectName = new SubjectNameInfo(xSubjectName.Value);
+                    if (subjectName.Count > 0 && subjectName.ContainsKey("CN")) {
+                        result.Author = subjectName["CN"];
                     }
                 }
 
@@ -755,6 +753,9 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                     var subjectName = new SubjectNameInfo(xSubjectName.Value);
                     if (subjectName.Count > 0 && subjectName.ContainsKey("O")) {
                         result.Organization = subjectName["O"];
+                    }
+                    else if (subjectName.Count > 0 && subjectName.ContainsKey("OU")) {
+                        result.Organization = subjectName["OU"];
                     }
                 }
 
@@ -781,24 +782,33 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                     var data = Convert.FromBase64String(xmlCert.Value);
                     var cert = new X509Certificate2(data);
                     result.Certificate = cert;
-                    if (result.Author == null) {
+                    if (result.Author.IsNullOrEmpty()) {
                         var subjectName = new SubjectNameInfo(cert.Subject);
                         if (subjectName.Count > 0 && subjectName.ContainsKey("CN")) {
                             result.Author = subjectName["CN"];
                         }
                     }
-                    if (result.Publisher == null) {
+                    if (result.Publisher.IsNullOrEmpty()) {
                         var issuerName = new SubjectNameInfo(cert.Issuer);
                         if (issuerName.Count > 0 && issuerName.ContainsKey("CN")) {
                             result.Publisher = issuerName["CN"];
                         }
                     }
+                    if (result.Organization.IsNullOrEmpty()) {
+                        var subjectName = new SubjectNameInfo(cert.Subject);
+                        if (subjectName.Count > 0 && subjectName.ContainsKey("O")) {
+                            result.Organization = subjectName["O"];
+                        }
+                        else if (subjectName.Count > 0 && subjectName.ContainsKey("OU")) {
+                            result.Organization = subjectName["OU"];
+                        }
+                    }
                 }
                 catch { }
 
-                if (result.Author != null) { result.Author = result.Author.Replace("\"", String.Empty); }
-                if (result.Publisher != null) { result.Publisher = result.Publisher.Replace("\"", String.Empty); }
-                if (result.CommitmentTypeIndication == null) { result.CommitmentTypeIndication = "Formalne zatwierdzenie (Proof of approval)"; }
+                if (result.Author.IsNotNullOrEmpty()) { result.Author = result.Author.Replace("\"", String.Empty); }
+                if (result.Publisher.IsNotNullOrEmpty()) { result.Publisher = result.Publisher.Replace("\"", String.Empty); }
+                if (result.CommitmentTypeIndication.IsNullOrEmpty()) { result.CommitmentTypeIndication = "Formalne zatwierdzenie (Proof of approval)"; }
 
                 return result;
             }
