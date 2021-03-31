@@ -41,6 +41,15 @@ namespace Abc.Nes.NUnitTests {
             }
         }
 
+        [Test]
+        public void GetSignAndVerifyInfos() {
+            var pathToPackage = @"../../../../sample/LegalActRIOzielonagora.zip";
+            using (var mgr = new PackageSignerManager()) {
+                var result = mgr.GetSignAndVerifyInfo(pathToPackage);
+                Assert.IsTrue(result.Length > 0);
+            }
+        }
+
 
         [Test]
         public void ValidatePackage() {
@@ -53,7 +62,7 @@ namespace Abc.Nes.NUnitTests {
 
         [Test]
         public void Package_GetValidationResult() {
-            var path = @"../../../../sample/Paczka.testowa.30.03.21.podpisana.zip";
+            var path = @"../../../../sample/LegalAct26.03.2.podpisana.zip";
 
             var signedPackageManager = new SignedPackageManager();
             var info = signedPackageManager.Extract(path);
@@ -75,12 +84,15 @@ namespace Abc.Nes.NUnitTests {
 
             using (var signerMgr = new PackageSignerManager()) {
                 // get xades signature info
-                var signatureInfo = signerMgr.GetXadesSignatureInfos(Path.Combine(info.Directory, info.SignatureFileName));
-                Assert.IsTrue(signatureInfo.Length > 0);
-                // validate xades
-                var verifyInfo = signerMgr.VerifyXadesSignature(Path.Combine(info.Directory, info.SignatureFileName));
-                Assert.IsTrue(verifyInfo != null && verifyInfo.Length > 0);
+                var xadesPath = Path.Combine(info.Directory, info.SignatureFileName);
+                if (File.Exists(xadesPath)) {
+                    var signatureInfo = signerMgr.GetXadesSignatureInfos(xadesPath);
+                    Assert.IsTrue(signatureInfo.Length > 0);
+                    // validate xades
+                    var verifyInfo = signerMgr.VerifyXadesSignature(Path.Combine(info.Directory, info.SignatureFileName));
+                    Assert.IsTrue(verifyInfo != null && verifyInfo.Length > 0);
+                }
             }
-        }       
+        }
     }
 }
