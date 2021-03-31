@@ -240,12 +240,6 @@ Content-Disposition: filename=""{ fileName }""
             XmlNode MessageSignatureNode = xd.GetElementsByTagName("Signature", SignedXml.XmlDsigNamespaceUrl)[0];
             if (MessageSignatureNode == null) {
                 return null;
-                //return new ValidationResult() {
-                //    CertificateIsValid = false,
-                //    IsValid = false,
-                //    Message = "W dokumencie nie ma żadnych podpisów",
-                //    SignatureName = String.Empty
-                //};
             }
 
             signedXml.LoadXml((XmlElement)MessageSignatureNode);
@@ -265,9 +259,23 @@ Content-Disposition: filename=""{ fileName }""
             var certIsValid = false;
             var message = String.Empty;
             try {
-                certIsValid = ValidateCert(certificate);
+                certIsValid = ValidateCert(certificate, out message);
                 isValid = signedXml.CheckSignature(certificate, true);
-                message = isValid && certIsValid ? "Weryfikacja sygnatury podpisu i certyfikatu przebiegła pomyślnie" : "Weryfikacja podpisu lub certyfikatu zakończona niepowodzeniem";
+                if (String.IsNullOrEmpty(message)) {
+                    if (!isValid && certIsValid) {
+                        message = "Weryfikacja sygnatury podpisu zakończona niepowodzeniem";
+                    }
+                    else if (isValid && !certIsValid) {
+                        message = "Weryfikacja certyfikatu osoby podpisującej zakończona niepowodzeniem";
+                    }
+                    else if (!isValid && !certIsValid) {
+                        message = "Weryfikacja podpisu i certyfikatu zakończona niepowodzeniem";
+                    }
+                    else {
+                        message = "Weryfikacja sygnatury podpisu i certyfikatu przebiegła pomyślnie";
+                    }
+                    // message = isValid && certIsValid ? "Weryfikacja sygnatury podpisu i certyfikatu przebiegła pomyślnie" : "Weryfikacja podpisu lub certyfikatu zakończona niepowodzeniem";
+                }
             }
             catch (CryptographicException ex) {
                 message = ex.Message;
@@ -279,10 +287,6 @@ Content-Disposition: filename=""{ fileName }""
                 Message = message,
                 SignatureName = signedXml.Signature?.Id
             };
-
-            //using (XadesValidator validator = new XadesValidator()) {
-            //    return validator.Validate(stream);
-            //}
         }
 
         public ValidationResult ValidateSignature(string filePath) {
@@ -319,13 +323,40 @@ Content-Disposition: filename=""{ fileName }""
             //}
         }
 
-        private bool ValidateCert(X509Certificate2 e) {
+        private bool ValidateCert(X509Certificate2 e, out string errorMessage) {
+            errorMessage = string.Empty;
             if (e != null) {
                 var ch = new X509Chain();
                 ch.ChainPolicy.RevocationMode = X509RevocationMode.NoCheck;
                 if (ch.Build(e)) { return true; }
+                else {
+                    foreach (X509ChainStatus chainStatus in ch.ChainStatus) {
+                        errorMessage += $"[{chainStatus.Status}] {chainStatus.StatusInformation}\r\n";
+                    }
+                    if (!String.IsNullOrEmpty(errorMessage)) {
+                        var userName = GetSubjectCommonName(e);
+
+                        errorMessage = $"Weryfikacja certyfikatu osoby podpisującej {userName} zakończona niepowodzeniem: {errorMessage}".Trim();
+                    }
+
+                }
             }
             return default;
+        }
+
+        private string GetSubjectCommonName(X509Certificate2 e) {
+            var sc = e.Subject.Split(',');
+            if (sc.Length > 0) {
+                foreach (string t in sc) {
+                    string[] sci = t.Split('=');
+                    if (sci.Length > 1) {
+                        if (sci[0].Trim() == "CN") {
+                            return sci[1].Trim();
+                        }
+                    }
+                }
+            }
+            return String.Empty;
         }
 
         //public ValidationResult ValidateSignature(SignatureDocument sigDocument) {

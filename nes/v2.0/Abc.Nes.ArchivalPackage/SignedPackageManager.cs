@@ -14,6 +14,7 @@
 
 using Ionic.Zip;
 using System.IO;
+using System.Linq;
 
 namespace Abc.Nes.ArchivalPackage {
     public class SignedPackageManager : ISignedPackageManager {
@@ -38,7 +39,15 @@ namespace Abc.Nes.ArchivalPackage {
                     Directory = outputDir
                 };
                 using (var zipFile = ZipFile.Read(result.FileName)) {
-                    zipFile.ExtractAll(result.Directory);
+                    if (zipFile.EntryFileNames.Where(x => x.ToLower().Contains("dokumenty")).Any()) {
+                        // to jest paczka eADM
+                        result.Directory = Path.GetDirectoryName(filePath);
+                        result.PackageFileName = Path.GetFileName(filePath);
+                        return result;
+                    }
+                    else {
+                        zipFile.ExtractAll(result.Directory);
+                    }
                 }
 
                 foreach (var file in Directory.GetFiles(result.Directory)) {
@@ -74,6 +83,5 @@ namespace Abc.Nes.ArchivalPackage {
         public string Directory { get; set; }
         public string PackageFileName { get; set; }
         public string SignatureFileName { get; set; }
-
     }
 }

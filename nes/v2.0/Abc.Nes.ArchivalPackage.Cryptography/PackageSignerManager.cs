@@ -457,5 +457,39 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
 
             return default;
         }
+
+        public SignAndVerifyInfo[] GetSignAndVerifyInfo(string packageFilePath) {
+            if (String.IsNullOrEmpty(packageFilePath)) { throw new ArgumentNullException("packageFilePath"); }
+            if (!File.Exists(packageFilePath)) { throw new FileNotFoundException("Package file not found!", packageFilePath); }
+            var list = new List<SignAndVerifyInfo>();
+            using (var mgr = new PackageManager()) {
+                mgr.LoadPackage(packageFilePath);
+                var files = mgr.Package.GetAllFiles();
+                foreach (var item in files) {
+                    if (item is ArchivalPackage.Model.DocumentFile) {
+                        var result = GetSignAndVerifyInfo(mgr, item as ArchivalPackage.Model.DocumentFile);
+                        if (result != null && result.SignInfo != null && result.VerifyInfo != null) {
+                            list.Add(result);
+                        }
+                    }
+                }
+            }
+            return list.ToArray();
+        }
+
+        public SignAndVerifyInfo[] GetSignAndVerifyInfo(PackageManager mgr) {
+            if (mgr == null) { throw new ArgumentNullException("mgr"); }
+            var files = mgr.Package.GetAllFiles();
+            var list = new List<SignAndVerifyInfo>();
+            foreach (var item in files) {
+                if (item is ArchivalPackage.Model.DocumentFile) {
+                    var result = GetSignAndVerifyInfo(mgr, item as ArchivalPackage.Model.DocumentFile);
+                    if (result != null) {
+                        list.Add(result);
+                    }
+                }
+            }
+            return list.ToArray();
+        }
     }
 }
