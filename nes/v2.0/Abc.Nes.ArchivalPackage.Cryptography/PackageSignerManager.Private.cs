@@ -639,14 +639,35 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                     foreach (var name in names) {
                         var pkcs7 = signUtil.ReadSignatureData(name);
                         if (pkcs7 != null) {
-                            var certIsValid = ValidateCert(pkcs7.GetSigningCertificate());
+                            var message = String.Empty;
+                            var certIsValid = ValidateCert(pkcs7.GetSigningCertificate(), out message);
                             var isValid = pkcs7.VerifySignatureIntegrityAndAuthenticity();
+
+
+                            if (String.IsNullOrEmpty(message)) {
+                                if (!isValid && certIsValid) {
+                                    message = "Weryfikacja sygnatury podpisu zakończona niepowodzeniem.";
+                                }
+                                else if (isValid && !certIsValid) {
+                                    message = "Weryfikacja certyfikatu osoby podpisującej zakończona niepowodzeniem.";
+                                }
+                                else if (!isValid && !certIsValid) {
+                                    message = "Weryfikacja podpisu i certyfikatu zakończona niepowodzeniem.";
+                                }
+                                else {
+                                    message = "Weryfikacja sygnatury podpisu i certyfikatu przebiegła pomyślnie.";
+                                }
+                            }
+                            else if (!String.IsNullOrEmpty(message) && !isValid) {
+                                message = $"Weryfikacja sygnatury podpisu zakończona niepowodzeniem. {message}";
+                            }
+
                             list.Add(new SignatureVerifyInfo() {
                                 FileName = internalPath,
                                 SignatureName = name,
                                 IsValid = isValid,
                                 CertificateIsValid = certIsValid,
-                                Message = isValid && certIsValid ? "Weryfikacja sygnatury podpisu i certyfikatu przebiegła pomyślnie" : "Weryfikacja podpisu lub certyfikatu zakończona niepowodzeniem",
+                                Message = message
                             });
                         }
                     }
@@ -815,20 +836,87 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             return default;
         }
 
-        private bool ValidateCert(Org.BouncyCastle.X509.X509Certificate e) {
+        private bool ValidateCert(Org.BouncyCastle.X509.X509Certificate e, out string errorMessage) {
+            errorMessage = string.Empty;
             if (e != null) {
                 var cert = new X509Certificate2(e.GetEncoded());
-                return ValidateCert(cert);
+                return ValidateCert(cert, out errorMessage);
             }
             return default;
         }
-        private bool ValidateCert(X509Certificate2 e) {
+        private bool ValidateCert(X509Certificate2 e, out string errorMessage) {
+            errorMessage = string.Empty;
             if (e != null) {
                 var ch = new X509Chain();
                 ch.ChainPolicy.RevocationMode = X509RevocationMode.NoCheck;
                 if (ch.Build(e)) { return true; }
+                else {
+                    foreach (X509ChainStatus chainStatus in ch.ChainStatus) {
+                        errorMessage += $"[{GetX509ChainStatusFlagsDescription(chainStatus.Status)}] {chainStatus.StatusInformation}\r\n";
+                    }
+                    if (!String.IsNullOrEmpty(errorMessage)) {
+                        var userName = GetSubjectCommonName(e);
+
+                        errorMessage = $"Weryfikacja certyfikatu osoby podpisującej {userName} zakończona niepowodzeniem: {errorMessage}".Trim();
+                    }
+                }
             }
             return default;
+        }
+        private string GetX509ChainStatusFlagsDescription(X509ChainStatusFlags e) {
+            switch (e) {
+                case X509ChainStatusFlags.HasWeakSignature:
+                case X509ChainStatusFlags.NotSignatureValid:
+                case X509ChainStatusFlags.CtlNotSignatureValid: { return "Sygnatura"; }
+
+                case X509ChainStatusFlags.NotTimeNested:
+                case X509ChainStatusFlags.NotTimeValid:
+                case X509ChainStatusFlags.CtlNotTimeValid: { return "Ważność certyfikatu"; }
+
+                case X509ChainStatusFlags.NotValidForUsage:
+                case X509ChainStatusFlags.CtlNotValidForUsage: { return "Zastosowanie"; }
+
+                case X509ChainStatusFlags.HasNotSupportedCriticalExtension:
+                case X509ChainStatusFlags.InvalidExtension: { return "Rozszerzenie"; }
+
+                case X509ChainStatusFlags.Cyclic: { return "Zapętlenie"; }
+
+                case X509ChainStatusFlags.Revoked:
+                case X509ChainStatusFlags.RevocationStatusUnknown:
+                case X509ChainStatusFlags.OfflineRevocation: { return "Odwołanie certyfikatu"; }
+
+                case X509ChainStatusFlags.HasExcludedNameConstraint:
+                case X509ChainStatusFlags.PartialChain: { return "Łańcuch certyfikatów"; }
+
+                case X509ChainStatusFlags.ExplicitDistrust:
+                case X509ChainStatusFlags.UntrustedRoot: { return "Źródło"; }
+
+                case X509ChainStatusFlags.InvalidNameConstraints:
+                case X509ChainStatusFlags.InvalidBasicConstraints:
+                case X509ChainStatusFlags.HasNotDefinedNameConstraint:
+                case X509ChainStatusFlags.HasNotPermittedNameConstraint:
+                case X509ChainStatusFlags.HasNotSupportedNameConstraint: { return "Wymagalność danych"; }
+
+                case X509ChainStatusFlags.NoIssuanceChainPolicy:
+                case X509ChainStatusFlags.InvalidPolicyConstraints: { return "Polityka certyfikatu"; }
+
+                default: { return e.ToString(); }
+            }
+        }
+
+        private string GetSubjectCommonName(X509Certificate2 e) {
+            var sc = e.Subject.Split(',');
+            if (sc.Length > 0) {
+                foreach (string t in sc) {
+                    string[] sci = t.Split('=');
+                    if (sci.Length > 1) {
+                        if (sci[0].Trim() == "CN") {
+                            return sci[1].Trim();
+                        }
+                    }
+                }
+            }
+            return String.Empty;
         }
 
         private SignAndVerifyInfo GetZipSignAndVerifyInfo(byte[] fileData, string temp, string internalPath) {
@@ -914,15 +1002,34 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
 
                                 sigInfo.Add(item);
 
-
-                                var certIsValid = ValidateCert(cert);
+                                var message = String.Empty;
+                                var certIsValid = ValidateCert(cert, out message);
                                 var isValid = pkcs7.VerifySignatureIntegrityAndAuthenticity();
+
+                                if (String.IsNullOrEmpty(message)) {
+                                    if (!isValid && certIsValid) {
+                                        message = "Weryfikacja sygnatury podpisu zakończona niepowodzeniem";
+                                    }
+                                    else if (isValid && !certIsValid) {
+                                        message = "Weryfikacja certyfikatu osoby podpisującej zakończona niepowodzeniem";
+                                    }
+                                    else if (!isValid && !certIsValid) {
+                                        message = "Weryfikacja podpisu i certyfikatu zakończona niepowodzeniem";
+                                    }
+                                    else {
+                                        message = "Weryfikacja sygnatury podpisu i certyfikatu przebiegła pomyślnie";
+                                    }
+                                }
+                                else if (!String.IsNullOrEmpty(message) && !isValid) {
+                                    message = $"Weryfikacja sygnatury podpisu zakończona niepowodzeniem. {message}";
+                                }
+
                                 verifyInfo.Add(new SignatureVerifyInfo() {
                                     FileName = internalPath,
                                     SignatureName = name,
                                     IsValid = isValid,
                                     CertificateIsValid = certIsValid,
-                                    Message = isValid && certIsValid ? "Weryfikacja sygnatury podpisu i certyfikatu przebiegła pomyślnie" : "Weryfikacja podpisu lub certyfikatu zakończona niepowodzeniem",
+                                    Message = message
                                 });
                             }
                         }

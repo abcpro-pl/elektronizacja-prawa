@@ -96,7 +96,7 @@ namespace Abc.Nes.Validators {
                         _result.Add(new ValidationResultItem() {
                             Source = ValidationResultSource.Metadata,
                             Type = ValidationResultType.DoesNotHaveValue,
-                            Name = property.Name,
+                            Name = propertyName.IsNotNullOrEmpty()? propertyName: property.Name,
                             FullName = o.GetType().FullName,
                             DefaultMessage = String.Format(resx.GetString("RequiredFieldHasNoValue"), propertyName, objectFullName)
                         });
@@ -107,7 +107,7 @@ namespace Abc.Nes.Validators {
                             _result.Add(new ValidationResultItem() {
                                 Source = ValidationResultSource.Metadata,
                                 Type = ValidationResultType.HasNoElements,
-                                Name = property.Name,
+                                Name = propertyName.IsNotNullOrEmpty() ? propertyName : property.Name,
                                 FullName = o.GetType().FullName,
                                 DefaultMessage = String.Format(resx.GetString("RequiredFieldHasNoItems"), propertyName, objectFullName)
                             });

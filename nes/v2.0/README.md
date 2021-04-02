@@ -31,6 +31,7 @@ W tym katalogu znajduje się:
 
 Wersja  | Opis
 --------|--------
+1.1.17|Dodano nazwy statusów błędów certyfikatów w języku polskim.
 1.1.16|Dodano metody klasy `PackageSignerManager` pozwalające na pobranie informacji o podpisach dla wszystkich podpisanych dokumentów w paczce eADM (`GetSignAndVerifyInfo`). Dodano bardziej szczegółowe informacje o przyczynie błędnej weryfikacji podpisu i certyfikatu we właściwości `Message` zwracanego obiektu `SignAndVerifyInfo`.
 1.1.15|Dodano klasę `SignedPackageManager` przeznaczonej do pakowania i rozpakowywania paczki eADM wraz z dołączonym plikiem podpisu `.xades`. Poniżej dołączono przykłąd użycia tej klasy. Poprawiono wydobywanie danych podpisującego z certyfikatu. 
 1.1.14|Poprawka błędu wystepująca podczas ładowania nieprawidłowej paczki eADM.

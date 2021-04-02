@@ -18,7 +18,6 @@ namespace Abc.Nes.Xades {
         SignatureDocument CreateDetachedSignature(string filePath, X509Certificate2 cert, Signature.Parameters.SignatureProductionPlace productionPlace = null, Signature.Parameters.SignerRole signerRole = null, Upgraders.SignatureFormat? upgradeFormat = null, string timeStampServerUrl = "http://time.certum.pl");
         ValidationResult ValidateSignature(Stream stream);
         ValidationResult ValidateSignature(string filePath);
-        // ValidationResult ValidateSignature(SignatureDocument sigDocument);
     }
     public class XadesManager : IXadesManager {
         private Signature.Parameters.SignatureProductionPlace ProductionPlace = null;
@@ -263,18 +262,20 @@ Content-Disposition: filename=""{ fileName }""
                 isValid = signedXml.CheckSignature(certificate, true);
                 if (String.IsNullOrEmpty(message)) {
                     if (!isValid && certIsValid) {
-                        message = "Weryfikacja sygnatury podpisu zakończona niepowodzeniem";
+                        message = "Weryfikacja sygnatury podpisu zakończona niepowodzeniem.";
                     }
                     else if (isValid && !certIsValid) {
-                        message = "Weryfikacja certyfikatu osoby podpisującej zakończona niepowodzeniem";
+                        message = "Weryfikacja certyfikatu osoby podpisującej zakończona niepowodzeniem.";
                     }
                     else if (!isValid && !certIsValid) {
-                        message = "Weryfikacja podpisu i certyfikatu zakończona niepowodzeniem";
+                        message = "Weryfikacja podpisu i certyfikatu zakończona niepowodzeniem.";
                     }
                     else {
-                        message = "Weryfikacja sygnatury podpisu i certyfikatu przebiegła pomyślnie";
-                    }
-                    // message = isValid && certIsValid ? "Weryfikacja sygnatury podpisu i certyfikatu przebiegła pomyślnie" : "Weryfikacja podpisu lub certyfikatu zakończona niepowodzeniem";
+                        message = "Weryfikacja sygnatury podpisu i certyfikatu przebiegła pomyślnie.";
+                    }                   
+                }
+                else if (!String.IsNullOrEmpty(message) && !isValid) {
+                    message = $"Weryfikacja sygnatury podpisu zakończona niepowodzeniem. {message}";
                 }
             }
             catch (CryptographicException ex) {
@@ -295,32 +296,6 @@ Content-Disposition: filename=""{ fileName }""
                 System.Environment.CurrentDirectory = Path.GetDirectoryName(filePath);
                 return ValidateSignature(ms);
             }
-
-
-
-            //XmlDocument xmlDocument = new XmlDocument();
-            //xmlDocument.Load(filePath);
-            //var signedXml = new System.Security.Cryptography.Xml.SignedXml(xmlDocument);
-            //var nodeList = xmlDocument.GetElementsByTagName("Signature", System.Security.Cryptography.Xml.SignedXml.XmlDsigNamespaceUrl);
-            //if (nodeList != null && nodeList.Count > 0) {
-            //    var signature = (XmlElement)nodeList[0];
-            //    signedXml.LoadXml(signature);
-            //    AsymmetricAlgorithm key = null;
-            //    var v = signedXml.CheckSignatureReturningKey(out key);
-            //    XmlNode keyXml = signature.GetElementsByTagName("X509Certificate", System.Security.Cryptography.Xml.SignedXml.XmlDsigNamespaceUrl)[0];
-            //    if (keyXml == null) { throw new Exception("Failed to get signing certificate."); }
-            //    var cert = new X509Certificate2(Convert.FromBase64String(keyXml.InnerText));
-            //    if (!v) {
-            //        key = cert.PublicKey.Key;
-            //    }
-            //    var result = signedXml.CheckSignature(cert,true);
-            //    if (result) { }
-            //}
-
-
-            //using (XadesValidator validator = new XadesValidator()) {
-            //    return validator.Validate(filePath);
-            //}
         }
 
         private bool ValidateCert(X509Certificate2 e, out string errorMessage) {
@@ -331,17 +306,57 @@ Content-Disposition: filename=""{ fileName }""
                 if (ch.Build(e)) { return true; }
                 else {
                     foreach (X509ChainStatus chainStatus in ch.ChainStatus) {
-                        errorMessage += $"[{chainStatus.Status}] {chainStatus.StatusInformation}\r\n";
+                        errorMessage += $"[{GetX509ChainStatusFlagsDescription(chainStatus.Status)}] {chainStatus.StatusInformation}\r\n";
                     }
                     if (!String.IsNullOrEmpty(errorMessage)) {
                         var userName = GetSubjectCommonName(e);
 
                         errorMessage = $"Weryfikacja certyfikatu osoby podpisującej {userName} zakończona niepowodzeniem: {errorMessage}".Trim();
                     }
-
                 }
             }
             return default;
+        }
+
+        private string GetX509ChainStatusFlagsDescription(X509ChainStatusFlags e) {
+            switch (e) {
+                case X509ChainStatusFlags.HasWeakSignature:
+                case X509ChainStatusFlags.NotSignatureValid:
+                case X509ChainStatusFlags.CtlNotSignatureValid: { return "Sygnatura"; }
+
+                case X509ChainStatusFlags.NotTimeNested:
+                case X509ChainStatusFlags.NotTimeValid:
+                case X509ChainStatusFlags.CtlNotTimeValid: { return "Ważność certyfikatu"; }
+
+                case X509ChainStatusFlags.NotValidForUsage:
+                case X509ChainStatusFlags.CtlNotValidForUsage: { return "Zastosowanie"; }
+
+                case X509ChainStatusFlags.HasNotSupportedCriticalExtension:
+                case X509ChainStatusFlags.InvalidExtension: { return "Rozszerzenie"; }
+
+                case X509ChainStatusFlags.Cyclic: { return "Zapętlenie"; }
+
+                case X509ChainStatusFlags.Revoked:
+                case X509ChainStatusFlags.RevocationStatusUnknown:
+                case X509ChainStatusFlags.OfflineRevocation: { return "Odwołanie certyfikatu"; }
+
+                case X509ChainStatusFlags.HasExcludedNameConstraint:
+                case X509ChainStatusFlags.PartialChain: { return "Łańcuch certyfikatów"; }
+
+                case X509ChainStatusFlags.ExplicitDistrust:
+                case X509ChainStatusFlags.UntrustedRoot: { return "Źródło"; }
+
+                case X509ChainStatusFlags.InvalidNameConstraints:
+                case X509ChainStatusFlags.InvalidBasicConstraints:
+                case X509ChainStatusFlags.HasNotDefinedNameConstraint:
+                case X509ChainStatusFlags.HasNotPermittedNameConstraint:
+                case X509ChainStatusFlags.HasNotSupportedNameConstraint: { return "Wymagalność danych"; }
+
+                case X509ChainStatusFlags.NoIssuanceChainPolicy:
+                case X509ChainStatusFlags.InvalidPolicyConstraints: { return "Polityka certyfikatu"; }
+
+                default: { return e.ToString(); }
+            }
         }
 
         private string GetSubjectCommonName(X509Certificate2 e) {
@@ -358,14 +373,6 @@ Content-Disposition: filename=""{ fileName }""
             }
             return String.Empty;
         }
-
-        //public ValidationResult ValidateSignature(SignatureDocument sigDocument) {
-        //    SignatureDocument.CheckSignatureDocument(sigDocument);
-
-        //    using (XadesValidator validator = new XadesValidator()) {
-        //        return validator.Validate(sigDocument);
-        //    }
-        //}
 
         private void SetSignatureId(XadesSignedXml xadesSignedXml) {
             string id = Guid.NewGuid().ToString();
