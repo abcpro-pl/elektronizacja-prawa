@@ -16,7 +16,7 @@ using System.Xml.Serialization;
 
 namespace Abc.Nes.Enumerations {
     [XmlType(TypeName = "data-zdarzenia-typ")]
-    [XmlAnnotation("Słownik zdarzeń zwiazanych z datą dokumentu.")]
+    [XmlAnnotation("Słownik zdarzeń związanych z datą dokumentu.")]
     public enum EventDateType {
         [XmlEnum("")]
         None,
