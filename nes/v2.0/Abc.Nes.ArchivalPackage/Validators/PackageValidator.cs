@@ -195,6 +195,19 @@ namespace Abc.Nes.ArchivalPackage.Validators {
             return messageBuilder.Length == 0;
         }
 
+        public bool IsPackageValid(Stream stream) {
+            using (var zipFile = ZipFile.Read(stream, new ReadOptions() {
+                Encoding = Encoding.UTF8
+            })) {
+                var zipFileHasMandatoryDirectories =
+                   zipFile.EntryFileNames.Where(x => x.ToLower().StartsWith(MainDirectoriesName.Files.GetXmlEnum().ToLower())).Count() > 0 &&
+                   zipFile.EntryFileNames.Where(x => x.ToLower().StartsWith(MainDirectoriesName.Metadata.GetXmlEnum().ToLower())).Count() > 0 &&
+                   zipFile.EntryFileNames.Where(x => x.ToLower().StartsWith(MainDirectoriesName.Objects.GetXmlEnum().ToLower())).Count() > 0;
+
+                if (!zipFileHasMandatoryDirectories) { throw new PackageInvalidException(); }
+            }
+            return true;
+        }
         public bool IsPackageValid(string filePath) {
             using (var zipFile = ZipFile.Read(filePath)) {
                 var zipFileHasMandatoryDirectories =
@@ -214,6 +227,15 @@ namespace Abc.Nes.ArchivalPackage.Validators {
 
             IsPackageValid(filePath);
             return InitializePackage(filePath);
+        }
+
+        public Package GetPackage(Stream stream) {
+            if (stream.IsNull() || stream.Length == 0) { throw new ArgumentNullException(); }
+            stream.Position = 0;
+            if (!ZipFile.IsZipFile(stream, false)) { throw new ZipException("Specified file is not a zip file!"); }
+            stream.Position = 0;
+            IsPackageValid(stream);
+            return InitializePackage();
         }
 
         public Package InitializePackage(string filePath = null) {

@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Abc.Nes.ArchivalPackage {
@@ -196,9 +197,37 @@ namespace Abc.Nes.ArchivalPackage {
 
             try { if (File.Exists(tmp)) { File.Delete(tmp); } } catch { }
         }
+        public Stream Save(bool appendFileDataOnly = false) {
+            if (Package.IsNull()) { throw new NullReferenceException("Package is not initialized!"); }
+            if (Package.IsEmpty) { throw new PackageIsEmptyException(); }
+            var stream = new MemoryStream();
+            using (var zipFile = new ZipFile()) {
+                AddDocuments(Package.Documents, zipFile);
+                AddMetadata(Package.Metadata, zipFile, appendFileDataOnly: appendFileDataOnly);
+                AddMetadata(Package.Objects, zipFile, appendFileDataOnly: appendFileDataOnly);
+
+                zipFile.Save(stream);
+            }
+
+            return stream;
+        }
+        public void LoadPackage(Stream stream) {
+            // Package is already loaded
+            if (Package.IsNotNull() && Package.Documents.IsNotNull() && !Package.Documents.IsEmpty) { return; }
+
+            using (IPackageValidator validator = new PackageValidator()) {
+                Package = validator.GetPackage(stream);
+            }
+            stream.Position = 0;
+            using (var zipFile = ZipFile.Read(stream, new ReadOptions() {
+                Encoding = Encoding.UTF8
+            })) {
+                LoadPackageEntries(zipFile);
+            }
+        }
         public void LoadPackage(string filePath) {
             // Package is already loaded
-            if (FilePath == filePath && Package.Documents.IsNotNull() && !Package.Documents.IsEmpty) { return; }
+            if (FilePath == filePath && Package.IsNotNull() && Package.Documents.IsNotNull() && !Package.Documents.IsEmpty) { return; }
 
             using (IPackageValidator validator = new PackageValidator()) {
                 Package = validator.GetPackage(filePath);
@@ -206,63 +235,7 @@ namespace Abc.Nes.ArchivalPackage {
             }
 
             using (var zipFile = ZipFile.Read(filePath)) {
-                foreach (var entry in zipFile.Entries) {
-                    if (entry.Attributes == FileAttributes.Directory) {
-                        var dirName = entry.FileName;
-                        var dirs = dirName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
-                        FolderBase folder = null;
-
-                        if (dirs[0].ToLower() == MainDirectoriesName.Files.GetXmlEnum().ToLower()) { folder = Package.Documents; }
-                        else if (dirs[0].ToLower() == MainDirectoriesName.Metadata.GetXmlEnum().ToLower()) { folder = Package.Metadata; }
-                        else if (dirs[0].ToLower() == MainDirectoriesName.Objects.GetXmlEnum().ToLower()) { folder = Package.Objects; }
-
-                        foreach (var dir in dirs) {
-                            if (dir.ToLower() == MainDirectoriesName.Files.GetXmlEnum().ToLower() ||
-                                dir.ToLower() == MainDirectoriesName.Metadata.GetXmlEnum().ToLower() ||
-                                dir.ToLower() == MainDirectoriesName.Objects.GetXmlEnum().ToLower()) { continue; }
-
-                            folder = folder.CreateSubFolder(dir);
-                        }
-                    }
-                    else {
-                        var dirName = Path.GetDirectoryName(entry.FileName).Replace("\\", "/");
-                        var fileName = Path.GetFileName(entry.FileName);
-                        var dirs = dirName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
-                        FolderBase folder = null;
-                        if (dirs[0].ToLower() == MainDirectoriesName.Files.GetXmlEnum().ToLower()) { folder = Package.Documents; }
-                        else if (dirs[0].ToLower() == MainDirectoriesName.Metadata.GetXmlEnum().ToLower()) { folder = Package.Metadata; }
-                        else if (dirs[0].ToLower() == MainDirectoriesName.Objects.GetXmlEnum().ToLower()) { folder = Package.Objects; }
-                        foreach (var dir in dirs) {
-                            if (dirs[0] == dir) { continue; }
-                            var _folder = folder.GetFolder(dir);
-                            if (_folder.IsNull()) { _folder = folder.CreateSubFolder(dir); }
-                            folder = _folder;
-                        }
-
-                        var stream = new MemoryStream();
-                        entry.Extract(stream);
-                        var fileData = stream.ToArray();
-
-                        ItemBase item;
-                        if (dirs[0].ToLower() == MainDirectoriesName.Files.GetXmlEnum().ToLower()) {
-                            item = new DocumentFile() { FileName = fileName, FilePath = entry.FileName };
-                        }
-                        else {
-                            item = new MetadataFile() { FileName = fileName, FilePath = entry.FileName };
-                        }
-
-                        item.Init(fileData);
-
-                        if (item is MetadataFile && PackageType == Enumerations.DocumentType.None) {
-                            try {
-                                PackageType = (item as MetadataFile).Document.DocumentType;
-                            }
-                            catch { }
-                        }
-
-                        folder.AddItem(item);
-                    }
-                }
+                LoadPackageEntries(zipFile);
             }
         }
         public int GetDocumentsCount() {
@@ -434,6 +407,65 @@ namespace Abc.Nes.ArchivalPackage {
             result = result.RemoveIllegalCharacters();
             result = result.RemovePolishChars();
             return result;
+        }
+        private void LoadPackageEntries(ZipFile zipFile) {
+            foreach (var entry in zipFile.Entries) {
+                if (entry.Attributes == FileAttributes.Directory) {
+                    var dirName = entry.FileName;
+                    var dirs = dirName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+                    FolderBase folder = null;
+
+                    if (dirs[0].ToLower() == MainDirectoriesName.Files.GetXmlEnum().ToLower()) { folder = Package.Documents; }
+                    else if (dirs[0].ToLower() == MainDirectoriesName.Metadata.GetXmlEnum().ToLower()) { folder = Package.Metadata; }
+                    else if (dirs[0].ToLower() == MainDirectoriesName.Objects.GetXmlEnum().ToLower()) { folder = Package.Objects; }
+
+                    foreach (var dir in dirs) {
+                        if (dir.ToLower() == MainDirectoriesName.Files.GetXmlEnum().ToLower() ||
+                            dir.ToLower() == MainDirectoriesName.Metadata.GetXmlEnum().ToLower() ||
+                            dir.ToLower() == MainDirectoriesName.Objects.GetXmlEnum().ToLower()) { continue; }
+
+                        folder = folder.CreateSubFolder(dir);
+                    }
+                }
+                else {
+                    var dirName = Path.GetDirectoryName(entry.FileName).Replace("\\", "/");
+                    var fileName = Path.GetFileName(entry.FileName);
+                    var dirs = dirName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+                    FolderBase folder = null;
+                    if (dirs[0].ToLower() == MainDirectoriesName.Files.GetXmlEnum().ToLower()) { folder = Package.Documents; }
+                    else if (dirs[0].ToLower() == MainDirectoriesName.Metadata.GetXmlEnum().ToLower()) { folder = Package.Metadata; }
+                    else if (dirs[0].ToLower() == MainDirectoriesName.Objects.GetXmlEnum().ToLower()) { folder = Package.Objects; }
+                    foreach (var dir in dirs) {
+                        if (dirs[0] == dir) { continue; }
+                        var _folder = folder.GetFolder(dir);
+                        if (_folder.IsNull()) { _folder = folder.CreateSubFolder(dir); }
+                        folder = _folder;
+                    }
+
+                    var stream = new MemoryStream();
+                    entry.Extract(stream);
+                    var fileData = stream.ToArray();
+
+                    ItemBase item;
+                    if (dirs[0].ToLower() == MainDirectoriesName.Files.GetXmlEnum().ToLower()) {
+                        item = new DocumentFile() { FileName = fileName, FilePath = entry.FileName };
+                    }
+                    else {
+                        item = new MetadataFile() { FileName = fileName, FilePath = entry.FileName };
+                    }
+
+                    item.Init(fileData);
+
+                    if (item is MetadataFile && PackageType == Enumerations.DocumentType.None) {
+                        try {
+                            PackageType = (item as MetadataFile).Document.DocumentType;
+                        }
+                        catch { }
+                    }
+
+                    folder.AddItem(item);
+                }
+            }
         }
 
         public void Dispose() { }
