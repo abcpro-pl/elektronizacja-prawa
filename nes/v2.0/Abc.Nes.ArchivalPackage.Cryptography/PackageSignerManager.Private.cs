@@ -143,7 +143,14 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 catch { }
             }
         }
-        private void SignPdfItem(ItemBase item, X509Certificate2 cert, bool addTimeStamp, string reason = "eADM Signing", string location = null, string timeStampServerUrl = "http://time.certum.pl") {
+        private void SignPdfItem(
+            ItemBase item, 
+            X509Certificate2 cert, 
+            bool addTimeStamp, 
+            string reason = "Formalne zatwierdzenie (Proof of approval)", 
+            string location = null, 
+            string timeStampServerUrl = "http://time.certum.pl") {
+
             var input = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.pdf");
             var output = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.pdf");
             var temp = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.pdf");

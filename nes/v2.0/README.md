@@ -728,6 +728,41 @@ using (var mgr = new PackageSignerManager()) {
 }
 ```
 
+### Obsługa plików TAR i TAR.GZ
+#### Konwersja do pliku ZIP i załadowanie pliku paczki eADM
+
+```C#
+var path = @"../../../sample/paczka_archiwalna_48.tar";
+var pathZip = @"../../../sample/paczka_archiwalna_48.tar.zip";
+      
+using (var tar = new ArchivalPackage.Formats.Tar.TarFile(path)) {
+    if (tar.ConvertToZip(pathZip)) {
+        var mgr = new PackageManager();
+        mgr.LoadPackage(pathZip);
+        var isNotEmpty = mgr != null && mgr.Package != null && !mgr.Package.IsEmpty;
+        Assert.IsTrue(isNotEmpty);
+    }
+}
+```
+
+#### Konwersja do pliku ZIP i załadowanie paczki eADM z użyciem strumieni
+
+```C#
+var path = @"../../../sample/paczka_archiwalna_48.tar";
+using (var stream = File.OpenRead(path)) {
+    using (var tar = new ArchivalPackage.Formats.Tar.TarFile(stream, ArchivalPackage.Formats.Tar.TarType.Tar)) {
+        using (var zipStream = tar.ConvertToZip()) {
+            if (zipStream != null && zipStream.Length > 0) {
+                var mgr = new PackageManager();
+                mgr.LoadPackage(zipStream);
+                var isNotEmpty = mgr != null && mgr.Package != null && !mgr.Package.IsEmpty;
+                Assert.IsTrue(isNotEmpty);
+            }
+        }
+    }
+}
+```
+
 ### Archiwum zawierające paczkę eADM i plik podpisu .xades
 #### Rozpakowanie archiwum zawierającego paczke archiwalną i zewnetrzny plik podpisu .xades i ponowne jej podpisanie
 ```C#

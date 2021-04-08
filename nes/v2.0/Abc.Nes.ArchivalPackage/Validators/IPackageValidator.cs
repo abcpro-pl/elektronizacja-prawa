@@ -15,6 +15,7 @@
 using Abc.Nes.ArchivalPackage.Model;
 using Abc.Nes.Validators;
 using System;
+using System.IO;
 
 namespace Abc.Nes.ArchivalPackage.Validators {
     public interface IPackageValidator : IDisposable {
@@ -25,11 +26,23 @@ namespace Abc.Nes.ArchivalPackage.Validators {
         /// <returns>true if the file is a valid ZIP archive and contains the required directories.</returns>
         bool IsPackageValid(string filePath);
         /// <summary>
+        /// Checks if the file is a valid ZIP archive and contains the required directories.
+        /// </summary>
+        /// <param name="stream">ZIP file stream.</param>
+        /// <returns>true if the file is a valid ZIP archive and contains the required directories.</returns>
+        bool IsPackageValid(Stream stream);
+        /// <summary>
         /// Getting package model from a ZIP file.
         /// </summary>
         /// <param name="filePath">ZIP file path.</param>
         /// <returns>Package model.</returns>
         Package GetPackage(string filePath);
+        /// <summary>
+        /// Getting package model from a ZIP file stream.
+        /// </summary>
+        /// <param name="stream">ZIP file stream.</param>
+        /// <returns>Package model.</returns>
+        Package GetPackage(Stream stream);
         /// <summary>
         /// Getting package model from scratch.
         /// </summary>

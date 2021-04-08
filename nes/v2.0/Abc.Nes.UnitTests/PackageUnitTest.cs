@@ -385,5 +385,36 @@ namespace Abc.Nes.UnitTests {
                 Assert.IsTrue(signatures.Length > 0);
             }
         }
+
+        [TestMethod]
+        public void LoadTarArchive() {
+            var path = @"../../../sample/paczka_archiwalna_48.tar";
+            var pathZip = @"../../../sample/paczka_archiwalna_48.tar.zip";
+
+            using (var tar = new ArchivalPackage.Formats.Tar.TarFile(path)) {
+                if (tar.ConvertToZip(pathZip)) {
+                    var mgr = new PackageManager();
+                    mgr.LoadPackage(pathZip);
+                    var isNotEmpty = mgr != null && mgr.Package != null && !mgr.Package.IsEmpty;
+                    Assert.IsTrue(isNotEmpty);
+                }
+            }
+        }
+        [TestMethod]
+        public void LoadTarArchiveStream() {
+            var path = @"../../../sample/paczka_archiwalna_48.tar";
+            using (var stream = File.OpenRead(path)) {
+                using (var tar = new ArchivalPackage.Formats.Tar.TarFile(stream, ArchivalPackage.Formats.Tar.TarType.Tar)) {
+                    using (var zipStream = tar.ConvertToZip()) {
+                        if (zipStream != null && zipStream.Length > 0) {
+                            var mgr = new PackageManager();
+                            mgr.LoadPackage(zipStream);
+                            var isNotEmpty = mgr != null && mgr.Package != null && !mgr.Package.IsEmpty;
+                            Assert.IsTrue(isNotEmpty);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

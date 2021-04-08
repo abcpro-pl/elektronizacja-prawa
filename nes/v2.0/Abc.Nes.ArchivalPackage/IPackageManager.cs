@@ -16,6 +16,7 @@ using Abc.Nes.ArchivalPackage.Model;
 using Abc.Nes.Validators;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Abc.Nes.ArchivalPackage {
     public interface IPackageManager : IDisposable {
@@ -27,7 +28,9 @@ namespace Abc.Nes.ArchivalPackage {
         void AddFiles(IEnumerable<string> files, string folderName = null, IEnumerable<IDocument> metadata = null);
         void AddObject(IDocument metadata, string fileName);
         void Save(string filePath = null, bool appendFileDataOnly = false);
+        Stream Save(bool appendFileDataOnly = false);
         void LoadPackage(string filePath);
+        void LoadPackage(Stream stream);
         int GetDocumentsCount();
         IEnumerable<ItemBase> GetAllFiles();
         IEnumerable<ItemBase> GetAllFiles(FolderBase folder);

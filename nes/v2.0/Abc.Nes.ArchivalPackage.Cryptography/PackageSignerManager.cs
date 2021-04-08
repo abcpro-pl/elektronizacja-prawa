@@ -53,7 +53,8 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                         SignXmlItem(item, xadesManager, cert, productionPlace, signerRole, addTimeStamp ? XadesFormat.XadesT : XadesFormat.XadesBes, timeStampServerUrl);
                     }
                     else if (item.FileName.ToLower().EndsWith(".pdf")) {
-                        SignPdfItem(item, cert, addTimeStamp, timeStampServerUrl: timeStampServerUrl);
+                        string location = productionPlace.IsNotNull() ? productionPlace.City : null;
+                        SignPdfItem(item, cert, addTimeStamp, location: location, timeStampServerUrl: timeStampServerUrl);
                     }
                     else {
                         if (detachedSignaturePackageFiles) {
