@@ -30,6 +30,17 @@ namespace Abc.Nes.NUnitTests {
                 Assert.IsTrue(signatures.Length > 0);
             }
         }
+       
+        [Test]
+        public void ValidatePackageSignatures() {
+            var pathToPackage = @"../../../../sample/paczka_eADM_do_podpisu.podpisana.zip";
+            var smgr = new SignedPackageManager();
+            var info = smgr.Extract(pathToPackage);
+            using (var mgr = new PackageSignerManager()) {
+                var signatures = mgr.GetSignAndVerifyInfo(Path.Combine(info.Directory, info.PackageFileName));
+                Assert.IsTrue(signatures.Length > 0);
+            }
+        }
 
         [Test]
         public void GetSignAndVerifyInfo() {

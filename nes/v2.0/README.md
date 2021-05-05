@@ -31,6 +31,7 @@ W tym katalogu znajduje się:
 
 Wersja  | Opis
 --------|--------
+1.1.19|Dodanie atrybutu `NeutralLanguage` dla zestawów, dodanie brakującej referencji do `Microsoft.DotNet.PlatformAbstractions`.
 1.1.18|Dodano obsługę plików `.tar` i `.tar.gz` oraz wspacie dla odczytywania i zapisywania paczki eADM z użyciem strumieni.
 1.1.17|Dodano nazwy statusów błędów certyfikatów w języku polskim.
 1.1.16|Dodano metody klasy `PackageSignerManager` pozwalające na pobranie informacji o podpisach dla wszystkich podpisanych dokumentów w paczce eADM (`GetSignAndVerifyInfo`). Dodano bardziej szczegółowe informacje o przyczynie błędnej weryfikacji podpisu i certyfikatu we właściwości `Message` zwracanego obiektu `SignAndVerifyInfo`.

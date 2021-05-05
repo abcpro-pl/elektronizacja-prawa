@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.1;netstandard2.0;net48;net461</TargetFrameworks>
+    <NeutralLanguage>pl</NeutralLanguage>
     <Authors>ITORG Krzysztof Radzimski</Authors>
     <Company>ABC PRO Sp. z o.o.</Company>
     <Description>.NET library for digital signing an archival package for Polish State Archives, which is based on a modification of the .Net Framework System.Security.Cryptography.Xml (as Microsoft.XmlDsig), the XAdES starter kit developed by Microsoft France (as Microsoft.Xades) and FirmaXadesNet - Library for the generation of XAdES signatures.</Description>
@@ -16,9 +17,9 @@
     <PackageId>ABCPRO.NES.XAdES</PackageId>
     <Product>ABCPRO.NES.XAdES</Product>
     <PackageProjectUrl>https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0</PackageProjectUrl>
-    <AssemblyVersion>1.1.18.0</AssemblyVersion>
-    <FileVersion>1.1.18.0</FileVersion>
-    <Version>1.1.18</Version>
+    <AssemblyVersion>1.1.19.0</AssemblyVersion>
+    <FileVersion>1.1.19.0</FileVersion>
+    <Version>1.1.19</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
