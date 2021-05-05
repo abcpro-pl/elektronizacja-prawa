@@ -215,7 +215,7 @@ namespace Abc.Nes.ArchivalPackage.Validators {
                    zipFile.EntryFileNames.Where(x => x.ToLower().StartsWith(MainDirectoriesName.Metadata.GetXmlEnum().ToLower())).Count() > 0 &&
                    zipFile.EntryFileNames.Where(x => x.ToLower().StartsWith(MainDirectoriesName.Objects.GetXmlEnum().ToLower())).Count() > 0;
 
-                if (!zipFileHasMandatoryDirectories) { throw new PackageInvalidException(); }
+                if (!zipFileHasMandatoryDirectories) { throw new PackageInvalidException(); } 
             }
             return true;
         }
