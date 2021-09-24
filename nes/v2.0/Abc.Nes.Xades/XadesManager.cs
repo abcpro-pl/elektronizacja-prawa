@@ -1,4 +1,5 @@
-﻿using Abc.Nes.Xades.Crypto;
+﻿using Abc.Nes.Cryptography;
+using Abc.Nes.Xades.Crypto;
 using Abc.Nes.Xades.Signature;
 using Abc.Nes.Xades.Signature.Parameters;
 using Abc.Nes.Xades.Utils;
@@ -13,9 +14,9 @@ using System.Xml;
 
 namespace Abc.Nes.Xades {
     public interface IXadesManager : IDisposable {
-        SignatureDocument AppendSignatureToXmlFile(Stream input, X509Certificate2 cert, Signature.Parameters.SignatureProductionPlace productionPlace = null, Signature.Parameters.SignerRole signerRole = null, Upgraders.SignatureFormat? upgradeFormat = null, string timeStampServerUrl = "http://time.certum.pl");
-        SignatureDocument CreateEnvelopingSignature(Stream input, X509Certificate2 cert, Signature.Parameters.SignatureProductionPlace productionPlace = null, Signature.Parameters.SignerRole signerRole = null, string fileName = null, Upgraders.SignatureFormat? upgradeFormat = null, string timeStampServerUrl = "http://time.certum.pl");
-        SignatureDocument CreateDetachedSignature(string filePath, X509Certificate2 cert, Signature.Parameters.SignatureProductionPlace productionPlace = null, Signature.Parameters.SignerRole signerRole = null, Upgraders.SignatureFormat? upgradeFormat = null, string timeStampServerUrl = "http://time.certum.pl");
+        SignatureDocument AppendSignatureToXmlFile(Stream input, X509Certificate2 cert, Signature.Parameters.SignatureProductionPlace productionPlace = null, Signature.Parameters.SignerRole signerRole = null, Upgraders.SignatureFormat? upgradeFormat = null, string timeStampServerUrl = "http://time.certum.pl", CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval);
+        SignatureDocument CreateEnvelopingSignature(Stream input, X509Certificate2 cert, Signature.Parameters.SignatureProductionPlace productionPlace = null, Signature.Parameters.SignerRole signerRole = null, string fileName = null, Upgraders.SignatureFormat? upgradeFormat = null, string timeStampServerUrl = "http://time.certum.pl", CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval);
+        SignatureDocument CreateDetachedSignature(string filePath, X509Certificate2 cert, Signature.Parameters.SignatureProductionPlace productionPlace = null, Signature.Parameters.SignerRole signerRole = null, Upgraders.SignatureFormat? upgradeFormat = null, string timeStampServerUrl = "http://time.certum.pl", CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval);
         ValidationResult ValidateSignature(Stream stream);
         ValidationResult ValidateSignature(string filePath);
     }
@@ -33,7 +34,8 @@ namespace Abc.Nes.Xades {
             Signature.Parameters.SignatureProductionPlace productionPlace = null,
             Signature.Parameters.SignerRole signerRole = null,
             Upgraders.SignatureFormat? upgradeFormat = null,
-            string timeStampServerUrl = "http://time.certum.pl") {
+            string timeStampServerUrl = "http://time.certum.pl",
+            CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval) {
 
             if (input == null) { throw new ArgumentNullException("input"); }
 
@@ -78,7 +80,7 @@ Content-Transfer-Encoding: UTF-8"
             signatureDocument.XadesSignature.AddReference(ContentReference);
 
             SetSignatureId(signatureDocument.XadesSignature);
-            PrepareSignature(signatureDocument);
+            PrepareSignature(signatureDocument, commitmentTypeId: commitmentTypeId);
 
             signatureDocument.XadesSignature.ComputeSignature();
 
@@ -94,7 +96,8 @@ Content-Transfer-Encoding: UTF-8"
             Signature.Parameters.SignerRole signerRole = null,
             string fileName = null,
             Upgraders.SignatureFormat? upgradeFormat = null,
-            string timeStampServerUrl = "http://time.certum.pl") {
+            string timeStampServerUrl = "http://time.certum.pl",
+            CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval) {
 
             if (input == null) { throw new ArgumentNullException("input"); }
 
@@ -150,7 +153,7 @@ Content-Disposition: filename=""{ fileName }""
             signatureDocument.XadesSignature.AddReference(ContentReference);
 
             SetSignatureId(signatureDocument.XadesSignature);
-            PrepareSignature(signatureDocument, false);
+            PrepareSignature(signatureDocument, false, commitmentTypeId);
 
             signatureDocument.XadesSignature.AddObject(new DataObject() {
                 Id = objectId,
@@ -174,7 +177,8 @@ Content-Disposition: filename=""{ fileName }""
             Signature.Parameters.SignatureProductionPlace productionPlace = null,
             Signature.Parameters.SignerRole signerRole = null,
             Upgraders.SignatureFormat? upgradeFormat = null,
-            string timeStampServerUrl = "http://time.certum.pl") {
+            string timeStampServerUrl = "http://time.certum.pl",
+            CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval) {
 
             if (filePath == null) { throw new ArgumentNullException("filePath"); }
             if (!File.Exists(filePath)) { throw new FileNotFoundException("Specified file not found!"); }
@@ -218,7 +222,7 @@ Content-Disposition: filename=""{ fileName }""
             signatureDocument.XadesSignature.AddReference(ContentReference);
 
             SetSignatureId(signatureDocument.XadesSignature);
-            PrepareSignature(signatureDocument, false);
+            PrepareSignature(signatureDocument, false, commitmentTypeId);
 
             signatureDocument.XadesSignature.ComputeSignature();
 
@@ -255,24 +259,25 @@ Content-Disposition: filename=""{ fileName }""
             }
 
             var isValid = false;
-            var certIsValid = false;
             var message = String.Empty;
+            CertificateValidationInfo certValidationInfo = null;
             try {
-                certIsValid = ValidateCert(certificate, out message);
+                certValidationInfo = ValidateCert(certificate);
+                message = certValidationInfo.ErrorMessage;
                 isValid = signedXml.CheckSignature(certificate, true);
                 if (String.IsNullOrEmpty(message)) {
-                    if (!isValid && certIsValid) {
+                    if (!isValid && certValidationInfo.IsValid) {
                         message = "Weryfikacja sygnatury podpisu zakończona niepowodzeniem.";
                     }
-                    else if (isValid && !certIsValid) {
+                    else if (isValid && !certValidationInfo.IsValid) {
                         message = "Weryfikacja certyfikatu osoby podpisującej zakończona niepowodzeniem.";
                     }
-                    else if (!isValid && !certIsValid) {
+                    else if (!isValid && !certValidationInfo.IsValid) {
                         message = "Weryfikacja podpisu i certyfikatu zakończona niepowodzeniem.";
                     }
                     else {
                         message = "Weryfikacja sygnatury podpisu i certyfikatu przebiegła pomyślnie.";
-                    }                   
+                    }
                 }
                 else if (!String.IsNullOrEmpty(message) && !isValid) {
                     message = $"Weryfikacja sygnatury podpisu zakończona niepowodzeniem. {message}";
@@ -284,7 +289,7 @@ Content-Disposition: filename=""{ fileName }""
 
             return new ValidationResult() {
                 IsValid = isValid,
-                CertificateIsValid = certIsValid,
+                CertValidationInfo = certValidationInfo,
                 Message = message,
                 SignatureName = signedXml.Signature?.Id
             };
@@ -298,65 +303,20 @@ Content-Disposition: filename=""{ fileName }""
             }
         }
 
-        private bool ValidateCert(X509Certificate2 e, out string errorMessage) {
-            errorMessage = string.Empty;
+        private CertificateValidationInfo ValidateCert(X509Certificate2 e) {
             if (e != null) {
                 var ch = new X509Chain();
                 ch.ChainPolicy.RevocationMode = X509RevocationMode.NoCheck;
-                if (ch.Build(e)) { return true; }
+                if (ch.Build(e)) { return new CertificateValidationInfo(true); }
                 else {
-                    foreach (X509ChainStatus chainStatus in ch.ChainStatus) {
-                        errorMessage += $"[{GetX509ChainStatusFlagsDescription(chainStatus.Status)}] {chainStatus.StatusInformation}\r\n";
-                    }
-                    if (!String.IsNullOrEmpty(errorMessage)) {
-                        var userName = GetSubjectCommonName(e);
 
-                        errorMessage = $"Weryfikacja certyfikatu osoby podpisującej {userName} zakończona niepowodzeniem: {errorMessage}".Trim();
+                    foreach (X509ChainStatus chainStatus in ch.ChainStatus) {
+                        var userName = GetSubjectCommonName(e);
+                        return new CertificateValidationInfo(chainStatus, userName);
                     }
                 }
             }
             return default;
-        }
-
-        private string GetX509ChainStatusFlagsDescription(X509ChainStatusFlags e) {
-            switch (e) {
-                case X509ChainStatusFlags.HasWeakSignature:
-                case X509ChainStatusFlags.NotSignatureValid:
-                case X509ChainStatusFlags.CtlNotSignatureValid: { return "Sygnatura"; }
-
-                case X509ChainStatusFlags.NotTimeNested:
-                case X509ChainStatusFlags.NotTimeValid:
-                case X509ChainStatusFlags.CtlNotTimeValid: { return "Ważność certyfikatu"; }
-
-                case X509ChainStatusFlags.NotValidForUsage:
-                case X509ChainStatusFlags.CtlNotValidForUsage: { return "Zastosowanie"; }
-
-                case X509ChainStatusFlags.HasNotSupportedCriticalExtension:
-                case X509ChainStatusFlags.InvalidExtension: { return "Rozszerzenie"; }
-
-                case X509ChainStatusFlags.Cyclic: { return "Zapętlenie"; }
-
-                case X509ChainStatusFlags.Revoked:
-                case X509ChainStatusFlags.RevocationStatusUnknown:
-                case X509ChainStatusFlags.OfflineRevocation: { return "Odwołanie certyfikatu"; }
-
-                case X509ChainStatusFlags.HasExcludedNameConstraint:
-                case X509ChainStatusFlags.PartialChain: { return "Łańcuch certyfikatów"; }
-
-                case X509ChainStatusFlags.ExplicitDistrust:
-                case X509ChainStatusFlags.UntrustedRoot: { return "Źródło"; }
-
-                case X509ChainStatusFlags.InvalidNameConstraints:
-                case X509ChainStatusFlags.InvalidBasicConstraints:
-                case X509ChainStatusFlags.HasNotDefinedNameConstraint:
-                case X509ChainStatusFlags.HasNotPermittedNameConstraint:
-                case X509ChainStatusFlags.HasNotSupportedNameConstraint: { return "Wymagalność danych"; }
-
-                case X509ChainStatusFlags.NoIssuanceChainPolicy:
-                case X509ChainStatusFlags.InvalidPolicyConstraints: { return "Polityka certyfikatu"; }
-
-                default: { return e.ToString(); }
-            }
         }
 
         private string GetSubjectCommonName(X509Certificate2 e) {
@@ -380,10 +340,10 @@ Content-Disposition: filename=""{ fileName }""
             xadesSignedXml.SignatureValueId = "SignatureValue-" + id;
         }
 
-        private void PrepareSignature(SignatureDocument signatureDocument, bool addKeyInfoReference = true) {
+        private void PrepareSignature(SignatureDocument signatureDocument, bool addKeyInfoReference = true, CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval) {
             signatureDocument.XadesSignature.SignedInfo.SignatureMethod = SignatureMethod.RSAwithSHA256.URI;
             AddCertificateInfo(signatureDocument, addKeyInfoReference);
-            AddXadesInfo(signatureDocument);
+            AddXadesInfo(signatureDocument, commitmentTypeId);
         }
 
         private void AddCertificateInfo(SignatureDocument signatureDocument, bool addKeyInfoReference = true) {
@@ -408,7 +368,7 @@ Content-Disposition: filename=""{ fileName }""
             }
         }
 
-        private void AddXadesInfo(SignatureDocument signatureDocument) {
+        private void AddXadesInfo(SignatureDocument signatureDocument, CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval) {
             XadesObject xadesObject = new XadesObject {
                 Id = "XadesObjectId-" + Guid.NewGuid().ToString()
             };
@@ -419,7 +379,8 @@ Content-Disposition: filename=""{ fileName }""
             AddSignatureProperties(signatureDocument,
                 xadesObject.QualifyingProperties.SignedProperties.SignedSignatureProperties,
                 xadesObject.QualifyingProperties.SignedProperties.SignedDataObjectProperties,
-                xadesObject.QualifyingProperties.UnsignedProperties.UnsignedSignatureProperties);
+                xadesObject.QualifyingProperties.UnsignedProperties.UnsignedSignatureProperties,
+                commitmentTypeId);
 
             signatureDocument.XadesSignature.AddXadesObject(xadesObject);
         }
@@ -427,7 +388,8 @@ Content-Disposition: filename=""{ fileName }""
         private void AddSignatureProperties(SignatureDocument signatureDocument,
                     SignedSignatureProperties signedSignatureProperties,
                     SignedDataObjectProperties signedDataObjectProperties,
-                    UnsignedSignatureProperties unsignedSignatureProperties
+                    UnsignedSignatureProperties unsignedSignatureProperties,
+                    CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval
                     ) {
             var cert = new Cert();
             cert.IssuerSerial.X509IssuerName = XadesSigner.Certificate.IssuerName.Name;
@@ -465,7 +427,7 @@ Content-Disposition: filename=""{ fileName }""
             }
 
             CommitmentTypeIndication cti = new CommitmentTypeIndication();
-            cti.CommitmentTypeId.Identifier.IdentifierUri = SignatureCommitmentType.ProofOfApproval.URI;
+            cti.CommitmentTypeId.Identifier.IdentifierUri = new SignatureCommitmentType(commitmentTypeId).URI;
             cti.AllSignedDataObjects = true;
             signedDataObjectProperties.CommitmentTypeIndicationCollection.Add(cti);
 

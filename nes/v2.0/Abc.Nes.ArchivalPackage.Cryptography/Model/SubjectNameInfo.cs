@@ -8,7 +8,14 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 foreach (string t in sc) {
                     string[] sci = t.Split('=');
                     if (sci.Length > 1) {
-                        this.Add(sci[0].Trim(), sci[1].Trim());
+                        var key = sci[0].Trim();
+                        var value = sci[1].Trim();
+                        if (this.ContainsKey(key)) {
+                            this[key] += $" {value}";
+                        }
+                        else {
+                            this.Add(key, value);
+                        }
                     } 
                 }
             }

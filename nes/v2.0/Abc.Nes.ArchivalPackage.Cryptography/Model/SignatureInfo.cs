@@ -12,6 +12,7 @@
 
   ===================================================================================*/
 
+using Abc.Nes.Cryptography;
 using System;
 using System.Security.Cryptography.X509Certificates;
 
@@ -34,7 +35,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography.Model {
         public string FileName { get; internal set; }
         public string SignatureName { get; internal set; }
         public bool IsValid { get; internal set; }
-        public bool CertificateIsValid { get; internal set; }
+        public CertificateValidationInfo CertValidationInfo { get; internal set; }
         public string Message { get; internal set; }
     }
 

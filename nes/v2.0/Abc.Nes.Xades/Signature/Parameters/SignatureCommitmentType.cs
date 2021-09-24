@@ -21,37 +21,74 @@
 // 
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+using System.ComponentModel;
+
 namespace Abc.Nes.Xades.Signature.Parameters {
     internal class SignatureCommitmentType {
-        #region Private variables
+        public static SignatureCommitmentType ProofOfOrigin = new SignatureCommitmentType(CommitmentTypeId.ProofOfOrigin);
+        public static SignatureCommitmentType ProofOfReceipt = new SignatureCommitmentType(CommitmentTypeId.ProofOfReceipt);
+        public static SignatureCommitmentType ProofOfDelivery = new SignatureCommitmentType(CommitmentTypeId.ProofOfDelivery);
+        public static SignatureCommitmentType ProofOfSender = new SignatureCommitmentType(CommitmentTypeId.ProofOfSender);
+        public static SignatureCommitmentType ProofOfApproval = new SignatureCommitmentType(CommitmentTypeId.ProofOfApproval);
+        public static SignatureCommitmentType ProofOfCreation = new SignatureCommitmentType(CommitmentTypeId.ProofOfCreation);
 
-        private string _uri;
+        public string URI { get; }
+        public string Description { get; }
 
-        #endregion
 
-        #region Public properties
+        public SignatureCommitmentType(CommitmentTypeId id) {
+            URI = id.GetCategory();
+            Description = id.GetDescription();
+        }
+    }
 
-        public static SignatureCommitmentType ProofOfOrigin = new SignatureCommitmentType("http://uri.etsi.org/01903/v1.2.2#ProofOfOrigin");
-        public static SignatureCommitmentType ProofOfReceipt = new SignatureCommitmentType("http://uri.etsi.org/01903/v1.2.2#ProofOfReceipt");
-        public static SignatureCommitmentType ProofOfDelivery = new SignatureCommitmentType("http://uri.etsi.org/01903/v1.2.2#ProofOfDelivery");
-        public static SignatureCommitmentType ProofOfSender = new SignatureCommitmentType("http://uri.etsi.org/01903/v1.2.2#ProofOfSender");
-        public static SignatureCommitmentType ProofOfApproval = new SignatureCommitmentType("http://uri.etsi.org/01903/v1.2.2#ProofOfApproval");
-        public static SignatureCommitmentType ProofOfCreation = new SignatureCommitmentType("http://uri.etsi.org/01903/v1.2.2#ProofOfCreation");
-
-        public string URI {
-            get {
-                return _uri;
+    public static class __EnumExtensions {
+        public static string GetCategory(this Enum value) {
+            try {
+                var fi = value.GetType().GetField(value.ToString());
+                CategoryAttribute[] attributes = (CategoryAttribute[])fi.GetCustomAttributes(typeof(CategoryAttribute), false);
+                return (attributes.Length > 0) ? attributes[0].Category : value.ToString();
+            }
+            catch {
+                return string.Empty;
             }
         }
-
-        #endregion
-
-        #region Constructors
-
-        public SignatureCommitmentType(string uri) {
-            _uri = uri;
+        public static string GetDescription(this Enum value) {
+            try {
+                var fi = value.GetType().GetField(value.ToString());
+                DescriptionAttribute[] attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+                return (attributes.Length > 0) ? attributes[0].Description : value.ToString();
+            }
+            catch {
+                return string.Empty;
+            }
         }
+    }
 
-        #endregion
+    public enum CommitmentTypeId {
+        [Category("http://uri.etsi.org/01903/v1.2.2#ProofOfOrigin")]
+        [Description("Dowód pochodzenia (Proof of origin)")]
+        ProofOfOrigin,
+
+        [Category("http://uri.etsi.org/01903/v1.2.2#ProofOfReceipt")]
+        [Description("Potwierdzenie odbioru (Proof of receipt)")]
+        ProofOfReceipt,
+
+        [Category("http://uri.etsi.org/01903/v1.2.2#ProofOfDelivery")]
+        [Description("Dowód dostawy (Proof of delivery)")]
+        ProofOfDelivery,
+
+        [Category("http://uri.etsi.org/01903/v1.2.2#ProofOfSender")]
+        [Description("Dowód nadawcy (Proof of sender)")]
+        ProofOfSender,
+
+        [Category("http://uri.etsi.org/01903/v1.2.2#ProofOfApproval")]
+        [Description("Formalne zatwierdzenie (Proof of approval)")]
+        ProofOfApproval,
+
+        [Category("http://uri.etsi.org/01903/v1.2.2#ProofOfCreation")]
+        [Description("Potwierdzenie utworzenia (Proof of creation)")]
+        ProofOfCreation
     }
 }

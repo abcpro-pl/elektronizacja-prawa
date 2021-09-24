@@ -13,6 +13,7 @@
   ===================================================================================*/
 
 using Abc.Nes.ArchivalPackage.Cryptography.Model;
+using Abc.Nes.Xades.Signature.Parameters;
 using System;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml.Linq;
@@ -20,8 +21,8 @@ using System.Xml.Linq;
 namespace Abc.Nes.ArchivalPackage.Cryptography {
     public interface IPackageSignerManager : IDisposable {
         string Sign(string sourcePackageFilePath, X509Certificate2 cert, string outputPackageFilePath = null,
-                Abc.Nes.Xades.Signature.Parameters.SignatureProductionPlace productionPlace = null,
-                Abc.Nes.Xades.Signature.Parameters.SignerRole signerRole = null,
+                SignatureProductionPlace productionPlace = null,
+                SignerRole signerRole = null,
                 bool signPackageFiles = true,
                 bool signPackageFile = true,
                 bool detachedSignaturePackageFile = false,
@@ -31,8 +32,8 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
         string Sign(string sourcePackageFilePath,
             X509Certificate2 cert,
             string outputPackageFilePath = null,
-            Abc.Nes.Xades.Signature.Parameters.SignatureProductionPlace productionPlace = null,
-            Abc.Nes.Xades.Signature.Parameters.SignerRole signerRole = null,
+            SignatureProductionPlace productionPlace = null,
+            SignerRole signerRole = null,
             string[] internalFiles = null,
             bool signPackageFile = true,
             bool detachedSignaturePackageFile = true,
@@ -42,29 +43,31 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
         void SignInternalFile(string sourcePackageFilePath,
                 string internalPath,
                 X509Certificate2 cert,
-                Abc.Nes.Xades.Signature.Parameters.SignatureProductionPlace productionPlace = null,
-                Abc.Nes.Xades.Signature.Parameters.SignerRole signerRole = null,
+                SignatureProductionPlace productionPlace = null,
+                SignerRole signerRole = null,
                 bool detachedSignaturePackageFile = false,
                 string outputPackageFilePath = null,
                 bool addTimeStamp = false,
-                string timeStampServerUrl = "http://time.certum.pl");
+                string timeStampServerUrl = "http://time.certum.pl",
+                CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval);
 
         void SignInternalFile(
                 string sourcePackageFilePath,
                 ArchivalPackage.Model.ItemBase item,
                 PackageManager mgr,
                 X509Certificate2 cert,
-                Abc.Nes.Xades.Signature.Parameters.SignatureProductionPlace productionPlace = null,
-                Abc.Nes.Xades.Signature.Parameters.SignerRole signerRole = null,
+                SignatureProductionPlace productionPlace = null,
+                SignerRole signerRole = null,
                 bool detachedSignaturePackageFile = false,
                 string outputPackageFilePath = null,
                 bool addTimeStamp = false,
-                string timeStampServerUrl = "http://time.certum.pl");
+                string timeStampServerUrl = "http://time.certum.pl",
+                CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval);
 
         void SignPdfFile(
                 string sourceFilePath,
                 X509Certificate2 cert,
-                string reason = "Formalne zatwierdzenie (Proof of approval)",
+                CommitmentTypeId reason = CommitmentTypeId.ProofOfApproval,
                 string location = null,
                 bool addTimeStamp = false,
                 string timeStampServerUrl = "http://time.certum.pl",
@@ -75,7 +78,8 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 float apperanceWidth = 200F,
                 float apperanceHeight = 50F,
                 float margin = 10F,
-                string outputFilePath = null);
+                string outputFilePath = null,
+                bool addSignatureApperance = true);
 
         SignatureInfo[] GetSignatureInfos(PackageManager mgr, string internalPath);
         SignatureInfo[] GetSignatureInfos(PackageManager mgr, ArchivalPackage.Model.DocumentFile item);

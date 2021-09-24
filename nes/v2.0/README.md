@@ -31,6 +31,9 @@ W tym katalogu znajduje się:
 
 Wersja  | Opis
 --------|--------
+1.1.22|Usunięcie błędu z duplikacją atrybutu `SubjectNameInfo`.
+1.1.21|Dodanie opcji wyłączenia wizualizacji podpisu PADES.
+1.1.20|Dodanie informacji o weryfikacji certyfikatu - status i opis w języku polskim `CertificateValidationInfo`.
 1.1.19|Dodanie atrybutu `NeutralLanguage` dla zestawów, dodanie brakującej referencji do `Microsoft.DotNet.PlatformAbstractions`.
 1.1.18|Dodano obsługę plików `.tar` i `.tar.gz` oraz wspacie dla odczytywania i zapisywania paczki eADM z użyciem strumieni.
 1.1.17|Dodano nazwy statusów błędów certyfikatów w języku polskim.
@@ -658,7 +661,7 @@ var mgr = new PackageSignerManager();
 mgr.SignPdfFile(
     new FileInfo(path).FullName,
     CertUtil.SelectCertificate(),
-    "Podpis za zgodnosc z oryginalem",
+    CommitmentTypeId.ProofOfOrigin,
     "Warszawa",
     true,
     // wielkość obrazka 220x50 pikseli

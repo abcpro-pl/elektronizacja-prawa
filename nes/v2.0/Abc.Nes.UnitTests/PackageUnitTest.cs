@@ -36,17 +36,18 @@ namespace Abc.Nes.UnitTests {
             mgr.SignPdfFile(
                 new FileInfo(path).FullName,
                 CertUtil.SelectCertificate(),
-                "Podpis za zgodnosc z oryginalem",
-                "Warszawa",
+                CommitmentTypeId.ProofOfOrigin,
+                "Wołomierz-Łęczna",
                 true,
                 apperancePngImage: File.ReadAllBytes(new FileInfo(imagePath).FullName),
                 apperancePngImageLocation: PdfSignatureLocation.Custom,
                 apperanceLocationX: 360F,
-                apperanceLocationY: 770F, //700F,
+                apperanceLocationY: 790F,
                 apperanceWidth: 220F,
                 apperanceHeight: 50F,
                 margin: 10F,
-                outputFilePath: new FileInfo(outputpath).FullName
+                outputFilePath: new FileInfo(outputpath).FullName,
+                addSignatureApperance: false
            );
 
             Assert.IsTrue(new FileInfo(outputpath).Exists);

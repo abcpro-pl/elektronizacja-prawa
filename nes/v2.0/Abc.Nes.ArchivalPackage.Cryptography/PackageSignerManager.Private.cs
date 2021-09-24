@@ -15,6 +15,7 @@
 
 using Abc.Nes.ArchivalPackage.Cryptography.Model;
 using Abc.Nes.ArchivalPackage.Model;
+using Abc.Nes.Cryptography;
 using Abc.Nes.Xades;
 using Abc.Nes.Xades.Signature.Parameters;
 using iText.Kernel.Pdf;
@@ -53,7 +54,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
         private void signPdfFile(
                 string sourceFilePath,
                 X509Certificate2 cert,
-                string reason,
+                CommitmentTypeId reason,
                 string location,
                 bool addTimeStamp,
                 string timeStampServerUrl,
@@ -64,7 +65,8 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 float apperanceWidth,
                 float apperanceHeight,
                 float margin,
-                string outputFilePath) {
+                string outputFilePath,
+                bool addSignatureAppearance) {
 
             if (apperancePngImage == null) { apperancePngImage = Properties.Resources.nes_stamp; }
 
@@ -86,19 +88,22 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 using (var reader = new PdfReader(sourceFilePath)) {
                     using (var fs = new FileStream(temp, FileMode.Create)) {
                         var signer = new PdfSigner(reader, fs, new StampingProperties());
-                        var rect = GetApperanceImageRect(apperancePngImageLocation, pageWidth, pageHeight,
-                            apperanceLocationX, apperanceLocationY, apperanceWidth, apperanceHeight, margin);
-                        var appearance = signer.GetSignatureAppearance();
-                        appearance
-                            .SetPageRect(rect)
-                            .SetPageNumber(1)
-                            .SetReason(reason)
-                            .SetReasonCaption("Rodzaj: ")
-                            .SetLocation(location)
-                            .SetLocationCaption("Miejsce: ")
-                            .SetImage(iText.IO.Image.ImageDataFactory.CreatePng(apperancePngImage));
+                        if (addSignatureAppearance) {
+                            var rect = GetApperanceImageRect(apperancePngImageLocation, pageWidth, pageHeight,
+                                apperanceLocationX, apperanceLocationY, apperanceWidth, apperanceHeight, margin);
+                            var appearance = signer.GetSignatureAppearance();
+                            appearance
+                                .SetPageRect(rect)
+                                .SetPageNumber(1)
+                                .SetReason(reason.GetDescription())
+                                .SetReasonCaption("Rodzaj: ")
+                                .SetLocation(location)
+                                .SetLocationCaption("Miejsce: ")
+                                .SetImage(iText.IO.Image.ImageDataFactory.CreatePng(apperancePngImage));
 
-                        appearance.SetRenderingMode(PdfSignatureAppearance.RenderingMode.DESCRIPTION);
+                            appearance.SetRenderingMode(PdfSignatureAppearance.RenderingMode.DESCRIPTION);
+                        }
+
                         signer.SetFieldName($"sig-{Guid.NewGuid()}");
 
                         if (addTimeStamp) { tsa = new TSAClientBouncyCastle(timeStampServerUrl); }
@@ -144,11 +149,11 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             }
         }
         private void SignPdfItem(
-            ItemBase item, 
-            X509Certificate2 cert, 
-            bool addTimeStamp, 
-            string reason = "Formalne zatwierdzenie (Proof of approval)", 
-            string location = null, 
+            ItemBase item,
+            X509Certificate2 cert,
+            bool addTimeStamp,
+            CommitmentTypeId reason = CommitmentTypeId.ProofOfApproval,
+            string location = null,
             string timeStampServerUrl = "http://time.certum.pl") {
 
             var input = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.pdf");
@@ -182,7 +187,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                         appearance
                             .SetPageRect(rect)
                             .SetPageNumber(1)
-                            .SetReason(reason)
+                            .SetReason(reason.GetDescription())
                             .SetReasonCaption("Rodzaj: ")
                             .SetLocation(location)
                             .SetLocationCaption("Miejsce: ")
@@ -309,192 +314,14 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             }
             return default;
         }
-        /*
-        private const string SigTextFormat = "Signed by: {0} \r\nSigned on: {1:MM/dd/yyyy HH:mm:ss}";
-        private void SignPdfItem(ItemBase item, X509Certificate2 cert, bool addTimeStamp) {
-            var input = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.pdf");
-            var output = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.pdf");
-            var temp = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.pdf");
-            try {
-                File.WriteAllBytes(input, (item as DocumentFile).FileData);
-                var reader = new iTextSharp.text.pdf.PdfReader(input);
-                var outputStream = new FileStream(output, FileMode.Create);
-                var pdfStamper = iTextSharp.text.pdf.PdfStamper.CreateSignature(reader, outputStream, '\0', null, true);
-
-                var cp = new Org.BouncyCastle.X509.X509CertificateParser();
-                var chain = new[] { cp.ReadCertificate(cert.RawData) };
-
-                var appearance = pdfStamper.SignatureAppearance;
-
-                SetSigPosition(appearance, reader.AcroFields.GetSignatureNames().Count);
-                SetSigText(appearance, chain);
-                SetSigCryptoFromX509(cert, chain, appearance, addTimeStamp);
-
-                //pdfStamper.Close();
-                reader.Close();
-                outputStream.Close();
-
-                item.Init(File.ReadAllBytes(output));
-            }
-            finally {
-                try {
-                    if (File.Exists(input)) { File.Delete(input); }
-                    if (File.Exists(output)) { File.Delete(output); }
-                    if (File.Exists(temp)) { File.Delete(temp); }
-                }
-                catch { }
-            }
-
-
-
-        }
-        private void SetSigText(iTextSharp.text.pdf.PdfSignatureAppearance sigAppearance, IList<Org.BouncyCastle.X509.X509Certificate> chain) {
-            sigAppearance.SignDate = DateTime.Now;
-            var signedBy = iTextSharp.text.pdf.PdfPkcs7.GetSubjectFields(chain[0]).GetField("CN");
-            var signedOn = sigAppearance.SignDate;
-            sigAppearance.Layer2Text = String.Format(SigTextFormat, signedBy, signedOn);
-        }
-        private void SetSigCryptoFromX509(X509Certificate2 cert, Org.BouncyCastle.X509.X509Certificate[] chain, iTextSharp.text.pdf.PdfSignatureAppearance appearance, bool addTimeStamp) {
-            appearance.SetCrypto(null, chain, null, iTextSharp.text.pdf.PdfSignatureAppearance.WincerSigned);
-            appearance.CryptoDictionary = new iTextSharp.text.pdf.PdfSignature(iTextSharp.text.pdf.PdfName.AdobePpkms, iTextSharp.text.pdf.PdfName.AdbePkcs7Sha1) {
-                Date = new iTextSharp.text.pdf.PdfDate(appearance.SignDate),
-                Name = iTextSharp.text.pdf.PdfPkcs7.GetSubjectFields(chain[0]).GetField("CN"),
-                Reason = appearance.Reason,
-                Location = appearance.Location
-            };
-
-            const int csize = 4000;
-            var appendix = 2;
-            var exc = new Dictionary<iTextSharp.text.pdf.PdfName, int> { { iTextSharp.text.pdf.PdfName.Contents, csize * 2 + appendix } };
-            var htable = new System.Collections.Hashtable(exc);
-            appearance.PreClose(htable);
-
-            var sha = new System.Security.Cryptography.SHA1CryptoServiceProvider();
-
-            var s = appearance.RangeStream;
-            int read;
-            var buff = new byte[8192];
-            while ((read = s.Read(buff, 0, 8192)) > 0) {
-                sha.TransformBlock(buff, 0, read, buff, 0);
-            }
-            sha.TransformFinalBlock(buff, 0, 0);
-            var pk = SignMsg(sha.Hash, cert, false, addTimeStamp);
-
-            var outc = new byte[csize];
-
-            var dic2 = new iTextSharp.text.pdf.PdfDictionary();
-
-            Array.Copy(pk, 0, outc, 0, pk.Length);
-
-            dic2.Put(iTextSharp.text.pdf.PdfName.Contents, new iTextSharp.text.pdf.PdfString(outc).SetHexWriting(true));
-
-            //appearance.CryptoDictionary.Remove(iTextSharp.text.pdf.PdfName.Contents);
-
-            appearance.Close(dic2);
-        }
-        private void SetSigPosition(iTextSharp.text.pdf.PdfSignatureAppearance sigAppearance, int oldSigCount) {
-            //Note: original formula from QuangNgV, ll = lower left, ur = upper right, coordinates are calculated relative from the lower left of the pdf page
-            float llx = (100 + 20) * (oldSigCount % 5),
-                    lly = (25 + 20) * (oldSigCount / 5),
-                    urx = llx + 100,
-                    ury = lly + 25;
-            sigAppearance.SetVisibleSignature(new iTextSharp.text.Rectangle(llx, lly, urx, ury), 1, null);
-        }
-        private byte[] SignMsg(Byte[] msg, X509Certificate2 signerCert, bool detached, bool addTimeStamp = true) {
-            //  Place message in a ContentInfo object.
-            //  This is required to build a SignedCms object.
-            var contentInfo = new System.Security.Cryptography.Pkcs.ContentInfo(msg);
-
-            //  Instantiate SignedCms object with the ContentInfo above.
-            //  Has default SubjectIdentifierType IssuerAndSerialNumber.
-            var signedCms = new System.Security.Cryptography.Pkcs.SignedCms(contentInfo, detached);
-
-            //  Formulate a CmsSigner object for the signer.
-            var cmsSigner = new System.Security.Cryptography.Pkcs.CmsSigner(signerCert);
-
-            // Include the following line if the top certificate in the
-            // smartcard is not in the trusted list.
-            cmsSigner.IncludeOption = X509IncludeOption.WholeChain;
-
-            //if (addTimeStamp) {
-            //    using (var client = new TimeStamp.TimeStampClient()) {
-            //        var token = client.RequestTimeStampToken("http://time.certum.pl", msg, TimeStamp.Oid.SHA1);
-            //        cmsSigner.UnsignedAttributes.Add(new System.Security.Cryptography.Pkcs.Pkcs9SigningTime(token.EncodedToken));
-            //    }
-            //}
-
-            //  Sign the CMS/PKCS #7 message. The second argument is
-            //  needed to ask for the pin.
-            signedCms.ComputeSignature(cmsSigner, false);
-
-            //  Encode the CMS/PKCS #7 message.
-            return signedCms.Encode();
-        }
-        
-        private void SignPdfItem(ItemBase item, X509Certificate2 cert, bool addTimeStamp) {
-            var tempFilePath = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.pdf");
-            try {
-                File.WriteAllBytes(tempFilePath, (item as DocumentFile).FileData);
-
-                //using (var stream = new FileStream(tempFilePath, FileMode.Open, FileAccess.ReadWrite)) {
-                    using (var doc = new Aspose.Pdf.Document(tempFilePath)) {
-                        if (doc.Form != null && doc.Form.Fields != null) {
-                            foreach (var field in doc.Form.Fields) {
-                                var sf = field as Aspose.Pdf.Forms.SignatureField;
-                                if (sf != null) { return; } // this document has signature.
-                            }
-                        }
-
-                        using (var sig = new Aspose.Pdf.Facades.PdfFileSignature(doc)) {
-                            var pkcs = new Aspose.Pdf.Forms.ExternalSignature(cert);
-                            var timestampSettings = new Aspose.Pdf.TimestampSettings("http://time.certum.pl", string.Empty); // User/Password can be omitted
-                            pkcs.TimestampSettings = timestampSettings;
-                            sig.Sign(1, true, new System.Drawing.Rectangle(10, 10, 300, 50), pkcs);
-                            sig.Save(tempFilePath);
-                        }
-
-
-                        //var field1 = new Aspose.Pdf.Forms.SignatureField(doc.Pages[1], new Aspose.Pdf.Rectangle(10, 10, 300, 50));
-                        //var externalSignature = new Aspose.Pdf.Forms.ExternalSignature(cert) {
-                        //    //Authority = "Me",
-                        //    //Reason = "Reason",
-                        //    //ContactInfo = "Contact"
-                        //    //TimestampSettings = addTimeStamp ? new Aspose.Pdf.TimestampSettings("http://time.certum.pl", String.Empty) : null
-                        //};
-
-                        //if (addTimeStamp) {
-                        //    externalSignature.TimestampSettings = new Aspose.Pdf.TimestampSettings("http://time.certum.pl", String.Empty);
-                        //}
-
-                        //field1.PartialName = "sig1";
-                        //doc.Form.Add(field1, 1);
-                        //field1.Sign(externalSignature);
-
-                        //if (externalSignature.Verify()) {
-                        //    doc.Save();
-                        //}
-
-                    }
-                //}
-                item.Init(File.ReadAllBytes(tempFilePath));
-            }
-            finally {
-                try {
-                    if (File.Exists(tempFilePath)) { File.Delete(tempFilePath); }
-                }
-                catch { }
-            }
-
-        }
-        */
-
         private void SignXmlItem(ItemBase item,
                          XadesManager xadesManager,
                          X509Certificate2 cert,
                          SignatureProductionPlace productionPlace = null,
                          SignerRole signerRole = null,
                          XadesFormat xadesFormat = XadesFormat.XadesBes,
-                         string timeStampServerUrl = "http://time.certum.pl") {
+                         string timeStampServerUrl = "http://time.certum.pl",
+                         CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval) {
             var ms = new MemoryStream((item as DocumentFile).FileData);
             Xades.Upgraders.SignatureFormat? upgradeFormat = null;
             if (xadesFormat == XadesFormat.XadesT) {
@@ -504,7 +331,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 upgradeFormat = Xades.Upgraders.SignatureFormat.XAdES_XL;
             }
 
-            var result = xadesManager.AppendSignatureToXmlFile(ms, cert, productionPlace, signerRole, upgradeFormat, timeStampServerUrl);
+            var result = xadesManager.AppendSignatureToXmlFile(ms, cert, productionPlace, signerRole, upgradeFormat, timeStampServerUrl, commitmentTypeId);
             if (result != null) {
                 using (var msOutput = new MemoryStream()) {
                     result.Save(msOutput);
@@ -519,10 +346,11 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                      SignatureProductionPlace productionPlace = null,
                      SignerRole signerRole = null,
                      bool addTimeStamp = false,
-                     string timeStampServerUrl = "http://time.certum.pl") {
+                     string timeStampServerUrl = "http://time.certum.pl",
+                     CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval) {
             var ms = new MemoryStream((item as DocumentFile).FileData);
             Xades.Upgraders.SignatureFormat? xadesFormat = addTimeStamp ? Xades.Upgraders.SignatureFormat.XAdES_T : (Xades.Upgraders.SignatureFormat?)null;
-            var result = xadesManager.CreateEnvelopingSignature(ms, cert, productionPlace, signerRole, null, xadesFormat, timeStampServerUrl);
+            var result = xadesManager.CreateEnvelopingSignature(ms, cert, productionPlace, signerRole, null, xadesFormat, timeStampServerUrl, commitmentTypeId);
             if (result != null) {
                 using (var msOutput = new MemoryStream()) {
                     result.Save(msOutput);
@@ -537,11 +365,12 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                     SignatureProductionPlace productionPlace = null,
                     SignerRole signerRole = null,
                     bool addTimeStamp = false,
-                    string timeStampServerUrl = "http://time.certum.pl") {
+                    string timeStampServerUrl = "http://time.certum.pl",
+                    CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval) {
             var tempFilePath = Path.Combine(Path.GetTempPath(), (item as DocumentFile).FileName);
             File.WriteAllBytes(tempFilePath, (item as DocumentFile).FileData);
             Xades.Upgraders.SignatureFormat? xadesFormat = addTimeStamp ? Xades.Upgraders.SignatureFormat.XAdES_T : (Xades.Upgraders.SignatureFormat?)null;
-            var result = xadesManager.CreateDetachedSignature(tempFilePath, cert, productionPlace, signerRole, xadesFormat, timeStampServerUrl);
+            var result = xadesManager.CreateDetachedSignature(tempFilePath, cert, productionPlace, signerRole, xadesFormat, timeStampServerUrl, commitmentTypeId);
             if (result != null) {
                 using (var msOutput = new MemoryStream()) {
                     result.Save(msOutput);
@@ -646,19 +475,20 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                     foreach (var name in names) {
                         var pkcs7 = signUtil.ReadSignatureData(name);
                         if (pkcs7 != null) {
-                            var message = String.Empty;
-                            var certIsValid = ValidateCert(pkcs7.GetSigningCertificate(), out message);
+
+                            var certValidationInfo = ValidateCert(pkcs7.GetSigningCertificate());
+                            var message = certValidationInfo.ErrorMessage;
                             var isValid = pkcs7.VerifySignatureIntegrityAndAuthenticity();
 
 
                             if (String.IsNullOrEmpty(message)) {
-                                if (!isValid && certIsValid) {
+                                if (!isValid && certValidationInfo.IsValid) {
                                     message = "Weryfikacja sygnatury podpisu zakończona niepowodzeniem.";
                                 }
-                                else if (isValid && !certIsValid) {
+                                else if (isValid && !certValidationInfo.IsValid) {
                                     message = "Weryfikacja certyfikatu osoby podpisującej zakończona niepowodzeniem.";
                                 }
-                                else if (!isValid && !certIsValid) {
+                                else if (!isValid && !certValidationInfo.IsValid) {
                                     message = "Weryfikacja podpisu i certyfikatu zakończona niepowodzeniem.";
                                 }
                                 else {
@@ -673,7 +503,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                                 FileName = internalPath,
                                 SignatureName = name,
                                 IsValid = isValid,
-                                CertificateIsValid = certIsValid,
+                                CertValidationInfo = certValidationInfo,
                                 Message = message
                             });
                         }
@@ -716,7 +546,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                         FileName = internalPath,
                         IsValid = result.IsValid,
                         SignatureName = result.SignatureName,
-                        CertificateIsValid = result.CertificateIsValid,
+                        CertValidationInfo = result.CertValidationInfo,
                         Message = result.Message
                     });
                 }
@@ -843,74 +673,28 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             return default;
         }
 
-        private bool ValidateCert(Org.BouncyCastle.X509.X509Certificate e, out string errorMessage) {
-            errorMessage = string.Empty;
+        private CertificateValidationInfo ValidateCert(Org.BouncyCastle.X509.X509Certificate e) {
             if (e != null) {
                 var cert = new X509Certificate2(e.GetEncoded());
-                return ValidateCert(cert, out errorMessage);
+                return ValidateCert(cert);
             }
             return default;
         }
-        private bool ValidateCert(X509Certificate2 e, out string errorMessage) {
-            errorMessage = string.Empty;
+        private CertificateValidationInfo ValidateCert(X509Certificate2 e) {
             if (e != null) {
                 var ch = new X509Chain();
                 ch.ChainPolicy.RevocationMode = X509RevocationMode.NoCheck;
-                if (ch.Build(e)) { return true; }
+                if (ch.Build(e)) { return new CertificateValidationInfo(true); }
                 else {
-                    foreach (X509ChainStatus chainStatus in ch.ChainStatus) {
-                        errorMessage += $"[{GetX509ChainStatusFlagsDescription(chainStatus.Status)}] {chainStatus.StatusInformation}\r\n";
-                    }
-                    if (!String.IsNullOrEmpty(errorMessage)) {
-                        var userName = GetSubjectCommonName(e);
 
-                        errorMessage = $"Weryfikacja certyfikatu osoby podpisującej {userName} zakończona niepowodzeniem: {errorMessage}".Trim();
+                    foreach (X509ChainStatus chainStatus in ch.ChainStatus) {
+                        var userName = GetSubjectCommonName(e);
+                        return new CertificateValidationInfo(chainStatus, userName);
                     }
                 }
             }
             return default;
         }
-        private string GetX509ChainStatusFlagsDescription(X509ChainStatusFlags e) {
-            switch (e) {
-                case X509ChainStatusFlags.HasWeakSignature:
-                case X509ChainStatusFlags.NotSignatureValid:
-                case X509ChainStatusFlags.CtlNotSignatureValid: { return "Sygnatura"; }
-
-                case X509ChainStatusFlags.NotTimeNested:
-                case X509ChainStatusFlags.NotTimeValid:
-                case X509ChainStatusFlags.CtlNotTimeValid: { return "Ważność certyfikatu"; }
-
-                case X509ChainStatusFlags.NotValidForUsage:
-                case X509ChainStatusFlags.CtlNotValidForUsage: { return "Zastosowanie"; }
-
-                case X509ChainStatusFlags.HasNotSupportedCriticalExtension:
-                case X509ChainStatusFlags.InvalidExtension: { return "Rozszerzenie"; }
-
-                case X509ChainStatusFlags.Cyclic: { return "Zapętlenie"; }
-
-                case X509ChainStatusFlags.Revoked:
-                case X509ChainStatusFlags.RevocationStatusUnknown:
-                case X509ChainStatusFlags.OfflineRevocation: { return "Odwołanie certyfikatu"; }
-
-                case X509ChainStatusFlags.HasExcludedNameConstraint:
-                case X509ChainStatusFlags.PartialChain: { return "Łańcuch certyfikatów"; }
-
-                case X509ChainStatusFlags.ExplicitDistrust:
-                case X509ChainStatusFlags.UntrustedRoot: { return "Źródło"; }
-
-                case X509ChainStatusFlags.InvalidNameConstraints:
-                case X509ChainStatusFlags.InvalidBasicConstraints:
-                case X509ChainStatusFlags.HasNotDefinedNameConstraint:
-                case X509ChainStatusFlags.HasNotPermittedNameConstraint:
-                case X509ChainStatusFlags.HasNotSupportedNameConstraint: { return "Wymagalność danych"; }
-
-                case X509ChainStatusFlags.NoIssuanceChainPolicy:
-                case X509ChainStatusFlags.InvalidPolicyConstraints: { return "Polityka certyfikatu"; }
-
-                default: { return e.ToString(); }
-            }
-        }
-
         private string GetSubjectCommonName(X509Certificate2 e) {
             var sc = e.Subject.Split(',');
             if (sc.Length > 0) {
@@ -1009,25 +793,25 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
 
                                 sigInfo.Add(item);
 
-                                var message = String.Empty;
-                                var certIsValid = ValidateCert(cert, out message);
+                                var certValidationInfo = ValidateCert(cert);
+                                var message = certValidationInfo.ErrorMessage;
                                 var isValid = pkcs7.VerifySignatureIntegrityAndAuthenticity();
 
                                 if (String.IsNullOrEmpty(message)) {
-                                    if (!isValid && certIsValid) {
+                                    if (!isValid && certValidationInfo.IsValid) {
                                         message = "Weryfikacja sygnatury podpisu zakończona niepowodzeniem";
                                     }
-                                    else if (isValid && !certIsValid) {
+                                    else if (isValid && !certValidationInfo.IsValid) {
                                         message = "Weryfikacja certyfikatu osoby podpisującej zakończona niepowodzeniem";
                                     }
-                                    else if (!isValid && !certIsValid) {
+                                    else if (!isValid && !certValidationInfo.IsValid) {
                                         message = "Weryfikacja podpisu i certyfikatu zakończona niepowodzeniem";
                                     }
                                     else {
                                         message = "Weryfikacja sygnatury podpisu i certyfikatu przebiegła pomyślnie";
                                     }
                                 }
-                                else if (!String.IsNullOrEmpty(message) && !isValid) {
+                                else if (!certValidationInfo.IsValid && !isValid) {
                                     message = $"Weryfikacja sygnatury podpisu zakończona niepowodzeniem. {message}";
                                 }
 
@@ -1035,7 +819,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                                     FileName = internalPath,
                                     SignatureName = name,
                                     IsValid = isValid,
-                                    CertificateIsValid = certIsValid,
+                                    CertValidationInfo = certValidationInfo,
                                     Message = message
                                 });
                             }

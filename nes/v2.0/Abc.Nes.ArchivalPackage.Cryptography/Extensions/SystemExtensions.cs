@@ -118,5 +118,58 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 return 0;
             }
         }
+
+        public static string RemovePolishChars(this string source) {
+            string result = String.Empty;
+
+            if (source != null) {
+                if (source.HasPolishChars()) {
+                    foreach (char c in source) {
+                        switch (c) {
+                            case 'ą': { result += 'a'; break; }
+                            case 'ę': { result += 'e'; break; }
+                            case 'ź': { result += 'z'; break; }
+                            case 'ć': { result += 'c'; break; }
+                            case 'ż': { result += 'z'; break; }
+                            case 'ń': { result += 'n'; break; }
+                            case 'ł': { result += 'l'; break; }
+                            case 'ó': { result += 'o'; break; }
+                            case 'ś': { result += 's'; break; }
+
+                            case 'Ą': { result += 'A'; break; }
+                            case 'Ę': { result += 'E'; break; }
+                            case 'Ź': { result += 'Z'; break; }
+                            case 'Ć': { result += 'C'; break; }
+                            case 'Ż': { result += 'Z'; break; }
+                            case 'Ń': { result += 'N'; break; }
+                            case 'Ł': { result += 'L'; break; }
+                            case 'Ó': { result += 'O'; break; }
+                            case 'Ś': { result += 'S'; break; }
+
+                            default: { result += c; break; }
+                        }
+                    }
+                }
+                else {
+                    result = source;
+                }
+            }
+
+            return result;
+        }
+        public static string RemoveIllegalCharacters(this string source) {
+            return source.Replace("\\", String.Empty)
+               .Replace("/", String.Empty)
+               .Replace("*", String.Empty)
+               .Replace("?", String.Empty)
+               .Replace(":", String.Empty)
+               .Replace("=", String.Empty)
+               .Replace(";", String.Empty)
+               .Replace(",", "");
+
+        }
+        public static bool HasPolishChars(this string source) {
+            return source.ContainsInTable(true, false, "ą", "ę", "ź", "ć", "ż", "ń", "ł", "ó", "ś");
+        }
     }
 }

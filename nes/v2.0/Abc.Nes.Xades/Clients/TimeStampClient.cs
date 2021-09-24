@@ -87,7 +87,7 @@ namespace Abc.Nes.Xades.Clients {
 
             HttpWebResponse res = (HttpWebResponse)req.GetResponse();
             if (res.StatusCode != HttpStatusCode.OK) {
-                throw new Exception("El servidor ha devuelto una respuesta no válida");
+                throw new Exception("Serwer zwrócił nieprawidłową odpowiedź!");
             }
             else {
                 Stream resStream = new BufferedStream(res.GetResponseStream());
@@ -97,7 +97,7 @@ namespace Abc.Nes.Xades.Clients {
                 tsRes.Validate(tsr);
 
                 if (tsRes.TimeStampToken == null) {
-                    throw new Exception("El servidor no ha devuelto ningún sello de tiempo");
+                    throw new Exception("Serwer nie zwrócił sygnatury czasowej!");
                 }
 
                 return tsRes.TimeStampToken.GetEncoded();

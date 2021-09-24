@@ -61,6 +61,15 @@ namespace Abc.Nes.NUnitTests {
             }
         }
 
+        [Test]
+        public void XXX() {
+            var pathToPackage = @"../../../../sample/LegalAct.Duplicate.zip";
+            var packageSignerManager = new PackageSignerManager();
+
+          var  _signatureInfos = packageSignerManager.GetSignatureInfos(pathToPackage);
+            if (_signatureInfos!= null) { }
+        }
+
 
         [Test]
         public void ValidatePackage() {
