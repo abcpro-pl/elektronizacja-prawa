@@ -1,4 +1,4 @@
-﻿namespace Abc.Nes.ArchivalPackage.Cryptography {
+﻿namespace Abc.Nes.Common {
     public enum PdfSignatureLocation {
         Custom,
         TopLeft,

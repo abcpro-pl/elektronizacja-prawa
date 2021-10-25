@@ -13,6 +13,7 @@
   ===================================================================================*/
 
 using Abc.Nes.ArchivalPackage.Cryptography.Model;
+using Abc.Nes.Common;
 using Abc.Nes.Xades.Signature.Parameters;
 using System;
 using System.Security.Cryptography.X509Certificates;
@@ -69,8 +70,13 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 X509Certificate2 cert,
                 CommitmentTypeId reason = CommitmentTypeId.ProofOfApproval,
                 string location = null,
+                DateTime? signDate = null,
                 bool addTimeStamp = false,
                 string timeStampServerUrl = "http://time.certum.pl",
+                string tsaPolicy = null,
+                string tsaLogin = null,
+                string tsaPassword = null,
+                X509Certificate2 tsaCert = null,
                 byte[] apperancePngImage = null,
                 PdfSignatureLocation apperancePngImageLocation = PdfSignatureLocation.Custom,
                 float apperanceLocationX = 30F,
@@ -79,7 +85,9 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 float apperanceHeight = 50F,
                 float margin = 10F,
                 string outputFilePath = null,
-                bool addSignatureApperance = true);
+                bool addSignatureApperance = true,
+                bool imageAsBackground = true,
+                bool allowMultipleSignatures = false);
 
         SignatureInfo[] GetSignatureInfos(PackageManager mgr, string internalPath);
         SignatureInfo[] GetSignatureInfos(PackageManager mgr, ArchivalPackage.Model.DocumentFile item);

@@ -13,6 +13,8 @@
   ===================================================================================*/
 
 using Abc.Nes.ArchivalPackage.Cryptography.Model;
+using Abc.Nes.Common;
+using Abc.Nes.Common.Models;
 using Abc.Nes.Xades;
 using Abc.Nes.Xades.Signature;
 using Abc.Nes.Xades.Signature.Parameters;
@@ -52,19 +54,19 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             if (items != null && signPackageFiles) {
                 foreach (var item in items) {
                     if (item.FileName.ToLower().EndsWith(".xml")) {
-                        SignXmlItem(item, xadesManager, cert, productionPlace, signerRole, addTimeStamp ? XadesFormat.XadesT : XadesFormat.XadesBes, timeStampServerUrl, Xades.Signature.Parameters.CommitmentTypeId.ProofOfOrigin);
+                        SignXmlItem(item, xadesManager, cert, productionPlace, signerRole, addTimeStamp ? XadesFormat.XadesT : XadesFormat.XadesBes, timeStampServerUrl, CommitmentTypeId.ProofOfOrigin);
                     }
                     else if (item.FileName.ToLower().EndsWith(".pdf")) {
                         string location = productionPlace.IsNotNull() ? productionPlace.City : null;
-                        SignPdfItem(item, cert, addTimeStamp, Xades.Signature.Parameters.CommitmentTypeId.ProofOfOrigin, location, timeStampServerUrl);
+                        SignPdfItem(item, cert, addTimeStamp, CommitmentTypeId.ProofOfOrigin, location, timeStampServerUrl);
                     }
                     else {
                         if (detachedSignaturePackageFiles) {
                             // place signature in detached .xades file
-                            SignDetachedOtherItem(mgr, item, xadesManager, cert, productionPlace, signerRole, addTimeStamp, timeStampServerUrl, Xades.Signature.Parameters.CommitmentTypeId.ProofOfOrigin);
+                            SignDetachedOtherItem(mgr, item, xadesManager, cert, productionPlace, signerRole, addTimeStamp, timeStampServerUrl, CommitmentTypeId.ProofOfOrigin);
                         }
                         else {
-                            SignOtherItem(item, xadesManager, cert, productionPlace, signerRole, addTimeStamp, timeStampServerUrl, Xades.Signature.Parameters.CommitmentTypeId.ProofOfOrigin);
+                            SignOtherItem(item, xadesManager, cert, productionPlace, signerRole, addTimeStamp, timeStampServerUrl, CommitmentTypeId.ProofOfOrigin);
                         }
                     }
                 }
@@ -128,18 +130,18 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 foreach (var item in items) {
                     if (!internalFiles.Contains(item.FilePath)) { continue; }
                     if (item.FileName.ToLower().EndsWith(".xml")) {
-                        SignXmlItem(item, xadesManager, cert, productionPlace, signerRole, addTimeStamp ? XadesFormat.XadesT : XadesFormat.XadesBes, timeStampServerUrl, Xades.Signature.Parameters.CommitmentTypeId.ProofOfOrigin);
+                        SignXmlItem(item, xadesManager, cert, productionPlace, signerRole, addTimeStamp ? XadesFormat.XadesT : XadesFormat.XadesBes, timeStampServerUrl, CommitmentTypeId.ProofOfOrigin);
                     }
                     else if (item.FileName.ToLower().EndsWith(".pdf")) {
-                        SignPdfItem(item, cert, addTimeStamp, Xades.Signature.Parameters.CommitmentTypeId.ProofOfOrigin, timeStampServerUrl: timeStampServerUrl);
+                        SignPdfItem(item, cert, addTimeStamp, CommitmentTypeId.ProofOfOrigin, timeStampServerUrl: timeStampServerUrl);
                     }
                     else {
                         if (detachedSignaturePackageFiles) {
                             // place signature in detached .xades file
-                            SignDetachedOtherItem(mgr, item, xadesManager, cert, productionPlace, signerRole, addTimeStamp, timeStampServerUrl, Xades.Signature.Parameters.CommitmentTypeId.ProofOfOrigin);
+                            SignDetachedOtherItem(mgr, item, xadesManager, cert, productionPlace, signerRole, addTimeStamp, timeStampServerUrl, CommitmentTypeId.ProofOfOrigin);
                         }
                         else {
-                            SignOtherItem(item, xadesManager, cert, productionPlace, signerRole, addTimeStamp, timeStampServerUrl, Xades.Signature.Parameters.CommitmentTypeId.ProofOfOrigin);
+                            SignOtherItem(item, xadesManager, cert, productionPlace, signerRole, addTimeStamp, timeStampServerUrl, CommitmentTypeId.ProofOfOrigin);
                         }
                     }
                 }
@@ -249,13 +251,31 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             mgr.Save(outputPackageFilePath, true);
         }
 
+        public void SignPdfFile(string sourceFilePath, PdfSignatureOptions options, string outputFilePath = null) {
+            if (options.Certificate == null) { throw new ArgumentNullException("cert"); }
+            if (sourceFilePath == null) { throw new ArgumentNullException("filePath"); }
+            if (!File.Exists(sourceFilePath)) { throw new FileNotFoundException("File not found!", sourceFilePath); }
+            if (outputFilePath == null) { outputFilePath = sourceFilePath; }
+            if (options.AddTimestamp && options.TimestampOptions == null) throw new ArgumentNullException("TimestampOptions");
+
+            if (!options.SignDate.HasValue) options.SignDate = DateTime.Now;
+
+
+            signPdfFile(sourceFilePath, options, outputFilePath);
+        }
+
         public void SignPdfFile(
                 string sourceFilePath,
                 X509Certificate2 cert,
                 CommitmentTypeId reason = CommitmentTypeId.ProofOfApproval,
                 string location = null,
+                DateTime? signDate = null,
                 bool addTimeStamp = false,
                 string timeStampServerUrl = "http://time.certum.pl",
+                string tsaPolicy=null, 
+                string tsaLogin=null,
+                string tsaPassword=null,
+                X509Certificate2 tsaCert=null,
                 byte[] apperancePngImage = null,
                 PdfSignatureLocation apperancePngImageLocation = PdfSignatureLocation.Custom,
                 float apperanceLocationX = 30F,
@@ -264,16 +284,23 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 float apperanceHeight = 50F,
                 float margin = 10F,
                 string outputFilePath = null,
-                bool addSignatureApperance = true) {
+                bool addSignatureApperance = true,
+                bool imageAsBackground = true,
+                bool allowMultipleSignatures = false) {
             if (cert == null) { throw new ArgumentNullException("cert"); }
             if (sourceFilePath == null) { throw new ArgumentNullException("filePath"); }
             if (!File.Exists(sourceFilePath)) { throw new FileNotFoundException("File not found!", sourceFilePath); }
             if (outputFilePath == null) { outputFilePath = sourceFilePath; }
 
-            signPdfFile(sourceFilePath, cert, reason, location, addTimeStamp, timeStampServerUrl,
+            if (!signDate.HasValue) signDate = DateTime.Now;
+
+            signPdfFile(sourceFilePath, cert, reason, location, signDate.Value,
+                addTimeStamp, timeStampServerUrl, tsaPolicy, tsaCert, tsaLogin, tsaPassword, 
                 apperancePngImage, apperancePngImageLocation, apperanceLocationX, apperanceLocationY,
                 apperanceWidth, apperanceHeight, margin,
-                outputFilePath, addSignatureApperance);
+                outputFilePath, 
+                addSignatureApperance, imageAsBackground,
+                allowMultipleSignatures);
         }
 
         public void Dispose() { }
