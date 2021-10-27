@@ -63,6 +63,16 @@ namespace Abc.Nes.ArchivalPackage.Cryptography.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] img_blank {
+            get {
+                object obj = ResourceManager.GetObject("img_blank", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] nes_stamp {
             get {
                 object obj = ResourceManager.GetObject("nes_stamp", resourceCulture);

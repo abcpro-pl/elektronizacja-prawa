@@ -108,7 +108,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 float pageHeight = 0;
                 using (var reader = new PdfReader(sourceFilePath)) {
                     using (var pdfDoc = new PdfDocument(reader, new StampingProperties())) {
-                        var page = pdfDoc.GetPage(1);
+                        var page = pdfDoc.GetPage(options.PageNumber);
                         var pageRect = page.GetPageSize();
                         pageWidth = pageRect.GetWidth();
                         pageHeight = pageRect.GetHeight();
@@ -128,69 +128,94 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                             var rect = GetApperanceImageRect(options.SignatureLocation, pageWidth, pageHeight,
                                 options.PositionX, options.PositionY, options.Width, options.Height, options.Margin, signatureCount);
                             var sb = new StringBuilder();
-                            sb.AppendLine("Podpisany przez:");
+                            sb.AppendLine(options.SignatureTitle);
                             //var signerName = cert.FriendlyName;
                             //if (signerName == null || signerName == string.Empty)
                             var signerName = options.Certificate.GetNameInfo(X509NameType.SimpleName, false);
 
                             sb.AppendLine(signerName);
-                            sb.AppendLine(DateTimeHelper.FormatDateForSignature(options.SignDate.Value));
+                            string dateString = DateTimeHelper.FormatDateForSignature(options.SignDate.Value,
+                                                                                      options.DatePrefix,
+                                                                                      options.DatePostfix,
+                                                                                      options.DateCultureInfoName,
+                                                                                      options.DateStringFormat);
+                            sb.Append(dateString);
 
                             var appearance = signer.GetSignatureAppearance();
                             appearance.SetReason(options.Reason.GetDescription())
-                                .SetReasonCaption("Rodzaj: ");
+                                .SetReasonCaption(options.ReasonText);
 
                             if (options.Location != null)
                                 appearance.SetLocation(options.Location)
-                                    .SetLocationCaption("Miejsce: ");
+                                    .SetLocationCaption(options.LocationText);
 
 
                             appearance
-                                .SetLayer2FontSize(6f)
+                                .SetLayer2FontSize(options.FontSize)
                                 .SetPageRect(rect)
-                                .SetPageNumber(1);
+                                .SetPageNumber(options.PageNumber);
                             string signText = sb.ToString();
                             appearance.SetLayer2Text(signText);
 
+                            iText.IO.Image.ImageData image;
                             appearance.SetRenderingMode(PdfSignatureAppearance.RenderingMode.DESCRIPTION);
-                            if (options.SignatureImage != null) {
-                                iText.IO.Image.ImageData image = iText.IO.Image.ImageDataFactory.CreatePng(options.SignatureImage);
-                                if (options.ImageAsBackground)
+                            bool emptyImage = options.SignatureImage == null;
+                            if (!emptyImage) {
+                                image = iText.IO.Image.ImageDataFactory.CreatePng(options.SignatureImage);
+                            }
+                            else image = ImageDataFactory.CreatePng(Properties.Resources.img_blank);
+
+                            if (options.ImageAsBackground) {
+                                if (!emptyImage)
                                     appearance.SetImage(image);
+                            }
+                            else {
+                                //custom widget
+                                var pdfDoc = signer.GetDocument();
+                                var layer2 = appearance.GetLayer2();
+                                var canvas = new PdfCanvas(layer2, pdfDoc);
+
+                                float MARGIN = 1;
+                                PdfFont font = PdfFontFactory.CreateFont();
+
+                                float width = rect.GetWidth();
+                                float height = rect.GetHeight();
+                                iText.Kernel.Geom.Rectangle imgRect;
+                                iText.Kernel.Geom.Rectangle signatureRect;
+
+                                //square image left, signature right
+                                if (emptyImage) {
+                                    imgRect = new iText.Kernel.Geom.Rectangle(0,0);
+                                    signatureRect = new iText.Kernel.Geom.Rectangle(MARGIN, MARGIN, rect.GetWidth() - MARGIN, rect.GetHeight() - MARGIN);
+                                }
                                 else {
-                                    //custom widget
-                                    var pdfDoc = signer.GetDocument();
-                                    var layer2 = appearance.GetLayer2();
-                                    var canvas = new PdfCanvas(layer2, pdfDoc);
+                                    imgRect = new iText.Kernel.Geom.Rectangle(MARGIN, MARGIN, rect.GetHeight() - MARGIN * 2, rect.GetHeight() - MARGIN * 2);
+                                    signatureRect = new iText.Kernel.Geom.Rectangle(rect.GetHeight() + MARGIN, MARGIN, width - rect.GetHeight(), rect.GetHeight() - 2 * MARGIN);
+                                }
 
-                                    float MARGIN = 1;
-                                    PdfFont font = PdfFontFactory.CreateFont();
+                                //image on top, signature bottom
+                                //iText.Kernel.Geom.Rectangle dataRect = new iText.Kernel.Geom.Rectangle(MARGIN, rect.GetHeight() / 2 + MARGIN, rect.GetWidth() - 2 * MARGIN, rect.GetHeight() / 2 - MARGIN);
+                                //iText.Kernel.Geom.Rectangle signatureRect = new iText.Kernel.Geom.Rectangle(MARGIN, MARGIN, rect.GetWidth() - 2 * MARGIN, rect.GetHeight() / 2 - MARGIN);
 
-                                    float width = rect.GetWidth();
-                                    float height = rect.GetHeight();
-                                    //square image left, signature right
-                                    iText.Kernel.Geom.Rectangle imgRect = new iText.Kernel.Geom.Rectangle(MARGIN, MARGIN, rect.GetHeight() - MARGIN * 2, rect.GetHeight() - MARGIN * 2);
-                                    iText.Kernel.Geom.Rectangle signatureRect = new iText.Kernel.Geom.Rectangle(rect.GetHeight() + MARGIN, MARGIN, width - rect.GetHeight(), rect.GetHeight() - 2 * MARGIN);
+                                try {
+                                    //text element
+                                    Canvas signLayoutCanvas = new Canvas(canvas, signatureRect);
+                                    Paragraph para = new Paragraph(signText)
+                                        //.SetMultipliedLeading(.9f)
+                                        .SetFontSize(options.FontSize)
+                                        //.SetTextRenderingMode(PdfCanvasConstants.TextRenderingMode.FILL_CLIP)
+                                        
+                                        .AddStyle(new Style { })
+                                        .SetMargin(0);
+                                    var div = new Div();
+                                    div.SetHeight(signatureRect.GetHeight());
+                                    div.SetWidth(signatureRect.GetWidth());
+                                    div.SetVerticalAlignment(iText.Layout.Properties.VerticalAlignment.MIDDLE);
+                                    div.SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.CENTER);
+                                    div.Add(para);
+                                    signLayoutCanvas.Add(div);
 
-                                    //image on top, signature bottom
-                                    //iText.Kernel.Geom.Rectangle dataRect = new iText.Kernel.Geom.Rectangle(MARGIN, rect.GetHeight() / 2 + MARGIN, rect.GetWidth() - 2 * MARGIN, rect.GetHeight() / 2 - MARGIN);
-                                    //iText.Kernel.Geom.Rectangle signatureRect = new iText.Kernel.Geom.Rectangle(MARGIN, MARGIN, rect.GetWidth() - 2 * MARGIN, rect.GetHeight() / 2 - MARGIN);
-
-                                    try {
-                                        //text element
-                                        Canvas signLayoutCanvas = new Canvas(canvas, signatureRect);
-                                        Paragraph para = new Paragraph(signText)
-                                            //.SetMultipliedLeading(.9f)
-                                            .SetFontSize(6)
-                                            .SetMargin(0);
-                                        var div = new Div();
-                                        div.SetHeight(signatureRect.GetHeight());
-                                        div.SetWidth(signatureRect.GetWidth());
-                                        div.SetVerticalAlignment(iText.Layout.Properties.VerticalAlignment.MIDDLE);
-                                        div.SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.CENTER);
-                                        div.Add(para);
-                                        signLayoutCanvas.Add(div);
-
+                                    if (!emptyImage) {
                                         //image element
                                         Canvas dataLayoutCanvas = new Canvas(canvas, imgRect);
                                         Image sImage = new Image(image);
@@ -202,16 +227,17 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                                         imgDiv.SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.CENTER);
                                         imgDiv.Add(sImage);
                                         dataLayoutCanvas.Add(imgDiv);
-
                                     }
-                                    catch { throw; }
-
-                                    //appearance.SetSignatureGraphic(image);
-
-                                    //appearance.SetRenderingMode(PdfSignatureAppearance.RenderingMode.GRAPHIC_AND_DESCRIPTION);
 
                                 }
+                                catch { throw; }
+
+                                //appearance.SetSignatureGraphic(image);
+
+                                //appearance.SetRenderingMode(PdfSignatureAppearance.RenderingMode.GRAPHIC_AND_DESCRIPTION);
+
                             }
+
 
 
                         }
