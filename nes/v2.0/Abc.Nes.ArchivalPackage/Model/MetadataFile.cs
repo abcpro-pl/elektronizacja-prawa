@@ -35,18 +35,18 @@ namespace Abc.Nes.ArchivalPackage.Model {
         }
     }
 
-    public class MetdataFolder : Folder<MetdataFolder, MetadataFile> {
+    public class MetadataFolder : Folder<MetadataFolder, MetadataFile> {
         public override List<MetadataFile> Items { get; set; }
-        public override List<MetdataFolder> Folders { get; set; }
+        public override List<MetadataFolder> Folders { get; set; }
 
         public override FolderBase CreateSubFolder(string folderName) {
             if (folderName.IsNullOrEmpty()) { throw new ArgumentNullException(); }
-            var folder = new MetdataFolder() {
+            var folder = new MetadataFolder() {
                 FolderName = folderName,
-                Folders = new List<MetdataFolder>(),
+                Folders = new List<MetadataFolder>(),
                 Items = new List<MetadataFile>()
             };
-            if (Folders.IsNull()) { Folders = new List<MetdataFolder>(); }
+            if (Folders.IsNull()) { Folders = new List<MetadataFolder>(); }
             Folders.Add(folder);
             return folder;
         }

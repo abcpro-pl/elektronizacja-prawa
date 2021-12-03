@@ -21,10 +21,12 @@ namespace Abc.Nes.ArchivalPackage.Model {
     public class Package {
         public string FilePath { get; }
         public DocumentFolder Documents { get; set; }
-        public MetdataFolder Metadata { get; set; }
-        public MetdataFolder Objects { get; set; }
-        public bool IsEmpty {
-            get {
+        public MetadataFolder Metadata { get; set; }
+        public MetadataFolder Objects { get; set; }
+        public bool IsEmpty
+        {
+            get
+            {
                 return (Documents.IsNull() || Documents.IsEmpty) || (Metadata.IsNull() || Metadata.IsEmpty) || (Objects.IsNull() || Objects.IsEmpty);
             }
         }
@@ -62,8 +64,22 @@ namespace Abc.Nes.ArchivalPackage.Model {
 
         public MetadataFile GetMetadataFile(ItemBase documentFile) {
             if (documentFile.IsNotNull() && documentFile.FilePath.IsNotNullOrEmpty()) {
+                string metadataFilePath;
                 var regex = new Regex(Regex.Escape($"{MainDirectoriesName.Files.GetXmlEnum()}"));
-                var metadataFilePath = regex.Replace(documentFile.FilePath, MainDirectoriesName.Metadata.GetXmlEnum(), 1);
+
+                var subFolder = documentFile.GetSubFolderName();
+                if (subFolder.IsNotNullOrEmpty()) {
+                    // find metadata file for subfolder
+                    metadataFilePath = documentFile.FilePath.Substring(0, documentFile.FilePath.LastIndexOf('/'));
+                    metadataFilePath = regex.Replace(metadataFilePath, MainDirectoriesName.Metadata.GetXmlEnum(), 1);
+                    var result = GetItemByFilePath($"{metadataFilePath}.xml") as MetadataFile;
+                    if (result.IsNotNull()) {
+                        return result;
+                    }
+                }
+
+                // find metadata file for document file               
+                metadataFilePath = regex.Replace(documentFile.FilePath, MainDirectoriesName.Metadata.GetXmlEnum(), 1);
                 return GetItemByFilePath($"{metadataFilePath}.xml") as MetadataFile;
             }
             return default;

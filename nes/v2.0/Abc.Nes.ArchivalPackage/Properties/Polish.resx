@@ -132,6 +132,9 @@
   <data name="MetadataNotFound" xml:space="preserve">
     <value>Nie znaleziono metadanych dla pliku {0}!</value>
   </data>
+  <data name="NumberOfMetadataIsInsufficient" xml:space="preserve">
+    <value>Liczba plików metadanych jest niewystarczająca!</value>
+  </data>
   <data name="Package" xml:space="preserve">
     <value>Paczka</value>
   </data>

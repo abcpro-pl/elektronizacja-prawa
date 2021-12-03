@@ -2,14 +2,15 @@ using Abc.Nes.ArchivalPackage;
 using Abc.Nes.ArchivalPackage.Cryptography;
 using Abc.Nes.ArchivalPackage.Cryptography.Model;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Abc.Nes.NUnitTests {
     public class CryptographyTests {
         [SetUp]
-        public void Setup() {
-        }
+        public void Setup() { }
 
         [Test]
         public void ValidateXadesSignature() {
@@ -30,7 +31,7 @@ namespace Abc.Nes.NUnitTests {
                 Assert.IsTrue(signatures.Length > 0);
             }
         }
-       
+
         [Test]
         public void ValidatePackageSignatures() {
             var pathToPackage = @"../../../../sample/paczka_eADM_do_podpisu.podpisana.zip";
@@ -66,17 +67,78 @@ namespace Abc.Nes.NUnitTests {
             var pathToPackage = @"../../../../sample/LegalAct.Duplicate.zip";
             var packageSignerManager = new PackageSignerManager();
 
-          var  _signatureInfos = packageSignerManager.GetSignatureInfos(pathToPackage);
-            if (_signatureInfos!= null) { }
+            var _signatureInfos = packageSignerManager.GetSignatureInfos(pathToPackage);
+            if (_signatureInfos != null) { }
         }
 
 
         [Test]
         public void ValidatePackage() {
+            Exception exception = null;
             var pathToPackage = @"../../../../sample/CorruptedPackage.zip";
             using (var mgr = new PackageManager()) {
-                mgr.LoadPackage(pathToPackage);
-                Assert.IsTrue(mgr.Package != null);
+                mgr.LoadPackage(pathToPackage, out exception);
+                Assert.IsTrue(mgr.Package != null && exception == null);
+            }
+        }
+
+
+        [Test]
+        public void ValidatePackage2() {
+            var pathToPackage = @"../../../../sample/OtherZip.zip";
+            using (var mgr = new PackageManager()) {
+                Exception exception;
+                mgr.LoadPackage(pathToPackage, out exception);
+                Assert.IsTrue(mgr.Package != null && exception == null);
+            }
+        }
+
+        [Test]
+        public void ValidatePackageEZDPUW() {
+            var path = @"../../../../sample/_2016-10-28_18_33.tar";
+            //var path = @"../../../../sample/_2006-12-15_11_45.tar";
+            //var path = @"../../../../sample/Sprawy_PUW_BIA_20211109_090742.tar";
+            using (var stream = File.OpenRead(path)) {
+                using (var tar = new ArchivalPackage.Formats.Tar.TarFile(stream, ArchivalPackage.Formats.Tar.TarType.Tar)) {
+                    using (var zipStream = tar.ConvertToZip()) {
+                        if (zipStream != null && zipStream.Length > 0) {
+                            var mgr = new PackageManager();
+                            Exception exception;
+                            mgr.LoadPackage(zipStream, out exception);
+                            var isNotEmpty = mgr != null && mgr.Package != null && !mgr.Package.IsEmpty;
+                            var validator = new ArchivalPackage.Validators.PackageValidator();
+                            var result = validator.GetValidationResult(mgr.Package, true);
+                            //Assert.IsTrue(isNotEmpty && exception == null && result.IsCorrect);
+
+                            //mgr.Save("../../../../sample/_2006-12-15_11_45.zip");
+
+                            //var mgr2 = new PackageManager();
+                            //mgr2.AddFiles(mgr.Package.Documents.Items, "Wniosek", mgr.Package.Metadata.Items.Select(x=>x.Document));
+                            //mgr2.Save("../../../../sample/_2006-12-15_11_33_test.zip");
+
+                            Assert.IsTrue(isNotEmpty && exception == null && result.IsCorrect);
+                        }
+                    }
+                }
+            }
+        }
+
+
+        [Test]
+        public void ValidateTarPackage() {
+            var path = @"../../../../sample/Sprawy_PUW_BIA_20211109_090742.tar";
+            using (var stream = File.OpenRead(path)) {
+                using (var tar = new ArchivalPackage.Formats.Tar.TarFile(stream, ArchivalPackage.Formats.Tar.TarType.Tar)) {
+                    using (var zipStream = tar.ConvertToZip()) {
+                        if (zipStream != null && zipStream.Length > 0) {
+                            var mgr = new PackageManager();
+                            Exception exception;
+                            mgr.LoadPackage(zipStream, out exception);
+                            var isNotEmpty = mgr != null && mgr.Package != null && !mgr.Package.IsEmpty;
+                            Assert.IsTrue(isNotEmpty && exception == null);
+                        }
+                    }
+                }
             }
         }
 
@@ -89,7 +151,8 @@ namespace Abc.Nes.NUnitTests {
 
             // validate package
             using (var mgr = new PackageManager()) {
-                mgr.LoadPackage(Path.Combine(info.Directory, info.PackageFileName));
+                Exception exception;
+                mgr.LoadPackage(Path.Combine(info.Directory, info.PackageFileName), out exception);
                 var validateMetdataFiles = true;
                 var breakOnFirstError = false;
                 var result = mgr.GetValidationResult(validateMetdataFiles, breakOnFirstError);
@@ -99,7 +162,7 @@ namespace Abc.Nes.NUnitTests {
                     }
                 }
 
-                Assert.IsTrue(result.IsCorrect);
+                Assert.IsTrue(result.IsCorrect && exception == null);
             }
 
             using (var signerMgr = new PackageSignerManager()) {

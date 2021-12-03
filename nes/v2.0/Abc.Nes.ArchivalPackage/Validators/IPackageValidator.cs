@@ -23,26 +23,30 @@ namespace Abc.Nes.ArchivalPackage.Validators {
         /// Checks if the file is a valid ZIP archive and contains the required directories.
         /// </summary>
         /// <param name="filePath">ZIP file path.</param>
+        /// <param name="exception">Returns an error description if the package is not correct.</param>
         /// <returns>true if the file is a valid ZIP archive and contains the required directories.</returns>
-        bool IsPackageValid(string filePath);
+        bool IsPackageValid(string filePath, out Exception exception);
         /// <summary>
         /// Checks if the file is a valid ZIP archive and contains the required directories.
         /// </summary>
         /// <param name="stream">ZIP file stream.</param>
+        /// <param name="exception">Returns an error description if the package is not correct.</param>
         /// <returns>true if the file is a valid ZIP archive and contains the required directories.</returns>
-        bool IsPackageValid(Stream stream);
+        bool IsPackageValid(Stream stream, out Exception exception);
         /// <summary>
         /// Getting package model from a ZIP file.
         /// </summary>
         /// <param name="filePath">ZIP file path.</param>
+        /// <param name="exception">Returns an error description if the package is not correct.</param>
         /// <returns>Package model.</returns>
-        Package GetPackage(string filePath);
+        Package GetPackage(string filePath, out Exception exception);
         /// <summary>
         /// Getting package model from a ZIP file stream.
         /// </summary>
         /// <param name="stream">ZIP file stream.</param>
+        /// <param name="exception">Returns an error description if the package is not correct.</param>
         /// <returns>Package model.</returns>
-        Package GetPackage(Stream stream);
+        Package GetPackage(Stream stream, out Exception exception);
         /// <summary>
         /// Getting package model from scratch.
         /// </summary>

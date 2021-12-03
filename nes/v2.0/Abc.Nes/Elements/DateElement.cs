@@ -78,8 +78,8 @@ Umożliwia wyszukiwanie i sortowanie dokumentów lub ich grupy według czasu zda
 
         [XmlElement("typ")]
         [XmlRequired]
-        public DocumentDateType Type { get; set; }
-        public bool ShouldSerializeType() { return Type != DocumentDateType.None; }
+        public DocumentDateType17 Type { get; set; }
+        public bool ShouldSerializeType() { return Type != DocumentDateType17.None; }
 
         // -----------------------------data-dokumentu-grupa ------------------------------------       
         [XmlGroup(Name = "data-dokumentu-grupa")]

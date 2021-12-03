@@ -106,6 +106,15 @@ namespace Abc.Nes.ArchivalPackage.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Liczba plików metadanych jest niewystarczająca!.
+        /// </summary>
+        internal static string NumberOfMetadataIsInsufficient {
+            get {
+                return ResourceManager.GetString("NumberOfMetadataIsInsufficient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Paczka.
         /// </summary>
         internal static string Package {

@@ -46,7 +46,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
 
             var xadesManager = new XadesManager();
             var mgr = new PackageManager();
-            mgr.LoadPackage(sourcePackageFilePath);
+            mgr.LoadPackage(sourcePackageFilePath, out var exception);
 
             var items = mgr.GetAllFiles();
             if (items != null && signPackageFiles) {
@@ -121,7 +121,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
 
             var xadesManager = new XadesManager();
             var mgr = new PackageManager();
-            mgr.LoadPackage(sourcePackageFilePath);
+            mgr.LoadPackage(sourcePackageFilePath, out var exception);
 
             var items = mgr.GetAllFiles();
             if (items != null && internalFiles != null && internalFiles.Length > 0) {
@@ -197,7 +197,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             if (String.IsNullOrEmpty(outputPackageFilePath)) { outputPackageFilePath = new FileInfo(sourcePackageFilePath).FullName; }
 
             var mgr = new PackageManager();
-            mgr.LoadPackage(sourcePackageFilePath);
+            mgr.LoadPackage(sourcePackageFilePath, out var exception);
             var item = mgr.GetItemByFilePath(internalPath);
             if (item != null) {
                 SignInternalFile(sourcePackageFilePath, item, mgr, cert, productionPlace, signerRole, detachedSignaturePackageFile,
@@ -225,7 +225,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
 
             var xadesManager = new XadesManager();
             if (mgr.Package.Documents == null || mgr.Package.Documents.IsEmpty) {
-                mgr.LoadPackage(sourcePackageFilePath);
+                mgr.LoadPackage(sourcePackageFilePath, out var exception);
             }
 
             if (item.FileName.ToLower().EndsWith(".xml")) {
@@ -281,7 +281,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
         public SignatureInfo[] GetSignatureInfos(string packageFilePath) {
             var list = new List<SignatureInfo>();
             using (var mgr = new PackageManager()) {
-                mgr.LoadPackage(packageFilePath);
+                mgr.LoadPackage(packageFilePath, out var exception);
                 foreach (var file in mgr.Package.GetAllFiles()) {
                     if (file is ArchivalPackage.Model.DocumentFile) {
                         var item = file as ArchivalPackage.Model.DocumentFile;
@@ -340,7 +340,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             if (!File.Exists(packageFilePath)) { throw new FileNotFoundException("Package file not found!", packageFilePath); }
 
             var mgr = new PackageManager();
-            mgr.LoadPackage(packageFilePath);
+            mgr.LoadPackage(packageFilePath, out var exception);
             return GetSignatureInfos(mgr, internalPath);
         }
 
@@ -383,7 +383,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
         public SignatureVerifyInfo[] VerifySignatures(string packageFilePath, string internalPath) {
             var list = new List<SignatureVerifyInfo>();
             using (var mgr = new PackageManager()) {
-                mgr.LoadPackage(packageFilePath);
+                mgr.LoadPackage(packageFilePath, out var exception);
                 var file = mgr.GetItemByFilePath(internalPath);
                 if (file != null) {
                     var item = file as ArchivalPackage.Model.DocumentFile;
@@ -399,7 +399,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             var list = new List<SignatureVerifyInfo>();
 
             using (var mgr = new PackageManager()) {
-                mgr.LoadPackage(packageFilePath);
+                mgr.LoadPackage(packageFilePath, out var exception);
                 foreach (var file in mgr.Package.GetAllFiles()) {
                     if (file is ArchivalPackage.Model.DocumentFile) {
                         var item = file as ArchivalPackage.Model.DocumentFile;
@@ -419,7 +419,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             if (!File.Exists(packageFilePath)) { throw new FileNotFoundException("Package file not found!", packageFilePath); }
 
             var mgr = new PackageManager();
-            mgr.LoadPackage(packageFilePath);
+            mgr.LoadPackage(packageFilePath, out var exception);
 
             return GetSignAndVerifyInfo(mgr, internalPath);
         }
@@ -469,7 +469,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             if (!File.Exists(packageFilePath)) { throw new FileNotFoundException("Package file not found!", packageFilePath); }
             var list = new List<SignAndVerifyInfo>();
             using (var mgr = new PackageManager()) {
-                mgr.LoadPackage(packageFilePath);
+                mgr.LoadPackage(packageFilePath, out var exception);
                 var files = mgr.Package.GetAllFiles();
                 foreach (var item in files) {
                     if (item is ArchivalPackage.Model.DocumentFile) {

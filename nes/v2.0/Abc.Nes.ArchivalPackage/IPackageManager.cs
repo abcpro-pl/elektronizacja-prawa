@@ -29,8 +29,8 @@ namespace Abc.Nes.ArchivalPackage {
         void AddObject(IDocument metadata, string fileName);
         void Save(string filePath = null, bool appendFileDataOnly = false);
         Stream Save(bool appendFileDataOnly = false);
-        void LoadPackage(string filePath);
-        void LoadPackage(Stream stream);
+        void LoadPackage(string filePath, out Exception exception);
+        void LoadPackage(Stream stream, out Exception exception);
         int GetDocumentsCount();
         IEnumerable<ItemBase> GetAllFiles();
         IEnumerable<ItemBase> GetAllFiles(FolderBase folder);

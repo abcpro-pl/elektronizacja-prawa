@@ -40,7 +40,8 @@ namespace Abc.Nes.ArchivalPackage {
             }
             Package.Documents.Items.Add(document);
             if (metadata.IsNotNull()) {
-                Package.Metadata.Items.Add(new MetadataFile() {
+                Package.Metadata.Items.Add(new MetadataFile()
+                {
                     Document = metadata,
                     FileName = $"{document.FileName}.xml"
                 });
@@ -56,13 +57,15 @@ namespace Abc.Nes.ArchivalPackage {
                 }
             }
 
-            Package.Documents.Items.Add(new DocumentFile() {
+            Package.Documents.Items.Add(new DocumentFile()
+            {
                 FileName = GetValidFileName(filePath),
                 FileData = File.ReadAllBytes(filePath)
             });
 
             if (metadata.IsNotNull()) {
-                Package.Metadata.Items.Add(new MetadataFile() {
+                Package.Metadata.Items.Add(new MetadataFile()
+                {
                     Document = metadata,
                     FileName = $"{GetValidFileName(filePath)}.xml"
                 });
@@ -81,20 +84,206 @@ namespace Abc.Nes.ArchivalPackage {
 
             var folder = Package.Documents;
             if (folderName.IsNotNullOrEmpty()) {
-                folder = new DocumentFolder() {
+                folder = new DocumentFolder()
+                {
                     FolderName = folderName,
                     Items = new List<DocumentFile>()
                 };
                 Package.Documents.Folders.Add(folder);
             }
 
-            MetdataFolder metadataFolder = Package.Metadata;
+            MetadataFolder metadataFolder = Package.Metadata;
             if (metadata.IsNotNull() && metadata.Count() > 0 && folderName.IsNotNullOrEmpty()) {
-                metadataFolder = new MetdataFolder() {
+                metadataFolder = new MetadataFolder()
+                {
                     FolderName = folderName,
                     Items = new List<MetadataFile>()
                 };
                 Package.Metadata.Folders.Add(metadataFolder);
+
+                // compile and add folder metadata file
+                var folderMetadata = new MetadataFile()
+                {
+                    FileName = $"{folderName}.xml"
+                };
+
+                if (metadata.First().DocumentType == Enumerations.DocumentType.Nes17) {
+
+                    folderMetadata.Document = new Document17()
+                    {
+                        Formats = new List<Elements.FormatElement17> {
+                            new Elements.FormatElement17() { Type = "multipart/mixed" }
+                        },
+                        Description = $"Metadane folderu {folder}"
+                    };
+
+                    foreach (var _metadata in metadata) {
+                        var m = _metadata as Document17;
+                        var d = folderMetadata.Document as Document17;
+                        if (d.Recipients.IsNotNull()) { d.Recipients = new List<Elements.RecipientElement17>(); }
+                        foreach (var item in m.Recipients) {
+                            if (!d.Recipients.Where(x => x.ToString() == item.ToString()).Any()) {
+                                d.Recipients.Add(item);
+                            }
+                        }
+
+                        if (d.Dates.IsNotNull()) { d.Dates = new List<Elements.DateElement17>(); }
+                        foreach (var item in m.Dates) {
+                            if (!d.Dates.Where(x => x.ToString() == item.ToString()).Any()) {
+                                d.Dates.Add(item);
+                            }
+                        }
+
+                        if (d.Access.IsNotNull()) { d.Access = new List<Elements.AccessElement17>(); }
+                        foreach (var item in m.Access) {
+                            if (!d.Access.Where(x => x.ToString() == item.ToString()).Any()) {
+                                d.Access.Add(item);
+                            }
+                        }
+
+                        if (d.Groupings.IsNotNull()) { d.Groupings = new List<Elements.GroupingElement>(); }
+                        foreach (var item in m.Groupings) {
+                            if (!d.Groupings.Where(x => x.ToString() == item.ToString()).Any()) {
+                                d.Groupings.Add(item);
+                            }
+                        }
+
+                        if (d.Identifiers.IsNotNull()) { d.Identifiers = new List<Elements.IdentifierElement>(); }
+                        foreach (var item in m.Identifiers) {
+                            if (!d.Identifiers.Where(x => x.ToString() == item.ToString()).Any()) {
+                                d.Identifiers.Add(item);
+                            }
+                        }
+
+                        if (d.Authors.IsNotNull()) { d.Authors = new List<Elements.AuthorElement17>(); }
+                        foreach (var item in m.Authors) {
+                            if (!d.Authors.Where(x => x.ToString() == item.ToString()).Any()) {
+                                d.Authors.Add(item);
+                            }
+                        }
+
+                        if (d.Types.IsNotNull()) { d.Types = new List<Elements.TypeElement17>(); }
+                        foreach (var item in m.Types) {
+                            if (!d.Types.Where(x => x.ToString() == item.ToString()).Any()) {
+                                d.Types.Add(item);
+                            }
+                        }
+
+                        if (d.Titles.IsNotNull()) { d.Titles = new List<Elements.TitleElement>(); }
+                        foreach (var item in m.Titles) {
+                            if (!d.Titles.Where(x => x.ToString() == item.ToString()).Any()) {
+                                d.Titles.Add(item);
+                            }
+                        }
+
+                        if (d.Relations.IsNotNull()) { d.Relations = new List<Elements.RelationElement>(); }
+                        foreach (var item in m.Relations) {
+                            if (!d.Relations.Where(x => x.ToString() == item.ToString()).Any()) {
+                                d.Relations.Add(item);
+                            }
+                        }
+
+                        if (d.Languages.IsNotNull()) { d.Languages = new List<Elements.LanguageElement>(); }
+                        foreach (var item in m.Languages) {
+                            if (!d.Languages.Where(x => x.ToString() == item.ToString()).Any()) {
+                                d.Languages.Add(item);
+                            }
+                        }
+                    }
+                }
+                else if (metadata.First().DocumentType == Enumerations.DocumentType.Nes20) {
+                    folderMetadata.Document = new Document()
+                    {
+                        Formats = new List<Elements.FormatElement> {
+                            new Elements.FormatElement() { Type = "multipart/mixed" }
+                        },
+                        Description = $"Metadane folderu {folder}"
+                    };
+
+                    foreach (var _metadata in metadata) {
+                        var m = _metadata as Document;
+                        var d = folderMetadata.Document as Document;
+
+                        if (d.Senders.IsNotNull()) { d.Senders = new List<Elements.SenderElement>(); }
+                        foreach (var item in m.Senders) {
+                            if (!d.Senders.Where(x => x.ToString() == item.ToString()).Any()) {
+                                d.Senders.Add(item);
+                            }
+                        }
+
+                        if (d.Recipients.IsNotNull()) { d.Recipients = new List<Elements.RecipientElement>(); }
+                        foreach (var item in m.Recipients) {
+                            if (!d.Recipients.Where(x => x.ToString() == item.ToString()).Any()) {
+                                d.Recipients.Add(item);
+                            }
+                        }
+
+                        if (d.Dates.IsNotNull()) { d.Dates = new List<Elements.DateElement>(); }
+                        foreach (var item in m.Dates) {
+                            if (!d.Dates.Where(x => x.ToString() == item.ToString()).Any()) {
+                                d.Dates.Add(item);
+                            }
+                        }
+
+                        if (d.Access.IsNotNull()) { d.Access = new List<Elements.AccessElement>(); }
+                        foreach (var item in m.Access) {
+                            if (!d.Access.Where(x => x.ToString() == item.ToString()).Any()) {
+                                d.Access.Add(item);
+                            }
+                        }
+
+                        if (d.Groupings.IsNotNull()) { d.Groupings = new List<Elements.GroupingElement>(); }
+                        foreach (var item in m.Groupings) {
+                            if (!d.Groupings.Where(x => x.ToString() == item.ToString()).Any()) {
+                                d.Groupings.Add(item);
+                            }
+                        }
+
+                        if (d.Identifiers.IsNotNull()) { d.Identifiers = new List<Elements.IdentifierElement>(); }
+                        foreach (var item in m.Identifiers) {
+                            if (!d.Identifiers.Where(x => x.ToString() == item.ToString()).Any()) {
+                                d.Identifiers.Add(item);
+                            }
+                        }
+
+                        if (d.Authors.IsNotNull()) { d.Authors = new List<Elements.AuthorElement>(); }
+                        foreach (var item in m.Authors) {
+                            if (!d.Authors.Where(x => x.ToString() == item.ToString()).Any()) {
+                                d.Authors.Add(item);
+                            }
+                        }
+
+                        if (d.Types.IsNotNull()) { d.Types = new List<Elements.TypeElement>(); }
+                        foreach (var item in m.Types) {
+                            if (!d.Types.Where(x => x.ToString() == item.ToString()).Any()) {
+                                d.Types.Add(item);
+                            }
+                        }
+
+                        if (d.Titles.IsNotNull()) { d.Titles = new List<Elements.TitleElement>(); }
+                        foreach (var item in m.Titles) {
+                            if (!d.Titles.Where(x => x.ToString() == item.ToString()).Any()) {
+                                d.Titles.Add(item);
+                            }
+                        }
+
+                        if (d.Relations.IsNotNull()) { d.Relations = new List<Elements.RelationElement>(); }
+                        foreach (var item in m.Relations) {
+                            if (!d.Relations.Where(x => x.ToString() == item.ToString()).Any()) {
+                                d.Relations.Add(item);
+                            }
+                        }
+
+                        if (d.Languages.IsNotNull()) { d.Languages = new List<Elements.LanguageElement>(); }
+                        foreach (var item in m.Languages) {
+                            if (!d.Languages.Where(x => x.ToString() == item.ToString()).Any()) {
+                                d.Languages.Add(item);
+                            }
+                        }
+                    }
+                }
+
+                Package.Metadata.AddItem(folderMetadata);
             }
 
             for (int i = 0; i < documents.Count(); i++) {
@@ -103,7 +292,8 @@ namespace Abc.Nes.ArchivalPackage {
                 folder.Items.Add(document);
                 if (metadata.IsNotNull()) {
                     var fileMetadata = metadata.ToArray()[i];
-                    metadataFolder.Items.Add(new MetadataFile() {
+                    metadataFolder.Items.Add(new MetadataFile()
+                    {
                         Document = fileMetadata,
                         FileName = $"{document.FileName}.xml"
                     });
@@ -130,16 +320,18 @@ namespace Abc.Nes.ArchivalPackage {
 
             var folder = Package.Documents;
             if (folderName.IsNotNullOrEmpty()) {
-                folder = new DocumentFolder() {
+                folder = new DocumentFolder()
+                {
                     FolderName = folderName,
                     Items = new List<DocumentFile>()
                 };
                 Package.Documents.Folders.Add(folder);
             }
 
-            MetdataFolder metadataFolder = Package.Metadata;
+            MetadataFolder metadataFolder = Package.Metadata;
             if (metadata.IsNotNull() && folderName.IsNotNullOrEmpty()) {
-                metadataFolder = new MetdataFolder() {
+                metadataFolder = new MetadataFolder()
+                {
                     FolderName = folderName,
                     Items = new List<MetadataFile>()
                 };
@@ -148,14 +340,16 @@ namespace Abc.Nes.ArchivalPackage {
 
             for (var i = 0; i < files.Count(); i++) {
                 var filePath = files.ToArray()[i];
-                folder.Items.Add(new DocumentFile() {
+                folder.Items.Add(new DocumentFile()
+                {
                     FileName = GetValidFileName(filePath),
                     FileData = File.ReadAllBytes(filePath)
                 });
 
                 if (metadata.IsNotNull()) {
                     var fileMetadata = metadata.ToArray()[i];
-                    metadataFolder.Items.Add(new MetadataFile() {
+                    metadataFolder.Items.Add(new MetadataFile()
+                    {
                         Document = fileMetadata,
                         FileName = $"{GetValidFileName(filePath)}.xml"
                     });
@@ -173,7 +367,8 @@ namespace Abc.Nes.ArchivalPackage {
                 }
             }
 
-            Package.Objects.AddItem(new MetadataFile() {
+            Package.Objects.AddItem(new MetadataFile()
+            {
                 Document = metadata,
                 FileName = fileName
             });
@@ -211,26 +406,31 @@ namespace Abc.Nes.ArchivalPackage {
 
             return stream;
         }
-        public void LoadPackage(Stream stream) {
+        public void LoadPackage(Stream stream, out Exception exception) {
+            exception = null;
+
             // Package is already loaded
             if (Package.IsNotNull() && Package.Documents.IsNotNull() && !Package.Documents.IsEmpty) { return; }
 
             using (IPackageValidator validator = new PackageValidator()) {
-                Package = validator.GetPackage(stream);
+                Package = validator.GetPackage(stream, out exception);
             }
             stream.Position = 0;
-            using (var zipFile = ZipFile.Read(stream, new ReadOptions() {
+            using (var zipFile = ZipFile.Read(stream, new ReadOptions()
+            {
                 Encoding = Encoding.UTF8
             })) {
                 LoadPackageEntries(zipFile);
             }
         }
-        public void LoadPackage(string filePath) {
+        public void LoadPackage(string filePath, out Exception exception) {
+            exception = null;
+
             // Package is already loaded
             if (FilePath == filePath && Package.IsNotNull() && Package.Documents.IsNotNull() && !Package.Documents.IsEmpty) { return; }
 
             using (IPackageValidator validator = new PackageValidator()) {
-                Package = validator.GetPackage(filePath);
+                Package = validator.GetPackage(filePath, out exception);
                 if (Package.IsNotNull()) { FilePath = Package.FilePath; }
             }
 
@@ -361,7 +561,7 @@ namespace Abc.Nes.ArchivalPackage {
             }
             return count;
         }
-        private void AddMetadata(MetdataFolder folder, ZipFile zipFile, string folderPath = null, bool appendFileDataOnly = false) {
+        private void AddMetadata(MetadataFolder folder, ZipFile zipFile, string folderPath = null, bool appendFileDataOnly = false) {
             if (folder.IsNull()) { return; }
             if (zipFile.IsNull()) { throw new ArgumentNullException("zipFile"); }
             if (folderPath.IsNullOrEmpty()) { folderPath = folder.FolderName; }
@@ -415,9 +615,11 @@ namespace Abc.Nes.ArchivalPackage {
                     var dirs = dirName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
                     FolderBase folder = null;
 
-                    if (dirs[0].ToLower() == MainDirectoriesName.Files.GetXmlEnum().ToLower()) { folder = Package.Documents; }
+                    if (dirs.Length == 0) { folder = Package.Documents; }
+                    else if (dirs[0].ToLower() == MainDirectoriesName.Files.GetXmlEnum().ToLower()) { folder = Package.Documents; }
                     else if (dirs[0].ToLower() == MainDirectoriesName.Metadata.GetXmlEnum().ToLower()) { folder = Package.Metadata; }
                     else if (dirs[0].ToLower() == MainDirectoriesName.Objects.GetXmlEnum().ToLower()) { folder = Package.Objects; }
+                    else { folder = Package.Documents; }
 
                     foreach (var dir in dirs) {
                         if (dir.ToLower() == MainDirectoriesName.Files.GetXmlEnum().ToLower() ||
@@ -432,9 +634,12 @@ namespace Abc.Nes.ArchivalPackage {
                     var fileName = Path.GetFileName(entry.FileName);
                     var dirs = dirName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
                     FolderBase folder = null;
-                    if (dirs[0].ToLower() == MainDirectoriesName.Files.GetXmlEnum().ToLower()) { folder = Package.Documents; }
+                    if (dirs.Length == 0) { folder = Package.Documents; }
+                    else if (dirs[0].ToLower() == MainDirectoriesName.Files.GetXmlEnum().ToLower()) { folder = Package.Documents; }
                     else if (dirs[0].ToLower() == MainDirectoriesName.Metadata.GetXmlEnum().ToLower()) { folder = Package.Metadata; }
                     else if (dirs[0].ToLower() == MainDirectoriesName.Objects.GetXmlEnum().ToLower()) { folder = Package.Objects; }
+                    else { folder = Package.Documents; }
+
                     foreach (var dir in dirs) {
                         if (dirs[0] == dir) { continue; }
                         var _folder = folder.GetFolder(dir);
@@ -447,11 +652,18 @@ namespace Abc.Nes.ArchivalPackage {
                     var fileData = stream.ToArray();
 
                     ItemBase item;
-                    if (dirs[0].ToLower() == MainDirectoriesName.Files.GetXmlEnum().ToLower()) {
+                    if (dirs.Length == 0) {
                         item = new DocumentFile() { FileName = fileName, FilePath = entry.FileName };
                     }
-                    else {
+                    else if (dirs[0].ToLower() == MainDirectoriesName.Files.GetXmlEnum().ToLower()) {
+                        item = new DocumentFile() { FileName = fileName, FilePath = entry.FileName };
+                    }
+                    else if (dirs[0].ToLower() == MainDirectoriesName.Metadata.GetXmlEnum().ToLower() ||
+                        dirs[0].ToLower() == MainDirectoriesName.Objects.GetXmlEnum().ToLower()) {
                         item = new MetadataFile() { FileName = fileName, FilePath = entry.FileName };
+                    }
+                    else {
+                        item = new DocumentFile() { FileName = fileName, FilePath = entry.FileName };
                     }
 
                     item.Init(fileData);

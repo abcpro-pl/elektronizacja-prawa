@@ -18,5 +18,15 @@ namespace Abc.Nes.ArchivalPackage.Model {
 		public string FileName { get; set; }
 		public string FilePath { get; internal set; }
 		public abstract void Init(byte[] fileData);
+
+		public string GetSubFolderName() {
+			if (FilePath.IsNotNullOrEmpty()) {
+				var table = FilePath.Split('/', '\\');
+				if (table.IsNotNull() && table.Length > 2) {
+					return table[table.Length - 2];
+				}
+			}
+			return default;
+		}
 	}
 }

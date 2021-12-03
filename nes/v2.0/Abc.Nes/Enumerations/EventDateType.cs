@@ -70,4 +70,31 @@ namespace Abc.Nes.Enumerations {
         [XmlEnum("daty skrajne")]
         Range      
     }
+
+    [XmlType(TypeName = "data-dokumentu-zdarzenie-typ")]
+    [XmlAnnotation("Słownik zdarzeń związanych z datą dokumentu.")]
+    public enum DocumentDateType17 {
+        [XmlEnum("")]
+        None,
+        [XmlEnum("dostepnyPo")]
+        AvailableAfter,
+        [XmlEnum("opublikowany")]
+        Published,
+        [XmlEnum("stworzony")]
+        Created,
+        [XmlEnum("uzyskany")]
+        Requested,
+        [XmlEnum("otrzymany")]
+        Recieved,
+        [XmlEnum("wyslany")]
+        Sent,
+        [XmlEnum("zaakceptowany")]
+        Accepted,
+        [XmlEnum("zatwierdzony")]
+        Approved,
+        [XmlEnum("zmodyfikowany")]
+        Modified,
+        [XmlEnum("daty skrajne")]
+        Range
+    }
 }

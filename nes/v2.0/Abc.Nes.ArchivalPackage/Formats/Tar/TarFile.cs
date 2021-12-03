@@ -128,7 +128,7 @@ namespace Abc.Nes.ArchivalPackage.Formats.Tar {
 
                 if (!Directory.Exists(Path.GetDirectoryName(output)))
                     Directory.CreateDirectory(Path.GetDirectoryName(output));
-                if (!name.Equals("./", StringComparison.InvariantCulture) && !name.EndsWith("/")) {
+                if (!name.Equals("./", StringComparison.InvariantCulture) && !name.EndsWith("/") && size > 0) {
                     using (var str = File.Open(output, FileMode.OpenOrCreate, FileAccess.Write)) {
                         var buf = new byte[size];
                         stream.Read(buf, 0, buf.Length);

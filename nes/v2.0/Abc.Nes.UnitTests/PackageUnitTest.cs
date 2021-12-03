@@ -20,6 +20,7 @@ using Abc.Nes.Enumerations;
 using Abc.Nes.Xades.Signature.Parameters;
 using Abc.Nes.Xades.Utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -61,8 +62,8 @@ namespace Abc.Nes.UnitTests {
             var path = @"../../../sample/EZD_PUW.zip";
             var outpath = @"../../../sample/EZD_PUW_generated.zip";
             var mgr = new PackageManager();
-            mgr.LoadPackage(path);
-            var isNotEmpty = mgr != null && mgr.Package != null && !mgr.Package.IsEmpty;
+            mgr.LoadPackage(path, out Exception e);
+            var isNotEmpty = mgr != null && mgr.Package != null && !mgr.Package.IsEmpty && e == null;
             Assert.IsTrue(isNotEmpty);
             mgr.Save(outpath);
         }
@@ -71,8 +72,8 @@ namespace Abc.Nes.UnitTests {
         public void Package_LoadPackage() {
             var path = @"../../../sample/InvalidPackage.zip";
             var mgr = new PackageManager();
-            mgr.LoadPackage(path);
-            var isNotEmpty = mgr != null && mgr.Package != null && !mgr.Package.IsEmpty;
+            mgr.LoadPackage(path, out Exception e);
+            var isNotEmpty = mgr != null && mgr.Package != null && !mgr.Package.IsEmpty && e == null;
             Assert.IsTrue(isNotEmpty);
         }
 
@@ -80,8 +81,8 @@ namespace Abc.Nes.UnitTests {
         public void Package_LoadValidatedPackage() {
             var path = @"../../../sample/ValidatedPackage.zip";
             var mgr = new PackageManager();
-            mgr.LoadPackage(path);
-            var isNotEmpty = mgr != null && mgr.Package != null && !mgr.Package.IsEmpty;
+            mgr.LoadPackage(path, out Exception e);
+            var isNotEmpty = mgr != null && mgr.Package != null && !mgr.Package.IsEmpty && e == null;
             Assert.IsTrue(isNotEmpty);
         }
 
@@ -89,9 +90,9 @@ namespace Abc.Nes.UnitTests {
         public void Package_GetDocumentsCount() {
             var path = @"../../../sample/ValidatedPackage.zip";
             var mgr = new PackageManager();
-            mgr.LoadPackage(path);
+            mgr.LoadPackage(path, out Exception e);
+            var isNotEmpty = mgr != null && mgr.Package != null && !mgr.Package.IsEmpty && e == null;
             var count = mgr.GetDocumentsCount();
-            var isNotEmpty = mgr != null && mgr.Package != null && !mgr.Package.IsEmpty;
             Assert.IsTrue(isNotEmpty && count == 3);
         }
 
@@ -99,8 +100,8 @@ namespace Abc.Nes.UnitTests {
         public void Package_Save() {
             var path = @"../../../sample/InvalidPackage.zip";
             var mgr = new PackageManager();
-            mgr.LoadPackage(path);
-
+            mgr.LoadPackage(path, out Exception e);
+            
             mgr.AddFile(new DocumentFile() {
                 FileData = File.ReadAllBytes(@"../../../sample/sample_file.pdf"),
                 FileName = "TabelaWydatkow.pdf"
@@ -176,7 +177,7 @@ namespace Abc.Nes.UnitTests {
             var result = false;
             var path = @"../../../sample/ValidatedPackage.zip";
             var mgr = new PackageManager();
-            mgr.LoadPackage(path);
+            mgr.LoadPackage(path, out Exception e);
             var item = mgr.GetItemByFilePath("dokumenty/Wniosek/Wniosek.xml");
             if (item != null) {
                 var metadataFile = mgr.GetMetadataFile(item);
@@ -191,7 +192,7 @@ namespace Abc.Nes.UnitTests {
             var result = false;
             var path = @"../../../sample/ValidatedPackage.zip";
             var mgr = new PackageManager();
-            mgr.LoadPackage(path);
+            mgr.LoadPackage(path, out Exception e);
             var item = mgr.GetParentFolder("dokumenty/Wniosek/Wniosek.xml");
             if (item != null) {
                 result = item != null && item.GetItems().Any();
@@ -204,7 +205,7 @@ namespace Abc.Nes.UnitTests {
         public void Package_GetAllFiles() {
             var path = @"../../../sample/ValidatedPackage.zip";
             var mgr = new PackageManager();
-            mgr.LoadPackage(path);
+            mgr.LoadPackage(path, out Exception e);
             var items = mgr.GetAllFiles();
             var isNotEmpty = mgr != null && mgr.Package != null && !mgr.Package.IsEmpty;
             Assert.IsTrue(isNotEmpty && items.Count() == 8);
@@ -271,7 +272,7 @@ namespace Abc.Nes.UnitTests {
         public void Package_Validate() {
             var path = @"../../../sample/ValidatedPackage.zip";
             var mgr = new PackageManager();
-            mgr.LoadPackage(path);
+            mgr.LoadPackage(path, out Exception e);
             var validateMetdataFiles = true;
             var breakOnFirstError = false;
             var result = mgr.Validate(out var message, validateMetdataFiles, breakOnFirstError);
@@ -285,7 +286,7 @@ namespace Abc.Nes.UnitTests {
         public void Package_GetValidationResult() {
             var path = @"../../../sample/ValidatedPackage.zip";
             var mgr = new PackageManager();
-            mgr.LoadPackage(path);
+            mgr.LoadPackage(path, out Exception e);
             var validateMetdataFiles = true;
             var breakOnFirstError = false;
             var result = mgr.GetValidationResult(validateMetdataFiles, breakOnFirstError);
@@ -395,7 +396,7 @@ namespace Abc.Nes.UnitTests {
             using (var tar = new ArchivalPackage.Formats.Tar.TarFile(path)) {
                 if (tar.ConvertToZip(pathZip)) {
                     var mgr = new PackageManager();
-                    mgr.LoadPackage(pathZip);
+                    mgr.LoadPackage(pathZip, out Exception e);
                     var isNotEmpty = mgr != null && mgr.Package != null && !mgr.Package.IsEmpty;
                     Assert.IsTrue(isNotEmpty);
                 }
@@ -409,7 +410,7 @@ namespace Abc.Nes.UnitTests {
                     using (var zipStream = tar.ConvertToZip()) {
                         if (zipStream != null && zipStream.Length > 0) {
                             var mgr = new PackageManager();
-                            mgr.LoadPackage(zipStream);
+                            mgr.LoadPackage(zipStream, out Exception e);
                             var isNotEmpty = mgr != null && mgr.Package != null && !mgr.Package.IsEmpty;
                             Assert.IsTrue(isNotEmpty);
                         }
