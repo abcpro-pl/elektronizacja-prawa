@@ -11,7 +11,7 @@ W&nbsp;podkatalogu [NES/v2.0](nes/v2.0/README.md) znajdują się biblioteki do t
 
 W&nbsp;podkatalogu [psg](psg/README.md) znajduje się biblioteka służąca do generowania zdań po polsku, np. w&nbsp;celu testowania zachowań edytorów tekstów.
  
-## O ABC PRO 
+## O ABC PRO  
 
 Misją firmy ABC PRO Sp. z o.o. i&nbsp;jest tworzenie i&nbsp;dostarczanie wyspecjalizowanych aplikacji wspierających szeroko rozumianą „elektronizację prawa”. Nasze rozwiązania obejmują kluczowe zagadnienia związane z&nbsp;tworzeniem i&nbsp;publikacją prawa w Polsce, zarówno na szczeblu samorządowym jak i&nbsp;centralnym.
 

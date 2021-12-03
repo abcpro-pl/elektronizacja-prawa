@@ -21,12 +21,15 @@
 // 
 // --------------------------------------------------------------------------------------------------------------------
 
+using Abc.Nes.Common.Helpers;
 using Abc.Nes.Xades.Crypto;
 using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Tsp;
 using System;
 using System.IO;
 using System.Net;
+using System.Security.Cryptography.Pkcs;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace Abc.Nes.Xades.Clients {
@@ -35,6 +38,8 @@ namespace Abc.Nes.Xades.Clients {
         private string _url;
         private string _user;
         private string _password;
+        private string _reqPolicy;
+        private X509Certificate2 _certificate;
         #endregion
 
         #region Constructors
@@ -43,10 +48,32 @@ namespace Abc.Nes.Xades.Clients {
             _url = url;
         }
 
-        public TimeStampClient(string url, string user, string password)
+        public TimeStampClient(string url, string reqPolicy) 
             : this(url) {
+            _reqPolicy = reqPolicy;
+        }
+        /// <summary>
+        /// Time stamp client with credential authorized request
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <param name="reqPolicy"></param>
+        public TimeStampClient(string url, string user, string password, string reqPolicy = null)
+            : this(url, reqPolicy) {
             _user = user;
             _password = password;
+        }
+
+        /// <summary>
+        /// Time stamp client with request signed by certificate
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="certificate"></param>
+        /// <param name="reqPolicy"></param>
+        public TimeStampClient(string url, X509Certificate2 certificate, string reqPolicy = null)
+            : this(url, reqPolicy) {
+            _certificate = certificate;
         }
 
 
@@ -63,45 +90,12 @@ namespace Abc.Nes.Xades.Clients {
         /// <param name="certReq"></param>
         /// <returns></returns>
         public byte[] GetTimeStamp(byte[] hash, DigestMethod digestMethod, bool certReq) {
-            TimeStampRequestGenerator tsrq = new TimeStampRequestGenerator();
-            tsrq.SetCertReq(certReq);
-
-            BigInteger nonce = BigInteger.ValueOf(DateTime.Now.Ticks);
-
-            TimeStampRequest tsr = tsrq.Generate(digestMethod.Oid, hash, nonce);
-            byte[] data = tsr.GetEncoded();
-
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(_url);
-            req.Method = "POST";
-            req.ContentType = "application/timestamp-query";
-            req.ContentLength = data.Length;
-
-            if (!string.IsNullOrEmpty(_user) && !string.IsNullOrEmpty(_password)) {
-                string auth = string.Format("{0}:{1}", _user, _password);
-                req.Headers["Authorization"] = "Basic " + Convert.ToBase64String(Encoding.Default.GetBytes(auth), Base64FormattingOptions.None);
-            }
-
-            Stream reqStream = req.GetRequestStream();
-            reqStream.Write(data, 0, data.Length);
-            reqStream.Close();
-
-            HttpWebResponse res = (HttpWebResponse)req.GetResponse();
-            if (res.StatusCode != HttpStatusCode.OK) {
-                throw new Exception("Serwer zwrócił nieprawidłową odpowiedź!");
-            }
-            else {
-                Stream resStream = new BufferedStream(res.GetResponseStream());
-                TimeStampResponse tsRes = new TimeStampResponse(resStream);
-                resStream.Close();
-
-                tsRes.Validate(tsr);
-
-                if (tsRes.TimeStampToken == null) {
-                    throw new Exception("Serwer nie zwrócił sygnatury czasowej!");
-                }
-
-                return tsRes.TimeStampToken.GetEncoded();
-            }
+            var nonce = BigInteger.ValueOf(DateTime.Now.Ticks);
+            
+            var tsBytes = TimestampRequestHelper.RequestTimestamp(hash, _url, digestMethod.Oid, certReq, _reqPolicy, _user,_password, _certificate, nonce);
+            
+            return tsBytes;
+            
         }
 
         #endregion

@@ -348,3 +348,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+nes/v2.0/sample/TimestampTests/
+nes/v2.0/sample/certum.tsa.pass.txt

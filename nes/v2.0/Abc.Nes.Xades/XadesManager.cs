@@ -1,4 +1,6 @@
-﻿using Abc.Nes.Cryptography;
+﻿using Abc.Nes.Common;
+using Abc.Nes.Common.Models;
+using Abc.Nes.Cryptography;
 using Abc.Nes.Xades.Crypto;
 using Abc.Nes.Xades.Signature;
 using Abc.Nes.Xades.Signature.Parameters;
@@ -14,7 +16,17 @@ using System.Xml;
 
 namespace Abc.Nes.Xades {
     public interface IXadesManager : IDisposable {
-        SignatureDocument AppendSignatureToXmlFile(Stream input, X509Certificate2 cert, Signature.Parameters.SignatureProductionPlace productionPlace = null, Signature.Parameters.SignerRole signerRole = null, Upgraders.SignatureFormat? upgradeFormat = null, string timeStampServerUrl = "http://time.certum.pl", CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval);
+        SignatureDocument AppendSignatureToXmlFile(Stream input,
+                                                   X509Certificate2 cert,
+                                                   Signature.Parameters.SignatureProductionPlace productionPlace = null,
+                                                   Signature.Parameters.SignerRole signerRole = null,
+                                                   Upgraders.SignatureFormat? upgradeFormat = null,
+                                                   string timeStampServerUrl = "http://time.certum.pl",
+                                                   CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval,
+                                                   string timeStampPolicy = null,
+                                                   X509Certificate2 timeStampCertificate = null,
+                                                   string timeStampLogin = null,
+                                                   string timeStampPassword = null);
         SignatureDocument CreateEnvelopingSignature(Stream input, X509Certificate2 cert, Signature.Parameters.SignatureProductionPlace productionPlace = null, Signature.Parameters.SignerRole signerRole = null, string fileName = null, Upgraders.SignatureFormat? upgradeFormat = null, string timeStampServerUrl = "http://time.certum.pl", CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval);
         SignatureDocument CreateDetachedSignature(string filePath, X509Certificate2 cert, Signature.Parameters.SignatureProductionPlace productionPlace = null, Signature.Parameters.SignerRole signerRole = null, Upgraders.SignatureFormat? upgradeFormat = null, string timeStampServerUrl = "http://time.certum.pl", CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval);
         ValidationResult ValidateSignature(Stream stream);
@@ -28,6 +40,35 @@ namespace Abc.Nes.Xades {
         private Reference ContentReference = null;
         private Signer XadesSigner = null;
 
+        public void SignXmlFile(string filePath, SignatureOptions opts, string outputPath) {
+            if (File.Exists(filePath)) {
+                byte[] fileBytes = File.ReadAllBytes(filePath);
+
+                var fileStream = new MemoryStream(fileBytes);
+
+                Upgraders.SignatureFormat? upgradeType = null;
+
+                if (opts.AddTimestamp)
+                    upgradeType = Upgraders.SignatureFormat.XAdES_T;
+
+                SignatureDocument result = AppendSignatureToXmlFile(
+                    fileStream, opts.Certificate,
+                    null, null,
+                    upgradeType,
+                    opts.TimestampOptions?.TsaUrl,
+                    opts.Reason,
+                    opts.TimestampOptions?.TsaPolicy,
+                    opts.TimestampOptions?.Certificate,
+                    opts.TimestampOptions?.Login,
+                    opts.TimestampOptions?.Password
+                );
+
+                if (result != null) {
+                    result.Save(outputPath);
+                }
+            }
+        }
+
         public SignatureDocument AppendSignatureToXmlFile(
             Stream input,
             X509Certificate2 cert,
@@ -35,7 +76,11 @@ namespace Abc.Nes.Xades {
             Signature.Parameters.SignerRole signerRole = null,
             Upgraders.SignatureFormat? upgradeFormat = null,
             string timeStampServerUrl = "http://time.certum.pl",
-            CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval) {
+            CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval,
+            string timeStampPolicy = null,
+            X509Certificate2 timeStampCertificate = null,
+            string timeStampLogin = null,
+            string timeStampPassword = null) {
 
             if (input == null) { throw new ArgumentNullException("input"); }
 
@@ -83,8 +128,8 @@ Content-Transfer-Encoding: UTF-8"
             PrepareSignature(signatureDocument, commitmentTypeId: commitmentTypeId);
 
             signatureDocument.XadesSignature.ComputeSignature();
-
-            UpdateXadesSignature(signatureDocument, upgradeFormat, timeStampServerUrl);
+            
+            UpdateXadesSignature(signatureDocument, upgradeFormat, timeStampServerUrl, timeStampPolicy, timeStampLogin, timeStampPassword, timeStampCertificate);
 
             return signatureDocument;
         }
@@ -439,19 +484,35 @@ Content-Disposition: filename=""{ fileName }""
             }
         }
 
-        private void UpdateXadesSignature(SignatureDocument signatureDocument, Upgraders.SignatureFormat? upgradeFormat = null, string timeStampServerUrl = "http://time.certum.pl") {
-            signatureDocument.UpdateDocument();
+        private void UpdateXadesSignature(SignatureDocument signatureDocument,
+                                          Upgraders.SignatureFormat? upgradeFormat = null,
+                                          string timeStampServerUrl = "http://time.certum.pl",
+                                          string timeStampReqPolicy = null,
+                                          string timeStampLogin = null,
+                                          string timeStampPassword = null,
+                                          X509Certificate2 timeStampCertificate = null) {
 
-            XmlElement signatureElement = (XmlElement)signatureDocument.Document.SelectSingleNode("//*[@Id='" + signatureDocument.XadesSignature.Signature.Id + "']");
+                signatureDocument.UpdateDocument();
 
-            signatureDocument.XadesSignature = new XadesSignedXml(signatureDocument.Document);
-            signatureDocument.XadesSignature.LoadXml(signatureElement);
+                XmlElement signatureElement = (XmlElement)signatureDocument.Document.SelectSingleNode("//*[@Id='" + signatureDocument.XadesSignature.Signature.Id + "']");
+
+                signatureDocument.XadesSignature = new XadesSignedXml(signatureDocument.Document);
+                signatureDocument.XadesSignature.LoadXml(signatureElement);
 
             if (upgradeFormat.HasValue) {
                 var upgrader = new Upgraders.XadesUpgraderService();
+
+                Clients.TimeStampClient timeStampClient;
+                if (timeStampCertificate != null)
+                    timeStampClient = new Clients.TimeStampClient(timeStampServerUrl, timeStampCertificate, timeStampReqPolicy);
+                else if (timeStampLogin != null)
+                    timeStampClient = new Clients.TimeStampClient(timeStampServerUrl, timeStampLogin, timeStampPassword, timeStampReqPolicy);
+                else
+                    timeStampClient = new Clients.TimeStampClient(timeStampServerUrl, timeStampReqPolicy);
+
                 upgrader.Upgrade(signatureDocument, upgradeFormat.Value, new Upgraders.Parameters.UpgradeParameters() {
                     DigestMethod = Crypto.DigestMethod.SHA256,
-                    TimeStampClient = new Clients.TimeStampClient(timeStampServerUrl)
+                    TimeStampClient = timeStampClient
                 });
             }
         }

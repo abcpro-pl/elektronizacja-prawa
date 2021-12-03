@@ -88,6 +88,16 @@ namespace Abc.Nes.Xades.Utils {
             return true;
         }
 
+        public static X509Certificate2 GetCertByName(string name) {
+            X509Store store = new X509Store(StoreName.My, StoreLocation.CurrentUser);
+            store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
+            X509Certificate2Collection collection = (X509Certificate2Collection)store.Certificates;
+            X509Certificate2Collection fcollection = (X509Certificate2Collection)collection.Find(X509FindType.FindBySubjectName, name, true);
+
+            var cert = fcollection[0];
+            return cert;
+        }
+
 #if NET48 || NET461
         public static X509Certificate2 SelectCertificate(string message = null, string title = null) {
             X509Certificate2 cert = null;
