@@ -23,6 +23,7 @@ namespace Abc.Nes.ArchivalPackage.Model {
         public DocumentFolder Documents { get; set; }
         public MetadataFolder Metadata { get; set; }
         public MetadataFolder Objects { get; set; }
+        public DocumentFolder Another { get; set; }
         public bool IsEmpty
         {
             get
@@ -44,7 +45,6 @@ namespace Abc.Nes.ArchivalPackage.Model {
 
             return items;
         }
-
         public IEnumerable<ItemBase> GetAllFiles(FolderBase folder) {
             var items = new List<ItemBase>();
             if (folder.IsNotNull()) {
@@ -61,7 +61,6 @@ namespace Abc.Nes.ArchivalPackage.Model {
             }
             return items;
         }
-
         public MetadataFile GetMetadataFile(ItemBase documentFile) {
             if (documentFile.IsNotNull() && documentFile.FilePath.IsNotNullOrEmpty()) {
                 string metadataFilePath;

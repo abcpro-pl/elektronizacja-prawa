@@ -18,6 +18,7 @@ namespace Abc.Nes.ArchivalPackage {
     public enum MainDirectoriesName {
         [XmlEnum("dokumenty")] Files,
         [XmlEnum("metadane")] Metadata,
-        [XmlEnum("sprawy")] Objects
+        [XmlEnum("sprawy")] Objects,
+        [XmlEnum("inne")] Another,
     }
 }

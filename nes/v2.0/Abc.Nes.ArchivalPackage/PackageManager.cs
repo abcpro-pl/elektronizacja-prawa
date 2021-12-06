@@ -615,18 +615,27 @@ namespace Abc.Nes.ArchivalPackage {
                     var dirs = dirName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
                     FolderBase folder = null;
 
-                    if (dirs.Length == 0) { folder = Package.Documents; }
+                    if (dirs.Length == 0) { if (Package.Another.IsNull()) { Package.Another = new DocumentFolder() { FolderName = MainDirectoriesName.Another.GetXmlEnum().ToLower() }; } folder = Package.Another; }
                     else if (dirs[0].ToLower() == MainDirectoriesName.Files.GetXmlEnum().ToLower()) { folder = Package.Documents; }
                     else if (dirs[0].ToLower() == MainDirectoriesName.Metadata.GetXmlEnum().ToLower()) { folder = Package.Metadata; }
                     else if (dirs[0].ToLower() == MainDirectoriesName.Objects.GetXmlEnum().ToLower()) { folder = Package.Objects; }
-                    else { folder = Package.Documents; }
+                    else {
+                        if (Package.Another.IsNull()) { Package.Another = new DocumentFolder() { FolderName = MainDirectoriesName.Another.GetXmlEnum().ToLower() }; }
+                        if (dirs.Length > 1) {
+                            folder = Package.Another.GetFolder(dirs[0]);
+                        }
+                        else {
+                            folder = Package.Another;
+                        }
+                    }
 
                     foreach (var dir in dirs) {
                         if (dir.ToLower() == MainDirectoriesName.Files.GetXmlEnum().ToLower() ||
                             dir.ToLower() == MainDirectoriesName.Metadata.GetXmlEnum().ToLower() ||
                             dir.ToLower() == MainDirectoriesName.Objects.GetXmlEnum().ToLower()) { continue; }
-
-                        folder = folder.CreateSubFolder(dir);
+                        if (folder.FolderName != dir) {
+                            folder = folder.CreateSubFolder(dir);
+                        }
                     }
                 }
                 else {
@@ -634,14 +643,21 @@ namespace Abc.Nes.ArchivalPackage {
                     var fileName = Path.GetFileName(entry.FileName);
                     var dirs = dirName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
                     FolderBase folder = null;
-                    if (dirs.Length == 0) { folder = Package.Documents; }
+                    if (dirs.Length == 0) { folder = Package.Another; }
                     else if (dirs[0].ToLower() == MainDirectoriesName.Files.GetXmlEnum().ToLower()) { folder = Package.Documents; }
                     else if (dirs[0].ToLower() == MainDirectoriesName.Metadata.GetXmlEnum().ToLower()) { folder = Package.Metadata; }
                     else if (dirs[0].ToLower() == MainDirectoriesName.Objects.GetXmlEnum().ToLower()) { folder = Package.Objects; }
-                    else { folder = Package.Documents; }
+                    else if (dirs[0].ToLower() == MainDirectoriesName.Another.GetXmlEnum().ToLower()) { folder = Package.Another; }
 
                     foreach (var dir in dirs) {
-                        if (dirs[0] == dir) { continue; }
+                        if (dirs[0] == dir) {
+                            if (folder.IsNull()) {
+                                var __folder = Package.Another.GetFolder(dir);
+                                if (__folder.IsNull()) { __folder = Package.Another.CreateSubFolder(dir); }
+                                folder = __folder;
+                            }
+                            continue;
+                        }
                         var _folder = folder.GetFolder(dir);
                         if (_folder.IsNull()) { _folder = folder.CreateSubFolder(dir); }
                         folder = _folder;
@@ -653,7 +669,7 @@ namespace Abc.Nes.ArchivalPackage {
 
                     ItemBase item;
                     if (dirs.Length == 0) {
-                        item = new DocumentFile() { FileName = fileName, FilePath = entry.FileName };
+                        item = new DocumentFile() { FileName = fileName, FilePath = $"{MainDirectoriesName.Another.GetXmlEnum().ToLower()}/{entry.FileName}" };
                     }
                     else if (dirs[0].ToLower() == MainDirectoriesName.Files.GetXmlEnum().ToLower()) {
                         item = new DocumentFile() { FileName = fileName, FilePath = entry.FileName };
@@ -663,7 +679,7 @@ namespace Abc.Nes.ArchivalPackage {
                         item = new MetadataFile() { FileName = fileName, FilePath = entry.FileName };
                     }
                     else {
-                        item = new DocumentFile() { FileName = fileName, FilePath = entry.FileName };
+                        item = new DocumentFile() { FileName = fileName, FilePath = $"{MainDirectoriesName.Another.GetXmlEnum().ToLower()}/{entry.FileName}" };
                     }
 
                     item.Init(fileData);

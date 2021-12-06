@@ -14,6 +14,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Abc.Nes.ArchivalPackage.Model {
     public class DocumentFile : ItemBase {
@@ -28,6 +29,12 @@ namespace Abc.Nes.ArchivalPackage.Model {
         public override List<DocumentFolder> Folders { get; set; }
         public override FolderBase CreateSubFolder(string folderName) {
             if (folderName.IsNullOrEmpty()) { throw new ArgumentNullException(); }
+            if (Folders.IsNotNull()) {
+                var _folder = Folders.Where(x => x.FolderName == folderName).FirstOrDefault();
+                if (_folder.IsNotNull()) {
+                    return _folder;
+                }
+            }
             var folder = new DocumentFolder() {
                 FolderName = folderName,
                 Folders = new List<DocumentFolder>(),
