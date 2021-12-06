@@ -85,7 +85,7 @@ namespace Abc.Nes.NUnitTests {
 
         [Test]
         public void ValidatePackage2() {
-            var pathToPackage = @"../../../../sample/OtherZip.zip";
+            var pathToPackage = @"../../../../sample/BadPackage.zip";
             using (var mgr = new PackageManager()) {
                 Exception exception;
                 mgr.LoadPackage(pathToPackage, out exception);
