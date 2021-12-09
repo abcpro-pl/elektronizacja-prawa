@@ -31,6 +31,8 @@ W tym katalogu znajduje się:
 
 Wersja  | Opis
 --------|--------
+1.1.26|Usprawnienia w obsłudze dowolnych plików ZIP.
+1.1.25|Usprawnienia w obsłudze dowolnych plików ZIP.
 1.1.24|Obsługa dowolnych plików ZIP.
 1.1.23|Wsparcie dla zbiorczego pliku metadanych dla podkatalogu w folderze 'dokumenty'.
 1.1.22|Usunięcie błędu z duplikacją atrybutu `SubjectNameInfo`.

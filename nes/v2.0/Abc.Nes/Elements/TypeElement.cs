@@ -37,10 +37,10 @@ Umożliwia podanie informacji o rodzaju dokumentu na wykazach dokumentów znajdu
 
         public void SetKind(DocumentKindType kind) {
             if (Kinds.IsNull()) { Kinds = new List<string>(); }
-            Kinds.Add(kind.GetDocumentKindType());
+            Kinds.Add(kind.GetName());
         }
         public void SetClass(DocumentClassType docClass) {
-            Class = docClass.GetDocumentClassType();
+            Class = docClass.GetName();
         }       
     }
 
@@ -65,10 +65,10 @@ Umożliwia podanie informacji o rodzaju dokumentu na wykazach dokumentów znajdu
         public string Kind { get; set; }
 
         public void SetKind(DocumentKindType kind) {
-            Kind = kind.GetDocumentKindType();
+            Kind = kind.GetName();
         }
         public void SetClass(DocumentClassType docClass) {
-            Class = docClass.GetDocumentClassType();
+            Class = docClass.GetName();
         }
     }
 }

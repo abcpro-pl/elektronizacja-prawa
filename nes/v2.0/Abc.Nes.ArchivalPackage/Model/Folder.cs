@@ -20,11 +20,18 @@ namespace Abc.Nes.ArchivalPackage.Model {
         where T : ItemBase {
         public abstract List<T> Items { get; set; }
         public abstract List<F> Folders { get; set; }
-        public override FolderBase GetFolder(string folderName) {
+        public override FolderBase GetFolder(string folderName, bool ignoreCase = false) {
             if (Folders.IsNotNull()) {
                 foreach (FolderBase folder in Folders) {
-                    if (folder.FolderName == folderName) {
-                        return folder;
+                    if (ignoreCase) {
+                        if (folder.FolderName.ToLower() == folderName.ToLower()) {
+                            return folder;
+                        }
+                    }
+                    else {
+                        if (folder.FolderName == folderName) {
+                            return folder;
+                        }
                     }
                 }
             }
@@ -44,7 +51,7 @@ namespace Abc.Nes.ArchivalPackage.Model {
             }
         }
 
-        public override IEnumerable<FolderBase> GetFolders() => Folders;
-        public override IEnumerable<ItemBase> GetItems() => Items;
+        public override IEnumerable<FolderBase> GetFolders() => Folders.IsNull() ? new List<F>() : Folders;
+        public override IEnumerable<ItemBase> GetItems() => Items.IsNull() ? new List<T>() : Items;
     }
 }

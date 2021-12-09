@@ -7,15 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="itext7" Version="7.1.16" />
-    <PackageReference Include="Portable.BouncyCastle" Version="1.8.10" />
+    <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
     <PackageReference Include="System.Security.Cryptography.Pkcs" Version="6.0.0" />
   </ItemGroup>
-  
-  <!--<ItemGroup>
-    <Reference Include="System.Security">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.Security.dll</HintPath>
-    </Reference>
-  </ItemGroup>-->
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\itext7-dotnet\itext\itext.sign\itext.sign.netstandard.csproj" />
+  </ItemGroup>
 </Project>

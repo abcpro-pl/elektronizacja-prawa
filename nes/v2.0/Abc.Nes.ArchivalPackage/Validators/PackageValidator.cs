@@ -296,6 +296,11 @@ namespace Abc.Nes.ArchivalPackage.Validators {
                     FolderName = MainDirectoriesName.Objects.GetXmlEnum(),
                     Items = new List<MetadataFile>(),
                     Folders = new List<MetadataFolder>()
+                },
+                Another = new DocumentFolder() {
+                    FolderName = MainDirectoriesName.Another.GetXmlEnum(),
+                    Items = new List<DocumentFile>(),
+                    Folders = new List<DocumentFolder>()
                 }
             };
         }

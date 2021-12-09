@@ -5,7 +5,6 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 namespace Abc.Nes.NUnitTests {
     public class CryptographyTests {
@@ -68,7 +67,7 @@ namespace Abc.Nes.NUnitTests {
             var packageSignerManager = new PackageSignerManager();
 
             var _signatureInfos = packageSignerManager.GetSignatureInfos(pathToPackage);
-            if (_signatureInfos != null) { }
+            Assert.IsTrue(_signatureInfos != null && _signatureInfos.Length > 0);
         }
 
 
@@ -78,18 +77,54 @@ namespace Abc.Nes.NUnitTests {
             var pathToPackage = @"../../../../sample/CorruptedPackage.zip";
             using (var mgr = new PackageManager()) {
                 mgr.LoadPackage(pathToPackage, out exception);
-                Assert.IsTrue(mgr.Package != null && exception == null);
+                Assert.IsTrue(mgr.Package != null && exception != null);
             }
         }
 
 
         [Test]
-        public void ValidatePackage2() {
+        public void ValidatePackage1() {
             var pathToPackage = @"../../../../sample/BadPackage.zip";
             using (var mgr = new PackageManager()) {
                 Exception exception;
                 mgr.LoadPackage(pathToPackage, out exception);
-                Assert.IsTrue(mgr.Package != null && exception == null);
+                Assert.IsTrue(mgr.Package != null && exception != null);
+            }
+        }
+
+        [Test]
+        public void ValidatePackage2() {
+            var pathToPackage = @"../../../../sample/BadPackage2.zip";
+            using (var mgr = new PackageManager()) {
+                Exception exception;
+                mgr.LoadPackage(pathToPackage, out exception);
+                Assert.IsTrue(mgr.Package != null && exception != null);
+            }
+        }
+        [Test]
+        public void ValidatePackage2Stream() {
+            var pathToPackage = @"../../../../sample/BadPackage2.zip";
+            using (var mgr = new PackageManager()) {
+                Exception exception;
+                using (var stream = File.OpenRead(pathToPackage)) {
+                    mgr.LoadPackage(stream, out exception);
+
+                    var file = mgr.Package.GetItemByFilePath("inne/InnePliki/Wniosek przychodzacy z odpowiedzia.pdf");
+                    Assert.IsTrue(mgr.Package != null && file != null && exception != null);
+                }
+            }
+        }
+        [Test]
+        public void ValidatePackage3Stream() {
+            var pathToPackage = @"../../../../sample/BadPackage3.zip";
+            using (var mgr = new PackageManager()) {
+                Exception exception;
+                using (var stream = File.OpenRead(pathToPackage)) {
+                    mgr.LoadPackage(stream, out exception);
+
+                    var file = mgr.Package.GetItemByFilePath("__inne__/akt.pdf");
+                    Assert.IsTrue(mgr.Package != null && file != null && exception != null);
+                }
             }
         }
 
@@ -116,7 +151,7 @@ namespace Abc.Nes.NUnitTests {
                             //mgr2.AddFiles(mgr.Package.Documents.Items, "Wniosek", mgr.Package.Metadata.Items.Select(x=>x.Document));
                             //mgr2.Save("../../../../sample/_2006-12-15_11_33_test.zip");
 
-                            Assert.IsTrue(isNotEmpty && exception == null && result.IsCorrect);
+                            Assert.IsTrue(isNotEmpty && exception == null && !result.IsCorrect);
                         }
                     }
                 }

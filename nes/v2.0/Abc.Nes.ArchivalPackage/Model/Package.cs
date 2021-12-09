@@ -24,13 +24,8 @@ namespace Abc.Nes.ArchivalPackage.Model {
         public MetadataFolder Metadata { get; set; }
         public MetadataFolder Objects { get; set; }
         public DocumentFolder Another { get; set; }
-        public bool IsEmpty
-        {
-            get
-            {
-                return (Documents.IsNull() || Documents.IsEmpty) || (Metadata.IsNull() || Metadata.IsEmpty) || (Objects.IsNull() || Objects.IsEmpty);
-            }
-        }
+        public bool IsEmpty => (Documents.IsNull() || Documents.IsEmpty) || (Metadata.IsNull() || Metadata.IsEmpty) || (Objects.IsNull() || Objects.IsEmpty);
+        public bool HasAnotherFilesOrDirectories => Another.IsNotNull() && ((Another.Items.IsNotNull() && Another.Items.Count > 0) || (Another.Folders.IsNotNull() && Another.Folders.Count > 0));
         public Package() { }
         internal Package(string filePath) : this() {
             FilePath = filePath;
@@ -42,6 +37,8 @@ namespace Abc.Nes.ArchivalPackage.Model {
             items.AddRange(GetAllFiles(Documents));
             items.AddRange(GetAllFiles(Metadata));
             items.AddRange(GetAllFiles(Objects));
+
+            items.AddRange(GetAllFiles(Another));
 
             return items;
         }
@@ -104,14 +101,20 @@ namespace Abc.Nes.ArchivalPackage.Model {
                             folder = Objects;
                             continue;
                         }
+                        else if (itemName == Another.FolderName.ToLower()) {
+                            folder = Another;
+                            continue;
+                        }
+                        else {
+                            // file in pseudo-another folder
+                            folder = Another.GetFolder(itemName, true);
+                            if (folder.IsNotNull()) { continue; }
+                        }
                     }
 
-                    var folders = folder.GetFolders();
-                    if (folders.IsNotNull() && folders.Count() > 0) {
-                        var _folder = folders.Where(x => x.FolderName.ToLower() == itemName).FirstOrDefault();
-                        if (_folder.IsNotNull()) {
-                            folder = _folder;
-                        }
+                    var _folder = folder.GetFolder(itemName, true);
+                    if (_folder.IsNotNull()) {
+                        folder = _folder;
                     }
                 }
 

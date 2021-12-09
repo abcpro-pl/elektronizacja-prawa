@@ -20,9 +20,15 @@ using System.Xml.Linq;
 namespace Abc.Nes.ArchivalPackage.Model {
     public class MetadataFile : DocumentFile {
         public IDocument Document { get; set; }
-        public override void Init(byte[] fileData) {
+        public override void Init(byte[] fileData, out Exception ex) {
+            ex = null;
             FileData = fileData;
-            Document = new Converters.XmlConverter().ParseXml(TrimBom(fileData));
+            try {
+                Document = new Converters.XmlConverter().ParseXml(TrimBom(fileData));
+            }
+            catch (Exception e) {
+                ex = e;
+            }
         }
 
         private string TrimBom(byte[] data) {

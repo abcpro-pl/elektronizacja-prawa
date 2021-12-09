@@ -19,7 +19,8 @@ using System.Linq;
 namespace Abc.Nes.ArchivalPackage.Model {
     public class DocumentFile : ItemBase {
         public byte[] FileData { get; set; }        
-        public override void Init(byte[] fileData) {
+        public override void Init(byte[] fileData, out Exception ex) {
+            ex = null;
             FileData = fileData;
         }
     }

@@ -29,7 +29,7 @@ namespace Abc.Nes.Elements {
         public string Measure { get; set; }
 
         public void SetMeasure(FileSizeType sizeType) {
-            Measure = sizeType.GetSizeType();
+            Measure = sizeType.GetName();
         }       
     }
 }

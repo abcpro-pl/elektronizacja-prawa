@@ -17,9 +17,9 @@
     <PackageId>ABCPRO.NES.ArchivalPackage.Cryptography</PackageId>
     <Product>ABCPRO.NES.ArchivalPackage.Cryptography</Product>
     <PackageProjectUrl>https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0</PackageProjectUrl>
-    <AssemblyVersion>1.1.24.0</AssemblyVersion>
-    <FileVersion>1.1.24.0</FileVersion>
-    <Version>1.1.24</Version>
+    <AssemblyVersion>1.1.26.0</AssemblyVersion>
+    <FileVersion>1.1.26.0</FileVersion>
+    <Version>1.1.26</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
@@ -45,11 +45,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="itext7" Version="7.1.16" />
-    <PackageReference Include="Portable.BouncyCastle" Version="1.8.10" />
+    <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\itext7-dotnet\itext\itext.kernel\itext.kernel.netstandard.csproj" />
     <ProjectReference Include="..\Abc.Nes.ArchivalPackage\Abc.Nes.ArchivalPackage.csproj" />
     <ProjectReference Include="..\Abc.Nes.Xades\Abc.Nes.Xades.csproj" />
   </ItemGroup>

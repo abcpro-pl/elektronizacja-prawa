@@ -38,11 +38,4 @@ namespace Abc.Nes.Enumerations {
         [XmlEnum("niedostepne")]
         NotAvailable       
     }
-
-    [XmlType(TypeName = "dostepnosc-data-typ")]
-    [XmlAnnotation("Typ daty dostepności.")]
-    public enum AccessDateType {
-        [XmlEnum("dostępny po")]
-        After
-    }
 }

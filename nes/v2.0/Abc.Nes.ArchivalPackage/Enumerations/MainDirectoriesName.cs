@@ -19,6 +19,6 @@ namespace Abc.Nes.ArchivalPackage {
         [XmlEnum("dokumenty")] Files,
         [XmlEnum("metadane")] Metadata,
         [XmlEnum("sprawy")] Objects,
-        [XmlEnum("inne")] Another,
+        [XmlEnum("__INNE__")] Another,
     }
 }

@@ -593,10 +593,10 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 }
 
                 if (File.Exists(output)) {
-                    item.Init(File.ReadAllBytes(output));
+                    item.Init(File.ReadAllBytes(output),out var exception);
                 }
                 else if (File.Exists(temp)) {
-                    item.Init(File.ReadAllBytes(temp));
+                    item.Init(File.ReadAllBytes(temp), out var exception);
                 }
 
                 try {
@@ -704,7 +704,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             if (result != null) {
                 using (var msOutput = new MemoryStream()) {
                     result.Save(msOutput);
-                    item.Init(msOutput.ToArray());
+                    item.Init(msOutput.ToArray(), out var exception);
                 }
             }
         }
@@ -723,7 +723,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             if (result != null) {
                 using (var msOutput = new MemoryStream()) {
                     result.Save(msOutput);
-                    item.Init(msOutput.ToArray());
+                    item.Init(msOutput.ToArray(), out var exception);
                 }
             }
         }
