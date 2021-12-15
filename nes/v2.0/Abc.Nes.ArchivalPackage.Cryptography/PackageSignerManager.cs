@@ -252,6 +252,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
         }
 
         public void SignPdfFile(string sourceFilePath, PdfSignatureOptions options, string outputFilePath = null) {
+
             if (options.Certificate == null) { throw new ArgumentNullException("cert"); }
             if (sourceFilePath == null) { throw new ArgumentNullException("filePath"); }
             if (!File.Exists(sourceFilePath)) { throw new FileNotFoundException("File not found!", sourceFilePath); }

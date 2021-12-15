@@ -350,7 +350,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                     using (var fs = new FileStream(temp, FileMode.Create)) {
 
                         StampingProperties properties = new StampingProperties();
-                        if (allowMultipleSignatures)
+                        if (signatureCount > 0 && allowMultipleSignatures)
                             properties.UseAppendMode();
 
                         var signer = new PdfSigner(reader, fs, properties);
