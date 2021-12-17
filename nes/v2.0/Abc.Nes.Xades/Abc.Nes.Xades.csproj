@@ -17,9 +17,9 @@
     <PackageId>ABCPRO.NES.XAdES</PackageId>
     <Product>ABCPRO.NES.XAdES</Product>
     <PackageProjectUrl>https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0</PackageProjectUrl>
-    <AssemblyVersion>1.1.26.0</AssemblyVersion>
-    <FileVersion>1.1.26.0</FileVersion>
-    <Version>1.1.26</Version>
+    <AssemblyVersion>1.1.27.0</AssemblyVersion>
+    <FileVersion>1.1.27.0</FileVersion>
+    <Version>1.1.27</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 

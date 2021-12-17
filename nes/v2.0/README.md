@@ -31,6 +31,7 @@ W tym katalogu znajduje się:
 
 Wersja  | Opis
 --------|--------
+1.1.27|Dodanie wsparcia dla wielopodpisu pliku PDF.
 1.1.26|Usprawnienia w obsłudze dowolnych plików ZIP.
 1.1.25|Usprawnienia w obsłudze dowolnych plików ZIP.
 1.1.24|Obsługa dowolnych plików ZIP.
