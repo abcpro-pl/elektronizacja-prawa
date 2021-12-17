@@ -24,7 +24,6 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace Abc.Nes.ArchivalPackage {
     public class PackageManager : IPackageManager {
@@ -455,12 +454,6 @@ namespace Abc.Nes.ArchivalPackage {
         }
         public MetadataFile GetMetadataFile(ItemBase documentFile) {
             return Package.GetMetadataFile(documentFile);
-            //if (documentFile.IsNotNull() && documentFile.FilePath.IsNotNullOrEmpty()) {
-            //    var regex = new Regex(Regex.Escape($"{MainDirectoriesName.Files.GetXmlEnum()}"), RegexOptions.IgnoreCase);
-            //    var metadataFilePath = regex.Replace(documentFile.FilePath, MainDirectoriesName.Metadata.GetXmlEnum(), 1);
-            //    return GetItemByFilePath($"{metadataFilePath}.xml") as MetadataFile;
-            //}
-            //return default;
         }
         public ItemBase GetItemByFilePath(string filePath) {
             return Package.GetItemByFilePath(filePath);
