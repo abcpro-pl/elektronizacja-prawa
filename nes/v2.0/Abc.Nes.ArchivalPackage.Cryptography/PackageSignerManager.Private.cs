@@ -176,7 +176,10 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                                 var canvas = new PdfCanvas(layer2, pdfDoc);
 
                                 float MARGIN = 1;
-                                PdfFont font = PdfFontFactory.CreateFont();
+
+                                iText.IO.Font.FontProgram fontProgram = iText.IO.Font.FontProgramFactory.CreateFont();
+                                PdfFont font = PdfFontFactory.CreateFont(fontProgram, "cp1250", true);
+                                
 
                                 float width = rect.GetWidth();
                                 float height = rect.GetHeight();
@@ -202,6 +205,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                                     Canvas signLayoutCanvas = new Canvas(canvas, signatureRect);
                                     Paragraph para = new Paragraph(signText)
                                         //.SetMultipliedLeading(.9f)
+                                        .SetFont(font)
                                         .SetFontSize(options.FontSize)
                                         //.SetTextRenderingMode(PdfCanvasConstants.TextRenderingMode.FILL_CLIP)
                                         
