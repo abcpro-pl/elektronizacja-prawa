@@ -16,6 +16,7 @@ namespace Abc.Nes.NUnitTests {
 
         //test files
         const string PDF_FILE = "testFile.pdf";
+        const string PDF_LEGISLATOR_FILE = "legislatorTest.pdf";
         const string XML_FILE = "testFile.xml";
         const string LOGO_FILE = "TestLogo1.png";
 
@@ -39,6 +40,7 @@ namespace Abc.Nes.NUnitTests {
         //pdf signature params
         int WIDTH = 150;
         int HEIGHT = 40;
+        int MARGIN = 2;
 
 
         string certum_tsa_login;
@@ -97,7 +99,7 @@ namespace Abc.Nes.NUnitTests {
                 SignatureImage = img,
                 Height = HEIGHT,
                 Width = WIDTH,
-                Margin = 10,
+                Margin = MARGIN,
                 SignatureLocation = PdfSignatureLocation.TopRight,
                 PositionX = 1,
                 PositionY = 1,
@@ -153,7 +155,7 @@ namespace Abc.Nes.NUnitTests {
                 X509Certificate2 cert = CertUtil.GetCertByName(TEST_CERT);
 
                 pdfSignOptions.Certificate = cert;
-                pdfSignOptions.Location = "Location A";
+                pdfSignOptions.Location = "1st signature location";
                 pdfSignOptions.AddVisibleSignature = true;
 
                 mgr.SignPdfFile(filePath, pdfSignOptions, tmpFile);
@@ -165,7 +167,7 @@ namespace Abc.Nes.NUnitTests {
                 //                true, false);
 
                 pdfSignOptions.Reason = CommitmentTypeId.ProofOfApproval;
-                pdfSignOptions.Location = "Location B";
+                pdfSignOptions.Location = "2nd signature location";
                 pdfSignOptions.SignDate = DateTime.Now;
                 pdfSignOptions.Width = WIDTH + 15;
                 pdfSignOptions.AllowMultipleSignatures = true;
@@ -489,6 +491,42 @@ namespace Abc.Nes.NUnitTests {
                 Assert.IsTrue(File.Exists(destPath));
             }
         }
+
+        [Test]
+        public void SignPdf_KIRCert_noTs_double () {
+            testName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            using (var mgr = new PackageSignerManager()) {
+
+                PreparePdfPaths(out string filePath, out string destPath);
+
+                X509Certificate2 cert = CertUtil.GetCertByName(KIR_CERT);
+
+                pdfSignOptions.Certificate = cert;
+                pdfSignOptions.Location = "1st signature location";
+                pdfSignOptions.AddVisibleSignature = true;
+                var tmpFile = Path.GetTempFileName();
+                var tmpPath = Path.Combine(testFilesDirPath, tmpFile);
+
+                mgr.SignPdfFile(filePath, pdfSignOptions, tmpFile);
+
+                pdfSignOptions.Reason = CommitmentTypeId.ProofOfApproval;
+                pdfSignOptions.Location = "2nd signature location";
+                pdfSignOptions.SignDate = DateTime.Now;
+                pdfSignOptions.Width = WIDTH + 15;
+                pdfSignOptions.AllowMultipleSignatures = true;
+                mgr.SignPdfFile(tmpFile, pdfSignOptions, destPath);
+
+                File.Delete(tmpPath);
+                //mgr.SignPdfFile(filePath, cert,
+                //                CommitmentTypeId.ProofOfOrigin,null,signDate,
+
+                //                apperancePngImage: img, 
+                //                outputFilePath: destPath,
+                //                addSignatureApperance: true);
+                Assert.IsTrue(File.Exists(destPath));
+            }
+        }
+
         [Test]
         public void SignPdf_KIRCert_TsKIR() {
             testName = System.Reflection.MethodBase.GetCurrentMethod().Name;
@@ -556,6 +594,160 @@ namespace Abc.Nes.NUnitTests {
                 //                img,
                 //                outputFilePath: destPath,
                 //                addSignatureApperance: true);
+                Assert.IsTrue(File.Exists(destPath));
+            }
+        }
+
+        [Test]
+        public void SignPdf_KIRCert_LegislatorTest() {
+            testName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            using(var mgr = new PackageSignerManager()) {
+                PreparePdfPaths(PDF_LEGISLATOR_FILE, out string filePath, out string destPath);
+                X509Certificate2 cert = CertUtil.GetCertByName(KIR_CERT);
+
+                pdfSignOptions.Certificate = cert;
+                pdfSignOptions.Reason = CommitmentTypeId.ProofOfApproval;
+                pdfSignOptions.Location = "Polska";
+                pdfSignOptions.TimestampOptions = new TimestampOptions {
+                    TsaUrl = TSA_CERTUM
+                };
+                pdfSignOptions.SignatureImage = null;
+                //pdfSignOptions.Loc
+
+                mgr.SignPdfFile(filePath,
+                    cert,
+                    CommitmentTypeId.ProofOfApproval,
+                    "Polska",
+                    DateTime.Now,
+                    false,
+                    TSA_CERTUM,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    PdfSignatureLocation.TopRight,
+                    360F,
+                    790F,
+                    150F,
+                    HEIGHT,
+                    MARGIN,
+                    destPath,
+                    true,
+                    false, 
+                    true);
+
+                Assert.IsTrue(File.Exists(destPath));
+            }
+        }
+        [Test]
+        public void SignPdf_KIRCert_LegislatorTest_TsKir() {
+            testName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            using (var mgr = new PackageSignerManager()) {
+                PreparePdfPaths(PDF_LEGISLATOR_FILE, out string filePath, out string destPath);
+                X509Certificate2 cert = CertUtil.GetCertByName(KIR_CERT);
+
+                pdfSignOptions.Certificate = cert;
+                pdfSignOptions.Reason = CommitmentTypeId.ProofOfApproval;
+                pdfSignOptions.Location = "Polska";
+                pdfSignOptions.TimestampOptions = new TimestampOptions {
+                    TsaUrl = TSA_CERTUM
+                };
+                pdfSignOptions.SignatureImage = null;
+                //pdfSignOptions.Loc
+
+                mgr.SignPdfFile(filePath,
+                    cert,
+                    CommitmentTypeId.ProofOfApproval,
+                    "Polska",
+                    DateTime.Now,
+                    true,
+                    TSA_KIR,
+                    null,
+                    null,
+                    null,
+                    cert,
+                    null,
+                    PdfSignatureLocation.TopRight,
+                    360F,
+                    790F,
+                    150F,
+                    HEIGHT,
+                    10F,
+                    destPath,
+                    true,
+                    false,
+                    true);
+
+                Assert.IsTrue(File.Exists(destPath));
+            }
+        }
+        [Test]
+        public void SignPdf_TestCert_LegislatorTest_double() {
+            testName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            using (var mgr = new PackageSignerManager()) {
+                PreparePdfPaths(PDF_LEGISLATOR_FILE, out string filePath, out string destPath);
+                X509Certificate2 cert = CertUtil.GetCertByName(TEST_CERT);
+
+                pdfSignOptions.Certificate = cert;
+                pdfSignOptions.Reason = CommitmentTypeId.ProofOfApproval;
+                pdfSignOptions.Location = "Polska";
+                pdfSignOptions.TimestampOptions = new TimestampOptions {
+                    TsaUrl = TSA_CERTUM
+                };
+                pdfSignOptions.SignatureImage = null;
+                //pdfSignOptions.Loc
+                var tmpFile = Path.GetTempFileName();
+                var tmpPath = Path.Combine(testFilesDirPath, tmpFile);
+
+                mgr.SignPdfFile(filePath,
+                    cert,
+                    CommitmentTypeId.ProofOfApproval,
+                    "Polska",
+                    DateTime.Now,
+                    true,
+                    TSA_CERTUM,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    PdfSignatureLocation.TopRight,
+                    360F,
+                    790F,
+                    WIDTH,
+                    HEIGHT,
+                    10F,
+                    tmpPath,
+                    true,
+                    false,
+                    true);
+
+
+                mgr.SignPdfFile(tmpPath,
+                    cert,
+                    CommitmentTypeId.ProofOfApproval,
+                    "Polska",
+                    DateTime.Now,
+                    false,
+                    TSA_CERTUM,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    PdfSignatureLocation.TopRight,
+                    360F,
+                    790F,
+                    150F,
+                    HEIGHT,
+                    10F,
+                    destPath,
+                    true,
+                    false,
+                    true);
+
+                File.Delete(tmpPath);
                 Assert.IsTrue(File.Exists(destPath));
             }
         }
@@ -700,7 +892,12 @@ namespace Abc.Nes.NUnitTests {
             }
         }
         #endregion sign xml test
-
+        private void PreparePdfPaths(string inputFileName, out string filePath, out string destPath) {
+            filePath = Path.Combine(testFilesDirPath, inputFileName);
+            destPath = Path.Combine(signedPath, $"{testName}.pdf");
+            if (File.Exists(destPath))
+                File.Delete(destPath);
+        }
         private void PreparePdfPaths(out string filePath, out string destPath) {
             filePath = Path.Combine(testFilesDirPath, PDF_FILE);
             destPath = Path.Combine(signedPath, $"{testName}.pdf");
