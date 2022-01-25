@@ -131,7 +131,11 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                             sb.AppendLine(options.SignatureTitle);
                             //var signerName = cert.FriendlyName;
                             //if (signerName == null || signerName == string.Empty)
-                            var signerName = options.Certificate.GetNameInfo(X509NameType.SimpleName, false);
+                            string signerName;
+                            if (options.SignerName.IsNotNullOrEmpty())
+                                signerName = options.SignerName;
+                            else
+                                signerName = options.Certificate.GetNameInfo(X509NameType.SimpleName, false);
 
                             sb.AppendLine(signerName);
                             string dateString = DateTimeHelper.FormatDateForSignature(options.SignDate.Value,

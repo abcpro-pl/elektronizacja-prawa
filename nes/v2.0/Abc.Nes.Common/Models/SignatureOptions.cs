@@ -13,5 +13,9 @@ namespace Abc.Nes.Common.Models {
             }
         }
         public TimestampOptions TimestampOptions { get; set; } = null;
+        /// <summary>
+        /// Custom name, if empty name is taken from certificate
+        /// </summary>
+        public string SignerName { get; set; } = null;
     }
 }
