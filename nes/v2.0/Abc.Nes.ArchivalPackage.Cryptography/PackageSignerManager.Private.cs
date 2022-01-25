@@ -64,14 +64,14 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                             x = margin;
                             y = margin;
                             if (signatureCount > 0)
-                                y -= height;
+                                y += height * signatureCount;
                             break;
                         }
                     case PdfSignatureLocation.BottomRight: { 
                             x = pageWidth - (margin + apperanceWidth);
                             y = margin;
                             if (signatureCount > 0)
-                                y -= height;
+                                y += height * signatureCount;
                             break;
                         }
 
@@ -79,14 +79,14 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                             x = margin;
                             y = pageHeight - (margin + apperanceHeight);
                             if (signatureCount > 0)
-                                y -= height;
+                                y -= height * signatureCount;
                             break;
                         }
                     case PdfSignatureLocation.TopRight: { 
                             x = pageWidth - (margin + apperanceWidth);
                             y = pageHeight - (margin + apperanceHeight);
                             if (signatureCount > 0)
-                                y -= height;
+                                y -= height * signatureCount;
                             break;
                         }
                 }
