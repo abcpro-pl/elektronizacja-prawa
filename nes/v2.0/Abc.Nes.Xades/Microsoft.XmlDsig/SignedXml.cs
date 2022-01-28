@@ -638,6 +638,10 @@ namespace Microsoft.XmlDsig {
                 }
             }
 
+            if (string.Equals(XmlDsigXPathTransformUrl, transformAlgorithm, StringComparison.OrdinalIgnoreCase)) {
+                return true;
+            }
+
             SignedXmlDebugLog.LogUnsafeTransformMethod(
                 this,
                 transformAlgorithm,

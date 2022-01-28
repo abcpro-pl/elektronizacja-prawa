@@ -1265,7 +1265,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                     FileName = internalPath,
                     IsValid = false,
                     SignatureName = String.Empty
-                }); ;
+                });
             }
         }
     }

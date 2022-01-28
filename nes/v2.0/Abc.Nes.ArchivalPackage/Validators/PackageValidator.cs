@@ -319,6 +319,12 @@ namespace Abc.Nes.ArchivalPackage.Validators {
             foreach (var item in folder.Folders) {
                 if (metadataFolder.Items.Where(x => x.FileName == $"{item.FolderName}.xml").Any()) { continue; }
                 var result = CheckDocumentAndMetadataCount(item, metadataFolder.Folders.Where(x => x.FolderName == item.FolderName).FirstOrDefault());
+                if (!result) {
+                    foreach (var fItem in item.Items) {
+                        if (!metadataFolder.Items.Where(x => x.FileName.Contains(fItem.FileName)).Any()) { return false; }
+                    }
+                    result = true;
+                }
                 if (!result) { return false; }
             }
 

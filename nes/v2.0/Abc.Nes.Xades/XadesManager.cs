@@ -280,8 +280,9 @@ Content-Disposition: filename=""{ fileName }""
         }
 
         public ValidationResult ValidateSignature(Stream stream) {
-            XmlDocument xd = new XmlDocument();
-            xd.PreserveWhitespace = true;
+            XmlDocument xd = new XmlDocument {
+                PreserveWhitespace = true
+            };
             xd.Load(stream);
             var signedXml = new SignedXml(xd);
 

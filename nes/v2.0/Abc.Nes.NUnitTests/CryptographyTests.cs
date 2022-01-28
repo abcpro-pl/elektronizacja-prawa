@@ -5,6 +5,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Abc.Nes.NUnitTests {
     public class CryptographyTests {
@@ -130,9 +131,8 @@ namespace Abc.Nes.NUnitTests {
 
         [Test]
         public void ValidatePackageEZDPUW() {
-            var path = @"../../../../sample/_2016-10-28_18_33.tar";
-            //var path = @"../../../../sample/_2006-12-15_11_45.tar";
-            //var path = @"../../../../sample/Sprawy_PUW_BIA_20211109_090742.tar";
+            var path = @"../../../../sample/paczka0.zip";
+
             using (var stream = File.OpenRead(path)) {
                 using (var tar = new ArchivalPackage.Formats.Tar.TarFile(stream, ArchivalPackage.Formats.Tar.TarType.Tar)) {
                     using (var zipStream = tar.ConvertToZip()) {
@@ -143,19 +143,80 @@ namespace Abc.Nes.NUnitTests {
                             var isNotEmpty = mgr != null && mgr.Package != null && !mgr.Package.IsEmpty;
                             var validator = new ArchivalPackage.Validators.PackageValidator();
                             var result = validator.GetValidationResult(mgr.Package, true);
-                            //Assert.IsTrue(isNotEmpty && exception == null && result.IsCorrect);
 
-                            //mgr.Save("../../../../sample/_2006-12-15_11_45.zip");
-
-                            //var mgr2 = new PackageManager();
-                            //mgr2.AddFiles(mgr.Package.Documents.Items, "Wniosek", mgr.Package.Metadata.Items.Select(x=>x.Document));
-                            //mgr2.Save("../../../../sample/_2006-12-15_11_33_test.zip");
-
-                            Assert.IsTrue(isNotEmpty && exception == null && !result.IsCorrect);
+                            Assert.IsTrue(isNotEmpty && exception == null && result.IsCorrect);
                         }
                     }
                 }
             }
+        }
+
+        [Test]
+        public void ValidatePackageSignaturesEZDPUW() {
+            var path = @"../../../../sample/paczka0.zip";
+            var result = new List<Signature>();
+            using (var stream = File.OpenRead(path)) {
+                using (var tar = new ArchivalPackage.Formats.Tar.TarFile(stream, ArchivalPackage.Formats.Tar.TarType.Tar)) {
+                    var pathToPackage = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString() + ".zip");
+                    var zipConvertResult = tar.ConvertToZip(pathToPackage);
+                    if (zipConvertResult) {
+                        if (File.Exists(pathToPackage)) {
+                            using (var packageSignerManager = new PackageSignerManager()) {
+                                var pathToFileInPackage = "dokumenty/E161491121.xml";
+                                var verifiedSignaturesForDocument = packageSignerManager.VerifySignatures(pathToPackage, pathToFileInPackage);
+
+                                var signatures = packageSignerManager.GetSignatureInfos(pathToPackage, pathToFileInPackage);
+
+                                foreach (var signature in signatures) {
+                                    var signatureForDocument = new Signature() {
+                                        Author = signature.Author,
+                                        CreateDate = signature.CreateDate,
+                                        Type = signature.SignatureType == SignatureType.Pades ? "PAdeS" : "XAdES",
+                                        Publisher = signature.Publisher,
+                                        Number = signature.SignatureNumber,
+                                        CommitmentType = signature.CommitmentTypeIndication,
+                                        Position = signature.ClaimedRole,
+                                        Institution = signature.Organization,
+                                        IsCorrect = false,
+                                        SignatureValid = false,
+                                        CertyficateIsValid = false
+                                    };
+
+                                    var verifiedSignature = verifiedSignaturesForDocument
+                                        .FirstOrDefault(x => x.SignatureName == signature.SignatureNumber);
+
+                                    if (verifiedSignature != null) {
+                                        signatureForDocument.IsCorrect = verifiedSignature.IsValid && verifiedSignature.CertValidationInfo.IsValid;
+                                        signatureForDocument.SignatureValid = verifiedSignature.IsValid;
+                                        signatureForDocument.CertyficateIsValid = verifiedSignature.CertValidationInfo.IsValid;
+                                        signatureForDocument.VerifiedMessage = verifiedSignature.Message;
+                                    }
+
+                                    result.Add(signatureForDocument);
+                                }
+                            }
+
+                            File.Delete(pathToPackage);
+                        }
+                    }
+                }
+            }
+        }
+
+        public class Signature {
+            public Guid Id { get; set; }
+            public string Number { get; set; }
+            public string Type { get; set; }
+            public string CommitmentType { get; set; }
+            public string Author { get; set; }
+            public string Position { get; set; }
+            public string Institution { get; set; }
+            public DateTime CreateDate { get; set; }
+            public string Publisher { get; set; }
+            public bool IsCorrect { get; set; }
+            public string VerifiedMessage { get; set; }
+            public bool SignatureValid { get; set; }
+            public bool CertyficateIsValid { get; set; }
         }
 
 

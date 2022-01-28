@@ -60,6 +60,7 @@ namespace Microsoft.XmlDsig {
                                 _nsm.AddNamespace(prefix, namespaceURI);
                             }
                         }
+
                         break;
                     }
                     else {
@@ -139,13 +140,16 @@ namespace Microsoft.XmlDsig {
                 XPathNavigator navigator = _document.CreateNavigator();
                 XPathNodeIterator it = navigator.Select("//. | //@*");
 
-                XPathExpression xpathExpr = navigator.Compile("boolean(" + _xpathexpr + ")");
-                xpathExpr.SetContext(_nsm);
+                XPathExpression xpr = navigator.Compile("boolean(" + _xpathexpr + ")");
+                if (!_nsm.HasNamespace("ds")) {
+                    _nsm.AddNamespace("ds", "http://www.w3.org/2000/09/xmldsig#");
+                }
+                xpr.SetContext(_nsm);
 
                 while (it.MoveNext()) {
                     XmlNode node = ((IHasXmlNode)it.Current).GetNode();
 
-                    bool include = (bool)it.Current.Evaluate(xpathExpr);
+                    bool include = (bool)it.Current.Evaluate(xpr);
                     if (include == true)
                         resultNodeList.Add(node);
                 }
