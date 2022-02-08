@@ -350,3 +350,4 @@ MigrationBackup/
 .ionide/
 nes/v2.0/sample/TimestampTests/
 nes/v2.0/sample/certum.tsa.pass.txt
+nes/v2.0/sample/cert.names.txt

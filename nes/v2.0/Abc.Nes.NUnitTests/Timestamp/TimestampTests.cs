@@ -21,9 +21,14 @@ namespace Abc.Nes.NUnitTests {
         const string LOGO_FILE = "TestLogo1.png";
 
         //test certificates names
-        private const string TEST_CERT = "localhost";
-        private const string KIR_CERT = "Marcin I";
-        private const string SIGILLUM_CERT = "Beata W";
+        //private const string TEST_CERT = "localhost";
+        //private const string KIR_CERT = "X";
+        //private const string SIGILLUM_CERT = "Y";
+        
+        //test certificate prefixes
+        private const string TEST_PREFIX = "TEST";
+        private const string SIGILLUM_PREFIX = "SIG";
+        private const string KIR_PREFIX = "KIR";
 
         //timestamp urls
         private const string TSA_KIR = "http://www.ts.kir.com.pl/HttpTspServer";
@@ -32,7 +37,21 @@ namespace Abc.Nes.NUnitTests {
         private const string TSA_SIGILLUM = "http://tsa.sigillum.pl";
 
         //auth data file names
+        /// <summary>
+        /// File with login and password for certum timestamp server basic auth.<br/>
+        /// Login in 1st line, password in 2nd example:<br/>
+        /// myLogin<br/>
+        /// secretPasword
+        /// </summary>
         private const string CERTUM_TSA_AUTH_FILE = "certum.tsa.pass.txt";
+        /// <summary>
+        /// File with certificate names. Format:<br/>
+        /// PREFIX Certificate name<br/>
+        /// example:<br/>
+        /// KIR John Doe<br/>
+        /// SIG Jane Smith
+        /// </summary>
+        private const string CERTIFICATE_NAMES_FILE = "cert.names.txt";
 
         //tsa policies
         private const string TSA_POLICY_SIGILLUM = "1.2.616.1.113725.0.0.5";
@@ -42,6 +61,9 @@ namespace Abc.Nes.NUnitTests {
         int HEIGHT = 40;
         int MARGIN = 2;
 
+        string test_cert;
+        string kir_cert;
+        string sigillum_cert;
 
         string certum_tsa_login;
         string certum_tsa_password;
@@ -57,14 +79,13 @@ namespace Abc.Nes.NUnitTests {
         [OneTimeSetUp]
         public void Init() {
             pwd = Directory.GetCurrentDirectory();
-            testFilesDirPath = Path.Combine(pwd, @"../../../../sample/");
+            testFilesDirPath = Path.GetFullPath(Path.Combine(pwd, @"../../../../sample/"));
             signedPath = Path.Combine(testFilesDirPath, "TimestampTests");
 
-            var certumFilePath = Path.Combine(testFilesDirPath, CERTUM_TSA_AUTH_FILE);
+            
+            LoadCertificateNamesData();
+            LoadCertumBasicAuthData();
 
-            var authTxt = File.ReadAllLines(certumFilePath);
-            certum_tsa_login = authTxt[0];
-            certum_tsa_password = authTxt[1];
 
             //if (Directory.Exists(signedPath))
             //    Directory.Delete(signedPath, true);
@@ -73,8 +94,11 @@ namespace Abc.Nes.NUnitTests {
 
             img = GetImage(LOGO_FILE);
 
-            
+
         }
+
+        
+
         [SetUp]
         public void Setup() {
             signDate = DateTime.Now;
@@ -116,7 +140,7 @@ namespace Abc.Nes.NUnitTests {
                 
                 PreparePdfPaths(out string filePath, out string destPath);
 
-                X509Certificate2 cert = CertUtil.GetCertByName(TEST_CERT);
+                X509Certificate2 cert = CertUtil.GetCertByName(test_cert);
 
                 
                 pdfSignOptions.Certificate = cert;
@@ -152,7 +176,7 @@ namespace Abc.Nes.NUnitTests {
                 var tmpFile = Path.GetTempFileName();
                 var tmpPath = Path.Combine(testFilesDirPath, tmpFile);
 
-                X509Certificate2 cert = CertUtil.GetCertByName(TEST_CERT);
+                X509Certificate2 cert = CertUtil.GetCertByName(test_cert);
 
                 pdfSignOptions.Certificate = cert;
                 pdfSignOptions.Location = "1st signature location";
@@ -194,7 +218,7 @@ namespace Abc.Nes.NUnitTests {
 
                 PreparePdfPaths(out string filePath, out string destPath);
 
-                X509Certificate2 cert = CertUtil.GetCertByName(TEST_CERT);
+                X509Certificate2 cert = CertUtil.GetCertByName(test_cert);
 
                 pdfSignOptions.Certificate = cert;
                 pdfSignOptions.ImageAsBackground = true;
@@ -212,6 +236,24 @@ namespace Abc.Nes.NUnitTests {
             }
         }
         [Test]
+        public void SignPdf_TestCert_noTS_pastDate() {
+            testName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+            using (var mgr = new PackageSignerManager()) {
+
+                PreparePdfPaths(out string filePath, out string destPath);
+
+                X509Certificate2 cert = CertUtil.GetCertByName(test_cert);
+
+                pdfSignOptions.Certificate = cert;
+                pdfSignOptions.AddVisibleSignature = true;
+                pdfSignOptions.SignDate = new DateTime(2022, 1, 3, 10, 11, 25, DateTimeKind.Local);
+
+                mgr.SignPdfFile(filePath, pdfSignOptions, destPath);
+                Assert.IsTrue(File.Exists(destPath));
+            }
+        }
+        [Test]
         public void SignPdf_TestCert_noTS_graphic() {
             testName = System.Reflection.MethodBase.GetCurrentMethod().Name;
 
@@ -219,7 +261,7 @@ namespace Abc.Nes.NUnitTests {
 
                 PreparePdfPaths(out string filePath, out string destPath);
 
-                X509Certificate2 cert = CertUtil.GetCertByName(TEST_CERT);
+                X509Certificate2 cert = CertUtil.GetCertByName(test_cert);
 
                 pdfSignOptions.Certificate = cert;
                 pdfSignOptions.AddVisibleSignature = true;
@@ -269,7 +311,7 @@ namespace Abc.Nes.NUnitTests {
 
                 PreparePdfPaths(out string filePath, out string destPath);
 
-                X509Certificate2 cert = CertUtil.GetCertByName(TEST_CERT);
+                X509Certificate2 cert = CertUtil.GetCertByName(test_cert);
 
                 pdfSignOptions.Certificate = cert;
                 pdfSignOptions.AddVisibleSignature = true;
@@ -295,7 +337,7 @@ namespace Abc.Nes.NUnitTests {
 
                 PreparePdfPaths(out string filePath, out string destPath);
 
-                X509Certificate2 cert = CertUtil.GetCertByName(TEST_CERT);
+                X509Certificate2 cert = CertUtil.GetCertByName(test_cert);
 
                 pdfSignOptions.Certificate = cert;
                 pdfSignOptions.AddVisibleSignature = true;
@@ -323,7 +365,7 @@ namespace Abc.Nes.NUnitTests {
 
                 PreparePdfPaths(out string filePath, out string destPath);
 
-                X509Certificate2 cert = CertUtil.GetCertByName(TEST_CERT);
+                X509Certificate2 cert = CertUtil.GetCertByName(test_cert);
 
                 pdfSignOptions.Certificate = cert;
                 pdfSignOptions.TimestampOptions = new TimestampOptions { 
@@ -349,7 +391,7 @@ namespace Abc.Nes.NUnitTests {
             using (var mgr = new PackageSignerManager()) {
                 PreparePdfPaths(out string filePath, out string destPath);
 
-                X509Certificate2 cert = CertUtil.GetCertByName(TEST_CERT);
+                X509Certificate2 cert = CertUtil.GetCertByName(test_cert);
 
                 pdfSignOptions.Certificate = cert;
 
@@ -420,8 +462,8 @@ namespace Abc.Nes.NUnitTests {
                 var tmpFile = Path.GetTempFileName();
                 var tmpPath = Path.Combine(testFilesDirPath, tmpFile);
 
-                X509Certificate2 kirCert = CertUtil.GetCertByName(KIR_CERT),
-                    sigillumCert = CertUtil.GetCertByName(SIGILLUM_CERT);
+                X509Certificate2 kirCert = CertUtil.GetCertByName(kir_cert),
+                    sigillumCert = CertUtil.GetCertByName(sigillum_cert);
 
                 pdfSignOptions.Certificate = kirCert;
                 pdfSignOptions.Reason = CommitmentTypeId.ProofOfOrigin;
@@ -475,7 +517,7 @@ namespace Abc.Nes.NUnitTests {
 
                 PreparePdfPaths(out string filePath, out string destPath);
 
-                X509Certificate2 cert = CertUtil.GetCertByName(KIR_CERT);
+                X509Certificate2 cert = CertUtil.GetCertByName(kir_cert);
 
                 pdfSignOptions.Certificate = cert;
                 pdfSignOptions.AddVisibleSignature = true;
@@ -499,7 +541,7 @@ namespace Abc.Nes.NUnitTests {
 
                 PreparePdfPaths(out string filePath, out string destPath);
 
-                X509Certificate2 cert = CertUtil.GetCertByName(KIR_CERT);
+                X509Certificate2 cert = CertUtil.GetCertByName(kir_cert);
 
                 pdfSignOptions.Certificate = cert;
                 pdfSignOptions.Location = "1st signature location";
@@ -533,7 +575,7 @@ namespace Abc.Nes.NUnitTests {
             using (var mgr = new PackageSignerManager()) {
                 PreparePdfPaths(out string filePath, out string destPath);
 
-                X509Certificate2 cert = CertUtil.GetCertByName(KIR_CERT),
+                X509Certificate2 cert = CertUtil.GetCertByName(kir_cert),
                     tsaCert = cert;
 
                 pdfSignOptions.Certificate = cert;
@@ -554,7 +596,7 @@ namespace Abc.Nes.NUnitTests {
 
                 PreparePdfPaths(out string filePath, out string destPath);
 
-                X509Certificate2 cert = CertUtil.GetCertByName(SIGILLUM_CERT);
+                X509Certificate2 cert = CertUtil.GetCertByName(sigillum_cert);
 
                 pdfSignOptions.Certificate = cert;
                 pdfSignOptions.AddVisibleSignature = true;
@@ -577,7 +619,7 @@ namespace Abc.Nes.NUnitTests {
 
                 PreparePdfPaths(out string filePath, out string destPath);
 
-                X509Certificate2 cert = CertUtil.GetCertByName(SIGILLUM_CERT);
+                X509Certificate2 cert = CertUtil.GetCertByName(sigillum_cert);
 
                 pdfSignOptions.Certificate = cert;
                 pdfSignOptions.TimestampOptions = new TimestampOptions {
@@ -603,7 +645,7 @@ namespace Abc.Nes.NUnitTests {
             testName = System.Reflection.MethodBase.GetCurrentMethod().Name;
             using(var mgr = new PackageSignerManager()) {
                 PreparePdfPaths(PDF_LEGISLATOR_FILE, out string filePath, out string destPath);
-                X509Certificate2 cert = CertUtil.GetCertByName(KIR_CERT);
+                X509Certificate2 cert = CertUtil.GetCertByName(kir_cert);
 
                 pdfSignOptions.Certificate = cert;
                 pdfSignOptions.Reason = CommitmentTypeId.ProofOfApproval;
@@ -645,7 +687,7 @@ namespace Abc.Nes.NUnitTests {
             testName = System.Reflection.MethodBase.GetCurrentMethod().Name;
             using (var mgr = new PackageSignerManager()) {
                 PreparePdfPaths(PDF_LEGISLATOR_FILE, out string filePath, out string destPath);
-                X509Certificate2 cert = CertUtil.GetCertByName(KIR_CERT);
+                X509Certificate2 cert = CertUtil.GetCertByName(kir_cert);
 
                 pdfSignOptions.Certificate = cert;
                 pdfSignOptions.Reason = CommitmentTypeId.ProofOfApproval;
@@ -687,7 +729,7 @@ namespace Abc.Nes.NUnitTests {
             testName = System.Reflection.MethodBase.GetCurrentMethod().Name;
             using (var mgr = new PackageSignerManager()) {
                 PreparePdfPaths(PDF_LEGISLATOR_FILE, out string filePath, out string destPath);
-                X509Certificate2 cert = CertUtil.GetCertByName(TEST_CERT);
+                X509Certificate2 cert = CertUtil.GetCertByName(test_cert);
 
                 pdfSignOptions.Certificate = cert;
                 pdfSignOptions.Reason = CommitmentTypeId.ProofOfApproval;
@@ -762,7 +804,7 @@ namespace Abc.Nes.NUnitTests {
                 
                 PrepareXmlPaths(out string filePath, out string destPath);
 
-                X509Certificate2 cert = CertUtil.GetCertByName(KIR_CERT);
+                X509Certificate2 cert = CertUtil.GetCertByName(kir_cert);
                 
                 xmlSignOptions.Certificate = cert;
                 xmlSignOptions.TimestampOptions = new TimestampOptions {
@@ -784,7 +826,7 @@ namespace Abc.Nes.NUnitTests {
             testName = System.Reflection.MethodBase.GetCurrentMethod().Name;
             using (var manager = new XadesManager()) {
                 PrepareXmlPaths(out string filePath, out string destPath);
-                X509Certificate2 cert = CertUtil.GetCertByName(KIR_CERT);
+                X509Certificate2 cert = CertUtil.GetCertByName(kir_cert);
 
                 xmlSignOptions.Certificate = cert;
 
@@ -810,7 +852,7 @@ namespace Abc.Nes.NUnitTests {
             using (var manager = new XadesManager()) {
                 PrepareXmlPaths(out string filePath, out string destPath);
 
-                X509Certificate2 cert = CertUtil.GetCertByName(TEST_CERT);
+                X509Certificate2 cert = CertUtil.GetCertByName(test_cert);
 
                 xmlSignOptions.Certificate = cert;
 
@@ -825,7 +867,7 @@ namespace Abc.Nes.NUnitTests {
             testName = System.Reflection.MethodBase.GetCurrentMethod().Name;
             using (var manager = new XadesManager()) {
                 PrepareXmlPaths(out string filePath, out string destPath);
-                X509Certificate2 cert = CertUtil.GetCertByName(TEST_CERT);
+                X509Certificate2 cert = CertUtil.GetCertByName(test_cert);
 
                 xmlSignOptions.Certificate = cert;
                 xmlSignOptions.TimestampOptions = new TimestampOptions {
@@ -842,7 +884,7 @@ namespace Abc.Nes.NUnitTests {
             testName = System.Reflection.MethodBase.GetCurrentMethod().Name;
             using (var manager = new XadesManager()) {
                 PrepareXmlPaths(out string filePath, out string destPath);
-                X509Certificate2 cert = CertUtil.GetCertByName(TEST_CERT);
+                X509Certificate2 cert = CertUtil.GetCertByName(test_cert);
 
                 xmlSignOptions.Certificate = cert;
                 xmlSignOptions.TimestampOptions = new TimestampOptions {
@@ -862,7 +904,7 @@ namespace Abc.Nes.NUnitTests {
             testName = System.Reflection.MethodBase.GetCurrentMethod().Name;
             using (var manager = new XadesManager()) {
                 PrepareXmlPaths(out string filePath, out string destPath);
-                X509Certificate2 cert = CertUtil.GetCertByName(SIGILLUM_CERT);
+                X509Certificate2 cert = CertUtil.GetCertByName(sigillum_cert);
 
                 xmlSignOptions.Certificate = cert;
                 xmlSignOptions.TimestampOptions = new TimestampOptions {
@@ -882,7 +924,7 @@ namespace Abc.Nes.NUnitTests {
             testName = System.Reflection.MethodBase.GetCurrentMethod().Name;
             using (var manager = new XadesManager()) {
                 PrepareXmlPaths(out string filePath, out string destPath);
-                X509Certificate2 cert = CertUtil.GetCertByName(SIGILLUM_CERT);
+                X509Certificate2 cert = CertUtil.GetCertByName(sigillum_cert);
 
                 xmlSignOptions.Certificate = cert;
 
@@ -916,6 +958,49 @@ namespace Abc.Nes.NUnitTests {
             var imgPath = Path.Combine(testFilesDirPath, fileName);
             var img = File.ReadAllBytes(imgPath);
             return img;
+        }
+
+        private void LoadCertificateNamesData() {
+            var certNamesPath = Path.Combine(testFilesDirPath, CERTIFICATE_NAMES_FILE);
+            if (File.Exists(certNamesPath)) {
+                var certTxt = File.ReadAllLines(certNamesPath);
+                foreach (string line in certTxt) {
+                    if (line.Contains(KIR_PREFIX)) {
+                        var split = line.Split(KIR_PREFIX, StringSplitOptions.RemoveEmptyEntries);
+                        kir_cert = split[0].Trim();
+                    }
+                    else if (line.Contains(SIGILLUM_PREFIX)) {
+                        var split = line.Split(SIGILLUM_PREFIX, StringSplitOptions.RemoveEmptyEntries);
+                        sigillum_cert = split[0].Trim();
+                    }
+                    else if (line.Contains(TEST_PREFIX)) {
+                        var split = line.Split(TEST_PREFIX, StringSplitOptions.RemoveEmptyEntries);
+                        test_cert = split[0].Trim();
+                    }
+                }
+            }
+            else {
+                throw new FileNotFoundException(certNamesPath);
+            }
+
+            if (null == kir_cert || kir_cert == string.Empty)
+                throw new ArgumentException($"Brak nazwy certyfikatu KIR w pliku {certNamesPath}");
+            if (null == sigillum_cert || sigillum_cert == string.Empty)
+                throw new ArgumentException($"Brak nazwy certyfikatu Sigillum w pliku {certNamesPath}");
+            if (null == test_cert || test_cert == string.Empty)
+                throw new ArgumentException($"Brak nazwy certyfikatu Test w pliku {certNamesPath}");
+        }
+
+        private void LoadCertumBasicAuthData() {
+            var certumFilePath = Path.Combine(testFilesDirPath, CERTUM_TSA_AUTH_FILE);
+            if (File.Exists(certumFilePath)) {
+                var authTxt = File.ReadAllLines(certumFilePath);
+                certum_tsa_login = authTxt[0];
+                certum_tsa_password = authTxt[1];
+            }
+            else {
+                throw new FileNotFoundException(certumFilePath);
+            }
         }
     }
 }
