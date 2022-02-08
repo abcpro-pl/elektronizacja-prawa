@@ -86,15 +86,10 @@ namespace Abc.Nes.NUnitTests {
             LoadCertificateNamesData();
             LoadCertumBasicAuthData();
 
-
-            //if (Directory.Exists(signedPath))
-            //    Directory.Delete(signedPath, true);
             if (!Directory.Exists(signedPath))
                 Directory.CreateDirectory(signedPath);
 
             img = GetImage(LOGO_FILE);
-
-
         }
 
         
@@ -154,12 +149,7 @@ namespace Abc.Nes.NUnitTests {
 
                 mgr.SignPdfFile(filePath, pdfSignOptions, destPath);
 
-                //mgr.SignPdfFile(filePath, cert,
-                //                CommitmentTypeId.ProofOfOrigin, "Wawa", signDate,
-                //                true, TSA_CERTUM_BASIC, reqPolicy, login, pass, null,
-                //                img,
-                //                outputFilePath: destPath,
-                //                addSignatureApperance: true);
+                
                 Assert.IsTrue(File.Exists(destPath));
                 bool isValid = ValidatePdfSignature(mgr, destPath);
                 Assert.IsTrue(isValid);
@@ -185,12 +175,7 @@ namespace Abc.Nes.NUnitTests {
                 pdfSignOptions.AddVisibleSignature = true;
 
                 mgr.SignPdfFile(filePath, pdfSignOptions, tmpFile);
-                //mgr.SignPdfFile(filePath, cert,
-                //                CommitmentTypeId.ProofOfOrigin, "location A", signDate,
-                //                false, null, null, null, null, null,
-                //                img, PdfSignatureLocation.TopRight, 0, 0, WIDTH, HEIGHT, 0,
-                //                tmpFile,
-                //                true, false);
+                
 
                 pdfSignOptions.Reason = CommitmentTypeId.ProofOfApproval;
                 pdfSignOptions.Location = "2nd signature location";
@@ -198,13 +183,7 @@ namespace Abc.Nes.NUnitTests {
                 pdfSignOptions.Width = WIDTH + 15;
                 pdfSignOptions.AllowMultipleSignatures = true;
                 mgr.SignPdfFile(tmpFile, pdfSignOptions, destPath);
-                //mgr.SignPdfFile(tmpFile, cert,
-                //                CommitmentTypeId.ProofOfApproval, "location B", DateTime.Now,
-                //                false, null, null, null, null, null,
-                //                null, PdfSignatureLocation.TopRight, 0, 0, WIDTH+20, HEIGHT, 0,
-                //                destPath,
-                //                true, false,
-                //                true);
+                
 
                 File.Delete(tmpPath);
                 
@@ -271,13 +250,6 @@ namespace Abc.Nes.NUnitTests {
 
                 mgr.SignPdfFile(filePath, pdfSignOptions, destPath);
 
-                //mgr.SignPdfFile(filePath, cert,
-                //                CommitmentTypeId.ProofOfOrigin, null, signDate,
-                //                false, null, null, null, null, null,
-                //                img, PdfSignatureLocation.TopRight, 0, 0, WIDTH, HEIGHT, 0,
-                //                destPath,
-                //                true, false
-                //               );
                 Assert.IsTrue(File.Exists(destPath));
                 bool isValid = ValidatePdfSignature(mgr, destPath);
                 Assert.IsTrue(isValid);
@@ -324,12 +296,7 @@ namespace Abc.Nes.NUnitTests {
 
                 mgr.SignPdfFile(filePath, pdfSignOptions, destPath);
 
-                //mgr.SignPdfFile(filePath, cert,
-                //                CommitmentTypeId.ProofOfOrigin, null, signDate,
-                                
-                //                outputFilePath: destPath,
-                //                addSignatureApperance: true);
-
+                
                 Assert.IsTrue(File.Exists(destPath));
                 bool isValid = ValidatePdfSignature(mgr, destPath);
                 Assert.IsTrue(isValid);
@@ -354,12 +321,7 @@ namespace Abc.Nes.NUnitTests {
 
                 mgr.SignPdfFile(filePath, pdfSignOptions, destPath);
 
-                //mgr.SignPdfFile(filePath, cert,
-                //                CommitmentTypeId.ProofOfOrigin, null, signDate,
-                //                true, TSA_CERTUM,
-                //                apperancePngImage: img,
-                //                outputFilePath: destPath,
-                //                addSignatureApperance: true);
+                
                 Assert.IsTrue(File.Exists(destPath));
                 bool isValid = ValidatePdfSignature(mgr, destPath);
                 Assert.IsTrue(isValid);
@@ -383,12 +345,7 @@ namespace Abc.Nes.NUnitTests {
 
                 mgr.SignPdfFile(filePath, pdfSignOptions, destPath);
 
-                //mgr.SignPdfFile(filePath, cert,
-                //                CommitmentTypeId.ProofOfOrigin, null, signDate,
-                //                true, TSA_CERTUM,
-                                
-                //                outputFilePath: destPath,
-                //                addSignatureApperance: false);
+                
                 Assert.IsTrue(File.Exists(destPath));
                 bool isValid = ValidatePdfSignature(mgr, destPath);
                 Assert.IsTrue(isValid);
@@ -408,11 +365,7 @@ namespace Abc.Nes.NUnitTests {
 
                 mgr.SignPdfFile(filePath, pdfSignOptions, destPath);
 
-                //mgr.SignPdfFile(filePath, cert,
-                //                CommitmentTypeId.ProofOfOrigin, null,signDate,
-                                
-                //                outputFilePath: destPath,
-                //                addSignatureApperance: false);
+                
                 Assert.IsTrue(File.Exists(destPath));
                 bool isValid = ValidatePdfSignature(mgr, destPath);
                 Assert.IsTrue(isValid);
@@ -489,12 +442,7 @@ namespace Abc.Nes.NUnitTests {
                 pdfSignOptions.AddVisibleSignature = true;
 
                 mgr.SignPdfFile(filePath, pdfSignOptions, tmpFile);
-                //mgr.SignPdfFile(filePath, kirCert,
-                //                CommitmentTypeId.ProofOfOrigin, "location A", signDate,
-                //                true, TSA_KIR, null, null, null, kirCert,
-                //                img, PdfSignatureLocation.TopLeft,
-                //                outputFilePath: tmpFile,
-                //                addSignatureApperance: true);
+                
 
 
                 pdfSignOptions.Certificate = sigillumCert;
@@ -511,13 +459,7 @@ namespace Abc.Nes.NUnitTests {
                 pdfSignOptions.AllowMultipleSignatures = true;
 
                 mgr.SignPdfFile(tmpFile, pdfSignOptions, destPath);
-                //mgr.SignPdfFile(tmpFile, sigillumCert,
-                //                CommitmentTypeId.ProofOfApproval, "location B", DateTime.Now,
-                //                true, TSA_SIGILLUM, TSA_POLICY_SIGILLUM, null, null, sigillumCert,
-                //                null, PdfSignatureLocation.TopRight, 0,0,WIDTH,HEIGHT,
-                //                outputFilePath: destPath,
-                //                addSignatureApperance: true,
-                //                allowMultipleSignatures: true);
+                
 
                 File.Delete(tmpPath);
                 Assert.IsTrue(File.Exists(destPath));
@@ -539,12 +481,7 @@ namespace Abc.Nes.NUnitTests {
 
                 mgr.SignPdfFile(filePath, pdfSignOptions, destPath);
 
-                //mgr.SignPdfFile(filePath, cert,
-                //                CommitmentTypeId.ProofOfOrigin,null,signDate,
-                                
-                //                apperancePngImage: img, 
-                //                outputFilePath: destPath,
-                //                addSignatureApperance: true);
+               
                 Assert.IsTrue(File.Exists(destPath));
                 bool isValid = ValidatePdfSignature(mgr, destPath);
                 Assert.IsTrue(isValid);
@@ -576,12 +513,7 @@ namespace Abc.Nes.NUnitTests {
                 mgr.SignPdfFile(tmpFile, pdfSignOptions, destPath);
 
                 File.Delete(tmpPath);
-                //mgr.SignPdfFile(filePath, cert,
-                //                CommitmentTypeId.ProofOfOrigin,null,signDate,
-
-                //                apperancePngImage: img, 
-                //                outputFilePath: destPath,
-                //                addSignatureApperance: true);
+                
                 Assert.IsTrue(File.Exists(destPath));
                 bool isValid = ValidatePdfSignature(mgr, destPath);
                 Assert.IsTrue(isValid);
@@ -624,12 +556,7 @@ namespace Abc.Nes.NUnitTests {
 
                 mgr.SignPdfFile(filePath, pdfSignOptions, destPath);
 
-                //mgr.SignPdfFile(filePath, cert,
-                //                CommitmentTypeId.ProofOfOrigin,null,signDate,
-
-                //                apperancePngImage:img,
-                //                outputFilePath: destPath,
-                //                addSignatureApperance: true);
+                
                 Assert.IsTrue(File.Exists(destPath));
                 bool isValid = ValidatePdfSignature(mgr, destPath);
                 Assert.IsTrue(isValid);
@@ -653,12 +580,7 @@ namespace Abc.Nes.NUnitTests {
                 pdfSignOptions.AddVisibleSignature = true;
 
                 mgr.SignPdfFile(filePath, pdfSignOptions, destPath);
-                //mgr.SignPdfFile(filePath,cert,
-                //                CommitmentTypeId.ProofOfOrigin,null,signDate,
-                //                true, TSA_SIGILLUM, TSA_POLICY_SIGILLUM, null, null, cert,
-                //                img,
-                //                outputFilePath: destPath,
-                //                addSignatureApperance: true);
+                
                 Assert.IsTrue(File.Exists(destPath));
                 bool isValid = ValidatePdfSignature(mgr, destPath);
                 Assert.IsTrue(isValid);
@@ -865,17 +787,7 @@ namespace Abc.Nes.NUnitTests {
 
                 manager.SignXmlFile(filePath, xmlSignOptions, destPath);
 
-                //byte[] fileBytes = File.ReadAllBytes(filePath);
-                //var fileStream = new MemoryStream(fileBytes);
-
-                //Xades.Signature.SignatureDocument result = manager.AppendSignatureToXmlFile(
-                //    fileStream, cert,
-                //    timeStampServerUrl: null
-                //);
-
-                //if (result != null) {
-                //    result.Save(destPath);
-                //}
+                
                 Assert.IsTrue(File.Exists(destPath));
                 var result = manager.ValidateSignature(destPath);
                 Assert.IsTrue(result.IsValid);
