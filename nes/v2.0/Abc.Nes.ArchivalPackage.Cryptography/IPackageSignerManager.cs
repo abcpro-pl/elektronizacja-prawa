@@ -109,5 +109,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
         SignAndVerifyInfo GetSignAndVerifyInfo(PackageManager mgr, ArchivalPackage.Model.DocumentFile item);
         SignAndVerifyInfo[] GetSignAndVerifyInfo(string packageFilePath);
         SignAndVerifyInfo[] GetSignAndVerifyInfo(PackageManager mgr);
+
+        SignAndVerifyInfo GetPdfFileSignAndVerifyInfo(string filePath);
     }
 }

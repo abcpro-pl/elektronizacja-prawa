@@ -448,6 +448,15 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             return list.ToArray();
         }
 
+        public SignAndVerifyInfo GetPdfFileSignAndVerifyInfo(string filePath) {
+            if (File.Exists(filePath)) {
+                var data = File.ReadAllBytes(filePath);
+                var verify = GetPadesSignAndVerifyInfo(data, filePath);
+                return verify;
+            }
+            return null;
+        }
+
         public SignAndVerifyInfo GetSignAndVerifyInfo(string packageFilePath, string internalPath) {
             if (String.IsNullOrEmpty(packageFilePath)) { throw new ArgumentNullException("packageFilePath"); }
             if (String.IsNullOrEmpty(internalPath)) { throw new ArgumentNullException("internalPath"); }
