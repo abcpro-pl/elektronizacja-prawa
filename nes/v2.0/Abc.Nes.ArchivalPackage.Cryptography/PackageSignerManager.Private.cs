@@ -123,6 +123,8 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                             properties.UseAppendMode();
 
                         var signer = new PdfSigner(reader, fs, properties);
+                        if (options.SignDate.HasValue)
+                            signer.SetSignDate(options.SignDate.Value);
 
                         if (options.AddVisibleSignature) {
                             var rect = GetApperanceImageRect(options.SignatureLocation, pageWidth, pageHeight,
@@ -696,6 +698,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                          X509Certificate2 cert,
                          SignatureProductionPlace productionPlace = null,
                          SignerRole signerRole = null,
+                         DateTime? signDate = null,
                          XadesFormat xadesFormat = XadesFormat.XadesBes,
                          string timeStampServerUrl = "http://time.certum.pl",
                          CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval) {
@@ -708,7 +711,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 upgradeFormat = Xades.Upgraders.SignatureFormat.XAdES_XL;
             }
 
-            var result = xadesManager.AppendSignatureToXmlFile(ms, cert, productionPlace, signerRole, upgradeFormat, timeStampServerUrl, commitmentTypeId);
+            var result = xadesManager.AppendSignatureToXmlFile(ms, cert, productionPlace, signerRole, upgradeFormat, signDate, timeStampServerUrl, commitmentTypeId);
             if (result != null) {
                 using (var msOutput = new MemoryStream()) {
                     result.Save(msOutput);

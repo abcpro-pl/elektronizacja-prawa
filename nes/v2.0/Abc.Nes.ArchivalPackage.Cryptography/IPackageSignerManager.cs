@@ -28,6 +28,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 bool signPackageFile = true,
                 bool detachedSignaturePackageFile = false,
                 bool detachedSignaturePackageFiles = false,
+                DateTime? signDate = null,
                 bool addTimeStamp = false,
                 string timeStampServerUrl = "http://time.certum.pl");
         string Sign(string sourcePackageFilePath,
@@ -39,6 +40,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             bool signPackageFile = true,
             bool detachedSignaturePackageFile = true,
             bool detachedSignaturePackageFiles = true,
+            DateTime? signDate = null,
             bool addTimeStamp = false,
             string timeStampServerUrl = "http://time.certum.pl");
         void SignInternalFile(string sourcePackageFilePath,
@@ -48,6 +50,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 SignerRole signerRole = null,
                 bool detachedSignaturePackageFile = false,
                 string outputPackageFilePath = null,
+                DateTime? signDate = null,
                 bool addTimeStamp = false,
                 string timeStampServerUrl = "http://time.certum.pl",
                 CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval);
@@ -61,6 +64,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 SignerRole signerRole = null,
                 bool detachedSignaturePackageFile = false,
                 string outputPackageFilePath = null,
+                DateTime? signDate = null,
                 bool addTimeStamp = false,
                 string timeStampServerUrl = "http://time.certum.pl",
                 CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval);

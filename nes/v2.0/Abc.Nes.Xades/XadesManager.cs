@@ -21,6 +21,7 @@ namespace Abc.Nes.Xades {
                                                    Signature.Parameters.SignatureProductionPlace productionPlace = null,
                                                    Signature.Parameters.SignerRole signerRole = null,
                                                    Upgraders.SignatureFormat? upgradeFormat = null,
+                                                   DateTime? signDate = null,
                                                    string timeStampServerUrl = "http://time.certum.pl",
                                                    CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval,
                                                    string timeStampPolicy = null,
@@ -55,6 +56,7 @@ namespace Abc.Nes.Xades {
                     fileStream, opts.Certificate,
                     null, null,
                     upgradeType,
+                    opts.SignDate,
                     opts.TimestampOptions?.TsaUrl,
                     opts.Reason,
                     opts.TimestampOptions?.TsaPolicy,
@@ -75,6 +77,7 @@ namespace Abc.Nes.Xades {
             Signature.Parameters.SignatureProductionPlace productionPlace = null,
             Signature.Parameters.SignerRole signerRole = null,
             Upgraders.SignatureFormat? upgradeFormat = null,
+            DateTime? signDate = null,
             string timeStampServerUrl = "http://time.certum.pl",
             CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval,
             string timeStampPolicy = null,
@@ -125,7 +128,7 @@ Content-Transfer-Encoding: UTF-8"
             signatureDocument.XadesSignature.AddReference(ContentReference);
 
             SetSignatureId(signatureDocument.XadesSignature);
-            PrepareSignature(signatureDocument, commitmentTypeId: commitmentTypeId);
+            PrepareSignature(signatureDocument, commitmentTypeId: commitmentTypeId, signDate: signDate);
 
             signatureDocument.XadesSignature.ComputeSignature();
             
@@ -386,10 +389,14 @@ Content-Disposition: filename=""{ fileName }""
             xadesSignedXml.SignatureValueId = "SignatureValue-" + id;
         }
 
-        private void PrepareSignature(SignatureDocument signatureDocument, bool addKeyInfoReference = true, CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval) {
+        private void PrepareSignature(SignatureDocument signatureDocument,
+                                      bool addKeyInfoReference = true,
+                                      CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval,
+                                      DateTime? signDate = null) {
+
             signatureDocument.XadesSignature.SignedInfo.SignatureMethod = SignatureMethod.RSAwithSHA256.URI;
             AddCertificateInfo(signatureDocument, addKeyInfoReference);
-            AddXadesInfo(signatureDocument, commitmentTypeId);
+            AddXadesInfo(signatureDocument, commitmentTypeId, signDate);
         }
 
         private void AddCertificateInfo(SignatureDocument signatureDocument, bool addKeyInfoReference = true) {
@@ -414,7 +421,7 @@ Content-Disposition: filename=""{ fileName }""
             }
         }
 
-        private void AddXadesInfo(SignatureDocument signatureDocument, CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval) {
+        private void AddXadesInfo(SignatureDocument signatureDocument, CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval, DateTime? signDate=null) {
             XadesObject xadesObject = new XadesObject {
                 Id = "XadesObjectId-" + Guid.NewGuid().ToString()
             };
@@ -426,7 +433,7 @@ Content-Disposition: filename=""{ fileName }""
                 xadesObject.QualifyingProperties.SignedProperties.SignedSignatureProperties,
                 xadesObject.QualifyingProperties.SignedProperties.SignedDataObjectProperties,
                 xadesObject.QualifyingProperties.UnsignedProperties.UnsignedSignatureProperties,
-                commitmentTypeId);
+                commitmentTypeId, signDate);
 
             signatureDocument.XadesSignature.AddXadesObject(xadesObject);
         }
@@ -435,7 +442,8 @@ Content-Disposition: filename=""{ fileName }""
                     SignedSignatureProperties signedSignatureProperties,
                     SignedDataObjectProperties signedDataObjectProperties,
                     UnsignedSignatureProperties unsignedSignatureProperties,
-                    CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval
+                    CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval,
+                    DateTime? signDate = null
                     ) {
             var cert = new Cert();
             cert.IssuerSerial.X509IssuerName = XadesSigner.Certificate.IssuerName.Name;
@@ -444,6 +452,8 @@ Content-Disposition: filename=""{ fileName }""
             signedSignatureProperties.SigningCertificate.CertCollection.Add(cert);
 
             signedSignatureProperties.SigningTime = DateTime.Now;
+            if (signDate.HasValue)
+                signedSignatureProperties.SigningTime = signDate.Value;
 
             if (DataFormat != null) {
                 var newDataObjectFormat = new DataObjectFormat {
