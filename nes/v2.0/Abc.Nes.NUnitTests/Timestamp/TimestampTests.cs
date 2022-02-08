@@ -161,6 +161,8 @@ namespace Abc.Nes.NUnitTests {
                 //                outputFilePath: destPath,
                 //                addSignatureApperance: true);
                 Assert.IsTrue(File.Exists(destPath));
+                bool isValid = ValidatePdfSignature(mgr, destPath);
+                Assert.IsTrue(isValid);
             }
         }
 
@@ -207,6 +209,8 @@ namespace Abc.Nes.NUnitTests {
                 File.Delete(tmpPath);
                 
                 Assert.IsTrue(File.Exists(destPath));
+                bool isValid = ValidatePdfSignature(mgr, destPath);
+                Assert.IsTrue(isValid);
             }
         }
 
@@ -226,13 +230,9 @@ namespace Abc.Nes.NUnitTests {
 
                 mgr.SignPdfFile(filePath, pdfSignOptions, destPath);
 
-                //mgr.SignPdfFile(filePath, cert,
-                //                CommitmentTypeId.ProofOfOrigin, null, signDate,
-                                
-                //                apperancePngImage: img,
-                //                outputFilePath: destPath,
-                //                addSignatureApperance: true);
                 Assert.IsTrue(File.Exists(destPath));
+                bool isValid = ValidatePdfSignature(mgr, destPath);
+                Assert.IsTrue(isValid);
             }
         }
         [Test]
@@ -251,8 +251,11 @@ namespace Abc.Nes.NUnitTests {
 
                 mgr.SignPdfFile(filePath, pdfSignOptions, destPath);
                 Assert.IsTrue(File.Exists(destPath));
+                bool isValid = ValidatePdfSignature(mgr, destPath);
+                Assert.IsTrue(isValid);
             }
         }
+
         [Test]
         public void SignPdf_TestCert_noTS_graphic() {
             testName = System.Reflection.MethodBase.GetCurrentMethod().Name;
@@ -276,6 +279,8 @@ namespace Abc.Nes.NUnitTests {
                 //                true, false
                 //               );
                 Assert.IsTrue(File.Exists(destPath));
+                bool isValid = ValidatePdfSignature(mgr, destPath);
+                Assert.IsTrue(isValid);
             }
         }
 
@@ -326,6 +331,8 @@ namespace Abc.Nes.NUnitTests {
                 //                addSignatureApperance: true);
 
                 Assert.IsTrue(File.Exists(destPath));
+                bool isValid = ValidatePdfSignature(mgr, destPath);
+                Assert.IsTrue(isValid);
             }
         }
 
@@ -354,6 +361,8 @@ namespace Abc.Nes.NUnitTests {
                 //                outputFilePath: destPath,
                 //                addSignatureApperance: true);
                 Assert.IsTrue(File.Exists(destPath));
+                bool isValid = ValidatePdfSignature(mgr, destPath);
+                Assert.IsTrue(isValid);
             }
         }
 
@@ -381,6 +390,8 @@ namespace Abc.Nes.NUnitTests {
                 //                outputFilePath: destPath,
                 //                addSignatureApperance: false);
                 Assert.IsTrue(File.Exists(destPath));
+                bool isValid = ValidatePdfSignature(mgr, destPath);
+                Assert.IsTrue(isValid);
             }
         }
 
@@ -403,6 +414,8 @@ namespace Abc.Nes.NUnitTests {
                 //                outputFilePath: destPath,
                 //                addSignatureApperance: false);
                 Assert.IsTrue(File.Exists(destPath));
+                bool isValid = ValidatePdfSignature(mgr, destPath);
+                Assert.IsTrue(isValid);
             }
         }
         //[Test]
@@ -508,6 +521,8 @@ namespace Abc.Nes.NUnitTests {
 
                 File.Delete(tmpPath);
                 Assert.IsTrue(File.Exists(destPath));
+                bool isValid = ValidatePdfSignature(mgr, destPath);
+                Assert.IsTrue(isValid);
             }
         }
         [Test]
@@ -531,6 +546,8 @@ namespace Abc.Nes.NUnitTests {
                 //                outputFilePath: destPath,
                 //                addSignatureApperance: true);
                 Assert.IsTrue(File.Exists(destPath));
+                bool isValid = ValidatePdfSignature(mgr, destPath);
+                Assert.IsTrue(isValid);
             }
         }
 
@@ -566,6 +583,8 @@ namespace Abc.Nes.NUnitTests {
                 //                outputFilePath: destPath,
                 //                addSignatureApperance: true);
                 Assert.IsTrue(File.Exists(destPath));
+                bool isValid = ValidatePdfSignature(mgr, destPath);
+                Assert.IsTrue(isValid);
             }
         }
 
@@ -586,6 +605,8 @@ namespace Abc.Nes.NUnitTests {
 
                 mgr.SignPdfFile(filePath, pdfSignOptions, destPath);
                 Assert.IsTrue(File.Exists(destPath));
+                bool isValid = ValidatePdfSignature(mgr, destPath);
+                Assert.IsTrue(isValid);
             }
         }
 
@@ -610,6 +631,8 @@ namespace Abc.Nes.NUnitTests {
                 //                outputFilePath: destPath,
                 //                addSignatureApperance: true);
                 Assert.IsTrue(File.Exists(destPath));
+                bool isValid = ValidatePdfSignature(mgr, destPath);
+                Assert.IsTrue(isValid);
             }
         }
         [Test]
@@ -637,6 +660,8 @@ namespace Abc.Nes.NUnitTests {
                 //                outputFilePath: destPath,
                 //                addSignatureApperance: true);
                 Assert.IsTrue(File.Exists(destPath));
+                bool isValid = ValidatePdfSignature(mgr, destPath);
+                Assert.IsTrue(isValid);
             }
         }
 
@@ -680,6 +705,8 @@ namespace Abc.Nes.NUnitTests {
                     true);
 
                 Assert.IsTrue(File.Exists(destPath));
+                bool isValid = ValidatePdfSignature(mgr, destPath);
+                Assert.IsTrue(isValid);
             }
         }
         [Test]
@@ -722,6 +749,8 @@ namespace Abc.Nes.NUnitTests {
                     true);
 
                 Assert.IsTrue(File.Exists(destPath));
+                bool isValid = ValidatePdfSignature(mgr, destPath);
+                Assert.IsTrue(isValid);
             }
         }
         [Test]
@@ -791,6 +820,8 @@ namespace Abc.Nes.NUnitTests {
 
                 File.Delete(tmpPath);
                 Assert.IsTrue(File.Exists(destPath));
+                bool isValid = ValidatePdfSignature(mgr, destPath);
+                Assert.IsTrue(isValid);
             }
         }
         #endregion sign pdf test
@@ -816,6 +847,8 @@ namespace Abc.Nes.NUnitTests {
                 manager.SignXmlFile(filePath, xmlSignOptions, destPath);
 
                 Assert.IsTrue(File.Exists(destPath));
+                var result = manager.ValidateSignature(destPath);
+                Assert.IsTrue(result.IsValid);
             }
         }
 
@@ -844,6 +877,8 @@ namespace Abc.Nes.NUnitTests {
                 //    result.Save(destPath);
                 //}
                 Assert.IsTrue(File.Exists(destPath));
+                var result = manager.ValidateSignature(destPath);
+                Assert.IsTrue(result.IsValid);
             }
         }
         [Test]
@@ -860,6 +895,26 @@ namespace Abc.Nes.NUnitTests {
 
 
                 Assert.IsTrue(File.Exists(destPath));
+                var result = manager.ValidateSignature(destPath);
+                Assert.IsTrue(result.IsValid);
+            }
+        }
+        [Test]
+        public void SignXml_TestCert_noTs_pastDate() {
+            testName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            using (var manager = new XadesManager()) {
+                PrepareXmlPaths(out string filePath, out string destPath);
+
+                X509Certificate2 cert = CertUtil.GetCertByName(test_cert);
+
+                xmlSignOptions.Certificate = cert;
+                xmlSignOptions.SignDate = new DateTime(2022, 01, 02, 11, 07, 45, DateTimeKind.Local);
+
+                manager.SignXmlFile(filePath, xmlSignOptions, destPath);
+
+                Assert.IsTrue(File.Exists(destPath));
+                var result = manager.ValidateSignature(destPath);
+                Assert.IsTrue(result.IsValid);
             }
         }
         [Test]
@@ -877,6 +932,8 @@ namespace Abc.Nes.NUnitTests {
                 manager.SignXmlFile(filePath, xmlSignOptions, destPath);
 
                 Assert.IsTrue(File.Exists(destPath));
+                var result = manager.ValidateSignature(destPath);
+                Assert.IsTrue(result.IsValid);
             }
         }
         [Test]
@@ -897,6 +954,8 @@ namespace Abc.Nes.NUnitTests {
                 manager.SignXmlFile(filePath, xmlSignOptions, destPath);
 
                 Assert.IsTrue(File.Exists(destPath));
+                var result = manager.ValidateSignature(destPath);
+                Assert.IsTrue(result.IsValid);
             }
         }
         [Test]
@@ -916,6 +975,8 @@ namespace Abc.Nes.NUnitTests {
                 manager.SignXmlFile(filePath, xmlSignOptions, destPath);
 
                 Assert.IsTrue(File.Exists(destPath));
+                var result = manager.ValidateSignature(destPath);
+                Assert.IsTrue(result.IsValid);
             }
         }
 
@@ -931,6 +992,8 @@ namespace Abc.Nes.NUnitTests {
                 manager.SignXmlFile(filePath, xmlSignOptions, destPath);
 
                 Assert.IsTrue(File.Exists(destPath));
+                var result = manager.ValidateSignature(destPath);
+                Assert.IsTrue(result.IsValid);
             }
         }
         #endregion sign xml test
@@ -1001,6 +1064,16 @@ namespace Abc.Nes.NUnitTests {
             else {
                 throw new FileNotFoundException(certumFilePath);
             }
+        }
+
+        private static bool ValidatePdfSignature(PackageSignerManager mgr, string destPath) {
+            var result = mgr.GetPdfFileSignAndVerifyInfo(destPath);
+            bool isValid = true;
+            foreach (var item in result.VerifyInfo) {
+                isValid = isValid && item.IsValid;
+            }
+
+            return isValid;
         }
     }
 }
