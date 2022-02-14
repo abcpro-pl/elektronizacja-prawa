@@ -31,6 +31,7 @@ W tym katalogu znajduje się:
 
 Wersja  | Opis
 --------|--------
+1.1.29|Zmiany wizualizacji podpisu PAdES.
 1.1.28|Dodanie wsparcia dla weryfikacji plików XML z transformacją XPath. Poprawki dotyczące zliczania plików metadanych dla plików i folderów w katalogu dokumenty.
 1.1.27|Dodanie wsparcia dla wielopodpisu pliku PDF.
 1.1.26|Usprawnienia w obsłudze dowolnych plików ZIP.
