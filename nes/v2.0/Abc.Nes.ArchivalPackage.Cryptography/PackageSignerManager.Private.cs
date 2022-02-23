@@ -365,6 +365,9 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
 
                         var signer = new PdfSigner(reader, fs, properties);
 
+                        if (signDate > DateTime.MinValue)
+                            signer.SetSignDate(signDate);
+
                         if (addSignatureAppearance) {
                             var rect = GetApperanceImageRect(apperancePngImageLocation, pageWidth, pageHeight,
                                 apperanceLocationX, apperanceLocationY, apperanceWidth, apperanceHeight, margin, signatureCount);

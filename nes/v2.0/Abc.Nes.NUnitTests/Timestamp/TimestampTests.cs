@@ -746,6 +746,55 @@ namespace Abc.Nes.NUnitTests {
                 Assert.IsTrue(isValid);
             }
         }
+
+        [Test]
+        public void SignPdf_TestCert_LegislatorTest_PastDate() {
+            testName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            using (var mgr = new PackageSignerManager()) {
+                PreparePdfPaths(PDF_LEGISLATOR_FILE, out string filePath, out string destPath);
+                X509Certificate2 cert = CertUtil.GetCertByName(test_cert);
+
+                pdfSignOptions.Certificate = cert;
+                pdfSignOptions.Reason = CommitmentTypeId.ProofOfApproval;
+                pdfSignOptions.Location = "Polska";
+                pdfSignOptions.TimestampOptions = new TimestampOptions {
+                    TsaUrl = TSA_CERTUM
+                };
+                pdfSignOptions.SignatureImage = null;
+                pdfSignOptions.SignDate = new DateTime(2022, 01, 02, 11, 07, 45, DateTimeKind.Local);
+                //pdfSignOptions.Loc
+                var tmpFile = Path.GetTempFileName();
+                
+
+                mgr.SignPdfFile(filePath,
+                    cert,
+                    CommitmentTypeId.ProofOfApproval,
+                    "Polska",
+                    pdfSignOptions.SignDate,
+                    true,
+                    TSA_CERTUM,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    PdfSignatureLocation.TopRight,
+                    360F,
+                    790F,
+                    WIDTH,
+                    HEIGHT,
+                    10F,
+                    destPath,
+                    true,
+                    false,
+                    true);
+
+                
+                Assert.IsTrue(File.Exists(destPath));
+                bool isValid = ValidatePdfSignature(mgr, destPath);
+                Assert.IsTrue(isValid);
+            }
+        }
         #endregion sign pdf test
 
         #region sign xml test
