@@ -29,12 +29,20 @@ namespace Abc.Nes.NUnitTests {
         private const string TEST_PREFIX = "TEST";
         private const string SIGILLUM_PREFIX = "SIG";
         private const string KIR_PREFIX = "KIR";
+        private const string CENCERT_PREFIX = "CEN";
+        private const string CERTUM_PREFIX = "CER";
+        private const string EUROCERT_PREFIX = "EUR";
 
         //timestamp urls
         private const string TSA_KIR = "http://www.ts.kir.com.pl/HttpTspServer";
         private const string TSA_CERTUM_BASIC = "https://qts.certum.pl/default/basic";
         private const string TSA_CERTUM = "http://time.certum.pl";
         private const string TSA_SIGILLUM = "http://tsa.sigillum.pl";
+        private const string TSA_EUROCERT = ""; //todo
+        private const string TSA_CENCERT1 = "http://tsp.cencert.pl";
+        private const string TSA_CENCERT2 = "http://tsp2.cencert.pl";
+
+
 
         //auth data file names
         /// <summary>
@@ -64,6 +72,9 @@ namespace Abc.Nes.NUnitTests {
         string test_cert;
         string kir_cert;
         string sigillum_cert;
+        string cencert_cert;
+        string certum_cert;
+        string eurocert_cert;
 
         string certum_tsa_login;
         string certum_tsa_password;
@@ -543,6 +554,60 @@ namespace Abc.Nes.NUnitTests {
         }
 
         [Test]
+        public void SignPdf_CenCert_TsCencert1() {
+            testName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            using (var mgr = new PackageSignerManager()) {
+
+                PreparePdfPaths(out string filePath, out string destPath);
+
+                X509Certificate2 cert = CertUtil.GetCertByName(cencert_cert);
+
+
+                pdfSignOptions.Certificate = cert;
+                pdfSignOptions.Location = "Wawa";
+                pdfSignOptions.AddVisibleSignature = true;
+                pdfSignOptions.TimestampOptions = new TimestampOptions {
+                    Certificate = cert,
+                    TsaUrl = TSA_CENCERT1
+                };
+
+                mgr.SignPdfFile(filePath, pdfSignOptions, destPath);
+
+
+                Assert.IsTrue(File.Exists(destPath));
+                bool isValid = ValidatePdfSignature(mgr, destPath);
+                Assert.IsTrue(isValid);
+            }
+        }
+
+        [Test]
+        public void SignPdf_CenCert_TsCencert2() {
+            testName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            using (var mgr = new PackageSignerManager()) {
+
+                PreparePdfPaths(out string filePath, out string destPath);
+
+                X509Certificate2 cert = CertUtil.GetCertByName(cencert_cert);
+
+
+                pdfSignOptions.Certificate = cert;
+                pdfSignOptions.Location = "Wawa";
+                pdfSignOptions.AddVisibleSignature = true;
+                pdfSignOptions.TimestampOptions = new TimestampOptions {
+                    Certificate = cert,
+                    TsaUrl = TSA_CENCERT2
+                };
+
+                mgr.SignPdfFile(filePath, pdfSignOptions, destPath);
+
+
+                Assert.IsTrue(File.Exists(destPath));
+                bool isValid = ValidatePdfSignature(mgr, destPath);
+                Assert.IsTrue(isValid);
+            }
+        }
+
+        [Test]
         public void SignPdf_SigillumCert_noTs() {
             testName = System.Reflection.MethodBase.GetCurrentMethod().Name;
             using (var mgr = new PackageSignerManager()) {
@@ -997,6 +1062,18 @@ namespace Abc.Nes.NUnitTests {
                         var split = line.Split(SIGILLUM_PREFIX, StringSplitOptions.RemoveEmptyEntries);
                         sigillum_cert = split[0].Trim();
                     }
+                    else if (line.Contains(CENCERT_PREFIX)) {
+                        var split = line.Split(CENCERT_PREFIX, StringSplitOptions.RemoveEmptyEntries);
+                        cencert_cert = split[0].Trim();
+                    }
+                    else if (line.Contains(EUROCERT_PREFIX)) {
+                        var split = line.Split(EUROCERT_PREFIX, StringSplitOptions.RemoveEmptyEntries);
+                        eurocert_cert = split[0].Trim();
+                    }
+                    else if (line.Contains(CERTUM_PREFIX)) {
+                        var split = line.Split(CERTUM_PREFIX, StringSplitOptions.RemoveEmptyEntries);
+                        certum_cert = split[0].Trim();
+                    }
                     else if (line.Contains(TEST_PREFIX)) {
                         var split = line.Split(TEST_PREFIX, StringSplitOptions.RemoveEmptyEntries);
                         test_cert = split[0].Trim();
@@ -1007,12 +1084,22 @@ namespace Abc.Nes.NUnitTests {
                 throw new FileNotFoundException(certNamesPath);
             }
 
+            StringBuilder sb = new StringBuilder();
             if (null == kir_cert || kir_cert == string.Empty)
-                throw new ArgumentException($"Brak nazwy certyfikatu KIR w pliku {certNamesPath}");
+                sb.AppendLine($"Brak nazwy certyfikatu KIR w pliku {certNamesPath}");
             if (null == sigillum_cert || sigillum_cert == string.Empty)
-                throw new ArgumentException($"Brak nazwy certyfikatu Sigillum w pliku {certNamesPath}");
+                sb.AppendLine($"Brak nazwy certyfikatu Sigillum w pliku {certNamesPath}");
+            if (null == cencert_cert || cencert_cert == string.Empty)
+                sb.AppendLine($"Brak nazwy certyfikatu Cencert w pliku {certNamesPath}");
+            if (null == certum_cert || certum_cert == string.Empty)
+                sb.AppendLine($"Brak nazwy certyfikatu Certum w pliku {certNamesPath}");
+            if (null == eurocert_cert || eurocert_cert == string.Empty)
+                sb.AppendLine($"Brak nazwy certyfikatu EuroCert w pliku {certNamesPath}");
             if (null == test_cert || test_cert == string.Empty)
-                throw new ArgumentException($"Brak nazwy certyfikatu Test w pliku {certNamesPath}");
+                sb.AppendLine($"Brak nazwy certyfikatu Test w pliku {certNamesPath}");
+
+            if (sb.Length > 0)
+                throw new ArgumentException(sb.ToString());
         }
 
         private void LoadCertumBasicAuthData() {
