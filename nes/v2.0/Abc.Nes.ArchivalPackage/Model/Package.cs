@@ -58,29 +58,35 @@ namespace Abc.Nes.ArchivalPackage.Model {
             }
             return items;
         }
-        public MetadataFile GetMetadataFile(ItemBase documentFile) {
+        public MetadataFile GetMetadataFile(ItemBase documentFile, bool findWithoutSpaces = false) {
             if (documentFile.IsNotNull() && documentFile.FilePath.IsNotNullOrEmpty()) {
+                var documentFilePath = documentFile.FilePath;
                 string metadataFilePath;
                 var regex = new Regex(Regex.Escape($"{MainDirectoriesName.Files.GetXmlEnum()}"));
 
                 var subFolder = documentFile.GetSubFolderName();
                 if (subFolder.IsNotNullOrEmpty()) {
                     // find metadata file for subfolder
-                    metadataFilePath = documentFile.FilePath.Substring(0, documentFile.FilePath.LastIndexOf('/'));
+                    metadataFilePath = documentFilePath.Substring(0, documentFilePath.LastIndexOf('/'));
                     metadataFilePath = regex.Replace(metadataFilePath, MainDirectoriesName.Metadata.GetXmlEnum(), 1);
-                    var result = GetItemByFilePath($"{metadataFilePath}.xml") as MetadataFile;
+                    var result = GetItemByFilePath($"{metadataFilePath}.xml", findWithoutSpaces) as MetadataFile;
                     if (result.IsNotNull()) {
                         return result;
                     }
                 }
 
                 // find metadata file for document file               
-                metadataFilePath = regex.Replace(documentFile.FilePath, MainDirectoriesName.Metadata.GetXmlEnum(), 1);
-                return GetItemByFilePath($"{metadataFilePath}.xml") as MetadataFile;
+                {
+                    metadataFilePath = regex.Replace(documentFilePath, MainDirectoriesName.Metadata.GetXmlEnum(), 1);
+                    var result = GetItemByFilePath($"{metadataFilePath}.xml", findWithoutSpaces) as MetadataFile;
+                    if (result.IsNotNull()) {
+                        return result;
+                    }
+                }
             }
             return default;
         }
-        public ItemBase GetItemByFilePath(string filePath) {
+        public ItemBase GetItemByFilePath(string filePath, bool findWithoutSpaces = false) {
             if (filePath.IsNotNullOrEmpty()) {
                 FolderBase folder = null;
                 var table = filePath.Split('/');
@@ -119,7 +125,21 @@ namespace Abc.Nes.ArchivalPackage.Model {
                 }
 
                 if (folder.IsNotNull()) {
-                    return folder.GetItems().Where(x => x.FileName.ToLower() == table.Last().ToLower()).FirstOrDefault();
+                    ItemBase result = null;
+                    var fileName = table.Last().ToLower();
+                    if (findWithoutSpaces) {
+                        fileName = fileName.FileGetFileNameWithoutExtension();
+                        result = folder.GetItems().Where(x => x.FileName.FileGetFileNameWithoutExtension().CompareToWithoutSpaceAndCharCase(fileName)).FirstOrDefault();
+                        if (result.IsNull() && fileName.Contains(".")) {
+                            fileName = fileName.FileGetFileNameWithoutExtension();
+                            result = folder.GetItems().Where(x => x.FileName.FileGetFileNameWithoutExtension().CompareToWithoutSpaceAndCharCase(fileName)).FirstOrDefault();
+                        }
+                    }
+                    else {
+                        result = folder.GetItems().Where(x => x.FileName.ToLower() == fileName).FirstOrDefault();
+                    }
+
+                    return result;
                 }
             }
             return default;

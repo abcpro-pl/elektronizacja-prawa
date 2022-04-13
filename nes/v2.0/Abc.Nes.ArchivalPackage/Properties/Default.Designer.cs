@@ -97,6 +97,15 @@ namespace Abc.Nes.ArchivalPackage.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Metadata found for file {0}, but filenames differ in amount of whitespace!.
+        /// </summary>
+        internal static string MetadataFoundWithoutSpaces {
+            get {
+                return ResourceManager.GetString("MetadataFoundWithoutSpaces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Metadata not found for file: {0}!.
         /// </summary>
         internal static string MetadataNotFound {

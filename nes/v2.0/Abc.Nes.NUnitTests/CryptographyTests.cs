@@ -240,7 +240,8 @@ namespace Abc.Nes.NUnitTests {
 
         [Test]
         public void Package_GetValidationResult() {
-            var path = @"../../../../sample/LegalAct26.03.2.podpisana.zip";
+            // var path = @"../../../../sample/LegalAct26.03.2.podpisana.zip";
+            var path = @"../../../../sample/Sprawa_GN-III.7541.7.2018_20210301_143750.zip";
 
             var signedPackageManager = new SignedPackageManager();
             var info = signedPackageManager.Extract(path);

@@ -129,6 +129,9 @@
   <data name="MetadataAreNotValid" xml:space="preserve">
     <value>Metadata of file: {0} are not a valid!</value>
   </data>
+  <data name="MetadataFoundWithoutSpaces" xml:space="preserve">
+    <value>Metadata found for file {0}, but filenames differ in amount of whitespace!</value>
+  </data>
   <data name="MetadataNotFound" xml:space="preserve">
     <value>Metadata not found for file: {0}!</value>
   </data>

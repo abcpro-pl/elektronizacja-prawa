@@ -15,6 +15,7 @@
 using System;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
@@ -150,6 +151,13 @@ namespace Abc.Nes.ArchivalPackage {
         public static bool HasPolishChars(this string source) {
             return source.ContainsInTable(true, false, "ą", "ę", "ź", "ć", "ż", "ń", "ł", "ó", "ś");
         }
-
+        public static string FileGetFileNameWithoutExtension(this string fileName) {
+            return Path.GetFileNameWithoutExtension(fileName);
+        }
+        public static bool CompareToWithoutSpaceAndCharCase(this string string1, string string2) {
+            var s1 = Regex.Replace(string1,@"\s+",string.Empty).ToLower();
+            var s2 = Regex.Replace(string2, @"\s+", string.Empty).ToLower();
+            return s1.CompareTo(s2) == 0;
+        }
     }
 }
