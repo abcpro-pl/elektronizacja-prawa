@@ -26,12 +26,13 @@ namespace Abc.Nes.NUnitTests {
         //private const string SIGILLUM_CERT = "Y";
         
         //test certificate prefixes
-        private const string TEST_PREFIX = "TEST";
-        private const string SIGILLUM_PREFIX = "SIG";
-        private const string KIR_PREFIX = "KIR";
-        private const string CENCERT_PREFIX = "CEN";
-        private const string CERTUM_PREFIX = "CER";
-        private const string EUROCERT_PREFIX = "EUR";
+        private const string TEST_PREFIX = "TEST ";
+        private const string SIGILLUM_PREFIX = "SIG ";
+        private const string KIR_PREFIX = "KIR ";
+        private const string CENCERT_PREFIX = "CEN ";
+        private const string CERTUM_PREFIX = "CER ";
+        private const string CERTUM_PREFIX_CLIDE = "CER2 ";
+        private const string EUROCERT_PREFIX = "EUR ";
 
         //timestamp urls
         private const string TSA_KIR = "http://www.ts.kir.com.pl/HttpTspServer";
@@ -74,6 +75,7 @@ namespace Abc.Nes.NUnitTests {
         string sigillum_cert;
         string cencert_cert;
         string certum_cert;
+        string certum_clide_cert;
         string eurocert_cert;
 
         string certum_tsa_login;
@@ -166,6 +168,34 @@ namespace Abc.Nes.NUnitTests {
                 Assert.IsTrue(isValid);
             }
         }
+
+        //[Test]
+        //public void SignPdf_TestCert_TsCertum_ClidePfx() {
+        //    testName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+        //    using (var mgr = new PackageSignerManager()) {
+
+        //        PreparePdfPaths(out string filePath, out string destPath);
+
+        //        X509Certificate2 cert = CertUtil.GetCertByName(test_cert);
+
+        //        var cert2 = CertUtil.GetCertByName(certum_clide_cert);
+
+        //        pdfSignOptions.Certificate = cert;
+        //        pdfSignOptions.Location = "Wawa";
+        //        pdfSignOptions.AddVisibleSignature = true;
+        //        pdfSignOptions.TimestampOptions = new TimestampOptions {
+        //            TsaUrl = TSA_CERTUM_BASIC,
+        //            Certificate = cert2
+        //        };
+
+        //        mgr.SignPdfFile(filePath, pdfSignOptions, destPath);
+
+
+        //        Assert.IsTrue(File.Exists(destPath));
+        //        bool isValid = ValidatePdfSignature(mgr, destPath);
+        //        Assert.IsTrue(isValid);
+        //    }
+        //}
 
 
         [Test]
@@ -1073,6 +1103,10 @@ namespace Abc.Nes.NUnitTests {
                     else if (line.Contains(CERTUM_PREFIX)) {
                         var split = line.Split(CERTUM_PREFIX, StringSplitOptions.RemoveEmptyEntries);
                         certum_cert = split[0].Trim();
+                    }
+                    else if (line.Contains(CERTUM_PREFIX_CLIDE)) {
+                        var split = line.Split(CERTUM_PREFIX_CLIDE, StringSplitOptions.RemoveEmptyEntries);
+                        certum_clide_cert = split[0].Trim();
                     }
                     else if (line.Contains(TEST_PREFIX)) {
                         var split = line.Split(TEST_PREFIX, StringSplitOptions.RemoveEmptyEntries);
