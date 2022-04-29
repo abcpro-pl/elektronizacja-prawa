@@ -295,6 +295,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 bool addSignatureApperance = true,
                 bool imageAsBackground = true,
                 bool allowMultipleSignatures = false) {
+
             if (cert == null) { throw new ArgumentNullException("cert"); }
             if (sourceFilePath == null) { throw new ArgumentNullException("filePath"); }
             if (!File.Exists(sourceFilePath)) { throw new FileNotFoundException("File not found!", sourceFilePath); }
@@ -302,13 +303,44 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
 
             if (!signDate.HasValue) signDate = DateTime.Now;
 
-            signPdfFile(sourceFilePath, cert, reason, location, signDate.Value,
-                addTimeStamp, timeStampServerUrl, tsaPolicy, tsaCert, tsaLogin, tsaPassword, 
-                apperancePngImage, apperancePngImageLocation, apperanceLocationX, apperanceLocationY,
-                apperanceWidth, apperanceHeight, margin,
-                outputFilePath, 
-                addSignatureApperance, imageAsBackground,
-                allowMultipleSignatures);
+            var options = new PdfSignatureOptions {
+                AddVisibleSignature = addSignatureApperance,
+                AllowMultipleSignatures = allowMultipleSignatures,
+                Certificate = cert,
+                //DateCultureInfoName
+                Height = apperanceHeight,
+                Width = apperanceWidth,
+                ImageAsBackground = imageAsBackground,
+                Location = location,
+                Margin = margin,
+                PageNumber = 1,
+                PositionX = apperanceLocationX,
+                PositionY = apperanceLocationY,
+                Reason = reason,
+                SignatureImage = apperancePngImage,
+                SignatureLocation = apperancePngImageLocation,
+                SignDate = signDate
+            };
+
+            if (addTimeStamp) {
+                options.TimestampOptions = new TimestampOptions {
+                    TsaUrl = timeStampServerUrl,
+                    TsaPolicy = tsaPolicy,
+                    Certificate = tsaCert,
+                    Login = tsaLogin,
+                    Password = tsaPassword
+                };
+            }
+
+            signPdfFile(sourceFilePath, options, outputFilePath);
+
+            //signPdfFile(sourceFilePath, cert, reason, location, signDate.Value,
+            //    addTimeStamp, timeStampServerUrl, tsaPolicy, tsaCert, tsaLogin, tsaPassword, 
+            //    apperancePngImage, apperancePngImageLocation, apperanceLocationX, apperanceLocationY,
+            //    apperanceWidth, apperanceHeight, margin,
+            //    outputFilePath, 
+            //    addSignatureApperance, imageAsBackground,
+            //    allowMultipleSignatures);
         }
 
         public void Dispose() { }

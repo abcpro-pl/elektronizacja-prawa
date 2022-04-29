@@ -119,7 +119,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                     using (var fs = new FileStream(temp, FileMode.Create)) {
 
                         StampingProperties properties = new StampingProperties();
-                        if (options.AllowMultipleSignatures)
+                        if (signatureCount > 0 && options.AllowMultipleSignatures)
                             properties.UseAppendMode();
 
                         var signer = new PdfSigner(reader, fs, properties);
@@ -313,6 +313,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 catch { }
             }
         }
+        [Obsolete]
         private void signPdfFile(
                 string sourceFilePath,
                 X509Certificate2 cert,
