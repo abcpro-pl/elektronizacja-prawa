@@ -21,6 +21,7 @@ namespace Abc.Nes {
     /// </summary>
     public interface IDocument {
         DocumentType DocumentType { get; }
+        string Description { get; set; }
     }
 
     public abstract class ElementBase {

@@ -60,14 +60,14 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             //var result = new iText.Kernel.Geom.Rectangle(apperanceLocationX, apperanceLocationY, apperanceWidth, apperanceHeight);
             if (apperancePngImageLocation != PdfSignatureLocation.Custom) {
                 switch (apperancePngImageLocation) {
-                    case PdfSignatureLocation.BottomLeft: { 
+                    case PdfSignatureLocation.BottomLeft: {
                             x = margin;
                             y = margin;
                             if (signatureCount > 0)
                                 y += height * signatureCount;
                             break;
                         }
-                    case PdfSignatureLocation.BottomRight: { 
+                    case PdfSignatureLocation.BottomRight: {
                             x = pageWidth - (margin + apperanceWidth);
                             y = margin;
                             if (signatureCount > 0)
@@ -75,14 +75,14 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                             break;
                         }
 
-                    case PdfSignatureLocation.TopLeft: { 
+                    case PdfSignatureLocation.TopLeft: {
                             x = margin;
                             y = pageHeight - (margin + apperanceHeight);
                             if (signatureCount > 0)
                                 y -= height * signatureCount;
                             break;
                         }
-                    case PdfSignatureLocation.TopRight: { 
+                    case PdfSignatureLocation.TopRight: {
                             x = pageWidth - (margin + apperanceWidth);
                             y = pageHeight - (margin + apperanceHeight);
                             if (signatureCount > 0)
@@ -185,7 +185,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
 
                                 iText.IO.Font.FontProgram fontProgram = iText.IO.Font.FontProgramFactory.CreateFont();
                                 PdfFont font = PdfFontFactory.CreateFont(fontProgram, "cp1250", true);
-                                
+
 
                                 float width = rect.GetWidth();
                                 float height = rect.GetHeight();
@@ -194,7 +194,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
 
                                 //square image left, signature right
                                 if (emptyImage) {
-                                    imgRect = new iText.Kernel.Geom.Rectangle(0,0);
+                                    imgRect = new iText.Kernel.Geom.Rectangle(0, 0);
                                     signatureRect = new iText.Kernel.Geom.Rectangle(MARGIN, MARGIN, rect.GetWidth() - MARGIN, rect.GetHeight() - MARGIN);
                                 }
                                 else {
@@ -214,7 +214,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                                         .SetFont(font)
                                         .SetFontSize(options.FontSize)
                                         //.SetTextRenderingMode(PdfCanvasConstants.TextRenderingMode.FILL_CLIP)
-                                        
+
                                         .AddStyle(new Style { })
                                         .SetMargin(0);
                                     var div = new Div();
@@ -247,9 +247,6 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                                 //appearance.SetRenderingMode(PdfSignatureAppearance.RenderingMode.GRAPHIC_AND_DESCRIPTION);
 
                             }
-
-
-
                         }
 
                         signer.SetFieldName($"sig-{Guid.NewGuid()}");
@@ -324,7 +321,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 string timeStampServerUrl,
                 string tsaPolicy,
                 X509Certificate2 tsaCert,
-                string tsaLogin, 
+                string tsaLogin,
                 string tsaPassword,
                 byte[] apperancePngImage,
                 PdfSignatureLocation apperancePngImageLocation,
@@ -414,7 +411,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                                     float width = rect.GetWidth();
                                     float height = rect.GetHeight();
                                     //square image left, signature right
-                                    iText.Kernel.Geom.Rectangle imgRect = new iText.Kernel.Geom.Rectangle(MARGIN, MARGIN, rect.GetHeight() - MARGIN *2, rect.GetHeight() - MARGIN*2);
+                                    iText.Kernel.Geom.Rectangle imgRect = new iText.Kernel.Geom.Rectangle(MARGIN, MARGIN, rect.GetHeight() - MARGIN * 2, rect.GetHeight() - MARGIN * 2);
                                     iText.Kernel.Geom.Rectangle signatureRect = new iText.Kernel.Geom.Rectangle(rect.GetHeight() + MARGIN, MARGIN, width - rect.GetHeight(), rect.GetHeight() - 2 * MARGIN);
 
                                     //image on top, signature bottom
@@ -511,7 +508,8 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                             writer.Close();
                         }
                     }
-                } else {
+                }
+                else {
                     File.Copy(temp, outputFilePath, true);
                 }
 
@@ -607,7 +605,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 }
 
                 if (File.Exists(output)) {
-                    item.Init(File.ReadAllBytes(output),out var exception);
+                    item.Init(File.ReadAllBytes(output), out var exception);
                 }
                 else if (File.Exists(temp)) {
                     item.Init(File.ReadAllBytes(temp), out var exception);
@@ -649,7 +647,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                     RSACryptoServiceProvider rsa = (RSACryptoServiceProvider)certificate.PrivateKey;
                     return rsa.SignData(message, hashAlgorithm);
                 }
-                else if(certificate.PrivateKey is RSA) {
+                else if (certificate.PrivateKey is RSA) {
                     RSA rsa = (RSA)certificate.PrivateKey;
                     var han = new HashAlgorithmName(hashAlgorithm);
                     return rsa.SignData(message, han, RSASignaturePadding.Pkcs1);
@@ -773,29 +771,18 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                             using (var converter = new Converters.XmlConverter()) {
                                 var xadesMetadataFileDocumentXml = converter.GetXml(metadataFile.Document);
                                 IDocument parsedDocument = converter.ParseXml(xadesMetadataFileDocumentXml);
-                                Document xadesMetadataFileDocument = parsedDocument as Document;
-                                
-                                if (xadesMetadataFileDocument.IsNotNull()) {
-                                    xadesMetadataFileDocument.Description = $"Digital signature of file {(item as DocumentFile).FileName}.";
+                                if (parsedDocument != null) {
+                                    parsedDocument.Description = $"Digital signature of file {item.FileName}.";
+
                                     xadesMetadataFile = new MetadataFile() {
                                         FileName = $"{xadesFile.FileName}.xml",
-                                        Document = xadesMetadataFileDocument
+                                        Document = parsedDocument
                                     };
-                                } else {
-                                    Document17 xadesMetadataFileDocument17 = parsedDocument as Document17;
-                                    if (xadesMetadataFileDocument17.IsNotNull()) {
-                                        xadesMetadataFileDocument17.Description = $"Digital signature of file {(item as DocumentFile).FileName}.";
-                                        xadesMetadataFile = new MetadataFile() {
-                                            FileName = $"{xadesFile.FileName}.xml",
-                                            Document = xadesMetadataFileDocument17
-                                        };
-                                    }
-                                }
-                                
 
-                                var metadataFolder = mgr.GetParentFolder(metadataFile);
-                                if (metadataFolder != null) {
-                                    metadataFolder.AddItem(xadesMetadataFile);
+                                    var metadataFolder = mgr.GetParentFolder(metadataFile);
+                                    if (metadataFolder != null) {
+                                        metadataFolder.AddItem(xadesMetadataFile);
+                                    }
                                 }
                             }
                         }
