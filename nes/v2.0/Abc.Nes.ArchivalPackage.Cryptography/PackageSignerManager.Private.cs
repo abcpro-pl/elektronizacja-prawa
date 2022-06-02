@@ -769,14 +769,29 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                         // add metadata
                         var metadataFile = mgr.GetMetadataFile(item);
                         if (metadataFile != null) {
+                            MetadataFile xadesMetadataFile = null;
                             using (var converter = new Converters.XmlConverter()) {
                                 var xadesMetadataFileDocumentXml = converter.GetXml(metadataFile.Document);
-                                var xadesMetadataFileDocument = converter.ParseXml(xadesMetadataFileDocumentXml) as Document;
-                                xadesMetadataFileDocument.Description = $"Digital signature of file {(item as DocumentFile).FileName}.";
-                                var xadesMetadataFile = new MetadataFile() {
-                                    FileName = $"{xadesFile.FileName}.xml",
-                                    Document = xadesMetadataFileDocument
-                                };
+                                IDocument parsedDocument = converter.ParseXml(xadesMetadataFileDocumentXml);
+                                Document xadesMetadataFileDocument = parsedDocument as Document;
+                                
+                                if (xadesMetadataFileDocument.IsNotNull()) {
+                                    xadesMetadataFileDocument.Description = $"Digital signature of file {(item as DocumentFile).FileName}.";
+                                    xadesMetadataFile = new MetadataFile() {
+                                        FileName = $"{xadesFile.FileName}.xml",
+                                        Document = xadesMetadataFileDocument
+                                    };
+                                } else {
+                                    Document17 xadesMetadataFileDocument17 = parsedDocument as Document17;
+                                    if (xadesMetadataFileDocument17.IsNotNull()) {
+                                        xadesMetadataFileDocument17.Description = $"Digital signature of file {(item as DocumentFile).FileName}.";
+                                        xadesMetadataFile = new MetadataFile() {
+                                            FileName = $"{xadesFile.FileName}.xml",
+                                            Document = xadesMetadataFileDocument17
+                                        };
+                                    }
+                                }
+                                
 
                                 var metadataFolder = mgr.GetParentFolder(metadataFile);
                                 if (metadataFolder != null) {
