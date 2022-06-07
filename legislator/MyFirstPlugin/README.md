@@ -1,18 +1,7 @@
 <img src="images/abcpro-pl-white-4.svg" width="200px" style="width: 200px; margin: auto; display:block;"/>
 
-# Elektronizacja prawa
-Udostępniane publicznie standardy, schematy i&nbsp;opisy oraz kod źródłowy oprogramowania przeznaczony do celów komercyjnych i&nbsp;niekomercyjnych. 
-
-## Paczka eADM i Niezbędne Elementy Struktury 2.0
-
-W&nbsp;podkatalogu [NES/v2.0](nes/v2.0/README.md) znajduje się kod biblioteki do tworzenia, edycji i&nbsp;podpisywania paczki eADM oraz plików metadanych zgodnych z&nbsp;NES 2.0.
-
-## Przykładowy dodatek do programu Legioslator 2.x
-W&nbsp;podkatalogu [Legislator/MyFirstPlugin](legislator/MyFirstPlugin/README.md) znajduje się kod przykładowego dodatku do Edytora Aktów Prawnych Legislator 2.x.
-
-## Generator losowych zdań po polsku
-
-W&nbsp;podkatalogu [psg](psg/README.md) znajduje się biblioteka służąca do generowania zdań po polsku, np. w&nbsp;celu testowania zachowań edytorów tekstów.
+# Przykładowy dodatek do programu Legioslator 2.x
+W&nbsp;tym katalogu znajduje się kod przykładowego dodatku do Edytora Aktów Prawnych Legislator 2.x.
  
 ## O ABC PRO  
 
