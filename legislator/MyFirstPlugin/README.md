@@ -1,4 +1,4 @@
-<img src="images/abcpro-pl-white-4.svg" width="200px" style="width: 200px; margin: auto; display:block;"/>
+<img src="../../images/abcpro-pl-white-4.svg" width="200px" style="width: 200px; margin: auto; display:block;"/>
 
 # Przykładowy dodatek do programu Legioslator 2.x
 W&nbsp;tym katalogu znajduje się kod przykładowego dodatku do Edytora Aktów Prawnych Legislator 2.x.
