@@ -20,7 +20,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace MyFirstPlugin {
-    public class Plugin : IPluginLegislator, IPluginLegislatorEvents, IPluginLegislatorCustomBehavior {
+    public class Plugin : IPluginLegislator, IPluginLegislatorEvents, IPluginLegislatorCustomBehavior, IPluginLegislatorProtocolEvents {
         private static Plugin m_ThisPlugin = null;
         public static Plugin ThisPlugin => m_ThisPlugin;
 
@@ -159,6 +159,15 @@ namespace MyFirstPlugin {
                 return name;
             }
             return "akt";
+        }
+
+        public bool ExecuteProtocolString(string protocolString) {
+            if (protocolString.IsNotNullOrEmpty()) {
+                if (System.Windows.Forms.MessageBox.Show(protocolString, "Protocol", System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes) {
+                    return true;
+                }
+            }
+            return default;
         }
     }
 }
