@@ -63,6 +63,16 @@ namespace MyFirstPlugin.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap MyFirstPluginFile32 {
+            get {
+                object obj = ResourceManager.GetObject("MyFirstPluginFile32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Plugin32 {
             get {
                 object obj = ResourceManager.GetObject("Plugin32", resourceCulture);

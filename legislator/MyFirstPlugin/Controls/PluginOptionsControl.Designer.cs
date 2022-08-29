@@ -45,9 +45,9 @@
             this.cbEnabled.Location = new System.Drawing.Point(24, 126);
             this.cbEnabled.Margin = new System.Windows.Forms.Padding(2);
             this.cbEnabled.Name = "cbEnabled";
-            this.cbEnabled.Size = new System.Drawing.Size(138, 17);
+            this.cbEnabled.Size = new System.Drawing.Size(136, 17);
             this.cbEnabled.TabIndex = 4;
-            this.cbEnabled.Text = "Włącz funkcje dodatku";
+            this.cbEnabled.Text = "Enable add-on features";
             this.cbEnabled.UseVisualStyleBackColor = true;
             this.cbEnabled.CheckedChanged += new System.EventHandler(this.cbEnabled_CheckedChanged);
             // 

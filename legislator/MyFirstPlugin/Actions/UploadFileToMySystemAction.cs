@@ -13,24 +13,23 @@ using System.Windows.Forms;
 
 namespace MyFirstPlugin.Actions {
     public class UploadFileToMySystemAction : IPluginLegislatorAction, IDisposable {
-        public ActionButtonLocation ButtonLocation { get { return ActionButtonLocation.EditorForm; } }
-        public int ButtonOrder { get { return 0; } }
-        public string Caption { get { return "Wyślij do systemu"; } }
-        public string Description { get { return "Zapisz dokument w repozytorium dokumentów systemu"; } }
-        public bool Enabled { get { return true; } }
-        public Bitmap Icon16 { get { return Properties.Resources.Save32; } }
-        public Bitmap Icon32 { get { return Properties.Resources.Save32; } }
-        public Bitmap Icon48 { get { return Properties.Resources.Save32; } }
-        public string MoreInfoUrl { get { return "https://itorg.pl/"; } }
-        public bool Visible { get { return true; } }
-        public void Dispose() { }
-
+        public ActionButtonLocation ButtonLocation => ActionButtonLocation.EditorForm; 
+        public int ButtonOrder => 0; 
+        public string Caption => "Send to system"; 
+        public string Description => "Save the document in the system document repository"; 
+        public bool Enabled => true; 
+        public Bitmap Icon16 => Properties.Resources.Save32; 
+        public Bitmap Icon32 => Properties.Resources.Save32; 
+        public Bitmap Icon48 => Properties.Resources.Save32; 
+        public string MoreInfoUrl => "https://itorg.pl/"; 
+        public bool Visible => true; 
+     
         public object Execute() {
-            if (!Plugin.ThisPlugin.UsePlugin) { throw new Exception("Funkcje dodatku nie są włączone!"); }
+            if (!Plugin.ThisPlugin.UsePlugin) { throw new Exception("Add-on features are not included!"); }
             Plugin.ThisPlugin.ControllerInstance.SaveCurrentDocument();
             var filePath = Plugin.ThisPlugin.ControllerInstance.GetCurrentDocumentPath();
 
-            Plugin.ThisPlugin.ApiController.ShowWaitForm("Wysyłanie do systemu...");
+            Plugin.ThisPlugin.ApiController.ShowWaitForm("Send to system...");
             var isBusy = true;
             var task = Plugin.ThisPlugin.SendDocument(filePath);
             task.ContinueWith(t => {
@@ -53,5 +52,7 @@ namespace MyFirstPlugin.Actions {
 
             return this;
         }
+
+        public void Dispose() { }
     }
 }

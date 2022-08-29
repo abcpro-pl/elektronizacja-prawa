@@ -49,10 +49,13 @@
   <ItemGroup>
     <Compile Include="Actions\LearnMoreNewFileTabAction.cs" />
     <Compile Include="Actions\LearnMoreSampleAction.cs" />
+    <Compile Include="Actions\MyNewFileTabAction.cs" />
     <Compile Include="Actions\OpenFromSystemAction.cs" />
+    <Compile Include="Actions\OpenTabItemsAction.cs" />
     <Compile Include="Actions\UploadFileToMySystemAction.cs" />
     <Compile Include="Extensions\StringExtensionsClass.cs" />
     <Compile Include="Model\ActionResult.cs" />
+    <Compile Include="Model\RecentlyUsedItem.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="PluginConfiguration.cs" />
     <Compile Include="Controls\PluginOptionsControl.cs">
@@ -88,6 +91,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\plugin32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MyFirstPluginFile32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
