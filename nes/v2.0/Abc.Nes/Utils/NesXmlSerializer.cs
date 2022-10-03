@@ -90,7 +90,7 @@ namespace System.Xml.Serialization {
         }
 
         protected void AttributeSynonymHandler(object sender, XmlAttributeEventArgs e) {
-            var member = XmlSynonymsAttribute.GetMember(e.ObjectBeingDeserialized, e.Attr.Name);
+            var member = XmlSynonymsAttribute.GetMember(e.ObjectBeingDeserialized, e.Attr.LocalName);
             if (member.IsNull()) { return; }
 
             if (member.PropertyType.FullName == "System.String") {
@@ -110,7 +110,7 @@ namespace System.Xml.Serialization {
             }
             else {
                 object value;
-                var serializer = new XmlSerializer(member.PropertyType, new XmlRootAttribute(e.Attr.Name));
+                var serializer = new XmlSerializer(member.PropertyType, new XmlRootAttribute(e.Attr.LocalName));
                 using (var reader = new StringReader(e.Attr.OuterXml)) {
                     value = serializer.Deserialize(reader);
                 }
@@ -119,7 +119,7 @@ namespace System.Xml.Serialization {
         }
 
         protected void ElementSynonymHandler(object sender, XmlElementEventArgs e) {
-            PropertyInfo property = XmlSynonymsAttribute.GetMember(e.ObjectBeingDeserialized, e.Element.Name);
+            PropertyInfo property = XmlSynonymsAttribute.GetMember(e.ObjectBeingDeserialized, e.Element.LocalName);
             if (property.IsNull() || !property.CanWrite) { return; }
 
             object value = e.Element.InnerText;
@@ -141,7 +141,7 @@ namespace System.Xml.Serialization {
                 property.SetValue(objectBeingDeserialized, o);
             }
             else {
-                var serializer = new XmlSerializer(property.PropertyType, new XmlRootAttribute(e.Element.Name));
+                var serializer = new XmlSerializer(property.PropertyType, new XmlRootAttribute(e.Element.LocalName));
                 using (var reader = new StringReader(e.Element.OuterXml)) {
                     value = serializer.Deserialize(reader);
                 }

@@ -31,8 +31,9 @@ W tym katalogu znajduje się:
 
 Wersja  | Opis
 --------|--------
-1.1.32|Dodanie CountryCode 'Polska'.
-1.1.31|Obsługa plików metadanych 1.7 podczas podpisywania.
+1.1.33|Obsługa `namespace prefix` w `XmlSynonyms`.
+1.1.32|Dodanie `CountryCode` 'Polska'.
+1.1.31|Obsługa plikó metadanych 1.7 podczas podpisywania.
 1.1.30|Dodanie bardziej szczegółowej weryfikacji nazw plików metadanych (z pominięciem białych znaków i rozszerzeń).
 1.1.29|Zmiany wizualizacji podpisu PAdES.
 1.1.28|Dodanie wsparcia dla weryfikacji plików XML z transformacją XPath. Poprawki dotyczące zliczania plików metadanych dla plików i folderów w katalogu dokumenty.
