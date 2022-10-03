@@ -119,6 +119,8 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                     using (var fs = new FileStream(temp, FileMode.Create)) {
 
                         StampingProperties properties = new StampingProperties();
+                        
+                        properties.PreserveEncryption();
                         if (signatureCount > 0 && options.AllowMultipleSignatures)
                             properties.UseAppendMode();
 
@@ -266,7 +268,10 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                                 //tsa.SetNonce(nonce.ToByteArray());
                             }
                         }
-                        var signature = new X509Certificate2Signature(options.Certificate, HashAlgorithmName.SHA256.Name);
+                        string hashAlgorithm = HashAlgorithmName.SHA256.Name;
+                        if (options.HashAlgorithmName.IsNotNull())
+                            hashAlgorithm = options.HashAlgorithmName;
+                        var signature = new X509Certificate2Signature(options.Certificate, hashAlgorithm);
                         signer.SignDetached(signature, GetChain(options.Certificate), null, null, tsa, 0, PdfSigner.CryptoStandard.CADES);
                     }
                 }

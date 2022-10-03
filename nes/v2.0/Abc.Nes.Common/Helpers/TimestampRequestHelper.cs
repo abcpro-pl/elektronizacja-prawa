@@ -105,7 +105,8 @@ namespace Abc.Nes.Common.Helpers {
 
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(tspUrl);
             req.Method = "POST";
-            
+            req.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
+
 
             if (!string.IsNullOrEmpty(tspLogin) && !string.IsNullOrEmpty(tspPassword)) {
                 //basic auth

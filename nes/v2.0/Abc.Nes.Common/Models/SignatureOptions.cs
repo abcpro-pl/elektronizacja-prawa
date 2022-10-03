@@ -17,5 +17,6 @@ namespace Abc.Nes.Common.Models {
         /// Custom name, if empty name is taken from certificate
         /// </summary>
         public string SignerName { get; set; } = null;
+        public string HashAlgorithmName { get; set; } = null;
     }
 }

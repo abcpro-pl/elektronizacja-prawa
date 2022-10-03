@@ -27,7 +27,8 @@ namespace Abc.Nes.Xades {
                                                    string timeStampPolicy = null,
                                                    X509Certificate2 timeStampCertificate = null,
                                                    string timeStampLogin = null,
-                                                   string timeStampPassword = null);
+                                                   string timeStampPassword = null,
+                                                   string hashAlgorithmName = "SHA256");
         SignatureDocument CreateEnvelopingSignature(Stream input, X509Certificate2 cert, Signature.Parameters.SignatureProductionPlace productionPlace = null, Signature.Parameters.SignerRole signerRole = null, string fileName = null, Upgraders.SignatureFormat? upgradeFormat = null, string timeStampServerUrl = "http://time.certum.pl", CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval);
         SignatureDocument CreateDetachedSignature(string filePath, X509Certificate2 cert, Signature.Parameters.SignatureProductionPlace productionPlace = null, Signature.Parameters.SignerRole signerRole = null, Upgraders.SignatureFormat? upgradeFormat = null, string timeStampServerUrl = "http://time.certum.pl", CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval);
         ValidationResult ValidateSignature(Stream stream);
@@ -62,7 +63,8 @@ namespace Abc.Nes.Xades {
                     opts.TimestampOptions?.TsaPolicy,
                     opts.TimestampOptions?.Certificate,
                     opts.TimestampOptions?.Login,
-                    opts.TimestampOptions?.Password
+                    opts.TimestampOptions?.Password,
+                    opts.HashAlgorithmName
                 );
 
                 if (result != null) {
@@ -83,7 +85,8 @@ namespace Abc.Nes.Xades {
             string timeStampPolicy = null,
             X509Certificate2 timeStampCertificate = null,
             string timeStampLogin = null,
-            string timeStampPassword = null) {
+            string timeStampPassword = null,
+            string hashAlgorithmName = "SHA256") {
 
             if (input == null) { throw new ArgumentNullException("input"); }
 
@@ -110,9 +113,12 @@ Content-Type: text/xml
 Content-Transfer-Encoding: UTF-8"
             };
 
+            //var digestMethod = SignedXml.XmlDsigSHA1Url;
+
             ContentReference = new Reference {
                 Id = "Reference-" + Guid.NewGuid().ToString(),
                 Uri = ""
+                //,DigestMethod = digestMethod
             };
 
             for (int i = 0; i < signatureDocument.Document.DocumentElement.Attributes.Count; i++) {
@@ -128,7 +134,7 @@ Content-Transfer-Encoding: UTF-8"
             signatureDocument.XadesSignature.AddReference(ContentReference);
 
             SetSignatureId(signatureDocument.XadesSignature);
-            PrepareSignature(signatureDocument, commitmentTypeId: commitmentTypeId, signDate: signDate);
+            PrepareSignature(signatureDocument, commitmentTypeId: commitmentTypeId, signDate: signDate, hashAlgorithmName: hashAlgorithmName);
 
             signatureDocument.XadesSignature.ComputeSignature();
             
@@ -392,16 +398,38 @@ Content-Disposition: filename=""{ fileName }""
         private void PrepareSignature(SignatureDocument signatureDocument,
                                       bool addKeyInfoReference = true,
                                       CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval,
-                                      DateTime? signDate = null) {
-
-            signatureDocument.XadesSignature.SignedInfo.SignatureMethod = SignatureMethod.RSAwithSHA256.URI;
+                                      DateTime? signDate = null,
+                                      string hashAlgorithmName = null) {
+            
+            signatureDocument.XadesSignature.SignedInfo.SignatureMethod = GetSignatureMethod(hashAlgorithmName);
             AddCertificateInfo(signatureDocument, addKeyInfoReference);
-            AddXadesInfo(signatureDocument, commitmentTypeId, signDate);
+            AddXadesInfo(signatureDocument, commitmentTypeId, signDate, hashAlgorithmName);
+        }
+
+        private static string GetSignatureMethod(string hashAlgorithmName) {
+            string sigMethod;
+            switch (hashAlgorithmName.ToUpper()) {
+                default:
+                case "SHA2":
+                case "SHA256":
+                    sigMethod = SignatureMethod.RSAwithSHA256.URI;
+                    break;
+                case "SHA1":
+                    sigMethod = SignatureMethod.RSAwithSHA1.URI;
+                    break;
+                case "SHA512":
+                    sigMethod = SignatureMethod.RSAwithSHA512.URI;
+                    break;
+
+            }
+
+            return sigMethod;
         }
 
         private void AddCertificateInfo(SignatureDocument signatureDocument, bool addKeyInfoReference = true) {
             XadesSigner = new Signer(Certificate);
             signatureDocument.XadesSignature.SigningKey = XadesSigner.SigningKey;
+            //signatureDocument.XadesSignature.SafeCanonicalizationMethods
 
             var keyInfo = new KeyInfo {
                 Id = "KeyInfoId-" + signatureDocument.XadesSignature.Signature.Id
@@ -421,7 +449,10 @@ Content-Disposition: filename=""{ fileName }""
             }
         }
 
-        private void AddXadesInfo(SignatureDocument signatureDocument, CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval, DateTime? signDate=null) {
+        private void AddXadesInfo(SignatureDocument signatureDocument,
+                                  CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval,
+                                  DateTime? signDate = null,
+                                  string hashAlgorithmName = "SHA256") {
             XadesObject xadesObject = new XadesObject {
                 Id = "XadesObjectId-" + Guid.NewGuid().ToString()
             };
@@ -433,7 +464,7 @@ Content-Disposition: filename=""{ fileName }""
                 xadesObject.QualifyingProperties.SignedProperties.SignedSignatureProperties,
                 xadesObject.QualifyingProperties.SignedProperties.SignedDataObjectProperties,
                 xadesObject.QualifyingProperties.UnsignedProperties.UnsignedSignatureProperties,
-                commitmentTypeId, signDate);
+                commitmentTypeId, signDate, hashAlgorithmName);
 
             signatureDocument.XadesSignature.AddXadesObject(xadesObject);
         }
@@ -443,12 +474,31 @@ Content-Disposition: filename=""{ fileName }""
                     SignedDataObjectProperties signedDataObjectProperties,
                     UnsignedSignatureProperties unsignedSignatureProperties,
                     CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval,
-                    DateTime? signDate = null
+                    DateTime? signDate = null,
+                    string hashAlgorithmName = "SHA256"
                     ) {
             var cert = new Cert();
             cert.IssuerSerial.X509IssuerName = XadesSigner.Certificate.IssuerName.Name;
             cert.IssuerSerial.X509SerialNumber = XadesSigner.Certificate.GetSerialNumberAsDecimalString();
-            DigestUtil.SetCertDigest(XadesSigner.Certificate.GetRawCertData(), Crypto.DigestMethod.SHA256, cert.CertDigest);
+            
+            Crypto.DigestMethod digestMethod;
+            switch (hashAlgorithmName.ToUpper()) {
+                default:
+                case "SHA256":
+                case "SHA2":
+                case "SHA-2":
+                    digestMethod = Crypto.DigestMethod.SHA256;
+                    break;
+                case "SHA1":
+                case "SHA-1":
+                    digestMethod = Crypto.DigestMethod.SHA1;
+                    break;
+                case "SHA512":
+                    digestMethod = Crypto.DigestMethod.SHA512;
+                    break;
+            }
+
+            DigestUtil.SetCertDigest(XadesSigner.Certificate.GetRawCertData(), digestMethod, cert.CertDigest);
             signedSignatureProperties.SigningCertificate.CertCollection.Add(cert);
 
             signedSignatureProperties.SigningTime = DateTime.Now;

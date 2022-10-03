@@ -67,7 +67,12 @@ namespace Microsoft.Xades {
         {
             "_id",
             "_Id",
-            "_ID"
+            "_ID",
+            "_iD",
+            "id",
+            "ID",
+            "Id",
+            "iD"
         };
 
         private KnownSignatureStandard signatureStandard;
@@ -372,7 +377,8 @@ namespace Microsoft.Xades {
 
                 // if not, search for custom ids
                 foreach (string idAttr in idAttrs) {
-                    retVal = xmlDocument.SelectSingleNode("//*[@" + idAttr + "=\"" + idValue + "\"]") as XmlElement;
+                    string xpath = "//*[@" + idAttr + "=\"" + idValue + "\"]";
+                    retVal = xmlDocument.SelectSingleNode(xpath) as XmlElement;
                     if (retVal != null) {
                         break;
                     }
