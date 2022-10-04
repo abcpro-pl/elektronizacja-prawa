@@ -40,6 +40,9 @@ namespace System.Xml.Serialization {
             else if (o is Document17) {
                 DocumentType = DocumentType.Nes17;
             }
+            else if (o is Document16) {
+                DocumentType = DocumentType.Nes16;
+            }
 
             base.Serialize(xmlWriter, o);
             if (stringWriter.IsNotNull()) {

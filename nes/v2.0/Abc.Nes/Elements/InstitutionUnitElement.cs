@@ -28,7 +28,6 @@ namespace Abc.Nes.Elements {
     [XmlType(TypeName = "instytucja-jednostka-typ")]
     [XmlAnnotation("Element zawierający dane jednostki organizacyjnej instytucji.")]
     public class InstitutionOrgUnitElement {
-        // [XmlElement("id")] public List<IdElement> Identifiers { get; set; }
         [XmlElement("nazwa")] [XmlRequired] [XmlAnnotation("Nazwa instytucji")] public string Name { get; set; }
         [XmlElement("adres")] public List<AddressElement> Addresses { get; set; }
         [XmlElement("kontakt")] public List<ContactElement> Contacts { get; set; }

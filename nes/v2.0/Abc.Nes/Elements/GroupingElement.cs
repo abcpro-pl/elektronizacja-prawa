@@ -20,6 +20,7 @@ namespace Abc.Nes.Elements {
     public class GroupingElement : ElementBase {
         [XmlElement("typGrupy")]
         [XmlSynonyms("typ")]
+        [XmlSynonyms("typ", Enumerations.DocumentType.Nes16)]
         [XmlRequired]
         [XmlAnnotation("Określenie typu grupy dokumentów np. sprawa, rejestr umów, rejestr skarg i wniosków itd.")]
         [XmlSimpleType(TypeName = "grupowanie-typgrupy-typ", Annotation = "Dla zbioru/grupy będącej sprawą założoną zgodnie z jednolitym rzeczowym wykazem akt typ przyjmuje wartość = „znak sprawy”. Dla pozostałych grup – inny dowolny tekst w sposób jednoznaczny charakteryzujący wyodrębniony zbiór/grupę dokumentów.", BaseTypeName = "xs:string", UnionMemberTypes = "ndap:niepusty-ciag-typ")]
@@ -27,6 +28,7 @@ namespace Abc.Nes.Elements {
 
         [XmlElement("kodGrupy")]
         [XmlSynonyms("kod")]
+        [XmlSynonyms("kod", Enumerations.DocumentType.Nes16)]
         [XmlRequired]
         [XmlAnnotation("Numer albo ciąg znaków będący identyfikatorem grupy dokumentów. W danym kontekście (miejscu w strukturze obiegu dokumentów) wartość powinna być unikatowa.")]
         [XmlSimpleType(TypeName = "grupowanie-kodgrupy-typ", Annotation = "Dla grupy będącej sprawą założoną zgodnie z jednolitym rzeczowym wykazem akt, kod przyjmuje wartość zgodną z przyjętym w podmiocie sposobem znakowania spraw. Dla pozostałych grup – unikatowy identyfikator wyodrębnionego zbioru/grupy.", BaseTypeName = "xs:string", UnionMemberTypes = "ndap:niepusty-ciag-typ")]

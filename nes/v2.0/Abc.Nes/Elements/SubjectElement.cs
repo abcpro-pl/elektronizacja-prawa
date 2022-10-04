@@ -30,6 +30,21 @@ Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czy
         [XmlIgnore] public InstitutionElement Institution { get { return Subject as InstitutionElement; } set { SubjectType = SubjectType.instytucja; Subject = value; } }
     }
 
+    [XmlType(TypeName = "podmiot-typ")]
+    [XmlAnnotation(@"Element zawierający dane podmiotu. 
+Jednostka (osoba fizyczna, instytucja), która może być stroną w jakiejś czynności związanej z dokumentem (tworzenie, odbieranie, akceptacja, podpisywanie, łączenie w grupy). ")]
+    public class SubjectElement16 {
+        [XmlRequired]
+        [XmlChoiceIdentifier("SubjectType")]
+        [XmlElement("osoba", typeof(PersonElement16))]
+        [XmlElement("instytucja", typeof(InstitutionElement16))]
+        public object Subject { get; set; }
+
+        [XmlIgnore] public SubjectType SubjectType;
+        [XmlIgnore] public PersonElement16 Person { get { return Subject as PersonElement16; } set { SubjectType = SubjectType.osoba; Subject = value; } }
+        [XmlIgnore] public InstitutionElement16 Institution { get { return Subject as InstitutionElement16; } set { SubjectType = SubjectType.instytucja; Subject = value; } }
+    }
+
     [XmlType(IncludeInSchema = false)]
     public enum SubjectType {
         osoba,

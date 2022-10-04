@@ -25,4 +25,14 @@ namespace Abc.Nes.Elements {
         [XmlElement("adres")] [XmlAnnotation("Adresy")] public List<AddressElement> Addresses { get; set; }
         [XmlElement("kontakt")] [XmlAnnotation("Kontakty")] public List<ContactElement> Contacts { get; set; }
     }
+
+    [XmlType(TypeName = "osoba-typ")]
+    [XmlAnnotation("Element zawierający dane osoby fizycznej.")]
+    public class PersonElement16 {
+        [XmlElement("id")] public List<PersonIdElement> Identifiers { get; set; }
+        [XmlElement("nazwisko")][XmlRequired][XmlAnnotation("Nazwisko")] public string Surname { get; set; }
+        [XmlElement("imie")][XmlAnnotation("Imię")] public string FirstName { get; set; }
+        [XmlElement("adres")][XmlAnnotation("Adresy")] public List<AddressElement> Addresses { get; set; }
+        [XmlElement("kontakt")][XmlAnnotation("Kontakty")] public List<ContactElement> Contacts { get; set; }
+    }
 }

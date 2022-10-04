@@ -73,7 +73,7 @@ Umożliwia wyszukiwanie i sortowanie dokumentów lub ich grupy według czasu zda
 Umożliwia wyszukiwanie i sortowanie dokumentów lub ich grupy według czasu zdarzeń z nimi związanych, jak również wyszukiwanie / filtrowanie wg rodzajów zdarzeń.")]
     [XmlChoice]
     public class DateElement17 {
-        [XmlIgnore] public const DocumentType DOCUMENT_TYPE = DocumentType.Nes17;
+        [XmlIgnore] public DocumentType DOCUMENT_TYPE => DocumentType.Nes17;
 
 
         [XmlElement("typ")]
@@ -114,4 +114,49 @@ Umożliwia wyszukiwanie i sortowanie dokumentów lub ich grupy według czasu zda
         public DateTime GetDateFrom() { try { return Convert.ToDateTime(DateFrom); } catch { } return default; }
         public DateTime GetDateTo() { try { return Convert.ToDateTime(DateTo); } catch { } return default; }
     }
+
+    [XmlType(TypeName = "data-dokumentu-typ")]
+    [XmlAnnotation(@"Element zawierający dane o dacie dokumentu. 
+Umożliwia wyszukiwanie i sortowanie dokumentów lub ich grupy według czasu zdarzeń z nimi związanych, jak również wyszukiwanie / filtrowanie wg rodzajów zdarzeń.")]
+    [XmlChoice]
+    public class DateElement16 {
+        [XmlIgnore] public const DocumentType DOCUMENT_TYPE = DocumentType.Nes16;
+
+        [XmlElement("typ")][XmlRequired] public DocumentDateType16 Type { get; set; }
+        public bool ShouldSerializeType() { return Type != DocumentDateType16.None; }
+
+        // -----------------------------data-dokumentu-grupa ------------------------------------       
+        [XmlGroup(Name = "data-dokumentu-grupa")]
+        [XmlElement("czas")]
+        [XmlRequired]
+        [XmlAnnotation("Data dokumentu")]
+        [XmlSimpleType(TypeName = "czas-typ", UnionMemberTypes = "xs:gYear xs:gYearMonth xs:date xs:dateTime", Annotation = "Czas zapisany jako rok lub rok i miesiąc lub jako pełna data.")]
+        public string Date { get; set; }
+        // -----------------------------data-dokumentu-grupa ------------------------------------
+
+
+        // -----------------------------przedzial-czasu-grupa -----------------------------------
+        [XmlGroup(Name = "przedzial-czasu-grupa")]
+        [XmlElement("od")]
+        [XmlRequired]
+        [XmlAnnotation("Data skrajna Od")]
+        [XmlSimpleType(TypeName = "czas-typ", UnionMemberTypes = "xs:gYear xs:gYearMonth xs:date xs:dateTime", Annotation = "Czas zapisany jako rok lub rok i miesiąc lub jako pełna data.")]
+        public string DateFrom { get; set; }
+        public bool ShouldSerializeDateFrom() { return DateFrom.IsNotNullOrEmpty(); }
+
+        [XmlGroup(Name = "przedzial-czasu-grupa")]
+        [XmlElement("do")]
+        [XmlRequired]
+        [XmlAnnotation("Data skrajna Do")]
+        [XmlSimpleType(TypeName = "czas-typ", UnionMemberTypes = "xs:gYear xs:gYearMonth xs:date xs:dateTime", Annotation = "Czas zapisany jako rok lub rok i miesiąc lub jako pełna data.")]
+        public string DateTo { get; set; }
+        public bool ShouldSerializeDateTo() { return DateTo.IsNotNullOrEmpty(); }
+
+        // -----------------------------przedzial-czasu-grupa -----------------------------------
+
+        public DateTime GetDate() { try { return Convert.ToDateTime(Date); } catch { } return default; }
+        public DateTime GetDateFrom() { try { return Convert.ToDateTime(DateFrom); } catch { } return default; }
+        public DateTime GetDateTo() { try { return Convert.ToDateTime(DateTo); } catch { } return default; }
+    }
+
 }

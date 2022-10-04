@@ -22,6 +22,13 @@ namespace Abc.Nes.Enumerations {
         [XmlEnum("obraz ruchomy")] Gif,
         [XmlEnum("wideo")] Video,
         [XmlEnum("kolekcja")] Collection,
-        [XmlEnum("zbiór danych")] DataSet
+        [XmlEnum("zbiór danych")] DataSet,
+        [XmlEnum("zdarzenie")] Event,
+        [XmlEnum("obraz")] Image,
+        [XmlEnum("zasób interaktywny")] InteractiveResource,
+        [XmlEnum("obraz ruchomy")] MovingImage,
+        [XmlEnum("obiekt fizyczny")] PhysicalObject,
+        [XmlEnum("oprogramowanie")] Software,
+        [XmlEnum("obraz nieruchomy")] StillImage
     }
 }

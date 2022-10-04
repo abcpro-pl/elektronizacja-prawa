@@ -61,4 +61,27 @@ namespace Abc.Nes.Elements {
 
         [XmlElement("podmiot")] [XmlRequired] public SubjectElement Subject { get; set; }
     }
+
+
+
+    [XmlType(TypeName = "tworca-typ-16")]
+    [XmlAnnotation(@"Podmiot (instytucja lub osoba) pełniący określoną rolę w przygotowaniu dokumentu. Pozwala na identyfikację osoby fizycznej lub prawnej, która przygotowała, modyfikowała, akceptowała/zatwierdziła, podpisała dokument.")]
+    public class AuthorElement16 {
+        [XmlElement("funkcja")]
+        [XmlRequired]
+        [XmlAnnotation("Określenie roli podmiotu w tworzeniu treści dokumentu.")]
+        [XmlSimpleType(TypeName = "tworca-funkcja-typ", Annotation = "Zgodnie z referencyjnym słownikiem  funkcji użytkowanych w podmiocie, słownik musi zawierać co najmniej następujące elementy: utworzył, modyfikował, zatwierdził, podpisał.", BaseTypeName = "xs:string", UnionMemberTypes = "ndap:niepusty-ciag-typ", EnumerationRestriction = typeof(AuthorFunctionType))]
+        public string Function { get; set; }
+
+        public void SetKind(AuthorFunctionType functionType) {
+            Function = functionType.GetXmlEnum();
+        }
+
+        public static string GetAuthorFunctionType(AuthorFunctionType functionType) {
+            return functionType.GetXmlEnum();
+        }
+
+        [XmlElement("podmiot")][XmlRequired] public SubjectElement16 Subject { get; set; }
+    }
+
 }

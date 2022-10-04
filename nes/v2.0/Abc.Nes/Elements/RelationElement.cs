@@ -35,4 +35,22 @@ namespace Abc.Nes.Elements {
             Type = type.GetXmlEnum();
         }    
     }
+
+
+    [XmlType(TypeName = "relacja-typ")]
+    [XmlAnnotation(@"Określenie bezpośredniego powiązania z innym dokumentem i rodzaju tego powiązania. Pozwala na odnalezienie dokumentów, które są bezpośrednio powiązane z danym dokumentem. Na przykład kolejnych wersji tego samego dokumentu, dekretacji dokumentu, dokumentów składających się z innych dokumentów, załączników do dokumentów, potwierdzeń doręczenia dokumentu, itd.")]
+    public class RelationElement16 : ElementBase {
+        [XmlElement("identyfikator")][XmlRequired] public List<IdentifierElement16> Identifiers { get; set; }
+
+        [XmlElement("typRelacji")]
+        [XmlSynonyms("typ")]
+        [XmlRequired]
+        [XmlAnnotation("Określenie rodzaju powiązania.")]
+        [XmlSimpleType(TypeName = "typrelacji-typ", Annotation = "Standardowe typy relacji powinny być ujęte w słownik zawierający co najmniej typy relacji określone w repozytorium interoparacyjności.", BaseTypeName = "xs:string", UnionMemberTypes = "ndap:niepusty-ciag-typ", EnumerationRestriction = typeof(RelationType))]
+        public string Type { get; set; }
+
+        public void SetType(RelationType type) {
+            Type = type.GetXmlEnum();
+        }
+    }
 }

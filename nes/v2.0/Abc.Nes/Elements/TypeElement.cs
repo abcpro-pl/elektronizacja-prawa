@@ -71,4 +71,30 @@ Umożliwia podanie informacji o rodzaju dokumentu na wykazach dokumentów znajdu
             Class = docClass.GetName();
         }
     }
+
+
+    [XmlType(TypeName = "kategoria-typ-16")]
+    [XmlAnnotation(@"Określenie kategorii i rodzaju dokumentu. 
+Pozwala na odnajdywanie dokumentów wg określonych klas (np. tylko dokumentów tekstowych, tylko fotografii, tylko nagrań dźwiękowych) oraz rodzajów (np. tylko decyzji, postanowień, urzędowych poświadczeń odbioru).
+Umożliwia podanie informacji o rodzaju dokumentu na wykazach dokumentów znajdujących się w danym zbiorze.")]
+    public class TypeElement16 {
+        [XmlElement("kategoria")]
+        [XmlRequired]
+        [XmlAnnotation("Określenie typu dokumentu na bardzo ogólnym poziomie (np. tekst, dźwięk, obraz, obraz ruchomy itd).")]
+        [XmlSimpleType(TypeName = "kategoria-klasa-typ", Annotation = "Słownik zdefiniowany w repozytorium interoperacyjności oparty o listę kategorii DCMI: http://dublincore.org/documents/dcmi-type-vocabulary/ (tekst, dźwięk, obraz nieruchomy, obraz ruchomy, zbiór dokumentów, zbiór danych, obiekt fizyczny, oprogramowanie).", BaseTypeName = "xs:string", EnumerationRestriction = typeof(DocumentClassType)/* new string[] { "tekst", "dźwięk", "obraz", "obraz ruchomy", "wideo" }*/, UnionMemberTypes = "ndap:niepusty-ciag-typ")]
+        public string Class { get; set; }
+
+        [XmlElement("rodzaj")]
+        [XmlRequired(false)]
+        [XmlAnnotation("Dookreślenie typu dokumentu ze względu na cel jakiemu służy dokument (np. decyzja, prezentacja, faktura, ustawa, notatka, rozporządzenie, pismo itd).")]
+        [XmlSimpleType(TypeName = "kategoria-rodzaj-typ", Annotation = "Dookreślenie typu dokumentu w ramach wskazanej klasy; Rekomendowane jest przygotowanie słownika rodzajów właściwego dla praktyki  kancelaryjnej podmiotu w odniesieniu do klasy tekst . Słownik taki będzie musiał zawierać co najmniej zestaw określeń wskazanych w repozytorium interoperacyjności.", EnumerationRestriction = typeof(DocumentKindType)/*new string[] { "decyzja", "prezentacja", "faktura", "ustawa", "notatka", "rozporządzenie", "pismo" }*/, UnionMemberTypes = "ndap:niepusty-ciag-typ", BaseTypeName = "xs:string")]
+        public string Kind { get; set; }
+
+        public void SetKind(DocumentKindType kind) {
+            Kind = kind.GetName();
+        }
+        public void SetClass(DocumentClassType docClass) {
+            Class = docClass.GetName();
+        }
+    }
 }

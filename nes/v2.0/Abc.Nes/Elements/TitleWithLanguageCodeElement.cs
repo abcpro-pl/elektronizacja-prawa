@@ -24,8 +24,9 @@ namespace Abc.Nes.Elements {
 
         [XmlAttribute("kodJezyka")]
         [XmlSynonyms("jezyk", DocumentType.Nes17)]
+        [XmlSynonyms("jezyk", DocumentType.Nes16)]
         [XmlRequired(false)]
-        public LanguageCode Type { get; set; }
+        public LanguageCode Type { get; set; } = LanguageCode.pol;
     }
 
     [XmlType(TypeName = "jezyk-typ")]
@@ -35,6 +36,7 @@ namespace Abc.Nes.Elements {
 
         [XmlAttribute("kodJezyka")]
         [XmlSynonyms("kod", DocumentType.Nes17)]
+        [XmlSynonyms("kod", DocumentType.Nes16)]
         [XmlRequired]
         public LanguageCode Type { get; set; }
     }

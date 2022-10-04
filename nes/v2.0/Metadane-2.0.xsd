@@ -122,6 +122,15 @@ Umożliwi łatwe ustalenie, jakie materiały można ze zbiorów w danym roku wyc
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
+		<xs:attribute name="wersja">
+			<xs:simpleType>
+				<xs:restriction base="ndap:niepusty-ciag-typ">
+					<xs:enumeration value="1.6"/>
+					<xs:enumeration value="1.7"/>
+					<xs:enumeration value="2.0"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="identyfikator-typ">
 		<xs:annotation>

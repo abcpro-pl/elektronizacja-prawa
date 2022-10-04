@@ -130,6 +130,16 @@ namespace Abc.Nes.NUnitTests {
         }
 
         [Test]
+        public void ValidatePackage4() {
+            var pathToPackage = @"../../../../sample/paczka16.zip";
+            using (var mgr = new PackageManager()) {
+                Exception exception;
+                mgr.LoadPackage(pathToPackage, out exception);
+                Assert.IsTrue(mgr.Package != null && exception == null);
+            }
+        }
+
+        [Test]
         public void ValidatePackageEZDPUW() {
             var path = @"../../../../sample/paczka0.zip";
 
