@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;netstandard2.0;net48;net461</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;netstandard2.0;net48;net461;net6.0</TargetFrameworks>
     <NeutralLanguage>pl</NeutralLanguage>
     <Authors>ITORG Krzysztof Radzimski</Authors>
     <Company>ABC PRO Sp. z o.o.</Company>

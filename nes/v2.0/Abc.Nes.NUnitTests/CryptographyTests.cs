@@ -135,7 +135,7 @@ namespace Abc.Nes.NUnitTests {
             using (var mgr = new PackageManager()) {
                 Exception exception;
                 mgr.LoadPackage(pathToPackage, out exception);
-                Assert.IsTrue(mgr.Package != null && exception == null);
+                Assert.IsTrue(mgr.Package != null && exception == null && mgr.Package.Metadata.Items.Count > 0);
             }
         }
 
