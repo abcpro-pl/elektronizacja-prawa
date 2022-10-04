@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 
 namespace Abc.Nes {
     /// <summary>
-    /// The root v.1.7 metadata element that describes document in archival package.
+    /// The root v.1.6 metadata element that describes document in archival package.
     /// </summary>
     [XmlType(TypeName = "dokument-typ")]
     [XmlAnnotation("Element główny metadanych opisujący dokument.")]
