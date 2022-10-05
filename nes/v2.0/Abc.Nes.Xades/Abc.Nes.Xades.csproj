@@ -1,68 +1,68 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;netstandard2.0;net48;net461;net6.0</TargetFrameworks>
-    <NeutralLanguage>pl</NeutralLanguage>
-    <Authors>ITORG Krzysztof Radzimski</Authors>
-    <Company>ABC PRO Sp. z o.o.</Company>
-    <Description>.NET library for digital signing an archival package for Polish State Archives, which is based on a modification of the .Net Framework System.Security.Cryptography.Xml (as Microsoft.XmlDsig), the XAdES starter kit developed by Microsoft France (as Microsoft.Xades) and FirmaXadesNet - Library for the generation of XAdES signatures.</Description>
-    <Copyright>ABC PRO Sp. z o.o.</Copyright>
-    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
-    <PackageIcon>nes_logo.jpg</PackageIcon>
-    <RepositoryUrl>https://github.com/abcpro-pl/elektronizacja-prawa.git</RepositoryUrl>
-    <RepositoryType>GIT</RepositoryType>
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;net48;net6.0</TargetFrameworks>
+		<NeutralLanguage>pl</NeutralLanguage>
+		<Authors>ITORG Krzysztof Radzimski</Authors>
+		<Company>ABC PRO Sp. z o.o.</Company>
+		<Description>.NET library for digital signing an archival package for Polish State Archives, which is based on a modification of the .Net Framework System.Security.Cryptography.Xml (as Microsoft.XmlDsig), the XAdES starter kit developed by Microsoft France (as Microsoft.Xades) and FirmaXadesNet - Library for the generation of XAdES signatures.</Description>
+		<Copyright>ABC PRO Sp. z o.o.</Copyright>
+		<PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+		<PackageIcon>nes_logo.jpg</PackageIcon>
+		<RepositoryUrl>https://github.com/abcpro-pl/elektronizacja-prawa.git</RepositoryUrl>
+		<RepositoryType>GIT</RepositoryType>
 
-    <PackageReleaseNotes>Make public RSAPKCS1SHA256SignatureDescription and RSAPKCS1SHA512SignatureDescription classes in assembly.</PackageReleaseNotes>
-    <SignAssembly>false</SignAssembly>
-    <PackageId>ABCPRO.NES.XAdES</PackageId>
-    <Product>ABCPRO.NES.XAdES</Product>
-    <PackageProjectUrl>https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0</PackageProjectUrl>
-    <AssemblyVersion>1.1.35.0</AssemblyVersion>
-    <FileVersion>1.1.35.0</FileVersion>
-    <Version>1.1.35</Version>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-  </PropertyGroup>
+		<PackageReleaseNotes>Make public RSAPKCS1SHA256SignatureDescription and RSAPKCS1SHA512SignatureDescription classes in assembly.</PackageReleaseNotes>
+		<SignAssembly>false</SignAssembly>
+		<PackageId>ABCPRO.NES.XAdES</PackageId>
+		<Product>ABCPRO.NES.XAdES</Product>
+		<PackageProjectUrl>https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0</PackageProjectUrl>
+		<AssemblyVersion>1.1.36.0</AssemblyVersion>
+		<FileVersion>1.1.36.0</FileVersion>
+		<Version>1.1.36</Version>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <NoWarn>1701;1702;IDE0063;</NoWarn>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<NoWarn>1701;1702;IDE0063;</NoWarn>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Include="..\images\nes_logo.jpg" Link="nes_logo.jpg">
-      <PackagePath></PackagePath>
-      <Pack>True</Pack>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\images\nes_logo.jpg" Link="nes_logo.jpg">
+			<PackagePath></PackagePath>
+			<Pack>True</Pack>
+		</None>
+	</ItemGroup>
 
-  <ItemGroup>    
-    <PackageReference Include="System.Security.Cryptography.Xml" Version="6.0.0" />    
-    <PackageReference Include="System.Security.Permissions" Version="6.0.0" />
-    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="6.0.0" />    
-    <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
-    <PackageReference Include="System.Memory" Version="4.5.4" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="System.Security.Cryptography.Xml" Version="6.0.1" />
+		<PackageReference Include="System.Security.Permissions" Version="6.0.0" />
+		<PackageReference Include="System.Security.Cryptography.Pkcs" Version="6.0.1" />
+		<PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
+		<PackageReference Include="System.Memory" Version="4.5.5" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Abc.Nes.Common\Abc.Nes.Common.csproj" />   
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Abc.Nes.Common\Abc.Nes.Common.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Update="Properties\Resources.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Update="Properties\Resources.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
 </Project>

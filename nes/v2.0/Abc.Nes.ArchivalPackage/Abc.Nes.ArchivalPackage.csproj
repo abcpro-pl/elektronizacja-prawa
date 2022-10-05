@@ -1,69 +1,69 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;netstandard2.0;net48;net461;net6.0</TargetFrameworks>
-    <NeutralLanguage>pl</NeutralLanguage>
-    <Authors>ITORG Krzysztof Radzimski</Authors>
-    <Company>ABC PRO Sp. z o.o.</Company>
-    <Description>.NET library for creating archival package (eADM) for Polish State Archives (NES - Necessary elements of electronic documents structure).</Description>
-    <Copyright>ABC PRO Sp. z o.o.</Copyright>
-    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
-    <PackageIcon>nes_logo.jpg</PackageIcon>
-    <RepositoryUrl>https://github.com/abcpro-pl/elektronizacja-prawa.git</RepositoryUrl>
-    <RepositoryType>GIT</RepositoryType>
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;net48;net6.0</TargetFrameworks>
+		<NeutralLanguage>pl</NeutralLanguage>
+		<Authors>ITORG Krzysztof Radzimski</Authors>
+		<Company>ABC PRO Sp. z o.o.</Company>
+		<Description>.NET library for creating archival package (eADM) for Polish State Archives (NES - Necessary elements of electronic documents structure).</Description>
+		<Copyright>ABC PRO Sp. z o.o.</Copyright>
+		<PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+		<PackageIcon>nes_logo.jpg</PackageIcon>
+		<RepositoryUrl>https://github.com/abcpro-pl/elektronizacja-prawa.git</RepositoryUrl>
+		<RepositoryType>GIT</RepositoryType>
 
-    <PackageReleaseNotes></PackageReleaseNotes>
-    <SignAssembly>false</SignAssembly>
-    <PackageId>ABCPRO.NES.ArchivalPackage</PackageId>
-    <Product>ABCPRO.NES.ArchivalPackage</Product>
-    <PackageProjectUrl>https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0</PackageProjectUrl>
-    <AssemblyVersion>1.1.35.0</AssemblyVersion>
-    <FileVersion>1.1.35.0</FileVersion>
-    <Version>1.1.35</Version>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-  </PropertyGroup>
+		<PackageReleaseNotes></PackageReleaseNotes>
+		<SignAssembly>false</SignAssembly>
+		<PackageId>ABCPRO.NES.ArchivalPackage</PackageId>
+		<Product>ABCPRO.NES.ArchivalPackage</Product>
+		<PackageProjectUrl>https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0</PackageProjectUrl>
+		<AssemblyVersion>1.1.36.0</AssemblyVersion>
+		<FileVersion>1.1.36.0</FileVersion>
+		<Version>1.1.36</Version>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <NoWarn>1701;1702;IDE0063;</NoWarn>
-  </PropertyGroup>
+	<PropertyGroup>
+		<NoWarn>1701;1702;IDE0063;</NoWarn>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Include="..\images\nes_logo.jpg" Link="nes_logo.jpg">
-      <PackagePath></PackagePath>
-      <Pack>True</Pack>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\images\nes_logo.jpg" Link="nes_logo.jpg">
+			<PackagePath></PackagePath>
+			<Pack>True</Pack>
+		</None>
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="DotNetZip" Version="1.16.0" />    
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="DotNetZip" Version="1.16.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Abc.Nes\Abc.Nes.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Abc.Nes\Abc.Nes.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Properties\Default.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Default.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Properties\Polish.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Polish.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Update="Properties\Default.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Default.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Properties\Polish.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Polish.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="Properties\Default.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Default.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Properties\Polish.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Polish.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Update="Properties\Default.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Default.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Properties\Polish.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Polish.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
 
 </Project>

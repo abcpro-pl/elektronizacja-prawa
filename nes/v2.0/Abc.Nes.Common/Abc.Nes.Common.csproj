@@ -1,17 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;net48;net461;net6.0</TargetFrameworks>
-    <AssemblyName>Abc.Nes.Common</AssemblyName>
-    <RootNamespace>Abc.Nes.Common</RootNamespace>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;net48;net6.0</TargetFrameworks>
+		<AssemblyName>Abc.Nes.Common</AssemblyName>
+		<RootNamespace>Abc.Nes.Common</RootNamespace>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
-    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="6.0.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
+		<PackageReference Include="System.Security.Cryptography.Pkcs" Version="6.0.1" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\itext7-dotnet\itext\itext.sign\itext.sign.netstandard.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\itext7-dotnet\itext\itext.sign\itext.sign.netstandard.csproj" />
+	</ItemGroup>
 </Project>
