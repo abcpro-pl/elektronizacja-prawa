@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30128.74
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abc.Nes", "Abc.Nes.csproj", "{FE8CA84E-A197-4B82-A3B7-61294397239C}"
 EndProject
@@ -38,6 +38,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abc.Nes.NUnitTests", "..\Abc.Nes.NUnitTests\Abc.Nes.NUnitTests.csproj", "{E6AC059C-ED72-4B3C-BCC8-DCF7E7469917}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abc.Nes.Common", "..\Abc.Nes.Common\Abc.Nes.Common.csproj", "{8922A8FD-91E1-4933-832F-AA0FFF350248}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "itext.barcodes.netstandard", "..\..\..\..\itext7-dotnet\itext\itext.barcodes\itext.barcodes.netstandard.csproj", "{70BBDD53-557A-4A61-A3AC-7F1345F0C33D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "itext.styledxmlparser.netstandard", "..\..\..\..\itext7-dotnet\itext\itext.styledxmlparser\itext.styledxmlparser.netstandard.csproj", "{37389899-E43B-4526-81CF-116BF2EEC093}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "itext.svg.netstandard", "..\..\..\..\itext7-dotnet\itext\itext.svg\itext.svg.netstandard.csproj", "{62517929-A7BC-4803-AFE0-1467DE022250}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +99,18 @@ Global
 		{8922A8FD-91E1-4933-832F-AA0FFF350248}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8922A8FD-91E1-4933-832F-AA0FFF350248}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8922A8FD-91E1-4933-832F-AA0FFF350248}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70BBDD53-557A-4A61-A3AC-7F1345F0C33D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70BBDD53-557A-4A61-A3AC-7F1345F0C33D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70BBDD53-557A-4A61-A3AC-7F1345F0C33D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70BBDD53-557A-4A61-A3AC-7F1345F0C33D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37389899-E43B-4526-81CF-116BF2EEC093}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37389899-E43B-4526-81CF-116BF2EEC093}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37389899-E43B-4526-81CF-116BF2EEC093}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37389899-E43B-4526-81CF-116BF2EEC093}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62517929-A7BC-4803-AFE0-1467DE022250}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62517929-A7BC-4803-AFE0-1467DE022250}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62517929-A7BC-4803-AFE0-1467DE022250}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62517929-A7BC-4803-AFE0-1467DE022250}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -111,6 +129,9 @@ Global
 		{027D5E18-3847-49AD-B1E2-C855CB67405B} = {285C9EF1-8916-4177-AA08-9E4943A884A3}
 		{E6AC059C-ED72-4B3C-BCC8-DCF7E7469917} = {470E9BE2-55C0-4302-B89B-5E05C7A03053}
 		{8922A8FD-91E1-4933-832F-AA0FFF350248} = {C6E7383D-C962-4A58-8541-A64C28638D3E}
+		{70BBDD53-557A-4A61-A3AC-7F1345F0C33D} = {285C9EF1-8916-4177-AA08-9E4943A884A3}
+		{37389899-E43B-4526-81CF-116BF2EEC093} = {285C9EF1-8916-4177-AA08-9E4943A884A3}
+		{62517929-A7BC-4803-AFE0-1467DE022250} = {285C9EF1-8916-4177-AA08-9E4943A884A3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8665C04C-0C9B-41E0-B5EA-26FC0DAC93B2}
