@@ -63,6 +63,15 @@ namespace Abc.Nes.NUnitTests {
         }
 
         [Test]
+        public void GetSignatureInfos_schema_v1_6() {
+            var pathToPackage = @"../../../../sample/test paczka z zip.zip";
+            var packageSignerManager = new PackageSignerManager();
+
+            var _signatureInfos = packageSignerManager.GetSignatureInfos(pathToPackage);
+            Assert.IsTrue(_signatureInfos != null && _signatureInfos.Length == 0);
+        }
+
+        [Test]
         public void XXX() {
             var pathToPackage = @"../../../../sample/LegalAct.Duplicate.zip";
             var packageSignerManager = new PackageSignerManager();
@@ -242,6 +251,7 @@ namespace Abc.Nes.NUnitTests {
         public void Package_GetValidationResult() {
             // var path = @"../../../../sample/LegalAct26.03.2.podpisana.zip";
             var path = @"../../../../sample/Sprawa_GN-III.7541.7.2018_20210301_143750.zip";
+            //var path = @"../../../../sample/Paczka z bledami 2.zip";
 
             var signedPackageManager = new SignedPackageManager();
             var info = signedPackageManager.Extract(path);
