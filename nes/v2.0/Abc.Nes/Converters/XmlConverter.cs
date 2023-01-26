@@ -50,11 +50,13 @@ namespace Abc.Nes.Converters {
                 Encoding = Encoding.UTF8
             })) {
                 xmlserializer.Serialize(writer, stringWriter, doc);
-                //var xmlText = stringWriter.ToString();
-                //var xml = XElement.Parse(xmlText);
+               
                 XNamespace xsiNs = "http://www.w3.org/2001/XMLSchema-instance";
                 if (doc.DocumentType == Enumerations.DocumentType.Nes17) {
                     xmlserializer.Xml.Add(new XAttribute(xsiNs + "schemaLocation", "http://www.mswia.gov.pl/standardy/ndap Metadane-1.7.xsd"));
+                }
+                else if (doc.DocumentType == Enumerations.DocumentType.Nes16) {
+                    xmlserializer.Xml.Add(new XAttribute(xsiNs + "schemaLocation", "http://www.mswia.gov.pl/standardy/ndap Metadane-1.6.xsd"));
                 }
                 else if (doc.DocumentType == Enumerations.DocumentType.Nes20) {
                     xmlserializer. Xml.Add(new XAttribute(xsiNs + "schemaLocation", "http://www.mswia.gov.pl/standardy/ndap Metadane-2.0.xsd"));
@@ -80,6 +82,12 @@ namespace Abc.Nes.Converters {
                         return serializer.Deserialize(stream) as Document;
                     }
                 }
+                else if (Document16.InternalValidateXml(xmlText)) {
+                    using (var stream = xmlText.GetMemoryStream()) {
+                        var serializer = new NesXmlSerializer(typeof(Document16));
+                        return serializer.Deserialize(stream) as Document16;
+                    }
+                }
                 else if (Document17.InternalValidateXml(xmlText)) {
                     using (var stream = xmlText.GetMemoryStream()) {
                         var serializer = new NesXmlSerializer(typeof(Document17));
@@ -97,6 +105,13 @@ namespace Abc.Nes.Converters {
                     using (var stream = xmlText.GetMemoryStream()) {
                         var serializer = new XmlSerializer(typeof(Document));
                         return serializer.Deserialize(stream) as Document;
+                    }
+                }
+                else if (Document16.InternalValidateXml(e)) {
+                    var xmlText = e.ToString();
+                    using (var stream = xmlText.GetMemoryStream()) {
+                        var serializer = new XmlSerializer(typeof(Document16));
+                        return serializer.Deserialize(stream) as Document16;
                     }
                 }
                 else if (Document17.InternalValidateXml(e)) {

@@ -32,10 +32,21 @@ Informacja o dostępności nie może naruszać przepisów regulujących dostęp 
 Określenie zasad i warunków regulujących dostęp do dokumentów. 
 Informacja o dostępności nie może naruszać przepisów regulujących dostęp do danych (np. do danych osobowych, informacji niejawnych itd.)")]
     public class AccessElement17 {
-        [XmlIgnore] public const DocumentType DOCUMENT_TYPE = DocumentType.Nes17;
+        [XmlIgnore] public DocumentType DOCUMENT_TYPE => DocumentType.Nes17;
         [XmlElement("dostepnosc")] [XmlRequired] public AccessType17 Access { get; set; }
         [XmlElement("uwagi")] [XmlAnnotation("Dodatkowe informacje o adresie")] public string Description { get; set; }
         [XmlElement("data")] public AccessDateElement Date { get; set; }     
+    }
+
+    [XmlType(TypeName = "dostep-typ")]
+    [XmlAnnotation(@"Element zawierający status dostępności dokumentu. 
+Określenie zasad i warunków regulujących dostęp do dokumentów. 
+Informacja o dostępności nie może naruszać przepisów regulujących dostęp do danych (np. do danych osobowych, informacji niejawnych itd.)")]
+    public class AccessElement16 {
+        [XmlIgnore] public DocumentType DOCUMENT_TYPE => DocumentType.Nes16;
+        [XmlElement("dostepnosc")][XmlRequired] public AccessType16 Access { get; set; }
+        [XmlElement("uwagi")][XmlAnnotation("Dodatkowe informacje o adresie")] public string Description { get; set; }
+        [XmlElement("data")] public AccessDateElement Date { get; set; }
     }
 
     [XmlType(TypeName = "dostep-data-typ")]

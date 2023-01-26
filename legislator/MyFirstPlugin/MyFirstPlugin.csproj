@@ -31,8 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EAP.Editor.Plugins.Core">
-      <HintPath>..\..\..\EAP.Integration\LIB\EAP.Editor.Plugins.Core.dll</HintPath>
+    <Reference Include="EAP.Editor.Plugins.Core, Version=2.1.901.17, Culture=neutral, PublicKeyToken=bde60e87478db61a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\EAP.Editor.Plugins.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -48,9 +49,13 @@
   <ItemGroup>
     <Compile Include="Actions\LearnMoreNewFileTabAction.cs" />
     <Compile Include="Actions\LearnMoreSampleAction.cs" />
+    <Compile Include="Actions\MyNewFileTabAction.cs" />
+    <Compile Include="Actions\OpenFromSystemAction.cs" />
+    <Compile Include="Actions\OpenTabItemsAction.cs" />
     <Compile Include="Actions\UploadFileToMySystemAction.cs" />
     <Compile Include="Extensions\StringExtensionsClass.cs" />
     <Compile Include="Model\ActionResult.cs" />
+    <Compile Include="Model\RecentlyUsedItem.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="PluginConfiguration.cs" />
     <Compile Include="Controls\PluginOptionsControl.cs">
@@ -86,6 +91,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\plugin32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MyFirstPluginFile32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

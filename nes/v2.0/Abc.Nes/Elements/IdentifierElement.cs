@@ -38,4 +38,24 @@ Stwarza podstawy do tworzenia jednoznacznych powiązań (relacji) między dokume
 
         [XmlElement("podmiot")] public SubjectElement Subject { get; set; }        
     }
+
+    [XmlType(TypeName = "identyfikator-typ")]
+    [XmlAnnotation(@"Element zawierający identyfikator wg. ustalonej typologii oraz opcjonalnie podmiot, który nadał.
+Umożliwia jednoznaczną identyfikację dokumentu w określonym zbiorze. 
+Pozwala na szybkie odnalezienie tego samego dokumentu na podstawie jego identyfikatora w różnym czasie. 
+Stwarza podstawy do tworzenia jednoznacznych powiązań (relacji) między dokumentami w określonym zbiorze np. przyporządkowując załączniki, notatki, potwierdzenia wysłania, potwierdzenia doręczenia, podpisy elektronicznie, opinie itd.")]
+    public class IdentifierElement16 : ElementBase {
+        [XmlElement("typ")]
+        [XmlAnnotation("Typ identyfikatora np. Znak sprawy.")]
+        [XmlRequired]
+        [XmlSimpleType(Annotation = "Typy identyfikatorów", EnumerationRestriction = typeof(IdTypes), BaseTypeName = "xs:string", TypeName = "identyfikator-rodzaj-typ", UnionMemberTypes = "xs:string")]
+        public string Type { get; set; }
+
+        [XmlElement("wartosc")]
+        [XmlAnnotation("Wartość identyfikatora np. ABC-A.123.77.3.2011.JW.")]
+        [XmlRequired]
+        public string Value { get; set; }
+
+        [XmlElement("podmiot")] public SubjectElement16 Subject { get; set; }
+    }
 }

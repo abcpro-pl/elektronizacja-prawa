@@ -3,12 +3,12 @@ using System.Resources;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("My First Plugin")]
-[assembly: AssemblyDescription("Szablon dla dodatku programu Legislator")]
+[assembly: AssemblyDescription("Legislator system add-on template")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ITORG Krzysztof Radzimski")]
 [assembly: AssemblyProduct("MyFirstPlugin")]
 [assembly: AssemblyCopyright("© 2009 - 2022 ITORG Krzysztof Radzimski")]
-[assembly: AssemblyTrademark("Wszelkie prawa zastrzeżone")]
+[assembly: AssemblyTrademark("All rights reserved")]
 [assembly: AssemblyCulture("")]
 
 [assembly: ComVisible(false)]

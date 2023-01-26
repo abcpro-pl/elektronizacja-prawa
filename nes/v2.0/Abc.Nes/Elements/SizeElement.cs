@@ -24,12 +24,11 @@ namespace Abc.Nes.Elements {
 
         [XmlAttribute("miara")]
         [XmlSynonyms("jednostka", DocumentType.Nes17)]
+        [XmlSynonyms("jednostka", DocumentType.Nes16)]
         [XmlRequired]
         [XmlSimpleType(Annotation = "Miara wielkości dokumentu.", TypeName = "miara-typ", UnionMemberTypes = "ndap:niepusty-ciag-typ", BaseTypeName = "xs:string", EnumerationRestriction = typeof(FileSizeType)/*new string[] { "bajt", "b", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" }*/)]
         public string Measure { get; set; }
 
-        public void SetMeasure(FileSizeType sizeType) {
-            Measure = sizeType.GetName();
-        }       
+        public void SetMeasure(FileSizeType sizeType) { Measure = sizeType.GetName(); }
     }
 }

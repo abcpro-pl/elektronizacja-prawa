@@ -54,6 +54,18 @@ namespace Abc.Nes.Elements {
         [XmlElement("inne")] public List<KeywordDataElement> Others { get; set; }
     }
 
+
+    [XmlType(TypeName = "tematyka-typ-16")]
+    [XmlAnnotation(@"Słowa kluczowe dotyczące treści dokumentu.")]
+    public class KeywordElement16 {
+        [XmlElement("przedmiot")][XmlAnnotation("Określenie tematyki treści dokumentu na bardzo dużym poziomie ogólności, nie będące nazwą własną (tj. nie nazwą geograficzną, osoby, obiektu, ulicy, instytucji itp.)")] public List<string> Matters { get; set; }
+        [XmlElement("osoby")][XmlAnnotation("Określenie osoby o której traktuje treść dokumentu.")] public List<string> MentionedPeople { get; set; }
+        [XmlElement("miejsce")][XmlAnnotation("Określenie obszaru administracyjnego lub obiektów geograficznych o których traktuje treść.")] public List<string> Places { get; set; }
+        [XmlElement("czas")][XmlAnnotation("Określenie okresów czasu lub konkretnych dat, których dotyczy treść dokumentu; posiada dwa podelementy: czasOd i czasDo.")] public List<KeywordDataRange> Dates { get; set; }
+        [XmlElement("odbiorca")][XmlAnnotation("Kategoria (grupa) osób lub instytucji, dla których dany dokument jest przeznaczony (do których kierowana jest treść).")] public List<string> Recipients { get; set; }
+        [XmlElement("inne")] public List<KeywordDataElement> Others { get; set; }
+    }
+
     public class KeywordDataRange {
         [XmlElement("od")]
         [XmlRequired(false)]

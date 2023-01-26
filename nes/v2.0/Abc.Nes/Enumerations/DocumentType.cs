@@ -13,10 +13,17 @@
   ===================================================================================*/
 
 
+using System.Xml.Serialization;
+
 namespace Abc.Nes.Enumerations {
     public enum DocumentType : int {
+        [XmlEnum("")]
         None = 0,
+        [XmlEnum("2.0")]
         Nes20,
-        Nes17
+        [XmlEnum("1.7")]
+        Nes17,
+        [XmlEnum("1.6")]
+        Nes16
     }
 }

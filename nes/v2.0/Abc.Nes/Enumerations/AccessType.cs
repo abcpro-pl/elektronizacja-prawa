@@ -38,4 +38,15 @@ namespace Abc.Nes.Enumerations {
         [XmlEnum("niedostepne")]
         NotAvailable       
     }
+
+    [XmlType(TypeName = "dostepnosc-typ")]
+    [XmlAnnotation(@"Słownik typów dostępności.")]
+    public enum AccessType16 {
+        [XmlEnum("wszystko")]
+        All,
+        [XmlEnum("metadane")]
+        Metadata,
+        [XmlEnum("niedostepne")]
+        NotAvailable
+    }
 }

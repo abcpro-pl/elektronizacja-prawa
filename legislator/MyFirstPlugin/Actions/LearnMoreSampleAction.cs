@@ -11,22 +11,23 @@ using EAP.Editor.Plugins.Core;
 
 namespace MyFirstPlugin.Actions {
     public class LearnMoreSampleAction : IPluginLegislatorAction, IDisposable {
-        public ActionButtonLocation ButtonLocation { get { return ActionButtonLocation.EditorForm; } }
-        public int ButtonOrder { get { return 1; } }
-        public string Caption { get { return "Poznaj nasz system"; } }
-        public string Description { get { return "Dowiedz się więcej o systemie"; } }
-        public bool Enabled { get { return true; } }
-        public Bitmap Icon16 { get { return Properties.Resources.Plugin32; } }
-        public Bitmap Icon32 { get { return Properties.Resources.Plugin32; } }
-        public Bitmap Icon48 { get { return Properties.Resources.Plugin48; } }
-        public string MoreInfoUrl { get { return "http://itorg.pl/"; } }
-        public bool Visible { get { return true; } }
-        public void Dispose() { }
+        public ActionButtonLocation ButtonLocation => ActionButtonLocation.EditorForm; 
+        public int ButtonOrder => 1;
+        public string Caption => "Get to know our system";
+        public string Description => "Find out more about this system";
+        public bool Enabled => true; 
+        public Bitmap Icon16 => Properties.Resources.Plugin32; 
+        public Bitmap Icon32 => Properties.Resources.Plugin32; 
+        public Bitmap Icon48 => Properties.Resources.Plugin48; 
+        public string MoreInfoUrl => "http://itorg.pl/"; 
+        public bool Visible => true; 
 
         public object Execute() {
-            //if (!Plugin.ThisPlugin.UsePlugin) { throw new Exception("Funkcje dodatku nie są włączone!"); }
+            //if (!Plugin.ThisPlugin.UsePlugin) { throw new Exception("Add-on features are not included!"); }
             System.Diagnostics.Process.Start("http://itorg.pl/");
             return this;
         }
+
+        public void Dispose() { }
     }
 }

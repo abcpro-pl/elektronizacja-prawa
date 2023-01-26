@@ -193,6 +193,7 @@ namespace Abc.Nes.Enumerations {
         PH,
         PN,
         PL,
+        Polska,
         PT,
         PR,
         QA,

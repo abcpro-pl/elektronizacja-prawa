@@ -28,4 +28,14 @@ namespace Abc.Nes.Elements {
         [XmlElement("pracownik")] [TargetDocumentType(DocumentType.Nes20)] public EmployeeElement Employee { get; set; }
         [XmlElement("jednostka")] [TargetDocumentType(DocumentType.Nes17)] public InstitutionOrgUnitElement OrgUnit { get; set; }
     }
+
+    [XmlType(TypeName = "instytucja-typ")]
+    [XmlAnnotation("Element zawierający dane instytucji. Podmiot inny niż osoba fizyczna np. urząd, organizacja, przedsiębiorstwo. ")]
+    public class InstitutionElement16 {
+        [XmlElement("id")] public List<IdElement> Identifiers { get; set; }
+        [XmlElement("nazwa")][XmlRequired][XmlAnnotation("Nazwa instytucji")] public string Name { get; set; }
+        [XmlElement("adres")] public List<AddressElement> Addresses { get; set; }
+        [XmlElement("kontakt")] public List<ContactElement> Contacts { get; set; }
+        [XmlElement("jednostka")] public InstitutionOrgUnitElement OrgUnit { get; set; }
+    }
 }
