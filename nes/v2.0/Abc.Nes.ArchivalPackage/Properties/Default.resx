@@ -123,6 +123,9 @@
   <data name="eADM" xml:space="preserve">
     <value>eADM Package</value>
   </data>
+  <data name="FileNotFoundForMetadata" xml:space="preserve">
+    <value>File not found for metadata file: {0}!</value>
+  </data>
   <data name="Metadata" xml:space="preserve">
     <value>Metadata</value>
   </data>

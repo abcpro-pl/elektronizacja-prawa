@@ -151,6 +151,20 @@ namespace Abc.Nes.ArchivalPackage.Validators {
                 }
             }
 
+            foreach (var item in package.GetAllFiles(package.Metadata)) {
+                var metadata = item as MetadataFile;
+                var file = package.GetFileByMetadata(metadata);
+                if (file.IsNull()) {
+                    result.Add(new PackageValidationResultItem() {
+                        FullName = metadata.FilePath,
+                        Name = metadata.FileName,
+                        Source = ValidationResultSource.Document,
+                        Type = ValidationResultType.NotFound,
+                        DefaultMessage = string.Format(resx.GetString("FileNotFoundForMetadata"), item.FilePath)
+                    });
+                }
+            }
+
 
             if (package.Objects.IsNull()) {
                 result.Add(new PackageValidationResultItem() {

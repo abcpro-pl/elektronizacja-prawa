@@ -79,6 +79,15 @@ namespace Abc.Nes.ArchivalPackage.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nie znaleziono pliku dla pliku metadanych {0}!.
+        /// </summary>
+        internal static string FileNotFoundForMetadata {
+            get {
+                return ResourceManager.GetString("FileNotFoundForMetadata", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Metadane.
         /// </summary>
         internal static string Metadata {

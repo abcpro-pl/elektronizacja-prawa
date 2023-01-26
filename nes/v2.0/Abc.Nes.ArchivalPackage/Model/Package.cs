@@ -58,6 +58,16 @@ namespace Abc.Nes.ArchivalPackage.Model {
             }
             return items;
         }
+        public ItemBase GetFileByMetadata(MetadataFile metadataFile) {
+            if (metadataFile.IsNotNull()) {
+                var fileName = System.IO.Path.GetFileNameWithoutExtension(metadataFile.FileName);
+                var regex = new Regex(Regex.Escape($"{MainDirectoriesName.Metadata.GetXmlEnum()}"));
+                var filePath = regex.Replace(metadataFile.FilePath, MainDirectoriesName.Files.GetXmlEnum(), 1);
+                var file = GetItemByFilePath(filePath, true);
+                return file;
+            }
+            return default;
+        }
         public MetadataFile GetMetadataFile(ItemBase documentFile, bool findWithoutSpaces = false) {
             if (documentFile.IsNotNull() && documentFile.FilePath.IsNotNullOrEmpty()) {
                 var documentFilePath = documentFile.FilePath;
