@@ -21,10 +21,12 @@ namespace Abc.Nes.Validators {
     public class DocumentValidator : IDocumentValidator {
         private ValidationResult _result = null;
         private System.Resources.ResourceManager resx = null;
+        private string _filePath = null;
         public void Dispose() { }
 
-        public IValidationResult Validate(IDocument document) {
-            _result = new ValidationResult();
+        public IValidationResult Validate(IDocument document, string filePath) {
+            _filePath = filePath;
+            _result = new ValidationResult() { FilePath = filePath };
             resx = Properties.Default.ResourceManager;
             if (System.Globalization.CultureInfo.CurrentCulture.Name == "pl" || System.Globalization.CultureInfo.CurrentCulture.Name == "pl-PL") {
                 resx = Properties.Polish.ResourceManager;
@@ -32,6 +34,52 @@ namespace Abc.Nes.Validators {
 
             if (document.IsNull()) { throw new ArgumentException(); }
             ValidateObject(document);
+
+            //foreach (var item in _result.Where(x=>x.FilePath.IsNull()) {
+            //    item.FilePath = filePath;
+            //}
+
+            var propName = "grupowanie";
+
+            bool groupCaseMissing = false;
+            string description = default;
+            System.Collections.Generic.List<Elements.GroupingElement> groupings = default;
+            switch (document.DocumentType) {
+                case Enumerations.DocumentType.Nes16:
+                    var doc16 = document as Document16;
+                    groupings = doc16.Groupings;
+                    description = doc16.Description;
+                    break;
+                case Enumerations.DocumentType.Nes17:
+                    var doc17 = document as Document17;
+                    description = doc17.Description;
+                    groupings = doc17.Groupings;
+                    break;
+                case Enumerations.DocumentType.Nes20:
+                    var doc20 = document as Document;
+                    description = doc20.Description;
+                    groupings = doc20.Groupings;
+                    break;
+            }
+            
+            if (groupings.IsNotNull()) {
+                if (groupings.Count == 0 || !groupings.Any(x => x.Type.ToLower() == "znak sprawy")) {
+                    groupCaseMissing = true;
+                }
+            }
+
+            if (groupCaseMissing) {
+                _result.Add(new ValidationResultItem() {
+                    Source = ValidationResultSource.Metadata,
+                    Type = ValidationResultType.GroupingCase,
+                    Name = filePath,
+                    FullName = description,
+                    DefaultMessage = string.Format(resx.GetString("RequiredItemNotFound"), $"{propName}/znak sprawy"),
+                    FilePath = filePath
+                });
+            }
+
+            //if(document.)
 
             return _result;
         }
@@ -96,8 +144,9 @@ namespace Abc.Nes.Validators {
                         _result.Add(new ValidationResultItem() {
                             Source = ValidationResultSource.Metadata,
                             Type = ValidationResultType.DoesNotHaveValue,
-                            Name = propertyName.IsNotNullOrEmpty()? propertyName: property.Name,
+                            Name = propertyName.IsNotNullOrEmpty() ? propertyName : property.Name,
                             FullName = o.GetType().FullName,
+                            FilePath = _filePath,
                             DefaultMessage = String.Format(resx.GetString("RequiredFieldHasNoValue"), propertyName, objectFullName)
                         });
                         continue;
@@ -109,6 +158,7 @@ namespace Abc.Nes.Validators {
                                 Type = ValidationResultType.HasNoElements,
                                 Name = propertyName.IsNotNullOrEmpty() ? propertyName : property.Name,
                                 FullName = o.GetType().FullName,
+                                FilePath = _filePath,
                                 DefaultMessage = String.Format(resx.GetString("RequiredFieldHasNoItems"), propertyName, objectFullName)
                             });
                         }

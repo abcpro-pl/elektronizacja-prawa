@@ -19,6 +19,7 @@ namespace Abc.Nes {
     public static class EnumExtensions {
         public static string GetName(this AccessDateType type) { return type.GetXmlEnum(); }
         public static string GetName(this AccessType17 type) { return type.GetXmlEnum(); }
+        public static string GetName(this AccessType16 type) { return type.GetXmlEnum(); }
         public static string GetName(this AccessType type) { return type.GetXmlEnum(); }
         public static string GetName(this ContactType type) { return type.GetXmlEnum(); }
         public static string GetName(this CountryCodeType type) { return type.GetXmlEnum(); }
@@ -26,6 +27,7 @@ namespace Abc.Nes {
         public static string GetName(this DateRangeType type) { return type.GetXmlEnum(); }
         public static string GetName(this DocumentDateType type) { return type.GetXmlEnum(); }
         public static string GetName(this DocumentDateType17 type) { return type.GetXmlEnum(); }
+        public static string GetName(this DocumentDateType16 type) { return type.GetXmlEnum(); }
         public static string GetName(this InstitutionIdType type) { return type.GetXmlEnum(); }
         public static string GetName(this IdTypes idType) { return idType.GetXmlEnum(); }
         public static string GetName(this PersonIdType type) { return type.GetXmlEnum(); }

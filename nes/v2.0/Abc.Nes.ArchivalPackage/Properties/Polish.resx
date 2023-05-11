@@ -124,7 +124,7 @@
     <value>Paczka eADM</value>
   </data>
   <data name="FileNotFoundForMetadata" xml:space="preserve">
-    <value>Nie znaleziono pliku dla pliku metadanych {0}!</value>
+    <value>Nie znaleziono dokumentu dla metadanych {0}!</value>
   </data>
   <data name="Metadata" xml:space="preserve">
     <value>Metadane</value>

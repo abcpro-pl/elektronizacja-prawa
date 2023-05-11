@@ -20,19 +20,24 @@ namespace Abc.Nes.ArchivalPackage.Model {
         where T : ItemBase {
         public abstract List<T> Items { get; set; }
         public abstract List<F> Folders { get; set; }
-        public override FolderBase GetFolder(string folderName, bool ignoreCase = false) {
+        public override FolderBase GetFolder(string folderName, bool ignoreCase = false, bool ignoreSpace = false) {
             if (Folders.IsNotNull()) {
                 foreach (FolderBase folder in Folders) {
+                    var folderNameToCheck = folder.FolderName;
                     if (ignoreCase) {
-                        if (folder.FolderName.ToLower() == folderName.ToLower()) {
-                            return folder;
-                        }
+                        folderNameToCheck = folderNameToCheck.ToLower();
+                        folderName = folderName.ToLower();
                     }
-                    else {
-                        if (folder.FolderName == folderName) {
-                            return folder;
-                        }
+                    if (ignoreSpace) {
+                        folderNameToCheck = folderNameToCheck.Replace(" ", string.Empty);
+                        folderName = folderName.Replace(" ", string.Empty);
                     }
+
+                    
+                    if (folderNameToCheck == folderName) {
+                        return folder;
+                    }
+                    
                 }
             }
 

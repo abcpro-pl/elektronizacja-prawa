@@ -399,7 +399,7 @@ Content-Disposition: filename=""{ fileName }""
                                       bool addKeyInfoReference = true,
                                       CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval,
                                       DateTime? signDate = null,
-                                      string hashAlgorithmName = null) {
+                                      string hashAlgorithmName = "") {
             
             signatureDocument.XadesSignature.SignedInfo.SignatureMethod = GetSignatureMethod(hashAlgorithmName);
             AddCertificateInfo(signatureDocument, addKeyInfoReference);

@@ -123,4 +123,7 @@
   <data name="RequiredFieldHasNoValue" xml:space="preserve">
     <value>Wymagane pole '{0}' w obiekcie typu '{1}' nie posiada wartości! </value>
   </data>
+  <data name="RequiredItemNotFound" xml:space="preserve">
+    <value>Wymagany element '{0}' nie został odnaleziony!</value>
+  </data>
 </root>

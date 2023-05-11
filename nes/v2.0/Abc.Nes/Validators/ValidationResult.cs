@@ -17,5 +17,6 @@ using System.Collections.Generic;
 namespace Abc.Nes.Validators {
     class ValidationResult : List<IValidationResultItem>, IValidationResult {
         public bool IsCorrect => Count == 0;
+		public string FilePath { get; set; }
     }
 }

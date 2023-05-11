@@ -20,5 +20,6 @@ namespace Abc.Nes.Validators {
         public string Name { get; set; }
         public string FullName { get; set; }
         public string DefaultMessage { get; set; }
+        public string FilePath { get; set; }
     }
 }

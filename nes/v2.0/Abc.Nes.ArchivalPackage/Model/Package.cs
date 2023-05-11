@@ -81,6 +81,7 @@ namespace Abc.Nes.ArchivalPackage.Model {
                     metadataFilePath = regex.Replace(metadataFilePath, MainDirectoriesName.Metadata.GetXmlEnum(), 1);
                     var result = GetItemByFilePath($"{metadataFilePath}.xml", findWithoutSpaces) as MetadataFile;
                     if (result.IsNotNull()) {
+                        result.DocumentFilePath = documentFilePath;
                         return result;
                     }
                 }
@@ -89,7 +90,13 @@ namespace Abc.Nes.ArchivalPackage.Model {
                 {
                     metadataFilePath = regex.Replace(documentFilePath, MainDirectoriesName.Metadata.GetXmlEnum(), 1);
                     var result = GetItemByFilePath($"{metadataFilePath}.xml", findWithoutSpaces) as MetadataFile;
+                    if (result.IsNull()) { //try find without extension
+                        var noExtFileName = System.IO.Path.ChangeExtension(metadataFilePath, "xml");
+                        
+                        result = GetItemByFilePath(noExtFileName, findWithoutSpaces) as MetadataFile;
+                    }
                     if (result.IsNotNull()) {
+                        result.DocumentFilePath = documentFilePath;
                         return result;
                     }
                 }
@@ -123,12 +130,12 @@ namespace Abc.Nes.ArchivalPackage.Model {
                         }
                         else {
                             // file in pseudo-another folder
-                            folder = Another.GetFolder(itemName, true);
+                            folder = Another.GetFolder(itemName, true, findWithoutSpaces);
                             if (folder.IsNotNull()) { continue; }
                         }
                     }
 
-                    var _folder = folder.GetFolder(itemName, true);
+                    var _folder = folder.GetFolder(itemName, true, findWithoutSpaces);
                     if (_folder.IsNotNull()) {
                         folder = _folder;
                     }

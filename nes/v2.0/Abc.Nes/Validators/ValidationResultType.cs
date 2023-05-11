@@ -17,6 +17,11 @@ namespace Abc.Nes.Validators {
         NotFound,
         Incorrect,
         HasNoElements,
-        DoesNotHaveValue
+        DoesNotHaveValue,
+        GroupingCase,
+        Grouping,
+        ConfirmationRelation,
+        Signature,
+        SignatureNotFound
     }
 }

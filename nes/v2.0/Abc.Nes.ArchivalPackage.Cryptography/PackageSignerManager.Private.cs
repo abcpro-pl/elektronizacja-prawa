@@ -253,14 +253,19 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
 
                         signer.SetFieldName($"sig-{Guid.NewGuid()}");
 
-                        if (options.AddTimestamp) {
-                            if (options.TimestampOptions.Login != null)
-                                tsa = new TSAClientAbcBouncyCastle(options.TimestampOptions.TsaUrl, options.TimestampOptions.Login, options.TimestampOptions.Password, 0, HashAlgorithmName.SHA256.Name);
-                            else if (options.TimestampOptions.Certificate != null)
-                                tsa = new TSAClientAbcBouncyCastle(options.TimestampOptions.TsaUrl, options.TimestampOptions.Certificate, HashAlgorithmName.SHA256.Name);
-                            else
-                                tsa = new TSAClientAbcBouncyCastle(options.TimestampOptions.TsaUrl);
+                        string hashAlgorithm = HashAlgorithmName.SHA256.Name;
 
+                        if (options.AddTimestamp) {
+                            if (options.TimestampOptions.Login != null) {
+                                tsa = new TSAClientAbcBouncyCastle(options.TimestampOptions.TsaUrl, options.TimestampOptions.Login, options.TimestampOptions.Password, 0, HashAlgorithmName.SHA256.Name);
+                            }
+                            else if (options.TimestampOptions.Certificate != null) {
+                                //hashAlgorithm = options.TimestampOptions.Certificate.SignatureAlgorithm.FriendlyName;
+                                tsa = new TSAClientAbcBouncyCastle(options.TimestampOptions.TsaUrl, options.TimestampOptions.Certificate, hashAlgorithm);
+                            }
+                            else {
+                                tsa = new TSAClientAbcBouncyCastle(options.TimestampOptions.TsaUrl);
+                            }
                             if (tsa != null) {
                                 tsa.SetTSAReqPolicy(options.TimestampOptions.TsaPolicy);
                                 tsa.SetCertReq(true);
@@ -268,7 +273,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                                 //tsa.SetNonce(nonce.ToByteArray());
                             }
                         }
-                        string hashAlgorithm = HashAlgorithmName.SHA256.Name;
+                        
                         if (options.HashAlgorithmName.IsNotNull())
                             hashAlgorithm = options.HashAlgorithmName;
                         var signature = new X509Certificate2Signature(options.Certificate, hashAlgorithm);
@@ -313,6 +318,9 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                     if (File.Exists(temp)) { File.Delete(temp); }
                 }
                 catch { }
+            } else {
+                //proba kolejnego podpisu z opcja niepozwalajaca
+                throw new Exception("Próba złożenia kolejnego podpisu bez opcji zezwalającej na wiele podpisów");
             }
         }
         [Obsolete]
@@ -1228,6 +1236,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
 
         private void VerifySignatures(List<SignatureVerifyInfo> list, PackageManager mgr, DocumentFile item, string internalPath) {
             try {
+                internalPath = internalPath.ToLower();
                 var temp = Path.Combine(Path.GetTempPath(), "ABCPRO.NES");
                 if (!Directory.Exists(temp)) { Directory.CreateDirectory(temp); }
 
@@ -1270,6 +1279,21 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                             //foreach (var _file in _files) {
                             //    try { File.Delete(_file); } catch { }
                             //}
+                        }
+                    }
+                } else {
+                    var _internalPath = internalPath + ".xades";
+                    var _item = mgr.GetItemByFilePath(_internalPath) as DocumentFile;
+                    if(_item!= null) {
+                        try {
+                            File.WriteAllBytes(Path.Combine(temp, item.FileName), item.FileData);
+                            File.WriteAllBytes(Path.Combine(temp, _item.FileName), _item.FileData);
+
+                            var result = VerifyXadesSignatures(Path.Combine(temp, _item.FileName), internalPath);
+                            if (result != null && result.Length > 0) { list.AddRange(result); }
+                        }
+                        finally {
+                            try { Directory.Delete(temp, true); } catch { }
                         }
                     }
                 }

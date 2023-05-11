@@ -484,7 +484,7 @@ namespace Abc.Nes.ArchivalPackage {
             }
             stream.Position = 0;
             using (var zipFile = ZipFile.Read(stream, new ReadOptions() {
-                Encoding = Encoding.UTF8
+                Encoding = Console.OutputEncoding
             })) {
                 LoadPackageEntries(zipFile, out var exception2);
                 if (exception.IsNull() && exception2.IsNotNull()) { exception = exception2; }
@@ -501,7 +501,11 @@ namespace Abc.Nes.ArchivalPackage {
                 if (Package.IsNotNull()) { FilePath = Package.FilePath; }
             }
 
-            using (var zipFile = ZipFile.Read(filePath)) {
+            
+            ReadOptions opts = new ReadOptions() {
+                Encoding = Console.OutputEncoding
+            };
+            using (var zipFile = ZipFile.Read(filePath, opts)) {
                 LoadPackageEntries(zipFile, out var exception2);
                 if (exception.IsNull() && exception2.IsNotNull()) { exception = exception2; }
             }

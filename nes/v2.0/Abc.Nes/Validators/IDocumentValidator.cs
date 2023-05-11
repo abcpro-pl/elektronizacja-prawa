@@ -16,6 +16,6 @@ using System;
 
 namespace Abc.Nes.Validators {
     public interface IDocumentValidator : IDisposable {
-        IValidationResult Validate(IDocument document);
+        IValidationResult Validate(IDocument document, string filePath);
     }
 }

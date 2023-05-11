@@ -77,5 +77,14 @@ namespace Abc.Nes.Properties {
                 return ResourceManager.GetString("RequiredFieldHasNoValue", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Required item &apos;{0}&apos; was not found!.
+        /// </summary>
+        internal static string RequiredItemNotFound {
+            get {
+                return ResourceManager.GetString("RequiredItemNotFound", resourceCulture);
+            }
+        }
     }
 }

@@ -34,9 +34,9 @@ namespace Abc.Nes.Converters {
 
         List<string> ValidationErrors { get; }
         bool Validate(string filePath);
-        bool Validate(IDocument document);
+        bool Validate(IDocument document, string filePath);
         IValidationResult GetValidationResult(string filePath);
-        IValidationResult GetValidationResult(IDocument document);
+        IValidationResult GetValidationResult(IDocument document, string filePath);
         bool ValidateWithSchema(string filePath, Type typeOfDocument = null, string rootTypeName = null);
     }
     public class XmlConverter : IXmlConverter {
@@ -144,13 +144,13 @@ namespace Abc.Nes.Converters {
             if (String.IsNullOrEmpty(filePath)) { throw new ArgumentException(); }
             if (!File.Exists(filePath)) { throw new FileNotFoundException(); }
 
-            return Validate(LoadXml(filePath));
+            return Validate(LoadXml(filePath), filePath);
         }
 
-        public bool Validate(IDocument document) {
+        public bool Validate(IDocument document, string filePath) {
             ValidationErrors = new List<string>();
             using (var validator = new DocumentValidator()) {
-                var result = validator.Validate(document);
+                var result = validator.Validate(document, filePath);
                 ValidationErrors.AddRange(result.Select(x => x.DefaultMessage));
             }
 
@@ -161,12 +161,12 @@ namespace Abc.Nes.Converters {
             if (String.IsNullOrEmpty(filePath)) { throw new ArgumentException(); }
             if (!File.Exists(filePath)) { throw new FileNotFoundException(); }
 
-            return GetValidationResult(LoadXml(filePath));
+            return GetValidationResult(LoadXml(filePath), filePath);
         }
-        public IValidationResult GetValidationResult(IDocument document) {
+        public IValidationResult GetValidationResult(IDocument document, string filePath) {
             ValidationErrors = new List<string>();
             using (var validator = new DocumentValidator()) {
-                var result = validator.Validate(document);
+                var result = validator.Validate(document, filePath);
                 ValidationErrors.AddRange(result.Select(x => x.DefaultMessage));
                 return result;
             }

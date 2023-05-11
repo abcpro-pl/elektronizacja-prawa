@@ -98,6 +98,42 @@ namespace Abc.Nes.Xades.Utils {
             return cert;
         }
 
+        public static X509Certificate2 GetCertBySerialNumber(string serial) {
+            X509Store store = new X509Store(StoreName.My, StoreLocation.CurrentUser);
+            store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
+            X509Certificate2Collection col = store.Certificates;
+            var found = col.Find(X509FindType.FindBySerialNumber, serial, true);
+            if (found.Count == 0) {
+                serial = serial.Replace("-", " ");
+                found = col.Find(X509FindType.FindBySerialNumber, serial, true);
+            }
+            if (found.Count == 0) {
+                found = col.Find(X509FindType.FindBySerialNumber, serial, false);
+            }
+            if (found.Count == 0) {
+                serial = serial.Replace(" ", string.Empty);
+                found = col.Find(X509FindType.FindBySerialNumber, serial, true);
+            }
+            if (found.Count == 0) {
+                found = col.Find(X509FindType.FindBySerialNumber, serial, false);
+            }
+            if (found.Count == 0) {
+                serial = serial.ToLower();
+                found = col.Find(X509FindType.FindBySerialNumber, serial, true);
+            }
+            if (found.Count == 0) {
+                found = col.Find(X509FindType.FindBySerialNumber, serial, false);
+            }
+
+            if (found.Count == 1) {
+                var cert = found[0];
+                return cert;
+            }
+            else {
+                return null;
+            }
+        }
+
 #if NET48 || NET461
         public static X509Certificate2 SelectCertificate(string message = null, string title = null) {
             X509Certificate2 cert = null;

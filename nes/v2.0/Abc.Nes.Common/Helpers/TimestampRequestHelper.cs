@@ -117,7 +117,8 @@ namespace Abc.Nes.Common.Helpers {
             else if (certificate != null) {
                 //signed request
                 ContentInfo ci = new ContentInfo(bytesToSend);
-                SignedCms env = new SignedCms(ci);
+                SignedCms env = new SignedCms(SubjectIdentifierType.IssuerAndSerialNumber, ci);
+                
                 CmsSigner signer = new CmsSigner(certificate);
                 env.ComputeSignature(signer, false);
                 bytesToSend = env.Encode();

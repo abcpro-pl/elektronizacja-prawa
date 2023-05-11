@@ -377,7 +377,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             if (item == null) { throw new ArgumentNullException("item"); }
 
             var list = new List<SignatureInfo>();
-            var internalPath = item.FilePath;
+            var internalPath = item.FilePath.ToLower();
             if (internalPath.EndsWith(".xades") || internalPath.EndsWith(".xml")) {
                 var result = GetXadesSignatureInfos(item.FileData.ToXElement(), internalPath);
                 if (result != null && result.Length > 0) { list.AddRange(result); }

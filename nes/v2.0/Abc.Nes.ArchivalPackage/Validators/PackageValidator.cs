@@ -25,6 +25,9 @@ using System.Text;
 
 namespace Abc.Nes.ArchivalPackage.Validators {
     public class PackageValidator : IPackageValidator {
+        public PackageValidator() {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+        }
         public void Dispose() { }
 
         public IValidationResult GetValidationResult(string filePath, bool validateMetdataFiles = false, bool breakOnFirstError = true) {
@@ -105,6 +108,7 @@ namespace Abc.Nes.ArchivalPackage.Validators {
 
             IDocumentValidator validator = new DocumentValidator();
 
+            //walidacja dokumentow
             foreach (var item in package.GetAllFiles(package.Documents)) {
                 var metadata = package.GetMetadataFile(item);
                 if (metadata.IsNull()) {
@@ -114,6 +118,7 @@ namespace Abc.Nes.ArchivalPackage.Validators {
                     if (metadata.IsNotNull()) {
                         result.Add(new PackageValidationResultItem() {
                             FullName = item.FilePath,
+                            FilePath = item.FilePath,
                             Name = item.FileName,
                             Source = ValidationResultSource.Metadata,
                             Type = ValidationResultType.Incorrect,
@@ -123,6 +128,7 @@ namespace Abc.Nes.ArchivalPackage.Validators {
                     else {
                         result.Add(new PackageValidationResultItem() {
                             FullName = item.FilePath,
+                            FilePath = item.FilePath,
                             Name = item.FileName,
                             Source = ValidationResultSource.Metadata,
                             Type = ValidationResultType.NotFound,
@@ -131,26 +137,112 @@ namespace Abc.Nes.ArchivalPackage.Validators {
                     }
                     if (breakOnFirstError) { break; }
                 }
-                else if (validateMetdataFiles) {
-                    var metadataResult = validator.Validate(metadata.Document);
-                    if (!metadataResult.IsCorrect) {
-                        result.Add(new PackageValidationResultItem() {
-                            FullName = item.FilePath,
-                            Name = item.FileName,
-                            Source = ValidationResultSource.Metadata,
-                            Type = ValidationResultType.Incorrect,
-                            DefaultMessage = String.Format(resx.GetString("MetadataAreNotValid"), item.FilePath)
-                        });
+                
+                if (metadata.IsNotNull()) {
+                    //else 
+                    if (validateMetdataFiles) {
+                        var metadataResult = validator.Validate(metadata.Document, metadata.DocumentFilePath);
+                        if (!metadataResult.IsCorrect) {
+                            //result.Add(new PackageValidationResultItem() {
+                            //    FullName = item.FilePath,
+                            //    Name = item.FileName,
+                            //    Source = ValidationResultSource.Metadata,
+                            //    Type = ValidationResultType.Incorrect,
+                            //    DefaultMessage = String.Format(resx.GetString("MetadataAreNotValid"), item.FilePath),
+                            //    FilePath = item.FilePath
+                            //});
 
-                        foreach (var _item in metadataResult) {
-                            result.Add(_item);
+                            foreach (var _item in metadataResult) {
+                                
+                                result.Add(_item);
+                            }
+
+                            if (breakOnFirstError) { break; }
                         }
+                    }
 
-                        if (breakOnFirstError) { break; }
+                }
+
+                //sprawdzam czy plik to UPP/UPO/UPP
+                if (item.FileName.EndsWith(".xml")) {
+                    var itemDoc = item as DocumentFile;
+                    if (itemDoc.IsNotNull()) {
+                        bool isUPPO = CheckIsUPO_UPP(itemDoc);
+                        if (isUPPO) {
+                            bool hasRel=false;
+                            string relatedFileName = null;
+                            //szuka nazwy pliku ktorego dotyczy upo/upp
+                            switch (metadata.Document.DocumentType) {
+                                case Enumerations.DocumentType.Nes16:
+                                    var doc16 = metadata.Document as Document16;
+                                    var rel16 = doc16.Relations.FirstOrDefault(x => x.Type == Enumerations.RelationType.IsReference.GetXmlEnum());
+                                    hasRel = rel16.IsNotNull();
+                                    if (hasRel) {
+                                        var fileId = rel16.Identifiers.FirstOrDefault(x => x.Type == "Nazwa pliku");
+                                        if (fileId.IsNotNull()) {
+                                            relatedFileName = fileId.Value;
+                                        }
+                                    }
+                                    break;
+                                case Enumerations.DocumentType.Nes17:
+                                    var doc17 = metadata.Document as Document17;
+                                    var rel = doc17.Relations.FirstOrDefault(x => x.Type == Enumerations.RelationType.IsReference.GetXmlEnum());
+                                    hasRel = rel.IsNotNull();
+                                    if (hasRel) {
+                                        var fileId = rel.Identifiers.FirstOrDefault(x => x.Type == "Nazwa pliku");
+                                        if (fileId.IsNotNull()) {
+                                            relatedFileName = fileId.Value;
+                                        }
+                                    }
+                                    break;
+                                case Enumerations.DocumentType.Nes20:
+                                    var doc20 = metadata.Document as Document;
+                                    rel = doc20.Relations.FirstOrDefault(x => x.Type == Enumerations.RelationType.IsReference.GetXmlEnum());
+                                    hasRel = rel.IsNotNull();
+                                    if (hasRel) {
+                                        var fileId = rel.Identifiers.FirstOrDefault(x => x.Type == "Nazwa pliku");
+                                        if (fileId.IsNotNull()) {
+                                            relatedFileName = fileId.Value;
+                                        }
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                            if (relatedFileName.IsNotNull()) {
+                                //sprawdzam czy plik istnieje w paczce
+                                var foundFile = package.GetItemByFilePath($"{resx.GetString("Documents")}/{relatedFileName}");
+                                if (foundFile.IsNull()) {
+                                    foundFile = package.GetItemByFilePath($"{resx.GetString("Documents")}/{relatedFileName.RemovePolishChars()}");
+                                }
+                                if (foundFile.IsNull()) {
+                                    result.Add(new PackageValidationResultItem() {
+                                        FullName = item.FilePath,
+                                        Name = item.FileName,
+                                        Source = ValidationResultSource.Document,
+                                        Type = ValidationResultType.ConfirmationRelation,
+                                        DefaultMessage = $"Nie znaleziono dokumentu określonego w relacji: {relatedFileName}", //TODO: resx
+                                        FilePath = item.FilePath
+                                    });
+                                }
+                            } else {
+                                //brak nazwy = brak relacji
+                                result.Add(new PackageValidationResultItem() {
+                                    FullName = item.FilePath,
+                                    Name = item.FileName,
+                                    Source = ValidationResultSource.Document,
+                                    Type = ValidationResultType.ConfirmationRelation,
+                                    DefaultMessage = "Brak relacji do dokumentu", //TODO: resx
+                                    FilePath = item.FilePath
+                                });
+                            }
+                        }
                     }
                 }
             }
 
+            //walidacja metadanych
             foreach (var item in package.GetAllFiles(package.Metadata)) {
                 var metadata = item as MetadataFile;
                 var file = package.GetFileByMetadata(metadata);
@@ -185,7 +277,48 @@ namespace Abc.Nes.ArchivalPackage.Validators {
                 });
             }
 
+            //walidacja spraw
+            foreach (var caseMetadata in package.Objects.Items) {
+                var caseValidation = validator.Validate(caseMetadata.Document, caseMetadata.FilePath);
+                if (!caseValidation.IsCorrect) {
+                    result.Add(new PackageValidationResultItem() {
+                        FullName = caseMetadata.FilePath,
+                        Name = caseMetadata.FileName,
+                        Source = ValidationResultSource.Object,
+                        Type = ValidationResultType.Incorrect,
+                        DefaultMessage = String.Format(resx.GetString("MetadataAreNotValid"), caseMetadata.FilePath),
+                        FilePath = caseMetadata.FilePath
+                    });
+
+                    foreach (var item in caseValidation) {
+                        //result.Add(item);
+                        result.Add(new PackageValidationResultItem() {
+                            FullName = item.FullName,
+                            Name = item.Name,
+                            Source = ValidationResultSource.Object,
+                            Type = item.Type,
+                            DefaultMessage = item.DefaultMessage,
+                            FilePath = item.FilePath
+                        });
+                    }
+                }
+            }
+
             return result;
+        }
+
+        private static bool CheckIsUPO_UPP(DocumentFile itemDoc) {
+            bool isUPO = false;
+            using (var docStream = new MemoryStream(itemDoc.FileData)) {
+                var docXml = System.Xml.Linq.XDocument.Load(docStream);
+
+                System.Xml.Linq.XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
+                var attr = docXml.Root.Attribute(xsi + "schemaLocation");
+                var upo = "crd.gov.pl/xml/schematy/UPO";
+                isUPO = attr.Value.Contains(upo);
+            }
+
+            return isUPO;
         }
 
         public bool Validate(string filePath, out string message, bool validateMetdataFiles = false, bool breakOnFirstError = true) {
@@ -219,7 +352,7 @@ namespace Abc.Nes.ArchivalPackage.Validators {
                         if (breakOnFirstError) { break; }
                     }
                     else if (validateMetdataFiles) {
-                        var _result = validator.Validate(metadata.Document);
+                        var _result = validator.Validate(metadata.Document, metadata.FilePath);
 
                         if (_result.IsNotNull() && _result.Count > 0) {
                             messageBuilder.AppendLine(String.Format(resx.GetString("MetadataAreNotValid"), item.FilePath));
@@ -242,7 +375,7 @@ namespace Abc.Nes.ArchivalPackage.Validators {
         public bool IsPackageValid(Stream stream, out Exception exception) {
             exception = null;
             using (var zipFile = ZipFile.Read(stream, new ReadOptions() {
-                Encoding = Encoding.UTF8
+                Encoding = Console.OutputEncoding
             })) {
                 var zipFileHasMandatoryDirectories =
                    zipFile.EntryFileNames.Where(x => x.ToLower().StartsWith(MainDirectoriesName.Files.GetXmlEnum().ToLower())).Count() > 0 &&
@@ -258,7 +391,12 @@ namespace Abc.Nes.ArchivalPackage.Validators {
         }
         public bool IsPackageValid(string filePath, out Exception exception) {
             exception = null;
-            using (var zipFile = ZipFile.Read(filePath)) {
+            ReadOptions opts = new ReadOptions() {
+                Encoding = Console.OutputEncoding
+            };
+            
+            using (var zipFile = ZipFile.Read(filePath, opts)) {
+                
                 var zipFileHasMandatoryDirectories =
                    zipFile.EntryFileNames.Where(x => x.ToLower().StartsWith(MainDirectoriesName.Files.GetXmlEnum().ToLower())).Count() > 0 &&
                    zipFile.EntryFileNames.Where(x => x.ToLower().StartsWith(MainDirectoriesName.Metadata.GetXmlEnum().ToLower())).Count() > 0 &&

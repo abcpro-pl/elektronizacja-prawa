@@ -14,12 +14,15 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Xml.Linq;
 
 namespace Abc.Nes.ArchivalPackage.Model {
     public class MetadataFile : DocumentFile {
         public IDocument Document { get; set; }
+        public string DocumentFileName { get { return DocumentFilePath.IsNotNullOrEmpty() ? Path.GetFileName(DocumentFilePath) : null; } }
+        public string DocumentFilePath { get; set; }
         public override void Init(byte[] fileData, out Exception ex) {
             ex = null;
             FileData = fileData;

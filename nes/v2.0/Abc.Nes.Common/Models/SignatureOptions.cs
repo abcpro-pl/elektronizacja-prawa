@@ -9,7 +9,7 @@ namespace Abc.Nes.Common.Models {
         public DateTime? SignDate { get; set; } = DateTime.Now;
         public bool AddTimestamp {
             get {
-                return TimestampOptions != null;
+                return TimestampOptions != null && TimestampOptions.TsaUrl != null && TimestampOptions.TsaUrl != string.Empty;
             }
         }
         public TimestampOptions TimestampOptions { get; set; } = null;
