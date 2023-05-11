@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;netstandard2.0;net48;net461</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0;net48;net6.0</TargetFrameworks>
     <NeutralLanguage>pl</NeutralLanguage>
     <Authors>ITORG Krzysztof Radzimski</Authors>
     <Company>ABC PRO Sp. z o.o.</Company>
@@ -17,9 +17,9 @@
     <PackageId>ABCPRO.NES.ArchivalPackage.Cryptography</PackageId>
     <Product>ABCPRO.NES.ArchivalPackage.Cryptography</Product>
     <PackageProjectUrl>https://github.com/abcpro-pl/elektronizacja-prawa/tree/master/nes/v2.0</PackageProjectUrl>
-    <AssemblyVersion>1.1.34.0</AssemblyVersion>
-    <FileVersion>1.1.34.0</FileVersion>
-    <Version>1.1.34</Version>
+		<AssemblyVersion>1.1.36.0</AssemblyVersion>
+		<FileVersion>1.1.36.0</FileVersion>
+		<Version>1.1.36</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 

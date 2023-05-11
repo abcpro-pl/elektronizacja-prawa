@@ -31,9 +31,10 @@ W tym katalogu znajduje się:
 
 Wersja  | Opis
 --------|--------
+1.1.36|Dodanie wsparcia dla `net6.0`.
 1.1.34|Obsługa schematu `Metadane-1.6.xsd`.
 1.1.33|Obsługa `namespace prefix` w `XmlSynonyms`.
-1.1.32|Dodanie `CountryCode` 'Polska'.
+1.1.32|Dodanie do `CountryCode` pozycji 'Polska'.
 1.1.31|Obsługa plikó metadanych 1.7 podczas podpisywania.
 1.1.30|Dodanie bardziej szczegółowej weryfikacji nazw plików metadanych (z pominięciem białych znaków i rozszerzeń).
 1.1.29|Zmiany wizualizacji podpisu PAdES.

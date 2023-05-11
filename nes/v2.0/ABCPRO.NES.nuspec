@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>ABCPRO.NES</id>
-		<version>1.1.34</version>
+		<version>1.1.36</version>
 		<authors>ITORG Krzysztof Radzimski</authors>
 		<owners>ABC PRO Sp. z o.o.</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -12,59 +12,45 @@
 		<copyright>ABC PRO Sp. z o.o.</copyright>
 		<icon>nes_logo.png</icon>
 		<summary>ABCPRO.NES for .NET is a library for creating and signing documents metadata and archival package (eADM) for Polish State Archives.</summary>
-		<releaseNotes>Use local names in XmlSynonyms.</releaseNotes>
+		<releaseNotes>Added support for net6.0.</releaseNotes>
 		<repository type="GIT" url="https://github.com/abcpro-pl/elektronizacja-prawa.git"/>
 		<tags>eADM NES paczka-archiwalna paczka-eADM c# .net csharp digital-signatures signing security accessibility opensource open source</tags>
 		<dependencies>
-			<group targetFramework=".NETFramework4.6.1">
-				<dependency id="Portable.BouncyCastle" version="1.9.0" exclude="Build,Analyzers" />
-				<dependency id="DotNetZip" version="1.16.0" exclude="Build,Analyzers" />
-				<dependency id="Common.Logging" version="3.4.1" exclude="Build,Analyzers" />
-				<dependency id="Newtonsoft.Json" version="13.0.1" exclude="Build,Analyzers" />
-			</group>
 			<group targetFramework=".NETFramework4.8">
 				<dependency id="Portable.BouncyCastle" version="1.9.0" exclude="Build,Analyzers" />
 				<dependency id="DotNetZip" version="1.16.0" exclude="Build,Analyzers" />
 				<dependency id="Common.Logging" version="3.4.1" exclude="Build,Analyzers" />
 				<dependency id="Newtonsoft.Json" version="13.0.1" exclude="Build,Analyzers" />
+				<dependency id="System.Memory" version="4.5.5" exclude="Build,Analyzers" />
+				<dependency id="System.Security.Cryptography.Xml" version="6.0.1" exclude="Build,Analyzers" />
+				<dependency id="System.Security.Permissions" version="6.0.0" exclude="Build,Analyzers" />
+				<dependency id="System.Security.Cryptography.Pkcs" version="6.0.1" exclude="Build,Analyzers" />
 			</group>
 			<group targetFramework="netstandard2.0">
 				<dependency id="Common.Logging" version="3.4.1" exclude="Build,Analyzers" />
 				<dependency id="Portable.BouncyCastle" version="1.9.0" exclude="Build,Analyzers" />
 				<dependency id="DotNetZip" version="1.16.0" exclude="Build,Analyzers" />
 				<dependency id="Newtonsoft.Json" version="13.0.1" exclude="Build,Analyzers" />
-			</group>
-			<group targetFramework="netstandard2.1">
+				<dependency id="System.Memory" version="4.5.5" exclude="Build,Analyzers" />
+				<dependency id="System.Security.Cryptography.Xml" version="6.0.1" exclude="Build,Analyzers" />
+				<dependency id="System.Security.Permissions" version="6.0.0" exclude="Build,Analyzers" />
+				<dependency id="System.Security.Cryptography.Pkcs" version="6.0.1" exclude="Build,Analyzers" />
+			</group>			
+			<group targetFramework="net6.0">
 				<dependency id="Common.Logging" version="3.4.1" exclude="Build,Analyzers" />
 				<dependency id="Portable.BouncyCastle" version="1.9.0" exclude="Build,Analyzers" />
 				<dependency id="DotNetZip" version="1.16.0" exclude="Build,Analyzers" />
 				<dependency id="Newtonsoft.Json" version="13.0.1" exclude="Build,Analyzers" />
+				<dependency id="System.Memory" version="4.5.5" exclude="Build,Analyzers" />
+				<dependency id="System.Security.Cryptography.Xml" version="6.0.1" exclude="Build,Analyzers" />
+				<dependency id="System.Security.Permissions" version="6.0.0" exclude="Build,Analyzers" />
+				<dependency id="System.Security.Cryptography.Pkcs" version="6.0.1" exclude="Build,Analyzers" />
 			</group>
 		</dependencies>
 	</metadata>
 	<files>
 		<file src="images\nes_logo.png" target="" />
 		<file src="README.md" target=""/>
-		<file src="Abc.Nes\bin\Release\net461\Abc.Nes.dll" target="lib\net461" />
-		<file src="Abc.Nes\bin\Release\net461\Abc.Nes.pdb" target="lib\net461" />
-		<file src="Abc.Nes.Common\bin\Release\net461\Abc.Nes.Common.dll" target="lib\net461" />
-		<file src="Abc.Nes.Common\bin\Release\net461\Abc.Nes.Common.pdb" target="lib\net461" />
-		<file src="Abc.Nes.ArchivalPackage\bin\Release\net461\Abc.Nes.ArchivalPackage.dll" target="lib\net461" />
-		<file src="Abc.Nes.ArchivalPackage\bin\Release\net461\Abc.Nes.ArchivalPackage.pdb" target="lib\net461" />
-		<file src="Abc.Nes.ArchivalPackage.Cryptography\bin\Release\net461\Abc.Nes.ArchivalPackage.Cryptography.dll" target="lib\net461" />
-		<file src="Abc.Nes.ArchivalPackage.Cryptography\bin\Release\net461\Abc.Nes.ArchivalPackage.Cryptography.pdb" target="lib\net461" />
-		<file src="Abc.Nes.Xades\bin\Release\net461\Abc.Nes.Xades.dll" target="lib\net461" />
-		<file src="Abc.Nes.Xades\bin\Release\net461\Abc.Nes.Xades.pdb" target="lib\net461" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.io\bin\Release\net40\itext.io.dll" target="lib\net461" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.kernel\bin\Release\net40\itext.kernel.dll" target="lib\net461" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.layout\bin\Release\net40\itext.layout.dll" target="lib\net461" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.pdfa\bin\Release\net40\itext.pdfa.dll" target="lib\net461" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.forms\bin\Release\net40\itext.forms.dll" target="lib\net461" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.barcodes\bin\Release\net40\itext.barcodes.dll" target="lib\net461" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.sign\bin\Release\net40\itext.sign.dll" target="lib\net461" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.styledxmlparser\bin\Release\net40\itext.styledxmlparser.dll" target="lib\net461" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.svg\bin\Release\net40\itext.svg.dll" target="lib\net461" />
-
 
 		<file src="Abc.Nes\bin\Release\net48\Abc.Nes.dll" target="lib\net48" />
 		<file src="Abc.Nes\bin\Release\net48\Abc.Nes.pdb" target="lib\net48" />
@@ -76,15 +62,15 @@
 		<file src="Abc.Nes.ArchivalPackage.Cryptography\bin\Release\net48\Abc.Nes.ArchivalPackage.Cryptography.pdb" target="lib\net48" />
 		<file src="Abc.Nes.Xades\bin\Release\net48\Abc.Nes.Xades.dll" target="lib\net48" />
 		<file src="Abc.Nes.Xades\bin\Release\net48\Abc.Nes.Xades.pdb" target="lib\net48" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.io\bin\Release\net40\itext.io.dll" target="lib\net48" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.kernel\bin\Release\net40\itext.kernel.dll" target="lib\net48" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.layout\bin\Release\net40\itext.layout.dll" target="lib\net48" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.pdfa\bin\Release\net40\itext.pdfa.dll" target="lib\net48" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.forms\bin\Release\net40\itext.forms.dll" target="lib\net48" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.barcodes\bin\Release\net40\itext.barcodes.dll" target="lib\net48" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.sign\bin\Release\net40\itext.sign.dll" target="lib\net48" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.styledxmlparser\bin\Release\net40\itext.styledxmlparser.dll" target="lib\net48" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.svg\bin\Release\net40\itext.svg.dll" target="lib\net48" />
+		<file src="..\..\..\itext7-dotnet\itext\itext.io\bin\Release\net48\itext.io.dll" target="lib\net48" />
+		<file src="..\..\..\itext7-dotnet\itext\itext.kernel\bin\Release\net48\itext.kernel.dll" target="lib\net48" />
+		<file src="..\..\..\itext7-dotnet\itext\itext.layout\bin\Release\net48\itext.layout.dll" target="lib\net48" />
+		<file src="..\..\..\itext7-dotnet\itext\itext.pdfa\bin\Release\net48\itext.pdfa.dll" target="lib\net48" />
+		<file src="..\..\..\itext7-dotnet\itext\itext.forms\bin\Release\net48\itext.forms.dll" target="lib\net48" />
+		<file src="..\..\..\itext7-dotnet\itext\itext.barcodes\bin\Release\net48\itext.barcodes.dll" target="lib\net48" />
+		<file src="..\..\..\itext7-dotnet\itext\itext.sign\bin\Release\net48\itext.sign.dll" target="lib\net48" />
+		<file src="..\..\..\itext7-dotnet\itext\itext.styledxmlparser\bin\Release\net48\itext.styledxmlparser.dll" target="lib\net48" />
+		<file src="..\..\..\itext7-dotnet\itext\itext.svg\bin\Release\net48\itext.svg.dll" target="lib\net48" />
 
 		<file src="Abc.Nes\bin\Release\netstandard2.0\Abc.Nes.dll" target="lib\netstandard2.0" />
 		<file src="Abc.Nes\bin\Release\netstandard2.0\Abc.Nes.pdb" target="lib\netstandard2.0" />
@@ -106,26 +92,24 @@
 		<file src="..\..\..\itext7-dotnet\itext\itext.styledxmlparser\bin\Release\netstandard2.0\itext.styledxmlparser.dll" target="lib\netstandard2.0" />
 		<file src="..\..\..\itext7-dotnet\itext\itext.svg\bin\Release\netstandard2.0\itext.svg.dll" target="lib\netstandard2.0" />
 
-
-		<file src="Abc.Nes\bin\Release\netstandard2.1\Abc.Nes.dll" target="lib\netstandard2.1" />
-		<file src="Abc.Nes\bin\Release\netstandard2.1\Abc.Nes.pdb" target="lib\netstandard2.1" />
-		<file src="Abc.Nes.Common\bin\Release\netstandard2.1\Abc.Nes.Common.dll" target="lib\netstandard2.1" />
-		<file src="Abc.Nes.Common\bin\Release\netstandard2.1\Abc.Nes.Common.pdb" target="lib\netstandard2.1" />
-		<file src="Abc.Nes.ArchivalPackage\bin\Release\netstandard2.1\Abc.Nes.ArchivalPackage.dll" target="lib\netstandard2.1" />
-		<file src="Abc.Nes.ArchivalPackage\bin\Release\netstandard2.1\Abc.Nes.ArchivalPackage.pdb" target="lib\netstandard2.1" />
-		<file src="Abc.Nes.ArchivalPackage.Cryptography\bin\Release\netstandard2.1\Abc.Nes.ArchivalPackage.Cryptography.dll" target="lib\netstandard2.1" />
-		<file src="Abc.Nes.ArchivalPackage.Cryptography\bin\Release\netstandard2.1\Abc.Nes.ArchivalPackage.Cryptography.pdb" target="lib\netstandard2.1" />
-		<file src="Abc.Nes.Xades\bin\Release\netstandard2.1\Abc.Nes.Xades.dll" target="lib\netstandard2.1" />
-		<file src="Abc.Nes.Xades\bin\Release\netstandard2.1\Abc.Nes.Xades.pdb" target="lib\netstandard2.1" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.io\bin\Release\netstandard2.0\itext.io.dll" target="lib\netstandard2.1" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.kernel\bin\Release\netstandard2.0\itext.kernel.dll" target="lib\netstandard2.1" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.layout\bin\Release\netstandard2.0\itext.layout.dll" target="lib\netstandard2.1" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.pdfa\bin\Release\netstandard2.0\itext.pdfa.dll" target="lib\netstandard2.1" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.forms\bin\Release\netstandard2.0\itext.forms.dll" target="lib\netstandard2.1" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.barcodes\bin\Release\netstandard2.0\itext.barcodes.dll" target="lib\netstandard2.1" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.sign\bin\Release\netstandard2.0\itext.sign.dll" target="lib\netstandard2.1" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.styledxmlparser\bin\Release\netstandard2.0\itext.styledxmlparser.dll" target="lib\netstandard2.1" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.svg\bin\Release\netstandard2.0\itext.svg.dll" target="lib\netstandard2.1" />
-
+		<file src="Abc.Nes\bin\Release\net6.0\Abc.Nes.dll" target="lib\net6.0" />
+		<file src="Abc.Nes\bin\Release\net6.0\Abc.Nes.pdb" target="lib\net6.0" />
+		<file src="Abc.Nes.Common\bin\Release\net6.0\Abc.Nes.Common.dll" target="lib\net6.0" />
+		<file src="Abc.Nes.Common\bin\Release\net6.0\Abc.Nes.Common.pdb" target="lib\net6.0" />
+		<file src="Abc.Nes.ArchivalPackage\bin\Release\net6.0\Abc.Nes.ArchivalPackage.dll" target="lib\net6.0" />
+		<file src="Abc.Nes.ArchivalPackage\bin\Release\net6.0\Abc.Nes.ArchivalPackage.pdb" target="lib\net6.0" />
+		<file src="Abc.Nes.ArchivalPackage.Cryptography\bin\Release\net6.0\Abc.Nes.ArchivalPackage.Cryptography.dll" target="lib\net6.0" />
+		<file src="Abc.Nes.ArchivalPackage.Cryptography\bin\Release\net6.0\Abc.Nes.ArchivalPackage.Cryptography.pdb" target="lib\net6.0" />
+		<file src="Abc.Nes.Xades\bin\Release\net6.0\Abc.Nes.Xades.dll" target="lib\net6.0" />
+		<file src="Abc.Nes.Xades\bin\Release\net6.0\Abc.Nes.Xades.pdb" target="lib\net6.0" />
+		<file src="..\..\..\itext7-dotnet\itext\itext.io\bin\Release\net6.0\itext.io.dll" target="lib\net6.0" />
+		<file src="..\..\..\itext7-dotnet\itext\itext.kernel\bin\Release\net6.0\itext.kernel.dll" target="lib\net6.0" />
+		<file src="..\..\..\itext7-dotnet\itext\itext.layout\bin\Release\net6.0\itext.layout.dll" target="lib\net6.0" />
+		<file src="..\..\..\itext7-dotnet\itext\itext.pdfa\bin\Release\net6.0\itext.pdfa.dll" target="lib\net6.0" />
+		<file src="..\..\..\itext7-dotnet\itext\itext.forms\bin\Release\net6.0\itext.forms.dll" target="lib\net6.0" />
+		<file src="..\..\..\itext7-dotnet\itext\itext.barcodes\bin\Release\net6.0\itext.barcodes.dll" target="lib\net6.0" />
+		<file src="..\..\..\itext7-dotnet\itext\itext.sign\bin\Release\net6.0\itext.sign.dll" target="lib\net6.0" />
+		<file src="..\..\..\itext7-dotnet\itext\itext.styledxmlparser\bin\Release\net6.0\itext.styledxmlparser.dll" target="lib\net6.0" />
+		<file src="..\..\..\itext7-dotnet\itext\itext.svg\bin\Release\net6.0\itext.svg.dll" target="lib\net6.0" />
 	</files>
 </package>
