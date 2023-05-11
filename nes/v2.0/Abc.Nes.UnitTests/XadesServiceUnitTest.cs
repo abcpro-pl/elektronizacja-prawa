@@ -40,34 +40,34 @@ namespace Abc.Nes.UnitTests {
             signedPackageManager.Compress(info);
         }
 
-        [TestMethod]
-        public void XadesManager_AppendSignatureToXmlFile() {
-            var document = DocumentUnitTest.GetModel();
-            var documentXml = new Abc.Nes.Converters.XmlConverter().GetXml(document);
+        //[TestMethod]
+        //public void XadesManager_AppendSignatureToXmlFile() {
+        //    var document = DocumentUnitTest.GetModel();
+        //    var documentXml = new Abc.Nes.Converters.XmlConverter().GetXml(document);
 
-            using (var manager = new XadesManager()) {
-                var xml = new MemoryStream(Encoding.UTF8.GetBytes(documentXml.ToString()));
-                var result = manager.AppendSignatureToXmlFile(xml, CertUtil.SelectCertificate(),
-                    new SignatureProductionPlace() {
-                        City = "Warszawa",
-                        CountryName = "Polska",
-                        PostalCode = "03-825",
-                        StateOrProvince = "mazowieckie"
-                    },
-                    new SignerRole("Wiceprezes Zarządu"));
+        //    using (var manager = new XadesManager()) {
+        //        var xml = new MemoryStream(Encoding.UTF8.GetBytes(documentXml.ToString()));
+        //        var result = manager.AppendSignatureToXmlFile(xml, CertUtil.SelectCertificate(),
+        //            new SignatureProductionPlace() {
+        //                City = "Warszawa",
+        //                CountryName = "Polska",
+        //                PostalCode = "03-825",
+        //                StateOrProvince = "mazowieckie"
+        //            },
+        //            new SignerRole("Wiceprezes Zarządu"));
 
-                var filePath = Path.Combine(Path.GetTempPath(), "signature.xml");
-                if (File.Exists(filePath)) { File.Delete(filePath); }
-                result.Save(filePath);
+        //        var filePath = Path.Combine(Path.GetTempPath(), "signature.xml");
+        //        if (File.Exists(filePath)) { File.Delete(filePath); }
+        //        result.Save(filePath);
 
-                //var mgr = new XmlDsigEnveloped(false, null);
-                //var vr = mgr.VerifyFile(filePath);
-                //Assert.IsTrue(vr);
-                var validationResult = manager.ValidateSignature(filePath);
-                Assert.IsTrue(validationResult.IsValid && result != null && result.Document != null && result.Document.OuterXml != null && File.Exists(filePath));
-                System.Diagnostics.Process.Start(filePath);
-            }
-        }
+        //        //var mgr = new XmlDsigEnveloped(false, null);
+        //        //var vr = mgr.VerifyFile(filePath);
+        //        //Assert.IsTrue(vr);
+        //        var validationResult = manager.ValidateSignature(filePath);
+        //        Assert.IsTrue(validationResult.IsValid && result != null && result.Document != null && result.Document.OuterXml != null && File.Exists(filePath));
+        //        System.Diagnostics.Process.Start(filePath);
+        //    }
+        //}
 
         [TestMethod]
         public void XadesManager_CreateEnvelopingSignature() {

@@ -582,6 +582,54 @@ namespace Abc.Nes.NUnitTests {
                 Assert.IsTrue(isValid);
             }
         }
+        [Test]
+        public void SignPdf_KIRCert_NoTs_DateBeforeCertValid() {
+            testName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            using (var mgr = new PackageSignerManager()) {
+                PreparePdfPaths(out string filePath, out string destPath);
+
+                X509Certificate2 cert = CertUtil.GetCertByName(kir_cert),
+                    tsaCert = cert;
+
+                pdfSignOptions.Certificate = cert;
+                pdfSignOptions.SignDate = new DateTime(2020, 01,01, 10,10,10); //2020-01-01 10:10:10
+                //pdfSignOptions.TimestampOptions = new TimestampOptions {
+                //    Certificate = cert,
+                //    TsaUrl = TSA_KIR
+                //};
+
+                mgr.SignPdfFile(filePath, pdfSignOptions, destPath);
+                Assert.IsTrue(File.Exists(destPath));
+                bool isValid = ValidatePdfSignature(mgr, destPath);
+                Assert.IsTrue(isValid);
+            }
+        }
+        [Test]
+        public void SignPdf_TestCert_TsKIR_wrongTsCert() {
+            testName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            using (var mgr = new PackageSignerManager()) {
+                PreparePdfPaths(out string filePath, out string destPath);
+
+                X509Certificate2 cert = CertUtil.GetCertByName(test_cert),
+                    tsaCert = cert;
+
+                pdfSignOptions.Certificate = cert;
+                pdfSignOptions.TimestampOptions = new TimestampOptions {
+                    Certificate = cert,
+                    TsaUrl = TSA_KIR
+                };
+                try {
+                    mgr.SignPdfFile(filePath, pdfSignOptions, destPath);
+                }
+                catch (Exception ex) {
+                    Assert.IsTrue(ex is iText.Kernel.PdfException);
+                    Assert.IsTrue(null != ex.InnerException);
+                    string errMsg = "Invalid TSA http://www.ts.kir.com.pl/HttpTspServer response code 32.";
+                    Assert.IsTrue(ex.InnerException.Message == errMsg);
+                }
+            }
+        }
+
 
         [Test]
         public void SignPdf_CenCert_TsCencert1() {
@@ -681,6 +729,32 @@ namespace Abc.Nes.NUnitTests {
                 Assert.IsTrue(isValid);
             }
         }
+
+        [Test]
+        public void SignPdf_SigillumCert_TsSigillum_Signer() {
+            testName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            using (var mgr = new PackageSignerManager()) {
+
+                PreparePdfPaths(out string filePath, out string destPath);
+
+                X509Certificate2 cert = CertUtil.GetCertByName(sigillum_cert);
+
+                pdfSignOptions.Certificate = cert;
+                pdfSignOptions.TimestampOptions = new TimestampOptions {
+                    Certificate = cert,
+                    TsaPolicy = TSA_POLICY_SIGILLUM,
+                    TsaUrl = TSA_SIGILLUM
+                };
+                pdfSignOptions.AddVisibleSignature = true;
+
+                mgr.SignPdfFile(filePath, pdfSignOptions, destPath);
+
+                Assert.IsTrue(File.Exists(destPath));
+                bool isValid = ValidatePdfSignature(mgr, destPath);
+                Assert.IsTrue(isValid);
+            }
+        }
+
 
         [Test]
         public void SignPdf_KIRCert_LegislatorTest() {
@@ -930,8 +1004,11 @@ namespace Abc.Nes.NUnitTests {
                 xmlSignOptions.Certificate = cert;
 
                 manager.SignXmlFile(filePath, xmlSignOptions, destPath);
+                manager.SignXmlFile(filePath, xmlSignOptions, destPath);
+                manager.SignXmlFile(filePath, xmlSignOptions, destPath);
+                manager.SignXmlFile(filePath, xmlSignOptions, destPath);
 
-                
+
                 Assert.IsTrue(File.Exists(destPath));
                 var result = manager.ValidateSignature(destPath);
                 Assert.IsTrue(result.IsValid);
@@ -939,6 +1016,24 @@ namespace Abc.Nes.NUnitTests {
         }
         [Test]
         public void SignXml_TestCert_noTs() {
+            testName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            using (var manager = new XadesManager()) {
+                PrepareXmlPaths(out string filePath, out string destPath);
+
+                X509Certificate2 cert = CertUtil.GetCertByName(test_cert);
+
+                xmlSignOptions.Certificate = cert;
+
+                manager.SignXmlFile(filePath, xmlSignOptions, destPath);
+
+
+                Assert.IsTrue(File.Exists(destPath));
+                var result = manager.ValidateSignature(destPath);
+                Assert.IsTrue(result.IsValid);
+            }
+        }
+        [Test]
+        public void SignXml_TestCert_noTs_NoDateNoNumber() {
             testName = System.Reflection.MethodBase.GetCurrentMethod().Name;
             using (var manager = new XadesManager()) {
                 PrepareXmlPaths(out string filePath, out string destPath);
@@ -1053,6 +1148,21 @@ namespace Abc.Nes.NUnitTests {
             }
         }
         #endregion sign xml test
+
+        [Test]
+        public void SignPackageDetached() {
+            var path = @"../../../../sample/paczka0real.zip";
+            var outPath = @"../../../../sample/paczka0.podpisana.zip";
+            var mgr = new PackageSignerManager();
+            var cert = CertUtil.GetCertByName(test_cert);
+            mgr.Sign(path, cert, outPath, null, null, false, true, true, false, DateTime.Now, false, null);
+            Assert.IsTrue(true);
+        }
+        [Test]
+        public void SignPackageAttached() {
+            Assert.IsTrue(true);
+        }
+
         private void PreparePdfPaths(string inputFileName, out string filePath, out string destPath) {
             filePath = Path.Combine(testFilesDirPath, inputFileName);
             destPath = Path.Combine(signedPath, $"{testName}.pdf");

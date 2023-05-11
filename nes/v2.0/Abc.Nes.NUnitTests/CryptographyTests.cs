@@ -259,9 +259,9 @@ namespace Abc.Nes.NUnitTests {
 
         [Test]
         public void Package_GetValidationResult() {
-            // var path = @"../../../../sample/LegalAct26.03.2.podpisana.zip";
-            var path = @"../../../../sample/Sprawa_GN-III.7541.7.2018_20210301_143750.zip";
-            //var path = @"../../../../sample/Paczka z bledami 2.zip";
+            var path = @"../../../../sample/LegalAct26.03.2.podpisana.zip";
+            //var path = @"../../../../sample/Sprawa_GN-III.7541.7.2018_20210301_143750.zip";
+            
 
             var signedPackageManager = new SignedPackageManager();
             var info = signedPackageManager.Extract(path);
@@ -273,6 +273,7 @@ namespace Abc.Nes.NUnitTests {
                 var validateMetdataFiles = true;
                 var breakOnFirstError = false;
                 var result = mgr.GetValidationResult(validateMetdataFiles, breakOnFirstError);
+                //var res = result as Abc.Nes.ArchivalPackage.Validators.PackageValidationResult;
                 if (!result.IsCorrect) {
                     foreach (var item in result) {
                         System.Diagnostics.Debug.WriteLine(item.DefaultMessage);
@@ -293,6 +294,54 @@ namespace Abc.Nes.NUnitTests {
                     Assert.IsTrue(verifyInfo != null && verifyInfo.Length > 0);
                 }
             }
+        }
+
+        [Test]
+        public void Package_GetValidationResultWithErrors() {
+            
+            //var path = @"../../../../sample/Sprawa_GN-III.7541.7.2018_20210301_143750.zip";
+            //var path = @"../../../../sample/Paczka z bledami 2.zip";
+            var path = @"../../../../sample/aPaczka_17.03.21.zip";
+
+
+            var signedPackageManager = new SignedPackageManager();
+            var info = signedPackageManager.Extract(path);
+
+            // validate package
+            using (var mgr = new PackageManager()) {
+                Exception exception;
+                mgr.LoadPackage(Path.Combine(info.Directory, info.PackageFileName), out exception);
+                var validateMetdataFiles = true;
+                var breakOnFirstError = false;
+                var result = mgr.GetValidationResult(validateMetdataFiles, breakOnFirstError);
+                if (!result.IsCorrect) {
+                    foreach (var item in result) {
+                        System.Diagnostics.Debug.WriteLine(item.DefaultMessage);
+                    }
+                }
+
+                Assert.IsTrue(!result.IsCorrect && exception == null);
+
+                //var res = result as Abc.Nes.ArchivalPackage.Validators.PackageValidationResult;
+                //Assert.IsTrue(res.DocumentToMetadataErrors.Count == 1);
+                //Assert.IsTrue(res.MetadataToDocumentErrors.Count == 1);
+                //Assert.IsTrue(res.CaseMetadataErrors.Count == 0);
+                //Assert.IsTrue(res.ConfirmationRelationErrors.Count == 2);
+                //Assert.IsTrue(res.DocumentToCaseErrors.Count == 0);
+                //Assert.IsTrue(res.MetadataErrors.Count == 0);
+            }
+
+            //using (var signerMgr = new PackageSignerManager()) {
+            //    // get xades signature info
+            //    var xadesPath = Path.Combine(info.Directory, info.SignatureFileName);
+            //    if (File.Exists(xadesPath)) {
+            //        var signatureInfo = signerMgr.GetXadesSignatureInfos(xadesPath);
+            //        Assert.IsTrue(signatureInfo.Length > 0);
+            //        // validate xades
+            //        var verifyInfo = signerMgr.VerifyXadesSignature(Path.Combine(info.Directory, info.SignatureFileName));
+            //        Assert.IsTrue(verifyInfo != null && verifyInfo.Length > 0);
+            //    }
+            //}
         }
     }
 }
