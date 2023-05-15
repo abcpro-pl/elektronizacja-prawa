@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>ABCPRO.NES</id>
-		<version>1.1.36</version>
+		<version>1.1.37</version>
 		<authors>ITORG Krzysztof Radzimski</authors>
 		<owners>ABC PRO Sp. z o.o.</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -12,39 +12,64 @@
 		<copyright>ABC PRO Sp. z o.o.</copyright>
 		<icon>nes_logo.png</icon>
 		<summary>ABCPRO.NES for .NET is a library for creating and signing documents metadata and archival package (eADM) for Polish State Archives.</summary>
-		<releaseNotes>Added support for net6.0.</releaseNotes>
+		<releaseNotes>Remove support for net6.0.</releaseNotes>
 		<repository type="GIT" url="https://github.com/abcpro-pl/elektronizacja-prawa.git"/>
 		<tags>eADM NES paczka-archiwalna paczka-eADM c# .net csharp digital-signatures signing security accessibility opensource open source</tags>
 		<dependencies>
 			<group targetFramework=".NETFramework4.8">
+				<dependency id="Common.Logging" version="3.4.1" exclude="Build,Analyzers" />
+				<dependency id="DotNetZip" version="1.16.0" exclude="Build,Analyzers" />
+				<dependency id="Portable.BouncyCastle" version="1.9.0" exclude="Build,Analyzers" />
+				<dependency id="Newtonsoft.Json" version="13.0.1" exclude="Build,Analyzers" />
+
+				<dependency id="Common.Logging" version="3.4.1" exclude="Build,Analyzers" />
 				<dependency id="Portable.BouncyCastle" version="1.9.0" exclude="Build,Analyzers" />
 				<dependency id="DotNetZip" version="1.16.0" exclude="Build,Analyzers" />
-				<dependency id="Common.Logging" version="3.4.1" exclude="Build,Analyzers" />
 				<dependency id="Newtonsoft.Json" version="13.0.1" exclude="Build,Analyzers" />
-				<dependency id="System.Memory" version="4.5.5" exclude="Build,Analyzers" />
-				<dependency id="System.Security.Cryptography.Xml" version="6.0.1" exclude="Build,Analyzers" />
-				<dependency id="System.Security.Permissions" version="6.0.0" exclude="Build,Analyzers" />
-				<dependency id="System.Security.Cryptography.Pkcs" version="6.0.1" exclude="Build,Analyzers" />
+
+				<dependency id="System.Collections.NonGeneric" version="4.3.0" exclude="Build,Analyzers"/>
+				<dependency id="System.Runtime.Serialization.Formatters" version="4.3.0" exclude="Build,Analyzers"/>
+				<dependency id="System.Threading.Thread" version="4.3.0" exclude="Build,Analyzers"/>
+				<dependency id="System.Threading.ThreadPool" version="4.3.0" exclude="Build,Analyzers"/>
+				<dependency id="System.Xml.XmlDocument" version="4.3.0" exclude="Build,Analyzers"/>
+
+				<dependency id="System.Memory" version="4.5.5" exclude="Build,Analyzers"/>
+				<dependency id="System.Net.Requests" version="4.3.0" exclude="Build,Analyzers"/>
+				<dependency id="System.Security.Cryptography.Xml" version="4.7.1" exclude="Build,Analyzers"/>
+				<dependency id="System.Security.Cryptography.Csp" version="4.3.0" exclude="Build,Analyzers"/>
+				<dependency id="System.Security.Cryptography.Pkcs" version="4.7.0" exclude="Build,Analyzers"/>
+
+				<dependency id="System.Globalization.Extensions" version="4.3.0" exclude="Build,Analyzers"/>
+				<dependency id="System.Runtime.Loader" version="4.3.0" exclude="Build,Analyzers"/>
+				<dependency id="System.Diagnostics.Process" version="4.3.0" exclude="Build,Analyzers"/>
+				<dependency id="Microsoft.Extensions.DependencyModel" version="6.0.0" exclude="Build,Analyzers"/>
+				<dependency id="Microsoft.DotNet.PlatformAbstractions" version="3.1.6" exclude="Build,Analyzers"/>
+				<dependency id="System.Text.Encoding.CodePages" version="4.7.1" exclude="Build,Analyzers"/>
 			</group>
 			<group targetFramework="netstandard2.0">
 				<dependency id="Common.Logging" version="3.4.1" exclude="Build,Analyzers" />
 				<dependency id="Portable.BouncyCastle" version="1.9.0" exclude="Build,Analyzers" />
 				<dependency id="DotNetZip" version="1.16.0" exclude="Build,Analyzers" />
 				<dependency id="Newtonsoft.Json" version="13.0.1" exclude="Build,Analyzers" />
-				<dependency id="System.Memory" version="4.5.5" exclude="Build,Analyzers" />
-				<dependency id="System.Security.Cryptography.Xml" version="6.0.1" exclude="Build,Analyzers" />
-				<dependency id="System.Security.Permissions" version="6.0.0" exclude="Build,Analyzers" />
-				<dependency id="System.Security.Cryptography.Pkcs" version="6.0.1" exclude="Build,Analyzers" />
-			</group>			
-			<group targetFramework="net6.0">
-				<dependency id="Common.Logging" version="3.4.1" exclude="Build,Analyzers" />
-				<dependency id="Portable.BouncyCastle" version="1.9.0" exclude="Build,Analyzers" />
-				<dependency id="DotNetZip" version="1.16.0" exclude="Build,Analyzers" />
-				<dependency id="Newtonsoft.Json" version="13.0.1" exclude="Build,Analyzers" />
-				<dependency id="System.Memory" version="4.5.5" exclude="Build,Analyzers" />
-				<dependency id="System.Security.Cryptography.Xml" version="6.0.1" exclude="Build,Analyzers" />
-				<dependency id="System.Security.Permissions" version="6.0.0" exclude="Build,Analyzers" />
-				<dependency id="System.Security.Cryptography.Pkcs" version="6.0.1" exclude="Build,Analyzers" />
+
+				<dependency id="System.Collections.NonGeneric" version="4.3.0" exclude="Build,Analyzers"/>
+				<dependency id="System.Runtime.Serialization.Formatters" version="4.3.0" exclude="Build,Analyzers"/>
+				<dependency id="System.Threading.Thread" version="4.3.0" exclude="Build,Analyzers"/>
+				<dependency id="System.Threading.ThreadPool" version="4.3.0" exclude="Build,Analyzers"/>
+				<dependency id="System.Xml.XmlDocument" version="4.3.0" exclude="Build,Analyzers"/>
+
+				<dependency id="System.Memory" version="4.5.5" exclude="Build,Analyzers"/>
+				<dependency id="System.Net.Requests" version="4.3.0" exclude="Build,Analyzers"/>
+				<dependency id="System.Security.Cryptography.Xml" version="4.7.1" exclude="Build,Analyzers"/>
+				<dependency id="System.Security.Cryptography.Csp" version="4.3.0" exclude="Build,Analyzers"/>
+				<dependency id="System.Security.Cryptography.Pkcs" version="4.7.0" exclude="Build,Analyzers"/>
+
+				<dependency id="System.Globalization.Extensions" version="4.3.0" exclude="Build,Analyzers"/>
+				<dependency id="System.Runtime.Loader" version="4.3.0" exclude="Build,Analyzers"/>
+				<dependency id="System.Diagnostics.Process" version="4.3.0" exclude="Build,Analyzers"/>
+				<dependency id="Microsoft.Extensions.DependencyModel" version="6.0.0" exclude="Build,Analyzers"/>
+				<dependency id="Microsoft.DotNet.PlatformAbstractions" version="3.1.6" exclude="Build,Analyzers"/>
+				<dependency id="System.Text.Encoding.CodePages" version="4.7.1" exclude="Build,Analyzers"/>
 			</group>
 		</dependencies>
 	</metadata>
@@ -91,25 +116,5 @@
 		<file src="..\..\..\itext7-dotnet\itext\itext.sign\bin\Release\netstandard2.0\itext.sign.dll" target="lib\netstandard2.0" />
 		<file src="..\..\..\itext7-dotnet\itext\itext.styledxmlparser\bin\Release\netstandard2.0\itext.styledxmlparser.dll" target="lib\netstandard2.0" />
 		<file src="..\..\..\itext7-dotnet\itext\itext.svg\bin\Release\netstandard2.0\itext.svg.dll" target="lib\netstandard2.0" />
-
-		<file src="Abc.Nes\bin\Release\net6.0\Abc.Nes.dll" target="lib\net6.0" />
-		<file src="Abc.Nes\bin\Release\net6.0\Abc.Nes.pdb" target="lib\net6.0" />
-		<file src="Abc.Nes.Common\bin\Release\net6.0\Abc.Nes.Common.dll" target="lib\net6.0" />
-		<file src="Abc.Nes.Common\bin\Release\net6.0\Abc.Nes.Common.pdb" target="lib\net6.0" />
-		<file src="Abc.Nes.ArchivalPackage\bin\Release\net6.0\Abc.Nes.ArchivalPackage.dll" target="lib\net6.0" />
-		<file src="Abc.Nes.ArchivalPackage\bin\Release\net6.0\Abc.Nes.ArchivalPackage.pdb" target="lib\net6.0" />
-		<file src="Abc.Nes.ArchivalPackage.Cryptography\bin\Release\net6.0\Abc.Nes.ArchivalPackage.Cryptography.dll" target="lib\net6.0" />
-		<file src="Abc.Nes.ArchivalPackage.Cryptography\bin\Release\net6.0\Abc.Nes.ArchivalPackage.Cryptography.pdb" target="lib\net6.0" />
-		<file src="Abc.Nes.Xades\bin\Release\net6.0\Abc.Nes.Xades.dll" target="lib\net6.0" />
-		<file src="Abc.Nes.Xades\bin\Release\net6.0\Abc.Nes.Xades.pdb" target="lib\net6.0" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.io\bin\Release\net6.0\itext.io.dll" target="lib\net6.0" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.kernel\bin\Release\net6.0\itext.kernel.dll" target="lib\net6.0" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.layout\bin\Release\net6.0\itext.layout.dll" target="lib\net6.0" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.pdfa\bin\Release\net6.0\itext.pdfa.dll" target="lib\net6.0" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.forms\bin\Release\net6.0\itext.forms.dll" target="lib\net6.0" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.barcodes\bin\Release\net6.0\itext.barcodes.dll" target="lib\net6.0" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.sign\bin\Release\net6.0\itext.sign.dll" target="lib\net6.0" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.styledxmlparser\bin\Release\net6.0\itext.styledxmlparser.dll" target="lib\net6.0" />
-		<file src="..\..\..\itext7-dotnet\itext\itext.svg\bin\Release\net6.0\itext.svg.dll" target="lib\net6.0" />
 	</files>
 </package>
