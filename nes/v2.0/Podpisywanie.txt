@@ -1,0 +1,1 @@
+nuget sign ABCPRO.NES.1.1.37.nupkg -CertificateSubjectName  "ABC PRO SP. z o.o." -Timestamper "http://time.certum.pl"

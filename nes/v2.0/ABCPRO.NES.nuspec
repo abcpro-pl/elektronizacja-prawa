@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
 	<metadata>
 		<id>ABCPRO.NES</id>
 		<version>1.1.37</version>
@@ -15,6 +15,7 @@
 		<releaseNotes>Remove support for net6.0.</releaseNotes>
 		<repository type="GIT" url="https://github.com/abcpro-pl/elektronizacja-prawa.git"/>
 		<tags>eADM NES paczka-archiwalna paczka-eADM c# .net csharp digital-signatures signing security accessibility opensource open source</tags>
+		<readme>README.md</readme>
 		<dependencies>
 			<group targetFramework=".NETFramework4.8">
 				<dependency id="Common.Logging" version="3.4.1" exclude="Build,Analyzers" />
