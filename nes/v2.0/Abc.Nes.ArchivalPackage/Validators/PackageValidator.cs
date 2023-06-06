@@ -164,7 +164,7 @@ namespace Abc.Nes.ArchivalPackage.Validators {
                 }
 
                 //sprawdzam czy plik to UPP/UPO/UPP
-                if (item.FileName.EndsWith(".xml")) {
+                if (item.FileName.ToLower().EndsWith(".xml")) {
                     var itemDoc = item as DocumentFile;
                     if (itemDoc.IsNotNull()) {
                         bool isUPPO = CheckIsUPO_UPP(itemDoc);
@@ -247,6 +247,18 @@ namespace Abc.Nes.ArchivalPackage.Validators {
                 var metadata = item as MetadataFile;
                 var file = package.GetFileByMetadata(metadata);
                 if (file.IsNull()) {
+                    file = package.GetItemByFilePath(metadata.DocumentFilePath);
+                    if (file.IsNotNull()) {
+                        result.Add(new PackageValidationResultItem() {
+                            FullName = metadata.FilePath,
+                            Name = metadata.FileName,
+                            Source = ValidationResultSource.Document,
+                            Type = ValidationResultType.Incorrect,
+                            DefaultMessage = string.Format(resx.GetString("DocumentFilePathNotMatch"), item.FilePath)
+                        });
+                    }
+                }
+                if (file.IsNull()) {
                     result.Add(new PackageValidationResultItem() {
                         FullName = metadata.FilePath,
                         Name = metadata.FileName,
@@ -314,8 +326,10 @@ namespace Abc.Nes.ArchivalPackage.Validators {
 
                 System.Xml.Linq.XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
                 var attr = docXml.Root.Attribute(xsi + "schemaLocation");
-                var upo = "crd.gov.pl/xml/schematy/UPO";
-                isUPO = attr.Value.Contains(upo);
+                if (attr != null) {
+                    var upo = "crd.gov.pl/xml/schematy/UPO";
+                    isUPO = attr.Value.Contains(upo);
+                }
             }
 
             return isUPO;

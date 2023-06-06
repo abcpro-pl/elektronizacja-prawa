@@ -19,7 +19,7 @@ namespace Abc.Nes.ArchivalPackage.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Polish {
@@ -57,6 +57,15 @@ namespace Abc.Nes.ArchivalPackage.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ścieżka do pliku dokumentu {0} się nie zgadza..
+        /// </summary>
+        internal static string DocumentFilePathNotMatch {
+            get {
+                return ResourceManager.GetString("DocumentFilePathNotMatch", resourceCulture);
             }
         }
         
@@ -102,6 +111,15 @@ namespace Abc.Nes.ArchivalPackage.Properties {
         internal static string MetadataAreNotValid {
             get {
                 return ResourceManager.GetString("MetadataAreNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ścieżka do pliku metadanych {0} się nie zgadza..
+        /// </summary>
+        internal static string MetadataFilePathNotMatch {
+            get {
+                return ResourceManager.GetString("MetadataFilePathNotMatch", resourceCulture);
             }
         }
         

@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DocumentFilePathNotMatch" xml:space="preserve">
+    <value>Ścieżka do pliku dokumentu {0} się nie zgadza.</value>
+  </data>
   <data name="Documents" xml:space="preserve">
     <value>Dokumenty</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="MetadataAreNotValid" xml:space="preserve">
     <value>Metadane dla pliku {0} nie są prawidłowe!</value>
+  </data>
+  <data name="MetadataFilePathNotMatch" xml:space="preserve">
+    <value>Ścieżka do pliku metadanych {0} się nie zgadza.</value>
   </data>
   <data name="MetadataFoundWithoutSpaces" xml:space="preserve">
     <value>Znaleziono metadane dla pliku {0}, ale nazwy plików różnią się ilością białych znaków!</value>

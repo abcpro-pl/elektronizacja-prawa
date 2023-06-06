@@ -18,7 +18,7 @@ using System;
 namespace Abc.Nes.ArchivalPackage.Model {
     public abstract class ItemBase {
 		public string FileName { get; set; }
-		public string FilePath { get; internal set; }
+		public string FilePath { get; set; }
 		public abstract void Init(byte[] fileData, out Exception ex);
 
 		public string GetSubFolderName() {

@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DocumentFilePathNotMatch" xml:space="preserve">
+    <value>Document file path {0} does not match.</value>
+  </data>
   <data name="Documents" xml:space="preserve">
     <value>Documents</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="MetadataAreNotValid" xml:space="preserve">
     <value>Metadata of file: {0} are not a valid!</value>
+  </data>
+  <data name="MetadataFilePathNotMatch" xml:space="preserve">
+    <value>Metadata file path {0} does not match.</value>
   </data>
   <data name="MetadataFoundWithoutSpaces" xml:space="preserve">
     <value>Metadata found for file {0}, but filenames differ in amount of whitespace!</value>
