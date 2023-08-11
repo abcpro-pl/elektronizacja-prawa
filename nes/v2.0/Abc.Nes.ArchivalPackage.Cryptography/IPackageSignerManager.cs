@@ -97,11 +97,13 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
         SignatureInfo[] GetSignatureInfos(PackageManager mgr, ArchivalPackage.Model.DocumentFile item);
         SignatureInfo[] GetSignatureInfos(string packageFilePath);
         SignatureInfo[] GetSignatureInfos(string packageFilePath, string internalPath);
+        SignatureInfo[] GetFileSignatureInfos(string filePath, string internalPath);
         SignatureInfo[] GetXadesSignatureInfos(string xadesFilePath);
         SignatureInfo[] GetXadesSignatureInfos(XElement xades, string fileName = null);
 
         SignatureVerifyInfo[] VerifySignatures(string packageFilePath);
         SignatureVerifyInfo[] VerifySignatures(string packageFilePath, string internalPath);
+        SignatureVerifyInfo[] VerifyFileSignatures(string filePath, string internalPath);
         SignatureVerifyInfo[] VerifyXadesSignature(string xadesFilePath);
 
         SignAndVerifyInfo GetSignAndVerifyInfo(string packageFilePath, string internalPath);

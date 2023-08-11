@@ -386,21 +386,58 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 var result = GetPadesInfos(item.FileData, internalPath);
                 if (result != null && result.Length > 0) { list.AddRange(result); }
             }
-            else if (internalPath.EndsWith(".zip")) {
+            else if (internalPath.EndsWith(".zipx")) {
                 var result = GetZipxInfos(item.FileData, internalPath);
                 if (result != null && result.Length > 0) { list.AddRange(result); }
             }
             else {
+                //other file, check if .xades file exists
                 var xadesInternalPath = $"{internalPath}.xades";
                 var xadesItem = mgr.GetItemByFilePath(xadesInternalPath) as ArchivalPackage.Model.DocumentFile;
                 if (xadesItem != null) {
-                    var result = GetXadesSignatureInfos(xadesItem.FileData.ToXElement(), xadesInternalPath);
+                    //found .xades, get signature and add for original file
+                    var result = GetXadesSignatureInfos(xadesItem.FileData.ToXElement(), internalPath);
                     if (result != null && result.Length > 0) { list.AddRange(result); }
                 }
             }
 
             return list.ToArray();
         }
+
+        public SignatureInfo[] GetFileSignatureInfos(string filePath, string internalPath) {
+            var list = new List<SignatureInfo>();
+            if (File.Exists(filePath)) {
+                var data = File.ReadAllBytes(filePath);
+                if (internalPath.EndsWith(".xades") || internalPath.EndsWith(".xml")) {
+                    var result = GetXadesSignatureInfos(data.ToXElement(), internalPath);
+                    if (result != null && result.Length > 0) { list.AddRange(result); }
+                }
+                else if (internalPath.EndsWith(".pdf")) {
+                    var result = GetPadesInfos(data, internalPath);
+                    if (result != null && result.Length > 0) { list.AddRange(result); }
+                }
+                else if (internalPath.EndsWith(".zipx")) {
+                    var result = GetZipxInfos(data, internalPath);
+                    if (result != null && result.Length > 0) { list.AddRange(result); }
+                }
+                else {
+                    var xadesInternalPath = $"{internalPath}.xades";
+                    var fileXadesPath = $"{filePath}.xades";
+                    if (File.Exists(fileXadesPath)) {
+                        //var data2 = File.ReadAllBytes(fileXadesPath);
+                        var result = GetXadesSignatureInfos(fileXadesPath);
+                        if (result != null && result.Length > 0) { list.AddRange(result); }
+                    }
+                    //var xadesItem = mgr.GetItemByFilePath(xadesInternalPath) as ArchivalPackage.Model.DocumentFile;
+                    //if (xadesItem != null) {
+                    //    var result = GetXadesSignatureInfos(xadesItem.FileData.ToXElement(), xadesInternalPath);
+                    //    if (result != null && result.Length > 0) { list.AddRange(result); }
+                    //}
+                }
+            }
+            return list.ToArray();
+        }
+
         public SignatureInfo[] GetSignatureInfos(string packageFilePath, string internalPath) {
             if (String.IsNullOrEmpty(packageFilePath)) { throw new ArgumentNullException("packageFilePath"); }
             if (String.IsNullOrEmpty(internalPath)) { throw new ArgumentNullException("internalPath"); }
@@ -460,6 +497,14 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 }
             }
 
+            return list.ToArray();
+        }
+        public SignatureVerifyInfo[] VerifyFileSignatures(string filePath, string internalPath) {
+            var list = new List<SignatureVerifyInfo>();
+            if (File.Exists(filePath)) {
+                var fileData = File.ReadAllBytes(filePath);
+                VerifySignatures(list, filePath, internalPath, fileData);
+            }
             return list.ToArray();
         }
         public SignatureVerifyInfo[] VerifySignatures(string packageFilePath) {

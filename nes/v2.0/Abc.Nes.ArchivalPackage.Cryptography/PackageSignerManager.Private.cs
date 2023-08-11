@@ -953,6 +953,26 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
 
             return list.ToArray();
         }
+
+        private SignatureVerifyInfo[] VerifyXadesSignatures(byte[] data, string filePath, string internalPath) {
+            var list = new List<SignatureVerifyInfo>();
+
+            using (var mgr = new XadesManager()) {
+                var result = mgr.ValidateSignature(data, filePath);
+                if (result != null) {
+                    list.Add(new SignatureVerifyInfo() {
+                        FileName = internalPath,
+                        IsValid = result.IsValid,
+                        SignatureName = result.SignatureName,
+                        CertValidationInfo = result.CertValidationInfo,
+                        Message = result.Message
+                    });
+                }
+            }
+
+            return list.ToArray();
+        }
+
         private string GetCommitmentTypeIndication(XElement e) {
             const string xmlCTIProofOfReceipt = "http://uri.etsi.org/01903/v1.2.2#ProofOfReceipt";
             const string xmlCTIProofOfDelivery = "http://uri.etsi.org/01903/v1.2.2#ProofOfDelivery";
@@ -1234,6 +1254,37 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             return default;
         }
 
+        private void VerifySignatures(List<SignatureVerifyInfo> list, string filePath, string name, byte[] data) {
+            var lName = name.ToLower();
+            if (lName.EndsWith(".xml")) {
+                var result = VerifyXadesSignatures(data, filePath, name);
+                if (result != null && result.Length > 0) { list.AddRange(result); }
+
+            } else if (lName.EndsWith(".pdf")) {
+                var result = VerifyPadesSignatures(data, name);
+                if (result != null && result.Length > 0) { list.AddRange(result); }
+            } else if (lName.EndsWith(".zipx")) {
+                var result = VerifyZipxSignatures(data, name);
+                if (result != null && result.Length > 0) { list.AddRange(result); }
+            } else if (lName.EndsWith(".xades")) {
+                var targetFilePath = filePath.Replace(".xades", string.Empty);
+                var targetName = name.Replace(".xades", string.Empty);
+                if (File.Exists(targetFilePath)) {
+                    var data2 = File.ReadAllBytes(targetFilePath);
+                    var result = VerifyXadesSignatures(data, filePath, name);
+                    if (result != null && result.Length > 0) { list.AddRange(result); }
+                }
+            } else { //sprawdzam czy jest xades dla pliku
+                var xadesFilePath = $"{filePath}.xades";
+                var xadesName = $"{name}.xades";
+                if (File.Exists(xadesFilePath)) {
+                    var data2 = File.ReadAllBytes(xadesFilePath);
+                    var result = VerifyXadesSignatures(data2, xadesFilePath, xadesName);
+                    if (result != null && result.Length > 0) { list.AddRange(result); }
+                }
+            }
+        }
+
         private void VerifySignatures(List<SignatureVerifyInfo> list, PackageManager mgr, DocumentFile item, string internalPath) {
             try {
                 internalPath = internalPath.ToLower();
@@ -1258,7 +1309,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                     var result = VerifyPadesSignatures(item.FileData, internalPath);
                     if (result != null && result.Length > 0) { list.AddRange(result); }
                 }
-                else if (internalPath.EndsWith(".zip")) {
+                else if (internalPath.EndsWith(".zipx")) {
                     var result = VerifyZipxSignatures(item.FileData, internalPath);
                     if (result != null && result.Length > 0) { list.AddRange(result); }
                 }

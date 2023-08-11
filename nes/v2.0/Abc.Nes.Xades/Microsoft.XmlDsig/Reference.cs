@@ -424,6 +424,24 @@ namespace Microsoft.XmlDsig {
                             //resolver = (this.SignedXml.ResolverSet ? this.SignedXml._xmlResolver : new XmlSecureResolver(new XmlUrlResolver(), baseUri));
                             //hashInputStream = this.TransformChain.TransformToOctetStream(inputStream, resolver, _uri);
                         }
+                        else if(_uri != null && dir !=null && File.Exists(Path.Combine(dir, WebUtility.UrlDecode(_uri)))){
+                            var _uriPath = Path.Combine(dir, WebUtility.UrlDecode(_uri));
+                            inputStream = new MemoryStream(File.ReadAllBytes(_uriPath));
+                            hashInputStream = inputStream;
+                            _uri = Path.GetFileName(_uriPath);
+                        }
+                        else if (_uri != null && baseUri != null && File.Exists(Path.Combine(baseUri, _uri))) {
+                            var _uriPath = Path.Combine(baseUri, _uri);
+                            inputStream = new MemoryStream(File.ReadAllBytes(_uriPath));
+                            hashInputStream = inputStream;
+                            _uri = Path.GetFileName(_uriPath);
+                        }
+                        else if (_uri != null && baseUri != null && File.Exists(Path.Combine(baseUri, WebUtility.UrlDecode(_uri)))) {
+                            var _uriPath = Path.Combine(baseUri, WebUtility.UrlDecode(_uri));
+                            inputStream = new MemoryStream(File.ReadAllBytes(_uriPath));
+                            hashInputStream = inputStream;
+                            _uri = Path.GetFileName(_uriPath);
+                        }
                         else {
                             throw new CryptographicException(SR.Cryptography_Xml_UriNotResolved, _uri);
                         }

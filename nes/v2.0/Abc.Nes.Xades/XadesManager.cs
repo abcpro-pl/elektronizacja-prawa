@@ -358,6 +358,13 @@ Content-Disposition: filename=""{ fileName }""
             }
         }
 
+        public ValidationResult ValidateSignature(byte[] data, string filePath) {
+            using (MemoryStream ms = new MemoryStream(data)) {
+                System.Environment.CurrentDirectory = Path.GetDirectoryName(filePath);
+                return ValidateSignature(ms);
+            }
+        }
+
         private CertificateValidationInfo ValidateCert(X509Certificate2 e) {
             if (e != null) {
                 var ch = new X509Chain();
