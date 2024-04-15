@@ -35,7 +35,7 @@ Informacja o dostępności nie może naruszać przepisów regulujących dostęp 
         [XmlIgnore] public DocumentType DOCUMENT_TYPE => DocumentType.Nes17;
         [XmlElement("dostepnosc")] [XmlRequired] public AccessType17 Access { get; set; }
         [XmlElement("uwagi")] [XmlAnnotation("Dodatkowe informacje o adresie")] public string Description { get; set; }
-        [XmlElement("data")] public AccessDateElement Date { get; set; }     
+        [XmlElement("data")] public AccessDateElement17 Date { get; set; }     
     }
 
     [XmlType(TypeName = "dostep-typ")]
@@ -46,7 +46,20 @@ Informacja o dostępności nie może naruszać przepisów regulujących dostęp 
         [XmlIgnore] public DocumentType DOCUMENT_TYPE => DocumentType.Nes16;
         [XmlElement("dostepnosc")][XmlRequired] public AccessType16 Access { get; set; }
         [XmlElement("uwagi")][XmlAnnotation("Dodatkowe informacje o adresie")] public string Description { get; set; }
-        [XmlElement("data")] public AccessDateElement Date { get; set; }
+        [XmlElement("data")] public AccessDateElement17 Date { get; set; }
+    }
+
+    [XmlType(TypeName = "dostep-data-typ")]
+    [XmlAnnotation("Data dostępności dokumentu.")]
+    public class AccessDateElement17 {
+        [XmlElement("typ")] public DocumentDateType17 Type { get; set; }
+
+        [XmlElement("czas")]
+        [XmlRequired]
+        [XmlAnnotation("Data dostępności dokumentu.")]
+        [XmlSimpleType(TypeName = "czas-typ", UnionMemberTypes = "xs:gYear xs:gYearMonth xs:date xs:dateTime", Annotation = "Czas zapisany jako rok lub rok i miesiąc lub jako pełna data.")]
+        public string Date { get; set; }
+        public bool ShouldSerializeDate() { return Date.IsNotNullOrEmpty(); }
     }
 
     [XmlType(TypeName = "dostep-data-typ")]

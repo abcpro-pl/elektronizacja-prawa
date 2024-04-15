@@ -20,5 +20,5 @@ namespace Abc.Nes.Enumerations {
     public enum AccessDateType {
         [XmlEnum("dostępny po")]
         After
-    }
+    } 
 }
