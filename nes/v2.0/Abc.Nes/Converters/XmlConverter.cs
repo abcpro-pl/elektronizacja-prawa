@@ -103,21 +103,21 @@ namespace Abc.Nes.Converters {
                 if (Document.InternalValidateXml(e)) {
                     var xmlText = UpdateToCurrentVersion(e.ToString());
                     using (var stream = xmlText.GetMemoryStream()) {
-                        var serializer = new XmlSerializer(typeof(Document));
+                        var serializer = new NesXmlSerializer(typeof(Document));
                         return serializer.Deserialize(stream) as Document;
                     }
                 }
                 else if (Document16.InternalValidateXml(e)) {
                     var xmlText = e.ToString();
                     using (var stream = xmlText.GetMemoryStream()) {
-                        var serializer = new XmlSerializer(typeof(Document16));
+                        var serializer = new NesXmlSerializer(typeof(Document16));
                         return serializer.Deserialize(stream) as Document16;
                     }
                 }
                 else if (Document17.InternalValidateXml(e)) {
                     var xmlText = e.ToString();
                     using (var stream = xmlText.GetMemoryStream()) {
-                        var serializer = new XmlSerializer(typeof(Document17));
+                        var serializer = new NesXmlSerializer(typeof(Document17));
                         return serializer.Deserialize(stream) as Document17;
                     }
                 }
