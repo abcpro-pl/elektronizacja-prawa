@@ -151,6 +151,24 @@ namespace Abc.Nes.ArchivalPackage.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No documents related to case.
+        /// </summary>
+        internal static string ObjectHasNoDocuments {
+            get {
+                return ResourceManager.GetString("ObjectHasNoDocuments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing metadata for case {0}.
+        /// </summary>
+        internal static string ObjectHasNoMetadata {
+            get {
+                return ResourceManager.GetString("ObjectHasNoMetadata", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Package.
         /// </summary>
         internal static string Package {

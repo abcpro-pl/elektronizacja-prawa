@@ -108,6 +108,8 @@ namespace Abc.Nes.ArchivalPackage.Validators {
 
             IDocumentValidator validator = new DocumentValidator();
 
+            var documentsByCase = new Dictionary<string, List<MetadataFile>>();
+
             //walidacja dokumentow
             foreach (var item in package.GetAllFiles(package.Documents)) {
                 var metadata = package.GetMetadataFile(item);
@@ -139,6 +141,11 @@ namespace Abc.Nes.ArchivalPackage.Validators {
                 }
                 
                 if (metadata.IsNotNull()) {
+                    var caseId = metadata.Document.GetCaseGroupIdentifier();
+                    if (!documentsByCase.ContainsKey(caseId))
+                        documentsByCase.Add(caseId, new List<MetadataFile>());
+
+                    documentsByCase[caseId].Add(metadata);
                     //else 
                     if (validateMetdataFiles) {
                         var metadataResult = validator.Validate(metadata.Document, metadata.DocumentFilePath);
@@ -314,6 +321,31 @@ namespace Abc.Nes.ArchivalPackage.Validators {
                         });
                     }
                 }
+
+                var caseID = caseMetadata.Document.GetCaseIdentifier();
+                if (!documentsByCase.ContainsKey(caseID)) {
+                    result.Add(new PackageValidationResultItem() {
+                        FullName = caseMetadata.FilePath,
+                        Name = caseMetadata.FileName,
+                        Source = ValidationResultSource.Object,
+                        Type = ValidationResultType.HasNoElements,
+                        DefaultMessage = resx.GetString("ObjectHasNoDocuments"),
+                        FilePath = caseMetadata.FilePath
+                    });
+                }
+                documentsByCase.Remove(caseID);
+            }
+
+            foreach (var item in documentsByCase) {
+                result.Add(new PackageValidationResultItem() {
+                    FullName = item.Key,
+                    Name = item.Key,
+                    Source = ValidationResultSource.Object,
+                    Type = ValidationResultType.NotFound,
+                    DefaultMessage = string.Format(resx.GetString("ObjectHasNoMetadata"), item.Key),
+                    FilePath = item.Key
+                });
+                
             }
 
             return result;

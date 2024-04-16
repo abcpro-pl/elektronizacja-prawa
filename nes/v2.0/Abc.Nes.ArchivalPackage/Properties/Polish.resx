@@ -147,6 +147,12 @@
   <data name="NumberOfMetadataIsInsufficient" xml:space="preserve">
     <value>Liczba plików metadanych jest niewystarczająca!</value>
   </data>
+  <data name="ObjectHasNoDocuments" xml:space="preserve">
+    <value>Brak dokumentów przypisanych do sprawy</value>
+  </data>
+  <data name="ObjectHasNoMetadata" xml:space="preserve">
+    <value>Brak metadanych dla sprawy {0}</value>
+  </data>
   <data name="Package" xml:space="preserve">
     <value>Paczka</value>
   </data>

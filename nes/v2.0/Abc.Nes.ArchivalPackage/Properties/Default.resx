@@ -147,6 +147,12 @@
   <data name="NumberOfMetadataIsInsufficient" xml:space="preserve">
     <value>The number of metadata files is insufficient!</value>
   </data>
+  <data name="ObjectHasNoDocuments" xml:space="preserve">
+    <value>No documents related to case</value>
+  </data>
+  <data name="ObjectHasNoMetadata" xml:space="preserve">
+    <value>Missing metadata for case {0}</value>
+  </data>
   <data name="Package" xml:space="preserve">
     <value>Package</value>
   </data>
