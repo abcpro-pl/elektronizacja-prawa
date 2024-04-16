@@ -2,6 +2,7 @@
 using Abc.Nes.Enumerations;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
@@ -70,6 +71,20 @@ namespace Abc.Nes {
             catch { }
 
             return default;
+        }
+
+        public string GetCaseGroupIdentifier() {
+            var group = Groupings.Where(x => x.Type?.ToLower() == "znak sprawy" || x.Type?.ToLower() == "collection").FirstOrDefault();
+            if (group != null)
+                return group.Code;
+            return string.Empty;
+        }
+
+        public string GetCaseIdentifier() {
+            var id = Identifiers.Where(x => x.Type?.ToLower() == "znak sprawy" || x.Type?.ToLower() == "collection").FirstOrDefault();
+            if (id != null)
+                return id.Value;
+            return string.Empty;
         }
     }
 }

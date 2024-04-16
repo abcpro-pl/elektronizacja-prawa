@@ -22,6 +22,9 @@ namespace Abc.Nes {
     public interface IDocument {
         DocumentType DocumentType { get; }
         string Description { get; set; }
+
+        string GetCaseGroupIdentifier();
+        string GetCaseIdentifier();
     }
 
     public abstract class ElementBase {
