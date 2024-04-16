@@ -49,7 +49,7 @@ namespace Abc.Nes.ArchivalPackage.Model {
                 if (folderItems.IsNotNull() && folderItems.Count() > 0) items.AddRange(folderItems);
 
                 var subfolders = folder.GetFolders();
-                if (subfolders.IsNotNull() && folderItems.Count() > 0) {
+                if (subfolders.IsNotNull() && subfolders.Count() > 0) {
                     foreach (var subfolder in subfolders) {
                         var subfolderItems = GetAllFiles(subfolder);
                         if (subfolderItems.IsNotNull() && subfolderItems.Count() > 0) items.AddRange(subfolderItems);

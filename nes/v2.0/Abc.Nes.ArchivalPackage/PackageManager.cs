@@ -652,7 +652,7 @@ namespace Abc.Nes.ArchivalPackage {
         private void LoadPackageEntries(ZipFile zipFile, out Exception ex) {
             ex = null;
             foreach (var entry in zipFile.Entries) {
-                if (entry.Attributes == FileAttributes.Directory) {
+                if (entry.Attributes == FileAttributes.Directory || entry.Attributes == (FileAttributes.Directory | FileAttributes.NotContentIndexed)) {
                     var dirName = entry.FileName;
                     var dirs = dirName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
                     FolderBase folder = null;
@@ -724,6 +724,11 @@ namespace Abc.Nes.ArchivalPackage {
                     }
 
                     item.Init(fileData, out ex);
+
+                    if(ex != null && ex is System.Xml.XmlException) {
+                        var exc = new System.Xml.XmlException($"Plik: {entry.FileName}", ex);
+                        ex = exc;
+                    }
 
                     if (item is MetadataFile && PackageType == Enumerations.DocumentType.None) {
                         try {
