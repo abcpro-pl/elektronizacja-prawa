@@ -20,5 +20,19 @@ namespace Abc.Nes.Enumerations {
     public enum AccessDateType {
         [XmlEnum("dostępny po")]
         After
-    } 
+    }
+
+    [XmlType(TypeName = "dostepnosc-data-typ")]
+    [XmlAnnotation("Typ daty dostepności.")]
+    public enum AccessDateType17 {
+        [XmlEnum("dostepnyPo")]
+        After
+    }
+
+    [XmlType(TypeName = "dostepnosc-data-typ")]
+    [XmlAnnotation("Typ daty dostepności.")]
+    public enum AccessDateType16 {
+        [XmlEnum("dostepnyPo")]
+        After
+    }
 }
