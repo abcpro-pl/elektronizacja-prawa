@@ -96,14 +96,14 @@ namespace Abc.Nes {
         }
 
         public string GetCaseGroupIdentifier() {
-            var group = Groupings.Where(x => x.Type?.ToLower() == "znak sprawy" || x.Type?.ToLower() == "collection").FirstOrDefault();
+            var group = Groupings.Where(x => x.Type?.ToLower() == "znaksprawy" || x.Type?.ToLower() == "znak sprawy" || x.Type?.ToLower() == "collection").FirstOrDefault();
             if (group != null)
                 return group.Code;
             return string.Empty;
         }
 
         public string GetCaseIdentifier() {
-            var id = Identifiers.Where(x => x.Type?.ToLower() == "znak sprawy" || x.Type?.ToLower() == "collection").FirstOrDefault();
+            var id = Identifiers.Where(x => x.Type?.ToLower() == "znaksprawy" || x.Type?.ToLower() == "znak sprawy" || x.Type?.ToLower() == "collection").FirstOrDefault();
             if (id != null)
                 return id.Value;
             return string.Empty;
