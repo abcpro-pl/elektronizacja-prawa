@@ -674,7 +674,7 @@ namespace Abc.Nes.ArchivalPackage {
                         if (dir.ToLower() == MainDirectoriesName.Files.GetXmlEnum().ToLower() ||
                             dir.ToLower() == MainDirectoriesName.Metadata.GetXmlEnum().ToLower() ||
                             dir.ToLower() == MainDirectoriesName.Objects.GetXmlEnum().ToLower()) { continue; }
-                        if (folder.FolderName != dir) {
+                        if (folder != null && folder.FolderName != dir) {
                             folder = folder.CreateSubFolder(dir);
                         }
                     }
@@ -725,14 +725,23 @@ namespace Abc.Nes.ArchivalPackage {
 
                     item.Init(fileData, out ex);
 
-                    if(ex != null && ex is System.Xml.XmlException) {
-                        var exc = new System.Xml.XmlException($"Plik: {entry.FileName}", ex);
-                        ex = exc;
+                    if (ex != null) {
+                        if (ex is System.Xml.XmlException) {
+                            var exc = new System.Xml.XmlException($"Plik: {entry.FileName}", ex);
+                            ex = exc;
+                        }
+                        else {
+                            var exc = new Exception($"Plik: {entry.FileName}", ex);
+                        }
                     }
 
                     if (item is MetadataFile && PackageType == Enumerations.DocumentType.None) {
                         try {
-                            PackageType = (item as MetadataFile).Document.DocumentType;
+                            var itemMetadataFile = (item as MetadataFile);
+                            if (itemMetadataFile.Document != null) {
+                                PackageType = itemMetadataFile.Document.DocumentType;
+                            }
+                            else PackageType = Enumerations.DocumentType.None;
                         }
                         catch { }
                     }

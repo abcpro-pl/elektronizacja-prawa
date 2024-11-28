@@ -68,23 +68,13 @@ namespace Abc.Nes.ArchivalPackage.Model {
             }
             return default;
         }
-        public MetadataFile GetMetadataFile(ItemBase documentFile, bool findWithoutSpaces = false) {
+        public MetadataFile GetMetadataFile(ItemBase documentFile, bool findWithoutSpaces = false, bool checkParentIfNotFound = true) {
             if (documentFile.IsNotNull() && documentFile.FilePath.IsNotNullOrEmpty()) {
                 var documentFilePath = documentFile.FilePath;
                 string metadataFilePath;
                 var regex = new Regex(Regex.Escape($"{MainDirectoriesName.Files.GetXmlEnum()}"));
 
-                var subFolder = documentFile.GetSubFolderName();
-                if (subFolder.IsNotNullOrEmpty()) {
-                    // find metadata file for subfolder
-                    metadataFilePath = documentFilePath.Substring(0, documentFilePath.LastIndexOf('/'));
-                    metadataFilePath = regex.Replace(metadataFilePath, MainDirectoriesName.Metadata.GetXmlEnum(), 1);
-                    var result = GetItemByFilePath($"{metadataFilePath}.xml", findWithoutSpaces) as MetadataFile;
-                    if (result.IsNotNull()) {
-                        result.DocumentFilePath = documentFilePath;
-                        return result;
-                    }
-                }
+                
 
                 // find metadata file for document file               
                 {
@@ -100,6 +90,21 @@ namespace Abc.Nes.ArchivalPackage.Model {
                         return result;
                     }
                 }
+                //no metadata found for file
+                if (checkParentIfNotFound) {
+                    var subFolder = documentFile.GetSubFolderName();
+                    if (subFolder.IsNotNullOrEmpty()) {
+                        // find metadata file for subfolder
+                        metadataFilePath = documentFilePath.Substring(0, documentFilePath.LastIndexOf('/'));
+                        metadataFilePath = regex.Replace(metadataFilePath, MainDirectoriesName.Metadata.GetXmlEnum(), 1);
+                        var result = GetItemByFilePath($"{metadataFilePath}.xml", findWithoutSpaces) as MetadataFile;
+                        if (result.IsNotNull()) {
+                            //result.DocumentFilePath = documentFilePath;
+                            return result;
+                        }
+                    }
+                }
+
             }
             return default;
         }

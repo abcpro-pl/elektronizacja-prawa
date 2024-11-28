@@ -194,6 +194,7 @@ namespace Abc.Nes.Enumerations {
         PN,
         PL,
         Polska,
+        POLSKA,
         PT,
         PR,
         QA,

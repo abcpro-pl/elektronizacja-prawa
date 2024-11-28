@@ -112,11 +112,12 @@ namespace Abc.Nes.ArchivalPackage.Validators {
 
             //walidacja dokumentow
             foreach (var item in package.GetAllFiles(package.Documents)) {
-                var metadata = package.GetMetadataFile(item);
-                if (metadata.IsNull()) {
+                var metadata = package.GetMetadataFile(item, false, false);
+                MetadataFile parentMetadata = null;
 
+                if (metadata.IsNull()) {
                     // find lower case filename's without spaces
-                    metadata = package.GetMetadataFile(item, true);
+                    metadata = package.GetMetadataFile(item, true, false);
                     if (metadata.IsNotNull()) {
                         result.Add(new PackageValidationResultItem() {
                             FullName = item.FilePath,
@@ -128,24 +129,29 @@ namespace Abc.Nes.ArchivalPackage.Validators {
                         });
                     }
                     else {
-                        result.Add(new PackageValidationResultItem() {
-                            FullName = item.FilePath,
-                            FilePath = item.FilePath,
-                            Name = item.FileName,
-                            Source = ValidationResultSource.Metadata,
-                            Type = ValidationResultType.NotFound,
-                            DefaultMessage = String.Format(resx.GetString("MetadataNotFound"), item.FilePath)
-                        });
+                        parentMetadata = package.GetMetadataFile(item, false, true);
+                        if (parentMetadata.IsNull()) {
+                            result.Add(new PackageValidationResultItem() {
+                                FullName = item.FilePath,
+                                FilePath = item.FilePath,
+                                Name = item.FileName,
+                                Source = ValidationResultSource.Metadata,
+                                Type = ValidationResultType.NotFound,
+                                DefaultMessage = String.Format(resx.GetString("MetadataNotFound"), item.FilePath)
+                            });
+                        }
                     }
                     if (breakOnFirstError) { break; }
                 }
                 
                 if (metadata.IsNotNull()) {
-                    var caseId = metadata.Document.GetCaseGroupIdentifier();
-                    if (!documentsByCase.ContainsKey(caseId))
-                        documentsByCase.Add(caseId, new List<MetadataFile>());
+                    if (metadata.Document != null) {
+                        var caseId = metadata.Document.GetCaseGroupIdentifier();
+                        if (!documentsByCase.ContainsKey(caseId))
+                            documentsByCase.Add(caseId, new List<MetadataFile>());
 
-                    documentsByCase[caseId].Add(metadata);
+                        documentsByCase[caseId].Add(metadata);
+                    }
                     //else 
                     if (validateMetdataFiles) {
                         var metadataResult = validator.Validate(metadata.Document, metadata.DocumentFilePath);
@@ -168,6 +174,21 @@ namespace Abc.Nes.ArchivalPackage.Validators {
                         }
                     }
 
+                } else if (parentMetadata.IsNotNull()) {
+                    if(parentMetadata.Document != null) {
+                        var caseId = parentMetadata.Document.GetCaseGroupIdentifier();
+                        if (!documentsByCase.ContainsKey(caseId))
+                            documentsByCase.Add(caseId, new List<MetadataFile>());
+
+                        documentsByCase[(caseId)].Add(parentMetadata);
+                    }
+
+                    if (validateMetdataFiles) {
+                        var metaResult = validator.Validate(parentMetadata.Document, parentMetadata.DocumentFilePath);
+                        if (!metaResult.IsCorrect) {
+
+                        }
+                    }
                 }
 
                 //sprawdzam czy plik to UPP/UPO/UPP
