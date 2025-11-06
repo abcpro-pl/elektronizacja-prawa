@@ -1,11 +1,13 @@
 using Abc.Nes.ArchivalPackage;
 using Abc.Nes.ArchivalPackage.Cryptography;
 using Abc.Nes.ArchivalPackage.Cryptography.Model;
+using Microsoft.XmlDsig;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Xml;
 
 namespace Abc.Nes.NUnitTests {
     public class CryptographyTests {
@@ -18,6 +20,19 @@ namespace Abc.Nes.NUnitTests {
             var list = new List<SignatureVerifyInfo>();
             using (var mgr = new PackageSignerManager()) {
                 list.AddRange(mgr.VerifyXadesSignature(path));
+            }
+            Assert.IsTrue(list.Count > 0);
+        }
+
+        [Test]
+        public void ValidateXadesSignature2() {
+            var path = @"../../../../sample/A1_b8426ec8-ba8d-40e8-ac0a-e98b4251b697 .xml";
+            var list = new List<SignatureVerifyInfo>();
+            using (var mgr = new PackageSignerManager()) {
+                var veri = mgr.VerifyXadesSignature(path);
+                
+                list.AddRange(veri);
+
             }
             Assert.IsTrue(list.Count > 0);
         }
@@ -295,6 +310,8 @@ namespace Abc.Nes.NUnitTests {
                 }
             }
         }
+
+
 
         [Test]
         public void Package_GetValidationResultWithErrors() {

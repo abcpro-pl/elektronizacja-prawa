@@ -18,6 +18,7 @@ using Abc.Nes.Common.Models;
 using Abc.Nes.Xades;
 using Abc.Nes.Xades.Signature;
 using Abc.Nes.Xades.Signature.Parameters;
+using Org.BouncyCastle.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -48,33 +49,34 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             if (String.IsNullOrEmpty(outputPackageFilePath)) { outputPackageFilePath = new FileInfo(sourcePackageFilePath).FullName; }
 
             var xadesManager = new XadesManager();
-            var mgr = new PackageManager();
-            mgr.LoadPackage(sourcePackageFilePath, out var exception);
+            using (var mgr = new PackageManager()) {
+                mgr.LoadPackage(sourcePackageFilePath, out var exception);
 
-            var items = mgr.GetAllFiles();
-            if (items != null && signPackageFiles) {
-                foreach (var item in items) {
-                    if (item.FileName.ToLower().EndsWith(".xml")) {
-                        XadesFormat xadesFormat = addTimeStamp ? XadesFormat.XadesT : XadesFormat.XadesBes;
-                        SignXmlItem(item, xadesManager, cert, productionPlace, signerRole, signDate, xadesFormat, timeStampServerUrl, CommitmentTypeId.ProofOfOrigin);
-                    }
-                    else if (item.FileName.ToLower().EndsWith(".pdf")) {
-                        string location = productionPlace.IsNotNull() ? productionPlace.City : null;
-                        SignPdfItem(item, cert, addTimeStamp, CommitmentTypeId.ProofOfOrigin, location, timeStampServerUrl);
-                    }
-                    else {
-                        if (detachedSignaturePackageFiles) {
-                            // place signature in detached .xades file
-                            SignDetachedOtherItem(mgr, item, xadesManager, cert, productionPlace, signerRole, addTimeStamp, timeStampServerUrl, CommitmentTypeId.ProofOfOrigin);
+                var items = mgr.GetAllFiles();
+                if (items != null && signPackageFiles) {
+                    foreach (var item in items) {
+                        if (item.FileName.ToLower().EndsWith(".xml")) {
+                            XadesFormat xadesFormat = addTimeStamp ? XadesFormat.XadesT : XadesFormat.XadesBes;
+                            SignXmlItem(item, xadesManager, cert, productionPlace, signerRole, signDate, xadesFormat, timeStampServerUrl, CommitmentTypeId.ProofOfOrigin);
+                        }
+                        else if (item.FileName.ToLower().EndsWith(".pdf")) {
+                            string location = productionPlace.IsNotNull() ? productionPlace.City : null;
+                            SignPdfItem(item, cert, addTimeStamp, CommitmentTypeId.ProofOfOrigin, location, timeStampServerUrl);
                         }
                         else {
-                            SignOtherItem(item, xadesManager, cert, productionPlace, signerRole, addTimeStamp, timeStampServerUrl, CommitmentTypeId.ProofOfOrigin);
+                            if (detachedSignaturePackageFiles) {
+                                // place signature in detached .xades file
+                                SignDetachedOtherItem(mgr, item, xadesManager, cert, productionPlace, signerRole, addTimeStamp, timeStampServerUrl, CommitmentTypeId.ProofOfOrigin);
+                            }
+                            else {
+                                SignOtherItem(item, xadesManager, cert, productionPlace, signerRole, addTimeStamp, timeStampServerUrl, CommitmentTypeId.ProofOfOrigin);
+                            }
                         }
                     }
                 }
-            }
 
-            mgr.Save(outputPackageFilePath, true);
+                mgr.Save(outputPackageFilePath, true);
+            }
             if (signPackageFile) {
                 SignatureDocument result;
                 Xades.Upgraders.SignatureFormat? sigFormat = addTimeStamp ? Xades.Upgraders.SignatureFormat.XAdES_T : (Xades.Upgraders.SignatureFormat?)null;
@@ -124,64 +126,64 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             if (!File.Exists(sourcePackageFilePath)) { throw new FileNotFoundException("Package file not found!", sourcePackageFilePath); }
             if (String.IsNullOrEmpty(outputPackageFilePath)) { outputPackageFilePath = new FileInfo(sourcePackageFilePath).FullName; }
 
-            var xadesManager = new XadesManager();
-            var mgr = new PackageManager();
-            mgr.LoadPackage(sourcePackageFilePath, out var exception);
+            using (var xadesManager = new XadesManager())
+            using (var mgr = new PackageManager()) {
+                mgr.LoadPackage(sourcePackageFilePath, out var exception);
 
-            var items = mgr.GetAllFiles();
-            if (items != null && internalFiles != null && internalFiles.Length > 0) {
-                foreach (var item in items) {
-                    if (!internalFiles.Contains(item.FilePath)) { continue; }
-                    if (item.FileName.ToLower().EndsWith(".xml")) {
-                        XadesFormat xadesFormat = addTimeStamp ? XadesFormat.XadesT : XadesFormat.XadesBes;
-                        SignXmlItem(item, xadesManager, cert, productionPlace, signerRole, signDate, xadesFormat, timeStampServerUrl, CommitmentTypeId.ProofOfOrigin);
-                    }
-                    else if (item.FileName.ToLower().EndsWith(".pdf")) {
-                        SignPdfItem(item, cert, addTimeStamp, CommitmentTypeId.ProofOfOrigin, timeStampServerUrl: timeStampServerUrl);
-                    }
-                    else {
-                        if (detachedSignaturePackageFiles) {
-                            // place signature in detached .xades file
-                            SignDetachedOtherItem(mgr, item, xadesManager, cert, productionPlace, signerRole, addTimeStamp, timeStampServerUrl, CommitmentTypeId.ProofOfOrigin);
+                var items = mgr.GetAllFiles();
+                if (items != null && internalFiles != null && internalFiles.Length > 0) {
+                    foreach (var item in items) {
+                        if (!internalFiles.Contains(item.FilePath)) { continue; }
+                        if (item.FileName.ToLower().EndsWith(".xml")) {
+                            XadesFormat xadesFormat = addTimeStamp ? XadesFormat.XadesT : XadesFormat.XadesBes;
+                            SignXmlItem(item, xadesManager, cert, productionPlace, signerRole, signDate, xadesFormat, timeStampServerUrl, CommitmentTypeId.ProofOfOrigin);
+                        }
+                        else if (item.FileName.ToLower().EndsWith(".pdf")) {
+                            SignPdfItem(item, cert, addTimeStamp, CommitmentTypeId.ProofOfOrigin, timeStampServerUrl: timeStampServerUrl);
                         }
                         else {
-                            SignOtherItem(item, xadesManager, cert, productionPlace, signerRole, addTimeStamp, timeStampServerUrl, CommitmentTypeId.ProofOfOrigin);
+                            if (detachedSignaturePackageFiles) {
+                                // place signature in detached .xades file
+                                SignDetachedOtherItem(mgr, item, xadesManager, cert, productionPlace, signerRole, addTimeStamp, timeStampServerUrl, CommitmentTypeId.ProofOfOrigin);
+                            }
+                            else {
+                                SignOtherItem(item, xadesManager, cert, productionPlace, signerRole, addTimeStamp, timeStampServerUrl, CommitmentTypeId.ProofOfOrigin);
+                            }
+                        }
+                    }
+                }
+
+                mgr.Save(outputPackageFilePath, true);
+                if (signPackageFile) {
+                    SignatureDocument result;
+                    Xades.Upgraders.SignatureFormat? sigFormat = addTimeStamp ? Xades.Upgraders.SignatureFormat.XAdES_T : (Xades.Upgraders.SignatureFormat?)null;
+
+                    if (detachedSignaturePackageFile) {
+                        // place signature in detached .xades file
+                        result = xadesManager.CreateDetachedSignature(outputPackageFilePath, cert, productionPlace, signerRole,
+                              sigFormat, timeStampServerUrl);
+
+                        if (result != null) {
+                            var resultFilePath = $"{outputPackageFilePath}.xades";
+                            result.Save(resultFilePath);
+                            return resultFilePath;
+                        }
+                    }
+                    else {
+                        using (var stream = new FileStream(outputPackageFilePath, FileMode.Open)) {
+                            result = xadesManager.CreateEnvelopingSignature(stream, cert, productionPlace, signerRole,
+                                null, sigFormat, timeStampServerUrl);
+                        }
+                        if (result != null) {
+                            if (!outputPackageFilePath.ToLower().EndsWith(".xades")) {
+                                outputPackageFilePath = $"{outputPackageFilePath}.xades";
+                            }
+                            result.Save(outputPackageFilePath);
+                            return outputPackageFilePath;
                         }
                     }
                 }
             }
-
-            mgr.Save(outputPackageFilePath, true);
-            if (signPackageFile) {
-                SignatureDocument result;
-                Xades.Upgraders.SignatureFormat? sigFormat = addTimeStamp ? Xades.Upgraders.SignatureFormat.XAdES_T : (Xades.Upgraders.SignatureFormat?)null;
-
-                if (detachedSignaturePackageFile) {
-                    // place signature in detached .xades file
-                    result = xadesManager.CreateDetachedSignature(outputPackageFilePath, cert, productionPlace, signerRole,
-                          sigFormat, timeStampServerUrl);
-
-                    if (result != null) {
-                        var resultFilePath = $"{outputPackageFilePath}.xades";
-                        result.Save(resultFilePath);
-                        return resultFilePath;
-                    }
-                }
-                else {
-                    using (var stream = new FileStream(outputPackageFilePath, FileMode.Open)) {
-                        result = xadesManager.CreateEnvelopingSignature(stream, cert, productionPlace, signerRole,
-                            null, sigFormat, timeStampServerUrl);
-                    }
-                    if (result != null) {
-                        if (!outputPackageFilePath.ToLower().EndsWith(".xades")) {
-                            outputPackageFilePath = $"{outputPackageFilePath}.xades";
-                        }
-                        result.Save(outputPackageFilePath);
-                        return outputPackageFilePath;
-                    }
-                }
-            }
-
             return default;
         }
 
@@ -203,12 +205,13 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             if (!File.Exists(sourcePackageFilePath)) { throw new FileNotFoundException("Package file not found!", sourcePackageFilePath); }
             if (String.IsNullOrEmpty(outputPackageFilePath)) { outputPackageFilePath = new FileInfo(sourcePackageFilePath).FullName; }
 
-            var mgr = new PackageManager();
-            mgr.LoadPackage(sourcePackageFilePath, out var exception);
-            var item = mgr.GetItemByFilePath(internalPath);
-            if (item != null) {
-                SignInternalFile(sourcePackageFilePath, item, mgr, cert, productionPlace, signerRole, detachedSignaturePackageFile,
-                    outputPackageFilePath, signDate, addTimeStamp, timeStampServerUrl, commitmentTypeId);
+            using (var mgr = new PackageManager()) {
+                mgr.LoadPackage(sourcePackageFilePath, out var exception);
+                var item = mgr.GetItemByFilePath(internalPath);
+                if (item != null) {
+                    SignInternalFile(sourcePackageFilePath, item, mgr, cert, productionPlace, signerRole, detachedSignaturePackageFile,
+                        outputPackageFilePath, signDate, addTimeStamp, timeStampServerUrl, commitmentTypeId);
+                }
             }
         }
 
@@ -390,6 +393,16 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 var result = GetZipxInfos(item.FileData, internalPath);
                 if (result != null && result.Length > 0) { list.AddRange(result); }
             }
+            else if (internalPath.EndsWith(".zip")) {
+                try {
+                    //w eNadzor zipx sa jako zip, sprawdzam czy jest zipx-em
+                    var result = GetZipxInfos(item.FileData, internalPath);
+                    if (result != null && result.Length > 0) { list.AddRange(result); }
+                }
+                catch (Exception ex) {
+                    //zip nie jest zipx
+                }
+            }
             else {
                 //other file, check if .xades file exists
                 var xadesInternalPath = $"{internalPath}.xades";
@@ -443,9 +456,10 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             if (String.IsNullOrEmpty(internalPath)) { throw new ArgumentNullException("internalPath"); }
             if (!File.Exists(packageFilePath)) { throw new FileNotFoundException("Package file not found!", packageFilePath); }
 
-            var mgr = new PackageManager();
-            mgr.LoadPackage(packageFilePath, out var exception);
-            return GetSignatureInfos(mgr, internalPath);
+            using (var mgr = new PackageManager()) {
+                mgr.LoadPackage(packageFilePath, out var exception);
+                return GetSignatureInfos(mgr, internalPath);
+            }
         }
 
         public SignatureInfo[] GetXadesSignatureInfos(string xadesFilePath) {
@@ -499,7 +513,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
 
             return list.ToArray();
         }
-        public SignatureVerifyInfo[] VerifyFileSignatures(string filePath, string internalPath) {
+        public SignatureVerifyInfo[] VerifyFileSignatures(string filePath, string internalPath = null) {
             var list = new List<SignatureVerifyInfo>();
             if (File.Exists(filePath)) {
                 var fileData = File.ReadAllBytes(filePath);
@@ -507,6 +521,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             }
             return list.ToArray();
         }
+
         public SignatureVerifyInfo[] VerifySignatures(string packageFilePath) {
             var list = new List<SignatureVerifyInfo>();
 
@@ -539,10 +554,11 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             if (String.IsNullOrEmpty(internalPath)) { throw new ArgumentNullException("internalPath"); }
             if (!File.Exists(packageFilePath)) { throw new FileNotFoundException("Package file not found!", packageFilePath); }
 
-            var mgr = new PackageManager();
-            mgr.LoadPackage(packageFilePath, out var exception);
+            using (var mgr = new PackageManager()) {
+                mgr.LoadPackage(packageFilePath, out var exception);
 
-            return GetSignAndVerifyInfo(mgr, internalPath);
+                return GetSignAndVerifyInfo(mgr, internalPath);
+            }
         }
         public SignAndVerifyInfo GetSignAndVerifyInfo(PackageManager mgr, string internalPath) {
             if (mgr == null) { throw new ArgumentNullException("mgr"); }
@@ -559,7 +575,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             if (item == null) { throw new ArgumentNullException("item"); }
 
             var internalPath = item.FilePath;
-            var temp = Path.Combine(Path.GetTempPath(), $"ABCPRO.NES\\{Path.GetFileNameWithoutExtension(internalPath)}");
+            var temp = Path.Combine(Path.GetTempPath(), $"ABCPRO.NES{Path.DirectorySeparatorChar}{Path.GetFileNameWithoutExtension(internalPath)}");
 
             try {
                 if (!Directory.Exists(temp)) { Directory.CreateDirectory(temp); }

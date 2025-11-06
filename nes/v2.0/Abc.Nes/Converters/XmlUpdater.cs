@@ -186,6 +186,14 @@ namespace Abc.Nes.Converters {
                     if (x.Value == "dostepnyPo") { x.Value = EventDateType.AvailableAfter.GetXmlEnum(); }
                     if (x.Value == "wyslany") { x.Value = EventDateType.Sent.GetXmlEnum(); }
                 });
+
+                //item.Elements().Where(x => x.Name.LocalName == "od").ToList().ForEach(x => {
+                //    x.Name = N("czasOd");
+                //});
+
+                //item.Elements().Where(x => x.Name.LocalName == "do").ToList().ForEach(x => {
+                //    x.Name = N("czasDo");
+                //});
             }
         }
 

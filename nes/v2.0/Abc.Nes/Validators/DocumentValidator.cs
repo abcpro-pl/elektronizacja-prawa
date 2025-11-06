@@ -40,7 +40,7 @@ namespace Abc.Nes.Validators {
             //}
 
             //check grouping for documents, not for cases
-            if (!filePath.ToLower().StartsWith("sprawy")) {
+            if (filePath!=null && !filePath.ToLower().StartsWith("sprawy")) {
                 var propName = "grupowanie";
 
                 bool groupCaseMissing = false;

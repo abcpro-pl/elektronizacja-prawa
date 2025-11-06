@@ -12,8 +12,10 @@
 
   ===================================================================================*/
 
-using Ionic.Zip;
+//using Ionic.Zip;
+using System;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 
 namespace Abc.Nes.ArchivalPackage {
@@ -38,6 +40,7 @@ namespace Abc.Nes.ArchivalPackage {
                     FileName = filePath,
                     Directory = outputDir
                 };
+#if NET48
                 using (var zipFile = ZipFile.Read(result.FileName)) {
                     if (zipFile.EntryFileNames.Where(x => x.ToLower().Contains("dokumenty")).Any()) {
                         // to jest paczka eADM
@@ -49,6 +52,18 @@ namespace Abc.Nes.ArchivalPackage {
                         zipFile.ExtractAll(result.Directory);
                     }
                 }
+#else
+                using (var zipStream = new FileStream(result.FileName, FileMode.Open, FileAccess.Read))
+                using (var zipFile = new ZipArchive(zipStream, ZipArchiveMode.Read, true)) {
+                    if (zipFile.Entries.Where(x => x.Name.ToLower().Contains("dokumenty")).Any()) {
+                        result.Directory = Path.GetDirectoryName(filePath);
+                        result.PackageFileName = Path.GetFileName(filePath);
+                        return result;
+                    } else {
+                        zipFile.ExtractToDirectory(result.Directory);
+                    }
+                }
+#endif
 
                 foreach (var file in Directory.GetFiles(result.Directory)) {
                     if (Path.GetExtension(file) == ".xades") {
@@ -67,11 +82,19 @@ namespace Abc.Nes.ArchivalPackage {
         }
 
         public void Compress(SignedPackageInfo info) {
+#if NET48
             using (var zipFile = new ZipFile(info.FileName)) {
                 zipFile.AddFile(Path.Combine(info.Directory, info.PackageFileName));
                 zipFile.AddFile(Path.Combine(info.Directory, info.SignatureFileName));
                 zipFile.Save();
             }
+#else
+            using (var zipFileStream = new FileStream(info.FileName, FileMode.Create))
+            using (var zipArchive = new ZipArchive(zipFileStream, ZipArchiveMode.Create)) {
+                zipArchive.CreateEntryFromFile(Path.Combine(info.Directory, info.PackageFileName), info.PackageFileName);
+                zipArchive.CreateEntryFromFile(Path.Combine(info.Directory, info.SignatureFileName), info.SignatureFileName);
+            }
+#endif
         }
 
         public void Dispose() { }

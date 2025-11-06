@@ -32,6 +32,9 @@ namespace Microsoft.XmlDsig {
                 case "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256": return new RSAPKCS1SHA256SignatureDescription();
                 case "http://www.w3.org/2001/04/xmldsig-more#rsa-sha384": return new RSAPKCS1SHA384SignatureDescription();
                 case "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512": return new RSAPKCS1SHA512SignatureDescription();
+
+                case "http://www.w3.org/2002/06/xmldsig-filter2": return new XmlDsigXPathFilter2Transform();
+
                 default: return null;
             }
         }

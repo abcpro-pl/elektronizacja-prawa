@@ -73,18 +73,84 @@ namespace Abc.Nes {
             return default;
         }
 
+        public static bool TryLoadXml(string xmlText, out IDocument document, out Exception exception) {
+            Document16 doc = null;
+            exception = null;
+            using (var stream = xmlText.GetMemoryStream()) {
+                var serializer = new NesXmlSerializer(typeof(Document16));
+                try {
+
+                    doc = serializer.Deserialize(stream) as Document16;
+                    document = doc;
+                }
+                catch (Exception ex) {
+                    document = null;
+                    exception = ex;
+                    return false;
+                }
+            }
+
+            if (doc != null) {
+                return true;
+            }
+
+            return false;
+        }
         public string GetCaseGroupIdentifier() {
-            var group = Groupings.Where(x => x.Type?.ToLower() == "znaksprawy" || x.Type?.ToLower() == "znak sprawy" || x.Type?.ToLower() == "collection").FirstOrDefault();
+            var group = Groupings
+                //.Where(x => x.Type?.ToLower() == "znaksprawy" || x.Type?.ToLower() == "znak sprawy" || x.Type?.ToLower() == "collection")
+                .Where(x => groupIdValues.Contains(x.Type?.ToLower()))
+                .FirstOrDefault();
             if (group != null)
                 return group.Code;
             return string.Empty;
         }
 
+
+
         public string GetCaseIdentifier() {
-            var id = Identifiers.Where(x => x.Type?.ToLower() == "znaksprawy" || x.Type?.ToLower() == "znak sprawy" || x.Type?.ToLower() == "collection").FirstOrDefault();
+            var id = Identifiers
+                //.Where(x => x.Type?.ToLower() == "znaksprawy" || x.Type?.ToLower() == "znak sprawy" || x.Type?.ToLower() == "collection")
+                .Where(x => caseIdvalues.Contains(x.Type?.ToLower()))
+                .FirstOrDefault();
             if (id != null)
                 return id.Value;
             return string.Empty;
         }
+
+        public string GetCaseGroupIdentifier(string typeName) {
+            var group = Groupings
+
+                .Where(x => x.Type?.ToLower() == typeName.ToLower())
+                .FirstOrDefault();
+            if (group != null)
+                return group.Code;
+            return string.Empty;
+        }
+
+        public string GetCaseIdentifier(string typeName) {
+            var id = Identifiers.Where(x => x.Type?.ToLower() == typeName.ToLower())
+                .FirstOrDefault();
+            if (id != null) return id.Value;
+            return string.Empty;
+        }
+
+        //TODO: tymczasowe rozwiazanie, docelowo obsluga dowolnego stringa
+        private readonly string[] groupIdValues = new string[] {
+            "znak sprawy",
+            "znaksprawy",
+            "collection",
+            "znakdntas",
+            "teczkaaktowa",
+            "uidsprawy",
+        };
+
+        private readonly string[] caseIdvalues = new string[] {
+            "znaksprawy",
+            "znak sprawy",
+            "collection",
+            "znakdntas",
+            "teczkaaktowa",
+        };
     }
 }

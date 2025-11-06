@@ -41,6 +41,6 @@ namespace Abc.Nes.Enumerations {
         [XmlEnum("data rejestracji")]
         Registred,
         [XmlEnum("dostępny po")]
-        AvailableAfter
+        AvailableAfter,
     }
 }

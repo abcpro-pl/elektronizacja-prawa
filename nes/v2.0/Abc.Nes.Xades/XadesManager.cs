@@ -28,7 +28,8 @@ namespace Abc.Nes.Xades {
                                                    X509Certificate2 timeStampCertificate = null,
                                                    string timeStampLogin = null,
                                                    string timeStampPassword = null,
-                                                   string hashAlgorithmName = "SHA256");
+                                                   string hashAlgorithmName = "SHA256",
+                                                   string[] fileReferences = null);
         SignatureDocument CreateEnvelopingSignature(Stream input, X509Certificate2 cert, Signature.Parameters.SignatureProductionPlace productionPlace = null, Signature.Parameters.SignerRole signerRole = null, string fileName = null, Upgraders.SignatureFormat? upgradeFormat = null, string timeStampServerUrl = "http://time.certum.pl", CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval);
         SignatureDocument CreateDetachedSignature(string filePath, X509Certificate2 cert, Signature.Parameters.SignatureProductionPlace productionPlace = null, Signature.Parameters.SignerRole signerRole = null, Upgraders.SignatureFormat? upgradeFormat = null, string timeStampServerUrl = "http://time.certum.pl", CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval);
         ValidationResult ValidateSignature(Stream stream);
@@ -42,7 +43,7 @@ namespace Abc.Nes.Xades {
         private Reference ContentReference = null;
         private Signer XadesSigner = null;
 
-        public void SignXmlFile(string filePath, SignatureOptions opts, string outputPath) {
+        public void SignXmlFile(string filePath, SignatureOptions opts, string outputPath, string[] fileReferences = null) {
             if (File.Exists(filePath)) {
                 byte[] fileBytes = File.ReadAllBytes(filePath);
 
@@ -64,7 +65,8 @@ namespace Abc.Nes.Xades {
                     opts.TimestampOptions?.Certificate,
                     opts.TimestampOptions?.Login,
                     opts.TimestampOptions?.Password,
-                    opts.HashAlgorithmName
+                    opts.HashAlgorithmName,
+                    fileReferences
                 );
 
                 if (result != null) {
@@ -86,7 +88,8 @@ namespace Abc.Nes.Xades {
             X509Certificate2 timeStampCertificate = null,
             string timeStampLogin = null,
             string timeStampPassword = null,
-            string hashAlgorithmName = "SHA256") {
+            string hashAlgorithmName = "SHA256",
+            string[] fileReferences = null) {
 
             if (input == null) { throw new ArgumentNullException("input"); }
 
@@ -132,6 +135,30 @@ Content-Transfer-Encoding: UTF-8"
             ContentReference.AddTransform(xmlDsigEnvelopedSignatureTransform);
 
             signatureDocument.XadesSignature.AddReference(ContentReference);
+
+            if(fileReferences != null && fileReferences.Length > 0) {
+                for (int i = 0; i < fileReferences.Length; i++) {
+                    var filePath = fileReferences[i];
+
+                    if (!File.Exists(filePath)) {
+                        throw new FileNotFoundException($"Referenced file not found: {filePath}");
+                    }
+                    var fileRef = new Reference();
+                    var fileName = Path.GetFileName(filePath);
+                    fileRef.Uri = "";// fileName;
+                    fileRef.DigestMethod = SignedXml.XmlDsigSHA256Url;
+                    fileRef.Id = $"FileRef-{i}-{fileName}";
+
+                    using (SHA256 sha256 = SHA256.Create()) {
+                        byte[] fileContent = File.ReadAllBytes(filePath);
+                        byte[] hash = sha256.ComputeHash(fileContent);
+                        fileRef.DigestValue = hash;
+                    }
+
+                    //fileRef.AddTransform(new XmlDsigC14NTransform());
+                    signatureDocument.XadesSignature.AddReference(fileRef);
+                }
+            }
 
             SetSignatureId(signatureDocument.XadesSignature);
             PrepareSignature(signatureDocument, commitmentTypeId: commitmentTypeId, signDate: signDate, hashAlgorithmName: hashAlgorithmName);
@@ -293,6 +320,7 @@ Content-Disposition: filename=""{ fileName }""
                 PreserveWhitespace = true
             };
             xd.Load(stream);
+            var test = xd.ToString();
             var signedXml = new SignedXml(xd);
 
             XmlNode MessageSignatureNode = xd.GetElementsByTagName("Signature", SignedXml.XmlDsigNamespaceUrl)[0];

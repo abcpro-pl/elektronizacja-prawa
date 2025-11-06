@@ -24,7 +24,9 @@ namespace Abc.Nes {
         string Description { get; set; }
 
         string GetCaseGroupIdentifier();
+        string GetCaseGroupIdentifier(string typeName);
         string GetCaseIdentifier();
+        string GetCaseIdentifier(string typeName);
     }
 
     public abstract class ElementBase {

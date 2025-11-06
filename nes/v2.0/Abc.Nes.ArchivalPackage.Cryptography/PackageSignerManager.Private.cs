@@ -40,7 +40,7 @@ using Abc.Nes.Common.Helpers;
 using Abc.Nes.Common.Models;
 
 namespace Abc.Nes.ArchivalPackage.Cryptography {
-    partial class PackageSignerManager {
+    public partial class PackageSignerManager {
         private iText.Kernel.Geom.Rectangle GetApperanceImageRect(
                 PdfSignatureLocation apperancePngImageLocation,
                 float pageWidth,
@@ -716,7 +716,8 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                          DateTime? signDate = null,
                          XadesFormat xadesFormat = XadesFormat.XadesBes,
                          string timeStampServerUrl = "http://time.certum.pl",
-                         CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval) {
+                         CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval,
+                         string[] fileReferences = null) {
             var ms = new MemoryStream((item as DocumentFile).FileData);
             Xades.Upgraders.SignatureFormat? upgradeFormat = null;
             if (xadesFormat == XadesFormat.XadesT) {
@@ -726,7 +727,8 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 upgradeFormat = Xades.Upgraders.SignatureFormat.XAdES_XL;
             }
 
-            var result = xadesManager.AppendSignatureToXmlFile(ms, cert, productionPlace, signerRole, upgradeFormat, signDate, timeStampServerUrl, commitmentTypeId);
+            var result = xadesManager.AppendSignatureToXmlFile(ms, cert, productionPlace, signerRole, upgradeFormat,
+                signDate, timeStampServerUrl, commitmentTypeId, fileReferences: fileReferences);
             if (result != null) {
                 using (var msOutput = new MemoryStream()) {
                     result.Save(msOutput);
@@ -810,7 +812,7 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 if (zip.ContainsEntry(XML)) {
                     // musimy rozpakować archiwum w celu weryfikacji 
                     // pliku akt.xml
-                    var temp = Path.Combine(Path.GetTempPath(), $"ABCPRO.NES\\{Path.GetFileName(internalPath)}");
+                    var temp = Path.Combine(Path.GetTempPath(), $"ABCPRO.NES{Path.DirectorySeparatorChar}{Path.GetFileName(internalPath)}");
                     if (!Directory.Exists(temp)) { Directory.CreateDirectory(temp); }
                     zip.ExtractAll(temp);
                     try {
@@ -827,40 +829,47 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             return default;
         }
         private SignatureInfo[] GetPadesInfos(byte[] fileData, string fileName = null) {
-            using (var pdfDoc = new PdfDocument(new PdfReader(new MemoryStream(fileData)))) {
-                var signUtil = new SignatureUtil(pdfDoc);
-                var names = signUtil.GetSignatureNames();
-                if (names != null && names.Count > 0) {
-                    var list = new List<SignatureInfo>();
-                    foreach (var name in names) {
-                        var pkcs7 = signUtil.ReadSignatureData(name);
-                        if (pkcs7 != null) {
-                            var cert = new X509Certificate2(pkcs7.GetSigningCertificate().GetEncoded());
-                            if (cert != null) {
-                                var subject = new SubjectNameInfo(cert.Subject);
-                                var issuer = new SubjectNameInfo(cert.Issuer);
-                                var item = new SignatureInfo() {
-                                    CreateDate = pkcs7.GetSignDate(),
-                                    Certificate = cert,
-                                    Author = subject.ContainsKey("CN") ? subject["CN"] : String.Empty,
-                                    Publisher = issuer.ContainsKey("CN") ? issuer["CN"] : String.Empty,
-                                    SignatureType = SignatureType.Pades,
-                                    SignatureNumber = name,
-                                    FileName = fileName,
-                                    CommitmentTypeIndication = pkcs7.GetReason(),
-                                    Organization = subject.ContainsKey("O") ? subject["O"] : String.Empty,
-                                    ClaimedRole = ""
-                                };
-                                if (item.Author != null) { item.Author = item.Author.Replace("\"", String.Empty); }
-                                if (item.Publisher != null) { item.Publisher = item.Publisher.Replace("\"", String.Empty); }
-                                if (item.CommitmentTypeIndication == null) { item.CommitmentTypeIndication = "Formalne zatwierdzenie (Proof of approval)"; }
+            try {
 
-                                list.Add(item);
+
+                using (var pdfDoc = new PdfDocument(new PdfReader(new MemoryStream(fileData)))) {
+                    var signUtil = new SignatureUtil(pdfDoc);
+                    var names = signUtil.GetSignatureNames();
+                    if (names != null && names.Count > 0) {
+                        var list = new List<SignatureInfo>();
+                        foreach (var name in names) {
+                            var pkcs7 = signUtil.ReadSignatureData(name);
+                            if (pkcs7 != null) {
+                                var cert = new X509Certificate2(pkcs7.GetSigningCertificate().GetEncoded());
+                                if (cert != null) {
+                                    var subject = new SubjectNameInfo(cert.Subject);
+                                    var issuer = new SubjectNameInfo(cert.Issuer);
+                                    var item = new SignatureInfo() {
+                                        CreateDate = pkcs7.GetSignDate(),
+                                        Certificate = cert,
+                                        Author = subject.ContainsKey("CN") ? subject["CN"] : String.Empty,
+                                        Publisher = issuer.ContainsKey("CN") ? issuer["CN"] : String.Empty,
+                                        SignatureType = SignatureType.Pades,
+                                        SignatureNumber = name,
+                                        FileName = fileName,
+                                        CommitmentTypeIndication = pkcs7.GetReason(),
+                                        Organization = subject.ContainsKey("O") ? subject["O"] : String.Empty,
+                                        ClaimedRole = ""
+                                    };
+                                    if (item.Author != null) { item.Author = item.Author.Replace("\"", String.Empty); }
+                                    if (item.Publisher != null) { item.Publisher = item.Publisher.Replace("\"", String.Empty); }
+                                    if (item.CommitmentTypeIndication == null) { item.CommitmentTypeIndication = "Formalne zatwierdzenie (Proof of approval)"; }
+
+                                    list.Add(item);
+                                }
                             }
                         }
+                        return list.ToArray();
                     }
-                    return list.ToArray();
                 }
+            }
+            catch (Exception ex) {
+
             }
             return default;
         }
@@ -919,14 +928,14 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 if (zip.ContainsEntry(XML)) {
                     // musimy rozpakować archiwum w celu weryfikacji 
                     // pliku akt.xml
-                    var temp = Path.Combine(Path.GetTempPath(), $"ABCPRO.NES\\{Path.GetFileName(internalPath)}");
+                    var temp = Path.Combine(Path.GetTempPath(), $"ABCPRO.NES{Path.DirectorySeparatorChar}{Path.GetFileName(internalPath)}");
                     if (!Directory.Exists(temp)) { Directory.CreateDirectory(temp); }
-                    zip.ExtractAll(temp);
                     try {
+                        zip.ExtractAll(temp);
                         var result = VerifyXadesSignatures(Path.Combine(temp, XML), internalPath);
                         if (result != null) { list.AddRange(result); }
                     }
-                    catch { }
+                    catch { throw; }
                     finally {
                         try { Directory.Delete(temp, true); } catch { }
                     }
@@ -1288,7 +1297,8 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
         private void VerifySignatures(List<SignatureVerifyInfo> list, PackageManager mgr, DocumentFile item, string internalPath) {
             try {
                 internalPath = internalPath.ToLower();
-                var temp = Path.Combine(Path.GetTempPath(), "ABCPRO.NES");
+                var temp = Path.Combine(Path.GetTempPath(), "ABCPRO.NES", Guid.NewGuid().ToString());
+
                 if (!Directory.Exists(temp)) { Directory.CreateDirectory(temp); }
 
                 if (internalPath.EndsWith(".xml")) {
@@ -1299,10 +1309,11 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                         if (result != null && result.Length > 0) { list.AddRange(result); }
                     }
                     finally {
-                        var _files = Directory.GetFiles(temp);
-                        foreach (var _file in _files) {
-                            try { File.Delete(_file); } catch { }
-                        }
+                        try { Directory.Delete(temp, true); } catch { }
+                        //var _files = Directory.GetFiles(temp);
+                        //foreach (var _file in _files) {
+                        //    try { File.Delete(_file); } catch { }
+                        //}
                     }
                 }
                 else if (internalPath.EndsWith(".pdf")) {
@@ -1312,6 +1323,16 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                 else if (internalPath.EndsWith(".zipx")) {
                     var result = VerifyZipxSignatures(item.FileData, internalPath);
                     if (result != null && result.Length > 0) { list.AddRange(result); }
+                }
+                else if (internalPath.EndsWith(".zip")) {
+                    try {
+                        //w eNadzor zipx sa jako zip, sprawdzam czy jest zipx-em
+                        var result = VerifyZipxSignatures(item.FileData, internalPath);
+                        if (result != null && result.Length > 0) { list.AddRange(result); }
+                    }
+                    catch (Exception ex) {
+
+                    }
                 }
                 else if (internalPath.EndsWith(".xades")) {
                     var _internalPath = internalPath.Replace(".xades", "");
@@ -1348,6 +1369,9 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                         }
                     }
                 }
+
+                if (Directory.Exists(temp)) 
+                    try { Directory.Delete(temp, true); } catch { }
             }
             catch {
                 list.Add(new SignatureVerifyInfo() {

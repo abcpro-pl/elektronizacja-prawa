@@ -82,6 +82,8 @@ namespace Microsoft.XmlDsig {
         public const string XmlDecryptionTransformUrl = "http://www.w3.org/2002/07/decrypt#XML";
         public const string XmlLicenseTransformUrl = "urn:mpeg:mpeg21:2003:01-REL-R-NS:licenseTransform";
 
+        public const string XmlDsigXPathFilter2TransformUrl = "http://www.w3.org/2002/06/xmldsig-filter2";
+
         //
         // public constructors
         //
@@ -639,6 +641,10 @@ namespace Microsoft.XmlDsig {
             }
 
             if (string.Equals(XmlDsigXPathTransformUrl, transformAlgorithm, StringComparison.OrdinalIgnoreCase)) {
+                return true;
+            }
+
+            if (string.Equals(XmlDsigXPathFilter2TransformUrl, transformAlgorithm, StringComparison.OrdinalIgnoreCase)) {
                 return true;
             }
 

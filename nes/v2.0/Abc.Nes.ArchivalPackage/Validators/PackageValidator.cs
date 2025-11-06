@@ -16,10 +16,13 @@ using Abc.Nes.ArchivalPackage.Exceptions;
 using Abc.Nes.ArchivalPackage.Model;
 using Abc.Nes.Validators;
 using Ionic.Zip;
+using SharpCompress.Archives;
+//using Ionic.Zip;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text;
 
@@ -129,16 +132,29 @@ namespace Abc.Nes.ArchivalPackage.Validators {
                         });
                     }
                     else {
-                        parentMetadata = package.GetMetadataFile(item, false, true);
-                        if (parentMetadata.IsNull()) {
-                            result.Add(new PackageValidationResultItem() {
+                        metadata = package.GetMetadataFile(item, true, true);
+                        if (metadata.IsNotNull()) {
+                            result.Add(new PackageValidationResultItem {
                                 FullName = item.FilePath,
                                 FilePath = item.FilePath,
                                 Name = item.FileName,
                                 Source = ValidationResultSource.Metadata,
-                                Type = ValidationResultType.NotFound,
-                                DefaultMessage = String.Format(resx.GetString("MetadataNotFound"), item.FilePath)
+                                Type = ValidationResultType.Incorrect,
+                                DefaultMessage = string.Format(resx.GetString("MetadataFilePathNotMatch"), item.FilePath)
                             });
+                        }
+                        else {
+                            parentMetadata = package.GetMetadataFile(item, false, true);
+                            if (parentMetadata.IsNull()) {
+                                result.Add(new PackageValidationResultItem() {
+                                    FullName = item.FilePath,
+                                    FilePath = item.FilePath,
+                                    Name = item.FileName,
+                                    Source = ValidationResultSource.Metadata,
+                                    Type = ValidationResultType.NotFound,
+                                    DefaultMessage = String.Format(resx.GetString("MetadataNotFound"), item.FilePath)
+                                });
+                            }
                         }
                     }
                     if (breakOnFirstError) { break; }
@@ -375,13 +391,19 @@ namespace Abc.Nes.ArchivalPackage.Validators {
         private static bool CheckIsUPO_UPP(DocumentFile itemDoc) {
             bool isUPO = false;
             using (var docStream = new MemoryStream(itemDoc.FileData)) {
-                var docXml = System.Xml.Linq.XDocument.Load(docStream);
+                try {
 
-                System.Xml.Linq.XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
-                var attr = docXml.Root.Attribute(xsi + "schemaLocation");
-                if (attr != null) {
-                    var upo = "crd.gov.pl/xml/schematy/UPO";
-                    isUPO = attr.Value.Contains(upo);
+                    var docXml = System.Xml.Linq.XDocument.Load(docStream);
+
+                    System.Xml.Linq.XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
+                    var attr = docXml.Root.Attribute(xsi + "schemaLocation");
+                    if (attr != null) {
+                        var upo = "crd.gov.pl/xml/schematy/UPO";
+                        isUPO = attr.Value.Contains(upo);
+                    }
+                }
+                catch (Exception ex) {
+                    isUPO = false;
                 }
             }
 
@@ -441,9 +463,11 @@ namespace Abc.Nes.ArchivalPackage.Validators {
 
         public bool IsPackageValid(Stream stream, out Exception exception) {
             exception = null;
-            using (var zipFile = ZipFile.Read(stream, new ReadOptions() {
+#if NET48
+            using (var zipFile = Ionic.Zip.ZipFile.Read(stream, new ReadOptions() {
                 Encoding = Console.OutputEncoding
-            })) {
+            })) 
+            {
                 var zipFileHasMandatoryDirectories =
                    zipFile.EntryFileNames.Where(x => x.ToLower().StartsWith(MainDirectoriesName.Files.GetXmlEnum().ToLower())).Count() > 0 &&
                    zipFile.EntryFileNames.Where(x => x.ToLower().StartsWith(MainDirectoriesName.Metadata.GetXmlEnum().ToLower())).Count() > 0 &&
@@ -454,15 +478,48 @@ namespace Abc.Nes.ArchivalPackage.Validators {
                     return false;
                 }
             }
+#else
+            bool zipFileHasMandatoryDirectories = false;
+            var archiveType = ZipValidator.DetectArchiveType(stream);
+            if (archiveType == ZipValidator.ArchiveType.TarGz) {
+                using (var gzipStream = new System.IO.Compression.GZipStream(stream, System.IO.Compression.CompressionMode.Decompress, true))
+                using (var decompressStream = new MemoryStream()) {
+                    gzipStream.CopyTo(decompressStream);
+                    decompressStream.Position = 0;
+                    using (var tarArchive = SharpCompress.Archives.Tar.TarArchive.Open(decompressStream)) {
+
+                        zipFileHasMandatoryDirectories =
+                            tarArchive.Entries.Where(x => x.Key.ToLower().StartsWith(MainDirectoriesName.Files.GetXmlEnum().ToLower())).Count() > 0 &&
+                            tarArchive.Entries.Where(x => x.Key.ToLower().StartsWith(MainDirectoriesName.Metadata.GetXmlEnum().ToLower())).Count() > 0 &&
+                            tarArchive.Entries.Where(x => x.Key.ToLower().StartsWith(MainDirectoriesName.Objects.GetXmlEnum().ToLower())).Count() > 0;
+                    }
+                }
+            }
+            else
+                using (var zipFile = ArchiveFactory.Open(stream)) {
+                    //using (var zipFile = new ZipArchive(stream, ZipArchiveMode.Read, true)) {
+                    zipFileHasMandatoryDirectories =
+                       zipFile.Entries.Where(x => x.Key.ToLower().StartsWith(MainDirectoriesName.Files.GetXmlEnum().ToLower())).Count() > 0 &&
+                       zipFile.Entries.Where(x => x.Key.ToLower().StartsWith(MainDirectoriesName.Metadata.GetXmlEnum().ToLower())).Count() > 0 &&
+                       zipFile.Entries.Where(x => x.Key.ToLower().StartsWith(MainDirectoriesName.Objects.GetXmlEnum().ToLower())).Count() > 0;
+
+                }
+            if (!zipFileHasMandatoryDirectories) {
+                exception = new PackageInvalidException();
+                return false;
+            }
+#endif
+
             return true;
         }
         public bool IsPackageValid(string filePath, out Exception exception) {
             exception = null;
+
+#if NET48
             ReadOptions opts = new ReadOptions() {
                 Encoding = Console.OutputEncoding
             };
-            
-            using (var zipFile = ZipFile.Read(filePath, opts)) {
+            using (var zipFile = Ionic.Zip.ZipFile.Read(filePath, opts)) {
                 
                 var zipFileHasMandatoryDirectories =
                    zipFile.EntryFileNames.Where(x => x.ToLower().StartsWith(MainDirectoriesName.Files.GetXmlEnum().ToLower())).Count() > 0 &&
@@ -474,6 +531,42 @@ namespace Abc.Nes.ArchivalPackage.Validators {
                     return false;
                 }
             }
+#else
+            bool zipFileHasMandatoryDirectories = false;
+            using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read)) {
+                if (filePath.ToLower().EndsWith(".tar.gz")) {
+                    using(var gzipStream = new System.IO.Compression.GZipStream(stream, System.IO.Compression.CompressionMode.Decompress))
+                    using (var decompressStream = new MemoryStream()) {
+                        gzipStream.CopyTo(decompressStream);
+                        decompressStream.Position = 0;
+                        using(var tarArchive = SharpCompress.Archives.Tar.TarArchive.Open(decompressStream)) {
+
+                        zipFileHasMandatoryDirectories =
+                            tarArchive.Entries.Where(x => x.Key.ToLower().StartsWith(MainDirectoriesName.Files.GetXmlEnum().ToLower())).Count() > 0 &&
+                            tarArchive.Entries.Where(x => x.Key.ToLower().StartsWith(MainDirectoriesName.Metadata.GetXmlEnum().ToLower())).Count() > 0 &&
+                            tarArchive.Entries.Where(x => x.Key.ToLower().StartsWith(MainDirectoriesName.Objects.GetXmlEnum().ToLower())).Count() > 0;
+                        }
+                    }
+                }
+                else {
+                    using (var zipFile = ArchiveFactory.Open(stream)) {
+                        //using (var zipFile = new ZipArchive(stream, ZipArchiveMode.Read, true)) {
+                        zipFileHasMandatoryDirectories =
+                            zipFile.Entries.Where(x => x.Key.ToLower().StartsWith(MainDirectoriesName.Files.GetXmlEnum().ToLower())).Count() > 0 &&
+                            zipFile.Entries.Where(x => x.Key.ToLower().StartsWith(MainDirectoriesName.Metadata.GetXmlEnum().ToLower())).Count() > 0 &&
+                            zipFile.Entries.Where(x => x.Key.ToLower().StartsWith(MainDirectoriesName.Objects.GetXmlEnum().ToLower())).Count() > 0;
+                        //zipFile.Entries.Where(x => x.FullName.ToLower().StartsWith(MainDirectoriesName.Files.GetXmlEnum().ToLower())).Count() > 0 &&
+                        //zipFile.Entries.Where(x => x.FullName.ToLower().StartsWith(MainDirectoriesName.Metadata.GetXmlEnum().ToLower())).Count() > 0 &&
+                        //zipFile.Entries.Where(x => x.FullName.ToLower().StartsWith(MainDirectoriesName.Objects.GetXmlEnum().ToLower())).Count() > 0;
+                    }
+                    if (!zipFileHasMandatoryDirectories) {
+                        exception = new PackageInvalidException();
+                        return false;
+                    }
+                }
+            }
+
+#endif
             return true;
         }
 
@@ -481,7 +574,8 @@ namespace Abc.Nes.ArchivalPackage.Validators {
             exception = null;
             if (filePath.IsNullOrEmpty()) { throw new ArgumentNullException(); }
             if (!File.Exists(filePath)) { throw new FileNotFoundException(filePath); }
-            if (!ZipFile.IsZipFile(filePath)) { throw new ZipException("Specified file is not a zip file!"); }
+
+            if (!ZipValidator.IsValidArchive(filePath)) { throw new Exception("Specified file is not a zip file!"); }
 
             IsPackageValid(filePath, out exception);
             return InitializePackage(filePath);
@@ -491,7 +585,9 @@ namespace Abc.Nes.ArchivalPackage.Validators {
             exception = null;
             if (stream.IsNull() || stream.Length == 0) { throw new ArgumentNullException(); }
             stream.Position = 0;
-            if (!ZipFile.IsZipFile(stream, false)) { throw new ZipException("Specified file is not a zip file!"); }
+
+            if (!ZipValidator.IsValidArchive(stream, "")) { throw new Exception("Specified file is not a zip file!"); }
+
             stream.Position = 0;
             IsPackageValid(stream, out exception);
             return InitializePackage();
