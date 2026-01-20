@@ -379,31 +379,39 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
             if (mgr == null) { throw new ArgumentNullException("mgr"); }
             if (item == null) { throw new ArgumentNullException("item"); }
 
+            bool fileGotHandled = false;
+
             var list = new List<SignatureInfo>();
             var internalPath = item.FilePath.ToLower();
             if (internalPath.EndsWith(".xades") || internalPath.EndsWith(".xml")) {
                 var result = GetXadesSignatureInfos(item.FileData.ToXElement(), internalPath);
                 if (result != null && result.Length > 0) { list.AddRange(result); }
+                fileGotHandled = true;
             }
             else if (internalPath.EndsWith(".pdf")) {
                 var result = GetPadesInfos(item.FileData, internalPath);
                 if (result != null && result.Length > 0) { list.AddRange(result); }
+                fileGotHandled = true;
             }
             else if (internalPath.EndsWith(".zipx")) {
                 var result = GetZipxInfos(item.FileData, internalPath);
                 if (result != null && result.Length > 0) { list.AddRange(result); }
+                fileGotHandled = true;
             }
             else if (internalPath.EndsWith(".zip")) {
                 try {
                     //w eNadzor zipx sa jako zip, sprawdzam czy jest zipx-em
                     var result = GetZipxInfos(item.FileData, internalPath);
-                    if (result != null && result.Length > 0) { list.AddRange(result); }
+                    if (result != null && result.Length > 0) { list.AddRange(result);
+                        fileGotHandled = true;
+                    }
                 }
                 catch (Exception ex) {
                     //zip nie jest zipx
                 }
             }
-            else {
+
+            if(!fileGotHandled) {
                 //other file, check if .xades file exists
                 var xadesInternalPath = $"{internalPath}.xades";
                 var xadesItem = mgr.GetItemByFilePath(xadesInternalPath) as ArchivalPackage.Model.DocumentFile;
