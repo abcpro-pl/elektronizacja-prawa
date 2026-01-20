@@ -516,10 +516,11 @@ namespace Abc.Nes.ArchivalPackage {
             //using (var zipFile = new ZipArchive(stream, ZipArchiveMode.Read, true)) {
             //    LoadPackageEntries(zipFile, out exception);
             //}
+            var encoding = Encoding.GetEncoding(1250); //polish
             ReaderOptions readerOptions = new ReaderOptions {
                 ArchiveEncoding = new SharpCompress.Common.ArchiveEncoding {
-                    Default = Encoding.UTF8,
-                    Forced = Encoding.UTF8
+                    Default = encoding,
+                    Forced = null
                 }
             };
             using (IArchive arch = ArchiveFactory.Open(stream, readerOptions)) {
@@ -567,12 +568,12 @@ namespace Abc.Nes.ArchivalPackage {
             //    LoadPackageEntries(zipFile, out var ex2);
             //    if (exception.IsNull() && ex2.IsNotNull()) exception = ex2;
             //}
-
+            var encoding = Encoding.GetEncoding(1250);
             //sharpcompress
             ReaderOptions readerOptions = new ReaderOptions {
                 ArchiveEncoding = new SharpCompress.Common.ArchiveEncoding {
-                    Default = Encoding.UTF8,
-                    Forced = Encoding.UTF8
+                    Default = encoding,
+                    Forced = null
                 }
             };
 
