@@ -134,6 +134,9 @@ Content-Transfer-Encoding: UTF-8"
             var xmlDsigEnvelopedSignatureTransform = new XmlDsigEnvelopedSignatureTransform();
             ContentReference.AddTransform(xmlDsigEnvelopedSignatureTransform);
 
+            var xmlDsigC14NTransform = new XmlDsigC14NTransform();
+            ContentReference.AddTransform(xmlDsigC14NTransform);
+
             signatureDocument.XadesSignature.AddReference(ContentReference);
 
             if(fileReferences != null && fileReferences.Length > 0) {
