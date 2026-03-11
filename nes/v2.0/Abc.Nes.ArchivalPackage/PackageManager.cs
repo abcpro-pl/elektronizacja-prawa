@@ -116,70 +116,70 @@ namespace Abc.Nes.ArchivalPackage {
                     foreach (var _metadata in metadata) {
                         var m = _metadata as Document16;
                         var d = folderMetadata.Document as Document16;
-                        if (d.Recipients.IsNotNull()) { d.Recipients = new List<Elements.RecipientElement16>(); }
+                        if (d.Recipients.IsNull()) { d.Recipients = new List<Elements.RecipientElement16>(); }
                         foreach (var item in m.Recipients) {
                             if (!d.Recipients.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Recipients.Add(item);
                             }
                         }
 
-                        if (d.Dates.IsNotNull()) { d.Dates = new List<Elements.DateElement16>(); }
+                        if (d.Dates.IsNull()) { d.Dates = new List<Elements.DateElement16>(); }
                         foreach (var item in m.Dates) {
                             if (!d.Dates.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Dates.Add(item);
                             }
                         }
 
-                        if (d.Access.IsNotNull()) { d.Access = new List<Elements.AccessElement16>(); }
+                        if (d.Access.IsNull()) { d.Access = new List<Elements.AccessElement16>(); }
                         foreach (var item in m.Access) {
                             if (!d.Access.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Access.Add(item);
                             }
                         }
 
-                        if (d.Groupings.IsNotNull()) { d.Groupings = new List<Elements.GroupingElement>(); }
+                        if (d.Groupings.IsNull()) { d.Groupings = new List<Elements.GroupingElement>(); }
                         foreach (var item in m.Groupings) {
                             if (!d.Groupings.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Groupings.Add(item);
                             }
                         }
 
-                        if (d.Identifiers.IsNotNull()) { d.Identifiers = new List<Elements.IdentifierElement16>(); }
+                        if (d.Identifiers.IsNull()) { d.Identifiers = new List<Elements.IdentifierElement16>(); }
                         foreach (var item in m.Identifiers) {
                             if (!d.Identifiers.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Identifiers.Add(item);
                             }
                         }
 
-                        if (d.Authors.IsNotNull()) { d.Authors = new List<Elements.AuthorElement16>(); }
+                        if (d.Authors.IsNull()) { d.Authors = new List<Elements.AuthorElement16>(); }
                         foreach (var item in m.Authors) {
                             if (!d.Authors.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Authors.Add(item);
                             }
                         }
 
-                        if (d.Types.IsNotNull()) { d.Types = new List<Elements.TypeElement16>(); }
+                        if (d.Types.IsNull()) { d.Types = new List<Elements.TypeElement16>(); }
                         foreach (var item in m.Types) {
                             if (!d.Types.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Types.Add(item);
                             }
                         }
 
-                        if (d.Titles.IsNotNull()) { d.Titles = new List<Elements.TitleElement>(); }
+                        if (d.Titles.IsNull()) { d.Titles = new List<Elements.TitleElement>(); }
                         foreach (var item in m.Titles) {
                             if (!d.Titles.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Titles.Add(item);
                             }
                         }
 
-                        if (d.Relations.IsNotNull()) { d.Relations = new List<Elements.RelationElement16>(); }
+                        if (d.Relations.IsNull()) { d.Relations = new List<Elements.RelationElement16>(); }
                         foreach (var item in m.Relations) {
                             if (!d.Relations.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Relations.Add(item);
                             }
                         }
 
-                        if (d.Languages.IsNotNull()) { d.Languages = new List<Elements.LanguageElement>(); }
+                        if (d.Languages.IsNull()) { d.Languages = new List<Elements.LanguageElement>(); }
                         foreach (var item in m.Languages) {
                             if (!d.Languages.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Languages.Add(item);
@@ -199,70 +199,70 @@ namespace Abc.Nes.ArchivalPackage {
                     foreach (var _metadata in metadata) {
                         var m = _metadata as Document17;
                         var d = folderMetadata.Document as Document17;
-                        if (d.Recipients.IsNotNull()) { d.Recipients = new List<Elements.RecipientElement17>(); }
+                        if (d.Recipients.IsNull()) { d.Recipients = new List<Elements.RecipientElement17>(); }
                         foreach (var item in m.Recipients) {
                             if (!d.Recipients.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Recipients.Add(item);
                             }
                         }
 
-                        if (d.Dates.IsNotNull()) { d.Dates = new List<Elements.DateElement17>(); }
+                        if (d.Dates.IsNull()) { d.Dates = new List<Elements.DateElement17>(); }
                         foreach (var item in m.Dates) {
                             if (!d.Dates.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Dates.Add(item);
                             }
                         }
 
-                        if (d.Access.IsNotNull()) { d.Access = new List<Elements.AccessElement17>(); }
+                        if (d.Access.IsNull()) { d.Access = new List<Elements.AccessElement17>(); }
                         foreach (var item in m.Access) {
                             if (!d.Access.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Access.Add(item);
                             }
                         }
 
-                        if (d.Groupings.IsNotNull()) { d.Groupings = new List<Elements.GroupingElement>(); }
+                        if (d.Groupings.IsNull()) { d.Groupings = new List<Elements.GroupingElement>(); }
                         foreach (var item in m.Groupings) {
                             if (!d.Groupings.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Groupings.Add(item);
                             }
                         }
 
-                        if (d.Identifiers.IsNotNull()) { d.Identifiers = new List<Elements.IdentifierElement>(); }
+                        if (d.Identifiers.IsNull()) { d.Identifiers = new List<Elements.IdentifierElement>(); }
                         foreach (var item in m.Identifiers) {
                             if (!d.Identifiers.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Identifiers.Add(item);
                             }
                         }
 
-                        if (d.Authors.IsNotNull()) { d.Authors = new List<Elements.AuthorElement17>(); }
+                        if (d.Authors.IsNull()) { d.Authors = new List<Elements.AuthorElement17>(); }
                         foreach (var item in m.Authors) {
                             if (!d.Authors.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Authors.Add(item);
                             }
                         }
 
-                        if (d.Types.IsNotNull()) { d.Types = new List<Elements.TypeElement17>(); }
+                        if (d.Types.IsNull()) { d.Types = new List<Elements.TypeElement17>(); }
                         foreach (var item in m.Types) {
                             if (!d.Types.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Types.Add(item);
                             }
                         }
 
-                        if (d.Titles.IsNotNull()) { d.Titles = new List<Elements.TitleElement>(); }
+                        if (d.Titles.IsNull()) { d.Titles = new List<Elements.TitleElement>(); }
                         foreach (var item in m.Titles) {
                             if (!d.Titles.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Titles.Add(item);
                             }
                         }
 
-                        if (d.Relations.IsNotNull()) { d.Relations = new List<Elements.RelationElement>(); }
+                        if (d.Relations.IsNull()) { d.Relations = new List<Elements.RelationElement>(); }
                         foreach (var item in m.Relations) {
                             if (!d.Relations.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Relations.Add(item);
                             }
                         }
 
-                        if (d.Languages.IsNotNull()) { d.Languages = new List<Elements.LanguageElement>(); }
+                        if (d.Languages.IsNull()) { d.Languages = new List<Elements.LanguageElement>(); }
                         foreach (var item in m.Languages) {
                             if (!d.Languages.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Languages.Add(item);
@@ -282,77 +282,77 @@ namespace Abc.Nes.ArchivalPackage {
                         var m = _metadata as Document;
                         var d = folderMetadata.Document as Document;
 
-                        if (d.Senders.IsNotNull()) { d.Senders = new List<Elements.SenderElement>(); }
+                        if (d.Senders.IsNull()) { d.Senders = new List<Elements.SenderElement>(); }
                         foreach (var item in m.Senders) {
                             if (!d.Senders.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Senders.Add(item);
                             }
                         }
 
-                        if (d.Recipients.IsNotNull()) { d.Recipients = new List<Elements.RecipientElement>(); }
+                        if (d.Recipients.IsNull()) { d.Recipients = new List<Elements.RecipientElement>(); }
                         foreach (var item in m.Recipients) {
                             if (!d.Recipients.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Recipients.Add(item);
                             }
                         }
 
-                        if (d.Dates.IsNotNull()) { d.Dates = new List<Elements.DateElement>(); }
+                        if (d.Dates.IsNull()) { d.Dates = new List<Elements.DateElement>(); }
                         foreach (var item in m.Dates) {
                             if (!d.Dates.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Dates.Add(item);
                             }
                         }
 
-                        if (d.Access.IsNotNull()) { d.Access = new List<Elements.AccessElement>(); }
+                        if (d.Access.IsNull()) { d.Access = new List<Elements.AccessElement>(); }
                         foreach (var item in m.Access) {
                             if (!d.Access.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Access.Add(item);
                             }
                         }
 
-                        if (d.Groupings.IsNotNull()) { d.Groupings = new List<Elements.GroupingElement>(); }
+                        if (d.Groupings.IsNull()) { d.Groupings = new List<Elements.GroupingElement>(); }
                         foreach (var item in m.Groupings) {
                             if (!d.Groupings.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Groupings.Add(item);
                             }
                         }
 
-                        if (d.Identifiers.IsNotNull()) { d.Identifiers = new List<Elements.IdentifierElement>(); }
+                        if (d.Identifiers.IsNull()) { d.Identifiers = new List<Elements.IdentifierElement>(); }
                         foreach (var item in m.Identifiers) {
                             if (!d.Identifiers.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Identifiers.Add(item);
                             }
                         }
 
-                        if (d.Authors.IsNotNull()) { d.Authors = new List<Elements.AuthorElement>(); }
+                        if (d.Authors.IsNull()) { d.Authors = new List<Elements.AuthorElement>(); }
                         foreach (var item in m.Authors) {
                             if (!d.Authors.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Authors.Add(item);
                             }
                         }
 
-                        if (d.Types.IsNotNull()) { d.Types = new List<Elements.TypeElement>(); }
+                        if (d.Types.IsNull()) { d.Types = new List<Elements.TypeElement>(); }
                         foreach (var item in m.Types) {
                             if (!d.Types.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Types.Add(item);
                             }
                         }
 
-                        if (d.Titles.IsNotNull()) { d.Titles = new List<Elements.TitleElement>(); }
+                        if (d.Titles.IsNull()) { d.Titles = new List<Elements.TitleElement>(); }
                         foreach (var item in m.Titles) {
                             if (!d.Titles.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Titles.Add(item);
                             }
                         }
 
-                        if (d.Relations.IsNotNull()) { d.Relations = new List<Elements.RelationElement>(); }
+                        if (d.Relations.IsNull()) { d.Relations = new List<Elements.RelationElement>(); }
                         foreach (var item in m.Relations) {
                             if (!d.Relations.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Relations.Add(item);
                             }
                         }
 
-                        if (d.Languages.IsNotNull()) { d.Languages = new List<Elements.LanguageElement>(); }
+                        if (d.Languages.IsNull()) { d.Languages = new List<Elements.LanguageElement>(); }
                         foreach (var item in m.Languages) {
                             if (!d.Languages.Where(x => x.ToString() == item.ToString()).Any()) {
                                 d.Languages.Add(item);
