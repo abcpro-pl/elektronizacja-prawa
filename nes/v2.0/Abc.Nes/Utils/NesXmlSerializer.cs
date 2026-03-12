@@ -48,6 +48,12 @@ namespace System.Xml.Serialization {
             if (stringWriter.IsNotNull()) {
                 var xmlText = stringWriter.ToString();
                 Xml = XElement.Parse(xmlText);
+                if (o is Document17) {
+                    var attribute = Xml.Attribute("wersja");
+                    if (attribute != null) {
+                        attribute.Remove();
+                    }
+                }
                 ProcessSynonyms(Xml);
             }
         }

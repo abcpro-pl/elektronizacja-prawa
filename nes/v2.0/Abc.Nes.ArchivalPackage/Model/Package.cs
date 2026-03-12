@@ -23,6 +23,7 @@ namespace Abc.Nes.ArchivalPackage.Model {
         public DocumentFolder Documents { get; set; }
         public MetadataFolder Metadata { get; set; }
         public MetadataFolder Objects { get; set; }
+        public MetadataFile PackageMetadata { get; set; }
         public DocumentFolder Another { get; set; }
         public bool IsEmpty => (Documents.IsNull() || Documents.IsEmpty) || (Metadata.IsNull() || Metadata.IsEmpty) || (Objects.IsNull() || Objects.IsEmpty);
         public bool HasAnotherFilesOrDirectories => Another.IsNotNull() && ((Another.Items.IsNotNull() && Another.Items.Count > 0) || (Another.Folders.IsNotNull() && Another.Folders.Count > 0));

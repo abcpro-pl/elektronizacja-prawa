@@ -16,6 +16,8 @@ using Abc.Nes.ArchivalPackage.Exceptions;
 using Abc.Nes.ArchivalPackage.Model;
 using Abc.Nes.ArchivalPackage.Validators;
 using Abc.Nes.Converters;
+using Abc.Nes.Elements;
+using Abc.Nes.Enumerations;
 using Abc.Nes.Exceptions;
 using Abc.Nes.Validators;
 using Ionic.Zip;
@@ -445,6 +447,22 @@ namespace Abc.Nes.ArchivalPackage {
                 FileName = fileName
             });
         }
+        public void AddPackageMetadata(IDocument metadata, string fileName = "metadane_paczki.xml") {
+            if (metadata.IsNull()) { throw new ArgumentNullException("metadata"); }
+            if (fileName.IsNullOrEmpty()) { throw new ArgumentNullException("fileName"); }
+            if (!fileName.ToLower().EndsWith(".xml")) { throw new Exception("The Object file must by an XML file!"); }
+
+            if (Package.IsNull()) {
+                using (IPackageValidator validator = new PackageValidator()) {
+                    Package = validator.InitializePackage();
+                }
+            }
+
+            Package.PackageMetadata = new MetadataFile() {
+                Document = metadata,
+                FileName = fileName
+            };
+        }
         public void Save(string filePath = null, bool appendFileDataOnly = false) {
             if (Package.IsNull()) { throw new NullReferenceException("Package is not initialized!"); }
             if (Package.IsEmpty) { throw new PackageIsEmptyException(); }
@@ -465,6 +483,7 @@ namespace Abc.Nes.ArchivalPackage {
                 AddDocuments(Package.Documents, zipFile);
                 AddMetadata(Package.Metadata, zipFile, appendFileDataOnly: appendFileDataOnly);
                 AddMetadata(Package.Objects, zipFile, appendFileDataOnly: appendFileDataOnly);
+                AddPackageMetadata(Package.PackageMetadata, zipFile, appendFileDataOnly: appendFileDataOnly);
             }
 #endif
 
@@ -489,6 +508,7 @@ namespace Abc.Nes.ArchivalPackage {
                 AddDocuments(Package.Documents, zip);
                 AddMetadata(Package.Metadata, zip, appendFileDataOnly: appendFileDataOnly);
                 AddMetadata(Package.Objects, zip, appendFileDataOnly: appendFileDataOnly);
+                AddPackageMetadata(Package.PackageMetadata, zip, appendFileDataOnly: appendFileDataOnly);
 
                 stream.Position = 0;
             }
@@ -723,6 +743,26 @@ namespace Abc.Nes.ArchivalPackage {
             }
         }
 
+        private void AddPackageMetadata(MetadataFile metadataFile, ZipArchive zipFile, bool appendFileDataOnly = false) {
+            if (metadataFile.IsNull()) { return; }
+            if (zipFile.IsNull()) { throw new ArgumentNullException("zipFile"); }
+
+            var converter = new XmlConverter();
+            if (appendFileDataOnly && metadataFile.FileData.IsNotNull()) {
+                var entry = zipFile.CreateEntry($"{metadataFile.FileName}");
+                using (Stream entryStream = entry.Open()) {
+                    entryStream.Write(metadataFile.FileData, 0, metadataFile.FileData.Length);
+                }
+            }
+            else {
+                var entry = zipFile.CreateEntry($"{metadataFile.FileName}");
+                using (Stream entryStream = entry.Open()) {
+                    var data = converter.GetXml(metadataFile.Document).ToByteArray();
+                    entryStream.Write(data, 0, data.Length);
+                }
+            }
+        }
+
         private void AddMetadata(MetadataFolder folder, Ionic.Zip.ZipFile zipFile, string folderPath = null, bool appendFileDataOnly = false) {
             if (folder.IsNull()) { return; }
             if (zipFile.IsNull()) { throw new ArgumentNullException("zipFile"); }
@@ -946,84 +986,102 @@ namespace Abc.Nes.ArchivalPackage {
                         }
                     }
                     else {
-                        var dirName = Path.GetDirectoryName(entryFileName).Replace("\\", "/");
-                        var fileName = Path.GetFileName(entryFileName);
-                        var dirs = dirName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
-                        FolderBase folder = null;
-                        if (dirs.Length == 0) { folder = Package.Another; }
-                        else if (dirs[0].ToLower() == MainDirectoriesName.Files.GetXmlEnum().ToLower()) { folder = Package.Documents; }
-                        else if (dirs[0].ToLower() == MainDirectoriesName.Metadata.GetXmlEnum().ToLower()) { folder = Package.Metadata; }
-                        else if (dirs[0].ToLower() == MainDirectoriesName.Objects.GetXmlEnum().ToLower()) { folder = Package.Objects; }
-                        else if (dirs[0].ToLower() == MainDirectoriesName.Another.GetXmlEnum().ToLower()) { folder = Package.Another; }
-
-                        foreach (var dir in dirs) {
-                            if (dirs[0] == dir) {
-                                if (folder.IsNull()) {
-                                    var __folder = Package.Another.GetFolder(dir);
-                                    if (__folder.IsNull()) { __folder = Package.Another.CreateSubFolder(dir); }
-                                    folder = __folder;
+                        //wczytaj plik metadane_paczki.xml jako metadane dla calej paczki
+                        if (entryFileName == "metadane_paczki.xml") {
+                            using (var stream = new MemoryStream()) {
+                                using (var entryStream = entry.OpenEntryStream()) {
+                                    entryStream.CopyTo(stream);
                                 }
-                                continue;
-                            }
-                            var _folder = folder.GetFolder(dir);
-                            if (_folder.IsNull()) { _folder = folder.CreateSubFolder(dir); }
-                            folder = _folder;
-                        }
+                                stream.Position = 0;
+                                var fileData = stream.ToArray();
 
-                        // SharpCompress stream handling
-                        using (var stream = new MemoryStream()) {
-                            using (var entryStream = entry.OpenEntryStream()) {
-                                entryStream.CopyTo(stream);
+                                var metadataFile = new MetadataFile() {
+                                    FileName = "metadane_paczki.xml",
+                                    FilePath = entryFileName
+                                };
+                                metadataFile.Init(fileData, out ex);
+                                Package.PackageMetadata = metadataFile;
                             }
-                            stream.Position = 0;
-                            var fileData = stream.ToArray();
+                        } else {
+                            var dirName = Path.GetDirectoryName(entryFileName).Replace("\\", "/");
+                            var fileName = Path.GetFileName(entryFileName);
+                            var dirs = dirName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+                            FolderBase folder = null;
+                            if (dirs.Length == 0) { folder = Package.Another; }
+                            else if (dirs[0].ToLower() == MainDirectoriesName.Files.GetXmlEnum().ToLower()) { folder = Package.Documents; }
+                            else if (dirs[0].ToLower() == MainDirectoriesName.Metadata.GetXmlEnum().ToLower()) { folder = Package.Metadata; }
+                            else if (dirs[0].ToLower() == MainDirectoriesName.Objects.GetXmlEnum().ToLower()) { folder = Package.Objects; }
+                            else if (dirs[0].ToLower() == MainDirectoriesName.Another.GetXmlEnum().ToLower()) { folder = Package.Another; }
 
-                            ItemBase item;
-                            if (dirs.Length == 0) {
-                                item = new DocumentFile() { FileName = fileName, FilePath = $"{MainDirectoriesName.Another.GetXmlEnum().ToLower()}/{entryFileName}" };
-                            }
-                            else if (dirs[0].ToLower() == MainDirectoriesName.Files.GetXmlEnum().ToLower()) {
-                                item = new DocumentFile() { FileName = fileName, FilePath = entryFileName };
-                            }
-                            else if (dirs[0].ToLower() == MainDirectoriesName.Metadata.GetXmlEnum().ToLower() ||
-                                dirs[0].ToLower() == MainDirectoriesName.Objects.GetXmlEnum().ToLower()) {
-                                item = new MetadataFile() { FileName = fileName, FilePath = entryFileName };
-                            }
-                            else {
-                                item = new DocumentFile() { FileName = fileName, FilePath = $"{MainDirectoriesName.Another.GetXmlEnum().ToLower()}/{entryFileName}" };
-                            }
-
-                            item.Init(fileData, out ex);
-
-                            if (ex != null) {
-                                if (ex is System.Xml.XmlException) {
-                                    var exc = new System.Xml.XmlException($"Plik: {entryFileName}", ex);
-                                    ex = exc;
+                            foreach (var dir in dirs) {
+                                if (dirs[0] == dir) {
+                                    if (folder.IsNull()) {
+                                        var __folder = Package.Another.GetFolder(dir);
+                                        if (__folder.IsNull()) { __folder = Package.Another.CreateSubFolder(dir); }
+                                        folder = __folder;
+                                    }
+                                    continue;
                                 }
-                                else if (ex is DocumentSchemaException) {
-                                    var excTitle = $"Plik: {entryFileName}\nSkładnia pliku {fileName} z folderu {dirName} nie jest " +
-                                        $"zgodna z żadnym z wspieranych / obowiązujących schematów metadanych.";
-                                    var exc = new DocumentSchemaException(excTitle, ex);
-                                    ex = exc;
+                                var _folder = folder.GetFolder(dir);
+                                if (_folder.IsNull()) { _folder = folder.CreateSubFolder(dir); }
+                                folder = _folder;
+                            }
+
+                            // SharpCompress stream handling
+                            using (var stream = new MemoryStream()) {
+                                using (var entryStream = entry.OpenEntryStream()) {
+                                    entryStream.CopyTo(stream);
+                                }
+                                stream.Position = 0;
+                                var fileData = stream.ToArray();
+
+                                ItemBase item;
+                                if (dirs.Length == 0) {
+                                    item = new DocumentFile() { FileName = fileName, FilePath = $"{MainDirectoriesName.Another.GetXmlEnum().ToLower()}/{entryFileName}" };
+                                }
+                                else if (dirs[0].ToLower() == MainDirectoriesName.Files.GetXmlEnum().ToLower()) {
+                                    item = new DocumentFile() { FileName = fileName, FilePath = entryFileName };
+                                }
+                                else if (dirs[0].ToLower() == MainDirectoriesName.Metadata.GetXmlEnum().ToLower() ||
+                                    dirs[0].ToLower() == MainDirectoriesName.Objects.GetXmlEnum().ToLower()) {
+                                    item = new MetadataFile() { FileName = fileName, FilePath = entryFileName };
                                 }
                                 else {
-                                    var exc = new Exception($"Plik: {entryFileName}", ex);
-                                    ex = exc; // Fixed: assigning the new exception back to ex
+                                    item = new DocumentFile() { FileName = fileName, FilePath = $"{MainDirectoriesName.Another.GetXmlEnum().ToLower()}/{entryFileName}" };
                                 }
-                            }
 
-                            if (item is MetadataFile && PackageType == Enumerations.DocumentType.None) {
-                                try {
-                                    var itemMetadataFile = (item as MetadataFile);
-                                    if (itemMetadataFile.Document != null) {
-                                        PackageType = itemMetadataFile.Document.DocumentType;
+                                item.Init(fileData, out ex);
+
+                                if (ex != null) {
+                                    if (ex is System.Xml.XmlException) {
+                                        var exc = new System.Xml.XmlException($"Plik: {entryFileName}", ex);
+                                        ex = exc;
                                     }
-                                    else PackageType = Enumerations.DocumentType.None;
+                                    else if (ex is DocumentSchemaException) {
+                                        var excTitle = $"Plik: {entryFileName}\nSkładnia pliku {fileName} z folderu {dirName} nie jest " +
+                                            $"zgodna z żadnym z wspieranych / obowiązujących schematów metadanych.";
+                                        var exc = new DocumentSchemaException(excTitle, ex);
+                                        ex = exc;
+                                    }
+                                    else {
+                                        var exc = new Exception($"Plik: {entryFileName}", ex);
+                                        ex = exc; // Fixed: assigning the new exception back to ex
+                                    }
                                 }
-                                catch { }
-                            }
 
-                            folder.AddItem(item);
+                                if (item is MetadataFile && PackageType == Enumerations.DocumentType.None) {
+                                    try {
+                                        var itemMetadataFile = (item as MetadataFile);
+                                        if (itemMetadataFile.Document != null) {
+                                            PackageType = itemMetadataFile.Document.DocumentType;
+                                        }
+                                        else PackageType = Enumerations.DocumentType.None;
+                                    }
+                                    catch { }
+                                }
+
+                                folder.AddItem(item);
+                            }
                         }
                     }
                 }
