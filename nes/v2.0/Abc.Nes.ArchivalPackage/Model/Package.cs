@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 
 namespace Abc.Nes.ArchivalPackage.Model {
     public class Package {
+        public const string PackageMetadataFileName = "metadane_paczki.xml";
         public string FilePath { get; }
         public DocumentFolder Documents { get; set; }
         public MetadataFolder Metadata { get; set; }
@@ -111,6 +112,9 @@ namespace Abc.Nes.ArchivalPackage.Model {
         }
         public ItemBase GetItemByFilePath(string filePath, bool findWithoutSpaces = false) {
             if (filePath.IsNotNullOrEmpty()) {
+                if(filePath == PackageMetadataFileName) {
+                    return PackageMetadata;
+                }
                 FolderBase folder = null;
                 var table = filePath.Split('/');
 

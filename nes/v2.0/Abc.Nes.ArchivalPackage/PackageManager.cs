@@ -447,7 +447,7 @@ namespace Abc.Nes.ArchivalPackage {
                 FileName = fileName
             });
         }
-        public void AddPackageMetadata(IDocument metadata, string fileName = "metadane_paczki.xml") {
+        public void AddPackageMetadata(IDocument metadata, string fileName = Package.PackageMetadataFileName) {
             if (metadata.IsNull()) { throw new ArgumentNullException("metadata"); }
             if (fileName.IsNullOrEmpty()) { throw new ArgumentNullException("fileName"); }
             if (!fileName.ToLower().EndsWith(".xml")) { throw new Exception("The Object file must by an XML file!"); }
@@ -637,6 +637,9 @@ namespace Abc.Nes.ArchivalPackage {
             return Package.GetMetadataFile(documentFile);
         }
         public ItemBase GetItemByFilePath(string filePath) {
+            if(filePath == Package.PackageMetadataFileName) {
+                return Package.PackageMetadata;
+            }
             return Package.GetItemByFilePath(filePath);
         }
         public FolderBase GetParentFolder(ItemBase item) {
@@ -987,7 +990,7 @@ namespace Abc.Nes.ArchivalPackage {
                     }
                     else {
                         //wczytaj plik metadane_paczki.xml jako metadane dla calej paczki
-                        if (entryFileName == "metadane_paczki.xml") {
+                        if (entryFileName == Package.PackageMetadataFileName) {
                             using (var stream = new MemoryStream()) {
                                 using (var entryStream = entry.OpenEntryStream()) {
                                     entryStream.CopyTo(stream);
@@ -996,7 +999,7 @@ namespace Abc.Nes.ArchivalPackage {
                                 var fileData = stream.ToArray();
 
                                 var metadataFile = new MetadataFile() {
-                                    FileName = "metadane_paczki.xml",
+                                    FileName = Package.PackageMetadataFileName,
                                     FilePath = entryFileName
                                 };
                                 metadataFile.Init(fileData, out ex);
