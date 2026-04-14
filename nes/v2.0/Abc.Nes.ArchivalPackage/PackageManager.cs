@@ -543,21 +543,30 @@ namespace Abc.Nes.ArchivalPackage {
                     Forced = null
                 }
             };
-            using (IArchive arch = ArchiveFactory.Open(stream, readerOptions)) {
-                var type = ZipValidator.DetectArchiveType(stream);
-                if (type == ZipValidator.ArchiveType.TarGz) {
-                    using (var gzipStream = new System.IO.Compression.GZipStream(stream, System.IO.Compression.CompressionMode.Decompress, true))
-                    using (var decompressStream = new MemoryStream()) {
-                        gzipStream.CopyTo(decompressStream);
-                        decompressStream.Position = 0;
-                        using (var tarArchive = SharpCompress.Archives.Tar.TarArchive.Open(decompressStream)) {
+            var type = ZipValidator.DetectArchiveType(stream);
+            if (type == ZipValidator.ArchiveType.TarGz) {
+                stream.Position = 0;
+                using (var gzipStream = new System.IO.Compression.GZipStream(stream, System.IO.Compression.CompressionMode.Decompress, true))
+                using (var decompressStream = new MemoryStream()) {
+                    gzipStream.CopyTo(decompressStream);
+                    decompressStream.Position = 0;
+                    using (var tarArchive = SharpCompress.Archives.Tar.TarArchive.Open(decompressStream)) {
 
-                            LoadPackageEntries(tarArchive, out var ex2);
-                            if (exception.IsNull() && ex2.IsNotNull()) exception = ex2;
-                        }
+                        LoadPackageEntries(tarArchive, out var ex2);
+                        if (exception.IsNull() && ex2.IsNotNull()) exception = ex2;
                     }
                 }
-                else {
+            }
+            else if (type == ZipValidator.ArchiveType.Tar) {
+                stream.Position = 0;
+                using (var tarArchive = SharpCompress.Archives.Tar.TarArchive.Open(stream)) {
+                    LoadPackageEntries(tarArchive, out var ex2);
+                    if (exception.IsNull() && ex2.IsNotNull()) exception = ex2;
+                }
+            }
+            else {
+                stream.Position = 0;
+                using (IArchive arch = ArchiveFactory.Open(stream, readerOptions)) {
                     LoadPackageEntries(arch, out var ex2);
                     if (exception.IsNull() && ex2.IsNotNull()) exception = ex2;
                 }
@@ -611,7 +620,14 @@ namespace Abc.Nes.ArchivalPackage {
                         }
                     }
                 }
-            } 
+            }
+            else if (FilePath.ToLower().EndsWith(".tar")) {
+                using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                using (var tarArchive = SharpCompress.Archives.Tar.TarArchive.Open(stream)) {
+                    LoadPackageEntries(tarArchive, out var ex2);
+                    if (exception.IsNull() && ex2.IsNotNull()) exception = ex2;
+                }
+            }
             else {
                 using (IArchive arch = ArchiveFactory.Open(filePath, readerOptions)) {
                     LoadPackageEntries(arch, out var ex2);
