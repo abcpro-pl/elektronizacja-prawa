@@ -304,6 +304,9 @@ namespace Microsoft.XmlDsig {
             if (baseUri != null && baseUri.StartsWith("file:///")) {
                 dir = Path.GetDirectoryName(baseUri.Replace("file:///", String.Empty));
             }
+            else if (baseUri != null && !baseUri.StartsWith("http") && Directory.Exists(baseUri.TrimEnd(Path.DirectorySeparatorChar))) {
+                dir = baseUri.TrimEnd(Path.DirectorySeparatorChar);
+            }
 
             Stream hashInputStream = null;
             WebResponse response = null;
@@ -409,38 +412,9 @@ namespace Microsoft.XmlDsig {
                             resolver = (this.SignedXml.ResolverSet ? this.SignedXml._xmlResolver : new XmlSecureResolver(new XmlUrlResolver(), baseUri));
                             hashInputStream = this.TransformChain.TransformToOctetStream(inputStream, resolver, _uri);
                         }
-                        else if (_uri != null && File.Exists(_uri)) {
-                            inputStream = new MemoryStream(File.ReadAllBytes(_uri));
+                        else if (_uri != null && ResolveFileReference(_uri, dir, baseUri, out string resolvedPath)) {
+                            inputStream = new MemoryStream(File.ReadAllBytes(resolvedPath));
                             hashInputStream = inputStream;
-                            _uri = Path.GetFileName(_uri);
-                            //resolver = (this.SignedXml.ResolverSet ? this.SignedXml._xmlResolver : new XmlSecureResolver(new XmlUrlResolver(), baseUri));
-                            //hashInputStream = this.TransformChain.TransformToOctetStream(inputStream, resolver, _uri);
-                        }
-                        else if (_uri != null && dir!=null && File.Exists(Path.Combine(dir, _uri))) {
-                            var _uriPath = Path.Combine(dir, _uri);
-                            inputStream = new MemoryStream(File.ReadAllBytes(_uriPath));
-                            hashInputStream = inputStream;
-                            _uri = Path.GetFileName(_uriPath);
-                            //resolver = (this.SignedXml.ResolverSet ? this.SignedXml._xmlResolver : new XmlSecureResolver(new XmlUrlResolver(), baseUri));
-                            //hashInputStream = this.TransformChain.TransformToOctetStream(inputStream, resolver, _uri);
-                        }
-                        else if(_uri != null && dir !=null && File.Exists(Path.Combine(dir, WebUtility.UrlDecode(_uri)))){
-                            var _uriPath = Path.Combine(dir, WebUtility.UrlDecode(_uri));
-                            inputStream = new MemoryStream(File.ReadAllBytes(_uriPath));
-                            hashInputStream = inputStream;
-                            _uri = Path.GetFileName(_uriPath);
-                        }
-                        else if (_uri != null && baseUri != null && File.Exists(Path.Combine(baseUri, _uri))) {
-                            var _uriPath = Path.Combine(baseUri, _uri);
-                            inputStream = new MemoryStream(File.ReadAllBytes(_uriPath));
-                            hashInputStream = inputStream;
-                            _uri = Path.GetFileName(_uriPath);
-                        }
-                        else if (_uri != null && baseUri != null && File.Exists(Path.Combine(baseUri, WebUtility.UrlDecode(_uri)))) {
-                            var _uriPath = Path.Combine(baseUri, WebUtility.UrlDecode(_uri));
-                            inputStream = new MemoryStream(File.ReadAllBytes(_uriPath));
-                            hashInputStream = inputStream;
-                            _uri = Path.GetFileName(_uriPath);
                         }
                         else {
                             throw new CryptographicException(SR.Cryptography_Xml_UriNotResolved, _uri);
@@ -469,6 +443,51 @@ namespace Microsoft.XmlDsig {
             }
 
             return hashval;
+        }
+
+        private static bool ResolveFileReference(string uri, string dir, string baseUri, out string resolvedPath) {
+            resolvedPath = null;
+            if (uri == null) return false;
+
+            // Normalize URI: convert forward slashes to OS path separator
+            var normalizedUri = uri.Replace('/', Path.DirectorySeparatorChar);
+            var decodedUri = WebUtility.UrlDecode(uri).Replace('/', Path.DirectorySeparatorChar);
+
+            // 1. Direct path (absolute or relative to CWD)
+            if (File.Exists(normalizedUri)) {
+                resolvedPath = normalizedUri;
+                return true;
+            }
+
+            // 2. Relative to dir (extracted from file:/// baseUri or plain directory path)
+            if (dir != null) {
+                var path = Path.Combine(dir, normalizedUri);
+                if (File.Exists(path)) {
+                    resolvedPath = path;
+                    return true;
+                }
+                path = Path.Combine(dir, decodedUri);
+                if (File.Exists(path)) {
+                    resolvedPath = path;
+                    return true;
+                }
+            }
+
+            // 3. Relative to baseUri
+            if (baseUri != null) {
+                var path = Path.Combine(baseUri, normalizedUri);
+                if (File.Exists(path)) {
+                    resolvedPath = path;
+                    return true;
+                }
+                path = Path.Combine(baseUri, decodedUri);
+                if (File.Exists(path)) {
+                    resolvedPath = path;
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

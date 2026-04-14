@@ -54,6 +54,18 @@ namespace Abc.Nes.Xades {
                 if (opts.AddTimestamp)
                     upgradeType = Upgraders.SignatureFormat.XAdES_T;
 
+                var xmlDir = Path.GetDirectoryName(Path.GetFullPath(filePath));
+                System.Environment.CurrentDirectory = xmlDir;
+
+                if (fileReferences != null && fileReferences.Length > 0) {
+                    for (int i = 0; i < fileReferences.Length; i++) {
+                        var refFullPath = Path.GetFullPath(fileReferences[i]);
+                        if (refFullPath.StartsWith(xmlDir + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase)) {
+                            fileReferences[i] = refFullPath.Substring(xmlDir.Length + 1).Replace('\\', '/');
+                        }
+                    }
+                }
+
                 SignatureDocument result = AppendSignatureToXmlFile(
                     fileStream, opts.Certificate,
                     null, null,
@@ -148,15 +160,9 @@ Content-Transfer-Encoding: UTF-8"
                     }
                     var fileRef = new Reference();
                     var fileName = Path.GetFileName(filePath);
-                    fileRef.Uri = "";// fileName;
+                    fileRef.Uri = filePath.Replace('\\', '/');
                     fileRef.DigestMethod = SignedXml.XmlDsigSHA256Url;
                     fileRef.Id = $"FileRef-{i}-{fileName}";
-
-                    using (SHA256 sha256 = SHA256.Create()) {
-                        byte[] fileContent = File.ReadAllBytes(filePath);
-                        byte[] hash = sha256.ComputeHash(fileContent);
-                        fileRef.DigestValue = hash;
-                    }
 
                     //fileRef.AddTransform(new XmlDsigC14NTransform());
                     signatureDocument.XadesSignature.AddReference(fileRef);
