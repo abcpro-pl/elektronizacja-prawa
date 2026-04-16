@@ -27,6 +27,10 @@ namespace Abc.Nes.Common {
 
         [Category("http://uri.etsi.org/01903/v1.2.2#ProofOfCreation")]
         [Description("Potwierdzenie utworzenia (Proof of creation)")]
-        ProofOfCreation
+        ProofOfCreation,
+
+        [Category("http://www.crd.gov.pl/xml/schematy/edap/2010/01/02#Initials")]
+        [Description("Parafka")]
+        Initials
     }
 }
