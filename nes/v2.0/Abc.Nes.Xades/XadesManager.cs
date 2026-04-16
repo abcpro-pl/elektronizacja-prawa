@@ -55,34 +55,39 @@ namespace Abc.Nes.Xades {
                     upgradeType = Upgraders.SignatureFormat.XAdES_T;
 
                 var xmlDir = Path.GetDirectoryName(Path.GetFullPath(filePath));
-                System.Environment.CurrentDirectory = xmlDir;
+                var originalDirectory = System.Environment.CurrentDirectory;
+                try {
+                    System.Environment.CurrentDirectory = xmlDir;
 
-                if (fileReferences != null && fileReferences.Length > 0) {
-                    for (int i = 0; i < fileReferences.Length; i++) {
-                        var refFullPath = Path.GetFullPath(fileReferences[i]);
-                        if (refFullPath.StartsWith(xmlDir + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase)) {
-                            fileReferences[i] = refFullPath.Substring(xmlDir.Length + 1).Replace('\\', '/');
+                    if (fileReferences != null && fileReferences.Length > 0) {
+                        for (int i = 0; i < fileReferences.Length; i++) {
+                            var refFullPath = Path.GetFullPath(fileReferences[i]);
+                            if (refFullPath.StartsWith(xmlDir + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase)) {
+                                fileReferences[i] = refFullPath.Substring(xmlDir.Length + 1).Replace('\\', '/');
+                            }
                         }
                     }
-                }
 
-                SignatureDocument result = AppendSignatureToXmlFile(
-                    fileStream, opts.Certificate,
-                    null, null,
-                    upgradeType,
-                    opts.SignDate,
-                    opts.TimestampOptions?.TsaUrl,
-                    opts.Reason,
-                    opts.TimestampOptions?.TsaPolicy,
-                    opts.TimestampOptions?.Certificate,
-                    opts.TimestampOptions?.Login,
-                    opts.TimestampOptions?.Password,
-                    opts.HashAlgorithmName,
-                    fileReferences
-                );
+                    SignatureDocument result = AppendSignatureToXmlFile(
+                        fileStream, opts.Certificate,
+                        null, null,
+                        upgradeType,
+                        opts.SignDate,
+                        opts.TimestampOptions?.TsaUrl,
+                        opts.Reason,
+                        opts.TimestampOptions?.TsaPolicy,
+                        opts.TimestampOptions?.Certificate,
+                        opts.TimestampOptions?.Login,
+                        opts.TimestampOptions?.Password,
+                        opts.HashAlgorithmName,
+                        fileReferences
+                    );
 
-                if (result != null) {
-                    result.Save(outputPath);
+                    if (result != null) {
+                        result.Save(outputPath);
+                    }
+                } finally {
+                    System.Environment.CurrentDirectory = originalDirectory;
                 }
             }
         }
@@ -389,16 +394,26 @@ Content-Disposition: filename=""{ fileName }""
 
         public ValidationResult ValidateSignature(string filePath) {
             byte[] stringData = File.ReadAllBytes(filePath);
-            using (MemoryStream ms = new MemoryStream(stringData)) {
-                System.Environment.CurrentDirectory = Path.GetDirectoryName(filePath);
-                return ValidateSignature(ms);
+            var originalDirectory = System.Environment.CurrentDirectory;
+            try {
+                using (MemoryStream ms = new MemoryStream(stringData)) {
+                    System.Environment.CurrentDirectory = Path.GetDirectoryName(filePath);
+                    return ValidateSignature(ms);
+                }
+            } finally {
+                System.Environment.CurrentDirectory = originalDirectory;
             }
         }
 
         public ValidationResult ValidateSignature(byte[] data, string filePath) {
-            using (MemoryStream ms = new MemoryStream(data)) {
-                System.Environment.CurrentDirectory = Path.GetDirectoryName(filePath);
-                return ValidateSignature(ms);
+            var originalDirectory = System.Environment.CurrentDirectory;
+            try {
+                using (MemoryStream ms = new MemoryStream(data)) {
+                    System.Environment.CurrentDirectory = Path.GetDirectoryName(filePath);
+                    return ValidateSignature(ms);
+                }
+            } finally {
+                System.Environment.CurrentDirectory = originalDirectory;
             }
         }
 
