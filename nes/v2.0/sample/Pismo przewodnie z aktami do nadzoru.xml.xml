@@ -1,0 +1,133 @@
+<dokument xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.mswia.gov.pl/standardy/ndap" xsi:schemaLocation="http://www.mswia.gov.pl/standardy/ndap Metadane-2.0.xsd">
+  <identyfikator>
+    <typidentyfikatora>id.eNadzor</typidentyfikatora>
+    <wartoscId>1.17444.20201211111129.20741</wartoscId>
+    <podmiot>
+      <instytucja>
+        <id typId="NIP">9730051210</id>
+        <nazwa>Regionalna Izba Obrachunkowa w Zielonej Górze</nazwa>
+        <kontakt typKontaktu="Telefon">329 19 00</kontakt>
+        <kontakt typKontaktu="e-mail">zielonagora@rio.gov.pl</kontakt>
+      </instytucja>
+    </podmiot>
+  </identyfikator>
+  <identyfikator>
+    <typidentyfikatora>Znak sprawy</typidentyfikatora>
+    <wartoscId>RIO.II.K.0002.102.28.2020</wartoscId>
+  </identyfikator>
+  <identyfikator>
+    <typidentyfikatora>Nazwa pliku</typidentyfikatora>
+    <wartoscId>Pismo przewodnie z aktami do nadzoru.xml</wartoscId>
+  </identyfikator>
+  <tytul>
+    <oryginalny kodJezyka="pol">Pismo przewodnie z aktami do nadzoru nr DK.0711.12.2020  z dnia 11 grudnia 2020 r. - Związek Celowy Gmin MG-6</oryginalny>
+    <alternatywny kodJezyka="pol">Pismo przewodnie z aktami do nadzoru nr DK.0711.12.2020  z dnia 11 grudnia 2020 r. - Związek Celowy Gmin MG-6</alternatywny>
+  </tytul>
+  <data>
+    <typDaty>data na piśmie</typDaty>
+    <czas>2020-12-11T00:00:00+01:00</czas>
+  </data>
+  <data>
+    <typDaty>data rejestracji</typDaty>
+    <czas>2020-12-11T11:11:29+01:00</czas>
+  </data>
+  <format>
+    <typFormatu>.xml</typFormatu>
+    <niekompletnosc>nie</niekompletnosc>
+    <wielkosc miara="KB">21</wielkosc>
+  </format>
+  <dostep>
+    <dostepnosc>niepubliczny</dostepnosc>
+  </dostep>
+  <typ>
+    <klasa>Text</klasa>
+    <rodzaj>pismo</rodzaj>
+  </typ>
+  <typ>
+    <klasa>eNadzor</klasa>
+    <rodzaj>Pismo przewodnie z aktami do nadzoru</rodzaj>
+  </typ>
+  <typ>
+    <klasa>Text</klasa>
+    <rodzaj>podanie / wniosek</rodzaj>
+  </typ>
+  <typ>
+    <klasa>Text</klasa>
+    <rodzaj>Odwzorowanie cyfrowe - Nie</rodzaj>
+  </typ>
+  <grupowanie>
+    <typGrupy>Znak sprawy</typGrupy>
+    <kodGrupy>RIO.II.K.0002.102.28.2020</kodGrupy>
+    <opis>Związek Celowy Gmin MG-6</opis>
+  </grupowanie>
+  <grupowanie>
+    <typGrupy>Kolejność dokumentu w systemie eNadzor względem sprawy</typGrupy>
+    <kodGrupy>1</kodGrupy>
+    <opis>Nie dotyczy</opis>
+  </grupowanie>
+  <grupowanie>
+    <typGrupy>Dokument jest wnioskiem</typGrupy>
+    <kodGrupy>Tak</kodGrupy>
+    <opis>Nie dotyczy</opis>
+  </grupowanie>
+  <tworca>
+    <funkcja>utworzył</funkcja>
+    <podmiot>
+      <instytucja>
+        <id typId="NIP">5992619483</id>
+        <nazwa>Związek Celowy Gmin MG-6</nazwa>
+        <adres>
+          <kodPocztowy>66-400</kodPocztowy>
+          <miejscowosc>Gorzów Wielkopolski</miejscowosc>
+          <ulica>Pankiewicza</ulica>
+          <budynek>7-May</budynek>
+          <kraj>PL</kraj>
+        </adres>
+        <kontakt typKontaktu="e-mail">zcg-img6@wp.pl</kontakt>
+      </instytucja>
+    </podmiot>
+  </tworca>
+  <nadawca>
+    <podmiot>
+      <instytucja>
+        <id typId="NIP">5992619483</id>
+        <nazwa>Związek Celowy Gmin MG-6</nazwa>
+        <adres>
+          <kodPocztowy>66-400</kodPocztowy>
+          <miejscowosc>Gorzów Wielkopolski</miejscowosc>
+          <ulica>Pankiewicza</ulica>
+          <budynek>7-May</budynek>
+          <kraj>PL</kraj>
+        </adres>
+        <kontakt typKontaktu="e-mail">zcg-img6@wp.pl</kontakt>
+      </instytucja>
+    </podmiot>
+  </nadawca>
+  <odbiorca>
+    <doWiadomosci />
+    <podmiot>
+      <instytucja>
+        <id typId="NIP">9730051210</id>
+        <nazwa>Regionalna Izba Obrachunkowa w Zielonej Górze</nazwa>
+        <adres>
+          <kodPocztowy>65-261</kodPocztowy>
+          <miejscowosc>Zielona Góra</miejscowosc>
+          <ulica>Chmielna</ulica>
+          <budynek>13</budynek>
+          <kraj>PL</kraj>
+        </adres>
+        <kontakt typKontaktu="Telefon">329 19 00</kontakt>
+        <kontakt typKontaktu="e-mail">zielonagora@rio.gov.pl</kontakt>
+      </instytucja>
+    </podmiot>
+  </odbiorca>
+  <relacja>
+    <identyfikator>
+      <typidentyfikatora>Nazwa pliku</typidentyfikatora>
+      <wartoscId>Uchwała.zip</wartoscId>
+    </identyfikator>
+    <typRelacji>odnosi się do</typRelacji>
+  </relacja>
+  <jezyk kodJezyka="pol">polski</jezyk>
+  <opis>Pismo przewodnie z aktami do nadzoru nr DK.0711.12.2020  z dnia 11 grudnia 2020 r. - Związek Celowy Gmin MG-6</opis>
+</dokument>

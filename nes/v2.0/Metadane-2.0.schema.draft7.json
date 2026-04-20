@@ -1,0 +1,1714 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:generated:Metadane-2.0.schema.json",
+  "title": "dokument",
+  "definitions": {
+    "kraj-typ": {
+      "type": "string",
+      "enum": [
+        "AF",
+        "AX",
+        "AL",
+        "DZ",
+        "AS",
+        "AD",
+        "AO",
+        "AI",
+        "AQ",
+        "AG",
+        "AR",
+        "AM",
+        "AW",
+        "AU",
+        "AT",
+        "AZ",
+        "BS",
+        "BH",
+        "BD",
+        "BB",
+        "BY",
+        "BE",
+        "BZ",
+        "BJ",
+        "BM",
+        "BT",
+        "BO",
+        "BA",
+        "BW",
+        "BV",
+        "BR",
+        "IO",
+        "BN",
+        "BG",
+        "BF",
+        "BI",
+        "KH",
+        "CM",
+        "CA",
+        "CV",
+        "KY",
+        "CF",
+        "TD",
+        "CL",
+        "CN",
+        "CX",
+        "CC",
+        "CO",
+        "KM",
+        "CG",
+        "CD",
+        "CK",
+        "CR",
+        "CI",
+        "HR",
+        "CU",
+        "CY",
+        "CZ",
+        "DK",
+        "DJ",
+        "DM",
+        "DO",
+        "EC",
+        "EG",
+        "SV",
+        "GQ",
+        "ER",
+        "EE",
+        "ET",
+        "FK",
+        "FO",
+        "FJ",
+        "FI",
+        "FR",
+        "GF",
+        "PF",
+        "TF",
+        "GA",
+        "GM",
+        "GE",
+        "DE",
+        "GH",
+        "GI",
+        "GR",
+        "GL",
+        "GD",
+        "GP",
+        "GU",
+        "GT",
+        "GG",
+        "GN",
+        "GW",
+        "GY",
+        "HT",
+        "HM",
+        "VA",
+        "HN",
+        "HK",
+        "HU",
+        "IS",
+        "IN",
+        "ID",
+        "IR",
+        "IQ",
+        "IE",
+        "IM",
+        "IL",
+        "IT",
+        "JM",
+        "JP",
+        "JE",
+        "JO",
+        "KZ",
+        "KE",
+        "KI",
+        "KP",
+        "KR",
+        "KW",
+        "KG",
+        "LA",
+        "LV",
+        "LB",
+        "LS",
+        "LR",
+        "LY",
+        "LI",
+        "LT",
+        "LU",
+        "MO",
+        "MK",
+        "MG",
+        "MW",
+        "MY",
+        "MV",
+        "ML",
+        "MT",
+        "MH",
+        "MQ",
+        "MR",
+        "MU",
+        "YT",
+        "MX",
+        "FM",
+        "MD",
+        "MC",
+        "MN",
+        "MS",
+        "MA",
+        "MZ",
+        "MM",
+        "NA",
+        "NR",
+        "NP",
+        "NL",
+        "AN",
+        "NC",
+        "NZ",
+        "NI",
+        "NE",
+        "NG",
+        "NU",
+        "NF",
+        "MP",
+        "NO",
+        "OM",
+        "PK",
+        "PW",
+        "PS",
+        "PA",
+        "PG",
+        "PY",
+        "PE",
+        "PH",
+        "PN",
+        "PL",
+        "PT",
+        "PR",
+        "QA",
+        "RE",
+        "RO",
+        "RU",
+        "RW",
+        "SH",
+        "KN",
+        "LC",
+        "PM",
+        "VC",
+        "WS",
+        "SM",
+        "ST",
+        "SA",
+        "SN",
+        "CS",
+        "SC",
+        "SL",
+        "SG",
+        "SK",
+        "SI",
+        "SB",
+        "SO",
+        "ZA",
+        "GS",
+        "ES",
+        "LK",
+        "SD",
+        "SR",
+        "SJ",
+        "SZ",
+        "SE",
+        "CH",
+        "SY",
+        "TW",
+        "TJ",
+        "TZ",
+        "TH",
+        "TL",
+        "TG",
+        "TK",
+        "TO",
+        "TT",
+        "TN",
+        "TR",
+        "TM",
+        "TC",
+        "TV",
+        "UG",
+        "UA",
+        "AE",
+        "GB",
+        "US",
+        "UM",
+        "UY",
+        "UZ",
+        "VU",
+        "VE",
+        "VN",
+        "VG",
+        "VI",
+        "WF",
+        "EH",
+        "YE",
+        "ZM",
+        "ZW"
+      ]
+    },
+    "kod-jezyka-typ": {
+      "type": "string",
+      "enum": [
+        "abk",
+        "ace",
+        "ach",
+        "ada",
+        "aar",
+        "afh",
+        "afr",
+        "afa",
+        "aka",
+        "akk",
+        "alb",
+        "ale",
+        "alg",
+        "tut",
+        "amh",
+        "apa",
+        "ara",
+        "arc",
+        "arp",
+        "arn",
+        "arw",
+        "arm",
+        "art",
+        "asm",
+        "ast",
+        "ath",
+        "aus",
+        "map",
+        "ava",
+        "ave",
+        "awa",
+        "aym",
+        "aze",
+        "ban",
+        "bat",
+        "bal",
+        "bam",
+        "bai",
+        "bad",
+        "bnt",
+        "bas",
+        "bak",
+        "baq",
+        "btk",
+        "bej",
+        "bel",
+        "bem",
+        "ben",
+        "ber",
+        "bho",
+        "bih",
+        "bik",
+        "bin",
+        "bis",
+        "nob",
+        "bos",
+        "bra",
+        "bre",
+        "bug",
+        "bul",
+        "bua",
+        "bur",
+        "cad",
+        "car",
+        "spa",
+        "cat",
+        "cau",
+        "ceb",
+        "cel",
+        "cai",
+        "chg",
+        "cmc",
+        "cha",
+        "che",
+        "chr",
+        "nya",
+        "chy",
+        "chb",
+        "chi",
+        "chn",
+        "chp",
+        "cho",
+        "zha",
+        "chu",
+        "chk",
+        "chv",
+        "cop",
+        "cor",
+        "cos",
+        "cre",
+        "mus",
+        "crp",
+        "cpe",
+        "cpf",
+        "cpp",
+        "scr",
+        "cus",
+        "cze",
+        "dak",
+        "dan",
+        "day",
+        "del",
+        "din",
+        "div",
+        "doi",
+        "dgr",
+        "dra",
+        "dua",
+        "dut",
+        "dum",
+        "dyu",
+        "dzo",
+        "efi",
+        "egy",
+        "eka",
+        "elx",
+        "eng",
+        "enm",
+        "ang",
+        "epo",
+        "est",
+        "ewe",
+        "ewo",
+        "fan",
+        "fat",
+        "fao",
+        "fij",
+        "fin",
+        "fiu",
+        "fon",
+        "fre",
+        "frm",
+        "fro",
+        "fry",
+        "fur",
+        "ful",
+        "gaa",
+        "gla",
+        "glg",
+        "lug",
+        "gay",
+        "gba",
+        "gez",
+        "geo",
+        "ger",
+        "nds",
+        "gmh",
+        "goh",
+        "gem",
+        "kik",
+        "gil",
+        "gon",
+        "gor",
+        "got",
+        "grb",
+        "grc",
+        "gre",
+        "grn",
+        "guj",
+        "gwi",
+        "hai",
+        "hau",
+        "haw",
+        "heb",
+        "her",
+        "hil",
+        "him",
+        "hin",
+        "hmo",
+        "hit",
+        "hmn",
+        "hun",
+        "hup",
+        "iba",
+        "ice",
+        "ido",
+        "ibo",
+        "ijo",
+        "ilo",
+        "smn",
+        "inc",
+        "ine",
+        "ind",
+        "ina",
+        "ile",
+        "iku",
+        "ipk",
+        "ira",
+        "gle",
+        "mga",
+        "sga",
+        "iro",
+        "ita",
+        "jpn",
+        "jav",
+        "jrb",
+        "jpr",
+        "kab",
+        "kac",
+        "kal",
+        "kam",
+        "kan",
+        "kau",
+        "kaa",
+        "kar",
+        "kas",
+        "kaw",
+        "kaz",
+        "kha",
+        "khm",
+        "khi",
+        "kho",
+        "kmb",
+        "kin",
+        "kir",
+        "kom",
+        "kon",
+        "kok",
+        "kor",
+        "kos",
+        "kpe",
+        "kro",
+        "kua",
+        "kum",
+        "kur",
+        "kru",
+        "kut",
+        "lad",
+        "lah",
+        "lam",
+        "lao",
+        "lat",
+        "lav",
+        "ltz",
+        "lez",
+        "lin",
+        "lit",
+        "loz",
+        "lub",
+        "lua",
+        "lui",
+        "smj",
+        "lun",
+        "luo",
+        "lus",
+        "mac",
+        "mad",
+        "mag",
+        "mai",
+        "mak",
+        "mlg",
+        "may",
+        "mal",
+        "mlt",
+        "mnc",
+        "mdr",
+        "man",
+        "mni",
+        "mno",
+        "glv",
+        "mao",
+        "mar",
+        "chm",
+        "mah",
+        "mwr",
+        "mas",
+        "myn",
+        "men",
+        "mic",
+        "min",
+        "mis",
+        "moh",
+        "mol",
+        "mkh",
+        "lol",
+        "mon",
+        "mos",
+        "mul",
+        "mun",
+        "nah",
+        "nau",
+        "nav",
+        "nde",
+        "nbl",
+        "ndo",
+        "nep",
+        "nia",
+        "nic",
+        "ssa",
+        "niu",
+        "non",
+        "nai",
+        "sme",
+        "nor",
+        "nno",
+        "nub",
+        "nym",
+        "nyn",
+        "nyo",
+        "nzi",
+        "oci",
+        "oji",
+        "ori",
+        "orm",
+        "osa",
+        "oss",
+        "oto",
+        "pal",
+        "pau",
+        "pli",
+        "pam",
+        "pag",
+        "pan",
+        "pap",
+        "paa",
+        "per",
+        "peo",
+        "phi",
+        "phn",
+        "pon",
+        "pol",
+        "por",
+        "pra",
+        "pro",
+        "pus",
+        "que",
+        "roh",
+        "raj",
+        "rap",
+        "rar",
+        "roa",
+        "rum",
+        "rom",
+        "run",
+        "rus",
+        "sal",
+        "sam",
+        "smi",
+        "smo",
+        "sad",
+        "sag",
+        "san",
+        "sat",
+        "srd",
+        "sas",
+        "sco",
+        "sel",
+        "sem",
+        "scc",
+        "srr",
+        "shn",
+        "sna",
+        "sid",
+        "sgn",
+        "bla",
+        "snd",
+        "sin",
+        "sit",
+        "sio",
+        "sms",
+        "den",
+        "sla",
+        "slo",
+        "slv",
+        "sog",
+        "som",
+        "son",
+        "snk",
+        "wen",
+        "nso",
+        "sot",
+        "sai",
+        "sma",
+        "suk",
+        "sux",
+        "sun",
+        "sus",
+        "swa",
+        "ssw",
+        "swe",
+        "syr",
+        "tgl",
+        "tah",
+        "tai",
+        "tgk",
+        "tmh",
+        "tam",
+        "tat",
+        "tel",
+        "ter",
+        "tet",
+        "tha",
+        "tib",
+        "tig",
+        "tir",
+        "tem",
+        "tiv",
+        "tli",
+        "tpi",
+        "tkl",
+        "tog",
+        "ton",
+        "tsi",
+        "tso",
+        "tsn",
+        "tum",
+        "tup",
+        "tur",
+        "ota",
+        "tuk",
+        "tvl",
+        "tyv",
+        "twi",
+        "uga",
+        "uig",
+        "ukr",
+        "umb",
+        "und",
+        "urd",
+        "uzb",
+        "vai",
+        "ven",
+        "vie",
+        "vol",
+        "vot",
+        "wak",
+        "wal",
+        "wln",
+        "war",
+        "was",
+        "wel",
+        "wol",
+        "xho",
+        "sah",
+        "yao",
+        "yap",
+        "yid",
+        "yor",
+        "ypk",
+        "znd",
+        "zap",
+        "zen",
+        "zul",
+        "zun"
+      ]
+    },
+    "data-zdarzenia-typ": {
+      "type": "string",
+      "enum": [
+        "",
+        "opublikowany",
+        "utworzony",
+        "data na piśmie",
+        "uzyskany",
+        "doręczony",
+        "wysłany",
+        "zatwierdzony",
+        "podpisany",
+        "zmodyfikowany",
+        "data rejestracji",
+        "dostępny po"
+      ]
+    },
+    "data-zakres-typ": {
+      "type": "string",
+      "enum": [
+        "",
+        "daty skrajne"
+      ]
+    },
+    "wartosc-logiczna-typ": {
+      "type": "string",
+      "enum": [
+        "",
+        "nie",
+        "tak"
+      ]
+    },
+    "dostepnosc-typ": {
+      "type": "string",
+      "enum": [
+        "publiczny",
+        "niepubliczny",
+        "wyłączny",
+        "wszystko"
+      ]
+    },
+    "dostepnosc-data-typ": {
+      "type": "string",
+      "enum": [
+        "dostępny po"
+      ]
+    },
+    "dokument-opis-typ": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/niepusty-ciag-typ"
+        }
+      ]
+    },
+    "uprawnienia-typ": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/niepusty-ciag-typ"
+        }
+      ]
+    },
+    "lokalizacja-typ": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/niepusty-ciag-typ"
+        }
+      ]
+    },
+    "identyfikator-rodzaj-typ": {
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "osoba-identyfikator-rodzajtyp": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/niepusty-ciag-typ"
+        }
+      ]
+    },
+    "niepusty-ciag-typ": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "(\\r|\\n|.)*\\S(\\r|\\n|.)*"
+    },
+    "kontakt-rodzaj-typ": {
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "id-rodzaj-typ": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/niepusty-ciag-typ"
+        }
+      ]
+    },
+    "czas-typ": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/gYearMonth"
+        },
+        {
+          "type": "string",
+          "format": "date"
+        },
+        {
+          "type": "string",
+          "format": "date-time"
+        }
+      ]
+    },
+    "miara-typ": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/niepusty-ciag-typ"
+        }
+      ]
+    },
+    "kategoria-klasa-typ": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/niepusty-ciag-typ"
+        }
+      ]
+    },
+    "kategoria-rodzaj-typ": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/niepusty-ciag-typ"
+        }
+      ]
+    },
+    "grupowanie-typgrupy-typ": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/niepusty-ciag-typ"
+        }
+      ]
+    },
+    "grupowanie-kodgrupy-typ": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/niepusty-ciag-typ"
+        }
+      ]
+    },
+    "grupowanie-opis-typ": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/niepusty-ciag-typ"
+        }
+      ]
+    },
+    "tworca-funkcja-typ": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/niepusty-ciag-typ"
+        }
+      ]
+    },
+    "typrelacji-typ": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/niepusty-ciag-typ"
+        }
+      ]
+    },
+    "kategoria-archiwalna-typ": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/niepusty-ciag-typ"
+        }
+      ]
+    },
+    "klucz-nazwa-typ": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/niepusty-ciag-typ"
+        }
+      ]
+    },
+    "status-rodzaj-typ": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/niepusty-ciag-typ"
+        }
+      ]
+    },
+    "status-wersja-typ": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/niepusty-ciag-typ"
+        }
+      ]
+    },
+    "status-opis-typ": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/niepusty-ciag-typ"
+        }
+      ]
+    },
+    "dokument-typ": {
+      "type": "object",
+      "properties": {
+        "wersja": {
+          "type": "string"
+        },
+        "identyfikator": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/identyfikator-typ"
+          }
+        },
+        "tytul": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/tytul-typ"
+          }
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/data-przypisania-typ"
+          }
+        },
+        "format": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/format-typ"
+          }
+        },
+        "dostep": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/dostep-typ"
+          }
+        },
+        "typ": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/kategoria-typ"
+          }
+        },
+        "grupowanie": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/grupowanie-typ"
+          }
+        },
+        "tworca": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/tworca-typ"
+          },
+          "minItems": 0
+        },
+        "nadawca": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/nadawca-typ"
+          },
+          "minItems": 0
+        },
+        "odbiorca": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/odbiorca-typ"
+          },
+          "minItems": 0
+        },
+        "relacja": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/relacja-typ"
+          },
+          "minItems": 0
+        },
+        "kwalifikacja": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/kwalifikacja-typ"
+          },
+          "minItems": 0
+        },
+        "jezyk": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/jezyk-typ"
+          },
+          "minItems": 0
+        },
+        "opis": {
+          "$ref": "#/definitions/dokument-opis-typ"
+        },
+        "tematyka": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/tematyka-typ"
+          },
+          "minItems": 0
+        },
+        "uprawnienia": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/uprawnienia-typ"
+          },
+          "minItems": 0
+        },
+        "lokalizacja": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/lokalizacja-typ"
+          },
+          "minItems": 0
+        },
+        "status": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/status-typ"
+          },
+          "minItems": 0
+        },
+        "null": {
+          "type": "array",
+          "items": {},
+          "minItems": 0
+        }
+      },
+      "additionalProperties": true
+    },
+    "identyfikator-typ": {
+      "type": "object",
+      "properties": {
+        "typidentyfikatora": {
+          "$ref": "#/definitions/identyfikator-rodzaj-typ"
+        },
+        "wartoscId": {
+          "type": "string"
+        },
+        "podmiot": {
+          "$ref": "#/definitions/podmiot-typ"
+        }
+      },
+      "required": [
+        "typidentyfikatora",
+        "wartoscId"
+      ],
+      "additionalProperties": true
+    },
+    "podmiot-typ": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": true
+    },
+    "osoba-typ": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/osoba-identyfikator-typ"
+          },
+          "minItems": 0
+        },
+        "nazwisko": {
+          "type": "string"
+        },
+        "imie": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 0
+        },
+        "adres": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/adres-typ"
+          },
+          "minItems": 0
+        },
+        "kontakt": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/kontakt-typ"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "nazwisko"
+      ],
+      "additionalProperties": true
+    },
+    "osoba-identyfikator-typ": {
+      "type": "object",
+      "properties": {
+        "typId": {
+          "$ref": "#/definitions/osoba-identyfikator-rodzajtyp"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "typId",
+        "value"
+      ],
+      "additionalProperties": true
+    },
+    "adres-typ": {
+      "type": "object",
+      "properties": {
+        "kodPocztowy": {
+          "type": "string"
+        },
+        "poczta": {
+          "type": "string"
+        },
+        "miejscowosc": {
+          "$ref": "#/definitions/niepusty-ciag-typ"
+        },
+        "ulica": {
+          "type": "string"
+        },
+        "budynek": {
+          "type": "string"
+        },
+        "lokal": {
+          "type": "string"
+        },
+        "skrytkaPocztowa": {
+          "type": "string"
+        },
+        "uwagi": {
+          "type": "string"
+        },
+        "kraj": {
+          "$ref": "#/definitions/kraj-typ"
+        },
+        "gmina": {
+          "type": "string"
+        },
+        "powiat": {
+          "type": "string"
+        },
+        "wojewodztwo": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "miejscowosc",
+        "kraj"
+      ],
+      "additionalProperties": true
+    },
+    "kontakt-typ": {
+      "type": "object",
+      "properties": {
+        "typKontaktu": {
+          "$ref": "#/definitions/kontakt-rodzaj-typ"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "typKontaktu",
+        "value"
+      ],
+      "additionalProperties": true
+    },
+    "instytucja-typ": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/id-typ"
+          },
+          "minItems": 0
+        },
+        "nazwa": {
+          "type": "string"
+        },
+        "adres": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/adres-typ"
+          },
+          "minItems": 0
+        },
+        "kontakt": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/kontakt-typ"
+          },
+          "minItems": 0
+        },
+        "komorka": {
+          "$ref": "#/definitions/instytucja-komorka-typ"
+        },
+        "pracownik": {
+          "$ref": "#/definitions/instytucja-pracownik-typ"
+        }
+      },
+      "required": [
+        "nazwa"
+      ],
+      "additionalProperties": true
+    },
+    "id-typ": {
+      "type": "object",
+      "properties": {
+        "typId": {
+          "$ref": "#/definitions/id-rodzaj-typ"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "typId",
+        "value"
+      ],
+      "additionalProperties": true
+    },
+    "instytucja-komorka-typ": {
+      "type": "object",
+      "properties": {
+        "nazwa": {
+          "type": "string"
+        },
+        "adres": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/adres-typ"
+          },
+          "minItems": 0
+        },
+        "kontakt": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/kontakt-typ"
+          },
+          "minItems": 0
+        },
+        "komorka": {
+          "$ref": "#/definitions/instytucja-komorka-typ"
+        },
+        "pracownik": {
+          "$ref": "#/definitions/instytucja-pracownik-typ"
+        }
+      },
+      "required": [
+        "nazwa"
+      ],
+      "additionalProperties": true
+    },
+    "instytucja-pracownik-typ": {
+      "type": "object",
+      "properties": {
+        "nazwisko": {
+          "type": "string"
+        },
+        "imie": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 0
+        },
+        "kontakt": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/kontakt-typ"
+          },
+          "minItems": 0
+        },
+        "stanowisko": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "nazwisko"
+      ],
+      "additionalProperties": true
+    },
+    "instytucja-jednostka-typ": {
+      "type": "object",
+      "properties": {
+        "nazwa": {
+          "type": "string"
+        },
+        "adres": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/adres-typ"
+          },
+          "minItems": 0
+        },
+        "kontakt": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/kontakt-typ"
+          },
+          "minItems": 0
+        },
+        "poziom": {
+          "type": "string"
+        },
+        "jednostka": {
+          "$ref": "#/definitions/instytucja-jednostka-typ"
+        },
+        "pracownik": {
+          "$ref": "#/definitions/instytucja-jednostka-pracownik-typ"
+        }
+      },
+      "required": [
+        "nazwa"
+      ],
+      "additionalProperties": true
+    },
+    "instytucja-jednostka-pracownik-typ": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/id-typ"
+          },
+          "minItems": 0
+        },
+        "nazwisko": {
+          "type": "string"
+        },
+        "imie": {
+          "type": "string"
+        },
+        "kontakt": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/kontakt-typ"
+          },
+          "minItems": 0
+        },
+        "funkcja": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "nazwisko"
+      ],
+      "additionalProperties": true
+    },
+    "tytul-typ": {
+      "type": "object",
+      "properties": {
+        "oryginalny": {
+          "$ref": "#/definitions/tytul-z-jezykiem-typ"
+        },
+        "alternatywny": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/tytul-z-jezykiem-typ"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "oryginalny"
+      ],
+      "additionalProperties": true
+    },
+    "tytul-z-jezykiem-typ": {
+      "type": "object",
+      "properties": {
+        "kodJezyka": {
+          "$ref": "#/definitions/kod-jezyka-typ"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "additionalProperties": true
+    },
+    "data-przypisania-typ": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": true
+    },
+    "format-typ": {
+      "type": "object",
+      "properties": {
+        "typFormatu": {
+          "$ref": "#/definitions/niepusty-ciag-typ"
+        },
+        "specyfikacja": {
+          "type": "string"
+        },
+        "niekompletnosc": {
+          "$ref": "#/definitions/wartosc-logiczna-typ"
+        },
+        "wielkosc": {
+          "$ref": "#/definitions/wielkosc-format-typ"
+        },
+        "opis": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "typFormatu"
+      ],
+      "additionalProperties": true
+    },
+    "wielkosc-format-typ": {
+      "type": "object",
+      "properties": {
+        "miara": {
+          "$ref": "#/definitions/miara-typ"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "miara",
+        "value"
+      ],
+      "additionalProperties": true
+    },
+    "dostep-typ": {
+      "type": "object",
+      "properties": {
+        "dostepnosc": {
+          "$ref": "#/definitions/dostepnosc-typ"
+        },
+        "uwagi": {
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/definitions/dostep-data-typ"
+        }
+      },
+      "required": [
+        "dostepnosc"
+      ],
+      "additionalProperties": true
+    },
+    "dostep-data-typ": {
+      "type": "object",
+      "properties": {
+        "typ": {
+          "$ref": "#/definitions/dostepnosc-data-typ"
+        },
+        "czas": {
+          "$ref": "#/definitions/czas-typ"
+        }
+      },
+      "required": [
+        "typ",
+        "czas"
+      ],
+      "additionalProperties": true
+    },
+    "kategoria-typ": {
+      "type": "object",
+      "properties": {
+        "klasa": {
+          "$ref": "#/definitions/kategoria-klasa-typ"
+        },
+        "rodzaj": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/kategoria-rodzaj-typ"
+          }
+        }
+      },
+      "required": [
+        "klasa"
+      ],
+      "additionalProperties": true
+    },
+    "grupowanie-typ": {
+      "type": "object",
+      "properties": {
+        "typGrupy": {
+          "$ref": "#/definitions/grupowanie-typgrupy-typ"
+        },
+        "kodGrupy": {
+          "$ref": "#/definitions/grupowanie-kodgrupy-typ"
+        },
+        "opis": {
+          "$ref": "#/definitions/grupowanie-opis-typ"
+        }
+      },
+      "required": [
+        "typGrupy",
+        "kodGrupy",
+        "opis"
+      ],
+      "additionalProperties": true
+    },
+    "tworca-typ": {
+      "type": "object",
+      "properties": {
+        "funkcja": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/tworca-funkcja-typ"
+          }
+        },
+        "podmiot": {
+          "$ref": "#/definitions/podmiot-typ"
+        }
+      },
+      "required": [
+        "podmiot"
+      ],
+      "additionalProperties": true
+    },
+    "nadawca-typ": {
+      "type": "object",
+      "properties": {
+        "podmiot": {
+          "$ref": "#/definitions/podmiot-typ"
+        }
+      },
+      "required": [
+        "podmiot"
+      ],
+      "additionalProperties": true
+    },
+    "odbiorca-typ": {
+      "type": "object",
+      "properties": {
+        "doWiadomosci": {
+          "$ref": "#/definitions/wartosc-logiczna-typ"
+        },
+        "podmiot": {
+          "$ref": "#/definitions/podmiot-typ"
+        }
+      },
+      "required": [
+        "podmiot"
+      ],
+      "additionalProperties": true
+    },
+    "relacja-typ": {
+      "type": "object",
+      "properties": {
+        "identyfikator": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/identyfikator-typ"
+          }
+        },
+        "typRelacji": {
+          "$ref": "#/definitions/typrelacji-typ"
+        }
+      },
+      "required": [
+        "typRelacji"
+      ],
+      "additionalProperties": true
+    },
+    "kwalifikacja-typ": {
+      "type": "object",
+      "properties": {
+        "kategoria": {
+          "$ref": "#/definitions/kategoria-archiwalna-typ"
+        },
+        "data": {
+          "$ref": "#/definitions/czas-typ"
+        },
+        "podmiot": {
+          "$ref": "#/definitions/podmiot-typ"
+        }
+      },
+      "required": [
+        "kategoria",
+        "data",
+        "podmiot"
+      ],
+      "additionalProperties": true
+    },
+    "jezyk-typ": {
+      "type": "object",
+      "properties": {
+        "kodJezyka": {
+          "$ref": "#/definitions/kod-jezyka-typ"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "kodJezyka",
+        "value"
+      ],
+      "additionalProperties": true
+    },
+    "tematyka-typ": {
+      "type": "object",
+      "properties": {
+        "przedmiot": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 0
+        },
+        "wspomnianaOsoba": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 0
+        },
+        "miejsce": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 0
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/data-przypisania-typ"
+          },
+          "minItems": 0
+        },
+        "odbiorca": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 0
+        },
+        "inne": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/tematyka-slownik-typ"
+          },
+          "minItems": 0
+        }
+      },
+      "additionalProperties": true
+    },
+    "tematyka-slownik-typ": {
+      "type": "object",
+      "properties": {
+        "klucz": {
+          "$ref": "#/definitions/klucz-nazwa-typ"
+        },
+        "wartosc": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "klucz",
+        "wartosc"
+      ],
+      "additionalProperties": true
+    },
+    "status-typ": {
+      "type": "object",
+      "properties": {
+        "rodzaj": {
+          "$ref": "#/definitions/status-rodzaj-typ"
+        },
+        "wersja": {
+          "$ref": "#/definitions/status-wersja-typ"
+        },
+        "opis": {
+          "$ref": "#/definitions/status-opis-typ"
+        }
+      },
+      "required": [
+        "rodzaj",
+        "wersja"
+      ],
+      "additionalProperties": true
+    },
+    "Element_dokument": {
+      "$ref": "#/definitions/dokument-typ"
+    },
+    "gYearMonth": {
+      "type": "string",
+      "pattern": "^\\d{4}-(0[1-9]|1[0-2])$",
+      "description": "XSD gYearMonth mapped to string in form YYYY-MM (ISO 8601 subset)."
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "#/definitions/Element_dokument"
+    }
+  ]
+}

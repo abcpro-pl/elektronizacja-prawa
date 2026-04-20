@@ -1,0 +1,190 @@
+{
+  "dokument": {
+    "schemaLocation": "http://www.mswia.gov.pl/standardy/ndap Metadane-2.0.schema.draft7.json",
+    "identyfikator": [
+      {
+        "typidentyfikatora": "id.eNadzor",
+        "wartoscId": "1.17444.20201211111129.20741",
+        "podmiot": {
+          "instytucja": {
+            "id": {
+              "typId": "NIP",
+              "value": "9730051210"
+            },
+            "nazwa": "Regionalna Izba Obrachunkowa w Zielonej Górze",
+            "kontakt": [
+              {
+                "typKontaktu": "Telefon",
+                "value": "329 19 00"
+              },
+              {
+                "typKontaktu": "e-mail",
+                "value": "zielonagora@rio.gov.pl"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "typidentyfikatora": "Znak sprawy",
+        "wartoscId": "RIO.II.K.0002.102.28.2020"
+      },
+      {
+        "typidentyfikatora": "Nazwa pliku",
+        "wartoscId": "Pismo przewodnie z aktami do nadzoru.xml"
+      }
+    ],
+    "tytul": {
+      "oryginalny": {
+        "kodJezyka": "pol",
+        "value": "Pismo przewodnie z aktami do nadzoru nr DK.0711.12.2020  z dnia 11 grudnia 2020 r. - Związek Celowy Gmin MG-6"
+      },
+      "alternatywny": {
+        "kodJezyka": "pol",
+        "value": "Pismo przewodnie z aktami do nadzoru nr DK.0711.12.2020  z dnia 11 grudnia 2020 r. - Związek Celowy Gmin MG-6"
+      }
+    },
+    "data": [
+      {
+        "typDaty": "data na piśmie",
+        "czas": "2020-12-11T00:00:00+01:00"
+      },
+      {
+        "typDaty": "data rejestracji",
+        "czas": "2020-12-11T11:11:29+01:00"
+      }
+    ],
+    "format": {
+      "typFormatu": ".xml",
+      "niekompletnosc": "nie",
+      "wielkosc": {
+        "miara": "KB",
+        "value": "21"
+      }
+    },
+    "dostep": {
+      "dostepnosc": "niepubliczny"
+    },
+    "typ": [
+      {
+        "klasa": "Text",
+        "rodzaj": "pismo"
+      },
+      {
+        "klasa": "eNadzor",
+        "rodzaj": "Pismo przewodnie z aktami do nadzoru"
+      },
+      {
+        "klasa": "Text",
+        "rodzaj": "podanie / wniosek"
+      },
+      {
+        "klasa": "Text",
+        "rodzaj": "Odwzorowanie cyfrowe - Nie"
+      }
+    ],
+    "grupowanie": [
+      {
+        "typGrupy": "Znak sprawy",
+        "kodGrupy": "RIO.II.K.0002.102.28.2020",
+        "opis": "Związek Celowy Gmin MG-6"
+      },
+      {
+        "typGrupy": "Kolejność dokumentu w systemie eNadzor względem sprawy",
+        "kodGrupy": "1",
+        "opis": "Nie dotyczy"
+      },
+      {
+        "typGrupy": "Dokument jest wnioskiem",
+        "kodGrupy": "Tak",
+        "opis": "Nie dotyczy"
+      }
+    ],
+    "tworca": {
+      "funkcja": "utworzył",
+      "podmiot": {
+        "instytucja": {
+          "id": {
+            "typId": "NIP",
+            "value": "5992619483"
+          },
+          "nazwa": "Związek Celowy Gmin MG-6",
+          "adres": {
+            "kodPocztowy": "66-400",
+            "miejscowosc": "Gorzów Wielkopolski",
+            "ulica": "Pankiewicza",
+            "budynek": "7-May",
+            "kraj": "PL"
+          },
+          "kontakt": {
+            "typKontaktu": "e-mail",
+            "value": "zcg-img6@wp.pl"
+          }
+        }
+      }
+    },
+    "nadawca": {
+      "podmiot": {
+        "instytucja": {
+          "id": {
+            "typId": "NIP",
+            "value": "5992619483"
+          },
+          "nazwa": "Związek Celowy Gmin MG-6",
+          "adres": {
+            "kodPocztowy": "66-400",
+            "miejscowosc": "Gorzów Wielkopolski",
+            "ulica": "Pankiewicza",
+            "budynek": "7-May",
+            "kraj": "PL"
+          },
+          "kontakt": {
+            "typKontaktu": "e-mail",
+            "value": "zcg-img6@wp.pl"
+          }
+        }
+      }
+    },
+    "odbiorca": {
+      "doWiadomosci": null,
+      "podmiot": {
+        "instytucja": {
+          "id": {
+            "typId": "NIP",
+            "value": "9730051210"
+          },
+          "nazwa": "Regionalna Izba Obrachunkowa w Zielonej Górze",
+          "adres": {
+            "kodPocztowy": "65-261",
+            "miejscowosc": "Zielona Góra",
+            "ulica": "Chmielna",
+            "budynek": "13",
+            "kraj": "PL"
+          },
+          "kontakt": [
+            {
+              "typKontaktu": "Telefon",
+              "value": "329 19 00"
+            },
+            {
+              "typKontaktu": "e-mail",
+              "value": "zielonagora@rio.gov.pl"
+            }
+          ]
+        }
+      }
+    },
+    "relacja": {
+      "identyfikator": {
+        "typidentyfikatora": "Nazwa pliku",
+        "wartoscId": "Uchwała.zip"
+      },
+      "typRelacji": "odnosi się do"
+    },
+    "jezyk": {
+      "kodJezyka": "pol",
+      "value": "polski"
+    },
+    "opis": "Pismo przewodnie z aktami do nadzoru nr DK.0711.12.2020  z dnia 11 grudnia 2020 r. - Związek Celowy Gmin MG-6"
+  }
+}
