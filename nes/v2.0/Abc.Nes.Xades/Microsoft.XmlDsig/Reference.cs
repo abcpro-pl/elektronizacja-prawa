@@ -24,6 +24,7 @@ namespace Microsoft.XmlDsig {
         private XmlElement _cachedXml;
         private SignedXml _signedXml;
         internal CanonicalXmlNodeList _namespaces;
+        private string _baseDirectory;
 
         //
         // public constructors
@@ -130,6 +131,11 @@ namespace Microsoft.XmlDsig {
             get {
                 return _refTargetType;
             }
+        }
+
+        public string BaseDirectory {
+            get { return _baseDirectory; }
+            set { _baseDirectory = value; }
         }
 
         //
@@ -299,7 +305,9 @@ namespace Microsoft.XmlDsig {
                 throw new CryptographicException(SR.Cryptography_Xml_CreateHashAlgorithmFailed);
 
             // Let's go get the target.
-            string baseUri = document == null || String.IsNullOrEmpty(document.BaseURI) ? System.Environment.CurrentDirectory + Path.DirectorySeparatorChar : document.BaseURI;
+            string baseUri = !String.IsNullOrEmpty(_baseDirectory) ? _baseDirectory + Path.DirectorySeparatorChar
+                : document == null || String.IsNullOrEmpty(document.BaseURI) ? System.Environment.CurrentDirectory + Path.DirectorySeparatorChar
+                : document.BaseURI;
             string dir = null;
             if (baseUri != null && baseUri.StartsWith("file:///")) {
                 dir = Path.GetDirectoryName(baseUri.Replace("file:///", String.Empty));

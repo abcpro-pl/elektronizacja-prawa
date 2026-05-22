@@ -29,9 +29,10 @@ namespace Abc.Nes.Xades {
                                                    string timeStampLogin = null,
                                                    string timeStampPassword = null,
                                                    string hashAlgorithmName = "SHA256",
-                                                   string[] fileReferences = null);
+                                                   string[] fileReferences = null,
+                                                   string baseDirectory = null);
         SignatureDocument CreateEnvelopingSignature(Stream input, X509Certificate2 cert, Signature.Parameters.SignatureProductionPlace productionPlace = null, Signature.Parameters.SignerRole signerRole = null, string fileName = null, Upgraders.SignatureFormat? upgradeFormat = null, string timeStampServerUrl = "http://time.certum.pl", CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval);
-        SignatureDocument CreateDetachedSignature(string filePath, X509Certificate2 cert, Signature.Parameters.SignatureProductionPlace productionPlace = null, Signature.Parameters.SignerRole signerRole = null, Upgraders.SignatureFormat? upgradeFormat = null, string timeStampServerUrl = "http://time.certum.pl", CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval);
+        SignatureDocument CreateDetachedSignature(string filePath, X509Certificate2 cert, Signature.Parameters.SignatureProductionPlace productionPlace = null, Signature.Parameters.SignerRole signerRole = null, Upgraders.SignatureFormat? upgradeFormat = null, string timeStampServerUrl = "http://time.certum.pl", CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval, string baseDirectory = null);
         ValidationResult ValidateSignature(Stream stream);
         ValidationResult ValidateSignature(string filePath);
     }
@@ -55,39 +56,34 @@ namespace Abc.Nes.Xades {
                     upgradeType = Upgraders.SignatureFormat.XAdES_T;
 
                 var xmlDir = Path.GetDirectoryName(Path.GetFullPath(filePath));
-                var originalDirectory = System.Environment.CurrentDirectory;
-                try {
-                    System.Environment.CurrentDirectory = xmlDir;
 
-                    if (fileReferences != null && fileReferences.Length > 0) {
-                        for (int i = 0; i < fileReferences.Length; i++) {
-                            var refFullPath = Path.GetFullPath(fileReferences[i]);
-                            if (refFullPath.StartsWith(xmlDir + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase)) {
-                                fileReferences[i] = refFullPath.Substring(xmlDir.Length + 1).Replace('\\', '/');
-                            }
+                if (fileReferences != null && fileReferences.Length > 0) {
+                    for (int i = 0; i < fileReferences.Length; i++) {
+                        var refFullPath = Path.GetFullPath(Path.Combine(xmlDir, fileReferences[i]));
+                        if (refFullPath.StartsWith(xmlDir + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase)) {
+                            fileReferences[i] = refFullPath.Substring(xmlDir.Length + 1).Replace('\\', '/');
                         }
                     }
+                }
 
-                    SignatureDocument result = AppendSignatureToXmlFile(
-                        fileStream, opts.Certificate,
-                        null, null,
-                        upgradeType,
-                        opts.SignDate,
-                        opts.TimestampOptions?.TsaUrl,
-                        opts.Reason,
-                        opts.TimestampOptions?.TsaPolicy,
-                        opts.TimestampOptions?.Certificate,
-                        opts.TimestampOptions?.Login,
-                        opts.TimestampOptions?.Password,
-                        opts.HashAlgorithmName,
-                        fileReferences
-                    );
+                SignatureDocument result = AppendSignatureToXmlFile(
+                    fileStream, opts.Certificate,
+                    null, null,
+                    upgradeType,
+                    opts.SignDate,
+                    opts.TimestampOptions?.TsaUrl,
+                    opts.Reason,
+                    opts.TimestampOptions?.TsaPolicy,
+                    opts.TimestampOptions?.Certificate,
+                    opts.TimestampOptions?.Login,
+                    opts.TimestampOptions?.Password,
+                    opts.HashAlgorithmName,
+                    fileReferences,
+                    xmlDir
+                );
 
-                    if (result != null) {
-                        result.Save(outputPath);
-                    }
-                } finally {
-                    System.Environment.CurrentDirectory = originalDirectory;
+                if (result != null) {
+                    result.Save(outputPath);
                 }
             }
         }
@@ -106,7 +102,8 @@ namespace Abc.Nes.Xades {
             string timeStampLogin = null,
             string timeStampPassword = null,
             string hashAlgorithmName = "SHA256",
-            string[] fileReferences = null) {
+            string[] fileReferences = null,
+            string baseDirectory = null) {
 
             if (input == null) { throw new ArgumentNullException("input"); }
 
@@ -160,7 +157,8 @@ Content-Transfer-Encoding: UTF-8"
                 for (int i = 0; i < fileReferences.Length; i++) {
                     var filePath = fileReferences[i];
 
-                    if (!File.Exists(filePath)) {
+                    var resolvedPath = !string.IsNullOrEmpty(baseDirectory) ? Path.Combine(baseDirectory, filePath) : filePath;
+                    if (!File.Exists(resolvedPath)) {
                         throw new FileNotFoundException($"Referenced file not found: {filePath}");
                     }
                     var fileRef = new Reference();
@@ -173,6 +171,9 @@ Content-Transfer-Encoding: UTF-8"
                     signatureDocument.XadesSignature.AddReference(fileRef);
                 }
             }
+
+            if (!string.IsNullOrEmpty(baseDirectory))
+                signatureDocument.XadesSignature.BaseDirectory = baseDirectory;
 
             SetSignatureId(signatureDocument.XadesSignature);
             PrepareSignature(signatureDocument, commitmentTypeId: commitmentTypeId, signDate: signDate, hashAlgorithmName: hashAlgorithmName);
@@ -273,10 +274,12 @@ Content-Disposition: filename=""{ fileName }""
             Signature.Parameters.SignerRole signerRole = null,
             Upgraders.SignatureFormat? upgradeFormat = null,
             string timeStampServerUrl = "http://time.certum.pl",
-            CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval) {
+            CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval,
+            string baseDirectory = null) {
 
             if (filePath == null) { throw new ArgumentNullException("filePath"); }
-            if (!File.Exists(filePath)) { throw new FileNotFoundException("Specified file not found!"); }
+            var resolvedPath = !string.IsNullOrEmpty(baseDirectory) ? Path.Combine(baseDirectory, filePath) : filePath;
+            if (!File.Exists(resolvedPath)) { throw new FileNotFoundException("Specified file not found!"); }
             ProductionPlace = productionPlace;
             Role = signerRole;
             Certificate = cert ?? throw new ArgumentNullException("cert");
@@ -284,6 +287,9 @@ Content-Disposition: filename=""{ fileName }""
             var signatureDocument = new SignatureDocument() {
                 XadesSignature = new XadesSignedXml()
             };
+
+            if (!string.IsNullOrEmpty(baseDirectory))
+                signatureDocument.XadesSignature.BaseDirectory = baseDirectory;
 
             var fileName = Path.GetFileName(filePath);
 
@@ -330,12 +336,32 @@ Content-Disposition: filename=""{ fileName }""
         }
 
         public ValidationResult ValidateSignature(Stream stream) {
+            return ValidateSignatureInternal(stream, null);
+        }
+
+        public ValidationResult ValidateSignature(string filePath) {
+            byte[] stringData = File.ReadAllBytes(filePath);
+            using (MemoryStream ms = new MemoryStream(stringData)) {
+                return ValidateSignatureInternal(ms, Path.GetDirectoryName(Path.GetFullPath(filePath)));
+            }
+        }
+
+        public ValidationResult ValidateSignature(byte[] data, string filePath) {
+            using (MemoryStream ms = new MemoryStream(data)) {
+                return ValidateSignatureInternal(ms, Path.GetDirectoryName(Path.GetFullPath(filePath)));
+            }
+        }
+
+        private ValidationResult ValidateSignatureInternal(Stream stream, string baseDirectory) {
             XmlDocument xd = new XmlDocument {
                 PreserveWhitespace = true
             };
             xd.Load(stream);
             var test = xd.ToString();
             var signedXml = new SignedXml(xd);
+
+            if (!string.IsNullOrEmpty(baseDirectory))
+                signedXml.BaseDirectory = baseDirectory;
 
             XmlNode MessageSignatureNode = xd.GetElementsByTagName("Signature", SignedXml.XmlDsigNamespaceUrl)[0];
             if (MessageSignatureNode == null) {
@@ -390,31 +416,6 @@ Content-Disposition: filename=""{ fileName }""
                 Message = message,
                 SignatureName = signedXml.Signature?.Id
             };
-        }
-
-        public ValidationResult ValidateSignature(string filePath) {
-            byte[] stringData = File.ReadAllBytes(filePath);
-            var originalDirectory = System.Environment.CurrentDirectory;
-            try {
-                using (MemoryStream ms = new MemoryStream(stringData)) {
-                    System.Environment.CurrentDirectory = Path.GetDirectoryName(filePath);
-                    return ValidateSignature(ms);
-                }
-            } finally {
-                System.Environment.CurrentDirectory = originalDirectory;
-            }
-        }
-
-        public ValidationResult ValidateSignature(byte[] data, string filePath) {
-            var originalDirectory = System.Environment.CurrentDirectory;
-            try {
-                using (MemoryStream ms = new MemoryStream(data)) {
-                    System.Environment.CurrentDirectory = Path.GetDirectoryName(filePath);
-                    return ValidateSignature(ms);
-                }
-            } finally {
-                System.Environment.CurrentDirectory = originalDirectory;
-            }
         }
 
         private CertificateValidationInfo ValidateCert(X509Certificate2 e) {

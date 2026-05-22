@@ -28,6 +28,7 @@ namespace Microsoft.XmlDsig {
         internal XmlResolver _xmlResolver;
         internal XmlElement _context;
         protected bool _bResolverSet;
+        private string _baseDirectory;
 
         private Func<SignedXml, bool> _signatureFormatValidator = DefaultSignatureFormatValidator;
         private Collection<string> _safeCanonicalizationMethods;
@@ -146,6 +147,11 @@ namespace Microsoft.XmlDsig {
 
         public Collection<string> SafeCanonicalizationMethods {
             get { return _safeCanonicalizationMethods; }
+        }
+
+        public string BaseDirectory {
+            get { return _baseDirectory; }
+            set { _baseDirectory = value; }
         }
 
         public AsymmetricAlgorithm SigningKey {
@@ -813,6 +819,9 @@ namespace Microsoft.XmlDsig {
                 if (reference.DigestMethod == null)
                     reference.DigestMethod = Reference.DefaultDigestMethod;
 
+                if (!string.IsNullOrEmpty(_baseDirectory) && string.IsNullOrEmpty(reference.BaseDirectory))
+                    reference.BaseDirectory = _baseDirectory;
+
                 SignedXmlDebugLog.LogSigningReference(this, reference);
 
                 reference.UpdateHashValue(_containingDocument, nodeList);
@@ -830,6 +839,9 @@ namespace Microsoft.XmlDsig {
                 if (!ReferenceUsesSafeTransformMethods(digestedReference)) {
                     return false;
                 }
+
+                if (!string.IsNullOrEmpty(_baseDirectory) && string.IsNullOrEmpty(digestedReference.BaseDirectory))
+                    digestedReference.BaseDirectory = _baseDirectory;
 
                 SignedXmlDebugLog.LogVerifyReference(this, digestedReference);
                 byte[] calculatedHash = null;
