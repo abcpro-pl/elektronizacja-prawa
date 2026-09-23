@@ -764,45 +764,60 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
                     bool addTimeStamp = false,
                     string timeStampServerUrl = "http://time.certum.pl",
                     CommitmentTypeId commitmentTypeId = CommitmentTypeId.ProofOfApproval) {
-            var tempFilePath = Path.Combine(Path.GetTempPath(), (item as DocumentFile).FileName);
-            File.WriteAllBytes(tempFilePath, (item as DocumentFile).FileData);
-            Xades.Upgraders.SignatureFormat? xadesFormat = addTimeStamp ? Xades.Upgraders.SignatureFormat.XAdES_T : (Xades.Upgraders.SignatureFormat?)null;
-            var result = xadesManager.CreateDetachedSignature(tempFilePath, cert, productionPlace, signerRole, xadesFormat, timeStampServerUrl, commitmentTypeId);
-            if (result != null) {
-                using (var msOutput = new MemoryStream()) {
-                    result.Save(msOutput);
-                    var xadesFile = new DocumentFile() {
-                        FileName = $"{(item as DocumentFile).FileName}.xades",
-                        FileData = msOutput.ToArray()
-                    };
-                    var folder = mgr.GetParentFolder(item);
-                    if (folder != null) {
-                        folder.AddItem(xadesFile);
+            // file name comes from the package content - strip any path segments before using it
+            var safeFileName = Path.GetFileName((item as DocumentFile).FileName);
+            if (String.IsNullOrWhiteSpace(safeFileName)) { return; }
 
-                        // add metadata
-                        var metadataFile = mgr.GetMetadataFile(item);
-                        if (metadataFile != null) {
-                            MetadataFile xadesMetadataFile = null;
-                            using (var converter = new Converters.XmlConverter()) {
-                                var xadesMetadataFileDocumentXml = converter.GetXml(metadataFile.Document);
-                                IDocument parsedDocument = converter.ParseXml(xadesMetadataFileDocumentXml);
-                                if (parsedDocument != null) {
-                                    parsedDocument.Description = $"Digital signature of file {item.FileName}.";
+            // unique temp directory per call - avoids collisions on parallel signing
+            var tempDir = Path.Combine(Path.GetTempPath(), "ABCPRO.NES", Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(tempDir);
+            try {
+                var tempFilePath = Path.Combine(tempDir, safeFileName);
+                if (!Path.GetFullPath(tempFilePath).StartsWith(Path.GetFullPath(tempDir) + Path.DirectorySeparatorChar)) { return; }
 
-                                    xadesMetadataFile = new MetadataFile() {
-                                        FileName = $"{xadesFile.FileName}.xml",
-                                        Document = parsedDocument
-                                    };
+                File.WriteAllBytes(tempFilePath, (item as DocumentFile).FileData);
+                Xades.Upgraders.SignatureFormat? xadesFormat = addTimeStamp ? Xades.Upgraders.SignatureFormat.XAdES_T : (Xades.Upgraders.SignatureFormat?)null;
+                // reference URI must be the relative file name, not the local %TEMP% path
+                var result = xadesManager.CreateDetachedSignature(safeFileName, cert, productionPlace, signerRole, xadesFormat, timeStampServerUrl, commitmentTypeId, baseDirectory: tempDir);
+                if (result != null) {
+                    using (var msOutput = new MemoryStream()) {
+                        result.Save(msOutput);
+                        var xadesFile = new DocumentFile() {
+                            FileName = $"{(item as DocumentFile).FileName}.xades",
+                            FileData = msOutput.ToArray()
+                        };
+                        var folder = mgr.GetParentFolder(item);
+                        if (folder != null) {
+                            folder.AddItem(xadesFile);
 
-                                    var metadataFolder = mgr.GetParentFolder(metadataFile);
-                                    if (metadataFolder != null) {
-                                        metadataFolder.AddItem(xadesMetadataFile);
+                            // add metadata
+                            var metadataFile = mgr.GetMetadataFile(item);
+                            if (metadataFile != null) {
+                                MetadataFile xadesMetadataFile = null;
+                                using (var converter = new Converters.XmlConverter()) {
+                                    var xadesMetadataFileDocumentXml = converter.GetXml(metadataFile.Document);
+                                    IDocument parsedDocument = converter.ParseXml(xadesMetadataFileDocumentXml);
+                                    if (parsedDocument != null) {
+                                        parsedDocument.Description = $"Digital signature of file {item.FileName}.";
+
+                                        xadesMetadataFile = new MetadataFile() {
+                                            FileName = $"{xadesFile.FileName}.xml",
+                                            Document = parsedDocument
+                                        };
+
+                                        var metadataFolder = mgr.GetParentFolder(metadataFile);
+                                        if (metadataFolder != null) {
+                                            metadataFolder.AddItem(xadesMetadataFile);
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
+            }
+            finally {
+                try { Directory.Delete(tempDir, true); } catch { }
             }
         }
 

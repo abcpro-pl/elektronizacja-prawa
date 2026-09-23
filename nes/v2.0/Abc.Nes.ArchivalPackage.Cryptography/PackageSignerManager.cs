@@ -83,7 +83,11 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
 
                 if (detachedSignaturePackageFile) {
                     // place signature in detached .xades file
-                    result = xadesManager.CreateDetachedSignature(outputPackageFilePath, cert, productionPlace, signerRole);
+                    // reference URI must be relative (file name only), otherwise the signature
+                    // is not portable - the absolute disk path does not exist on the recipient side
+                    var packageFullPath = Path.GetFullPath(outputPackageFilePath);
+                    result = xadesManager.CreateDetachedSignature(Path.GetFileName(packageFullPath), cert, productionPlace, signerRole,
+                        baseDirectory: Path.GetDirectoryName(packageFullPath));
                     if (result != null) {
                         var resultFilePath = $"{outputPackageFilePath}.xades";
                         result.Save(resultFilePath);
@@ -160,8 +164,11 @@ namespace Abc.Nes.ArchivalPackage.Cryptography {
 
                     if (detachedSignaturePackageFile) {
                         // place signature in detached .xades file
-                        result = xadesManager.CreateDetachedSignature(outputPackageFilePath, cert, productionPlace, signerRole,
-                              sigFormat, timeStampServerUrl);
+                        // reference URI must be relative (file name only), otherwise the signature
+                        // is not portable - the absolute disk path does not exist on the recipient side
+                        var packageFullPath = Path.GetFullPath(outputPackageFilePath);
+                        result = xadesManager.CreateDetachedSignature(Path.GetFileName(packageFullPath), cert, productionPlace, signerRole,
+                              sigFormat, timeStampServerUrl, baseDirectory: Path.GetDirectoryName(packageFullPath));
 
                         if (result != null) {
                             var resultFilePath = $"{outputPackageFilePath}.xades";
