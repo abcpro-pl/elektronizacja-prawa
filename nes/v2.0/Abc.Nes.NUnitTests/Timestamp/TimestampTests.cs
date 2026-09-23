@@ -1234,6 +1234,20 @@ namespace Abc.Nes.NUnitTests {
         }
 
         [Test]
+        public void SignBigPackageFiles() {
+            var path = @"C:\Users\jaroslaw.grzyb\AppData\Local\Temp\AbcChromeSignerHost\91370235-83a1-4337-adb0-3c349b6d5ea3\paczka0 WB.6740.368.2024.zip";
+            var outPath = path + "signed.zip";
+            var mgr = new PackageSignerManager();
+            var cert = CertUtil.GetCertByName(test_cert);
+            string[] files = new string[] {
+                "dokumenty/196062024/196062024.xml",
+                "dokumenty/W.27031825/W.27031825.zip" 
+            };
+            mgr.Sign(path, cert, outPath, null, null, files, true, true, true, DateTime.Now, false);
+
+        }
+
+        [Test]
         public void VerifyXML() {
             var xmlTxt = @"<?xml version=""1.0"" encoding=""utf-8""?>
 <uchwala xmlns=""http://www.crd.gov.pl/xml/schematy/edap/2010/01/02"" widoczny=""tak"" status=""uchwalony"" id=""744d07f2-d34f-4a1d-95e6-1cd85350e522"">

@@ -36,6 +36,22 @@ namespace Abc.Nes.NUnitTests {
         }
 
         [Test]
+        public void TestPackageMetadataFile() {
+            var packagePath = Path.Combine(testFilesDirPath, "paczka_eadm_metadane_paczki.zip");
+            var filePath = PackageManager.PackageMetadataFileName;
+
+            var mgr = new PackageManager();
+            mgr.LoadPackage(packagePath, out _);
+
+            var file = mgr.GetItemByFilePath(filePath);
+
+            var metadataFile = file as MetadataFile;
+
+            Assert.IsNotNull(file);
+            Assert.IsNotEmpty(metadataFile.FileData);
+        }
+
+        [Test]
         public void ValidateXadesSignature() {
             var pathToPackage = Path.Combine(testFilesDirPath, "paczka0real.zip");
             var pathToFile = "dokumenty/17264112021Wy/17264112021Wy_1.xml";
@@ -292,6 +308,23 @@ namespace Abc.Nes.NUnitTests {
 
             using (var arch = new Aspose.Zip.Tar.TarArchive(archiveFilePath)) {
                 arch.ExtractToDirectory(destinationPath);
+            }
+        }
+
+        [Test]
+        public void ValidatePackage() {
+            //var archiveFilePath = Path.Combine("/mnt", "d", "Paczki", "EADM", "wysylka_6740.368.2024", "paczka 6740.368.2024.tar");
+            var archiveFilePath = Path.Combine("d:", "Paczki", "EADM", "wysylka_6740.368.2024", "paczka 6740.368.2024.tar");
+            var xadesPath = archiveFilePath + ".xades";
+            if (File.Exists(archiveFilePath) && File.Exists(xadesPath)) {
+                using (var packageSignerManager = new PackageSignerManager()) {
+                    var verifiedSignaturesForDocument = packageSignerManager.VerifyXadesSignature(xadesPath);
+                    //if(verifiedSignaturesForDocument)
+                    Assert.True(verifiedSignaturesForDocument[0].IsValid);
+                }
+            }
+            else {
+                Assert.Fail("No file to test");
             }
         }
     }

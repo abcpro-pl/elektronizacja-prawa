@@ -4,7 +4,7 @@
 // 2010 Microsoft France
 //
 // Originally published under the CECILL-B Free Software license agreement,
-// modified by Dpto. de Nuevas Tecnologías de la Dirección General de Urbanismo del Ayto. de Cartagena
+// modified by Dpto. de Nuevas Tecnologï¿½as de la Direcciï¿½n General de Urbanismo del Ayto. de Cartagena
 // and published under the GNU Lesser General Public License version 3.
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -1402,6 +1402,10 @@ namespace Microsoft.Xades {
             }
 
             foreach (Reference reference2 in list2) {
+                // Propaguj BaseDirectory z SignedXml do Reference (podobnie jak w bazowej klasie SignedXml)
+                if (!string.IsNullOrEmpty(this.BaseDirectory) && string.IsNullOrEmpty(reference2.BaseDirectory))
+                    reference2.BaseDirectory = this.BaseDirectory;
+
                 XmlDocument xmlDoc = null;
                 bool addSignatureNamespaces = false;
 
